@@ -55,10 +55,21 @@ class SidebarViewController: NSViewController {
 			return
 		}
 		
+		// Update the model to include the new item
+		parent.collapsed = false
 		parent.addToChildren(newDirectory)
 		dataController?.setNeedsSaved()
-		// TODO: All of the data doesn't need to be reloaded. Instead an insertion should be performed. This also has the benefit of having an animation.
-		sidebar.reloadData()
+		
+		// The item is being inserted at the end of the list of children. NSOutlineView.insertItems(at:inParent:withAnimation) takes the parent item to add the new item inside of. In this case, this is the parent directory which was calculated above. It also takes the child index to add the item to - this is simply the index of the (just added) last child subdirectory.
+		let endIndex = IndexSet(integer: parent.subdirectories.count - 1)
+		// Top level directories are a member of the root directory. However, NSOutlineView represents the item of the top level as nil, so if the parent is the root directory, change it to nil.
+		let sidebarParent = parent == rootDirectory ? nil : parent
+		
+		sidebar.insertItems(at: endIndex,
+												inParent: sidebarParent,
+												withAnimation: .slideUp)
+		// Items are collapsed by default, but should be expanded if an item has just been added to it.
+		sidebar.animator().expandItem(parent)
 	}
 }
 
