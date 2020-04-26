@@ -31,71 +31,190 @@ extension Directory {
 
 // MARK: Generated accessors for children
 extension Directory {
-	
 	/// Adds a new item to the directory at the given index.
 	/// - Parameters:
 	///   - value: The item to add to the directory.
 	///   - idx: The index to insert the item at.
 	@objc(insertObject:inChildrenAtIndex:)
-	@NSManaged public func insertIntoChildren(_ value: DirectoryItem, at idx: Int)
+	@NSManaged public func __insertIntoChildren(_ value: DirectoryItem, at idx: Int)
+	
+	/// Removes the item at the given index from the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter idx: The index to remove the item at.
+	@objc(removeObjectFromChildrenAtIndex:)
+	@NSManaged public func __removeFromChildren(at idx: Int)
+	
+	/// Adds multiple items to the directory at the given index set.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameters:
+	///   - values: The items to add to the directory.
+	///   - indexes: The indexes to insert the items at.
+	@objc(insertChildren:atIndexes:)
+	@NSManaged public func __insertIntoChildren(_ values: [DirectoryItem], at indexes: NSIndexSet)
+	
+	/// Removes the items at the given indexes from the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter indexes: The indexes to remove the items at.
+	@objc(removeChildrenAtIndexes:)
+	@NSManaged public func __removeFromChildren(at indexes: NSIndexSet)
+	
+	/// Replaces the item at the given index with the given item.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameters:
+	///   - idx: The index of the item to replace.
+	///   - value: The item to replace the existing item.
+	@objc(replaceObjectInChildrenAtIndex:withObject:)
+	@NSManaged public func __replaceChildren(at idx: Int, with value: DirectoryItem)
+	
+	/// Replaces the items at the given indexes with the given items.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameters:
+	///   - indexes: The indexes of the items to replace.
+	///   - values: The items to replace the existing items.
+	@objc(replaceChildrenAtIndexes:withChildren:)
+	@NSManaged public func __replaceChildren(at indexes: NSIndexSet, with values: [DirectoryItem])
+	
+	/// Adds a new item to the end of the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter value: The item to add to the directory.
+	@objc(addChildrenObject:)
+	@NSManaged public func __addToChildren(_ value: DirectoryItem)
+	
+	/// Removes the given item from the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter value: The item to remove from the directory.
+	@objc(removeChildrenObject:)
+	@NSManaged public func __removeFromChildren(_ value: DirectoryItem)
+	
+	/// Adds new items to the end of the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter values: The items to add to the directory.
+	@objc(addChildren:)
+	@NSManaged public func __addToChildren(_ values: NSOrderedSet)
+	
+	/// Removes the given items from the directory.
+	///
+	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
+	///
+	/// - Parameter values: The items to remove from the directory.
+	@objc(removeChildren:)
+	@NSManaged public func __removeFromChildren(_ values: NSOrderedSet)
+}
+
+// MARK: Custom accessors
+extension Directory {
+	/// Adds a new item to the directory at the given index.
+	/// - Parameters:
+	///   - value: The item to add to the directory.
+	///   - idx: The index to insert the item at.
+	func insertIntoChildren(_ value: DirectoryItem, at idx: Int) {
+		__insertIntoChildren(value, at: idx)
+		calculateSubDirectories()
+	}
 	
 	/// Removes the item at the given index from the directory.
 	/// - Parameter idx: The index to remove the item at.
-	@objc(removeObjectFromChildrenAtIndex:)
-	@NSManaged public func removeFromChildren(at idx: Int)
+	func removeFromChildren(at idx: Int) {
+		__removeFromChildren(at: idx)
+		calculateSubDirectories()
+	}
 	
 	/// Adds multiple items to the directory at the given index set.
 	/// - Parameters:
 	///   - values: The items to add to the directory.
 	///   - indexes: The indexes to insert the items at.
-	@objc(insertChildren:atIndexes:)
-	@NSManaged public func insertIntoChildren(_ values: [DirectoryItem], at indexes: NSIndexSet)
+	func insertIntoChildren(_ values: [DirectoryItem], at indexes: NSIndexSet) {
+		__insertIntoChildren(values, at: indexes)
+		calculateSubDirectories()
+	}
 	
 	/// Removes the items at the given indexes from the directory.
 	/// - Parameter indexes: The indexes to remove the items at.
-	@objc(removeChildrenAtIndexes:)
-	@NSManaged public func removeFromChildren(at indexes: NSIndexSet)
+	func removeFromChildren(at indexes: NSIndexSet) {
+		__removeFromChildren(at: indexes)
+		calculateSubDirectories()
+	}
 	
 	/// Replaces the item at the given index with the given item.
 	/// - Parameters:
 	///   - idx: The index of the item to replace.
 	///   - value: The item to replace the existing item.
-	@objc(replaceObjectInChildrenAtIndex:withObject:)
-	@NSManaged public func replaceChildren(at idx: Int, with value: DirectoryItem)
+	func replaceChildren(at idx: Int, with value: DirectoryItem) {
+		__replaceChildren(at: idx, with: value)
+		calculateSubDirectories()
+	}
 	
 	/// Replaces the items at the given indexes with the given items.
 	/// - Parameters:
 	///   - indexes: The indexes of the items to replace.
 	///   - values: The items to replace the existing items.
-	@objc(replaceChildrenAtIndexes:withChildren:)
-	@NSManaged public func replaceChildren(at indexes: NSIndexSet, with values: [DirectoryItem])
+	func replaceChildren(at indexes: NSIndexSet, with values: [DirectoryItem]) {
+		__replaceChildren(at: indexes, with: values)
+		calculateSubDirectories()
+	}
 	
 	/// Adds a new item to the end of the directory.
 	/// - Parameter value: The item to add to the directory.
-	@objc(addChildrenObject:)
-	@NSManaged public func addToChildren(_ value: DirectoryItem)
+	func addToChildren(_ value: DirectoryItem) {
+		__addToChildren(value)
+		calculateSubDirectories()
+	}
 	
 	/// Removes the given item from the directory.
 	/// - Parameter value: The item to remove from the directory.
-	@objc(removeChildrenObject:)
-	@NSManaged public func removeFromChildren(_ value: DirectoryItem)
+	func removeFromChildren(_ value: DirectoryItem) {
+		__removeFromChildren(value)
+		calculateSubDirectories()
+	}
 	
 	/// Adds new items to the end of the directory.
 	/// - Parameter values: The items to add to the directory.
-	@objc(addChildren:)
-	@NSManaged public func addToChildren(_ values: NSOrderedSet)
+	func addToChildren(_ values: NSOrderedSet) {
+		__addToChildren(values)
+		calculateSubDirectories()
+	}
 	
 	/// Removes the given items from the directory.
 	/// - Parameter values: The items to remove from the directory.
-	@objc(removeChildren:)
-	@NSManaged public func removeFromChildren(_ values: NSOrderedSet)
+	func removeFromChildren(_ values: NSOrderedSet) {
+		__removeFromChildren(values)
+		calculateSubDirectories()
+	}
 }
 
 // MARK: Derived properties
 extension Directory {
+	private static var subdirectoryCache: [Directory: [Directory]] = [:]
+	
+	/// Calculates the sub directories for the directory and adds the calculation to the cache.
+	/// - Returns: The calculated sub directories.
+	@discardableResult
+	private func calculateSubDirectories() -> [Directory] {
+		// TODO: Change this function to be more effecient. Currently it goes through all of the children to recompute this. Instead, this could be function dependent so that for example, when appending a Directory, the directory could simply be appended to the end of the cache as well.
+		let subdirectories = children.compactMap { $0 as? Directory }
+		Self.subdirectoryCache[self] = subdirectories
+		return subdirectories
+	}
+	
 	/// The direct (not recursive) subdirectories of this directory.
 	var subdirectories: [Directory] {
-		// TODO: Add a caching mechanism for this. NSOulineView calls this (n+1) times where n is the length of the colleciton. This makes NSOutlineView take O(n^2) time, but with caching it would be only O(n).
-		return children.compactMap { $0 as? Directory }
+		// The values are stored in a cache to prevent uncessesarily recomputing this property. calculateSubDirectories() automatically adds the calculation to the cache
+		return Self.subdirectoryCache[self] ?? calculateSubDirectories()
 	}
 }
