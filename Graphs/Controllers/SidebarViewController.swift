@@ -14,6 +14,8 @@ class SidebarViewController: NSViewController {
 	@IBOutlet weak var sidebar: NSOutlineView!
 	/// A button which adds a new non-physical directory.
 	@IBOutlet weak var addButton: NSButton!
+	/// A button which removes a directory.
+	@IBOutlet weak var removeButton: NSButton!
 	
 	override func viewDidLoad() {
 		// The data will have to be reloaded once the store is loaded.
@@ -32,12 +34,8 @@ class SidebarViewController: NSViewController {
 	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
 	@IBAction func addDirectory(_ sender: Any) {
-		guard let context = dataContext else { return }
+		guard let directoryController = directoryController else { return }
 		guard let rootDirectory = rootDirectory else { return }
-		
-		let newDirectory = Directory(context: context)
-		// The directory is non-physical, so it needs a display name.
-		newDirectory.customDisplayName = "New Directory"
 		
 		let selection = sidebar.selectedRowIndexes
 		let parent: Directory
@@ -56,10 +54,9 @@ class SidebarViewController: NSViewController {
 			return
 		}
 		
-		// Update the model to include the new item
-		parent.collapsed = false
-		parent.addToChildren(newDirectory)
-		dataController?.setNeedsSaved()
+		let newDirectory = directoryController.createSubdirectory(in: parent)
+		// The directory is non-physical, so it needs a display name.
+		newDirectory.customDisplayName = "New Directory"
 		
 		// The item is being inserted at the end of the list of children. NSOutlineView.insertItems(at:inParent:withAnimation) takes the parent item to add the new item inside of. In this case, this is the parent directory which was calculated above. It also takes the child index to add the item to - this is simply the index of the (just added) last child subdirectory.
 		let endIndex = IndexSet(integer: parent.subdirectories.count - 1)
@@ -72,6 +69,47 @@ class SidebarViewController: NSViewController {
 		// Items are collapsed by default, but should be expanded if an item has just been added to it.
 		sidebar.animator().expandItem(parent)
 	}
+	
+	/// Removes the selected directory in the source-list.
+	@IBAction func removeDirectory(_ sender: Any) {
+		let selection = sidebar.selectedRowIndexes
+		
+		guard !selection.isEmpty else { return }
+		
+		let selectedDirectories = selection.compactMap { row in
+			return sidebar.item(atRow: row) as? Directory
+		}
+		
+		guard selectedDirectories.count == selection.count else {
+			print("NSOutlineView inconsitancty: could not map all rows to directories")
+			return
+		}
+		
+		sidebar.beginUpdates()
+		selectedDirectories.forEach { directory in
+			let parent = directory.parent
+			let childIndex = sidebar.childIndex(forItem: directory)
+			directoryController?.remove(directory: directory)
+			
+			guard parent != nil else {
+				print("[WARNING] Error finding parent for directory item to be removed.")
+				return
+			}
+			guard childIndex != -1 else {
+				print("[WARNING] Error finding child index for subdirectory to be removed.")
+				return
+			}
+			
+			// Top level directories are a member of the root directory. However, NSOutlineView represents the item of the top level as nil, so if the parent is the root directory, change it to nil.
+			let sidebarParent = parent == rootDirectory ? nil : parent
+			
+			sidebar.removeItems(at: IndexSet(integer: childIndex),
+													inParent: sidebarParent,
+													withAnimation: .slideDown)
+		}
+		sidebar.endUpdates()
+	}
+	
 }
 
 // MARK: Helper Functions
@@ -81,9 +119,14 @@ extension SidebarViewController {
 		return .shared
 	}
 	
+	/// The directory controller.
+	var directoryController: DirectoryController? {
+		return dataController?.directoryController
+	}
+	
 	/// The root directory.
 	var rootDirectory: Directory? {
-		return dataController?.rootDirectory
+		return directoryController?.rootDirectory
 	}
 	
 	/// The managed object context for the model.

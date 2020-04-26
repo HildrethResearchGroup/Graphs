@@ -14,16 +14,16 @@ import Cocoa
 class DataController: NSObject {
 	/// The container that manages Core Data.
 	var persistentContainer: NSPersistentContainer
-	/// The root directory. All directories are decendents of this directory.
-	private(set) var rootDirectory: Directory?
 	/// A controller which manages when the application should save its state.
 	private var saveController = SaveController()
-	
+	/// A controller which manages the directory hierarchy.
+	var directoryController: DirectoryController!
 	/// Creates a `DataController` and runs the completion handler after Core Data has loaded the model from the store.
 	/// - Parameter completion: The completion handler to run after Core Data has loaded the model.
 	init(completion: @escaping () -> ()) {
 		persistentContainer = NSPersistentContainer(name: Self.dataModelName)
 		super.init()
+		directoryController = .init(dataController: self)
 		loadStore(completion: completion)
 	}
 }
@@ -105,39 +105,6 @@ extension DataController {
 	/// SQLite is used because it is nonatomic, so the whole datagraph doesn't need to be all loaded in memory at all times.
 	private static let storeType = "sqlite"
 	
-	/// Fetches the root directory if it exists. Otherwise creates the root directory.
-	/// - Returns: The (possibly newly created) root directory.
-	private func fetchRootDirectory() -> Directory? {
-		/// A function that creates a new root directory. This is done if there is no root directory yet.
-		func makeRootDirectory() -> Directory {
-			let directory = Directory(context: persistentContainer.viewContext)
-			setNeedsSaved()
-			return directory
-		}
-		
-		// Fetch any single directory object
-		let request = NSFetchRequest<Directory>(entityName: "Directory")
-		request.fetchLimit = 1
-		
-		do {
-			let fetch = try persistentContainer.viewContext.fetch(request)
-			guard var child = fetch.first else {
-				// There were no results returned, so make a root directory
-				return makeRootDirectory()
-			}
-			// Recursivley set the child to the parent in order to traverse up the tree until there is no parent. The root has no parent
-			while let parent = child.parent {
-				child = parent
-			}
-			
-			return child
-			
-		} catch {
-			print("Failed to fetch root directory: \(error)")
-			return nil
-		}
-	}
-	
 	/// Deletes the store.
 	///
 	/// A useful utility for deleting all data for debugging purposes. When the data schema is changed, this should be called, or Core Data will fail to read the data. To have this called while in `DEBUG`, simply set `shouldResetCoreData` to `true` in `Debug.swift`.
@@ -181,13 +148,12 @@ extension DataController {
 				fatalError("Failed to load Core Data stack: \(error!)")
 			}
 			
-			self.rootDirectory = self.fetchRootDirectory()
+			self.directoryController.loadRootDirectory()
 			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to no tbe collapsed. Without doing this, the top level items may not auto-expand on load.
-			self.rootDirectory?.collapsed = false
+			self.directoryController.rootDirectory?.collapsed = false
 			
 			self.saveController.context = self.persistentContainer.viewContext
 			completion()
 		}
 	}
 }
-

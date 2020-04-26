@@ -738,13 +738,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="240" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ct-UN-kVj">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ct-UN-kVj">
                                 <rect key="frame" x="0.0" y="26" width="240" height="274"/>
                                 <clipView key="contentView" drawsBackground="NO" id="gBJ-U9-xaO">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="274"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="7Ke-GS-jYN" id="rA3-Vi-RC9">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" outlineTableColumn="7Ke-GS-jYN" id="rA3-Vi-RC9">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="274"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -757,7 +757,7 @@
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="TvD-6w-aIn">
-                                                        <font key="font" metaFont="system"/>
+                                                        <font key="font" metaFont="label" size="13"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -794,7 +794,7 @@
                                                                     <rect key="frame" x="25" y="0.0" width="212" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="iHt-ON-u7e">
-                                                                        <font key="font" metaFont="system"/>
+                                                                        <font key="font" metaFont="label" size="13"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -845,7 +845,7 @@
                                                         </constraints>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="XO5-bh-D6t">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" metaFont="label" size="13"/>
                                                         </buttonCell>
                                                         <connections>
                                                             <action selector="addDirectory:" target="wL6-OG-lOu" id="rJw-PA-zw3"/>
@@ -858,8 +858,36 @@
                                                     <constraint firstAttribute="width" secondItem="H6N-ti-mix" secondAttribute="height" multiplier="1:1" id="hJx-ks-3X5"/>
                                                 </constraints>
                                             </customView>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="ktv-L5-w8O">
+                                                <rect key="frame" x="26" y="0.0" width="26" height="26"/>
+                                                <subviews>
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="nwC-eB-DrR">
+                                                        <rect key="frame" x="8" y="8" width="11" height="11"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="11" id="2Ko-Xx-u2u"/>
+                                                            <constraint firstAttribute="width" constant="11" id="h0V-en-8lo"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0KQ-BC-5Pe">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="label" size="13"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="removeDirectory:" target="wL6-OG-lOu" id="LCv-CP-kX4"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="nwC-eB-DrR" firstAttribute="centerY" secondItem="ktv-L5-w8O" secondAttribute="centerY" id="CQ0-vI-Iys"/>
+                                                    <constraint firstAttribute="width" secondItem="ktv-L5-w8O" secondAttribute="height" multiplier="1:1" id="SWB-Vc-CP6"/>
+                                                    <constraint firstItem="nwC-eB-DrR" firstAttribute="centerX" secondItem="ktv-L5-w8O" secondAttribute="centerX" id="aHS-5F-4tF"/>
+                                                </constraints>
+                                            </customView>
                                         </subviews>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="ktv-L5-w8O" secondAttribute="bottom" id="F7a-4i-UiE"/>
+                                            <constraint firstItem="ktv-L5-w8O" firstAttribute="width" secondItem="ktv-L5-w8O" secondAttribute="height" multiplier="1:1" id="LaI-Vd-zvK"/>
+                                            <constraint firstItem="ktv-L5-w8O" firstAttribute="leading" secondItem="H6N-ti-mix" secondAttribute="trailing" id="Rvc-24-5Tv"/>
+                                            <constraint firstItem="ktv-L5-w8O" firstAttribute="top" secondItem="7An-0A-fwj" secondAttribute="top" id="Tey-0f-wWR"/>
                                             <constraint firstItem="H6N-ti-mix" firstAttribute="top" secondItem="7An-0A-fwj" secondAttribute="top" id="UUy-I0-tCO"/>
                                             <constraint firstAttribute="bottom" secondItem="H6N-ti-mix" secondAttribute="bottom" id="fLJ-yy-GPh"/>
                                             <constraint firstItem="H6N-ti-mix" firstAttribute="leading" secondItem="7An-0A-fwj" secondAttribute="leading" id="lKi-ZM-iBS"/>
@@ -887,6 +915,7 @@
                     </view>
                     <connections>
                         <outlet property="addButton" destination="0jV-uR-RQh" id="dTA-Og-Z8L"/>
+                        <outlet property="removeButton" destination="nwC-eB-DrR" id="h9O-In-1dx"/>
                         <outlet property="sidebar" destination="rA3-Vi-RC9" id="FC3-ZO-MMf"/>
                     </connections>
                 </viewController>
@@ -974,5 +1003,6 @@
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

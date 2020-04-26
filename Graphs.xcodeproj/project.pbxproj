@@ -20,6 +20,7 @@
 		5A73E53224531D2500450137 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53124531D2500450137 /* DataController.swift */; };
 		5A73E53A24533BF300450137 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53924533BF300450137 /* Debug.swift */; };
 		5A73E53C2453473F00450137 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53B2453473F00450137 /* Notifications.swift */; };
+		5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79055E24554B0A0021CDB2 /* DirectoryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		5A73E53124531D2500450137 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		5A73E53924533BF300450137 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		5A73E53B2453473F00450137 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		5A79055E24554B0A0021CDB2 /* DirectoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */,
-				5A73E53124531D2500450137 /* DataController.swift */,
+				5A79055D24554AF10021CDB2 /* Controllers */,
 				5A73E52F24531D0200450137 /* Entities */,
 			);
 			path = Models;
@@ -175,6 +177,15 @@
 				5A73E51F2452A78F00450137 /* Directory.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		5A79055D24554AF10021CDB2 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A73E53124531D2500450137 /* DataController.swift */,
+				5A79055E24554B0A0021CDB2 /* DirectoryController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A73E53C2453473F00450137 /* Notifications.swift in Sources */,
+				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
 				5A73E5232452A78F00450137 /* DirectoryItem.swift in Sources */,
