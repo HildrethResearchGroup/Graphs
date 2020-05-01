@@ -49,9 +49,9 @@ class SidebarViewController: NSViewController {
 			let selectedItem = sidebar.item(atRow: sidebar.selectedRow)
 			parent = directoryFromItem(selectedItem) ?? rootDirectory
 		default:
-			// TODO: Determine what to do when multiple elements are selected and a new directory is created.
-			print("Selection of multiple elements")
-			return
+			// If multiple cells are selected, place the new directory in the last cell's directory.
+			let selectedItem = sidebar.item(atRow: selection.last!)
+			parent = directoryFromItem(selectedItem) ?? rootDirectory
 		}
 		
 		let newDirectory = directoryController.createSubdirectory(in: parent)
