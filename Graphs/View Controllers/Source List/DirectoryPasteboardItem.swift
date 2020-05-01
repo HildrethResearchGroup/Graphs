@@ -10,7 +10,7 @@ import Cocoa
 
 class DirectoryPasteboardWriter: NSFilePromiseProvider {
 	enum UserInfoKeys {
-		
+		static let row = "rowKey"
 	}
 	
 	// MARK: NSPasteboardWriting

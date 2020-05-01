@@ -217,4 +217,18 @@ extension Directory {
 		// The values are stored in a cache to prevent uncessesarily recomputing this property. calculateSubDirectories() automatically adds the calculation to the cache
 		return Self.subdirectoryCache[self] ?? calculateSubDirectories()
 	}
+	
+	/// The recursive parent directories of this directory.
+	var ansestors: Set<Directory> {
+		var ansestors: Set<Directory> = []
+		
+		var parent = self.parent
+		
+		while let nextParent = parent {
+			ansestors.insert(nextParent)
+			parent = nextParent.parent
+		}
+		
+		return ansestors
+	}
 }
