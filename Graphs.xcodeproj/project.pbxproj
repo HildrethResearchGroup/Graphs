@@ -91,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A69FB37245BD619003E2F56 /* Source List */ = {
+			isa = PBXGroup;
+			children = (
+				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
+				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
+			);
+			path = "Source List";
+			sourceTree = "<group>";
+		};
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +128,7 @@
 				5A73E53B2453473F00450137 /* Notifications.swift */,
 				5A73E50B2452966200450137 /* Models */,
 				5A73E50C2452966B00450137 /* Views */,
-				5A73E50D2452966F00450137 /* Controllers */,
+				5A73E50D2452966F00450137 /* View Controllers */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
 				5A73E4E524528F5B00450137 /* Main.storyboard */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
@@ -163,13 +172,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		5A73E50D2452966F00450137 /* Controllers */ = {
+		5A73E50D2452966F00450137 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
-				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
+				5A69FB37245BD619003E2F56 /* Source List */,
 			);
-			path = Controllers;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		5A73E52F24531D0200450137 /* Entities */ = {

@@ -8,6 +8,11 @@
 
 import Cocoa
 
+extension NSPasteboard.PasteboardType {
+	// A UTI string that should be a unique identifier
+	static let directoryRowPasteboardType = Self("com.connorbarnes.graphs.directoryRowPasteboardType")
+}
+
 extension SidebarViewController {
 	func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
 		#warning("Not implemented")
