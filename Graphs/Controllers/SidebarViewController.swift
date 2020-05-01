@@ -106,6 +106,10 @@ class SidebarViewController: NSViewController {
 			sidebar.removeItems(at: IndexSet(integer: childIndex),
 													inParent: sidebarParent,
 													withAnimation: .slideDown)
+			
+			if (parent?.subdirectories.count == 0) {
+				sidebar.reloadItem(sidebarParent, reloadChildren: false)
+			}
 		}
 		sidebar.endUpdates()
 	}
