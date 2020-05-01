@@ -107,6 +107,7 @@ class SidebarViewController: NSViewController {
 													inParent: sidebarParent,
 													withAnimation: .slideDown)
 			
+			// If there are no more subdirectories for the parent of the direcotry that has just been deleted, the disclosure triangle for that row should be hidden. To do that, the parent item is reloaded if it has no more subdirectories
 			if (parent?.subdirectories.count == 0) {
 				sidebar.reloadItem(sidebarParent, reloadChildren: false)
 			}
