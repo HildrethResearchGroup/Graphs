@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */; };
+		5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */; };
 		5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4DF24528F5800450137 /* AppDelegate.swift */; };
 		5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E324528F5B00450137 /* Assets.xcassets */; };
 		5A73E4E724528F5B00450137 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E524528F5B00450137 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+DragDrop.swift"; sourceTree = "<group>"; };
+		5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryPasteboardItem.swift; sourceTree = "<group>"; };
 		5A73E4DC24528F5800450137 /* Graphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A73E4DF24528F5800450137 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A73E4E324528F5B00450137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
 				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
+				5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */,
 			);
 			path = "Source List";
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A73E53C2453473F00450137 /* Notifications.swift in Sources */,
+				5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */,
 				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
