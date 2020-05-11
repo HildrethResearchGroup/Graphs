@@ -20,6 +20,10 @@ class SidebarViewController: NSViewController {
 	override func viewDidLoad() {
 		// The data will have to be reloaded once the store is loaded.
 		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded), name: .storeLoaded, object: nil)
+		
+		// Register drag types
+		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileURL])
+		
 		sidebar.reloadData()
 	}
 	
@@ -179,8 +183,8 @@ extension SidebarViewController: NSOutlineViewDataSource {
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-		guard let directory = directoryFromItem(item) else { return false }
-		return !directory.subdirectories.isEmpty
+		return true
+		
 	}
 }
 
@@ -192,6 +196,11 @@ extension SidebarViewController: NSOutlineViewDelegate {
 		let view = outlineView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
 		view?.textField?.stringValue = directory.displayName
 		return view
+	}
+	
+	func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
+		guard let directory = directoryFromItem(item) else { return false }
+		return !directory.subdirectories.isEmpty
 	}
 	
 	func outlineViewItemDidExpand(_ notification: Notification) {

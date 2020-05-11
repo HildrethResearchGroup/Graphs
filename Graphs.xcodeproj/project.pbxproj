@@ -186,8 +186,8 @@
 		5A73E52F24531D0200450137 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51D2452A78F00450137 /* DirectoryItem.swift */,
+				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51F2452A78F00450137 /* Directory.swift */,
 			);
 			path = Entities;
@@ -508,6 +508,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3ER597LK99;
@@ -528,6 +529,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3ER597LK99;
