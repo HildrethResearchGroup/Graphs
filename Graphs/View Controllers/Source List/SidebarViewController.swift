@@ -183,8 +183,8 @@ extension SidebarViewController: NSOutlineViewDataSource {
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+		// Every item is a directory, which can have subdirectories
 		return true
-		
 	}
 }
 
@@ -199,8 +199,9 @@ extension SidebarViewController: NSOutlineViewDelegate {
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-		guard let directory = directoryFromItem(item) else { return false }
-		return !directory.subdirectories.isEmpty
+		// This method is not being called when reload item is called, which is causing the disclosure view to be inconsitantly shown/hidden. For a temporary solution, the disclosure view will be always shown
+		// This appears to be a bug with AppKit. I have submitted a bug report, but in the time being, it doesn't look like there is an easy solution to this. One solution was to reload all of the children of the parent item, but this interfered with the animations
+		return true
 	}
 	
 	func outlineViewItemDidExpand(_ notification: Notification) {
