@@ -37,7 +37,7 @@ class SidebarViewController: NSViewController {
 	
 	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
-	@IBAction func addDirectory(_ sender: Any) {
+	@IBAction func addDirectory(_ sender: Any?) {
 		guard let directoryController = directoryController else { return }
 		guard let rootDirectory = rootDirectory else { return }
 		
@@ -249,5 +249,28 @@ extension SidebarViewController: NSTextFieldDelegate {
 		
 		directory?.customDisplayName = newName
 		dataController?.setNeedsSaved()
+	}
+}
+
+// MARK: Responder
+
+extension SidebarViewController {
+	@objc func delete(_ sender: Any?) {
+		removeDirectory(sender)
+	}
+	
+	
+}
+
+extension SidebarViewController: NSUserInterfaceValidations {
+	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
+		guard let action = item.action else { return false }
+		
+		switch action {
+		case #selector(delete(_:)):
+			return sidebar.selectedRowIndexes.count > 0
+		default:
+			return true
+		}
 	}
 }
