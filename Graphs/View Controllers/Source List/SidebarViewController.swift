@@ -17,6 +17,13 @@ class SidebarViewController: NSViewController {
 	/// A button which removes a directory.
 	@IBOutlet weak var removeButton: NSButton!
 	
+	/// Queue used for reading and writing file promises.
+	lazy var workQueue: OperationQueue = {
+			let providerQueue = OperationQueue()
+			providerQueue.qualityOfService = .userInitiated
+			return providerQueue
+	}()
+	
 	override func viewDidLoad() {
 		// The data will have to be reloaded once the store is loaded.
 		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded), name: .storeLoaded, object: nil)

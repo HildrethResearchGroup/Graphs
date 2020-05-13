@@ -21,8 +21,6 @@ extension SidebarViewController: NSFilePromiseProviderDelegate {
 	}
 	
 	func operationQueue(for filePromiseProvider: NSFilePromiseProvider) -> OperationQueue {
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.operationQueue(for:)")
-		return .main
+		return workQueue
 	}
 }
