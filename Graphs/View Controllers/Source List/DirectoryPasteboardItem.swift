@@ -9,7 +9,9 @@
 import Cocoa
 
 class DirectoryPasteboardWriter: NSFilePromiseProvider {
+	/// An enum holding a list of all the used keys in userDictionary.
 	enum UserInfoKeys {
+		/// The row of the dragged directory in the sidebar
 		static let row = "rowKey"
 	}
 	
@@ -18,7 +20,6 @@ class DirectoryPasteboardWriter: NSFilePromiseProvider {
 	override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
 		var types = super.writableTypes(for: pasteboard)
 		types.append(.directoryRowPasteboardType)
-		
 		return types
 	}
 	
