@@ -271,7 +271,6 @@ extension SidebarViewController: NSUserInterfaceValidations {
 		// 2. The developer will be more likley to notice that an item is not configured with an action becuase it will be disabled.
 		guard let action = item.action else { return false }
 		
-		//
 		switch action {
 		case #selector(delete(_:)):
 			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
