@@ -24,6 +24,13 @@ class SidebarViewController: NSViewController {
 			return providerQueue
 	}()
 	
+	/// Directory for accepting promised files.
+	lazy var promiseDestinationURL: URL = {
+			let promiseDestinationURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("Drops")
+			try? FileManager.default.createDirectory(at: promiseDestinationURL, withIntermediateDirectories: true, attributes: nil)
+			return promiseDestinationURL
+	}()
+	
 	override func viewDidLoad() {
 		// The data will have to be reloaded once the store is loaded.
 		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded), name: .storeLoaded, object: nil)
