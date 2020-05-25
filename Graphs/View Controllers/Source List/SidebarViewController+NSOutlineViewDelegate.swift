@@ -1,5 +1,5 @@
 //
-//  SidebarViewController+Datasource.swift
+//  SidebarViewController+NSOutlineViewDelegate.swift
 //  Graphs
 //
 //  Created by Connor Barnes on 5/13/20.
@@ -60,5 +60,12 @@ extension SidebarViewController: NSOutlineViewDelegate {
 		}
 		item.collapsed = true
 		dataController?.setNeedsSaved()
+	}
+	
+	func outlineViewSelectionDidChange(_ notification: Notification) {
+		let selectedRows = sidebar.selectedRowIndexes
+		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
+		
+		directoryController?.selectedDirectories = selectedDirectories
 	}
 }

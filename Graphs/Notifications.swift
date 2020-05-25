@@ -11,4 +11,6 @@ import Cocoa
 extension Notification.Name {
 	/// A notification that is fired when Core Data's store has loaded the application's data.
 	static let storeLoaded = Notification.Name(rawValue: "storeLoaded")
+	/// A notification that is fired when the sidebar's directory selection changes.
+	static let directorySelectionChanged = Notification.Name(rawValue: "directorySelectionChanged")
 }

@@ -1141,6 +1141,9 @@ CA
                             <constraint firstAttribute="trailing" secondItem="Ubw-NB-syQ" secondAttribute="trailing" id="wXk-0b-Hpv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="pb6-fr-3Ec" id="JK7-ue-pLL"/>
+                    </connections>
                 </viewController>
                 <customObject id="3As-aY-nYF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
