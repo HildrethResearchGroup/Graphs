@@ -9,16 +9,23 @@
 import Cocoa
 
 class DirectoryPasteboardWriter: NSFilePromiseProvider {
+	/// An enum holding a list of all the used keys in userDictionary.
 	enum UserInfoKeys {
+		/// The row of the dragged directory in the sidebar
 		static let row = "rowKey"
+		/// The name of the directory
+		static let name = "nameKey"
+		// The url of the directory
+		static let url = "urlKey"
 	}
 	
 	// MARK: NSPasteboardWriting
 	
 	override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
 		var types = super.writableTypes(for: pasteboard)
+		// As well as promise files, add internal directory pasteboard type and fileURLs.
 		types.append(.directoryRowPasteboardType)
-		
+		types.append(.fileURL)
 		return types
 	}
 	
@@ -33,4 +40,20 @@ class DirectoryPasteboardWriter: NSFilePromiseProvider {
 		}
 	}
 	
+}
+
+// MARK: Utilities
+
+extension DirectoryPasteboardWriter {
+	class func urlFromFilePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider) -> URL? {
+		guard let userInfo = filePromiseProvider.userInfo as? [String: Any] else { return nil }
+		
+		if let urlString = userInfo[DirectoryPasteboardWriter.UserInfoKeys.url] as? String {
+			if !urlString.isEmpty {
+				return URL(string: urlString)
+			}
+		}
+		
+		return nil
+	}
 }

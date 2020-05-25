@@ -23,6 +23,10 @@
 		5A73E53A24533BF300450137 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53924533BF300450137 /* Debug.swift */; };
 		5A73E53C2453473F00450137 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53B2453473F00450137 /* Notifications.swift */; };
 		5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79055E24554B0A0021CDB2 /* DirectoryController.swift */; };
+		5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */; };
+		5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */; };
+		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
+		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +70,10 @@
 		5A73E53924533BF300450137 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		5A73E53B2453473F00450137 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		5A79055E24554B0A0021CDB2 /* DirectoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryController.swift; sourceTree = "<group>"; };
+		5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+FirstResponder.swift"; sourceTree = "<group>"; };
+		5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSOutlineViewDelegate.swift"; sourceTree = "<group>"; };
+		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
+		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,10 @@
 			children = (
 				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
 				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
+				5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */,
+				5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */,
+				5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */,
+				5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */,
 				5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */,
 			);
 			path = "Source List";
@@ -336,14 +348,18 @@
 				5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */,
 				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
+				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
 				5A73E5232452A78F00450137 /* DirectoryItem.swift in Sources */,
 				5A73E53A24533BF300450137 /* Debug.swift in Sources */,
 				5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */,
+				5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */,
 				5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */,
+				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
 				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
+				5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

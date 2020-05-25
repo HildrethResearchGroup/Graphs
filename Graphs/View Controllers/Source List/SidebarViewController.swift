@@ -17,6 +17,20 @@ class SidebarViewController: NSViewController {
 	/// A button which removes a directory.
 	@IBOutlet weak var removeButton: NSButton!
 	
+	/// Queue used for reading and writing file promises.
+	lazy var workQueue: OperationQueue = {
+			let providerQueue = OperationQueue()
+			providerQueue.qualityOfService = .userInitiated
+			return providerQueue
+	}()
+	
+	/// Directory for accepting promised files.
+	lazy var promiseDestinationURL: URL = {
+			let promiseDestinationURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("Drops")
+			try? FileManager.default.createDirectory(at: promiseDestinationURL, withIntermediateDirectories: true, attributes: nil)
+			return promiseDestinationURL
+	}()
+	
 	override func viewDidLoad() {
 		// The data will have to be reloaded once the store is loaded.
 		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded), name: .storeLoaded, object: nil)
@@ -37,7 +51,7 @@ class SidebarViewController: NSViewController {
 	
 	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
-	@IBAction func addDirectory(_ sender: Any) {
+	@IBAction func addDirectory(_ sender: Any?) {
 		guard let directoryController = directoryController else { return }
 		guard let rootDirectory = rootDirectory else { return }
 		
@@ -75,7 +89,7 @@ class SidebarViewController: NSViewController {
 	}
 	
 	/// Removes the selected directory in the source-list.
-	@IBAction func removeDirectory(_ sender: Any) {
+	@IBAction func removeDirectory(_ sender: Any?) {
 		let selection = sidebar.selectedRowIndexes
 		
 		guard !selection.isEmpty else { return }
@@ -166,88 +180,5 @@ extension SidebarViewController {
 		guard let item = item else { return rootDirectory }
 		// Otherwise the parent directory will have set the item to be a Direcotry object.
 		return item as? Directory
-	}
-}
-
-// MARK: NSOutlineViewDataSource
-extension SidebarViewController: NSOutlineViewDataSource {
-	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-		guard let directory = directoryFromItem(item) else { return 0 }
-		return directory.subdirectories.count
-	}
-	
-	func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-		// TODO: Add better error handling than crashing.
-		guard let directory = directoryFromItem(item) else { fatalError() }
-		return directory.subdirectories[index]
-	}
-	
-	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-		// Every item is a directory, which can have subdirectories
-		return true
-	}
-}
-
-// MARK: NSOutlineViewDelegate
-extension SidebarViewController: NSOutlineViewDelegate {
-	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-		guard let directory = directoryFromItem(item) else { return nil }
-		let identifier = NSUserInterfaceItemIdentifier(rawValue: "DirectoryCell")
-		let view = outlineView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
-		view?.textField?.stringValue = directory.displayName
-		return view
-	}
-	
-	func outlineView(_ outlineView: NSOutlineView, shouldShowOutlineCellForItem item: Any) -> Bool {
-		// This method is not being called when reload item is called, which is causing the disclosure view to be inconsitantly shown/hidden. For a temporary solution, the disclosure view will be always shown
-		// This appears to be a bug with AppKit. I have submitted a bug report, but in the time being, it doesn't look like there is an easy solution to this. One solution was to reload all of the children of the parent item, but this interfered with the animations
-		return true
-	}
-	
-	func outlineViewItemDidExpand(_ notification: Notification) {
-		guard let item = notification.userInfo?["NSObject"] as? Directory else {
-			return
-		}
-		item.collapsed = false
-		expandNeededItems(in: item)
-		dataController?.setNeedsSaved()
-	}
-	
-	func outlineViewItemDidCollapse(_ notification: Notification) {
-		guard let item = notification.userInfo?["NSObject"] as? Directory else {
-			return
-		}
-		item.collapsed = true
-		dataController?.setNeedsSaved()
-	}
-}
-
-// MARK: NSTextFieldDelegate
-extension SidebarViewController: NSTextFieldDelegate {
-	/// Called when an NSTextField ends editing.
-	func controlTextDidEndEditing(_ notification: Notification) {
-		// Only the NSTextField in the NSTableViewCell should have this controller as its delegate -- no other subclasses of NSControl should thus be calling this method.
-		guard let textField = notification.object as? NSTextField else {
-			print("[WARNING] A subclass of NSControl has called controlTextDidEndEditing(_:) that is not an NSTextField. Only the NSTextField in the data cell of the NSTableViewCell should have its delegate set to the SidebarViewController.")
-			return
-		}
-		
-		let newName = textField.stringValue
-		
-		// In order to determine the Directory instance that the text field is referencing the following chain is used:
-		// The Edited NSTableView -> The container NSTableViewCell -> The row index of the cell -> The item of that cell -> The directory that item represents
-		guard let tableViewCell = textField.superview else {
-			print("[WARNING] NSOutlineView could not find the table view cell of the editing text field.")
-			return
-		}
-		let row = sidebar.row(for: tableViewCell)
-		guard row != -1 else {
-			print("[WARNING] NSOutlineView could not find the row of the editing text field.")
-			return
-		}
-		let directory = directoryFromItem(sidebar.item(atRow: row))
-		
-		directory?.customDisplayName = newName
-		dataController?.setNeedsSaved()
 	}
 }

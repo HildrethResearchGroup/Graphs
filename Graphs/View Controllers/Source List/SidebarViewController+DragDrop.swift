@@ -13,38 +13,82 @@ extension NSPasteboard.PasteboardType {
 	static let directoryRowPasteboardType = Self("com.connorbarnes.graphs.directoryRowPasteboardType")
 }
 
-extension SidebarViewController: NSFilePromiseProviderDelegate {
-	func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, fileNameForType fileType: String) -> String {
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.filePromiseProvider(_:fileNameForType:)")
-		return ""
-	}
-	
-	func filePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider, writePromiseTo url: URL, completionHandler: @escaping (Error?) -> Void) {
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.filePromiseProvider(_:writePromiseTo:completionHandler:")
-	}
-	
-	func operationQueue(for filePromiseProvider: NSFilePromiseProvider) -> OperationQueue {
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.operationQueue(for:)")
-		return .main
-	}
-}
-
 extension SidebarViewController {
 	func outlineView(_ outlineView: NSOutlineView, pasteboardWriterForItem item: Any) -> NSPasteboardWriting? {
-		
-		//guard let directory = directoryFromItem(item) else { return nil }
-		
 		let row = outlineView.row(forItem: item)
 		let pasteboardItem = NSPasteboardItem()
+		// The property list simply contains the row of the directory. The directory associated with this row can be easily obtained later
 		let propertyList = [DirectoryPasteboardWriter.UserInfoKeys.row: row]
 		pasteboardItem.setPropertyList(propertyList, forType: .directoryRowPasteboardType)
-		
 		return pasteboardItem
 	}
 	
+	func outlineView(_ outlineView: NSOutlineView, validateDrop info:
+		NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
+		var result = NSDragOperation()
+		
+		// Don't allow dropping on a child
+		guard index != -1 else { return result }
+		
+		guard let dropDirectory = directoryFromItem(item) else { return result }
+		
+		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
+			// Drag source is from within the outline view
+			if okayToDrop(draggingInfo: info, destinationItem: dropDirectory) {
+				result = .move
+			}
+		} else if info.draggingPasteboard.availableType(from: [.fileURL]) != nil {
+			// Drag source is from outside the app as a file URL, so a drop means adding a link or reference
+			result = .link
+		} else {
+			// Drag source is from outside the app, likly a file promise, so it's going to be a copy
+			result = .copy
+		}
+		
+		return result
+	}
+	
+	func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+		
+		guard let dropDirectory = directoryFromItem(item) ?? rootDirectory else { return false }
+		
+		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
+			// The items that are being dragged are internal items
+			
+			handleInternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
+		} else {
+			// The user has droped items from Finder
+			handleExternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
+		}
+		
+		return true
+	}
+	
+	func outlineView(_ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
+		if operation == .delete {
+			// This is called when dragging to the trash can
+			let items = session.draggingPasteboard.pasteboardItems
+			let itemsToRemove = items?.compactMap { (draggedItem) -> Directory? in
+				return directoryFromItem(draggedItem)
+			}
+			#warning("Not implemented")
+			fatalError("Not implemented")
+		}
+		
+		
+		
+		#warning("Not implemented")
+		print("[WARNING] Called unimplemented method: SidebarViewController.outlineView(_:draggingSession:endedAt:operation:)")
+	}
+}
+
+// MARK: Utilities
+extension SidebarViewController {
+	/// Returns true if the items being dragged can be dropped at the given location. This checks to make sure that a directory is not placed inside one of its children.
+	/// - Parameters:
+	///   - draggingInfo: The dragging info passed to the delegate method.
+	///   - destinationItem: The directory that is being dropped onto.
+	/// - Returns: True if the drop is okay, and false otherwise.
 	private func okayToDrop(draggingInfo: NSDraggingInfo, destinationItem: Directory?) -> Bool {
 		
 		guard let destinationItem = destinationItem else { return true }
@@ -66,33 +110,12 @@ extension SidebarViewController {
 		return !droppedOntoSelf
 	}
 	
-	func outlineView(_ outlineView: NSOutlineView, validateDrop info:
-		NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
-		var result = NSDragOperation()
-		
-		// Don't allow dropping on a child
-		guard index != -1 else { return result }
-		// Make sure we have a valid item to drop onto
-		//guard item != nil else { return result }
-		
-		guard let dropDirectory = directoryFromItem(item) else { return result }
-		
-		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
-			// Drag source is from within the outline view
-			if okayToDrop(draggingInfo: info, destinationItem: dropDirectory) {
-				result = .move
-			}
-		} else if info.draggingPasteboard.availableType(from: [.fileURL]) != nil {
-			// Drag source is from outside the app as a file URL, so a drop means adding a link or reference
-			result = .link
-		} else {
-			// Drag source is from outside the app, likly a file promise, so it's going to be a copy
-			result = .copy
-		}
-		
-		return result
-	}
-	
+	/// Handles dropping internal items onto the sidebar.
+	/// - Parameters:
+	///   - outlineView: The outlineview being dropped onto.
+	///   - draggingInfo: The dragging info.
+	///   - dropDirectory: The directory that the items are being dropped into.
+	///   - index: The child index of the directory that the items are being dropped at.
 	private func handleInternalDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
 		var itemsToMove: [Directory] = []
 		
@@ -149,40 +172,106 @@ extension SidebarViewController {
 		outlineView.endUpdates()
 	}
 	
-	func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
+	/// Handles dropping external items onto the sidebar.
+	/// - Parameters:
+	///   - outlineView: The outlineview being dropped onto.
+	///   - draggingInfo: The dragging info.
+	///   - dropDirectory: The directory that the items are being dropped into.
+	///   - index: The child index of the directory that the items are being dropped at.
+	private func handleExternalDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
+		// We look for file promises and urls
+		let supportedClasses = [NSFilePromiseReceiver.self, NSURL.self]
 		
-		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
-			if let dropDirectory = directoryFromItem(item) ?? rootDirectory {
-				handleInternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
-				return true
+		// For items dragged from outside the application, we want to seach for readable URLs
+		let searchOptions: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true]
+		
+		var droppedURLs: [URL] = []
+		
+		// Process all pasteboard items that are being dropped
+		draggingInfo.enumerateDraggingItems(options: [], for: nil, classes: supportedClasses, searchOptions: searchOptions) { draggingItem, _, _ in
+			switch draggingItem.item {
+			case let filePromiseReceiver as NSFilePromiseReceiver:
+				// The drag item is a file promise
+				// This effectively calls in the promises, so write to - self.destinatioURL
+				filePromiseReceiver.receivePromisedFiles(atDestination: self.promiseDestinationURL, options: [:], operationQueue: self.workQueue) { fileURL, error in
+					if let error = error {
+						// Handle error
+						#warning("Not implemented")
+						print("[WARNING] Called unimplemented method: SidebarViewController.handleExternalDrops(_:draggingInfo:dropDirectory:childIndex)")
+					} else {
+						OperationQueue.main.addOperation {
+							// Add new directory or insert new file
+							#warning("Not implemented")
+							print("[WARNING] Called unimplemented method: SidebarViewController.handleExternalDrops(_:draggingInfo:dropDirectory:childIndex)")
+						}
+					}
+				}
+			case let fileURL as URL:
+				// The drag item is a URL reference (not a file promise)
+				droppedURLs.append(fileURL)
+			default:
+				break
 			}
-			
 		}
 		
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.outlineView(_:acceptDrop:item:childIndex:")
-		return false
+		dropURLs(droppedURLs, outlineView: outlineView, dropDirectory: dropDirectory, childIndex: index)
 	}
 	
-	func outlineView(_ outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
-		if operation == .delete {
-			// This is called when dragging to the trash can
-			let items = session.draggingPasteboard.pasteboardItems
-			let itemsToRemove = items?.compactMap { (draggedItem) -> Directory? in
-				return directoryFromItem(draggedItem)
+	/// Inserts files/directories in the given directory.
+	/// - Parameters:
+	///   - urls: The urls of the files and directories to add.
+	///   - outlineView: The outlineview that is being dragged into.
+	///   - dropDirectory: The directory that files are being added to.
+	///   - childIndex: The index of the child inside the directory that files are being added at.
+	private func dropURLs(_ urls: [URL], outlineView: NSOutlineView, dropDirectory: Directory, childIndex: Int) {
+		// There must be a data context in order to drag items
+		guard let dataContext = dataContext else { return }
+		// Don't process if there are no URL's
+		guard !urls.isEmpty else { return }
+		
+		var directoriesToInsert: [Directory] = []
+		
+		func addFileSystemObject(in parent: Directory, at url: URL, animate: Bool = false) {
+			if url.isFolder {
+				// The item being added is a folder (directory)
+				let directory = Directory(context: dataContext)
+				directory.path = url
+				directory.collapsed = true
+				parent.addToChildren(directory)
+				directoriesToInsert.append(directory)
+				
+				// Add all of the directory's contents
+				do {
+					let fileURLS = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
+					
+					fileURLS.forEach { url in
+						addFileSystemObject(in: directory, at: url, animate: false)
+					}
+				} catch {
+					// Error reading directories content
+					print("[WARNING] Failed to read directory content: \(error)")
+				}
+				
+			} else {
+				// The item being added is just a file
+				let file = File(context: dataContext)
+				file.path = url
+				parent.addToChildren(file)
 			}
-			#warning("Not implemented")
-			fatalError("Not implemented")
 		}
 		
+		urls.forEach { url in
+			addFileSystemObject(in: dropDirectory, at: url, animate: true)
+		}
 		
-		
-		#warning("Not implemented")
-		print("[WARNING] Called unimplemented method: SidebarViewController.outlineView(_:draggingSession:endedAt:operation:)")
+		// Animate
+		let outlineParent = dropDirectory == rootDirectory ? nil : dropDirectory
+		outlineView.insertItems(at: IndexSet(integer: childIndex), inParent: outlineParent, withAnimation: .effectGap)
 	}
 	
-	// MARK: Utilities
-	
+	/// Extracts the directory from an NSPasteboardItem instance.
+	/// - Parameter item: The pasteboard item.
+	/// - Returns: The directory associated with the pasteboard item if there is one.
 	private func directoryFromPasteboardItem(_ item: NSPasteboardItem) -> Directory? {
 		// Get the row number from the property list
 		
@@ -191,5 +280,14 @@ extension SidebarViewController {
 		
 		// Ask the sidebar for the directory at that row
 		return sidebar.item(atRow: row) as? Directory
+	}
+}
+
+extension URL {
+	/// Returns true if the url is a file system container. (Packages are not considered containers)
+	var isFolder: Bool {
+		guard let resources = try? resourceValues(forKeys: [.isDirectoryKey, .isPackageKey]) else { return false }
+		
+		return (resources.isDirectory ?? false) && !(resources.isPackage ?? false)
 	}
 }

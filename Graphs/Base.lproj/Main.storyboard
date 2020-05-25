@@ -59,10 +59,17 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="File" id="bib-Uj-vzu">
                                     <items>
-                                        <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
-                                            <connections>
-                                                <action selector="newDocument:" target="Ady-hI-5gd" id="4Si-XN-c54"/>
-                                            </connections>
+                                        <menuItem title="New" id="pOH-ck-FVd">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="New" id="hMW-hD-ecw">
+                                                <items>
+                                                    <menuItem title="Folder" keyEquivalent="N" id="tlG-bs-gZd">
+                                                        <connections>
+                                                            <action selector="newDirectory:" target="Ady-hI-5gd" id="VTU-CL-1hy"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
@@ -155,6 +162,9 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Delete" id="pa3-QI-u2k">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="delete:" target="Ady-hI-5gd" id="0Mk-Ml-PaM"/>
@@ -684,7 +694,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Graphs" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -788,7 +798,7 @@
                                                                 <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-Ck-vW6">
                                                                     <rect key="frame" x="3" y="0.0" width="17" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSActionTemplate" id="5JA-bf-A9A"/>
+                                                                    <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSFolder" id="5JA-bf-A9A"/>
                                                                 </imageView>
                                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LCE-IT-ZRm">
                                                                     <rect key="frame" x="25" y="0.0" width="212" height="17"/>
@@ -1001,8 +1011,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSFolder" width="32" height="32"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>
