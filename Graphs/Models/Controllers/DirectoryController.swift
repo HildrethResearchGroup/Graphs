@@ -17,6 +17,7 @@ class DirectoryController: NSObject {
 	var selectedDirectories: [Directory] = [] {
 		didSet {
 			// When the selection changes, the file list table needs to be updated. It will respond to this notification.
+			filesToShow = files(in: selectedDirectories)
 			let notification = Notification(name: .directorySelectionChanged)
 			NotificationCenter.default.post(notification)
 		}
@@ -81,62 +82,10 @@ extension DirectoryController {
 	}
 	
 	func files(in directories: [Directory]) -> [File] {
-		directories.flatMap { directory -> [File] in
-			let subdirectories = directory.subdirectories
-			
-			// This is really inefficient and should be changed
-			// Delete all of the files and readd them based off the current directory
-			
-			let cachedSubFiles = directory.children.compactMap { $0 as? File }
-			
-			cachedSubFiles.forEach { subfile in
-				directory.removeFromChildren(subfile)
-				subfile.parent = nil
-				dataController.persistentContainer.viewContext.delete(subfile)
-			}
-			
-			// Determine the files based off the directory's disk contents
-			
-			var files: [File] = []
-			
-			if let directoryPath = directory.path {
-				do {
-					let contents = try FileManager.default.contentsOfDirectory(at: directoryPath, includingPropertiesForKeys: [.isDirectoryKey, .isPackageKey], options: [FileManager.DirectoryEnumerationOptions.skipsHiddenFiles])
-					
-					let directoryFiles = contents.filter { (url) -> Bool in
-						do {
-							let resourceValues = try url.resourceValues(forKeys: [.isDirectoryKey])
-							guard let isDirectory = resourceValues.isDirectory, let isPackage = resourceValues.isPackage else {
-								// Don't include items which were not able to be determined as a direcotyr or a package
-								print("[WARNING] Could not identify if a file was a directory or package at url: \(url.absoluteString)")
-								return false
-							}
-							// Direcories and packages are not counted as files
-							return !(isDirectory || isPackage)
-						} catch {
-							// Don't include items for which their resource values could not be obtained
-							print("[WARNING] Could not obtain resource values at url: \(url.absoluteString)")
-							return false
-						}
-					}.map { fileURL -> File in
-						let file = File(context: self.dataController.persistentContainer.viewContext)
-						file.path = fileURL
-						file.parent = directory
-						directory.addToChildren(file)
-						file.parent = directory
-						return file
-					}
-					
-					files += directoryFiles
-					
-				} catch {
-					
-				}
-			}
-			
-			
-			
-			
+		return directories.flatMap { directory -> [File] in
+			let directChildren = directory.children.compactMap { $0 as? File }
+			let recursiveChildren = files(in: directory.subdirectories)
+			return directChildren + recursiveChildren
 		}
 	}
 }
