@@ -23,6 +23,7 @@ class FileListViewController: NSViewController {
 	}
 	
 	@objc func directorySelectionDidChange() {
-		
+		// When the sidebar's selection of directories change, update the table view
+		tableView.reloadData()
 	}
 }

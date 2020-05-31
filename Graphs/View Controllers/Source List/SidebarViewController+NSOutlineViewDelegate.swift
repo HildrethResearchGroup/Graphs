@@ -33,8 +33,7 @@ extension SidebarViewController: NSOutlineViewDataSource {
 extension SidebarViewController: NSOutlineViewDelegate {
 	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
 		guard let directory = directoryFromItem(item) else { return nil }
-		let identifier = NSUserInterfaceItemIdentifier(rawValue: "DirectoryCell")
-		let view = outlineView.makeView(withIdentifier: identifier, owner: self) as? NSTableCellView
+		let view = outlineView.makeView(withIdentifier: .directoryCell, owner: self) as? NSTableCellView
 		view?.textField?.stringValue = directory.displayName
 		return view
 	}
