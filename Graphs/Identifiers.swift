@@ -14,6 +14,8 @@ extension Notification.Name {
 	static let storeLoaded = Notification.Name(rawValue: "storeLoaded")
 	/// A notification that is fired when the sidebar's directory selection changes.
 	static let directorySelectionChanged = Notification.Name(rawValue: "directorySelectionChanged")
+	/// A notification that is fired after processing an undo by Core Data
+	static let didProcessUndo = Notification.Name(rawValue: "didProcessUndo")
 }
 
 // MARK: User Interface

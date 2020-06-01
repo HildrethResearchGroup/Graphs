@@ -22,6 +22,8 @@ class DataController: NSObject {
 	/// - Parameter completion: The completion handler to run after Core Data has loaded the model.
 	init(completion: @escaping () -> ()) {
 		persistentContainer = NSPersistentContainer(name: Self.dataModelName)
+		// By default there is no undo manager, so set a new one.
+		persistentContainer.viewContext.undoManager = UndoManager()
 		super.init()
 		directoryController = .init(dataController: self)
 		loadStore(completion: completion)
@@ -152,7 +154,6 @@ extension DataController {
 			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to no tbe collapsed. Without doing this, the top level items may not auto-expand on load.
 			self.directoryController.rootDirectory?.collapsed = false
 			
-			self.saveController.context = self.persistentContainer.viewContext
 			completion()
 		}
 	}

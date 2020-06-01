@@ -32,8 +32,8 @@ class SidebarViewController: NSViewController {
 	}()
 	
 	override func viewDidLoad() {
-		// The data will have to be reloaded once the store is loaded.
-		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded), name: .storeLoaded, object: nil)
+		registerObservers()
+		
 		
 		// Register drag types
 		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileURL])
@@ -47,6 +47,11 @@ class SidebarViewController: NSViewController {
 		guard let rootDirectory = rootDirectory else { return }
 		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
 		expandNeededItems(in: rootDirectory)
+	}
+	
+	/// Called when undo or redo is called.
+	@objc func didUndo(_ notification: Notification) {
+		sidebar.reloadData()
 	}
 	
 	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
@@ -155,6 +160,21 @@ extension SidebarViewController {
 	/// The managed object context for the model.
 	var dataContext: NSManagedObjectContext? {
 		return dataController?.persistentContainer.viewContext
+	}
+	
+	func registerObservers() {
+		let notificationCenter = NotificationCenter.default
+		// The data will have to be reloaded once the store is loaded.
+		notificationCenter.addObserver(self,
+																	 selector: #selector(storeLoaded),
+																	 name: .storeLoaded,
+																	 object: nil)
+		
+		// When undo/redo is called the sidebar may need to be reloaded, so track when undo and redo is called. NSUndoManagerDidRedo/Undo is not used because when that notificaiton is fired there is processing that must be done first.
+		notificationCenter.addObserver(self,
+																	 selector: #selector(didUndo(_:)),
+																	 name: .didProcessUndo,
+																	 object: nil)
 	}
 	
 	/// Recursivley expands the items in the directory based on their `collapsed` property.

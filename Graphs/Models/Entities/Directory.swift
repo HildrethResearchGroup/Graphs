@@ -202,6 +202,10 @@ extension Directory {
 extension Directory {
 	private static var subdirectoryCache: [Directory: [Directory]] = [:]
 	
+	static func invalidateCache() {
+		subdirectoryCache = [:]
+	}
+	
 	/// Calculates the sub directories for the directory and adds the calculation to the cache.
 	/// - Returns: The calculated sub directories.
 	@discardableResult

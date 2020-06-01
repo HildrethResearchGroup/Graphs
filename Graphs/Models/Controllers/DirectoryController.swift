@@ -27,6 +27,21 @@ class DirectoryController: NSObject {
 	
 	init(dataController: DataController) {
 		self.dataController = dataController
+		super.init()
+		registerObservers()
+	}
+	
+	@objc func didUndo(_ notification: Notification) {
+		Directory.invalidateCache()
+		// Send a notificatoin that the undo has been processed and that view controllers should no update their contents
+		let notification = Notification(name: .didProcessUndo)
+		NotificationCenter.default.post(notification)
+	}
+	
+	func registerObservers() {
+		// Must register for undo/redo notifications to invalidate any caches.
+		NotificationCenter.default.addObserver(self, selector: #selector(didUndo(_:)), name: .NSUndoManagerDidUndoChange, object: dataController.persistentContainer.viewContext.undoManager)
+		NotificationCenter.default.addObserver(self, selector: #selector(didUndo(_:)), name: .NSUndoManagerDidRedoChange, object: dataController.persistentContainer.viewContext.undoManager)
 	}
 	
 	@discardableResult
