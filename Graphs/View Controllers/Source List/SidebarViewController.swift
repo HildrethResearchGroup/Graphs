@@ -52,6 +52,8 @@ class SidebarViewController: NSViewController {
 	/// Called when undo or redo is called.
 	@objc func didUndo(_ notification: Notification) {
 		sidebar.reloadData()
+		guard let rootDirectory = rootDirectory else { return }
+		expandNeededItems(in: rootDirectory)
 	}
 	
 	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
@@ -189,6 +191,8 @@ extension SidebarViewController {
 			directory.subdirectories.forEach { subdirectory in
 				expandNeededItems(in: subdirectory, expandSelf: true)
 			}
+		} else {
+			sidebar.collapseItem(directory)
 		}
 	}
 	
