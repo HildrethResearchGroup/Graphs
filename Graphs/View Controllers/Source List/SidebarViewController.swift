@@ -33,11 +33,7 @@ class SidebarViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		registerObservers()
-		
-		
-		// Register drag types
 		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileURL])
-		
 		sidebar.reloadData()
 	}
 	
@@ -51,12 +47,14 @@ class SidebarViewController: NSViewController {
 	
 	/// Called when undo or redo is called.
 	@objc func didUndo(_ notification: Notification) {
+		// We don't know what is being un/redone, so we have to reload the data rather than perform an insert/delete/move
 		sidebar.reloadData()
 		guard let rootDirectory = rootDirectory else { return }
+		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
 		expandNeededItems(in: rootDirectory)
 	}
 	
-	/// Adds a new non-physical directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
+	/// Adds a new directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
 	@IBAction func addDirectory(_ sender: Any?) {
 		guard let directoryController = directoryController else { return }
@@ -80,8 +78,7 @@ class SidebarViewController: NSViewController {
 		}
 		
 		let newDirectory = directoryController.createSubdirectory(in: parent)
-		// The directory is non-physical, so it needs a display name.
-		newDirectory.customDisplayName = "New Directory"
+		newDirectory.customDisplayName = Directory.defaultDisplayName
 		
 		// The item is being inserted at the end of the list of children. NSOutlineView.insertItems(at:inParent:withAnimation) takes the parent item to add the new item inside of. In this case, this is the parent directory which was calculated above. It also takes the child index to add the item to - this is simply the index of the (just added) last child subdirectory.
 		let endIndex = IndexSet(integer: parent.subdirectories.count - 1)
@@ -98,10 +95,10 @@ class SidebarViewController: NSViewController {
 	/// Removes the selected directory in the source-list.
 	@IBAction func removeDirectory(_ sender: Any?) {
 		let selection = sidebar.selectedRowIndexes
-		
 		guard !selection.isEmpty else { return }
 		
 		let selectedDirectories = selection.compactMap { row in
+			// This should never return nil (all items in the sourcelist should be directories) however if it does, skip over it, and it will be noted as an error in the following guard statment (we can't break out of a map)
 			return sidebar.item(atRow: row) as? Directory
 		}
 		
@@ -110,6 +107,7 @@ class SidebarViewController: NSViewController {
 			return
 		}
 		
+		// Multiple items may be removed, so put everything in an update block to improve performance
 		sidebar.beginUpdates()
 		selectedDirectories.forEach { directory in
 			let parent = directory.parent
@@ -131,11 +129,6 @@ class SidebarViewController: NSViewController {
 			sidebar.removeItems(at: IndexSet(integer: childIndex),
 													inParent: sidebarParent,
 													withAnimation: .slideDown)
-			
-			// If there are no more subdirectories for the parent of the direcotry that has just been deleted, the disclosure triangle for that row should be hidden. To do that, the parent item is reloaded if it has no more subdirectories
-			if (parent?.subdirectories.count == 0) {
-				sidebar.reloadItem(sidebarParent, reloadChildren: false)
-			}
 		}
 		sidebar.endUpdates()
 	}
@@ -164,15 +157,16 @@ extension SidebarViewController {
 		return dataController?.persistentContainer.viewContext
 	}
 	
+	/// Register observers for relevent notifications.
 	func registerObservers() {
 		let notificationCenter = NotificationCenter.default
-		// The data will have to be reloaded once the store is loaded.
+		// The data will have to be reloaded once the store is loaded
 		notificationCenter.addObserver(self,
 																	 selector: #selector(storeLoaded),
 																	 name: .storeLoaded,
 																	 object: nil)
 		
-		// When undo/redo is called the sidebar may need to be reloaded, so track when undo and redo is called. NSUndoManagerDidRedo/Undo is not used because when that notificaiton is fired there is processing that must be done first.
+		// When undo/redo is called the sidebar may need to be reloaded, so track when undo and redo is called. NSUndoManagerDidRedo/Undo is not used because when that notificaiton is fired there is processing that must be done first
 		notificationCenter.addObserver(self,
 																	 selector: #selector(didUndo(_:)),
 																	 name: .didProcessUndo,

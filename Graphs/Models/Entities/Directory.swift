@@ -200,12 +200,14 @@ extension Directory {
 
 // MARK: Derived properties
 extension Directory {
+	/// The default name of new directories
+	static let defaultDisplayName = "New Directory"
+	/// A cache that stores a directory's subdidrectories. This is added as a static dictionary rather than as a member variable because adding member variables that are not managed by CoreData is not reccomended.
 	private static var subdirectoryCache: [Directory: [Directory]] = [:]
-	
+	/// Invalidates all cached properties.
 	static func invalidateCache() {
 		subdirectoryCache = [:]
 	}
-	
 	/// Calculates the sub directories for the directory and adds the calculation to the cache.
 	/// - Returns: The calculated sub directories.
 	@discardableResult
@@ -215,13 +217,11 @@ extension Directory {
 		Self.subdirectoryCache[self] = subdirectories
 		return subdirectories
 	}
-	
 	/// The direct (not recursive) subdirectories of this directory.
 	var subdirectories: [Directory] {
 		// The values are stored in a cache to prevent uncessesarily recomputing this property. calculateSubDirectories() automatically adds the calculation to the cache
 		return Self.subdirectoryCache[self] ?? calculateSubDirectories()
 	}
-	
 	/// The recursive parent directories of this directory.
 	var ansestors: Set<Directory> {
 		var ansestors: Set<Directory> = []
@@ -235,8 +235,7 @@ extension Directory {
 		
 		return ansestors
 	}
-	
-	/// Returns true if this directory is a descendent of the given directory.
+	/// Returns `true` if this directory is a descendent of the given directory.
 	/// - Parameter directory: The directory to check if this directory is a descendent of.
 	/// - Returns: `true` if this directory is a descendent of the given directory, otherwise `false`.
 	func isDescendent(of directory: Directory) -> Bool {
@@ -253,6 +252,9 @@ extension Directory {
 		return false
 	}
 	
+	/// Returns `true` if this directory is a descendent of any of the given directories.
+	/// - Parameter directories: The directories to check if this directory is a descendent of.
+	/// - Returns: `true` if this directory is a descendent of any of the given directories, otherwise `false`.
 	func isDescendent(of directories: Set<Directory>) -> Bool {
 		// The first candidate is the parent directory
 		var ancestor = self.parent

@@ -25,6 +25,7 @@ extension SidebarViewController: NSOutlineViewDataSource {
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
 		// Every item is a directory, which can have subdirectories
+		// Idealy, empty directories whould not show the disclosure triangle, but this proved too difficult to implement for a minor visual improvment
 		return true
 	}
 }
@@ -45,15 +46,20 @@ extension SidebarViewController: NSOutlineViewDelegate {
 	}
 	
 	func outlineViewItemDidExpand(_ notification: Notification) {
+		// This delegate method is implemented to have the expanded/collapsed state changed so that it is persistant accross runs
+		// The item that expanded is stored in the "NSObject" key of userInfo
 		guard let item = notification.userInfo?["NSObject"] as? Directory else {
 			return
 		}
 		item.collapsed = false
+		// There may be child items in the newly expanded item that also need to be expanded
 		expandNeededItems(in: item)
 		dataController?.setNeedsSaved()
 	}
 	
 	func outlineViewItemDidCollapse(_ notification: Notification) {
+		// This delegate method is implemented to have the expanded/collapsed state changed so that it is persistant accross runs
+		// The item that expanded is stored in the "NSObject" key of userInfo
 		guard let item = notification.userInfo?["NSObject"] as? Directory else {
 			return
 		}
@@ -64,7 +70,6 @@ extension SidebarViewController: NSOutlineViewDelegate {
 	func outlineViewSelectionDidChange(_ notification: Notification) {
 		let selectedRows = sidebar.selectedRowIndexes
 		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
-		
 		directoryController?.selectedDirectories = selectedDirectories
 	}
 }

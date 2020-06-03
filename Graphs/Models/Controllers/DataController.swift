@@ -60,6 +60,7 @@ private class SaveController {
 	
 	/// Saves the Core Data model to the store if there have been any changes since the last save.
 	fileprivate func save() {
+		// Don't save if there hasn't been any changes
 		guard changeCount > 0 else { return }
 		guard let context = context else { return }
 		
@@ -69,17 +70,22 @@ private class SaveController {
 			print("[WARNING] Core Data failed to save: \(error)")
 		}
 		
+		// Change count represents the number of changes since the last save. Since we just saved set it to 0
 		changeCount = 0
 	}
 }
 
 extension DataController {
 	/// Notifies the controller that the Core Data model has changed and should be saved at some point in the future.
+	///
+	/// Call this whenever the model changes.
 	func setNeedsSaved() {
 		saveController.addChange()
 	}
 	
 	/// Immediatley saves the Core Data model to the store.
+	///
+	/// Note that the store may be saved periodically without this function being called.
 	func saveImmediatley() {
 		saveController.save()
 	}

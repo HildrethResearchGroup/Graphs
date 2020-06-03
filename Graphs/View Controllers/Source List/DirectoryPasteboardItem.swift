@@ -45,10 +45,15 @@ class DirectoryPasteboardWriter: NSFilePromiseProvider {
 // MARK: Utilities
 
 extension DirectoryPasteboardWriter {
+	/// Returns the url of a file promise provider.
+	/// - Parameter filePromiseProvider: The file promise provider.
+	/// - Returns: The url or `nil` if the url could not be determined.
 	class func urlFromFilePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider) -> URL? {
+		// The url is stored in a key of userInfo -- if userInfo is not a dictionary of [String: Any] or if the key does not exist return nil
 		guard let userInfo = filePromiseProvider.userInfo as? [String: Any] else { return nil }
 		
 		if let urlString = userInfo[DirectoryPasteboardWriter.UserInfoKeys.url] as? String {
+			// If the urlString is empty then it does not represent a valid url so return nil
 			if !urlString.isEmpty {
 				return URL(string: urlString)
 			}

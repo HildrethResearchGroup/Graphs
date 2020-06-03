@@ -37,6 +37,9 @@ extension SidebarViewController: NSFilePromiseProviderDelegate {
 
 // MARK: Utilities
 extension SidebarViewController {
+	/// Returns the name for a given file promise provider.
+	/// - Parameter filePromiseProvider: The file promise provider to determine the name from.
+	/// - Returns: The name or `nil` if it cannot determine one.
 	private func nameFromFilePromiseProvider(_ filePromiseProvider: NSFilePromiseProvider) -> String? {
 		let userInfo = filePromiseProvider.userInfo as? [String: Any]
 		return userInfo?[DirectoryPasteboardWriter.UserInfoKeys.name] as? String

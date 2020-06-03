@@ -26,12 +26,9 @@ extension SidebarViewController {
 	func outlineView(_ outlineView: NSOutlineView, validateDrop info:
 		NSDraggingInfo, proposedItem item: Any?, proposedChildIndex index: Int) -> NSDragOperation {
 		var result = NSDragOperation()
-		
 		// Don't allow dropping on a child
 		guard index != -1 else { return result }
-		
 		guard let dropDirectory = directoryFromItem(item) else { return result }
-		
 		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
 			// Drag source is from within the outline view
 			if okayToDrop(draggingInfo: info, destinationItem: dropDirectory) {
@@ -44,23 +41,19 @@ extension SidebarViewController {
 			// Drag source is from outside the app, likly a file promise, so it's going to be a copy
 			result = .copy
 		}
-		
 		return result
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: Any?, childIndex index: Int) -> Bool {
-		
 		guard let dropDirectory = directoryFromItem(item) ?? rootDirectory else { return false }
 		
 		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
 			// The items that are being dragged are internal items
-			
 			handleInternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
 		} else {
 			// The user has droped items from Finder
 			handleExternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
 		}
-		
 		return true
 	}
 	
@@ -74,9 +67,6 @@ extension SidebarViewController {
 			#warning("Not implemented")
 			fatalError("Not implemented")
 		}
-		
-		
-		
 		#warning("Not implemented")
 		print("[WARNING] Called unimplemented method: SidebarViewController.outlineView(_:draggingSession:endedAt:operation:)")
 	}
@@ -99,14 +89,12 @@ extension SidebarViewController {
 			guard let droppedPasteboardItem = dragItem.item as? NSPasteboardItem else { return }
 			
 			guard let dropDirectory = self.directoryFromPasteboardItem(droppedPasteboardItem) else { return }
-			
 			// Check if the dropped item is the parent of the location item
 			if ansestors.contains(dropDirectory) {
 				// Dropping a parent directory into this directory, which would create an infinite cycle, so don't allow this
 				droppedOntoSelf = true
 			}
 		}
-		
 		return !droppedOntoSelf
 	}
 	
@@ -118,7 +106,6 @@ extension SidebarViewController {
 	///   - index: The child index of the directory that the items are being dropped at.
 	private func handleInternalDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
 		var itemsToMove: [Directory] = []
-		
 		// If the drop location is ambiguous, add it to the end
 		let dropIndex = index == -1 ? dropDirectory.children.count : index
 		
@@ -129,7 +116,6 @@ extension SidebarViewController {
 				}
 			}
 		}
-		
 		// The items may be added at a higher index if there are selected items in the drop directory that are above the drop zone
 		let indexOffset = itemsToMove.lazy.filter { directory -> Bool in
 			// The parent of the item being moved has to be the same as the drop directory
@@ -140,14 +126,12 @@ extension SidebarViewController {
 				print("[WARNING] Internal error: index of directory child was nil")
 				return false
 			}
-			
 			// The item being moved has to be above the drop location
 			return directoryIndex < dropIndex
 		}.count
 		
 		let insertIndex = dropIndex - indexOffset
-		
-		// Each item will have a move animation, so put in an updates block
+		// Each item will have a move animation, so put in an update block to improve performance
 		outlineView.beginUpdates()
 		// Becuase each item is added individually as a child, it needs to be done in reverse order, otherwise the items would be pasted in the wrong order
 		itemsToMove.reversed().forEach { directory in
@@ -160,10 +144,8 @@ extension SidebarViewController {
 			dropDirectory.insertIntoChildren(directory, at: insertIndex)
 			
 			let newParent = dropDirectory == rootDirectory ? nil : dropDirectory
-			
 			// Then add animation
 			outlineView.moveItem(at: origionalIndex, inParent: origionalParent, to: insertIndex, inParent: newParent)
-			
 			// If there are no more subdirectories for the parent of the direcotry that has just had its children moved, the disclosure triangle for that row should be hidden. To do that, the parent item is reloaded if it has no more subdirectories
 			if (origionalParent?.subdirectories.count == 0) {
 				outlineView.reloadItem(origionalParent, reloadChildren: false)
@@ -181,12 +163,9 @@ extension SidebarViewController {
 	private func handleExternalDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
 		// We look for file promises and urls
 		let supportedClasses = [NSFilePromiseReceiver.self, NSURL.self]
-		
 		// For items dragged from outside the application, we want to seach for readable URLs
 		let searchOptions: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true]
-		
 		var droppedURLs: [URL] = []
-		
 		// Process all pasteboard items that are being dropped
 		draggingInfo.enumerateDraggingItems(options: [], for: nil, classes: supportedClasses, searchOptions: searchOptions) { draggingItem, _, _ in
 			switch draggingItem.item {
@@ -213,7 +192,6 @@ extension SidebarViewController {
 				break
 			}
 		}
-		
 		dropURLs(droppedURLs, outlineView: outlineView, dropDirectory: dropDirectory, childIndex: index)
 	}
 	
@@ -259,11 +237,9 @@ extension SidebarViewController {
 				parent.addToChildren(file)
 			}
 		}
-		
 		urls.forEach { url in
 			addFileSystemObject(in: dropDirectory, at: url, animate: true)
 		}
-		
 		// Animate
 		let outlineParent = dropDirectory == rootDirectory ? nil : dropDirectory
 		outlineView.insertItems(at: IndexSet(integer: childIndex), inParent: outlineParent, withAnimation: .effectGap)
@@ -274,10 +250,8 @@ extension SidebarViewController {
 	/// - Returns: The directory associated with the pasteboard item if there is one.
 	private func directoryFromPasteboardItem(_ item: NSPasteboardItem) -> Directory? {
 		// Get the row number from the property list
-		
 		guard let plist = item.propertyList(forType: .directoryRowPasteboardType) as? [String: Any] else { return nil }
 		guard let row = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else { return nil }
-		
 		// Ask the sidebar for the directory at that row
 		return sidebar.item(atRow: row) as? Directory
 	}
