@@ -154,6 +154,7 @@ extension DataController {
 			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to no tbe collapsed. Without doing this, the top level items may not auto-expand on load.
 			self.directoryController.rootDirectory?.collapsed = false
 			
+			self.saveController.context = self.persistentContainer.viewContext
 			completion()
 		}
 	}

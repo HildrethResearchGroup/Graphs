@@ -19,5 +19,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationWillTerminate(_ aNotification: Notification) {
 		DataController.shared?.saveImmediatley()
 	}
+	
+	func applicationWillResignActive(_ notification: Notification) {
+		DataController.shared?.saveImmediatley()
+	}
 }
 
