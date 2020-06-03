@@ -11,6 +11,7 @@ import Cocoa
 class FileListViewController: NSViewController {
 	/// The table view.
 	@IBOutlet weak var tableView: NSTableView!
+	/// The label in the bottom bar of the window. Displays the numebr of files in the directory selection as well as the currently selected files in the table view.
 	@IBOutlet weak var itemsSelectedLabel: NSTextField!
 	
 	override func viewDidLoad() {
@@ -19,8 +20,11 @@ class FileListViewController: NSViewController {
 	}
 	
 	func registerObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(directorySelectionDidChange), name: .directorySelectionChanged, object: nil)
-		
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(self,
+																	 selector: #selector(directorySelectionDidChange),
+																	 name: .directorySelectionChanged,
+																	 object: nil)
 	}
 	
 	@objc func directorySelectionDidChange() {
@@ -55,5 +59,16 @@ class FileListViewController: NSViewController {
 			
 			itemsSelectedLabel.stringValue = "\(numberOfSelectedFiles) of \(numberOfFiles) files selected in \(directoriesText)"
 		}
+	}
+}
+
+// MARK: Helper Functions
+extension FileListViewController {
+	var dataController: DataController? {
+		return DataController.shared
+	}
+	
+	var directoryController: DirectoryController? {
+		return dataController?.directoryController
 	}
 }

@@ -10,16 +10,16 @@ import Cocoa
 
 extension FileListViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
-		return DataController.shared?.directoryController.filesToShow.count ?? 0
+		return directoryController?.filesToShow.count ?? 0
 	}
 	
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		guard row < DataController.shared?.directoryController.filesToShow.count ?? 0 else {
+		guard row < directoryController?.filesToShow.count ?? 0 else {
 			// If the row is greater than the count or the controller is nil, return nil (this should never happen)
 			print("[WARNING] FIleListViewController could not find file for the table view at trow \(row).")
 			return nil
 		}
-		return DataController.shared!.directoryController.filesToShow[row]
+		return directoryController?.filesToShow[row]
 	}
 }
 
@@ -43,6 +43,7 @@ extension FileListViewController: NSTableViewDelegate {
 		
 		guard let view = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
 		
+		// We use the column identifier rather than a tag becuase the performance impact is negligable and the column identifiers are more descriptive to aid in debuging
 		switch tableColumn.identifier {
 		case .fileNameColumn:
 			view.textField?.stringValue = file.displayName
@@ -50,6 +51,7 @@ extension FileListViewController: NSTableViewDelegate {
 			view.textField?.stringValue = collectionName(forFile: file)
 		case .fileDateImportedColumn:
 			// TODO: Add import date
+			#warning("Unimplemented")
 			view.textField?.stringValue = "0/0/0"
 		default:
 			return nil
@@ -69,11 +71,11 @@ extension FileListViewController {
 	func collectionName(forFile file: File) -> String {
 		guard let parent = file.parent else {
 			// Every file should belong to a directory so this should never happen
-			print("[WARNING] File has no parent.")
+			print("[WARNING] File has no parent at FileListViewController.collectionName(forFile:).")
 			return ""
 		}
 		
-		if parent == DataController.shared?.directoryController.rootDirectory {
+		if parent == directoryController?.rootDirectory {
 			// If the parent directory is root, then don't display a name for the collection
 			return ""
 		} else {
