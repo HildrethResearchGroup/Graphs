@@ -57,6 +57,10 @@ extension FileListViewController: NSTableViewDelegate {
 		
 		return view
 	}
+	
+	func tableViewSelectionDidChange(_ notification: Notification) {
+		updateRowSelectionLabel()
+	}
 }
 
 // MARK: Helper Functions
