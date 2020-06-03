@@ -27,41 +27,33 @@ class FileListViewController: NSViewController {
 		// When the sidebar's selection of directories change, update the table view
 		tableView.reloadData()
 		itemsSelectedLabel.integerValue = tableView.numberOfRows
+		// The selection may change so update the row selection label
 		updateRowSelectionLabel()
 	}
 	
 	/// Updates the text on the bottom bar's label to indicate how many items are in the selected directories and how many are selected
 	func updateRowSelectionLabel() {
-		let numberOfItems = tableView.numberOfRows
-		let selectionCount = tableView.numberOfSelectedRows
+		let numberOfFiles = tableView.numberOfRows
+		let numberOfSelectedFiles = tableView.numberOfSelectedRows
 		let numberOfSelectedDirectories = DataController.shared?.directoryController.selectedDirectories.count ?? 0
 		
 		if numberOfSelectedDirectories == 0 {
 			itemsSelectedLabel.stringValue = "0 directories selected"
+			// Further processing is done down below, so just return now for this case
 			return
 		}
 		
-		let directoryText: String = {
-			if numberOfSelectedDirectories == 1 {
-				return "in 1 directory"
-			} else {
-				return "in \(numberOfSelectedDirectories) directories"
-			}
-		}()
+		// localize the word "directory" for plurality
+		let directoriesText = numberOfSelectedDirectories == 1 ? "directory" : "directories"
 		
-		let filesText: String = {
-			if numberOfItems == 1 {
-				return "1 file "
-			} else {
-				return "\(numberOfItems) files "
-			}
-		}()
+		// localize the word "file" for plurality
+		let filesText = numberOfFiles == 1 ? "file" : "files"
 		
-		if selectionCount == 0 {
-			itemsSelectedLabel.stringValue = filesText + directoryText
+		if numberOfSelectedFiles == 0 {
+			itemsSelectedLabel.stringValue = "\(numberOfFiles) \(filesText) in \(numberOfSelectedDirectories) \(directoriesText)"
 		} else {
 			
-			itemsSelectedLabel.stringValue = "\(selectionCount) of " + filesText + "selected " + directoryText
+			itemsSelectedLabel.stringValue = "\(numberOfSelectedFiles) of \(numberOfFiles) files selected in \(directoriesText)"
 		}
 	}
 }
