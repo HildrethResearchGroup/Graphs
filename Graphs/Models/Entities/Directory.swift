@@ -225,7 +225,7 @@ extension Directory {
 	/// The recursive parent directories of this directory.
 	var ansestors: Set<Directory> {
 		var ansestors: Set<Directory> = []
-		
+		// TODO: Is parent supposed to be in the set or not? It is an ansestor but will it introduce any bugs to change it?
 		var parent = self.parent
 		
 		while let nextParent = parent {
@@ -234,5 +234,38 @@ extension Directory {
 		}
 		
 		return ansestors
+	}
+	
+	/// Returns true if this directory is a descendent of the given directory.
+	/// - Parameter directory: The directory to check if this directory is a descendent of.
+	/// - Returns: `true` if this directory is a descendent of the given directory, otherwise `false`.
+	func isDescendent(of directory: Directory) -> Bool {
+		// The first ancestory is the parent
+		var ancestor = self.parent
+		
+		repeat {
+			if directory == ancestor { return true }
+			// Climb up the ancestor tree until there are no more parents
+			ancestor = ancestor?.parent
+		} while ancestor != nil
+		
+		// None of the ancestors were the given directory, so self is not a decesndent of directory
+		return false
+	}
+	
+	func isDescendent(of directories: Set<Directory>) -> Bool {
+		// The first candidate is the parent directory
+		var ancestor = self.parent
+		if ancestor == nil { return false }
+		
+		repeat {
+			// We can force unwrap becuase the while condition is ancestor != nil and the same check is performed before the loop
+			if directories.contains(ancestor!) { return true }
+			// Climb up the ancestor tree until there are no more parents
+			ancestor = ancestor?.parent
+		} while ancestor != nil
+		
+		// None of the ancestors were the given directory, so self is not a decesndent of directory
+		return false
 	}
 }

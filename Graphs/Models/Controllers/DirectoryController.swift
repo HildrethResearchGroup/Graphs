@@ -16,7 +16,7 @@ class DirectoryController: NSObject {
 	/// The currently selected directories.
 	var selectedDirectories: [Directory] = [] {
 		didSet {
-			// When the selection changes, the file list table needs to be updated. It will respond to this notification.
+			// When the selection changes, the file list table needs to be updated. It will respond to this notification
 			filesToShow = files(in: selectedDirectories)
 			let notification = Notification(name: .directorySelectionChanged)
 			NotificationCenter.default.post(notification)
@@ -26,6 +26,7 @@ class DirectoryController: NSObject {
 	private(set) var filesToShow: [File] = []
 	
 	init(dataController: DataController) {
+		// The directory controller gets its data from a data controller, so a data controller must be provided to create a directory contoller
 		self.dataController = dataController
 		super.init()
 		registerObservers()
@@ -39,7 +40,7 @@ class DirectoryController: NSObject {
 	}
 	
 	func registerObservers() {
-		// Must register for undo/redo notifications to invalidate any caches.
+		// Must register for undo/redo notifications to invalidate any caches
 		NotificationCenter.default.addObserver(self, selector: #selector(didUndo(_:)), name: .NSUndoManagerDidUndoChange, object: dataController.persistentContainer.viewContext.undoManager)
 		NotificationCenter.default.addObserver(self, selector: #selector(didUndo(_:)), name: .NSUndoManagerDidRedoChange, object: dataController.persistentContainer.viewContext.undoManager)
 	}
@@ -96,11 +97,40 @@ extension DirectoryController {
 		}
 	}
 	
+	/// Returns the files in the given directories and their subdirectories recursivley.
+	/// - Parameter directories: The directories to check for files in.
+	/// - Returns: The files in the given directories and their subdirectories recursivley.
 	func files(in directories: [Directory]) -> [File] {
-		return directories.flatMap { directory -> [File] in
+		return files(in: directories, knownNoDescendents: false)
+	}
+	
+	/// The function used by `files(in:)` but with an added parameter for recursive performance. The wrapper function is used without the parameter because the parameter should always be `true` the first time it is called and `false` when it is beinc called from withinside itself (recursivley). To prevent the user for accidentally passing the wrong value the parameter is removed from the internal interface.
+	/// - Parameters:
+	///   - directories: The directories  to check for files in.
+	///   - knownNoDescendents: `true` if it is known that none of the passed directories are a descendents of eachother, `false` otherwise.
+	/// - Returns: The files in the given directories and their subdirectories recursivley.
+	private func files(in directories: [Directory], knownNoDescendents: Bool) -> [File] {
+		
+		let map: (Directory) -> [File] = { directory -> [File] in
+			// Add this directories children and its subdirectories' children recursivley
 			let directChildren = directory.children.compactMap { $0 as? File }
-			let recursiveChildren = files(in: directory.subdirectories)
+			// We know that none of the passed directories are descendents of eachother because they all have the same parent.
+			let recursiveChildren = self.files(in: directory.subdirectories, knownNoDescendents: true)
 			return directChildren + recursiveChildren
 		}
+		
+		if knownNoDescendents {
+			return directories
+				// No need to filter becuase there are no directories that are descendents of other directories in the given array
+				.flatMap(map)
+		}
+		
+		// Contains will be called O(n) times where n is the number of elements in the collection. Without using a set, the algorithm is O(n^2), but by using a set, the algorithm is only O(n).
+		let directoriesSet = Set(directories)
+		
+		return directories
+			// Remove directories whose ancestors are in the array of directories
+			.filter { !$0.isDescendent(of: directoriesSet) }
+			.flatMap(map)
 	}
 }
