@@ -68,8 +68,6 @@ extension SidebarViewController: NSOutlineViewDelegate {
 	}
 	
 	func outlineViewSelectionDidChange(_ notification: Notification) {
-		let selectedRows = sidebar.selectedRowIndexes
-		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
-		directoryController?.selectedDirectories = selectedDirectories
+		updateDirectorySelection()
 	}
 }

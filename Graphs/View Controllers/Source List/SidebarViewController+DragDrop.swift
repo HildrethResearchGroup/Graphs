@@ -36,7 +36,9 @@ extension SidebarViewController {
 			}
 		} else if info.draggingPasteboard.availableType(from: [.fileURL]) != nil {
 			// Drag source is from outside the app as a file URL, so a drop means adding a link or reference
-			result = .link
+			if !(item == nil && externalDropContainsFiles(draggingInfo: info)) {
+				return .link
+			}
 		} else {
 			// Drag source is from outside the app, likly a file promise, so it's going to be a copy
 			result = .copy
@@ -128,6 +130,31 @@ extension SidebarViewController {
 			}
 		}
 		return !droppedOntoSelf
+	}
+	
+	private func externalDropContainsFiles(draggingInfo: NSDraggingInfo) -> Bool {
+		// We look for file promises and urls
+		let supportedClasses = [NSFilePromiseReceiver.self, NSURL.self]
+		// For items dragged from outside the application, we want to seach for readable URLs
+		let searchOptions: [NSPasteboard.ReadingOptionKey: Any] = [.urlReadingFileURLsOnly: true]
+		var droppedURLs: [URL] = []
+		// Process all pasteboard items that are being dropped
+		draggingInfo.enumerateDraggingItems(options: [], for: nil, classes: supportedClasses, searchOptions: searchOptions) { draggingItem, _, _ in
+			switch draggingItem.item {
+			case let filePromiseReceiver as NSFilePromiseReceiver:
+				// The drag item is a file promise, so it isn't a directory
+				break
+			case let fileURL as URL:
+				// The drag item is a URL reference (not a file promise)
+				droppedURLs.append(fileURL)
+			default:
+				break
+			}
+		}
+		
+		return droppedURLs.contains { url in
+			return !url.isFolder
+		}
 	}
 	
 	/// Handles dropping internal items onto the sidebar.
@@ -225,6 +252,8 @@ extension SidebarViewController {
 			}
 		}
 		dropURLs(droppedURLs, outlineView: outlineView, dropDirectory: dropDirectory, childIndex: index)
+		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
+		updateDirectorySelection()
 	}
 	
 	/// Inserts files/directories in the given directory.

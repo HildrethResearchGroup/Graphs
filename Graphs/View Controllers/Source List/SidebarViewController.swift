@@ -202,4 +202,12 @@ extension SidebarViewController {
 		// Otherwise the parent directory will have set the item to be a Direcotry object.
 		return item as? Directory
 	}
+	
+	/// Updates the directory selection in the directory controller. This is called to indicate that the files to show in the file list may have changed.
+	func updateDirectorySelection() {
+		let selectedRows = sidebar.selectedRowIndexes
+		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
+		// Setting this property calls a setter in DirectoryController which updates the filesToShow property
+		directoryController?.selectedDirectories = selectedDirectories
+	}
 }
