@@ -33,7 +33,10 @@ class SidebarViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		registerObservers()
+		// Allow dropping internal directory types and external files on the sidebar
 		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileURL])
+		// Allow dragging rows to the trash to delete them
+		sidebar.setDraggingSourceOperationMask([.delete], forLocal: false)
 		sidebar.reloadData()
 	}
 	
@@ -92,7 +95,7 @@ class SidebarViewController: NSViewController {
 		sidebar.animator().expandItem(parent)
 	}
 	
-	/// Removes the selected directory in the source-list.
+	/// Removes the selected directories in the source-list.
 	@IBAction func removeDirectory(_ sender: Any?) {
 		let selection = sidebar.selectedRowIndexes
 		guard !selection.isEmpty else { return }

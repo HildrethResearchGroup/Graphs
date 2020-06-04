@@ -7,6 +7,6 @@
 //
 
 #if DEBUG
-/// Setting this value to `true` deletes and resets the Core Data store the next time the app is run in `DEBUG` more..
+/// Setting this value to `true` deletes and resets the Core Data store the next time the app is run in `DEBUG` mode.
 let shouldResetCoreData = false
 #endif
