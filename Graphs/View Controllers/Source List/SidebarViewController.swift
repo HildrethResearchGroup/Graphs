@@ -93,6 +93,11 @@ class SidebarViewController: NSViewController {
 												withAnimation: .slideUp)
 		// Items are collapsed by default, but should be expanded if an item has just been added to it.
 		sidebar.animator().expandItem(parent)
+		
+		// Get the view for the newly inserted row so we can begin editing its textfield
+		let view = sidebar.view(atColumn: 0, row: sidebar.row(forItem: newDirectory), makeIfNecessary: true) as? NSTableCellView
+		
+		view?.textField?.becomeFirstResponder()
 	}
 	
 	/// Removes the selected directories in the source-list.
