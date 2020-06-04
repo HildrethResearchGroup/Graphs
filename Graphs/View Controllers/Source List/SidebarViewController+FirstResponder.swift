@@ -12,7 +12,7 @@ import Cocoa
 extension SidebarViewController {
 	/// Deletes the selected directories in the sidebar.
 	@objc func delete(_ sender: Any?) {
-		removeDirectory(sender)
+		removeSelectedDirectories(sender)
 	}
 	
 	/// Creates a new directory.

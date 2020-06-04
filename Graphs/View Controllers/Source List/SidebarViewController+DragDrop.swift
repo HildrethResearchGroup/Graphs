@@ -63,45 +63,16 @@ extension SidebarViewController {
 		if operation == .delete {
 			// This is called when dragging to the trash can
 			guard let items = session.draggingPasteboard.pasteboardItems else { return }
-			let itemsToRemove = items.compactMap { (draggedItem) -> Directory? in
-				
+			let directoriesToRemove = items.compactMap { (draggedItem) -> Directory? in
 				guard let plist = draggedItem.propertyList(forType: .directoryRowPasteboardType) as? [String: Any] else { return nil }
-				
 				guard let rowIndex = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else {
 					return nil
 				}
 				
 				let item = outlineView.item(atRow: rowIndex)
-				
 				return directoryFromItem(item)
 			}
-			
-			//itemsToRemove.forEach { directoryController?.remove(directory: $0) }
-			
-			// Multiple items may be removed, so put everything in an update block to improve performance
-			sidebar.beginUpdates()
-			itemsToRemove.forEach { directory in
-				let parent = directory.parent
-				let childIndex = sidebar.childIndex(forItem: directory)
-				directoryController?.remove(directory: directory)
-				
-				guard parent != nil else {
-					print("[WARNING] Error finding parent for directory item to be removed.")
-					return
-				}
-				guard childIndex != -1 else {
-					print("[WARNING] Error finding child index for subdirectory to be removed.")
-					return
-				}
-				
-				// Top level directories are a member of the root directory. However, NSOutlineView represents the item of the top level as nil, so if the parent is the root directory, change it to nil.
-				let sidebarParent = parent == rootDirectory ? nil : parent
-				
-				sidebar.removeItems(at: IndexSet(integer: childIndex),
-														inParent: sidebarParent,
-														withAnimation: .slideDown)
-			}
-			sidebar.endUpdates()
+			remove(directories: directoriesToRemove)
 		}
 	}
 }

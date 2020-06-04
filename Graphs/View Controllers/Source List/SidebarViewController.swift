@@ -96,44 +96,18 @@ class SidebarViewController: NSViewController {
 	}
 	
 	/// Removes the selected directories in the source-list.
-	@IBAction func removeDirectory(_ sender: Any?) {
+	@IBAction func removeSelectedDirectories(_ sender: Any?) {
 		let selection = sidebar.selectedRowIndexes
 		guard !selection.isEmpty else { return }
-		
 		let selectedDirectories = selection.compactMap { row in
 			// This should never return nil (all items in the sourcelist should be directories) however if it does, skip over it, and it will be noted as an error in the following guard statment (we can't break out of a map)
 			return sidebar.item(atRow: row) as? Directory
 		}
-		
 		guard selectedDirectories.count == selection.count else {
 			print("NSOutlineView inconsitancty: could not map all rows to directories")
 			return
 		}
-		
-		// Multiple items may be removed, so put everything in an update block to improve performance
-		sidebar.beginUpdates()
-		selectedDirectories.forEach { directory in
-			let parent = directory.parent
-			let childIndex = sidebar.childIndex(forItem: directory)
-			directoryController?.remove(directory: directory)
-			
-			guard parent != nil else {
-				print("[WARNING] Error finding parent for directory item to be removed.")
-				return
-			}
-			guard childIndex != -1 else {
-				print("[WARNING] Error finding child index for subdirectory to be removed.")
-				return
-			}
-			
-			// Top level directories are a member of the root directory. However, NSOutlineView represents the item of the top level as nil, so if the parent is the root directory, change it to nil.
-			let sidebarParent = parent == rootDirectory ? nil : parent
-			
-			sidebar.removeItems(at: IndexSet(integer: childIndex),
-													inParent: sidebarParent,
-													withAnimation: .slideDown)
-		}
-		sidebar.endUpdates()
+		remove(directories: selectedDirectories)
 	}
 	
 }
@@ -158,6 +132,35 @@ extension SidebarViewController {
 	/// The managed object context for the model.
 	var dataContext: NSManagedObjectContext? {
 		return dataController?.persistentContainer.viewContext
+	}
+	
+	/// Removes the given directories from the sidbar and updates the model.
+	/// - Parameter directories: The directories to remove.
+	func remove(directories: [Directory]) {
+		// Multiple items may be removed, so put everything in an update block to improve performance
+		sidebar.beginUpdates()
+		directories.forEach { directory in
+			let parent = directory.parent
+			let childIndex = sidebar.childIndex(forItem: directory)
+			directoryController?.remove(directory: directory)
+			
+			guard parent != nil else {
+				print("[WARNING] Error finding parent for directory item to be removed.")
+				return
+			}
+			guard childIndex != -1 else {
+				print("[WARNING] Error finding child index for subdirectory to be removed.")
+				return
+			}
+			
+			// Top level directories are a member of the root directory. However, NSOutlineView represents the item of the top level as nil, so if the parent is the root directory, change it to nil.
+			let sidebarParent = parent == rootDirectory ? nil : parent
+			
+			sidebar.removeItems(at: IndexSet(integer: childIndex),
+													inParent: sidebarParent,
+													withAnimation: .slideDown)
+		}
+		sidebar.endUpdates()
 	}
 	
 	/// Register observers for relevent notifications.
