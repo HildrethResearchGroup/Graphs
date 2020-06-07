@@ -882,7 +882,7 @@ CA
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
-                                                            <action selector="removeSelectedDirectories:" target="wL6-OG-lOu" id="LCv-CP-kX4"/>
+                                                            <action selector="delete:" target="ead-Yc-1N1" id="Qui-h6-RFg"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -947,7 +947,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gG4-El-eqy">
                                         <rect key="frame" x="76" y="5" width="54" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Inspector" id="1Mf-Az-1fy">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -985,7 +985,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="166" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -998,17 +998,17 @@ CA
                                 </constraints>
                             </customView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="nBB-7g-ZHY">
-                                <rect key="frame" x="0.0" y="24" width="450" height="1097"/>
+                                <rect key="frame" x="0.0" y="24" width="450" height="1145"/>
                                 <subviews>
                                     <scrollView misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="Pjd-XB-03O">
-                                        <rect key="frame" x="0.0" y="0.0" width="450" height="996"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="450" height="1042"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <clipView key="contentView" id="qYV-Om-jkB">
-                                            <rect key="frame" x="0.0" y="0.0" width="450" height="996"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="450" height="1042"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="7ge-iG-Y1D" viewBased="YES" id="pb6-fr-3Ec">
-                                                    <rect key="frame" x="0.0" y="0.0" width="450" height="971"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="450" height="1017"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1136,7 +1136,7 @@ CA
                                         </tableHeaderView>
                                     </scrollView>
                                     <customView misplaced="YES" id="wpb-2g-r4k">
-                                        <rect key="frame" x="0.0" y="997" width="450" height="100"/>
+                                        <rect key="frame" x="0.0" y="1043" width="450" height="102"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="5JT-Tg-6Yj"/>

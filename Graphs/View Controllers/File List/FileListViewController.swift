@@ -79,6 +79,13 @@ extension FileListViewController {
 		return dataController?.persistentContainer.viewContext
 	}
 	
+	func removeSelectedFiles() {
+		let files = tableView.selectedRowIndexes.compactMap { index in
+			directoryController?.filesToShow[index]
+		}
+		remove(files: files)
+	}
+	
 	func remove(files: [File]) {
 		files.forEach { file in
 			file.parent?.removeFromChildren(file)
