@@ -239,23 +239,25 @@ extension SidebarViewController {
 		// Don't process if there are no URL's
 		guard !urls.isEmpty else { return }
 		
-		var directoriesToInsert: [Directory] = []
-		
-		func addFileSystemObject(in parent: Directory, at url: URL, animate: Bool = false) {
+		func addFileSystemObject(in parent: Directory, at url: URL, index: Int? = nil, animate: Bool = false) {
 			if url.isFolder {
 				// The item being added is a folder (directory)
 				let directory = Directory(context: dataContext)
 				directory.path = url
 				directory.collapsed = true
-				parent.addToChildren(directory)
-				directoriesToInsert.append(directory)
+				if let index = index {
+					parent.insertIntoChildren(directory, at: index)
+				} else {
+					// Index should only be nil for adding files not folders, but if it is nil just add the directory to the end of the set of children
+					parent.addToChildren(directory)
+				}
 				
 				// Add all of the directory's contents
 				do {
 					let fileURLS = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
 					
 					fileURLS.forEach { url in
-						addFileSystemObject(in: directory, at: url, animate: false)
+						addFileSystemObject(in: directory, at: url)
 					}
 				} catch {
 					// Error reading directories content
@@ -269,12 +271,17 @@ extension SidebarViewController {
 				parent.addToChildren(file)
 			}
 		}
-		urls.forEach { url in
-			addFileSystemObject(in: dropDirectory, at: url, animate: true)
+		
+		// addFileSystemObject inserts the directories in the ordered set at the given index. Inserting objects one at a time at a given index will result in it being reversed, so reverse before iterating
+		urls.reversed().forEach { url in
+			addFileSystemObject(in: dropDirectory, at: url, index: childIndex, animate: true)
 		}
+		
 		// Animate
 		let outlineParent = dropDirectory == rootDirectory ? nil : dropDirectory
-		outlineView.insertItems(at: IndexSet(integer: childIndex), inParent: outlineParent, withAnimation: .effectGap)
+		let folderCount = urls.lazy.filter { $0.isFolder } .count
+		let insertionIndexSet = IndexSet(integersIn: childIndex..<(childIndex + folderCount))
+		outlineView.insertItems(at: insertionIndexSet, inParent: outlineParent, withAnimation: .slideDown)
 	}
 	
 	/// Extracts the directory from an NSPasteboardItem instance.
