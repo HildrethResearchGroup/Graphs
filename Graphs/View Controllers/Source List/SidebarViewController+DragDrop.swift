@@ -211,7 +211,7 @@ extension SidebarViewController {
 		}
 		
 		// The moved files will require the file list to refresh its contents
-		updateDirectorySelection()
+		directoryController?.updateFilesToShow(animate: true)
 	}
 	
 	/// Handles dropping external items onto the sidebar.
@@ -254,7 +254,7 @@ extension SidebarViewController {
 		}
 		dropURLs(droppedURLs, outlineView: outlineView, dropDirectory: dropDirectory, childIndex: index)
 		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
-		updateDirectorySelection()
+		directoryController?.updateFilesToShow(animate: true)
 	}
 	
 	/// Inserts files/directories in the given directory.

@@ -25,15 +25,53 @@ class FileListViewController: NSViewController {
 		let notificationCenter = NotificationCenter.default
 		// Needs to be notified when the directory selection has changed in order to update the files to show
 		notificationCenter.addObserver(self,
-																	 selector: #selector(filesToShowDidChange),
+																	 selector: #selector(filesToShowDidChange(_:)),
 																	 name: .filesToShowChanged,
 																	 object: nil)
 	}
 	
-	@objc func filesToShowDidChange() {
-		// When the sidebar's selection of directories change, update the table view
+	@objc func filesToShowDidChange(_ notification: Notification) {
+		if let userInfo = notification.userInfo as? [String: Any] {
+			if let oldValue = userInfo[UserInfoKeys.oldValue] as? [File] {
+				if let filesToShow = directoryController?.filesToShow {
+					let diff = filesToShow.difference(from: oldValue)
+					
+					let removalIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: _, element: _, associatedWith: _):
+							return nil
+						case .remove(offset: let offset, element: _, associatedWith: _):
+							return offset
+						}
+					}
+					
+					let insertionIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: let offset, element: _, associatedWith: _):
+							return offset
+						case .remove(offset: _, element: _, associatedWith: _):
+							return nil
+						}
+					}
+					
+					tableView.beginUpdates()
+					tableView.removeRows(at: IndexSet(removalIndicies),
+															 withAnimation: .slideDown)
+					tableView.insertRows(at: IndexSet(insertionIndicies),
+															 withAnimation: .slideDown)
+					
+					let collectionNameColumnIndex = tableView.column(withIdentifier: .fileCollectionNameColumn)
+					// When moving files to a new directory the collection name may change, so reload that column
+					tableView.reloadData(forRowIndexes: IndexSet(0..<filesToShow.count), columnIndexes: IndexSet(integer: collectionNameColumnIndex))
+					
+					tableView.endUpdates()
+					updateRowSelectionLabel()
+					return
+				}
+			}
+		}
+		// If the user dictionary didn't include the old collection in the userInfo dictionary then don't animate
 		tableView.reloadData()
-		itemsSelectedLabel.integerValue = tableView.numberOfRows
 		// The selection may change so update the row selection label
 		updateRowSelectionLabel()
 	}

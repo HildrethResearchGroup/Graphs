@@ -18,6 +18,11 @@ extension Notification.Name {
 	static let didProcessUndo = Notification.Name(rawValue: "didProcessUndo")
 }
 
+// MARK: UserInfo keys
+enum UserInfoKeys {
+	static let oldValue = "oldValue"
+}
+
 // MARK: User Interface
 extension NSUserInterfaceItemIdentifier {
 	static let fileNameColumn: Self = .init("FileNameColumn")
