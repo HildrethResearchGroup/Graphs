@@ -87,12 +87,39 @@ extension FileListViewController {
 	}
 	
 	func remove(files: [File]) {
+		guard let directoryController = directoryController else {
+			print("[WARNING] directoryController was nil at FileListViewController.remove(files:rows:).")
+			return
+		}
+		
 		files.forEach { file in
 			file.parent?.removeFromChildren(file)
 			file.parent = nil
 			context?.delete(file)
 		}
 		
-		directoryController?.updateFilesToShow()
+		// Get the indicies of the rows that are being removed so we can animate their removal
+		let rows = directoryController.filesToShow.indicies(of: files)
+		tableView.removeRows(at: rows, withAnimation: .slideDown)
+		// We do not need to call directoryController.updateFilesToShow() becuase we manually manage the change to animate it. If we would also call this function, it would abort the animation.
+	}
+}
+
+// MARK: Collection Utilities
+extension Collection where Element: Hashable, Index == Int {
+	// This function was written to find the indicies of m elements in a collection of n elements in O(n+m) time. Calling firstIndex(of:) repeatedly instead is O(n*m)
+	func indicies(of elements: [Element]) -> IndexSet {
+		let elementSet = Set(elements)
+		var iterator = makeIterator()
+		var indicies = IndexSet()
+		var index = startIndex
+		while let element = iterator.next() {
+			if elementSet.contains(element) {
+				indicies.insert(index)
+			}
+			index = self.index(after: index)
+		}
+		
+		return indicies
 	}
 }
