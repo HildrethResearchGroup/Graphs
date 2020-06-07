@@ -117,10 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
-				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
-				5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */,
 				5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */,
+				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
 				5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */,
+				5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */,
 				5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */,
 				5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */,
 			);
@@ -232,9 +232,9 @@
 			isa = PBXGroup;
 			children = (
 				5AA95E42247B76EB001FF163 /* FileListViewController.swift */,
-				5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */,
 				5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */,
 				5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */,
+				5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */,
 				5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */,
 			);
 			path = "File List";
