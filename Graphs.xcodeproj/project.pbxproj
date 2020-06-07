@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */; };
 		5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */; };
+		5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */; };
 		5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */; };
 		5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */; };
 		5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+DragDrop.swift"; sourceTree = "<group>"; };
 		5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+FirstResponder.swift"; sourceTree = "<group>"; };
+		5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryWindowController.swift; sourceTree = "<group>"; };
 		5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+DragDrop.swift"; sourceTree = "<group>"; };
 		5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryPasteboardItem.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				5AA95E42247B76EB001FF163 /* FileListViewController.swift */,
+				5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */,
 				5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */,
 				5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */,
 				5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */,
@@ -381,6 +384,7 @@
 				5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */,
 				5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */,
 				5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */,
+				5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */,
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
 				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
