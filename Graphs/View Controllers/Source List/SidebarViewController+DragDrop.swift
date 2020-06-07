@@ -31,7 +31,13 @@ extension SidebarViewController {
 		guard let dropDirectory = directoryFromItem(item) else { return result }
 		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
 			// Drag source is from within the outline view
-			if okayToDrop(draggingInfo: info, destinationItem: dropDirectory) {
+			if okayToDropDirectories(draggingInfo: info, destinationItem: dropDirectory) {
+				result = .move
+			}
+		} else if info.draggingPasteboard.availableType(from: [.fileRowPasteboardType]) != nil {
+			// Drag source is from the file tableview
+			// Files cannot be placed in the root directory
+			if dropDirectory != rootDirectory {
 				result = .move
 			}
 		} else if info.draggingPasteboard.availableType(from: [.fileURL]) != nil {
@@ -51,7 +57,9 @@ extension SidebarViewController {
 		
 		if info.draggingPasteboard.availableType(from: [.directoryRowPasteboardType]) != nil {
 			// The items that are being dragged are internal items
-			handleInternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
+			handleInternalDirectoryDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
+		} else if info.draggingPasteboard.availableType(from: [.fileRowPasteboardType]) != nil {
+			handleInternalFileDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
 		} else {
 			// The user has droped items from Finder
 			handleExternalDrops(outlineView, draggingInfo: info, dropDirectory: dropDirectory, childIndex: index)
@@ -79,12 +87,12 @@ extension SidebarViewController {
 
 // MARK: Utilities
 extension SidebarViewController {
-	/// Returns true if the items being dragged can be dropped at the given location. This checks to make sure that a directory is not placed inside one of its children.
+	/// Returns true if the directories being dragged can be dropped at the given location. This checks to make sure that a directory is not placed inside one of its children.
 	/// - Parameters:
 	///   - draggingInfo: The dragging info passed to the delegate method.
 	///   - destinationItem: The directory that is being dropped onto.
 	/// - Returns: True if the drop is okay, and false otherwise.
-	private func okayToDrop(draggingInfo: NSDraggingInfo, destinationItem: Directory?) -> Bool {
+	private func okayToDropDirectories(draggingInfo: NSDraggingInfo, destinationItem: Directory?) -> Bool {
 		
 		guard let destinationItem = destinationItem else { return true }
 		let ansestors = destinationItem.ansestors
@@ -134,7 +142,7 @@ extension SidebarViewController {
 	///   - draggingInfo: The dragging info.
 	///   - dropDirectory: The directory that the items are being dropped into.
 	///   - index: The child index of the directory that the items are being dropped at.
-	private func handleInternalDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
+	private func handleInternalDirectoryDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
 		var itemsToMove: [Directory] = []
 		// If the drop location is ambiguous, add it to the end
 		let dropIndex = index == -1 ? dropDirectory.children.count : index
@@ -182,6 +190,28 @@ extension SidebarViewController {
 			}
 		}
 		outlineView.endUpdates()
+	}
+	
+	private func handleInternalFileDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
+		var itemsToMove: [File] = []
+		
+		draggingInfo.enumerateDraggingItems(options: [], for: outlineView, classes: [NSPasteboardItem.self], searchOptions: [:]) { dragItem, _, _ in
+			if let droppedPasteboardItem = dragItem.item as? NSPasteboardItem {
+				if let itemToMove = self.fileFromPasteboardItem(droppedPasteboardItem) {
+					itemsToMove.append(itemToMove)
+				}
+			}
+		}
+		
+		// Move each file
+		itemsToMove.forEach { file in
+			file.parent?.removeFromChildren(file)
+			dropDirectory.addToChildren(file)
+			file.parent = dropDirectory
+		}
+		
+		// The moved files will require the file list to refresh its contents
+		updateDirectorySelection()
 	}
 	
 	/// Handles dropping external items onto the sidebar.
@@ -293,6 +323,14 @@ extension SidebarViewController {
 		guard let row = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else { return nil }
 		// Ask the sidebar for the directory at that row
 		return sidebar.item(atRow: row) as? Directory
+	}
+	
+	private func fileFromPasteboardItem(_ item: NSPasteboardItem) -> File? {
+		// Get the row number from the property list
+		guard let plist = item.propertyList(forType: .fileRowPasteboardType) as? [String: Any] else { return nil }
+		guard let row = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else { return nil }
+		// We don't have access to the tableview showing the files, but we do have access to the source for the tableview
+		return directoryController?.filesToShow[row]
 	}
 }
 

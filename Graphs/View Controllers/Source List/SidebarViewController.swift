@@ -34,7 +34,7 @@ class SidebarViewController: NSViewController {
 	override func viewDidLoad() {
 		registerObservers()
 		// Allow dropping internal directory types and external files on the sidebar
-		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileURL])
+		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileRowPasteboardType, .fileURL])
 		// Allow dragging rows to the trash to delete them
 		sidebar.setDraggingSourceOperationMask([.delete], forLocal: false)
 		sidebar.reloadData()
