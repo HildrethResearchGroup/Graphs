@@ -55,6 +55,8 @@ class SidebarViewController: NSViewController {
 		guard let rootDirectory = rootDirectory else { return }
 		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
 		expandNeededItems(in: rootDirectory)
+		// Calling reload data changed the selection
+		updateDirectorySelection()
 	}
 	
 	/// Adds a new directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
