@@ -21,4 +21,20 @@ extension FileListViewController {
 		pasteboardItem.setPropertyList(propertyList, forType: .fileRowPasteboardType)
 		return pasteboardItem
 	}
+	
+	func tableView(_ tableView: NSTableView, draggingSession session: NSDraggingSession, endedAt screenPoint: NSPoint, operation: NSDragOperation) {
+		if operation == .delete {
+			// This is called when dragging to the trash can
+			guard let items = session.draggingPasteboard.pasteboardItems else { return }
+			let filesToRemove = items.compactMap { (draggedItem) -> File? in
+				guard let plist = draggedItem.propertyList(forType: .fileRowPasteboardType) as? [String: Any] else { return nil }
+				guard let rowIndex = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else {
+					return nil
+				}
+				
+				return directoryController?.filesToShow[rowIndex]
+			}
+			remove(files: filesToRemove)
+		}
+	}
 }

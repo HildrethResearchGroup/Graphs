@@ -17,17 +17,20 @@ class FileListViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()
+		// Allows dragging files to the trash can to delete them
+		tableView.setDraggingSourceOperationMask([.delete], forLocal: false)
 	}
 	
 	func registerObservers() {
 		let notificationCenter = NotificationCenter.default
+		// Needs to be notified when the directory selection has changed in order to update the files to show
 		notificationCenter.addObserver(self,
-																	 selector: #selector(directorySelectionDidChange),
-																	 name: .directorySelectionChanged,
+																	 selector: #selector(filesToShowDidChange),
+																	 name: .filesToShowChanged,
 																	 object: nil)
 	}
 	
-	@objc func directorySelectionDidChange() {
+	@objc func filesToShowDidChange() {
 		// When the sidebar's selection of directories change, update the table view
 		tableView.reloadData()
 		itemsSelectedLabel.integerValue = tableView.numberOfRows
@@ -70,5 +73,19 @@ extension FileListViewController {
 	
 	var directoryController: DirectoryController? {
 		return dataController?.directoryController
+	}
+	
+	var context: NSManagedObjectContext? {
+		return dataController?.persistentContainer.viewContext
+	}
+	
+	func remove(files: [File]) {
+		files.forEach { file in
+			file.parent?.removeFromChildren(file)
+			file.parent = nil
+			context?.delete(file)
+		}
+		
+		directoryController?.updateFilesToShow()
 	}
 }
