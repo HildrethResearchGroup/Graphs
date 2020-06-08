@@ -45,6 +45,8 @@ extension DirectoryController {
 	func updateFilesToShow(animate: Bool) {
 		var notification = Notification(name: .filesToShowChanged)
 		
+		
+		
 		if animate {
 			let oldFilesToShow = filesToShow
 			filesToShow = files(in: selectedDirectories)
@@ -54,8 +56,43 @@ extension DirectoryController {
 			filesToShow = files(in: selectedDirectories)
 		}
 		
+		if let sort = self.fileSort {
+			filesToShow.sort(by: sort)
+		}
+		
 		// When the selection changes, the file list table needs to be updated. It will respond to this notification
 		NotificationCenter.default.post(notification)
+	}
+	
+	private var fileSort: ((File, File) -> Bool)? {
+		guard let sortKey = sortKey else { return nil }
+		
+		func nilFirstSort<T: Comparable>(_ lhs: T?, _ rhs: T?) -> Bool {
+			guard let lhs = lhs else { return true }
+			guard let rhs = rhs else { return false }
+			return lhs < rhs
+		}
+		
+		let ascendingSort: (File, File) -> Bool = {
+			switch sortKey {
+			case .displayName:
+				return { $0.displayName.lowercased() < $1.displayName.lowercased() }
+			case .collectionName:
+				return { nilFirstSort($0.parent?.displayName.lowercased(), $1.parent?.displayName.lowercased()) }
+			case .dateCreated:
+				return { nilFirstSort($0.dateCreated, $1.dateCreated) }
+			case .dateModified:
+				return { nilFirstSort($0.dateModified, $1.dateModified) }
+			case .size:
+				return { nilFirstSort($0.fileSize, $1.fileSize) }
+			}
+		}()
+		
+		if sortAscending {
+			return ascendingSort
+		} else {
+			return { ascendingSort($1, $0) }
+		}
 	}
 }
 

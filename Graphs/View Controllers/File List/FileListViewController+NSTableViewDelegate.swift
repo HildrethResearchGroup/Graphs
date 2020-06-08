@@ -91,8 +91,16 @@ extension FileListViewController: NSTableViewDelegate {
 	}
 	
 	func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {
-		guard let sortKey = tableView.sortDescriptors.first?.key else { return }
-		guard let ascending = tableView.sortDescriptors.first?.ascending else { return }
+		guard let sortKeyString = tableView.sortDescriptors.first?.key,
+			let sortKey = File.SortKey(rawValue: sortKeyString),
+			let ascending = tableView.sortDescriptors.first?.ascending else {
+			directoryController?.sortKey = nil
+			return
+		}
+		
+		directoryController?.sortKey = sortKey
+		directoryController?.sortAscending = ascending
+		directoryController?.updateFilesToShow(animate: false)
 	}
 }
 
