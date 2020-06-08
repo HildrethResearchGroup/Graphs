@@ -222,66 +222,7 @@ extension SidebarViewController {
 				break
 			}
 		}
-		dropURLs(droppedURLs, outlineView: outlineView, dropDirectory: dropDirectory, childIndex: index)
-		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
-		updateDirectorySelection()
-	}
-	
-	/// Inserts files/directories in the given directory.
-	/// - Parameters:
-	///   - urls: The urls of the files and directories to add.
-	///   - outlineView: The outlineview that is being dragged into.
-	///   - dropDirectory: The directory that files are being added to.
-	///   - childIndex: The index of the child inside the directory that files are being added at.
-	private func dropURLs(_ urls: [URL], outlineView: NSOutlineView, dropDirectory: Directory, childIndex: Int) {
-		// There must be a data context in order to drag items
-		guard let dataContext = dataContext else { return }
-		// Don't process if there are no URL's
-		guard !urls.isEmpty else { return }
-		
-		func addFileSystemObject(in parent: Directory, at url: URL, index: Int? = nil, animate: Bool = false) {
-			if url.isFolder {
-				// The item being added is a folder (directory)
-				let directory = Directory(context: dataContext)
-				directory.path = url
-				directory.collapsed = true
-				if let index = index {
-					parent.insertIntoChildren(directory, at: index)
-				} else {
-					// Index should only be nil for adding files not folders, but if it is nil just add the directory to the end of the set of children
-					parent.addToChildren(directory)
-				}
-				
-				// Add all of the directory's contents
-				do {
-					let fileURLS = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
-					
-					fileURLS.forEach { url in
-						addFileSystemObject(in: directory, at: url)
-					}
-				} catch {
-					// Error reading directories content
-					print("[WARNING] Failed to read directory content: \(error)")
-				}
-				
-			} else {
-				// The item being added is just a file
-				let file = File(context: dataContext)
-				file.path = url
-				parent.addToChildren(file)
-			}
-		}
-		
-		// addFileSystemObject inserts the directories in the ordered set at the given index. Inserting objects one at a time at a given index will result in it being reversed, so reverse before iterating
-		urls.reversed().forEach { url in
-			addFileSystemObject(in: dropDirectory, at: url, index: childIndex, animate: true)
-		}
-		
-		// Animate
-		let outlineParent = dropDirectory == rootDirectory ? nil : dropDirectory
-		let folderCount = urls.lazy.filter { $0.isFolder } .count
-		let insertionIndexSet = IndexSet(integersIn: childIndex..<(childIndex + folderCount))
-		outlineView.insertItems(at: insertionIndexSet, inParent: outlineParent, withAnimation: .slideDown)
+		importURLs(droppedURLs, dropDirectory: dropDirectory, childIndex: index)
 	}
 	
 	/// Extracts the directory from an NSPasteboardItem instance.
