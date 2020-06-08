@@ -19,9 +19,12 @@ class GraphsTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testIndiciesOf() throws {
+			// The array's elements are equal to its indicies, so the indicies should match
+			let array = (0..<100).map { $0 }
+			let indicies = [5, 21, 26, 29, 50]
+			XCTAssertEqual(array.indicies(of: indicies).map { $0 }, indicies)
+			
     }
 
     func testPerformanceExample() throws {

@@ -18,11 +18,7 @@ class DirectoryController: NSObject {
 	/// The currently selected directories.
 	var selectedDirectories: [Directory] = [] {
 		didSet {
-			// Files to show is a cached property that is dependant on the selected directories, so recaulculate it
-			filesToShow = files(in: selectedDirectories)
-			// When the selection changes, the file list table needs to be updated. It will respond to this notification
-			let notification = Notification(name: .directorySelectionChanged)
-			NotificationCenter.default.post(notification)
+			updateFilesToShow(animate: false)
 		}
 	}
 	/// The files in the currently selected directories.
@@ -42,6 +38,22 @@ extension DirectoryController {
 	/// The Core Data context.
 	private var context: NSManagedObjectContext {
 		return dataController.persistentContainer.viewContext
+	}
+	
+	func updateFilesToShow(animate: Bool) {
+		var notification = Notification(name: .filesToShowChanged)
+		
+		if animate {
+			let oldFilesToShow = filesToShow
+			filesToShow = files(in: selectedDirectories)
+			let userInfo = [UserInfoKeys.oldValue: oldFilesToShow]
+			notification.userInfo = userInfo
+		} else {
+			filesToShow = files(in: selectedDirectories)
+		}
+		
+		// When the selection changes, the file list table needs to be updated. It will respond to this notification
+		NotificationCenter.default.post(notification)
 	}
 }
 

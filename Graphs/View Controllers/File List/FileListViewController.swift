@@ -17,20 +17,61 @@ class FileListViewController: NSViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()
+		// Allows dragging files to the trash can to delete them
+		tableView.setDraggingSourceOperationMask([.delete], forLocal: false)
 	}
 	
 	func registerObservers() {
 		let notificationCenter = NotificationCenter.default
+		// Needs to be notified when the directory selection has changed in order to update the files to show
 		notificationCenter.addObserver(self,
-																	 selector: #selector(directorySelectionDidChange),
-																	 name: .directorySelectionChanged,
+																	 selector: #selector(filesToShowDidChange(_:)),
+																	 name: .filesToShowChanged,
 																	 object: nil)
 	}
 	
-	@objc func directorySelectionDidChange() {
-		// When the sidebar's selection of directories change, update the table view
+	@objc func filesToShowDidChange(_ notification: Notification) {
+		if let userInfo = notification.userInfo as? [String: Any] {
+			if let oldValue = userInfo[UserInfoKeys.oldValue] as? [File] {
+				if let filesToShow = directoryController?.filesToShow {
+					let diff = filesToShow.difference(from: oldValue)
+					
+					let removalIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: _, element: _, associatedWith: _):
+							return nil
+						case .remove(offset: let offset, element: _, associatedWith: _):
+							return offset
+						}
+					}
+					
+					let insertionIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: let offset, element: _, associatedWith: _):
+							return offset
+						case .remove(offset: _, element: _, associatedWith: _):
+							return nil
+						}
+					}
+					
+					tableView.beginUpdates()
+					tableView.removeRows(at: IndexSet(removalIndicies),
+															 withAnimation: .slideDown)
+					tableView.insertRows(at: IndexSet(insertionIndicies),
+															 withAnimation: .slideDown)
+					
+					let collectionNameColumnIndex = tableView.column(withIdentifier: .fileCollectionNameColumn)
+					// When moving files to a new directory the collection name may change, so reload that column
+					tableView.reloadData(forRowIndexes: IndexSet(0..<filesToShow.count), columnIndexes: IndexSet(integer: collectionNameColumnIndex))
+					
+					tableView.endUpdates()
+					updateRowSelectionLabel()
+					return
+				}
+			}
+		}
+		// If the user dictionary didn't include the old collection in the userInfo dictionary then don't animate
 		tableView.reloadData()
-		itemsSelectedLabel.integerValue = tableView.numberOfRows
 		// The selection may change so update the row selection label
 		updateRowSelectionLabel()
 	}
@@ -70,5 +111,53 @@ extension FileListViewController {
 	
 	var directoryController: DirectoryController? {
 		return dataController?.directoryController
+	}
+	
+	var context: NSManagedObjectContext? {
+		return dataController?.persistentContainer.viewContext
+	}
+	
+	func removeSelectedFiles() {
+		let files = tableView.selectedRowIndexes.compactMap { index in
+			directoryController?.filesToShow[index]
+		}
+		remove(files: files)
+	}
+	
+	func remove(files: [File]) {
+		guard let directoryController = directoryController else {
+			print("[WARNING] directoryController was nil at FileListViewController.remove(files:rows:).")
+			return
+		}
+		
+		files.forEach { file in
+			file.parent?.removeFromChildren(file)
+			file.parent = nil
+			context?.delete(file)
+		}
+		
+		// Get the indicies of the rows that are being removed so we can animate their removal
+		let rows = directoryController.filesToShow.indicies(of: files)
+		tableView.removeRows(at: rows, withAnimation: .slideDown)
+		// We do not need to call directoryController.updateFilesToShow() becuase we manually manage the change to animate it. If we would also call this function, it would abort the animation.
+	}
+}
+
+// MARK: Collection Utilities
+extension Collection where Element: Hashable, Index == Int {
+	// This function was written to find the indicies of m elements in a collection of n elements in O(n+m) time. Calling firstIndex(of:) repeatedly instead is O(n*m)
+	func indicies(of elements: [Element]) -> IndexSet {
+		let elementSet = Set(elements)
+		var iterator = makeIterator()
+		var indicies = IndexSet()
+		var index = startIndex
+		while let element = iterator.next() {
+			if elementSet.contains(element) {
+				indicies.insert(index)
+			}
+			index = self.index(after: index)
+		}
+		
+		return indicies
 	}
 }
