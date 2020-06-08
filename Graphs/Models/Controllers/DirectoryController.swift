@@ -21,6 +21,8 @@ class DirectoryController: NSObject {
 			updateFilesToShow(animate: false)
 		}
 	}
+	var sortKey: File.SortKey?
+	var sortAscending = true
 	/// The files in the currently selected directories.
 	private(set) var filesToShow: [File] = []
 	/// Creates a directory controller from a data controller.

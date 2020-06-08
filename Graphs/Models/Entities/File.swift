@@ -65,3 +65,14 @@ extension File {
 		return byteFormatter.string(from: bytes)
 	}
 }
+
+// MARK: Sorting
+extension File {
+	enum SortKey: String {
+		case displayName
+		case collectionName
+		case dateCreated
+		case dateModified
+		case size
+	}
+}
