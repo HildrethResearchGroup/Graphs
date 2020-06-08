@@ -206,7 +206,7 @@ extension SidebarViewController {
 		sidebar.insertItems(at: insertionIndexSet, inParent: outlineParent, withAnimation: .slideDown)
 		
 		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
-		updateDirectorySelection()
+		directoryController?.updateFilesToShow(animate: true)
 	}
 	
 	/// Removes the given directories from the sidbar and updates the model.
