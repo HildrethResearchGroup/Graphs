@@ -14,6 +14,10 @@ class FileListViewController: NSViewController {
 	/// The label in the bottom bar of the window. Displays the numebr of files in the directory selection as well as the currently selected files in the table view.
 	@IBOutlet weak var itemsSelectedLabel: NSTextField!
 	
+	@IBOutlet var dateFormatter: DateFormatter!
+	@IBOutlet var byteCountFormatter: ByteCountFormatter!
+	
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()

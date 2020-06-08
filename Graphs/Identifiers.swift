@@ -28,10 +28,16 @@ extension NSUserInterfaceItemIdentifier {
 	static let fileNameColumn: Self = .init("FileNameColumn")
 	static let fileCollectionNameColumn: Self = .init("FileCollectionNameColumn")
 	static let fileDateImportedColumn: Self = .init("FileDateImportedColumn")
+	static let fileDateCreatedColumn: Self = .init("FileDateCreatedColumn")
+	static let fileDateModifiedColumn: Self = .init("FileDateModifiedColumn")
+	static let fileSizeColumn: Self = .init("FileSizeColumn")
 	
 	static let fileNameCell: Self = .init("FileNameCell")
 	static let fileCollectionNameCell: Self = .init("FileCollectionNameCell")
 	static let fileDateImportedCell: Self = .init("FileDateImportedCell")
+	static let fileDateCreatedCell: Self = .init("FileDateCreatedCell")
+	static let fileDateModifiedCell: Self = .init("FileDateModifiedCell")
+	static let fileSizeCell: Self = .init("FileSizeCell")
 	
 	static let directoryCell: Self = .init("DirectoryCell")
 }

@@ -37,6 +37,12 @@ extension FileListViewController: NSTableViewDelegate {
 			cellIdentifier = .fileCollectionNameCell
 		case .fileDateImportedColumn:
 			cellIdentifier = .fileDateImportedCell
+		case .fileDateCreatedColumn:
+			cellIdentifier = .fileDateCreatedCell
+		case .fileDateModifiedColumn:
+			cellIdentifier = .fileDateModifiedCell
+		case .fileSizeColumn:
+			cellIdentifier = .fileSizeCell
 		default:
 			return nil
 		}
@@ -53,6 +59,25 @@ extension FileListViewController: NSTableViewDelegate {
 			// TODO: Add import date
 			#warning("Unimplemented")
 			view.textField?.stringValue = "0/0/0"
+		case .fileDateCreatedColumn:
+			if let formattedDate = dateFormatter.string(for: file.dateCreated) {
+				view.textField?.stringValue = formattedDate
+			} else {
+				view.textField?.stringValue = ""
+			}
+		case .fileDateModifiedColumn:
+			if let formattedDate = dateFormatter.string(for: file.dateModified) {
+				view.textField?.stringValue = formattedDate
+			} else {
+				view.textField?.stringValue = ""
+			}
+		case .fileSizeColumn:
+			if let fileSize = file.fileSize {
+				let formattedSize = byteCountFormatter.string(fromByteCount: Int64(fileSize))
+				view.textField?.stringValue = formattedSize
+			} else {
+				view.textField?.stringValue = ""
+			}
 		default:
 			return nil
 		}

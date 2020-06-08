@@ -24,3 +24,44 @@ extension File {
 		return NSFetchRequest<File>(entityName: "File")
 	}
 }
+
+// MARK: Derived Properties
+extension File {
+	var fileExtension: String? {
+		guard let substring = path?.lastPathComponent.split(separator: ".").last else {
+			return nil
+		}
+		return String(substring)
+	}
+	
+	var fileAttributes: [FileAttributeKey: Any]? {
+		guard let url = path?.absoluteString.dropFirst(7) else { return nil }
+		
+		return try? FileManager.default.attributesOfItem(atPath: String(url))
+	}
+	
+	var dateCreated: Date? {
+		return fileAttributes?[FileAttributeKey.creationDate] as? Date
+	}
+	
+	var dateModified: Date? {
+		return fileAttributes?[FileAttributeKey.modificationDate] as? Date
+	}
+	
+	var fileSize: Int? {
+		return (fileAttributes?[FileAttributeKey.size] as? NSNumber)?.intValue
+	}
+	
+	var fileSizeString: String {
+		guard let fileSize = fileSize else { return "" }
+		
+		let bytes = Measurement(value: Double(fileSize),
+														unit: UnitInformationStorage.bytes)
+		
+		let byteFormatter = ByteCountFormatter()
+		byteFormatter.includesUnit = true
+		byteFormatter.zeroPadsFractionDigits = true
+		
+		return byteFormatter.string(from: bytes)
+	}
+}
