@@ -17,6 +17,10 @@ class SidebarViewController: NSViewController {
 	/// A button which removes a directory.
 	@IBOutlet weak var removeButton: NSButton!
 	
+	@IBOutlet var importAccessoryView: NSView!
+	
+	@IBOutlet weak var importSubdirectoriesCheckbox: NSButton!
+	
 	/// Queue used for reading and writing file promises.
 	lazy var workQueue: OperationQueue = {
 			let providerQueue = OperationQueue()
@@ -147,7 +151,8 @@ extension SidebarViewController {
 	///   - outlineView: The outlineview that is being dragged into.
 	///   - dropDirectory: The directory that files are being added to. If `nil`, the root directory is used.
 	///   - childIndex: The index of the child inside the directory that files are being added at. If `nil`, the items are added to the end of the directory.
-	func importURLs(_ urls: [URL], dropDirectory: Directory?, childIndex: Int?) {
+	///   - includeSubdirectories: Whether or not to include subdirectories of the selection.
+	func importURLs(_ urls: [URL], dropDirectory: Directory?, childIndex: Int?, includeSubdirectories: Bool) {
 		
 		guard let dropDirectory = dropDirectory ?? rootDirectory else {
 			print("[WARNING] Could not determine drop directory.")
@@ -161,7 +166,7 @@ extension SidebarViewController {
 		// Don't process if there are no URL's
 		guard !urls.isEmpty else { return }
 		
-		func addFileSystemObject(in parent: Directory, at url: URL, index: Int? = nil, animate: Bool = false) {
+		func addFileSystemObject(in parent: Directory, at url: URL, index: Int? = nil, animate: Bool = false, includeSubdirectories: Bool) {
 			if url.isFolder {
 				// The item being added is a folder (directory)
 				let directory = Directory(context: dataContext)
@@ -177,9 +182,18 @@ extension SidebarViewController {
 				// Add all of the directory's contents
 				do {
 					let fileURLS = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
-					
-					fileURLS.forEach { url in
-						addFileSystemObject(in: directory, at: url)
+					if includeSubdirectories {
+						fileURLS.forEach { url in
+							addFileSystemObject(in: directory, at: url, includeSubdirectories: true)
+						}
+					} else {
+						// If not including subdirectories, filter out subfolders
+						fileURLS.filter { !$0.isFolder }
+							.forEach { url in
+							addFileSystemObject(in: directory,
+																	at: url,
+																	includeSubdirectories: true)
+						}
 					}
 				} catch {
 					// Error reading directories content
@@ -196,7 +210,7 @@ extension SidebarViewController {
 		
 		// addFileSystemObject inserts the directories in the ordered set at the given index. Inserting objects one at a time at a given index will result in it being reversed, so reverse before iterating
 		urls.reversed().forEach { url in
-			addFileSystemObject(in: dropDirectory, at: url, index: childIndex, animate: true)
+			addFileSystemObject(in: dropDirectory, at: url, index: childIndex, animate: true, includeSubdirectories: includeSubdirectories)
 		}
 		
 		// Animate

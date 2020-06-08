@@ -252,7 +252,10 @@ extension SidebarViewController {
 				break
 			}
 		}
-		importURLs(droppedURLs, dropDirectory: dropDirectory, childIndex: index)
+		importURLs(droppedURLs,
+							 dropDirectory: dropDirectory,
+							 childIndex: index,
+							 includeSubdirectories: true)
 	}
 	
 	/// Extracts the directory from an NSPasteboardItem instance.

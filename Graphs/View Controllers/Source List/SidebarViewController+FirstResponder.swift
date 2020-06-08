@@ -34,9 +34,16 @@ extension SidebarViewController {
 		// If the rootDirectory is the import location (nil will result in the rootDirecotry being the drop location as well) then files cannot be selected becuase files cannot be in the root directory.
 		openPanel.canChooseFiles = dropDirectory != nil && dropDirectory != rootDirectory
 		
-		let response = openPanel.runModal()
-		if response == .OK {
-			importURLs(openPanel.urls, dropDirectory: dropDirectory, childIndex: nil)
+		openPanel.accessoryView = importAccessoryView
+		
+		openPanel.beginSheetModal(for: view.window!) { (response) in
+			if response == .OK {
+				let includeSubdirectories = self.importSubdirectoriesCheckbox.state == .on
+				self.importURLs(openPanel.urls,
+												dropDirectory: dropDirectory,
+												childIndex: nil,
+												includeSubdirectories: includeSubdirectories)
+			}
 		}
 	}
 }
