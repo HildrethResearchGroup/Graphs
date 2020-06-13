@@ -21,8 +21,19 @@ class DirectoryController: NSObject {
 			updateFilesToShow(animate: false)
 		}
 	}
-	var sortKey: File.SortKey?
-	var sortAscending = true
+	private var sortCache: [File.SortKey: [File]] = [:]
+	private var descSortCache: [File.SortKey: [File]] = [:]
+	var sortKey: File.SortKey? {
+		didSet {
+			sortFiles()
+		}
+	}
+	var sortAscending = true {
+		didSet {
+			sortFiles()
+		}
+	}
+	var sortQueue = DispatchQueue(label: "sortQueue", qos: .utility)
 	/// The files in the currently selected directories.
 	private(set) var filesToShow: [File] = []
 	/// Creates a directory controller from a data controller.
@@ -42,10 +53,35 @@ extension DirectoryController {
 		return dataController.persistentContainer.viewContext
 	}
 	
+	func sortFiles() {
+		guard let sortKey = sortKey else { return }
+		if sortAscending {
+			if let files = sortCache[sortKey] {
+				filesToShow = files
+			} else {
+				let sorted = filesToShow.sorted(by: fileSort!)
+				sortCache[sortKey] = sorted
+				filesToShow = sorted
+			}
+		} else {
+			if let files = descSortCache[sortKey] {
+				filesToShow = files
+			} else {
+				let sorted = filesToShow.sorted(by: fileSort!)
+				descSortCache[sortKey] = sorted
+				filesToShow = sorted
+			}
+		}
+
+		let notification = Notification(name: .filesToShowChanged)
+		NotificationCenter.default.post(notification)
+	}
+	
 	func updateFilesToShow(animate: Bool) {
 		var notification = Notification(name: .filesToShowChanged)
 		
-		
+		sortCache = [:]
+		descSortCache = [:]
 		
 		if animate {
 			let oldFilesToShow = filesToShow

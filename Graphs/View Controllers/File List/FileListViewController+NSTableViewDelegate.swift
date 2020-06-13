@@ -100,7 +100,6 @@ extension FileListViewController: NSTableViewDelegate {
 		
 		directoryController?.sortKey = sortKey
 		directoryController?.sortAscending = ascending
-		directoryController?.updateFilesToShow(animate: false)
 	}
 }
 
