@@ -21,17 +21,19 @@ class DirectoryController: NSObject {
 			updateFilesToShow(animate: false)
 		}
 	}
+	/// The background thread to run work on.
+	// The QOS is user initiated becuase the user will have to wait while these operations perform.
 	var workQueue = DispatchQueue(label: "directoryControllerWork",
 																qos: .userInitiated)
-	
+	/// The cache that stores sorted versions of the file list.
 	var sortCache: SortCache!
-	
+	/// The current sort key for the file list.
 	var sortKey: File.SortKey? {
 		didSet {
 			sortCache.sortFiles()
 		}
 	}
-	
+	/// The direction of sorting for file list.
 	var sortAscending = true {
 		didSet {
 			sortCache.sortFiles()
@@ -57,32 +59,44 @@ extension DirectoryController {
 		return dataController.persistentContainer.viewContext
 	}
 	
+	/// Updates the files that should be shown based off the directory selection.
+	/// - Parameter animate: If `true` the changes will be animated in the table view.
 	func updateFilesToShow(animate: Bool) {
 		var notification = Notification(name: .filesToShowChanged)
+		invalidateSortCache()
 		
-		sortCache.abortBackgroundSort()
-		sortCache = SortCache(directoryController: self)
-		
-		if animate {
+		// Don't allow animating if sorting. The background thread interferes with the animation.
+		if animate && sortKey == nil {
+			// Pass the old files so we can perform a diff on the collection to determine which animations need to be performed
 			let oldFilesToShow = filesToShow
-			filesToShow = files(in: selectedDirectories)
 			let userInfo = [UserInfoKeys.oldValue: oldFilesToShow]
 			notification.userInfo = userInfo
-		} else {
-			filesToShow = files(in: selectedDirectories)
 		}
 		
+		filesToShow = files(in: selectedDirectories)
+		// Don't notify becuase we handle the notificaiton in this function. We cannot rely on sortFiles(notify:) to post the notification because we have custom userInfo that we may need to set in this function
 		sortCache.sortFiles(notify: false)
-		
 		// When the selection changes, the file list table needs to be updated. It will respond to this notification
 		NotificationCenter.default.post(notification)
 	}
 	
+	/// Called when work is about to be performed on the background thread. This will make sure that a progress indicator is showed in the UI.
 	func beginWork() {
 		NotificationCenter.default.post(name: .fileListStartedWork, object: nil)
 	}
 	
+	/// Called when work has finished on the background thread. This will refresh the tableview.
 	func endWork() {
+		NotificationCenter.default.post(name: .fileListFinishedWork, object: nil)
+	}
+	
+	/// Called when the items in the directory have changed and any cached sorts are now invalid.
+	func invalidateSortCache() {
+		// Without aborting background sorting, we will have to wait for the current (now void) sort to complete
+		sortCache.abortBackgroundSort()
+		// Make a new cache becuase the current one is now invalid
+		sortCache = SortCache(directoryController: self)
+		
 		NotificationCenter.default.post(name: .fileListFinishedWork, object: nil)
 	}
 }
@@ -93,6 +107,7 @@ extension DirectoryController {
 	@objc func didUndo(_ notification: Notification) {
 		// A cache is built up over time to prevent unneded computations. When an undo is called however, we do not know what is being undone so we can't simply update the cache, we have to entirely invalidate it
 		Directory.invalidateCache()
+		invalidateSortCache()
 		// Send a notificatoin that the undo has been processed and that view controllers should no update their contents. View controllers listen to this notification instead of NSUndoManagerDidUndo/RedoChange becuase if they listen to that notificaion, the cache may be invalidated after the view controller updates its views.
 		let notification = Notification(name: .didProcessUndo)
 		NotificationCenter.default.post(notification)
