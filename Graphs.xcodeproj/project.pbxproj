@@ -33,6 +33,7 @@
 		5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */; };
 		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
 		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
+		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSOutlineViewDelegate.swift"; sourceTree = "<group>"; };
 		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
+		5AF83782249482F4002BF370 /* SortCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			children = (
 				5A73E53124531D2500450137 /* DataController.swift */,
 				5A79055E24554B0A0021CDB2 /* DirectoryController.swift */,
+				5AF83782249482F4002BF370 /* SortCache.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
 				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
 				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
+				5AF83783249482F4002BF370 /* SortCache.swift in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
 				5A73E5232452A78F00450137 /* DirectoryItem.swift in Sources */,
 				5A73E53A24533BF300450137 /* Debug.swift in Sources */,

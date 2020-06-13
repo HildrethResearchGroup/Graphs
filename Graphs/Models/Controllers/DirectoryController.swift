@@ -21,27 +21,27 @@ class DirectoryController: NSObject {
 			updateFilesToShow(animate: false)
 		}
 	}
-	private var sortCache: [File.SortKey: [File]] = [:]
-	private var descSortCache: [File.SortKey: [File]] = [:]
+	var sortCache: SortCache!
+	
 	var sortKey: File.SortKey? {
 		didSet {
-			sortFiles()
+			sortCache.sortFiles()
 		}
 	}
 	var sortAscending = true {
 		didSet {
-			sortFiles()
+			sortCache.sortFiles()
 		}
 	}
-	var sortQueue = DispatchQueue(label: "sortQueue", qos: .utility)
 	/// The files in the currently selected directories.
-	private(set) var filesToShow: [File] = []
+	var filesToShow: [File] = []
 	/// Creates a directory controller from a data controller.
 	/// - Parameter dataController: The data controller to use.
 	init(dataController: DataController) {
 		// The directory controller gets its data from a data controller, so a data controller must be provided to create a directory contoller
 		self.dataController = dataController
 		super.init()
+		sortCache = SortCache(directoryController: self)
 		registerObservers()
 	}
 }
@@ -53,35 +53,10 @@ extension DirectoryController {
 		return dataController.persistentContainer.viewContext
 	}
 	
-	func sortFiles() {
-		guard let sortKey = sortKey else { return }
-		if sortAscending {
-			if let files = sortCache[sortKey] {
-				filesToShow = files
-			} else {
-				let sorted = filesToShow.sorted(by: fileSort!)
-				sortCache[sortKey] = sorted
-				filesToShow = sorted
-			}
-		} else {
-			if let files = descSortCache[sortKey] {
-				filesToShow = files
-			} else {
-				let sorted = filesToShow.sorted(by: fileSort!)
-				descSortCache[sortKey] = sorted
-				filesToShow = sorted
-			}
-		}
-
-		let notification = Notification(name: .filesToShowChanged)
-		NotificationCenter.default.post(notification)
-	}
-	
 	func updateFilesToShow(animate: Bool) {
 		var notification = Notification(name: .filesToShowChanged)
 		
-		sortCache = [:]
-		descSortCache = [:]
+		sortCache.invalidate()
 		
 		if animate {
 			let oldFilesToShow = filesToShow
@@ -92,43 +67,10 @@ extension DirectoryController {
 			filesToShow = files(in: selectedDirectories)
 		}
 		
-		if let sort = self.fileSort {
-			filesToShow.sort(by: sort)
-		}
+		sortCache.sortFiles(notify: false)
 		
 		// When the selection changes, the file list table needs to be updated. It will respond to this notification
 		NotificationCenter.default.post(notification)
-	}
-	
-	private var fileSort: ((File, File) -> Bool)? {
-		guard let sortKey = sortKey else { return nil }
-		
-		func nilFirstSort<T: Comparable>(_ lhs: T?, _ rhs: T?) -> Bool {
-			guard let lhs = lhs else { return true }
-			guard let rhs = rhs else { return false }
-			return lhs < rhs
-		}
-		
-		let ascendingSort: (File, File) -> Bool = {
-			switch sortKey {
-			case .displayName:
-				return { $0.displayName.lowercased() < $1.displayName.lowercased() }
-			case .collectionName:
-				return { nilFirstSort($0.parent?.displayName.lowercased(), $1.parent?.displayName.lowercased()) }
-			case .dateCreated:
-				return { nilFirstSort($0.dateCreated, $1.dateCreated) }
-			case .dateModified:
-				return { nilFirstSort($0.dateModified, $1.dateModified) }
-			case .size:
-				return { nilFirstSort($0.fileSize, $1.fileSize) }
-			}
-		}()
-		
-		if sortAscending {
-			return ascendingSort
-		} else {
-			return { ascendingSort($1, $0) }
-		}
 	}
 }
 
