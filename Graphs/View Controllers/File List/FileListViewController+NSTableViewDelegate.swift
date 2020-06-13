@@ -10,6 +10,8 @@ import Cocoa
 
 extension FileListViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
+		// When the file list is updating hide the elements
+		if fileListIsUpdating { return 0 }
 		return directoryController?.filesToShow.count ?? 0
 	}
 	

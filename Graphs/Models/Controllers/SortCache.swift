@@ -25,7 +25,12 @@ class SortCache {
 		return directoryController.sortAscending
 	}
 	
-	var sortQueue = DispatchQueue(label: "sortQueue", qos: .utility)
+	var operationNumber = 0
+	var workItem: DispatchWorkItem?
+	
+	func abortBackgroundSort() {
+		operationNumber += 1
+	}
 	
 	private var fileSort: ((File, File) -> Bool)? {
 		guard let sortKey = sortKey else { return nil }
@@ -58,35 +63,53 @@ class SortCache {
 		}
 	}
 	
-	func invalidate() {
-		sortCache = [:]
-	}
-	
 	func sortFiles(notify: Bool = true) {
 		guard let sortKey = sortKey else { return }
 		let key = Key(sortKey: sortKey, ascending: sortAscending)
 		
-		let sortedFiles: [File]
-		
 		if let files = sortCache[key] {
 			// The sorting is already cached
-			sortedFiles = files
+			directoryController.filesToShow = files
 		} else {
-			let reverseKey = Key(sortKey: sortKey, ascending: !sortAscending)
-			if let files: [File] = sortCache[reverseKey]?.reversed() {
-				// The reverse sorting is already cached. Add the reverse to the cache
-				// Reverse is used because it is significantly faster than sorting
-				sortCache[key] = files
-				sortedFiles = files
-			} else {
-				// No sort has been done for this key -- perform the search and add it to the cache.
-				let files = directoryController.filesToShow.sorted(by: fileSort!)
-				sortCache[key] = files
-				sortedFiles = files
+			
+			directoryController.beginWork()
+			
+			operationNumber += 1
+			let currentOperationNumber = operationNumber
+			
+			workItem = DispatchWorkItem {
+				let sortedFiles: [File]
+				let reverseKey = Key(sortKey: sortKey, ascending: !self.sortAscending)
+				
+				if let files: [File] = self.sortCache[reverseKey]?.reversed() {
+					// The reverse sorting is already cached. Add the reverse to the cache
+					// Reverse is used because it is significantly faster than sorting
+					self.sortCache[key] = files
+					sortedFiles = files
+				} else {
+					// No sort has been done for this key -- perform the search and add it to the cache.
+					let cancellableSort: (File, File) throws -> Bool = { (lhs, rhs) in
+						if self.operationNumber != currentOperationNumber {
+							throw SortTerminatedError()
+						}
+						return self.fileSort!(lhs, rhs)
+					}
+					guard let files = try? self.directoryController.filesToShow.sorted(by: cancellableSort) else { return }
+					self.sortCache[key] = files
+					sortedFiles = files
+				}
+				
+				DispatchQueue.main.async { [weak self] in
+					self?.sortCache[key] = sortedFiles
+					self?.directoryController.filesToShow = sortedFiles
+					self?.directoryController.endWork()
+				}
 			}
+			
+			directoryController.workQueue.async(execute: workItem!)
+			
+			
 		}
-		
-		directoryController.filesToShow = sortedFiles
 
 		if notify {
 			let notification = Notification(name: .filesToShowChanged)
@@ -100,4 +123,8 @@ extension SortCache {
 		var sortKey: File.SortKey
 		var ascending: Bool
 	}
+}
+
+struct SortTerminatedError: Error {
+	
 }

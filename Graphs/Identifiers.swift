@@ -16,6 +16,10 @@ extension Notification.Name {
 	static let filesToShowChanged = Notification.Name(rawValue: "filesToShowChanged")
 	/// A notification that is fired after processing an undo by Core Data
 	static let didProcessUndo = Notification.Name(rawValue: "didProcessUndo")
+	/// A notification that is fired when the file list is being updated on another thread.
+	static let fileListStartedWork = Notification.Name(rawValue: "fileListStartedWork")
+	/// A notification that is fired when the  file list has finished updating on another thread.
+	static let fileListFinishedWork = Notification.Name(rawValue: "fileListFinishedWord")
 }
 
 // MARK: UserInfo keys

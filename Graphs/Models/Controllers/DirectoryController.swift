@@ -21,6 +21,9 @@ class DirectoryController: NSObject {
 			updateFilesToShow(animate: false)
 		}
 	}
+	var workQueue = DispatchQueue(label: "directoryControllerWork",
+																qos: .userInitiated)
+	
 	var sortCache: SortCache!
 	
 	var sortKey: File.SortKey? {
@@ -28,6 +31,7 @@ class DirectoryController: NSObject {
 			sortCache.sortFiles()
 		}
 	}
+	
 	var sortAscending = true {
 		didSet {
 			sortCache.sortFiles()
@@ -56,7 +60,8 @@ extension DirectoryController {
 	func updateFilesToShow(animate: Bool) {
 		var notification = Notification(name: .filesToShowChanged)
 		
-		sortCache.invalidate()
+		sortCache.abortBackgroundSort()
+		sortCache = SortCache(directoryController: self)
 		
 		if animate {
 			let oldFilesToShow = filesToShow
@@ -71,6 +76,14 @@ extension DirectoryController {
 		
 		// When the selection changes, the file list table needs to be updated. It will respond to this notification
 		NotificationCenter.default.post(notification)
+	}
+	
+	func beginWork() {
+		NotificationCenter.default.post(name: .fileListStartedWork, object: nil)
+	}
+	
+	func endWork() {
+		NotificationCenter.default.post(name: .fileListFinishedWork, object: nil)
 	}
 }
 

@@ -14,9 +14,12 @@ class FileListViewController: NSViewController {
 	/// The label in the bottom bar of the window. Displays the numebr of files in the directory selection as well as the currently selected files in the table view.
 	@IBOutlet weak var itemsSelectedLabel: NSTextField!
 	
+	@IBOutlet weak var progressIndicator: NSProgressIndicator!
+	
 	@IBOutlet var dateFormatter: DateFormatter!
 	@IBOutlet var byteCountFormatter: ByteCountFormatter!
 	
+	var fileListIsUpdating = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,6 +35,27 @@ class FileListViewController: NSViewController {
 																	 selector: #selector(filesToShowDidChange(_:)),
 																	 name: .filesToShowChanged,
 																	 object: nil)
+		// Needs to be notified when the file list is being updated on another thread to show the progress indicator
+		notificationCenter.addObserver(self,
+																	 selector: #selector(fileListStartedWork(_:)),
+																	 name: .fileListStartedWork,
+																	 object: nil)
+		notificationCenter.addObserver(self,
+																	 selector: #selector(fileListFinishedWork(_:)),
+																	 name: .fileListFinishedWork,
+																	 object: nil)
+	}
+	
+	@objc func fileListStartedWork(_ notification: Notification) {
+		fileListIsUpdating = true
+		tableView.reloadData()
+		progressIndicator.startAnimation(self)
+	}
+	
+	@objc func fileListFinishedWork(_ notification: Notification) {
+		fileListIsUpdating = false
+		tableView.reloadData()
+		progressIndicator.stopAnimation(self)
 	}
 	
 	@objc func filesToShowDidChange(_ notification: Notification) {
