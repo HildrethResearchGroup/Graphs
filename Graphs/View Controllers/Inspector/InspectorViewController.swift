@@ -1,5 +1,5 @@
 //
-//  InspectorController.swift
+//  InspectorViewController.swift
 //  Graphs
 //
 //  Created by Connor Barnes on 6/14/20.
