@@ -718,8 +718,8 @@ CA
                     <splitViewItems>
                         <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="tbN-HT-LKD"/>
                         <splitViewItem holdingPriority="249" id="iLG-00-BcP"/>
-                        <splitViewItem canCollapse="YES" holdingPriority="260" id="S6h-nG-GGO"/>
-                        <splitViewItem id="O5O-Na-cRg"/>
+                        <splitViewItem canCollapse="YES" id="O5O-Na-cRg"/>
+                        <splitViewItem id="qYJ-9f-OTe"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="ezH-Nu-WtI">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -732,7 +732,7 @@ CA
                         <outlet property="splitView" destination="ezH-Nu-WtI" id="Dpx-cL-RA2"/>
                         <segue destination="wL6-OG-lOu" kind="relationship" relationship="splitItems" id="anF-fl-a07"/>
                         <segue destination="HTN-3w-kbB" kind="relationship" relationship="splitItems" id="A9E-6x-qEH"/>
-                        <segue destination="Typ-Xk-pUC" kind="relationship" relationship="splitItems" id="8sL-dc-wBk"/>
+                        <segue destination="Ewb-z6-Xsh" kind="relationship" relationship="splitItems" id="4Ds-4A-NyQ"/>
                     </connections>
                 </splitViewController>
                 <customObject id="gj5-I6-y6g" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -766,7 +766,7 @@ CA
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="TvD-6w-aIn">
-                                                        <font key="font" metaFont="label" size="13"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -803,7 +803,7 @@ CA
                                                                     <rect key="frame" x="25" y="0.0" width="212" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="iHt-ON-u7e">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -854,7 +854,7 @@ CA
                                                         </constraints>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="XO5-bh-D6t">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="label" size="13"/>
+                                                            <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
                                                             <action selector="addDirectory:" target="wL6-OG-lOu" id="rJw-PA-zw3"/>
@@ -878,7 +878,7 @@ CA
                                                         </constraints>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0KQ-BC-5Pe">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="label" size="13"/>
+                                                            <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                         <connections>
                                                             <action selector="delete:" target="ead-Yc-1N1" id="Qui-h6-RFg"/>
@@ -949,7 +949,7 @@ CA
                                         <rect key="frame" x="-2" y="-2" width="153" height="18"/>
                                         <buttonCell key="cell" type="check" title="Import subdirectories" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WdX-O1-yFG">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
                                 </gridCell>
@@ -964,43 +964,13 @@ CA
             </objects>
             <point key="canvasLocation" x="-523" y="1221"/>
         </scene>
-        <!--Inspector View-->
-        <scene sceneID="Whp-Yo-yv5">
+        <!--Inspector View Controller-->
+        <scene sceneID="wEf-mR-z0r">
             <objects>
-                <viewController title="Inspector View" id="Typ-Xk-pUC" sceneMemberID="viewController">
-                    <view key="view" id="MfZ-O5-cgZ">
-                        <rect key="frame" x="0.0" y="0.0" width="205" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Apw-ff-wIn">
-                                <rect key="frame" x="0.0" y="0.0" width="205" height="24"/>
-                                <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gG4-El-eqy">
-                                        <rect key="frame" x="76" y="5" width="54" height="14"/>
-                                        <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="Inspector" id="1Mf-Az-1fy">
-                                            <font key="font" metaFont="label" size="11"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="1A5-Mt-adF"/>
-                                    <constraint firstItem="gG4-El-eqy" firstAttribute="centerX" secondItem="Apw-ff-wIn" secondAttribute="centerX" id="Zxu-hF-VWV"/>
-                                    <constraint firstItem="gG4-El-eqy" firstAttribute="centerY" secondItem="Apw-ff-wIn" secondAttribute="centerY" id="e9f-AQ-HZy"/>
-                                </constraints>
-                            </customView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Apw-ff-wIn" secondAttribute="bottom" id="X8K-8m-Qml"/>
-                            <constraint firstItem="Apw-ff-wIn" firstAttribute="leading" secondItem="MfZ-O5-cgZ" secondAttribute="leading" id="fMi-MF-exk"/>
-                            <constraint firstAttribute="trailing" secondItem="Apw-ff-wIn" secondAttribute="trailing" id="udF-R6-iTI"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <customObject id="RYV-PX-hQu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <controllerPlaceholder storyboardName="Inspector" referencedIdentifier="Inspector View Controller" id="Ewb-z6-Xsh" sceneMemberID="viewController"/>
+                <customObject id="guS-Dm-IXh" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="654.5" y="1221"/>
+            <point key="canvasLocation" x="640" y="1043"/>
         </scene>
         <!--Detail View-->
         <scene sceneID="Xe4-4N-bKO">
@@ -1016,7 +986,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="402" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="menu" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -1054,7 +1024,7 @@ CA
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" baseWritingDirection="leftToRight" title="Text Cell" id="MRE-t2-glL">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1069,7 +1039,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="26" width="282" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="File" id="OL4-Je-2j3">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1090,7 +1060,7 @@ CA
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" baseWritingDirection="leftToRight" title="Text Cell" id="6E3-hm-cpf">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1105,7 +1075,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="-17" width="282" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Folder" id="naJ-Ot-7zx">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1123,7 +1093,7 @@ CA
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" baseWritingDirection="leftToRight" alignment="left" title="Text Cell" id="bsM-Vj-xqu">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1137,7 +1107,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="-17" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="1/1/1970" id="nPA-Zj-d3I">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1155,7 +1125,7 @@ CA
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="zgV-a2-WkJ">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1170,7 +1140,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0/0/0" id="euB-JL-OHe">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1188,7 +1158,7 @@ CA
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="qdO-gJ-RY0">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1203,7 +1173,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0/0/0" id="izx-gb-eHc">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
@@ -1221,7 +1191,7 @@ CA
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </tableHeaderCell>
                                                                     <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="TuW-Ei-6ur">
-                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                        <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -1236,7 +1206,7 @@ CA
                                                                                     <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0" id="RnQ-FR-9Nt">
-                                                                                        <font key="font" metaFont="label" size="13"/>
+                                                                                        <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
