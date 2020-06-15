@@ -44,4 +44,11 @@ extension NSUserInterfaceItemIdentifier {
 	static let fileSizeCell: Self = .init("FileSizeCell")
 	
 	static let directoryCell: Self = .init("DirectoryCell")
+	
+	static let fileInspectorSeparatorCell: Self = .init("FileInspectorSeparatorCell")
+	static let fileInspectorCategoryCell: Self = .init("FileInspectorCategoryCell")
+	static let fileInspectorCategoryOptionCell: Self = .init("FileInspectorCategoryOptionCell")
+	static let fileInspectorNameAndLocationCell: Self = .init("FileInspectorNameAndLocationCell")
+	static let fileInspectorTemplatesCell: Self = .init("FileInspectorTemplatesCell")
+	static let fileInspectorDetailsCell: Self = .init("FileInspectorDetailsCell")
 }
