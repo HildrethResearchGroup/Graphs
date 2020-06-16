@@ -71,12 +71,10 @@ extension FileController {
 	}
 	/// Called when work is about to be performed on the background thread. This will make sure that a progress indicator is showed in the UI.
 	private func beginWork() {
-		print("BEGIN")
 		NotificationCenter.default.post(name: .fileListStartedWork, object: nil)
 	}
 	/// Called when work has finished on the background thread. This will refresh the tableview.
 	private func endWork() {
-		print("END")
 		NotificationCenter.default.post(name: .fileListFinishedWork, object: nil)
 	}
 }
