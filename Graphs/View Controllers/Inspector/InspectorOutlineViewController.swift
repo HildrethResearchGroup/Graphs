@@ -10,8 +10,22 @@ import Cocoa
 
 protocol InspectorOutlineCellItem: Equatable {
 	static var outline: [InspectorOutlineCell<Self>] { get }
+	static var defaultExpandedCells: [InspectorOutlineCell<Self>] { get }
 	
 	var cellIdentifier: NSUserInterfaceItemIdentifier { get }
+}
+
+extension InspectorOutlineCellItem {
+	static var defaultExpandedCells: [InspectorOutlineCell<Self>] {
+		return outline.filter { cell in
+			switch cell {
+			case .header:
+				return true
+			case .body:
+				return false
+			}
+		}
+	}
 }
 
 enum InspectorOutlineCell<Item: InspectorOutlineCellItem>: Equatable {
@@ -52,6 +66,14 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	func prepareView(_ view: NSTableCellView, item: Item) {
 		
 	}
+	
+	override func viewDidLoad() {
+		Item.defaultExpandedCells.forEach {
+			primaryOutlineView?.expandItem(index(for: $0))
+		}
+	}
+	
+	var primaryOutlineView: NSOutlineView? { return nil }
 	
 	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
 		guard let cell = cellFromItem(item) else {

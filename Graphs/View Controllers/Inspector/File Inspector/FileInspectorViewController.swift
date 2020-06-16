@@ -11,6 +11,10 @@ import Cocoa
 class FileInspectorViewController: InspectorOutlineViewController<FileInspectorItem> {
 	@IBOutlet weak var outlineView: NSOutlineView!
 	
+	override var primaryOutlineView: NSOutlineView? {
+		return outlineView
+	}
+	
 	var file: File? {
 		didSet {
 			outlineView.reloadData()
