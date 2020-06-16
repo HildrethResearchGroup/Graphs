@@ -11,19 +11,27 @@ import Cocoa
 class FileInspectorViewController: InspectorOutlineViewController<FileInspectorItem> {
 	@IBOutlet weak var outlineView: NSOutlineView!
 	
-	var file: File?
+	var file: File? {
+		didSet {
+			outlineView.reloadData()
+		}
+	}
 	
 	var showingCustomDetails: Bool = false
 	
 	override func prepareView(_ view: NSTableCellView, item: FileInspectorItem) {
 		switch item {
-			
-		case .separator, .nameAndLocationHeader, .templatesHeader:
-			// No customization for basic category cells and seperators
+		case .separator:
+			// No customization for seperators
 			return
+		case .nameAndLocationHeader:
+			view.textField?.stringValue = "Name & Location"
+		case .templatesHeader:
+			view.textField?.stringValue = "Templates"
 		case .detailsHeader:
 			let view = view as! FileInspectorCategoryOptionCell
 			view.popUpButton.selectItem(at: showingCustomDetails ? 1: 0)
+			view.textField?.stringValue = "Details"
 		case .nameAndLocationBody:
 			let view = view as! FileInspectorNameAndLocationCell
 			guard let file = file else {
@@ -40,6 +48,10 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			return
 		}
 	}
+}
+
+extension FileInspectorViewController: InspectorSubViewController {
+	
 }
 
 enum FileInspectorItem: InspectorOutlineCellItem {

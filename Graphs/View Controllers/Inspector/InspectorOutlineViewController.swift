@@ -8,13 +8,13 @@
 
 import Cocoa
 
-protocol InspectorOutlineCellItem {
+protocol InspectorOutlineCellItem: Equatable {
 	static var outline: [InspectorOutlineCell<Self>] { get }
 	
 	var cellIdentifier: NSUserInterfaceItemIdentifier { get }
 }
 
-enum InspectorOutlineCell<Item: InspectorOutlineCellItem> {
+enum InspectorOutlineCell<Item: InspectorOutlineCellItem>: Equatable {
 	indirect case header (item: Item, children: [InspectorOutlineCell<Item>])
 	case body (item: Item)
 }
@@ -22,16 +22,43 @@ enum InspectorOutlineCell<Item: InspectorOutlineCellItem> {
 class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	typealias Cell = InspectorOutlineCell<Item>
 	
+	private func flattenCells(in cells: [Cell]) -> [Cell] {
+		var flattened: [Cell] = []
+		cells.forEach { cell in
+			switch cell {
+			case .header(_, let children):
+				flattened.append(cell)
+				flattened += flattenCells(in: children)
+			case .body(_):
+				flattened.append(cell)
+			}
+		}
+		return flattened
+	}
+	
+	private func index(for cell: Cell) -> NSNumber {
+		return NSNumber(value: flattenCells(in: Item.outline).firstIndex(of: cell)!)
+	}
+	
+	private func cell(for index: NSNumber) -> Cell {
+		return flattenCells(in: Item.outline)[index.intValue]
+	}
+	
+	private func cellFromItem(_ item: Any?) -> Cell? {
+		guard let item = item else { return nil }
+		return cell(for: (item as! NSNumber))
+	}
+	
 	func prepareView(_ view: NSTableCellView, item: Item) {
 		
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-		guard let item = item as? Cell else {
+		guard let cell = cellFromItem(item) else {
 			return Item.outline.count
 		}
 		
-		switch item {
+		switch cell {
 		case .header (_, let children):
 			return children.count
 		case .body:
@@ -40,19 +67,19 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-		guard let item = item as? Cell else {
-			return Item.outline[index]
+		guard let cell = cellFromItem(item) else {
+			return self.index(for: Item.outline[index])
 		}
 		
-		guard case .header (_, let children) = item else {
+		guard case .header (_, let children) = cell else {
 			fatalError("")
 		}
 		
-		return children[index]
+		return self.index(for: children[index])
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-		switch item as! Cell {
+		switch cellFromItem(item)! {
 		case .header:
 			return true
 		case .body:
@@ -61,7 +88,7 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	}
 	
 	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-		guard let cell = item as? Cell else { return nil }
+		let cell = cellFromItem(item)!
 		
 		let item: Item = {
 			switch cell {
