@@ -31,6 +31,12 @@ class FileController {
 	}
 	/// The files in the currently selected directories.
 	var filesToShow: [File] = []
+	/// The currently selected files
+	var filesSelected: [File] = [] {
+		didSet {
+			
+		}
+	}
 	/// Creates a file controller from a data controller.
 	/// - Parameter dataController: The data controller to use.
 	init(dataController: DataController) {
@@ -84,7 +90,7 @@ extension FileController {
 	/// Updates the files that should be shown based off the directory selection.
 	/// - Parameter animate: If `true` the changes will be animated in the table view.
 	func updateFilesToShow(animate: Bool) {
-		var notification = Notification(name: .filesToShowChanged)
+		var notification = Notification(name: .filesDisplayedDidChange)
 		invalidateSortCache()
 		// Don't allow animating if sorting. The background thread interferes with the animation.
 		if animate && sortKey == nil {

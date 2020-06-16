@@ -134,7 +134,7 @@ extension SortCache {
 		}
 
 		if notify {
-			let notification = Notification(name: .filesToShowChanged)
+			let notification = Notification(name: .filesDisplayedDidChange)
 			NotificationCenter.default.post(notification)
 		}
 	}

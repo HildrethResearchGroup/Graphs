@@ -33,7 +33,7 @@ class FileListViewController: NSViewController {
 		// Needs to be notified when the directory selection has changed in order to update the files to show
 		notificationCenter.addObserver(self,
 																	 selector: #selector(filesToShowDidChange(_:)),
-																	 name: .filesToShowChanged,
+																	 name: .filesDisplayedDidChange,
 																	 object: nil)
 		// Needs to be notified when the file list is being updated on another thread to show the progress indicator
 		notificationCenter.addObserver(self,
