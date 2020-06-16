@@ -11,9 +11,9 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		DataController.shared = .init(completion: {
+		DataController.initialize {
 			print("Core Data loaded")
-		})
+		}
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {

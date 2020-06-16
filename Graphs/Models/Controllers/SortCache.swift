@@ -9,27 +9,38 @@
 import Foundation
 
 class SortCache {
-	private unowned let directoryController: DirectoryController
+	private unowned let fileController: FileController
 	
-	init(directoryController: DirectoryController) {
-		self.directoryController = directoryController
+	init(fileController: FileController) {
+		self.fileController = fileController
 	}
 	
 	private var sortCache: [Key: [File]] = [:]
 	
-	var sortKey: File.SortKey? {
-		return directoryController.sortKey
+	private var operationNumber = 0
+}
+
+// MARK: Sort Key
+extension SortCache {
+	struct Key: Hashable {
+		var sortKey: File.SortKey
+		var ascending: Bool
+	}
+}
+
+// MARK: Sort Terminated Error
+struct SortTerminatedError: Error {
+	
+}
+
+// MARK: Helpers
+extension SortCache {
+	private var sortKey: File.SortKey? {
+		return fileController.sortKey
 	}
 	
-	var sortAscending: Bool {
-		return directoryController.sortAscending
-	}
-	
-	var operationNumber = 0
-	var workItem: DispatchWorkItem?
-	
-	func abortBackgroundSort() {
-		operationNumber += 1
+	private var sortAscending: Bool {
+		return fileController.sortAscending
 	}
 	
 	private var fileSort: ((File, File) -> Bool)? {
@@ -62,23 +73,32 @@ class SortCache {
 			return { ascendingSort($1, $0) }
 		}
 	}
-	
+}
+
+// MARK: Interface
+extension SortCache {
+	/// Stops the current sort operation on the background thread.
+	func abortBackgroundSort() {
+		operationNumber += 1
+	}
+	/// Sorts the files by the given sort key and ascending modifier.
+	/// - Parameter notify: If `true` a notification is sent indicating that the files were sorted. (`true` by default).
 	func sortFiles(notify: Bool = true) {
 		guard let sortKey = sortKey else { return }
 		let key = Key(sortKey: sortKey, ascending: sortAscending)
 		
 		if let files = sortCache[key] {
 			// The sorting is already cached
-			directoryController.filesToShow = files
+			fileController.filesToShow = files
 		} else {
-			
-			directoryController.beginWork()
-			
+			// A new sort is being performed to increase the operation number to cause any ongoing search to terminate early
 			operationNumber += 1
+			// The operation number at this time will be compared in the search closure to make sure we have not begun a new search operation (which would invalidate this operation)
 			let currentOperationNumber = operationNumber
 			
-			workItem = DispatchWorkItem {
-				let sortedFiles: [File]
+			var sortedFiles: [File] = []
+			
+			func backgroundWork() throws {
 				let reverseKey = Key(sortKey: sortKey, ascending: !self.sortAscending)
 				
 				if let files: [File] = self.sortCache[reverseKey]?.reversed() {
@@ -87,28 +107,30 @@ class SortCache {
 					self.sortCache[key] = files
 					sortedFiles = files
 				} else {
-					// No sort has been done for this key -- perform the search and add it to the cache.
+					guard let fileSort = fileSort else { return }
+					// No sort has been done for this key -- perform the search and add it to the cache
 					let cancellableSort: (File, File) throws -> Bool = { (lhs, rhs) in
+						// If the operation number has changed abort this sort
 						if self.operationNumber != currentOperationNumber {
 							throw SortTerminatedError()
 						}
-						return self.fileSort!(lhs, rhs)
+						return fileSort(lhs, rhs)
 					}
-					guard let files = try? self.directoryController.filesToShow.sorted(by: cancellableSort) else { return }
-					self.sortCache[key] = files
-					sortedFiles = files
-				}
-				
-				DispatchQueue.main.async { [weak self] in
-					self?.sortCache[key] = sortedFiles
-					self?.directoryController.filesToShow = sortedFiles
-					self?.directoryController.endWork()
+					
+					do {
+						let files = try self.fileController.filesToShow.sorted(by: cancellableSort)
+						self.sortCache[key] = files
+						sortedFiles = files
+					}
 				}
 			}
 			
-			directoryController.workQueue.async(execute: workItem!)
-			
-			
+			fileController.performBackgroundWork(backgroundWork) { [weak self] success in
+				guard success else { return }
+				
+				self?.sortCache[key] = sortedFiles
+				self?.fileController.filesToShow = sortedFiles
+			}
 		}
 
 		if notify {
@@ -116,15 +138,4 @@ class SortCache {
 			NotificationCenter.default.post(notification)
 		}
 	}
-}
-
-extension SortCache {
-	struct Key: Hashable {
-		var sortKey: File.SortKey
-		var ascending: Bool
-	}
-}
-
-struct SortTerminatedError: Error {
-	
 }

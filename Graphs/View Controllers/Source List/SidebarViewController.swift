@@ -66,7 +66,7 @@ class SidebarViewController: NSViewController {
 	/// Adds a new directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
 	@IBAction func addDirectory(_ sender: Any?) {
-		guard let directoryController = directoryController else { return }
+		guard let dataController = dataController else { return }
 		guard let rootDirectory = rootDirectory else { return }
 		
 		let selection = sidebar.selectedRowIndexes
@@ -86,7 +86,7 @@ class SidebarViewController: NSViewController {
 			parent = directoryFromItem(selectedItem) ?? rootDirectory
 		}
 		
-		let newDirectory = directoryController.createSubdirectory(in: parent)
+		let newDirectory = dataController.createSubdirectory(in: parent)
 		newDirectory.customDisplayName = Directory.defaultDisplayName
 		
 		// The item is being inserted at the end of the list of children. NSOutlineView.insertItems(at:inParent:withAnimation) takes the parent item to add the new item inside of. In this case, this is the parent directory which was calculated above. It also takes the child index to add the item to - this is simply the index of the (just added) last child subdirectory.
@@ -130,19 +130,14 @@ extension SidebarViewController {
 		return .shared
 	}
 	
-	/// The directory controller.
-	var directoryController: DirectoryController? {
-		return dataController?.directoryController
-	}
-	
 	/// The root directory.
 	var rootDirectory: Directory? {
-		return directoryController?.rootDirectory
+		return dataController?.rootDirectory
 	}
 	
 	/// The managed object context for the model.
 	var dataContext: NSManagedObjectContext? {
-		return dataController?.persistentContainer.viewContext
+		return dataController?.context
 	}
 	
 	/// Inserts files/directories in the given directory.
@@ -220,7 +215,7 @@ extension SidebarViewController {
 		sidebar.insertItems(at: insertionIndexSet, inParent: outlineParent, withAnimation: .slideDown)
 		
 		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
-		directoryController?.updateFilesToShow(animate: true)
+		dataController?.updateFilesDisplayed(animate: true)
 	}
 	
 	/// Removes the given directories from the sidbar and updates the model.
@@ -231,7 +226,7 @@ extension SidebarViewController {
 		directories.forEach { directory in
 			let parent = directory.parent
 			let childIndex = sidebar.childIndex(forItem: directory)
-			directoryController?.remove(directory: directory)
+			dataController?.remove(directory: directory)
 			
 			guard parent != nil else {
 				print("[WARNING] Error finding parent for directory item to be removed.")
@@ -300,6 +295,6 @@ extension SidebarViewController {
 		let selectedRows = sidebar.selectedRowIndexes
 		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
 		// Setting this property calls a setter in DirectoryController which updates the filesToShow property
-		directoryController?.selectedDirectories = selectedDirectories
+		dataController?.selectedDirectories = selectedDirectories
 	}
 }

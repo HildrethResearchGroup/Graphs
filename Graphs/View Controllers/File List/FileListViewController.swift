@@ -61,7 +61,7 @@ class FileListViewController: NSViewController {
 	@objc func filesToShowDidChange(_ notification: Notification) {
 		if let userInfo = notification.userInfo as? [String: Any] {
 			if let oldValue = userInfo[UserInfoKeys.oldValue] as? [File] {
-				if let filesToShow = directoryController?.filesToShow {
+				if let filesToShow = dataController?.filesDisplayed {
 					let diff = filesToShow.difference(from: oldValue)
 					
 					let removalIndicies = diff.compactMap { change -> Int? in
@@ -108,7 +108,7 @@ class FileListViewController: NSViewController {
 	func updateRowSelectionLabel() {
 		let numberOfFiles = tableView.numberOfRows
 		let numberOfSelectedFiles = tableView.numberOfSelectedRows
-		let numberOfSelectedDirectories = DataController.shared?.directoryController.selectedDirectories.count ?? 0
+		let numberOfSelectedDirectories = dataController?.selectedDirectories.count ?? 0
 		
 		if numberOfSelectedDirectories == 0 {
 			itemsSelectedLabel.stringValue = "0 directories selected"
@@ -137,23 +137,19 @@ extension FileListViewController {
 		return DataController.shared
 	}
 	
-	var directoryController: DirectoryController? {
-		return dataController?.directoryController
-	}
-	
 	var context: NSManagedObjectContext? {
-		return dataController?.persistentContainer.viewContext
+		return dataController?.context
 	}
 	
 	func removeSelectedFiles() {
 		let files = tableView.selectedRowIndexes.compactMap { index in
-			directoryController?.filesToShow[index]
+			dataController?.filesDisplayed[index]
 		}
 		remove(files: files)
 	}
 	
 	func remove(files: [File]) {
-		guard let directoryController = directoryController else {
+		guard let dataController = dataController else {
 			print("[WARNING] directoryController was nil at FileListViewController.remove(files:rows:).")
 			return
 		}
@@ -165,7 +161,7 @@ extension FileListViewController {
 		}
 		
 		// Get the indicies of the rows that are being removed so we can animate their removal
-		let rows = directoryController.filesToShow.indicies(of: files)
+		let rows = dataController.filesDisplayed.indicies(of: files)
 		tableView.removeRows(at: rows, withAnimation: .slideDown)
 		// We do not need to call directoryController.updateFilesToShow() becuase we manually manage the change to animate it. If we would also call this function, it would abort the animation.
 	}

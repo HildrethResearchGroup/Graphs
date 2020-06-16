@@ -211,7 +211,7 @@ extension SidebarViewController {
 		}
 		
 		// The moved files will require the file list to refresh its contents
-		directoryController?.updateFilesToShow(animate: true)
+		dataController?.updateFilesDisplayed(animate: true)
 	}
 	
 	/// Handles dropping external items onto the sidebar.
@@ -274,7 +274,7 @@ extension SidebarViewController {
 		guard let plist = item.propertyList(forType: .fileRowPasteboardType) as? [String: Any] else { return nil }
 		guard let row = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else { return nil }
 		// We don't have access to the tableview showing the files, but we do have access to the source for the tableview
-		return directoryController?.filesToShow[row]
+		return dataController?.filesDisplayed[row]
 	}
 }
 

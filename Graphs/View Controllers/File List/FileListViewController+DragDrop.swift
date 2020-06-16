@@ -32,7 +32,7 @@ extension FileListViewController {
 					return nil
 				}
 				
-				return directoryController?.filesToShow[rowIndex]
+				return dataController?.filesDisplayed[rowIndex]
 			}
 			remove(files: filesToRemove)
 		}

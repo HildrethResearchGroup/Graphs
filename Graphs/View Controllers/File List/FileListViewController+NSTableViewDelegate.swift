@@ -12,16 +12,16 @@ extension FileListViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		// When the file list is updating hide the elements
 		if fileListIsUpdating { return 0 }
-		return directoryController?.filesToShow.count ?? 0
+		return dataController?.filesDisplayed.count ?? 0
 	}
 	
 	func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-		guard row < directoryController?.filesToShow.count ?? 0 else {
+		guard row < dataController?.filesDisplayed.count ?? 0 else {
 			// If the row is greater than the count or the controller is nil, return nil (this should never happen)
 			print("[WARNING] FIleListViewController could not find file for the table view at trow \(row).")
 			return nil
 		}
-		return directoryController?.filesToShow[row]
+		return dataController?.filesDisplayed[row]
 	}
 }
 
@@ -96,12 +96,12 @@ extension FileListViewController: NSTableViewDelegate {
 		guard let sortKeyString = tableView.sortDescriptors.first?.key,
 			let sortKey = File.SortKey(rawValue: sortKeyString),
 			let ascending = tableView.sortDescriptors.first?.ascending else {
-			directoryController?.sortKey = nil
+			dataController?.fileSortKey = nil
 			return
 		}
 		
-		directoryController?.sortKey = sortKey
-		directoryController?.sortAscending = ascending
+		dataController?.fileSortKey = sortKey
+		dataController?.sortFilesAscending = ascending
 	}
 }
 
@@ -114,7 +114,7 @@ extension FileListViewController {
 			return ""
 		}
 		
-		if parent == directoryController?.rootDirectory {
+		if parent == dataController?.rootDirectory {
 			// If the parent directory is root, then don't display a name for the collection
 			return ""
 		} else {

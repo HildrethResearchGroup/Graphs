@@ -16,11 +16,11 @@ extension PrimaryWindowController: NSWindowDelegate {
 	func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {
 		guard let dataController = DataController.shared else { return nil }
 		
-		if let undoManager = dataController.persistentContainer.viewContext.undoManager {
+		if let undoManager = dataController.context.undoManager {
 			return undoManager
 		} else {
 			let undoManager = UndoManager()
-			dataController.persistentContainer.viewContext.undoManager = undoManager
+			dataController.context.undoManager = undoManager
 			return undoManager
 		}
 	}

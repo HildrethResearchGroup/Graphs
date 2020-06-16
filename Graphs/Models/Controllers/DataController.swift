@@ -6,88 +6,58 @@
 //  Copyright © 2020 Connor Barnes. All rights reserved.
 //
 
-import Cocoa
+import CoreData
 
 /// A class that manages the Core Data store for the app. Use this class to interact with the model.
 ///
 /// This is a singleton class, and should be accessed with the `shared` property.
-class DataController: NSObject {
+class DataController {
 	/// The container that manages Core Data.
-	var persistentContainer: NSPersistentContainer
-	/// A controller which manages when the application should save its state.
-	private var saveController = SaveController()
-	/// A controller which manages the directory hierarchy.
-	var directoryController: DirectoryController!
+	private var persistentContainer: NSPersistentContainer
+	/// A subcontroller which manages when the application should save its state.
+	private var saveController: SaveController!
+	/// A subcontroller which manages the directory hierarchy.
+	private var directoryController: DirectoryController!
+	/// A subcontroller which manages the files that are displayed.
+	private var fileController: FileController!
 	/// Creates a `DataController` and runs the completion handler after Core Data has loaded the model from the store.
 	/// - Parameter completion: The completion handler to run after Core Data has loaded the model.
 	init(completion: @escaping () -> ()) {
 		persistentContainer = NSPersistentContainer(name: Self.dataModelName)
 		// By default there is no undo manager, so set a new one.
 		persistentContainer.viewContext.undoManager = UndoManager()
-		super.init()
+		
+		saveController = .init(dataController: self)
 		directoryController = .init(dataController: self)
+		fileController = .init(dataController: self)
+		
 		loadStore(completion: completion)
+		registerObservers()
 	}
 }
 
-// MARK: Saving
-
-/// A class that keeps tracks of changes in Core Data and uses this to determine when to save.
-private class SaveController {
-	/// How long to wait between subsequent save operations.
-	static let saveInterval: TimeInterval = 60.0
-	/// The maximum number of changes to allow before saving.
-	static let changeThreshhold = 50
-	/// The Core Data context to manage saving of.
-	weak var context: NSManagedObjectContext?
-	
-	/// Registers a new change. Call this when a change has been made which will eventually require saving.
-	func addChange() {
-		changeCount += 1
-	}
-	
-	/// The number of changes since the last save.
-	private var changeCount = 0 {
-		didSet {
-			if changeCount == Self.changeThreshhold {
-				save()
-			}
-		}
-	}
-	
-	/// A timer that calls `save()` when it fires.
-	private var saveTimer = Timer()
-	
-	/// Saves the Core Data model to the store if there have been any changes since the last save.
-	fileprivate func save() {
-		// Don't save if there hasn't been any changes
-		guard changeCount > 0 else { return }
-		guard let context = context else { return }
-		
-		do {
-			try context.save()
-		} catch {
-			print("[WARNING] Core Data failed to save: \(error)")
-		}
-		
-		// Change count represents the number of changes since the last save. Since we just saved set it to 0
-		changeCount = 0
-	}
-}
-
+// MARK: Notifications
 extension DataController {
-	/// Notifies the controller that the Core Data model has changed and should be saved at some point in the future.
-	///
-	/// Call this whenever the model changes.
-	func setNeedsSaved() {
-		saveController.addChange()
+	/// Called when the user has requested an undo operation.
+	@objc private func didUndo(_ notification: Notification) {
+		// A cache is built up over time to prevent unneded computations. When an undo is called however, we dob not know what is being undone so we can't simply update the cache, we have to entirely invalidate it
+		Directory.invalidateCache()
+		fileController.invalidateSortCache()
+		// Send a notificatoin that the undo has been processed and that view controllers should no update their contents. View controllers listen to this notification instead of NSUndoManagerDidUndo/RedoChange becuase if they listen to that notificaion, the cache may be invalidated after the view controller updates its views.
+		let notification = Notification(name: .didProcessUndo)
+		NotificationCenter.default.post(notification)
 	}
-	
-	/// Immediatley saves the Core Data model to the store.
-	///
-	/// Note that the store may be saved periodically without this function being called.
-	func saveImmediatley() {
-		saveController.save()
+	/// Registers the controller to listen for notifications.
+	private func registerObservers() {
+		// Must register for undo/redo notifications to invalidate any caches.
+		NotificationCenter.default.addObserver(self,
+																					 selector: #selector(didUndo(_:)),
+																					 name: .NSUndoManagerDidUndoChange,
+																					 object: context.undoManager)
+		NotificationCenter.default.addObserver(self,
+																					 selector: #selector(didUndo(_:)),
+																					 name: .NSUndoManagerDidRedoChange,
+																					 object: context.undoManager)
 	}
 }
 
@@ -95,16 +65,21 @@ extension DataController {
 extension DataController {
 	/// The shared `DataController` instance for the app.
 	///
-	/// This needs to be set when the application launches.
-	static var shared: DataController? {
+	/// This needs to be set when the application launches by calling `DataController.initialize()`.
+	private(set) static var shared: DataController? {
 		didSet {
 			let notification = Notification(name: .storeLoaded)
 			NotificationCenter.default.post(notification)
 		}
 	}
+	/// Initializes the shared controller instance.
+	/// - Parameter completion: The code to execute when the data controller has finished initializing.
+	static func initialize(completion: @escaping () -> ()) {
+		DataController.shared = DataController.init(completion: completion)
+	}
 }
 
-// MARK: Helper Functions
+// MARK: Store Helper Functions
 extension DataController {
 	/// The name of the Core Data model.
 	private static let dataModelName = "GraphsModel"
@@ -112,7 +87,10 @@ extension DataController {
 	///
 	/// SQLite is used because it is nonatomic, so the whole datagraph doesn't need to be all loaded in memory at all times.
 	private static let storeType = "sqlite"
-	
+	/// The view context for the persistent container.
+	var context: NSManagedObjectContext {
+		return persistentContainer.viewContext
+	}
 	/// Deletes the store.
 	///
 	/// A useful utility for deleting all data for debugging purposes. When the data schema is changed, this should be called, or Core Data will fail to read the data. To have this called while in `DEBUG`, simply set `shouldResetCoreData` to `true` in `Debug.swift`.
@@ -124,9 +102,9 @@ extension DataController {
 			.appendingPathComponent("Graphs/\(Self.dataModelName).\(Self.storeType)")
 		
 		if FileManager.default.fileExists(atPath: url.path) {
-			print("Core Data store exists. Attempting to delete.")
+			print("[INFO] Core Data store exists. Attempting to delete.")
 		} else {
-			print("Core Data store does not exist.")
+			print("[INFO] Core Data store does not exist.")
 			return
 		}
 		
@@ -135,12 +113,11 @@ extension DataController {
 			try coordinator.destroyPersistentStore(at: url,
 																						 ofType: Self.dataModelName,
 																						 options: nil)
-			print("Core Data store deleted.")
+			print("[INFO] Core Data store deleted.")
 		} catch {
-			print("Core Data store not deleted: \(error)")
+			print("[WARNING] Core Data store not deleted: \(error)")
 		}
 	}
-	
 	/// Loads the saved Core Data model from disk if it exists. Otherwise creates an empty model.
 	/// - Parameter completion: The completion handler to run after the data is loaded.
 	private func loadStore(completion: @escaping () -> ()) {
@@ -159,9 +136,83 @@ extension DataController {
 			self.directoryController.loadRootDirectory()
 			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to no tbe collapsed. Without doing this, the top level items may not auto-expand on load.
 			self.directoryController.rootDirectory?.collapsed = false
-			
-			self.saveController.context = self.persistentContainer.viewContext
 			completion()
 		}
+	}
+}
+
+// MARK: Saving Interface
+extension DataController {
+	/// Notifies the controller that the Core Data model has changed and should be saved at some point in the future.
+	///
+	/// Call this whenever the model changes.
+	func setNeedsSaved() {
+		saveController.addChange()
+	}
+	/// Immediatley saves the Core Data model to the store.
+	///
+	/// Note that the store may be saved periodically without this function being called.
+	func saveImmediatley() {
+		saveController.save()
+	}
+}
+
+// MARK: Directory Interface
+extension DataController {
+	/// The currently selected directories in the sidebar.
+	var selectedDirectories: [Directory] {
+		get {
+			return directoryController.selectedDirectories
+		}
+		set {
+			directoryController.selectedDirectories = newValue
+		}
+	}
+	/// The root directory. All directories are decendents of this directory.
+	var rootDirectory: Directory? {
+		return directoryController.rootDirectory
+	}
+	/// Creates a new subdirectory in the given directory.
+	/// - Parameter parent: The directory to create a subdirectory inside of.
+	/// - Returns: The new directory that was created.
+	@discardableResult
+	func createSubdirectory(in parent: Directory) -> Directory {
+		return directoryController.createSubdirectory(in: parent)
+	}
+	/// Removes the given directory and its contents.
+	/// - Parameter directory: The directory to remove.
+	func remove(directory: Directory) {
+		directoryController.remove(directory: directory)
+	}
+}
+
+// MARK: File Interface
+extension DataController {
+	/// The files in the directories that are selected and sorted if a sort key is given.
+	var filesDisplayed: [File] {
+		return fileController.filesToShow
+	}
+	/// The current sort key for the file list.
+	var fileSortKey: File.SortKey? {
+		get {
+			return fileController.sortKey
+		}
+		set {
+			fileController.sortKey = newValue
+		}
+	}
+	/// The direction of sorting for file list.
+	var sortFilesAscending: Bool {
+		get {
+			return fileController.sortAscending
+		}
+		set {
+			fileController.sortAscending = newValue
+		}
+	}
+	/// Updates the files that should be shown based off the directory selection.
+	/// - Parameter animate: If `true` the changes will be animated in the table view.
+	func updateFilesDisplayed(animate: Bool) {
+		fileController.updateFilesToShow(animate: animate)
 	}
 }
