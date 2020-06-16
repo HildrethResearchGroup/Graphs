@@ -34,7 +34,8 @@ class FileController {
 	/// The currently selected files
 	var filesSelected: [File] = [] {
 		didSet {
-			
+			NotificationCenter.default.post(name: .filesSelectedDidChange,
+																			object: self)
 		}
 	}
 	/// Creates a file controller from a data controller.

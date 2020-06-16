@@ -192,6 +192,15 @@ extension DataController {
 	var filesDisplayed: [File] {
 		return fileController.filesToShow
 	}
+	/// The currently selected files.
+	var filesSelected: [File] {
+		get {
+			return fileController.filesSelected
+		}
+		set {
+			fileController.filesSelected = newValue
+		}
+	}
 	/// The current sort key for the file list.
 	var fileSortKey: File.SortKey? {
 		get {

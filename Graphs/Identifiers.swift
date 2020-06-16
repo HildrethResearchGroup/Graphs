@@ -14,6 +14,8 @@ extension Notification.Name {
 	static let storeLoaded = Notification.Name(rawValue: "storeLoaded")
 	/// A notification that is fired when the files to show has changed.
 	static let filesDisplayedDidChange = Notification.Name(rawValue: "filesDisplayedDidChange")
+	/// A notification that is fired when the selected files has changed.
+	static let filesSelectedDidChange = Notification.Name(rawValue: "filesSelectedDidChange")
 	/// A notification that is fired after processing an undo by Core Data
 	static let didProcessUndo = Notification.Name(rawValue: "didProcessUndo")
 	/// A notification that is fired when the file list is being updated on another thread.

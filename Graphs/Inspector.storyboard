@@ -14,303 +14,330 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="hP0-yz-b3l">
-                                <rect key="frame" x="0.0" y="422" width="250" height="28"/>
-                                <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-5K-tZS">
-                                        <rect key="frame" x="56" y="6" width="139" height="15"/>
-                                        <subviews>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="BQ0-S9-uBV" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="15" id="4up-fN-1gJ"/>
-                                                    <constraint firstAttribute="width" constant="15" id="pqu-Yk-Jjc"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="File Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="ejM-wr-Qbx">
-                                                    <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="File Icon Selected"/>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="File Icon"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                                        <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
-                                                        <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
-                                                        <integer key="value" value="0"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="KIR-5G-g1m" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
-                                                <rect key="frame" x="31" y="0.0" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="15" id="dk7-20-2DA"/>
-                                                    <constraint firstAttribute="height" constant="15" id="m6t-t4-Ho5"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Folder Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="lLF-DX-dtx">
-                                                    <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Folder Icon Selected"/>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Folder Icon"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                                        <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
-                                                        <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
-                                                        <integer key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="IEC-jJ-05g" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
-                                                <rect key="frame" x="62" y="0.0" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="15" id="ILc-bl-0GZ"/>
-                                                    <constraint firstAttribute="height" constant="15" id="aM5-EG-tZa"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Parser Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="2Cm-43-vUt">
-                                                    <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Parser Icon Selected"/>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Parser Icon"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                                        <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
-                                                        <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
-                                                        <integer key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="Bmt-F0-E5Q" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
-                                                <rect key="frame" x="93" y="0.0" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="15" id="9G6-Pj-TVL"/>
-                                                    <constraint firstAttribute="height" constant="15" id="L7i-j7-izZ"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Graph Icon New" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="Neh-4q-wQz">
-                                                    <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Graph Icon New Selected"/>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Graph Icon New"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                                        <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
-                                                        <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
-                                                        <integer key="value" value="3"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                            <button translatesAutoresizingMaskIntoConstraints="NO" id="fGb-m4-kvv" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
-                                                <rect key="frame" x="124" y="0.0" width="15" height="15"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="15" id="Lc6-bK-VDZ"/>
-                                                    <constraint firstAttribute="height" constant="15" id="cYI-Ih-ZU1"/>
-                                                </constraints>
-                                                <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Table Icon New" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="kAQ-g5-HJd">
-                                                    <behavior key="behavior" lightByContents="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Table Icon New Selected"/>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Table Icon New"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
-                                                        <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
-                                                        <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
-                                                        <integer key="value" value="4"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="0S6-1X-DIz"/>
-                                    <constraint firstItem="VUm-5K-tZS" firstAttribute="top" secondItem="hP0-yz-b3l" secondAttribute="top" constant="7" id="Rh8-Hq-cVF"/>
-                                    <constraint firstAttribute="bottom" secondItem="VUm-5K-tZS" secondAttribute="bottom" constant="6" id="ej1-yJ-MxO"/>
-                                    <constraint firstItem="VUm-5K-tZS" firstAttribute="centerX" secondItem="hP0-yz-b3l" secondAttribute="centerX" id="rbs-sx-9Vg"/>
-                                </constraints>
-                            </customView>
-                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BxA-Ut-wgF">
-                                <rect key="frame" x="0.0" y="419" width="250" height="5"/>
+                            <box boxType="custom" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="BUO-Hj-5gW">
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="450"/>
+                                <view key="contentView" id="BRo-TI-2nm">
+                                    <rect key="frame" x="0.0" y="0.0" width="250" height="450"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="Epg-mP-LOP">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="450"/>
+                                            <subviews>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="hP0-yz-b3l">
+                                                    <rect key="frame" x="0.0" y="422" width="250" height="28"/>
+                                                    <subviews>
+                                                        <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VUm-5K-tZS">
+                                                            <rect key="frame" x="56" y="6" width="139" height="15"/>
+                                                            <subviews>
+                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="BQ0-S9-uBV" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="15" id="4up-fN-1gJ"/>
+                                                                        <constraint firstAttribute="width" constant="15" id="pqu-Yk-Jjc"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="File Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="ejM-wr-Qbx">
+                                                                        <behavior key="behavior" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="File Icon Selected"/>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="File Icon"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
+                                                                            <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
+                                                                            <integer key="value" value="0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="KIR-5G-g1m" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
+                                                                    <rect key="frame" x="31" y="0.0" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="15" id="dk7-20-2DA"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="m6t-t4-Ho5"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Folder Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="lLF-DX-dtx">
+                                                                        <behavior key="behavior" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Folder Icon Selected"/>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Folder Icon"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
+                                                                            <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
+                                                                            <integer key="value" value="1"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="IEC-jJ-05g" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
+                                                                    <rect key="frame" x="62" y="0.0" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="15" id="ILc-bl-0GZ"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="aM5-EG-tZa"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Parser Icon" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="2Cm-43-vUt">
+                                                                        <behavior key="behavior" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Parser Icon Selected"/>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Parser Icon"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
+                                                                            <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
+                                                                            <integer key="value" value="2"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="Bmt-F0-E5Q" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
+                                                                    <rect key="frame" x="93" y="0.0" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="15" id="9G6-Pj-TVL"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="L7i-j7-izZ"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Graph Icon New" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="Neh-4q-wQz">
+                                                                        <behavior key="behavior" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Graph Icon New Selected"/>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Graph Icon New"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
+                                                                            <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
+                                                                            <integer key="value" value="3"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="fGb-m4-kvv" customClass="InspectorButton" customModule="Graphs" customModuleProvider="target">
+                                                                    <rect key="frame" x="124" y="0.0" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="15" id="Lc6-bK-VDZ"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="cYI-Ih-ZU1"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Table Icon New" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="kAQ-g5-HJd">
+                                                                        <behavior key="behavior" lightByContents="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <color key="contentTintColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Table Icon New Selected"/>
+                                                                        <userDefinedRuntimeAttribute type="image" keyPath="unselectedImage" value="Table Icon New"/>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="selectedTintColor">
+                                                                            <color key="value" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="unselectedTintColor">
+                                                                            <color key="value" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="tabIndex">
+                                                                            <integer key="value" value="4"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </button>
+                                                            </subviews>
+                                                            <visibilityPriorities>
+                                                                <integer value="1000"/>
+                                                                <integer value="1000"/>
+                                                                <integer value="1000"/>
+                                                                <integer value="1000"/>
+                                                                <integer value="1000"/>
+                                                            </visibilityPriorities>
+                                                            <customSpacing>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                                <real value="3.4028234663852886e+38"/>
+                                                            </customSpacing>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="0S6-1X-DIz"/>
+                                                        <constraint firstItem="VUm-5K-tZS" firstAttribute="top" secondItem="hP0-yz-b3l" secondAttribute="top" constant="7" id="Rh8-Hq-cVF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="VUm-5K-tZS" secondAttribute="bottom" constant="6" id="ej1-yJ-MxO"/>
+                                                        <constraint firstItem="VUm-5K-tZS" firstAttribute="centerX" secondItem="hP0-yz-b3l" secondAttribute="centerX" id="rbs-sx-9Vg"/>
+                                                    </constraints>
+                                                </customView>
+                                                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="BxA-Ut-wgF">
+                                                    <rect key="frame" x="0.0" y="419" width="250" height="5"/>
+                                                </box>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="awH-0i-qyq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                    <subviews>
+                                                        <tabView hidden="YES" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZN9-NU-vf5">
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                            <font key="font" metaFont="system"/>
+                                                            <tabViewItems>
+                                                                <tabViewItem label="File Inspector" identifier="" id="X1I-Ce-Wel">
+                                                                    <view key="view" id="ukg-wt-b7N">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="mo9-j6-2CW">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                                <connections>
+                                                                                    <segue destination="Kd2-E3-bt9" kind="embed" id="Zzv-2C-k4N"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="mo9-j6-2CW" firstAttribute="top" secondItem="ukg-wt-b7N" secondAttribute="top" id="BBz-xL-MEh"/>
+                                                                            <constraint firstItem="mo9-j6-2CW" firstAttribute="leading" secondItem="ukg-wt-b7N" secondAttribute="leading" id="ItT-O6-bLb"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="mo9-j6-2CW" secondAttribute="trailing" id="ZdI-Wu-S87"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="mo9-j6-2CW" secondAttribute="bottom" id="ldB-Dn-Nl6"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Directory Inspector" identifier="" id="mAC-07-FMu">
+                                                                    <view key="view" id="JtG-g4-toW">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="9PC-9f-yGr">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                                <connections>
+                                                                                    <segue destination="qKW-U2-QNi" kind="embed" id="233-Vz-DTh"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="9PC-9f-yGr" firstAttribute="top" secondItem="JtG-g4-toW" secondAttribute="top" id="LGA-uu-BhM"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="9PC-9f-yGr" secondAttribute="bottom" id="n3W-0W-O3N"/>
+                                                                            <constraint firstItem="9PC-9f-yGr" firstAttribute="leading" secondItem="JtG-g4-toW" secondAttribute="leading" id="nN0-CV-eUR"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="9PC-9f-yGr" secondAttribute="trailing" id="xXB-iL-Hdu"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Parser Inspector" identifier="" id="9hf-h6-cL0">
+                                                                    <view key="view" id="x7N-5L-XwG">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-iH-STO">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                                <connections>
+                                                                                    <segue destination="SdP-gU-hi2" kind="embed" id="GUw-W9-gn5"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="4Ih-iH-STO" firstAttribute="top" secondItem="x7N-5L-XwG" secondAttribute="top" id="PqF-Bj-EVh"/>
+                                                                            <constraint firstItem="4Ih-iH-STO" firstAttribute="leading" secondItem="x7N-5L-XwG" secondAttribute="leading" id="SkV-II-gSP"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="4Ih-iH-STO" secondAttribute="bottom" id="WfJ-8a-3XW"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="4Ih-iH-STO" secondAttribute="trailing" id="sOn-Xm-4qO"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Graph Inspector" identifier="" id="JNe-H0-93D">
+                                                                    <view key="view" id="frV-bC-hOK">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="50f-A1-nTP">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                                <connections>
+                                                                                    <segue destination="YU4-bp-XMX" kind="embed" id="pk8-w1-RVs"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstItem="50f-A1-nTP" firstAttribute="leading" secondItem="frV-bC-hOK" secondAttribute="leading" id="3e4-hS-6p6"/>
+                                                                            <constraint firstItem="50f-A1-nTP" firstAttribute="top" secondItem="frV-bC-hOK" secondAttribute="top" id="GXh-9m-bnb"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="50f-A1-nTP" secondAttribute="bottom" id="SSz-EV-kyd"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="50f-A1-nTP" secondAttribute="trailing" id="xhS-ox-36Y"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                                <tabViewItem label="Data Inspector" identifier="" id="pb4-nd-Mh0">
+                                                                    <view key="view" id="n0R-Yx-CJQ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <containerView translatesAutoresizingMaskIntoConstraints="NO" id="nty-nS-Phv">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
+                                                                                <connections>
+                                                                                    <segue destination="LQx-vr-bjc" kind="embed" id="x2a-Vb-eAk"/>
+                                                                                </connections>
+                                                                            </containerView>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="nty-nS-Phv" secondAttribute="bottom" id="Fjo-zY-qbI"/>
+                                                                            <constraint firstItem="nty-nS-Phv" firstAttribute="top" secondItem="n0R-Yx-CJQ" secondAttribute="top" id="KrJ-op-wSE"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="nty-nS-Phv" secondAttribute="trailing" id="LBU-b7-tmQ"/>
+                                                                            <constraint firstItem="nty-nS-Phv" firstAttribute="leading" secondItem="n0R-Yx-CJQ" secondAttribute="leading" id="RgI-2e-8rR"/>
+                                                                        </constraints>
+                                                                    </view>
+                                                                </tabViewItem>
+                                                            </tabViewItems>
+                                                        </tabView>
+                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ABg-kg-smT">
+                                                            <rect key="frame" x="74" y="203" width="103" height="16"/>
+                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="No File Selected" id="FMj-kS-CgV">
+                                                                <font key="font" usesAppearanceFont="YES"/>
+                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            </textFieldCell>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="ZN9-NU-vf5" secondAttribute="trailing" id="53W-al-4bX"/>
+                                                        <constraint firstItem="ZN9-NU-vf5" firstAttribute="top" secondItem="awH-0i-qyq" secondAttribute="top" id="HET-yc-5wR"/>
+                                                        <constraint firstItem="ABg-kg-smT" firstAttribute="centerX" secondItem="awH-0i-qyq" secondAttribute="centerX" id="KUP-VI-mTg"/>
+                                                        <constraint firstItem="ZN9-NU-vf5" firstAttribute="leading" secondItem="awH-0i-qyq" secondAttribute="leading" id="V9c-zY-Qo3"/>
+                                                        <constraint firstItem="ABg-kg-smT" firstAttribute="centerY" secondItem="awH-0i-qyq" secondAttribute="centerY" id="qUM-nF-oQL"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ZN9-NU-vf5" secondAttribute="bottom" id="wa5-fK-GCK"/>
+                                                    </constraints>
+                                                </customView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="BxA-Ut-wgF" secondAttribute="trailing" id="0Ei-vu-D9m"/>
+                                                <constraint firstAttribute="trailing" secondItem="awH-0i-qyq" secondAttribute="trailing" id="8dt-nn-jZ5"/>
+                                                <constraint firstItem="BxA-Ut-wgF" firstAttribute="leading" secondItem="Epg-mP-LOP" secondAttribute="leading" id="Gt6-7b-4CU"/>
+                                                <constraint firstItem="awH-0i-qyq" firstAttribute="leading" secondItem="Epg-mP-LOP" secondAttribute="leading" id="HBk-CO-8tB"/>
+                                                <constraint firstItem="hP0-yz-b3l" firstAttribute="top" secondItem="Epg-mP-LOP" secondAttribute="top" id="NcH-kt-PAo"/>
+                                                <constraint firstAttribute="trailing" secondItem="hP0-yz-b3l" secondAttribute="trailing" id="VZZ-FH-YIZ"/>
+                                                <constraint firstItem="hP0-yz-b3l" firstAttribute="leading" secondItem="Epg-mP-LOP" secondAttribute="leading" id="bj7-1i-sXW"/>
+                                                <constraint firstAttribute="bottom" secondItem="awH-0i-qyq" secondAttribute="bottom" id="kqP-78-dC0"/>
+                                                <constraint firstItem="BxA-Ut-wgF" firstAttribute="top" secondItem="hP0-yz-b3l" secondAttribute="bottom" id="sMO-nf-n8y"/>
+                                                <constraint firstItem="awH-0i-qyq" firstAttribute="top" secondItem="BxA-Ut-wgF" secondAttribute="bottom" id="yGc-yk-3Qt"/>
+                                            </constraints>
+                                        </customView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Epg-mP-LOP" secondAttribute="trailing" id="Ca5-7o-19f"/>
+                                        <constraint firstAttribute="bottom" secondItem="Epg-mP-LOP" secondAttribute="bottom" id="ERG-D8-FTB"/>
+                                        <constraint firstItem="Epg-mP-LOP" firstAttribute="leading" secondItem="BRo-TI-2nm" secondAttribute="leading" id="VS9-gz-kbC"/>
+                                        <constraint firstItem="Epg-mP-LOP" firstAttribute="top" secondItem="BRo-TI-2nm" secondAttribute="top" id="lKG-Hr-eVg"/>
+                                    </constraints>
+                                </view>
+                                <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </box>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="awH-0i-qyq">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                <subviews>
-                                    <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="ZN9-NU-vf5">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                        <font key="font" metaFont="system"/>
-                                        <tabViewItems>
-                                            <tabViewItem label="File Inspector" identifier="" id="X1I-Ce-Wel">
-                                                <view key="view" id="ukg-wt-b7N">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <containerView translatesAutoresizingMaskIntoConstraints="NO" id="mo9-j6-2CW">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                            <connections>
-                                                                <segue destination="Kd2-E3-bt9" kind="embed" id="Zzv-2C-k4N"/>
-                                                            </connections>
-                                                        </containerView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="mo9-j6-2CW" firstAttribute="top" secondItem="ukg-wt-b7N" secondAttribute="top" id="BBz-xL-MEh"/>
-                                                        <constraint firstItem="mo9-j6-2CW" firstAttribute="leading" secondItem="ukg-wt-b7N" secondAttribute="leading" id="ItT-O6-bLb"/>
-                                                        <constraint firstAttribute="trailing" secondItem="mo9-j6-2CW" secondAttribute="trailing" id="ZdI-Wu-S87"/>
-                                                        <constraint firstAttribute="bottom" secondItem="mo9-j6-2CW" secondAttribute="bottom" id="ldB-Dn-Nl6"/>
-                                                    </constraints>
-                                                </view>
-                                            </tabViewItem>
-                                            <tabViewItem label="Directory Inspector" identifier="" id="mAC-07-FMu">
-                                                <view key="view" id="JtG-g4-toW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <containerView translatesAutoresizingMaskIntoConstraints="NO" id="9PC-9f-yGr">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                            <connections>
-                                                                <segue destination="qKW-U2-QNi" kind="embed" id="233-Vz-DTh"/>
-                                                            </connections>
-                                                        </containerView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="9PC-9f-yGr" firstAttribute="top" secondItem="JtG-g4-toW" secondAttribute="top" id="LGA-uu-BhM"/>
-                                                        <constraint firstAttribute="bottom" secondItem="9PC-9f-yGr" secondAttribute="bottom" id="n3W-0W-O3N"/>
-                                                        <constraint firstItem="9PC-9f-yGr" firstAttribute="leading" secondItem="JtG-g4-toW" secondAttribute="leading" id="nN0-CV-eUR"/>
-                                                        <constraint firstAttribute="trailing" secondItem="9PC-9f-yGr" secondAttribute="trailing" id="xXB-iL-Hdu"/>
-                                                    </constraints>
-                                                </view>
-                                            </tabViewItem>
-                                            <tabViewItem label="Parser Inspector" identifier="" id="9hf-h6-cL0">
-                                                <view key="view" id="x7N-5L-XwG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <containerView translatesAutoresizingMaskIntoConstraints="NO" id="4Ih-iH-STO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                            <connections>
-                                                                <segue destination="SdP-gU-hi2" kind="embed" id="GUw-W9-gn5"/>
-                                                            </connections>
-                                                        </containerView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="4Ih-iH-STO" firstAttribute="top" secondItem="x7N-5L-XwG" secondAttribute="top" id="PqF-Bj-EVh"/>
-                                                        <constraint firstItem="4Ih-iH-STO" firstAttribute="leading" secondItem="x7N-5L-XwG" secondAttribute="leading" id="SkV-II-gSP"/>
-                                                        <constraint firstAttribute="bottom" secondItem="4Ih-iH-STO" secondAttribute="bottom" id="WfJ-8a-3XW"/>
-                                                        <constraint firstAttribute="trailing" secondItem="4Ih-iH-STO" secondAttribute="trailing" id="sOn-Xm-4qO"/>
-                                                    </constraints>
-                                                </view>
-                                            </tabViewItem>
-                                            <tabViewItem label="Graph Inspector" identifier="" id="JNe-H0-93D">
-                                                <view key="view" id="frV-bC-hOK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <containerView translatesAutoresizingMaskIntoConstraints="NO" id="50f-A1-nTP">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                            <connections>
-                                                                <segue destination="YU4-bp-XMX" kind="embed" id="pk8-w1-RVs"/>
-                                                            </connections>
-                                                        </containerView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="50f-A1-nTP" firstAttribute="leading" secondItem="frV-bC-hOK" secondAttribute="leading" id="3e4-hS-6p6"/>
-                                                        <constraint firstItem="50f-A1-nTP" firstAttribute="top" secondItem="frV-bC-hOK" secondAttribute="top" id="GXh-9m-bnb"/>
-                                                        <constraint firstAttribute="bottom" secondItem="50f-A1-nTP" secondAttribute="bottom" id="SSz-EV-kyd"/>
-                                                        <constraint firstAttribute="trailing" secondItem="50f-A1-nTP" secondAttribute="trailing" id="xhS-ox-36Y"/>
-                                                    </constraints>
-                                                </view>
-                                            </tabViewItem>
-                                            <tabViewItem label="Data Inspector" identifier="" id="pb4-nd-Mh0">
-                                                <view key="view" id="n0R-Yx-CJQ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <subviews>
-                                                        <containerView translatesAutoresizingMaskIntoConstraints="NO" id="nty-nS-Phv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
-                                                            <connections>
-                                                                <segue destination="LQx-vr-bjc" kind="embed" id="x2a-Vb-eAk"/>
-                                                            </connections>
-                                                        </containerView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="nty-nS-Phv" secondAttribute="bottom" id="Fjo-zY-qbI"/>
-                                                        <constraint firstItem="nty-nS-Phv" firstAttribute="top" secondItem="n0R-Yx-CJQ" secondAttribute="top" id="KrJ-op-wSE"/>
-                                                        <constraint firstAttribute="trailing" secondItem="nty-nS-Phv" secondAttribute="trailing" id="LBU-b7-tmQ"/>
-                                                        <constraint firstItem="nty-nS-Phv" firstAttribute="leading" secondItem="n0R-Yx-CJQ" secondAttribute="leading" id="RgI-2e-8rR"/>
-                                                    </constraints>
-                                                </view>
-                                            </tabViewItem>
-                                        </tabViewItems>
-                                    </tabView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ABg-kg-smT">
-                                        <rect key="frame" x="69" y="203" width="113" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Multiple Selection" id="FMj-kS-CgV">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ZN9-NU-vf5" secondAttribute="trailing" id="53W-al-4bX"/>
-                                    <constraint firstItem="ZN9-NU-vf5" firstAttribute="top" secondItem="awH-0i-qyq" secondAttribute="top" id="HET-yc-5wR"/>
-                                    <constraint firstItem="ABg-kg-smT" firstAttribute="centerX" secondItem="awH-0i-qyq" secondAttribute="centerX" id="KUP-VI-mTg"/>
-                                    <constraint firstItem="ZN9-NU-vf5" firstAttribute="leading" secondItem="awH-0i-qyq" secondAttribute="leading" id="V9c-zY-Qo3"/>
-                                    <constraint firstItem="ABg-kg-smT" firstAttribute="centerY" secondItem="awH-0i-qyq" secondAttribute="centerY" id="qUM-nF-oQL"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZN9-NU-vf5" secondAttribute="bottom" id="wa5-fK-GCK"/>
-                                </constraints>
-                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="hP0-yz-b3l" firstAttribute="leading" secondItem="dc5-zn-zmw" secondAttribute="leading" id="CUa-Dm-gph"/>
-                            <constraint firstItem="awH-0i-qyq" firstAttribute="leading" secondItem="dc5-zn-zmw" secondAttribute="leading" id="DG0-n3-oPI"/>
-                            <constraint firstAttribute="trailing" secondItem="hP0-yz-b3l" secondAttribute="trailing" id="Dg3-vQ-qgN"/>
-                            <constraint firstItem="awH-0i-qyq" firstAttribute="top" secondItem="BxA-Ut-wgF" secondAttribute="bottom" id="IAu-Lr-u1T"/>
-                            <constraint firstItem="BxA-Ut-wgF" firstAttribute="top" secondItem="hP0-yz-b3l" secondAttribute="bottom" id="M7A-5n-Vj0"/>
-                            <constraint firstAttribute="trailing" secondItem="BxA-Ut-wgF" secondAttribute="trailing" id="M9p-q4-GXg"/>
-                            <constraint firstItem="hP0-yz-b3l" firstAttribute="top" secondItem="dc5-zn-zmw" secondAttribute="top" id="aye-yG-AOk"/>
-                            <constraint firstAttribute="trailing" secondItem="awH-0i-qyq" secondAttribute="trailing" id="jpR-87-ccq"/>
-                            <constraint firstAttribute="bottom" secondItem="awH-0i-qyq" secondAttribute="bottom" id="q5w-u0-iw1"/>
-                            <constraint firstItem="BxA-Ut-wgF" firstAttribute="leading" secondItem="dc5-zn-zmw" secondAttribute="leading" id="zce-oH-NQZ"/>
+                            <constraint firstAttribute="trailing" secondItem="BUO-Hj-5gW" secondAttribute="trailing" id="30k-RN-WfN"/>
+                            <constraint firstItem="BUO-Hj-5gW" firstAttribute="leading" secondItem="dc5-zn-zmw" secondAttribute="leading" id="CAJ-sH-CKt"/>
+                            <constraint firstAttribute="bottom" secondItem="BUO-Hj-5gW" secondAttribute="bottom" id="K6F-Pu-dWh"/>
+                            <constraint firstItem="BUO-Hj-5gW" firstAttribute="top" secondItem="dc5-zn-zmw" secondAttribute="top" id="QRd-27-pBx"/>
                         </constraints>
                     </view>
                     <connections>
@@ -318,6 +345,7 @@
                         <outlet property="directoryInspectorButton" destination="KIR-5G-g1m" id="12W-4x-taf"/>
                         <outlet property="fileInspectorButton" destination="BQ0-S9-uBV" id="SlL-ym-sXl"/>
                         <outlet property="graphInspectorButton" destination="Bmt-F0-E5Q" id="XL6-Xo-EeJ"/>
+                        <outlet property="invalidSelectionLabel" destination="ABg-kg-smT" id="htq-jw-lyq"/>
                         <outlet property="parserInspectorButton" destination="IEC-jJ-05g" id="FrQ-BO-Q4x"/>
                         <outlet property="tabView" destination="ZN9-NU-vf5" id="G7B-5i-97a"/>
                     </connections>

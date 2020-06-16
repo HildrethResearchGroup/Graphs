@@ -93,7 +93,7 @@ class FileListViewController: NSViewController {
 					tableView.reloadData(forRowIndexes: IndexSet(0..<filesToShow.count), columnIndexes: IndexSet(integer: collectionNameColumnIndex))
 					
 					tableView.endUpdates()
-					updateRowSelectionLabel()
+					selectionDidChange()
 					return
 				}
 			}
@@ -101,11 +101,19 @@ class FileListViewController: NSViewController {
 		// If the user dictionary didn't include the old collection in the userInfo dictionary then don't animate
 		tableView.reloadData()
 		// The selection may change so update the row selection label
-		updateRowSelectionLabel()
+		selectionDidChange()
 	}
-	
-	/// Updates the text on the bottom bar's label to indicate how many items are in the selected directories and how many are selected
-	func updateRowSelectionLabel() {
+	/// Updates the model with a list of the currently selected files as well as updates the bottom bar's label.
+	func selectionDidChange() {
+		updateSelectionLabel()
+		guard let dataController = dataController else { return }
+		// Update the selected files, which will send out a notificaiton to update the setter.
+		let filesSelected = tableView.selectedRowIndexes
+			.map { dataController.filesDisplayed[$0] }
+		dataController.filesSelected = filesSelected
+	}
+	/// Updates the text on the bottom bar's label to indicate how many items are in the selected directories and how many are selected.
+	func updateSelectionLabel() {
 		let numberOfFiles = tableView.numberOfRows
 		let numberOfSelectedFiles = tableView.numberOfSelectedRows
 		let numberOfSelectedDirectories = dataController?.selectedDirectories.count ?? 0

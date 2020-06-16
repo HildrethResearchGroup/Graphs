@@ -89,7 +89,7 @@ extension FileListViewController: NSTableViewDelegate {
 	
 	func tableViewSelectionDidChange(_ notification: Notification) {
 		// Update the text at the bottom of the window which displays the number of selected files
-		updateRowSelectionLabel()
+		selectionDidChange()
 	}
 	
 	func tableView(_ tableView: NSTableView, sortDescriptorsDidChange oldDescriptors: [NSSortDescriptor]) {

@@ -9,7 +9,7 @@
 import CoreData
 
 /// A class that manages the directories for the app. Use this class to interact with the app's directories.
-class DirectoryController: NSObject {
+class DirectoryController {
 	/// The data controller which controlls the Core Data store.
 	private unowned let dataController: DataController
 	/// The root directory. All directories are decendents of this directory.
@@ -25,7 +25,6 @@ class DirectoryController: NSObject {
 	init(dataController: DataController) {
 		// The directory controller gets its data from a data controller, so a data controller must be provided to create a directory contoller
 		self.dataController = dataController
-		super.init()
 	}
 }
 
