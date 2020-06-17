@@ -35,7 +35,7 @@ class InspectorViewController: NSViewController, InspectorButtonGroup {
 	}
 	
 	func didSelect(button: InspectorButton) {
-		
+		selectionDidChange(nil)
 	}
 }
 
@@ -44,37 +44,82 @@ extension InspectorViewController {
 	func registerObservers() {
 		let notificationCenter = NotificationCenter.default
 		notificationCenter.addObserver(self,
-																	 selector: #selector(filesSelectedDidChange(_:)),
+																	 selector: #selector(selectionDidChange(_:)),
 																	 name: .filesSelectedDidChange,
+																	 object: nil)
+		notificationCenter.addObserver(self,
+																	 selector: #selector(selectionDidChange(_:)),
+																	 name: .directoriesSelectedDidChange,
 																	 object: nil)
 	}
 	
-	@objc func filesSelectedDidChange(_ notification: Notification) {
-		func updateData(for file: File?) {
-			invalidSelectionLabel.isHidden = file != nil
-			tabView.isHidden = file == nil
-			children.forEach { controller in
-				(controller as? InspectorSubViewController)?.file = file
-			}
+	@objc func selectionDidChange(_ notification: Notification?) {
+		func setLabel(text: String?) {
+			tabView.isHidden = text != nil
+			invalidSelectionLabel.stringValue = text ?? ""
 		}
 		
-		guard let files = DataController.shared?.filesSelected else {
-			invalidSelectionLabel.stringValue = "No File Selected"
-			updateData(for: nil)
+		let files = DataController.shared?.filesSelected
+		let directories = DataController.shared?.selectedDirectories
+		
+		guard let tabIdentifier = tabView.selectedTabViewItem?.identifier as? NSUserInterfaceItemIdentifier else {
+			setLabel(text: "No Tab Selected")
 			return
 		}
 		
-		switch files.count {
-		case 0:
-			invalidSelectionLabel.stringValue = "No File Selected"
-			updateData(for: nil)
-		case 1:
-			updateData(for: files.first!)
-		default:
-			invalidSelectionLabel.stringValue = "Multiple Selection"
-			updateData(for: nil)
+		func tabController<T: NSViewController>(ofType type: T.Type) -> T? {
+			return children.first { $0 is T } as? T
 		}
 		
+		switch tabIdentifier {
+		case .fileInspectorTab:
+			guard let controller = tabController(ofType: FileInspectorViewController.self) else {
+				break
+			}
+				
+			switch (files?.count, files?.first) {
+			case (nil, _), (0, _):
+				setLabel(text: "No File Selected")
+				controller.file = nil
+			case (1, let file):
+				setLabel(text: nil)
+				controller.file = file
+			default:
+				setLabel(text: "Multiple Files Selected")
+				controller.file = nil
+			}
+		case .directoryInspectorTab:
+			guard let controller = tabController(ofType: DirectoryInspectorViewController.self) else {
+				break
+			}
+			
+			switch (directories?.count, directories?.first) {
+				case (nil, _), (0, _):
+					setLabel(text: "No Directory Selected")
+					controller.directory = nil
+				case (1, let directory):
+					setLabel(text: nil)
+					controller.directory = directory
+				default:
+					setLabel(text: "Multiple Directories Selected")
+					controller.directory = nil
+			}
+		case .parserInspectorTab:
+			break
+		case .graphInspectorTab:
+			break
+		case .dataInspectorTab:
+			switch (files?.count, files?.first) {
+			case (nil, _), (0, _):
+				setLabel(text: "No File Selected")
+			case (1, _):
+				setLabel(text: nil)
+			default:
+				setLabel(text: "Multiple Files Selected")
+			}
+		default:
+			break
+		}
 	}
 }
 

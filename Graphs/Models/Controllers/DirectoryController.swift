@@ -18,6 +18,8 @@ class DirectoryController {
 	var selectedDirectories: [Directory] = [] {
 		didSet {
 			dataController.updateFilesDisplayed(animate: false)
+			NotificationCenter.default.post(name: .directoriesSelectedDidChange,
+																			object: self)
 		}
 	}
 	/// Creates a directory controller from a data controller.

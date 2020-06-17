@@ -188,7 +188,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                             <font key="font" metaFont="system"/>
                                                             <tabViewItems>
-                                                                <tabViewItem label="File Inspector" identifier="" id="X1I-Ce-Wel">
+                                                                <tabViewItem label="File Inspector" identifier="FileInspectorTab" id="X1I-Ce-Wel">
                                                                     <view key="view" id="ukg-wt-b7N">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -208,7 +208,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                 </tabViewItem>
-                                                                <tabViewItem label="Directory Inspector" identifier="" id="mAC-07-FMu">
+                                                                <tabViewItem label="Directory Inspector" identifier="DirectoryInspectorTab" id="mAC-07-FMu">
                                                                     <view key="view" id="JtG-g4-toW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,7 +228,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                 </tabViewItem>
-                                                                <tabViewItem label="Parser Inspector" identifier="" id="9hf-h6-cL0">
+                                                                <tabViewItem label="Parser Inspector" identifier="ParserInspectorTab" id="9hf-h6-cL0">
                                                                     <view key="view" id="x7N-5L-XwG">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,7 +248,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                 </tabViewItem>
-                                                                <tabViewItem label="Graph Inspector" identifier="" id="JNe-H0-93D">
+                                                                <tabViewItem label="Graph Inspector" identifier="GraphInspectorCell" id="JNe-H0-93D">
                                                                     <view key="view" id="frV-bC-hOK">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,7 +268,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                 </tabViewItem>
-                                                                <tabViewItem label="Data Inspector" identifier="" id="pb4-nd-Mh0">
+                                                                <tabViewItem label="Data Inspector" identifier="DataInspectorCell" id="pb4-nd-Mh0">
                                                                     <view key="view" id="n0R-Yx-CJQ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="421"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -425,7 +425,7 @@
                                                                 <outlet property="textField" destination="9Vf-iH-aK9" id="7z6-4P-Djh"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="FileInspectorCategoryOptionCell" id="KQh-bR-kOT" customClass="FileInspectorCategoryOptionCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="FileInspectorCategoryOptionCell" id="KQh-bR-kOT" customClass="InspectorCategoryOptionCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="38" width="242" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -464,7 +464,7 @@
                                                                 <outlet property="textField" destination="laL-tu-hQE" id="MO7-ob-Ofx"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="FileInspectorNameAndLocationCell" id="keE-9s-kKR" customClass="FileInspectorNameAndLocationCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="FileInspectorNameAndLocationCell" id="keE-9s-kKR" customClass="InspectorTwoTextFieldsCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="67" width="242" height="61"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -515,11 +515,11 @@
                                                                 <constraint firstItem="qe0-vA-dMA" firstAttribute="top" secondItem="j4a-bU-QFn" secondAttribute="bottom" constant="6" id="z0F-Wq-luB"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="nameTextField" destination="j4a-bU-QFn" id="iZT-jX-Ajg"/>
-                                                                <outlet property="pathTextField" destination="qe0-vA-dMA" id="9PN-gk-e1D"/>
+                                                                <outlet property="firstTextField" destination="j4a-bU-QFn" id="uku-t6-Sgn"/>
+                                                                <outlet property="secondTextField" destination="qe0-vA-dMA" id="f2C-ol-MsT"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="FileInspectorTemplatesCell" id="dVz-gd-zhh" customClass="FileInspectorTemplatesCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="FileInspectorTemplatesCell" id="dVz-gd-zhh" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="136" width="242" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -582,11 +582,11 @@
                                                                 <constraint firstAttribute="trailing" secondItem="nbN-4R-Y4H" secondAttribute="trailing" constant="2" id="znu-pv-Q9C"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="graphPopUpButton" destination="nTo-6s-QOs" id="gLb-lg-Gzs"/>
-                                                                <outlet property="parserPopUpButton" destination="nbN-4R-Y4H" id="UyR-xJ-ITC"/>
+                                                                <outlet property="firstPopUpButton" destination="nbN-4R-Y4H" id="TkG-lw-kST"/>
+                                                                <outlet property="secondPopUpButton" destination="nTo-6s-QOs" id="aod-n9-x8l"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="FileInspectorDetailsCell" id="GEb-71-rHM" customClass="FileInspectorDetailsCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="FileInspectorDetailsCell" id="GEb-71-rHM" customClass="InspectorTextViewCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="192" width="242" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -669,7 +669,7 @@
         <!--Directory Collection View Controller-->
         <scene sceneID="MHZ-48-mBz">
             <objects>
-                <viewController title="Directory Collection View Controller" id="qKW-U2-QNi" sceneMemberID="viewController">
+                <viewController title="Directory Collection View Controller" id="qKW-U2-QNi" customClass="DirectoryInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="C8j-x2-kkE">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -699,7 +699,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="FileInspectorSeparatorCell" id="laT-cR-cxS">
+                                                        <tableCellView identifier="DirectoryInspectorSeparatorCell" id="laT-cR-cxS">
                                                             <rect key="frame" x="4" y="4" width="242" height="1"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -714,7 +714,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="qs3-ht-4tu" secondAttribute="bottom" id="wbI-Q1-5eG"/>
                                                             </constraints>
                                                         </tableCellView>
-                                                        <tableCellView identifier="FileInspectorCategoryCell" id="Pj7-C8-npz">
+                                                        <tableCellView identifier="DirectoryInspectorCategoryCell" id="Pj7-C8-npz">
                                                             <rect key="frame" x="4" y="13" width="242" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -737,12 +737,134 @@
                                                                 <outlet property="textField" destination="sb2-KU-eMM" id="oTv-9p-4xB"/>
                                                             </connections>
                                                         </tableCellView>
+                                                        <tableCellView identifier="DirectoryInspectorNameAndLocationCell" id="qxr-On-vXB" customClass="InspectorTwoTextFieldsCell" customModule="Graphs" customModuleProvider="target">
+                                                            <rect key="frame" x="4" y="38" width="242" height="61"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P8f-HV-bAR">
+                                                                    <rect key="frame" x="42" y="43" width="40" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Name" id="YBt-Bi-Y6P">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tyH-bg-naG">
+                                                                    <rect key="frame" x="86" y="40" width="154" height="21"/>
+                                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ztn-nl-kXK">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jzL-2q-Gbc">
+                                                                    <rect key="frame" x="35" y="18" width="47" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Source" id="ygj-wC-oVN">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="pSi-Mf-nJV">
+                                                                    <rect key="frame" x="84" y="2" width="158" height="32"/>
+                                                                    <textFieldCell key="cell" selectable="YES" title="/Users/username/Documents/Data" id="fx0-Dy-LeC">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="pSi-Mf-nJV" secondAttribute="trailing" constant="2" id="4Pm-Ic-KRk"/>
+                                                                <constraint firstAttribute="bottom" secondItem="pSi-Mf-nJV" secondAttribute="bottom" constant="2" id="ETf-it-Zgq"/>
+                                                                <constraint firstItem="pSi-Mf-nJV" firstAttribute="leading" secondItem="tyH-bg-naG" secondAttribute="leading" id="KkC-nx-Tli"/>
+                                                                <constraint firstAttribute="trailing" secondItem="tyH-bg-naG" secondAttribute="trailing" constant="2" id="WRu-3e-5Rr"/>
+                                                                <constraint firstItem="P8f-HV-bAR" firstAttribute="firstBaseline" secondItem="tyH-bg-naG" secondAttribute="firstBaseline" id="c6c-Jh-hNb"/>
+                                                                <constraint firstItem="jzL-2q-Gbc" firstAttribute="firstBaseline" secondItem="pSi-Mf-nJV" secondAttribute="firstBaseline" id="c7F-dN-4je"/>
+                                                                <constraint firstAttribute="leading" secondItem="P8f-HV-bAR" secondAttribute="trailing" constant="-80" id="exk-ez-Hz2"/>
+                                                                <constraint firstItem="tyH-bg-naG" firstAttribute="leading" secondItem="P8f-HV-bAR" secondAttribute="trailing" constant="6" id="iXq-Wf-pZX"/>
+                                                                <constraint firstItem="pSi-Mf-nJV" firstAttribute="top" secondItem="tyH-bg-naG" secondAttribute="bottom" constant="6" id="nz4-0o-Ug9"/>
+                                                                <constraint firstItem="tyH-bg-naG" firstAttribute="top" secondItem="qxr-On-vXB" secondAttribute="top" id="oKd-Dm-o9b"/>
+                                                                <constraint firstItem="jzL-2q-Gbc" firstAttribute="trailing" secondItem="P8f-HV-bAR" secondAttribute="trailing" id="yFM-gE-fo2"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="firstTextField" destination="tyH-bg-naG" id="16T-XM-uZ4"/>
+                                                                <outlet property="secondTextField" destination="pSi-Mf-nJV" id="fFT-Ap-Nf9"/>
+                                                            </connections>
+                                                        </tableCellView>
+                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="S7d-aD-xjv" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
+                                                            <rect key="frame" x="4" y="107" width="242" height="48"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            <subviews>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eiO-p9-cCc">
+                                                                    <rect key="frame" x="39" y="30" width="43" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Parser" id="BKh-J3-dNF">
+                                                                        <font key="font" usesAppearanceFont="YES"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NsH-eO-jSj">
+                                                                    <rect key="frame" x="40" y="3" width="42" height="16"/>
+                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Graph" id="sVz-d7-xRl">
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                    </textFieldCell>
+                                                                </textField>
+                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VkB-yd-IhU">
+                                                                    <rect key="frame" x="84" y="24" width="159" height="25"/>
+                                                                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="j8c-eR-Sge" id="qZQ-f2-HJY">
+                                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <menu key="menu" id="FrE-RJ-FF3">
+                                                                            <items>
+                                                                                <menuItem title="Item 1" state="on" id="j8c-eR-Sge"/>
+                                                                                <menuItem title="Item 2" id="krh-rR-eci"/>
+                                                                                <menuItem title="Item 3" id="egm-vk-AMp"/>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpButtonCell>
+                                                                </popUpButton>
+                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-kL-06j">
+                                                                    <rect key="frame" x="84" y="-3" width="159" height="25"/>
+                                                                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MJN-Qu-wjl" id="jSI-hv-JaK">
+                                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <menu key="menu" id="dAq-KZ-wCe">
+                                                                            <items>
+                                                                                <menuItem title="Item 1" state="on" id="MJN-Qu-wjl"/>
+                                                                                <menuItem title="Item 2" id="MPP-wA-YMj"/>
+                                                                                <menuItem title="Item 3" id="gqC-GS-3gS"/>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpButtonCell>
+                                                                </popUpButton>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="VkB-yd-IhU" firstAttribute="leading" secondItem="eiO-p9-cCc" secondAttribute="trailing" constant="6" id="0ZZ-hR-c7s"/>
+                                                                <constraint firstAttribute="trailing" secondItem="VkB-yd-IhU" secondAttribute="trailing" constant="2" id="6Vo-MX-9Ed"/>
+                                                                <constraint firstItem="4tl-kL-06j" firstAttribute="leading" secondItem="VkB-yd-IhU" secondAttribute="leading" id="I7N-rr-5jd"/>
+                                                                <constraint firstItem="4tl-kL-06j" firstAttribute="firstBaseline" secondItem="NsH-eO-jSj" secondAttribute="firstBaseline" id="KCO-fr-XKl"/>
+                                                                <constraint firstAttribute="leading" secondItem="eiO-p9-cCc" secondAttribute="trailing" constant="-80" id="QM5-cZ-cwE"/>
+                                                                <constraint firstItem="4tl-kL-06j" firstAttribute="trailing" secondItem="VkB-yd-IhU" secondAttribute="trailing" id="VZn-Y1-ywi"/>
+                                                                <constraint firstItem="VkB-yd-IhU" firstAttribute="top" secondItem="S7d-aD-xjv" secondAttribute="top" id="XgD-UN-LE5"/>
+                                                                <constraint firstItem="eiO-p9-cCc" firstAttribute="firstBaseline" secondItem="VkB-yd-IhU" secondAttribute="firstBaseline" id="e6S-R4-RBd"/>
+                                                                <constraint firstAttribute="bottom" secondItem="4tl-kL-06j" secondAttribute="bottom" id="mLm-Wo-BG1"/>
+                                                                <constraint firstItem="4tl-kL-06j" firstAttribute="top" secondItem="VkB-yd-IhU" secondAttribute="bottom" constant="6" id="n3V-cI-MgG"/>
+                                                                <constraint firstItem="NsH-eO-jSj" firstAttribute="trailing" secondItem="eiO-p9-cCc" secondAttribute="trailing" id="tAH-4v-RnI"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="firstPopUpButton" destination="VkB-yd-IhU" id="J6G-Yq-OJ1"/>
+                                                                <outlet property="secondPopUpButton" destination="4tl-kL-06j" id="kJM-SN-gBS"/>
+                                                            </connections>
+                                                        </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="Kd2-E3-bt9" id="MMQ-cD-uV4"/>
-                                                <outlet property="delegate" destination="Kd2-E3-bt9" id="cai-yl-liz"/>
+                                                <outlet property="dataSource" destination="qKW-U2-QNi" id="LgW-t7-gad"/>
+                                                <outlet property="delegate" destination="qKW-U2-QNi" id="bXs-9R-zFh"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -765,6 +887,9 @@
                             <constraint firstAttribute="bottom" secondItem="W8E-KZ-d7N" secondAttribute="bottom" id="kZ2-ds-593"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outlineView" destination="DRz-u7-zEb" id="wdU-Ne-ohh"/>
+                    </connections>
                 </viewController>
                 <customObject id="piJ-Lr-Ddd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

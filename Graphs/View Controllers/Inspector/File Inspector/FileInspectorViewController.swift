@@ -33,22 +33,25 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 		case .templatesHeader:
 			view.textField?.stringValue = "Templates"
 		case .detailsHeader:
-			let view = view as! FileInspectorCategoryOptionCell
+			let view = view as! InspectorCategoryOptionCell
 			view.popUpButton.selectItem(at: showingCustomDetails ? 1: 0)
 			view.textField?.stringValue = "Details"
 		case .nameAndLocationBody:
-			let view = view as! FileInspectorNameAndLocationCell
+			let view = view as! InspectorTwoTextFieldsCell
 			guard let file = file else {
-				view.pathTextField.stringValue = ""
+				view.firstTextField.stringValue = ""
+				view.secondTextField.stringValue = ""
 				return
 			}
-			view.nameTextField.stringValue = file.displayName
-			view.pathTextField.stringValue = file.path?.absoluteString ?? ""
+			view.firstTextField.stringValue = file.displayName
+			view.secondTextField.stringValue = file.path?.absoluteString ?? ""
 		case .templatesBody:
 			// TODO: Select the correct templates
+			#warning("Not implemented")
 			return
 		case .detailsBody:
 			// TODO: Fill in the text view with the correct text
+			#warning("Not implemented")
 			return
 		}
 	}
@@ -58,7 +61,16 @@ extension FileInspectorViewController: InspectorSubViewController {
 	
 }
 
+// MARK: OutlineView Items
 enum FileInspectorItem: InspectorOutlineCellItem {
+	case separator
+	case nameAndLocationHeader
+	case nameAndLocationBody
+	case templatesHeader
+	case templatesBody
+	case detailsHeader
+	case detailsBody
+	
 	static var outline: [InspectorOutlineCell<Self>] {
 		return [.header(item: .nameAndLocationHeader,
 										children: [.body(item: .nameAndLocationBody)]),
@@ -69,14 +81,6 @@ enum FileInspectorItem: InspectorOutlineCellItem {
 						.header(item: .detailsHeader,
 										children: [.body(item: .detailsBody)])]
 	}
-	
-	case separator
-	case nameAndLocationHeader
-	case nameAndLocationBody
-	case templatesHeader
-	case templatesBody
-	case detailsHeader
-	case detailsBody
 	
 	var cellIdentifier: NSUserInterfaceItemIdentifier {
 		switch self {
