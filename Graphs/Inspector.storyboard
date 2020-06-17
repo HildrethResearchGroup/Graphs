@@ -966,7 +966,7 @@
                                                                 <outlet property="textField" destination="rc1-eK-ypB" id="L2h-vs-LKB"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorNameAndLocationCell" id="h1f-Ae-TGT">
+                                                        <tableCellView identifier="DirectoryInspectorNameAndLocationCell" id="h1f-Ae-TGT" customClass="InspectorTableCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="38" width="242" height="129"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1102,8 +1102,14 @@
                                                                 <constraint firstAttribute="leading" secondItem="cn9-Vo-n8w" secondAttribute="trailing" constant="-80" id="l53-mc-yE6"/>
                                                                 <constraint firstAttribute="trailing" secondItem="ncG-Lh-HWu" secondAttribute="trailing" id="psT-7m-0Gd"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="addItemButton" destination="ROI-dz-pcZ" id="49i-5p-owT"/>
+                                                                <outlet property="removeItemButton" destination="rf6-Sy-Fq1" id="472-o7-2lT"/>
+                                                                <outlet property="tableView" destination="NHf-Oq-UPh" id="myQ-Yy-zaP"/>
+                                                                <outlet property="textField" destination="eM3-kF-RhM" id="elu-68-LIb"/>
+                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorCategoryCell" id="9YA-hK-v6I">
+                                                        <tableCellView identifier="DirectoryInspectorCategoryCell" id="9YA-hK-v6I" customClass="InspectorCategoryButtonCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="175" width="242" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1121,8 +1127,11 @@
                                                                 <constraint firstItem="iRY-Lm-sFq" firstAttribute="leading" secondItem="9YA-hK-v6I" secondAttribute="leading" constant="16" id="dbq-rT-sJ5"/>
                                                                 <constraint firstAttribute="bottom" secondItem="iRY-Lm-sFq" secondAttribute="bottom" constant="2" id="vng-Vc-VIn"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="button" destination="iRY-Lm-sFq" id="dfY-Kn-ZOM"/>
+                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="0Xb-VY-Euc" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="0Xb-VY-Euc" customClass="InspectorTwoNumberFieldsOneOptionCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="200" width="242" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1189,8 +1198,15 @@
                                                                 <constraint firstItem="3g2-fc-pRR" firstAttribute="leading" secondItem="5V5-OZ-Zhf" secondAttribute="trailing" constant="2" id="o0W-8i-UZc"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Fas-23-xwU" secondAttribute="bottom" id="z8F-Xt-y8g"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="firstStepper" destination="3g2-fc-pRR" id="zfE-lR-JQs"/>
+                                                                <outlet property="firstTextField" destination="5V5-OZ-Zhf" id="l1C-OJ-xD6"/>
+                                                                <outlet property="popUpOption" destination="EIs-9T-pyH" id="3Cf-82-pyf"/>
+                                                                <outlet property="secondStepper" destination="Yx3-va-jDL" id="UzU-i8-j0k"/>
+                                                                <outlet property="secondTextField" destination="Fas-23-xwU" id="20D-xh-v5H"/>
+                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="3bF-XN-C0d" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="3bF-XN-C0d" customClass="InspectorTwoNumberFieldsOneOptionOnePopUpCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="256" width="242" height="75"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1284,8 +1300,16 @@
                                                                 <constraint firstItem="iK8-DS-db6" firstAttribute="leading" secondItem="wPn-gi-Ue9" secondAttribute="trailing" constant="6" id="qhy-A9-1bc"/>
                                                                 <constraint firstItem="Q5j-7A-Jmp" firstAttribute="top" secondItem="iK8-DS-db6" secondAttribute="bottom" constant="6" id="rCE-r2-Hq0"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="firstStepper" destination="Hod-E0-WyR" id="eZN-Bw-vJp"/>
+                                                                <outlet property="firstTextField" destination="iK8-DS-db6" id="alm-VG-byC"/>
+                                                                <outlet property="popUpButton" destination="IaS-gy-9gT" id="K3t-nI-JRW"/>
+                                                                <outlet property="popUpOption" destination="qG9-Z9-Ren" id="4pW-K1-AnV"/>
+                                                                <outlet property="secondStepper" destination="K19-DW-aFK" id="9Ck-x1-fux"/>
+                                                                <outlet property="secondTextField" destination="Q5j-7A-Jmp" id="I2Q-Ae-0e1"/>
+                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="Diu-BD-9QU" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="Diu-BD-9QU" customClass="InspectorOneNumberFieldOnePopUpCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="339" width="242" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1347,8 +1371,13 @@
                                                                 <constraint firstItem="exa-ez-qqr" firstAttribute="top" secondItem="Diu-BD-9QU" secondAttribute="top" id="xAI-22-7GF"/>
                                                                 <constraint firstAttribute="bottom" secondItem="cP3-dL-OuZ" secondAttribute="bottom" id="yDp-k3-8W2"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="popUpButton" destination="cP3-dL-OuZ" id="rbe-2d-47D"/>
+                                                                <outlet property="stepper" destination="h5y-qd-Uhs" id="efO-Pa-byS"/>
+                                                                <outlet property="textField" destination="exa-ez-qqr" id="zMk-Ix-ddf"/>
+                                                            </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="UhY-cv-7Iz" customClass="InspectorTwoPopUpButtonsCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="UhY-cv-7Iz" customClass="InspectorOneNumberFieldCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="395" width="242" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1383,6 +1412,10 @@
                                                                 <constraint firstItem="1A3-EU-Ifi" firstAttribute="leading" secondItem="wQN-zd-IVp" secondAttribute="trailing" constant="6" id="hNp-16-mrO"/>
                                                                 <constraint firstItem="1A3-EU-Ifi" firstAttribute="firstBaseline" secondItem="wQN-zd-IVp" secondAttribute="firstBaseline" id="vV0-sY-dLr"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="stepper" destination="K1e-kr-oPm" id="MT7-DN-yT6"/>
+                                                                <outlet property="textField" destination="1A3-EU-Ifi" id="ZXJ-ki-vyV"/>
+                                                            </connections>
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
