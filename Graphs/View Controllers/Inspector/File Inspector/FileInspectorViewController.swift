@@ -57,10 +57,6 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 	}
 }
 
-extension FileInspectorViewController: InspectorSubViewController {
-	
-}
-
 // MARK: OutlineView Items
 enum FileInspectorItem: InspectorOutlineCellItem {
 	case separator

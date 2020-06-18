@@ -105,9 +105,9 @@ extension InspectorViewController {
 					controller.directory = nil
 			}
 		case .parserInspectorTab:
-			break
+			setLabel(text: nil)
 		case .graphInspectorTab:
-			break
+			setLabel(text: nil)
 		case .dataInspectorTab:
 			switch (files?.count, files?.first) {
 			case (nil, _), (0, _):
@@ -121,8 +121,4 @@ extension InspectorViewController {
 			break
 		}
 	}
-}
-
-protocol InspectorSubViewController: class {
-	var file: File? { get set }
 }

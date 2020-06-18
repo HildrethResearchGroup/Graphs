@@ -66,4 +66,15 @@ extension NSUserInterfaceItemIdentifier {
 	static let directoryInspectorCategoryCell: Self = .init("DirectoryInspectorCategoryCell")
 	static let directoryInspectorNameAndLocationCell: Self = .init("DirectoryInspectorNameAndLocationCell")
 	static let directoryInspectorTemplatesCell: Self = .init("DirectoryInspectorTemplatesCell")
+	
+	static let parserInspectorSeparatorCell: Self = .init("ParserInspectorSeparatorCell")
+	static let parserInspectorCategoryCell: Self = .init("ParserInspectorCategoryCell")
+	static let parserInspectorTableCell: Self = .init("ParserInspectorTableCell")
+	static let parserInspectorCategoryCheckBoxCell: Self = .init("ParserInspectorCategoryCheckBoxCell")
+	static let parserInspectorExperimentDetailsCell: Self = .init("ParserInspectorExperimentDetailsCell")
+	static let parserInspectorHeaderCell: Self = .init("ParserInspectorHeaderCell")
+	static let parserInspectorDataCell: Self = .init("ParserInspectorDataCell")
+	static let parserInspectorFooterCell: Self = .init("ParserInspectorFooterCell")
+	
+	
 }

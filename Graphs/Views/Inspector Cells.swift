@@ -58,6 +58,7 @@ class InspectorOneNumberFieldOnePopUpCell: NSTableCellView {
 	@IBOutlet weak var popUpButton: NSPopUpButton!
 }
 
-class InspectorOneNumberFieldCell: NSTableCellView {
+class InspectorOneNumberFieldOneOptionCell: NSTableCellView {
 	@IBOutlet weak var stepper: NSStepper!
+	@IBOutlet weak var popUpOption: NSPopUpButton!
 }

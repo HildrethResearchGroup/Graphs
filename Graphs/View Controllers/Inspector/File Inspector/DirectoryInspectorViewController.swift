@@ -46,10 +46,7 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 	}
 }
 
-//extension DirectoryInspectorViewController: InspectorSubViewController {
-//
-//}
-
+// MARK: OutlineView Items
 enum DirectoryOutlineItem: InspectorOutlineCellItem {
 	case seperator
 	case nameAndLocationHeader

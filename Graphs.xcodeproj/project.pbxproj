@@ -19,6 +19,8 @@
 		5A34A20E24976BA00001CD1A /* Inspector Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20D24976BA00001CD1A /* Inspector Cells.swift */; };
 		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
 		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
+		5A3FC6E6249B0249008E54CA /* ParserInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3FC6E5249B0249008E54CA /* ParserInspectorViewController.swift */; };
+		5A3FC6E9249B0D71008E54CA /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3FC6E7249B0D71008E54CA /* Parser.swift */; };
 		5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */; };
 		5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */; };
 		5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */; };
@@ -75,6 +77,8 @@
 		5A34A20D24976BA00001CD1A /* Inspector Cells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Inspector Cells.swift"; sourceTree = "<group>"; };
 		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
+		5A3FC6E5249B0249008E54CA /* ParserInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserInspectorViewController.swift; sourceTree = "<group>"; };
+		5A3FC6E7249B0D71008E54CA /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryInspectorViewController.swift; sourceTree = "<group>"; };
 		5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+DragDrop.swift"; sourceTree = "<group>"; };
 		5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryPasteboardItem.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 			children = (
 				5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */,
 				5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */,
+				5A3FC6E5249B0249008E54CA /* ParserInspectorViewController.swift */,
 			);
 			path = "File Inspector";
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 		5A73E52F24531D0200450137 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				5A3FC6E7249B0D71008E54CA /* Parser.swift */,
 				5A73E51D2452A78F00450137 /* DirectoryItem.swift */,
 				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51F2452A78F00450137 /* Directory.swift */,
@@ -426,6 +432,7 @@
 				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
 				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
 				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,
+				5A3FC6E6249B0249008E54CA /* ParserInspectorViewController.swift in Sources */,
 				5AF83783249482F4002BF370 /* SortCache.swift in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
 				5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */,
@@ -443,6 +450,7 @@
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
 				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
+				5A3FC6E9249B0D71008E54CA /* Parser.swift in Sources */,
 				5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */,
 				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
 				5A73E5212452A78F00450137 /* File.swift in Sources */,

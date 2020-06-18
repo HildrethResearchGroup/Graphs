@@ -362,7 +362,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRa-Zd-xYx">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRa-Zd-xYx">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="VWu-d0-bha">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
@@ -646,7 +646,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="HEe-Q4-dqr">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -674,7 +674,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8E-KZ-d7N">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W8E-KZ-d7N">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="N8D-YA-GXk">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
@@ -875,7 +875,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="zSw-gb-TbK">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -898,12 +898,12 @@
         <!--Parser Inspector View Controller-->
         <scene sceneID="NgN-AT-Ofv">
             <objects>
-                <viewController title="Parser Inspector View Controller" id="SdP-gU-hi2" sceneMemberID="viewController">
+                <viewController title="Parser Inspector View Controller" id="SdP-gU-hi2" customClass="ParserInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Dow-Nh-zjH">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9n-0s-bQN">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="25" horizontalPageScroll="10" verticalLineScroll="25" verticalPageScroll="10" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9n-0s-bQN">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                                 <clipView key="contentView" copiesOnScroll="NO" id="yvU-2I-rWS">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
@@ -928,7 +928,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <tableCellView identifier="DirectoryInspectorSeparatorCell" id="hQQ-Qa-WY6">
+                                                        <tableCellView identifier="ParserInspectorSeparatorCell" id="hQQ-Qa-WY6">
                                                             <rect key="frame" x="4" y="4" width="242" height="1"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -943,12 +943,12 @@
                                                                 <constraint firstAttribute="bottom" secondItem="VJ3-Xw-K89" secondAttribute="bottom" id="p10-co-QLN"/>
                                                             </constraints>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorCategoryCell" id="TXQ-mH-Mpw">
+                                                        <tableCellView identifier="ParserInspectorCategoryCell" id="TXQ-mH-Mpw">
                                                             <rect key="frame" x="4" y="13" width="242" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="rc1-eK-ypB">
-                                                                    <rect key="frame" x="14" y="1" width="228" height="16"/>
+                                                                    <rect key="frame" x="0.0" y="1" width="242" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Category" id="JVK-rd-wYF">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -957,7 +957,7 @@
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="rc1-eK-ypB" firstAttribute="leading" secondItem="TXQ-mH-Mpw" secondAttribute="leading" constant="16" id="Hdt-fW-oiT"/>
+                                                                <constraint firstItem="rc1-eK-ypB" firstAttribute="leading" secondItem="TXQ-mH-Mpw" secondAttribute="leading" constant="2" id="Hdt-fW-oiT"/>
                                                                 <constraint firstAttribute="trailing" secondItem="rc1-eK-ypB" secondAttribute="trailing" constant="2" id="gOB-pj-x1W"/>
                                                                 <constraint firstAttribute="bottom" secondItem="rc1-eK-ypB" secondAttribute="bottom" constant="1" id="l2l-fv-OFO"/>
                                                                 <constraint firstItem="rc1-eK-ypB" firstAttribute="top" secondItem="TXQ-mH-Mpw" secondAttribute="top" id="ymO-Bt-b1D"/>
@@ -966,7 +966,7 @@
                                                                 <outlet property="textField" destination="rc1-eK-ypB" id="L2h-vs-LKB"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorNameAndLocationCell" id="h1f-Ae-TGT" customClass="InspectorTableCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorTableCell" id="h1f-Ae-TGT" customClass="InspectorTableCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="38" width="242" height="129"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1089,6 +1089,7 @@
                                                                         </constraints>
                                                                     </view>
                                                                     <color key="borderColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="fillColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                 </box>
                                                             </subviews>
                                                             <constraints>
@@ -1109,7 +1110,7 @@
                                                                 <outlet property="textField" destination="eM3-kF-RhM" id="elu-68-LIb"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorCategoryCell" id="9YA-hK-v6I" customClass="InspectorCategoryButtonCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorCategoryCheckBoxCell" id="9YA-hK-v6I" customClass="InspectorCategoryButtonCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="175" width="242" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1131,7 +1132,7 @@
                                                                 <outlet property="button" destination="iRY-Lm-sFq" id="dfY-Kn-ZOM"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="0Xb-VY-Euc" customClass="InspectorTwoNumberFieldsOneOptionCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorExperimentDetailsCell" id="0Xb-VY-Euc" customClass="InspectorTwoNumberFieldsOneOptionCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="200" width="242" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1145,7 +1146,7 @@
                                                                 </textField>
                                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EIs-9T-pyH">
                                                                     <rect key="frame" x="5" y="-3" width="138" height="25"/>
-                                                                    <popUpButtonCell key="cell" type="push" title="Number of Lines" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="ljg-5j-nSJ" id="CJo-LC-Ydn">
+                                                                    <popUpButtonCell key="cell" type="push" title="Number of Lines" bezelStyle="rounded" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="ljg-5j-nSJ" id="CJo-LC-Ydn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                         <menu key="menu" id="lcd-Jc-W9T">
@@ -1206,7 +1207,7 @@
                                                                 <outlet property="secondTextField" destination="Fas-23-xwU" id="20D-xh-v5H"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="3bF-XN-C0d" customClass="InspectorTwoNumberFieldsOneOptionOnePopUpCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorHeaderCell" id="3bF-XN-C0d" customClass="InspectorTwoNumberFieldsOneOptionOnePopUpCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="256" width="242" height="75"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1220,7 +1221,7 @@
                                                                 </textField>
                                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qG9-Z9-Ren">
                                                                     <rect key="frame" x="5" y="24" width="138" height="25"/>
-                                                                    <popUpButtonCell key="cell" type="push" title="Number of Lines" bezelStyle="rounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="RW0-9U-uch" id="YCi-Iu-i1l">
+                                                                    <popUpButtonCell key="cell" type="push" title="Number of Lines" bezelStyle="rounded" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="RW0-9U-uch" id="YCi-Iu-i1l">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                         <menu key="menu" id="ujC-SI-uln">
@@ -1309,7 +1310,7 @@
                                                                 <outlet property="secondTextField" destination="Q5j-7A-Jmp" id="I2Q-Ae-0e1"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="Diu-BD-9QU" customClass="InspectorOneNumberFieldOnePopUpCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorDataCell" id="Diu-BD-9QU" customClass="InspectorOneNumberFieldOnePopUpCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="339" width="242" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
@@ -1377,18 +1378,10 @@
                                                                 <outlet property="textField" destination="exa-ez-qqr" id="zMk-Ix-ddf"/>
                                                             </connections>
                                                         </tableCellView>
-                                                        <tableCellView identifier="DirectoryInspectorTemplatesCell" id="UhY-cv-7Iz" customClass="InspectorOneNumberFieldCell" customModule="Graphs" customModuleProvider="target">
+                                                        <tableCellView identifier="ParserInspectorFooterCell" id="UhY-cv-7Iz" customClass="InspectorOneNumberFieldOneOptionCell" customModule="Graphs" customModuleProvider="target">
                                                             <rect key="frame" x="4" y="395" width="242" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wQN-zd-IVp">
-                                                                    <rect key="frame" x="60" y="3" width="82" height="16"/>
-                                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Starting Line" id="saM-7m-dYx">
-                                                                        <font key="font" usesAppearanceFont="YES"/>
-                                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
-                                                                </textField>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1A3-EU-Ifi">
                                                                     <rect key="frame" x="146" y="0.0" width="79" height="21"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="gMs-vy-13S">
@@ -1401,18 +1394,32 @@
                                                                     <rect key="frame" x="224" y="-3" width="19" height="28"/>
                                                                     <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="Lon-RV-OLF"/>
                                                                 </stepper>
+                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zyS-5e-HUh">
+                                                                    <rect key="frame" x="5" y="-3" width="138" height="25"/>
+                                                                    <popUpButtonCell key="cell" type="push" title="Number of Lines" bezelStyle="rounded" alignment="right" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="SsT-Gb-Wco" id="n3q-lZ-ys8">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                        <menu key="menu" id="UTd-Sw-2eL">
+                                                                            <items>
+                                                                                <menuItem title="Starting Line" id="B4W-XU-bnm"/>
+                                                                                <menuItem title="Number of Lines" state="on" id="SsT-Gb-Wco"/>
+                                                                            </items>
+                                                                        </menu>
+                                                                    </popUpButtonCell>
+                                                                </popUpButton>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="K1e-kr-oPm" firstAttribute="leading" secondItem="1A3-EU-Ifi" secondAttribute="trailing" constant="2" id="Eea-Pl-Czj"/>
                                                                 <constraint firstAttribute="trailing" secondItem="K1e-kr-oPm" secondAttribute="trailing" constant="2" id="Iu2-KE-N7V"/>
+                                                                <constraint firstItem="zyS-5e-HUh" firstAttribute="firstBaseline" secondItem="1A3-EU-Ifi" secondAttribute="firstBaseline" id="IvP-MS-enL"/>
                                                                 <constraint firstItem="1A3-EU-Ifi" firstAttribute="top" secondItem="UhY-cv-7Iz" secondAttribute="top" id="NJ1-lw-J9Q"/>
                                                                 <constraint firstItem="K1e-kr-oPm" firstAttribute="centerY" secondItem="1A3-EU-Ifi" secondAttribute="centerY" id="XdE-5H-nSt"/>
                                                                 <constraint firstAttribute="bottom" secondItem="1A3-EU-Ifi" secondAttribute="bottom" id="as3-Ss-bXp"/>
-                                                                <constraint firstAttribute="leading" secondItem="wQN-zd-IVp" secondAttribute="trailing" constant="-140" id="elT-JQ-unp"/>
-                                                                <constraint firstItem="1A3-EU-Ifi" firstAttribute="leading" secondItem="wQN-zd-IVp" secondAttribute="trailing" constant="6" id="hNp-16-mrO"/>
-                                                                <constraint firstItem="1A3-EU-Ifi" firstAttribute="firstBaseline" secondItem="wQN-zd-IVp" secondAttribute="firstBaseline" id="vV0-sY-dLr"/>
+                                                                <constraint firstItem="1A3-EU-Ifi" firstAttribute="leading" secondItem="zyS-5e-HUh" secondAttribute="trailing" constant="6" id="hzP-Og-KmG"/>
+                                                                <constraint firstItem="zyS-5e-HUh" firstAttribute="trailing" secondItem="UhY-cv-7Iz" secondAttribute="leading" constant="140" id="v2b-Rv-fNb"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="popUpOption" destination="zyS-5e-HUh" id="ZAa-o9-geU"/>
                                                                 <outlet property="stepper" destination="K1e-kr-oPm" id="MT7-DN-yT6"/>
                                                                 <outlet property="textField" destination="1A3-EU-Ifi" id="ZXJ-ki-vyV"/>
                                                             </connections>
@@ -1421,8 +1428,8 @@
                                                 </tableColumn>
                                             </tableColumns>
                                             <connections>
-                                                <outlet property="dataSource" destination="qKW-U2-QNi" id="ptq-Ha-zqO"/>
-                                                <outlet property="delegate" destination="qKW-U2-QNi" id="97d-5e-j9f"/>
+                                                <outlet property="dataSource" destination="SdP-gU-hi2" id="uid-Cp-Rn5"/>
+                                                <outlet property="delegate" destination="SdP-gU-hi2" id="vN4-cg-Wcf"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -1433,7 +1440,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="I69-0v-DNW">
-                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                    <rect key="frame" x="-100" y="-100" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -1445,6 +1452,9 @@
                             <constraint firstItem="H9n-0s-bQN" firstAttribute="top" secondItem="Dow-Nh-zjH" secondAttribute="top" id="PpF-9L-gFN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outlineView" destination="wQD-On-M1x" id="Edi-O4-Z3k"/>
+                    </connections>
                 </viewController>
                 <customObject id="0nK-X6-zJe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
