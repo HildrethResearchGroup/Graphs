@@ -35,7 +35,7 @@ extension File {
 	}
 	
 	var fileAttributes: [FileAttributeKey: Any]? {
-		guard let url = path?.absoluteString.dropFirst(7) else { return nil }
+		guard let url = path?.path else { return nil }
 		
 		return try? FileManager.default.attributesOfItem(atPath: String(url))
 	}
