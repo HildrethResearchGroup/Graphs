@@ -144,6 +144,7 @@
 			children = (
 				5A34A20424973DBA0001CD1A /* InspectorViewController.swift */,
 				5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */,
+				5A4899D224BD5AF200822B80 /* Data Inspector */,
 				5ACFC52924BD3268006D386E /* Directory Inspector */,
 				5A34A2062497486F0001CD1A /* File Inspector */,
 			);
@@ -157,6 +158,13 @@
 				5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */,
 			);
 			path = "File Inspector";
+			sourceTree = "<group>";
+		};
+		5A4899D224BD5AF200822B80 /* Data Inspector */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Inspector";
 			sourceTree = "<group>";
 		};
 		5A69FB37245BD619003E2F56 /* Source List */ = {
