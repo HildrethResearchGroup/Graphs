@@ -109,13 +109,20 @@ extension InspectorViewController {
 		case .graphInspectorTab:
 			break
 		case .dataInspectorTab:
+			guard let controller = tabController(ofType: DataInspectorViewController.self) else {
+				break
+			}
+			
 			switch (files?.count, files?.first) {
 			case (nil, _), (0, _):
 				setLabel(text: "No File Selected")
-			case (1, _):
+				controller.file = nil
+			case (1, let file):
 				setLabel(text: nil)
+				controller.file = file
 			default:
 				setLabel(text: "Multiple Files Selected")
+				controller.file = nil
 			}
 		default:
 			break
