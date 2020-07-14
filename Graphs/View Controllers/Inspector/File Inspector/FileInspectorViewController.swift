@@ -101,3 +101,24 @@ enum FileInspectorItem: InspectorOutlineCellItem {
 	
 	
 }
+
+// MARK: Helpers
+extension FileInspectorViewController {
+	var dataController: DataController? {
+		return DataController.shared
+	}
+}
+
+// MARK: Notifications
+extension FileInspectorViewController {
+	func registerObservers() {
+		NotificationCenter.default.addObserver(self,
+																					 selector: #selector(reloadData(_:)),
+																					 name: .fileRenamed,
+																					 object: nil)
+	}
+	
+	@objc func reloadData(_ notification: Notification) {
+		outlineView.reloadData()
+	}
+}

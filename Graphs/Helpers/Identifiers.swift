@@ -26,6 +26,8 @@ extension Notification.Name {
 	static let fileListFinishedWork = Notification.Name(rawValue: "fileListFinishedWord")
 	/// A notification that is fired when a directory is renamed.
 	static let directoryRenamed = Notification.Name(rawValue: "directoryRenamed")
+	/// A notification that is fired when a file is renamed.
+	static let fileRenamed = Notification.Name(rawValue: "fileRenamed")
 }
 
 // MARK: UserInfo keys

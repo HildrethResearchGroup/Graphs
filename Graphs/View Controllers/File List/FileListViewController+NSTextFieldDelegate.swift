@@ -30,9 +30,8 @@ extension FileListViewController: NSTextFieldDelegate {
 			print("[WARNING] NSOutlineView could not find the row of the editing text field.")
 			return
 		}
-		let file = dataController?.filesDisplayed[row]
-		
-		file?.customDisplayName = newName
-		dataController?.setNeedsSaved()
+		if let file = dataController?.filesDisplayed[row] {
+			dataController?.rename(file: file, to: newName)
+		}
 	}
 }

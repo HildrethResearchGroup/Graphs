@@ -141,4 +141,14 @@ extension FileController {
 	func files(in directories: [Directory]) -> [File] {
 		return files(in: directories, knownNoDescendents: false)
 	}
+	/// Renames the given file.
+	/// - Parameters:
+	///   - file: The file to rename.
+	///   - newName: The new name of the file.
+	func rename(file: File, to newName: String?) {
+		file.customDisplayName = newName
+		dataController.setNeedsSaved()
+		NotificationCenter.default.post(name: .fileRenamed, object: file)
+		updateFilesToShow(animate: true)
+	}
 }

@@ -231,4 +231,11 @@ extension DataController {
 	func updateFilesDisplayed(animate: Bool) {
 		fileController.updateFilesToShow(animate: animate)
 	}
+	/// Renames the given file.
+	/// - Parameters:
+	///   - file: The file to rename.
+	///   - newName: The new name of the file.
+	func rename(file: File, to newName: String?) {
+		fileController.rename(file: file, to: newName)
+	}
 }

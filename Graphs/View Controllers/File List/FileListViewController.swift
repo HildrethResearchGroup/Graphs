@@ -27,82 +27,6 @@ class FileListViewController: NSViewController {
 		// Allows dragging files to the trash can to delete them
 		tableView.setDraggingSourceOperationMask([.delete], forLocal: false)
 	}
-	
-	func registerObservers() {
-		let notificationCenter = NotificationCenter.default
-		// Needs to be notified when the directory selection has changed in order to update the files to show
-		notificationCenter.addObserver(self,
-																	 selector: #selector(filesToShowDidChange(_:)),
-																	 name: .filesDisplayedDidChange,
-																	 object: nil)
-		// Needs to be notified when the file list is being updated on another thread to show the progress indicator
-		notificationCenter.addObserver(self,
-																	 selector: #selector(fileListStartedWork(_:)),
-																	 name: .fileListStartedWork,
-																	 object: nil)
-		notificationCenter.addObserver(self,
-																	 selector: #selector(fileListFinishedWork(_:)),
-																	 name: .fileListFinishedWork,
-																	 object: nil)
-	}
-	
-	@objc func fileListStartedWork(_ notification: Notification) {
-		fileListIsUpdating = true
-		tableView.reloadData()
-		progressIndicator.startAnimation(self)
-	}
-	
-	@objc func fileListFinishedWork(_ notification: Notification) {
-		fileListIsUpdating = false
-		tableView.reloadData()
-		progressIndicator.stopAnimation(self)
-	}
-	
-	@objc func filesToShowDidChange(_ notification: Notification) {
-		if let userInfo = notification.userInfo as? [String: Any] {
-			if let oldValue = userInfo[UserInfoKeys.oldValue] as? [File] {
-				if let filesToShow = dataController?.filesDisplayed {
-					let diff = filesToShow.difference(from: oldValue)
-					
-					let removalIndicies = diff.compactMap { change -> Int? in
-						switch change {
-						case .insert(offset: _, element: _, associatedWith: _):
-							return nil
-						case .remove(offset: let offset, element: _, associatedWith: _):
-							return offset
-						}
-					}
-					
-					let insertionIndicies = diff.compactMap { change -> Int? in
-						switch change {
-						case .insert(offset: let offset, element: _, associatedWith: _):
-							return offset
-						case .remove(offset: _, element: _, associatedWith: _):
-							return nil
-						}
-					}
-					
-					tableView.beginUpdates()
-					tableView.removeRows(at: IndexSet(removalIndicies),
-															 withAnimation: .slideDown)
-					tableView.insertRows(at: IndexSet(insertionIndicies),
-															 withAnimation: .slideDown)
-					
-					let collectionNameColumnIndex = tableView.column(withIdentifier: .fileCollectionNameColumn)
-					// When moving files to a new directory the collection name may change, so reload that column
-					tableView.reloadData(forRowIndexes: IndexSet(0..<filesToShow.count), columnIndexes: IndexSet(integer: collectionNameColumnIndex))
-					
-					tableView.endUpdates()
-					selectionDidChange()
-					return
-				}
-			}
-		}
-		// If the user dictionary didn't include the old collection in the userInfo dictionary then don't animate
-		tableView.reloadData()
-		// The selection may change so update the row selection label
-		selectionDidChange()
-	}
 	/// Updates the model with a list of the currently selected files as well as updates the bottom bar's label.
 	func selectionDidChange() {
 		updateSelectionLabel()
@@ -191,5 +115,113 @@ extension Collection where Element: Hashable, Index == Int {
 		}
 		
 		return indicies
+	}
+}
+
+// MARK: Notifications
+extension FileListViewController {
+	func registerObservers() {
+		let notificationCenter = NotificationCenter.default
+		// Needs to be notified when the directory selection has changed in order to update the files to show
+		notificationCenter.addObserver(self,
+																	 selector: #selector(filesToShowDidChange(_:)),
+																	 name: .filesDisplayedDidChange,
+																	 object: nil)
+		// Needs to be notified when the file list is being updated on another thread to show the progress indicator
+		notificationCenter.addObserver(self,
+																	 selector: #selector(fileListStartedWork(_:)),
+																	 name: .fileListStartedWork,
+																	 object: nil)
+		notificationCenter.addObserver(self,
+																	 selector: #selector(fileListFinishedWork(_:)),
+																	 name: .fileListFinishedWork,
+																	 object: nil)
+	}
+	
+	@objc func fileRenamed(_ notification: Notification) {
+		guard let file = notification.object as? File else {
+			print("[WARNING] fileRenamed notification did not have an object of type File.")
+			return
+		}
+		guard let row = dataController?.filesDisplayed.firstIndex(of: file) else {
+			return
+		}
+		
+		let column = tableView.column(withIdentifier: .fileNameColumn)
+		
+		tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integer: column))
+	}
+	
+	@objc func fileListStartedWork(_ notification: Notification) {
+		fileListIsUpdating = true
+		tableView.reloadData()
+		progressIndicator.startAnimation(self)
+	}
+	
+	@objc func fileListFinishedWork(_ notification: Notification) {
+		fileListIsUpdating = false
+		tableView.reloadData()
+		progressIndicator.stopAnimation(self)
+	}
+	
+	@objc func filesToShowDidChange(_ notification: Notification) {
+		let initiallySelectedFiles = dataController?.filesSelected
+		
+		func updateSelection() {
+			defer {
+				selectionDidChange()
+			}
+			
+			guard let initial = initiallySelectedFiles else { return }
+			
+			guard let indicies = dataController?.filesDisplayed.indicies(of: initial) else { return }
+			
+			tableView.selectRowIndexes(indicies, byExtendingSelection: false)
+		}
+		
+		if let userInfo = notification.userInfo as? [String: Any] {
+			if let oldValue = userInfo[UserInfoKeys.oldValue] as? [File] {
+				if let filesToShow = dataController?.filesDisplayed {
+					let diff = filesToShow.difference(from: oldValue)
+					
+					let removalIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: _, element: _, associatedWith: _):
+							return nil
+						case .remove(offset: let offset, element: _, associatedWith: _):
+							return offset
+						}
+					}
+					
+					let insertionIndicies = diff.compactMap { change -> Int? in
+						switch change {
+						case .insert(offset: let offset, element: _, associatedWith: _):
+							return offset
+						case .remove(offset: _, element: _, associatedWith: _):
+							return nil
+						}
+					}
+					
+					tableView.beginUpdates()
+					tableView.removeRows(at: IndexSet(removalIndicies),
+															 withAnimation: .slideDown)
+					tableView.insertRows(at: IndexSet(insertionIndicies),
+															 withAnimation: .slideDown)
+					
+					let collectionNameColumnIndex = tableView.column(withIdentifier: .fileCollectionNameColumn)
+					// When moving files to a new directory the collection name may change, so reload that column
+					tableView.reloadData(forRowIndexes: IndexSet(0..<filesToShow.count), columnIndexes: IndexSet(integer: collectionNameColumnIndex))
+					
+					tableView.endUpdates()
+					updateSelection()
+					return
+				}
+			}
+		}
+		
+		// If the user dictionary didn't include the old collection in the userInfo dictionary then don't animate
+		tableView.reloadData()
+		// The selection may change so update the row selection label
+		updateSelection()
 	}
 }
