@@ -44,7 +44,7 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 				return
 			}
 			view.firstTextField.stringValue = directory.displayName
-			view.secondTextField.stringValue = directory.path?.absoluteString ?? ""
+			view.secondTextField.stringValue = directory.path?.path ?? ""
 		case .templatesHeader:
 			view.textField?.stringValue = "Default Templates"
 		case .templatesBody:

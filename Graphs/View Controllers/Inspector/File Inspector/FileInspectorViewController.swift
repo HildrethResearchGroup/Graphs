@@ -44,7 +44,7 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 				return
 			}
 			view.firstTextField.stringValue = file.displayName
-			view.secondTextField.stringValue = file.path?.absoluteString ?? ""
+			view.secondTextField.stringValue = file.path?.path ?? ""
 		case .templatesBody:
 			// TODO: Select the correct templates
 			#warning("Not implemented")
