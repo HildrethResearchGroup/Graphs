@@ -68,6 +68,7 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	}
 	
 	override func viewDidLoad() {
+		super.viewDidLoad()
 		Item.defaultExpandedCells.forEach {
 			primaryOutlineView?.expandItem(index(for: $0))
 		}

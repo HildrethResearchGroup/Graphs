@@ -184,6 +184,13 @@ extension DataController {
 	func remove(directory: Directory) {
 		directoryController.remove(directory: directory)
 	}
+	/// Renames a directory.
+	/// - Parameters:
+	///   - directory: The directory to rename.
+	///   - newName: The new name of the directory.
+	func rename(directory: Directory, to newName: String?) {
+		directoryController.rename(directory: directory, to: newName)
+	}
 }
 
 // MARK: File Interface

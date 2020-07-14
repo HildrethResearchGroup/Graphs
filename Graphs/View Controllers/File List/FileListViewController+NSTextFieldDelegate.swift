@@ -12,7 +12,7 @@ extension FileListViewController: NSTextFieldDelegate {
 	/// Called when an NSTextField ends editing.
 	func controlTextDidEndEditing(_ notification: Notification) {
 		// Only the NSTextField in the NSTableViewCell should have this controller as its delegate -- no other subclasses of NSControl should thus be calling this method.
-		guard let textField = notification.object as? NSTextField else {
+		guard let textField = textField(for: notification) else {
 			print("[WARNING] A subclass of NSControl has called controlTextDidEndEditing(_:) that is not an NSTextField. Only the NSTextField in the data cell of the NSTableViewCell should have its delegate set to the SidebarViewController.")
 			return
 		}

@@ -44,25 +44,6 @@ class SidebarViewController: NSViewController {
 		sidebar.reloadData()
 	}
 	
-	/// Called when the Core Data store has loaded.
-	@objc func storeLoaded() {
-		sidebar.reloadData()
-		guard let rootDirectory = rootDirectory else { return }
-		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
-		expandNeededItems(in: rootDirectory)
-	}
-	
-	/// Called when undo or redo is called.
-	@objc func didUndo(_ notification: Notification) {
-		// We don't know what is being un/redone, so we have to reload the data rather than perform an insert/delete/move
-		sidebar.reloadData()
-		guard let rootDirectory = rootDirectory else { return }
-		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
-		expandNeededItems(in: rootDirectory)
-		// Calling reload data changed the selection
-		updateDirectorySelection()
-	}
-	
 	/// Adds a new directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
 	@IBAction func addDirectory(_ sender: Any?) {
@@ -247,22 +228,6 @@ extension SidebarViewController {
 		sidebar.endUpdates()
 	}
 	
-	/// Register observers for relevent notifications.
-	func registerObservers() {
-		let notificationCenter = NotificationCenter.default
-		// The data will have to be reloaded once the store is loaded
-		notificationCenter.addObserver(self,
-																	 selector: #selector(storeLoaded),
-																	 name: .storeLoaded,
-																	 object: nil)
-		
-		// When undo/redo is called the sidebar may need to be reloaded, so track when undo and redo is called. NSUndoManagerDidRedo/Undo is not used because when that notificaiton is fired there is processing that must be done first
-		notificationCenter.addObserver(self,
-																	 selector: #selector(didUndo(_:)),
-																	 name: .didProcessUndo,
-																	 object: nil)
-	}
-	
 	/// Recursivley expands the items in the directory based on their `collapsed` property.
 	/// - Parameters:
 	///   - directory: The directory to expand the items of.
@@ -296,5 +261,58 @@ extension SidebarViewController {
 		let selectedDirectories = selectedRows.compactMap { sidebar.item(atRow: $0) as? Directory }
 		// Setting this property calls a setter in DirectoryController which updates the filesToShow property
 		dataController?.selectedDirectories = selectedDirectories
+	}
+}
+
+// MARK: Notifications
+extension SidebarViewController {
+	/// Register observers for relevent notifications.
+	func registerObservers() {
+		let notificationCenter = NotificationCenter.default
+		// The data will have to be reloaded once the store is loaded
+		notificationCenter.addObserver(self,
+																	 selector: #selector(storeLoaded),
+																	 name: .storeLoaded,
+																	 object: nil)
+		
+		// When undo/redo is called the sidebar may need to be reloaded, so track when undo and redo is called. NSUndoManagerDidRedo/Undo is not used because when that notificaiton is fired there is processing that must be done first
+		notificationCenter.addObserver(self,
+																	 selector: #selector(didUndo(_:)),
+																	 name: .didProcessUndo,
+																	 object: nil)
+		
+		// When the name of a directory changes, it needs to be updated in the sidebar
+		notificationCenter.addObserver(self,
+																	 selector: #selector(directoryRenamed(_:)),
+																	 name: .directoryRenamed,
+																	 object: nil)
+	}
+	
+	/// Called when the Core Data store has loaded.
+	@objc func storeLoaded() {
+		sidebar.reloadData()
+		guard let rootDirectory = rootDirectory else { return }
+		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
+		expandNeededItems(in: rootDirectory)
+	}
+	
+	/// Called when undo or redo is called.
+	@objc func didUndo(_ notification: Notification) {
+		// We don't know what is being un/redone, so we have to reload the data rather than perform an insert/delete/move
+		sidebar.reloadData()
+		guard let rootDirectory = rootDirectory else { return }
+		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
+		expandNeededItems(in: rootDirectory)
+		// Calling reload data changed the selection
+		updateDirectorySelection()
+	}
+	
+	/// Called when a directory has been renamed.
+	@objc func directoryRenamed(_ notification: Notification) {
+		guard let directory = notification.object as? Directory else {
+			print("[WARNING] directoryRenamed notification did not have an object of type Directory")
+			return
+		}
+		sidebar.reloadItem(directory)
 	}
 }

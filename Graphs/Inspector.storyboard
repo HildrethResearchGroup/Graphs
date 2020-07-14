@@ -666,10 +666,10 @@
             </objects>
             <point key="canvasLocation" x="-586" y="916"/>
         </scene>
-        <!--Directory Collection View Controller-->
+        <!--Directory Inspector View Controller-->
         <scene sceneID="MHZ-48-mBz">
             <objects>
-                <viewController title="Directory Collection View Controller" id="qKW-U2-QNi" customClass="DirectoryInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Directory Inspector View Controller" id="qKW-U2-QNi" customClass="DirectoryInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="C8j-x2-kkE">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -756,6 +756,9 @@
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="qxr-On-vXB" id="iJE-no-5J4"/>
+                                                                    </connections>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jzL-2q-Gbc">
                                                                     <rect key="frame" x="35" y="18" width="47" height="16"/>
@@ -788,6 +791,7 @@
                                                                 <constraint firstItem="jzL-2q-Gbc" firstAttribute="trailing" secondItem="P8f-HV-bAR" secondAttribute="trailing" id="yFM-gE-fo2"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="qKW-U2-QNi" id="2YV-ZH-Arp"/>
                                                                 <outlet property="firstTextField" destination="tyH-bg-naG" id="16T-XM-uZ4"/>
                                                                 <outlet property="secondTextField" destination="pSi-Mf-nJV" id="fFT-Ap-Nf9"/>
                                                             </connections>

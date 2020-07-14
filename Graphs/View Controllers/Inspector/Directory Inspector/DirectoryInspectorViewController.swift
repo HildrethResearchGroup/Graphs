@@ -11,6 +11,8 @@ import Cocoa
 class DirectoryInspectorViewController: InspectorOutlineViewController<DirectoryOutlineItem> {
 	@IBOutlet weak var outlineView: NSOutlineView!
 	
+	var tf: NSTextField?
+	
 	override var primaryOutlineView: NSOutlineView? {
 		return outlineView
 	}
@@ -21,6 +23,11 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 		}
 	}
 	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		registerObservers()
+	}
+	
 	override func prepareView(_ view: NSTableCellView, item: DirectoryOutlineItem) {
 		switch item {
 		case .seperator:
@@ -29,6 +36,8 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 			view.textField?.stringValue = "Name & Location"
 		case .nameAndLocationBody:
 			let view = view as! InspectorTwoTextFieldsCell
+			//view.firstTextField.delegate = self
+			tf = view.firstTextField
 			guard let directory = directory else {
 				view.firstTextField.stringValue = ""
 				view.secondTextField.stringValue = ""
@@ -45,10 +54,6 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 		}
 	}
 }
-
-//extension DirectoryInspectorViewController: InspectorSubViewController {
-//
-//}
 
 enum DirectoryOutlineItem: InspectorOutlineCellItem {
 	case seperator
@@ -77,6 +82,26 @@ enum DirectoryOutlineItem: InspectorOutlineCellItem {
 			return .directoryInspectorCategoryCell
 		case .templatesBody:
 			return .directoryInspectorTemplatesCell
+		}
+	}
+}
+
+// MARK: Helpers
+extension DirectoryInspectorViewController {
+	var dataController: DataController? {
+		return DataController.shared
+	}
+}
+
+// MARK: Notificatoins
+extension DirectoryInspectorViewController {
+	func registerObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(reloadData(_:)), name: .directoryRenamed, object: nil)
+	}
+	
+	@objc func reloadData(_ notification: Notification) {
+		if notification.object as? Directory == directory && directory != nil {
+			outlineView.reloadData()
 		}
 	}
 }

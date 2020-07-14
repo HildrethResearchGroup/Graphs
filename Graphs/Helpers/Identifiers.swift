@@ -24,6 +24,8 @@ extension Notification.Name {
 	static let fileListStartedWork = Notification.Name(rawValue: "fileListStartedWork")
 	/// A notification that is fired when the  file list has finished updating on another thread.
 	static let fileListFinishedWork = Notification.Name(rawValue: "fileListFinishedWord")
+	/// A notification that is fired when a directory is renamed.
+	static let directoryRenamed = Notification.Name(rawValue: "directoryRenamed")
 }
 
 // MARK: UserInfo keys

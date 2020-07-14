@@ -90,4 +90,13 @@ extension DirectoryController {
 		}
 		dataController.setNeedsSaved()
 	}
+	/// Renames a directory.
+	/// - Parameters:
+	///   - directory: The directory to rename.
+	///   - newName: The new name of the directory.
+	func rename(directory: Directory, to newName: String?) {
+		directory.customDisplayName = newName
+		dataController.setNeedsSaved()
+		NotificationCenter.default.post(name: .directoryRenamed, object: directory)
+	}
 }

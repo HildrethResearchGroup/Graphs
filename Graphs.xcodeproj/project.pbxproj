@@ -38,6 +38,8 @@
 		5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79055E24554B0A0021CDB2 /* DirectoryController.swift */; };
 		5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E42247B76EB001FF163 /* FileListViewController.swift */; };
 		5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */; };
+		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
+		5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52D24BD3459006D386E /* NotificationTextField.swift */; };
 		5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */; };
 		5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */; };
 		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
@@ -101,6 +103,8 @@
 		5A79055E24554B0A0021CDB2 /* DirectoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		5AA95E42247B76EB001FF163 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
 		5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
+		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
+		5ACFC52D24BD3459006D386E /* NotificationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTextField.swift; sourceTree = "<group>"; };
 		5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+FirstResponder.swift"; sourceTree = "<group>"; };
 		5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSOutlineViewDelegate.swift"; sourceTree = "<group>"; };
 		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
@@ -191,8 +195,8 @@
 			children = (
 				5A73E4DF24528F5800450137 /* AppDelegate.swift */,
 				5A73E53924533BF300450137 /* Debug.swift */,
-				5A73E53B2453473F00450137 /* Identifiers.swift */,
 				5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */,
+				5ACFC52C24BD3433006D386E /* Helpers */,
 				5A73E50B2452966200450137 /* Models */,
 				5A73E50C2452966B00450137 /* Views */,
 				5A73E50D2452966F00450137 /* View Controllers */,
@@ -290,8 +294,18 @@
 			isa = PBXGroup;
 			children = (
 				5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */,
+				5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */,
 			);
 			path = "Directory Inspector";
+			sourceTree = "<group>";
+		};
+		5ACFC52C24BD3433006D386E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5A73E53B2453473F00450137 /* Identifiers.swift */,
+				5ACFC52D24BD3459006D386E /* NotificationTextField.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,6 +455,7 @@
 				5A73E53A24533BF300450137 /* Debug.swift in Sources */,
 				5A27B07F249733710024403E /* InspectorButton.swift in Sources */,
 				5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */,
+				5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */,
 				5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */,
 				5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */,
 				5A34A210249872750001CD1A /* FileController.swift in Sources */,
@@ -448,6 +463,7 @@
 				5A34A212249876400001CD1A /* SaveController.swift in Sources */,
 				5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */,
 				5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */,
+				5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */,
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
 				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
