@@ -40,6 +40,8 @@
 		5A73E53A24533BF300450137 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53924533BF300450137 /* Debug.swift */; };
 		5A73E53C2453473F00450137 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53B2453473F00450137 /* Identifiers.swift */; };
 		5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79055E24554B0A0021CDB2 /* DirectoryController.swift */; };
+		5A89838624BDA2F20057D511 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A89838524BDA2F20057D511 /* Parser.swift */; };
+		5A89838824BDA5140057D511 /* NSNumberWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A89838724BDA5140057D511 /* NSNumberWrapper.swift */; };
 		5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E42247B76EB001FF163 /* FileListViewController.swift */; };
 		5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */; };
 		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
@@ -109,6 +111,8 @@
 		5A73E53924533BF300450137 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		5A73E53B2453473F00450137 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		5A79055E24554B0A0021CDB2 /* DirectoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		5A89838524BDA2F20057D511 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		5A89838724BDA5140057D511 /* NSNumberWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNumberWrapper.swift; sourceTree = "<group>"; };
 		5AA95E42247B76EB001FF163 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
 		5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
 		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				5A73E51D2452A78F00450137 /* DirectoryItem.swift */,
+				5A89838524BDA2F20057D511 /* Parser.swift */,
 				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51F2452A78F00450137 /* Directory.swift */,
 			);
@@ -324,6 +329,7 @@
 				5A73E53B2453473F00450137 /* Identifiers.swift */,
 				5ACFC52D24BD3459006D386E /* NotificationTextField.swift */,
 				5A4899D524BD9DE500822B80 /* StringEncoding.swift */,
+				5A89838724BDA5140057D511 /* NSNumberWrapper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -471,6 +477,7 @@
 				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,
 				5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */,
 				5AF83783249482F4002BF370 /* SortCache.swift in Sources */,
+				5A89838624BDA2F20057D511 /* Parser.swift in Sources */,
 				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
 				5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */,
 				5A4899D424BD8F1100822B80 /* DataInspectorViewController.swift in Sources */,
@@ -491,6 +498,7 @@
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
 				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
+				5A89838824BDA5140057D511 /* NSNumberWrapper.swift in Sources */,
 				5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */,
 				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
