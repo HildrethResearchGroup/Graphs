@@ -88,6 +88,7 @@ extension ParserController {
 	func createParser() -> Parser {
 		let parser = Parser(context: context)
 		parsers.append(parser)
+		dataController.setNeedsSaved()
 		return parser
 	}
 	/// Removes the given parser.
@@ -95,6 +96,7 @@ extension ParserController {
 	func remove(parser: Parser) {
 		parsers.removeAll { $0 === parser }
 		context.delete(parser)
+		dataController.setNeedsSaved()
 	}
 	/// The parser to use for the given directory item.
 	/// - Parameter directoryItem: The directory item to find the parser for.

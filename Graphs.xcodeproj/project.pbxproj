@@ -51,6 +51,8 @@
 		5A937DFD24BEA5BD00D025B0 /* InspectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */; };
 		5A937E0024BEAE5100D025B0 /* ParserInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */; };
 		5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0124BEEE6A00D025B0 /* ParserController.swift */; };
+		5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */; };
+		5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */; };
 		5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E42247B76EB001FF163 /* FileListViewController.swift */; };
 		5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */; };
 		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
@@ -131,6 +133,8 @@
 		5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTableViewCell.swift; sourceTree = "<group>"; };
 		5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserInspectorViewController.swift; sourceTree = "<group>"; };
 		5A937E0124BEEE6A00D025B0 /* ParserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserController.swift; sourceTree = "<group>"; };
+		5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
+		5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserFileTypesCell.swift; sourceTree = "<group>"; };
 		5AA95E42247B76EB001FF163 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
 		5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
 		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				5A27B07E249733710024403E /* InspectorButton.swift */,
+				5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */,
 				5A937DED24BEA56700D025B0 /* Inspector Cells */,
 			);
 			path = Views;
@@ -341,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */,
+				5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */,
 			);
 			path = "Parser Inspector";
 			sourceTree = "<group>";
@@ -514,6 +520,8 @@
 				5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */,
 				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
+				5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */,
+				5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */,
 				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
 				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
 				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,

@@ -243,3 +243,40 @@ extension DataController {
 		fileController.rename(file: file, to: newName)
 	}
 }
+
+// MARK: Parser Interface
+extension DataController {
+	/// The parsers that have been created.
+	var parsers: [Parser] {
+		return parserController.parsers
+	}
+	/// Creates a new parser.
+	/// - Returns: A new parser.
+	func createParser() -> Parser {
+		return parserController.createParser()
+	}
+	/// Removes the given parser.
+	/// - Parameter parser: The parser to remove.
+	func remove(parser: Parser) {
+		parserController.remove(parser: parser)
+	}
+	/// The parser to use for the given directory item.
+	/// - Parameter directoryItem: The directory item to find the parser for.
+	/// - Returns: The parser to use for the given file, or the default parser for the given directory.
+	///
+	/// The parser for a given file is determined as follows: if the file has a custom parser, that parser is used. Otherwise the file has a toggle for which parser to choose from:
+	///
+	/// 1. *By folder:* the parser of the closet ansestor's default parser is used.
+	/// 2. *By file type:* the default parser of the file's file type is used.
+	///
+	/// If there is no parser for the file's chosen method (by folder/file type) then the other method is used. If niether method has a default, then the file has no default parser.
+	func parser(for directoryItem: DirectoryItem) -> Parser? {
+		return parserController.parser(for: directoryItem)
+	}
+	/// Returns the default parsers for the given file type.
+	/// - Parameter fileType: The file type (extension) to find the default parser for.
+	/// - Returns: The default parser for the given file type, or `nil` if there isn't one.
+	func defaultParsers(forFileType fileType: String) -> [Parser] {
+		return parserController.defaultParsers(forFileType: fileType)
+	}
+}

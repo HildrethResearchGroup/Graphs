@@ -123,6 +123,13 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 	}
 }
 
+// MARK: Helpers
+extension ParserInspectorViewController {
+	var dataController: DataController? {
+		return DataController.shared
+	}
+}
+
 // MARK: OutlineView Items
 enum ParserOutlineItem: InspectorOutlineCellItem {
 	case separator

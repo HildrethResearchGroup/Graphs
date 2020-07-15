@@ -1022,7 +1022,7 @@
                                                                                                     </textFieldCell>
                                                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                                                     <prototypeCellViews>
-                                                                                                        <tableCellView id="Wej-9b-bZv">
+                                                                                                        <tableCellView id="Wej-9b-bZv" customClass="ParserFileTypesCell" customModule="Graphs" customModuleProvider="target">
                                                                                                             <rect key="frame" x="119" y="1" width="115" height="21"/>
                                                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                                             <subviews>
@@ -1041,6 +1041,9 @@
                                                                                                                 <constraint firstAttribute="bottom" secondItem="lPs-3K-HeH" secondAttribute="bottom" id="oNa-zN-k6s"/>
                                                                                                                 <constraint firstItem="lPs-3K-HeH" firstAttribute="leading" secondItem="Wej-9b-bZv" secondAttribute="leading" constant="2" id="vls-BX-SOG"/>
                                                                                                             </constraints>
+                                                                                                            <connections>
+                                                                                                                <outlet property="tokenField" destination="lPs-3K-HeH" id="RrV-oK-iee"/>
+                                                                                                            </connections>
                                                                                                         </tableCellView>
                                                                                                     </prototypeCellViews>
                                                                                                 </tableColumn>
