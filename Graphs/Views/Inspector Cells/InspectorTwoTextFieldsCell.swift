@@ -1,16 +1,12 @@
 //
-//  Inspector Cells.swift
+//  InspectorTwoTextFieldsCell.swift
 //  Graphs
 //
-//  Created by Connor Barnes on 6/15/20.
+//  Created by Connor Barnes on 7/14/20.
 //  Copyright © 2020 Connor Barnes. All rights reserved.
 //
 
 import Cocoa
-
-class InspectorCategoryOptionCell: NSTableCellView {
-	@IBOutlet weak var popUpButton: NSPopUpButton!
-}
 
 class InspectorTwoTextFieldsCell: NSTableCellView {
 	@IBOutlet weak var firstTextField: NSTextField!
@@ -19,15 +15,7 @@ class InspectorTwoTextFieldsCell: NSTableCellView {
 	@IBOutlet weak var delegate: InspectorTwoTextFieldsCellDelegate?
 }
 
-class InspectorTwoPopUpButtonsCell: NSTableCellView {
-	@IBOutlet weak var firstPopUpButton: NSPopUpButton!
-	@IBOutlet weak var secondPopUpButton: NSPopUpButton!
-}
-
-class InspectorTextViewCell: NSTableCellView {
-	@IBOutlet weak var textView: NSTextView!
-}
-
+// MARK: Delegate
 @objc protocol InspectorTwoTextFieldsCellDelegate: class {
 	@objc optional func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
 	@objc optional func secondTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
