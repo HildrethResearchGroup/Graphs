@@ -13,9 +13,24 @@ class InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell: NSTableCellView {
 	@IBOutlet weak var checkBox: NSButton!
 	
 	@IBOutlet weak var delegate: InspectorOneTextFieldOnePopUpButtonOneCheckBoxCellDelegate?
+	
+	@objc func popUpButtonAction(_ sender: NSPopUpButton) {
+		delegate?.popUpButtonDidChange?(self)
+	}
+	
+	@objc func checkBoxAction(_ sender: NSPopUpButton) {
+		delegate?.checkBoxDidChangeState?(self)
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		popUpButton.action = #selector(popUpButtonAction(_:))
+		checkBox.action = #selector(checkBoxAction(_:))
+	}
 }
 
 // MARK: Delegate
 @objc protocol InspectorOneTextFieldOnePopUpButtonOneCheckBoxCellDelegate {
-	
+	@objc optional func popUpButtonDidChange(_ cell: InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell)
+	@objc optional func checkBoxDidChangeState(_ cell: InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell)
 }

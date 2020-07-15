@@ -320,10 +320,10 @@
 			isa = PBXGroup;
 			children = (
 				5A937DEE24BEA57900D025B0 /* InspectorCategoryOptionCell.swift */,
+				5A937DF624BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift */,
 				5A937DF024BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift */,
 				5A937DF224BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift */,
 				5A937DF424BEA59400D025B0 /* InspectorTextViewCell.swift */,
-				5A937DF624BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift */,
 				5A937DF824BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift */,
 				5A937DFA24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift */,
 				5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */,

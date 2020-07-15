@@ -13,6 +13,12 @@ class InspectorTwoTextFieldsCell: NSTableCellView {
 	@IBOutlet weak var secondTextField: NSTextField!
 	
 	@IBOutlet weak var delegate: InspectorTwoTextFieldsCellDelegate?
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		firstTextField.delegate = self
+		secondTextField.delegate = self
+	}
 }
 
 // MARK: Delegate
