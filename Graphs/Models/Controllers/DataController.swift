@@ -20,6 +20,8 @@ class DataController {
 	private var directoryController: DirectoryController!
 	/// A subcontroller which manages the files that are displayed.
 	private var fileController: FileController!
+	/// A subcontroller which manages file parsers.
+	private var parserController: ParserController!
 	/// Creates a `DataController` and runs the completion handler after Core Data has loaded the model from the store.
 	/// - Parameter completion: The completion handler to run after Core Data has loaded the model.
 	init(completion: @escaping () -> ()) {
@@ -30,6 +32,7 @@ class DataController {
 		saveController = .init(dataController: self)
 		directoryController = .init(dataController: self)
 		fileController = .init(dataController: self)
+		parserController = .init(dataController: self)
 		
 		loadStore(completion: completion)
 		registerObservers()
@@ -134,8 +137,9 @@ extension DataController {
 			}
 			
 			self.directoryController.loadRootDirectory()
-			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to no tbe collapsed. Without doing this, the top level items may not auto-expand on load.
+			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to not be collapsed. Without doing this, the top level items may not auto-expand on load.
 			self.directoryController.rootDirectory?.collapsed = false
+			self.parserController.loadParsers()
 			completion()
 		}
 	}
