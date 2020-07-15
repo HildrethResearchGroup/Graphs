@@ -8,22 +8,28 @@
         <attribute name="customDisplayName" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="URI"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directory" inverseName="children" inverseEntity="Directory"/>
+        <relationship name="parser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Parser"/>
     </entity>
-    <entity name="File" representedClassName="File" parentEntity="DirectoryItem" syncable="YES"/>
+    <entity name="File" representedClassName="File" parentEntity="DirectoryItem" syncable="YES">
+        <attribute name="parserDefaultMode" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Parser" representedClassName="Parser" syncable="YES">
         <attribute name="dataSeparator" optional="YES" attributeType="String" defaultValueString=","/>
         <attribute name="dataStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
+        <attribute name="defaultForFileTypes" attributeType="String" defaultValueString=""/>
         <attribute name="experimentDetailsEnd" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
         <attribute name="experimentDetailsStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
+        <attribute name="hasExperimentDetails" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="hasFooter" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="hasHeader" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="headerEnd" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
         <attribute name="headerSeparator" optional="YES" attributeType="String" defaultValueString=","/>
         <attribute name="headerStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
     </entity>
     <elements>
         <element name="Directory" positionX="13.171875" positionY="-32.796875" width="128" height="73"/>
-        <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="88"/>
-        <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="43"/>
-        <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="163"/>
+        <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="103"/>
+        <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="58"/>
+        <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="208"/>
     </elements>
 </model>

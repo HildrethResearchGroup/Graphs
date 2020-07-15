@@ -23,10 +23,27 @@ extension File {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<File> {
 		return NSFetchRequest<File>(entityName: "File")
 	}
+	
+	@objc(parserDefaultMode)
+	@NSManaged var _parserDefaultModeRaw: Int64
 }
 
 // MARK: Derived Properties
 extension File {
+	enum DefaultParserMode: Int64 {
+		case folderDefault
+		case fileTypeDefault
+	}
+	
+	var defaultParserMode: DefaultParserMode {
+		get {
+			return DefaultParserMode(rawValue: _parserDefaultModeRaw) ?? .folderDefault
+		}
+		set {
+			_parserDefaultModeRaw = newValue.rawValue
+		}
+	}
+	
 	var fileExtension: String? {
 		guard let substring = path?.lastPathComponent.split(separator: ".").last else {
 			return nil

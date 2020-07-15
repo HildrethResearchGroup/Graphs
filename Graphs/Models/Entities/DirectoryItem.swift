@@ -32,6 +32,8 @@ extension DirectoryItem {
 	@NSManaged public var customDisplayName: String?
 	/// The directory that the item is in. If this is `nil`, then the item is the root directory.
 	@NSManaged public var parent: Directory?
+	/// The parser to use to parse the item
+	@NSManaged public var parser: Parser?
 }
 
 // MARK: Derived Properties

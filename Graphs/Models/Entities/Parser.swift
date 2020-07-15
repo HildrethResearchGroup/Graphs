@@ -51,6 +51,10 @@ extension Parser {
 	@NSManaged public var dataSeparator: String?
 	@NSManaged public var headerSeparator: String?
 	@NSManaged public var hasFooter: Bool
+	@NSManaged public var hasHeader: Bool
+	@NSManaged public var hasExperimentDetails: Bool
+	@objc(defaultForFileTypes)
+	@NSManaged public var _defaultForFileTypes: String
 	@objc(dataStart)
 	@NSManaged public var __dataStart: NSNumber?
 	@objc(experimentDetailsEnd)
@@ -61,4 +65,15 @@ extension Parser {
 	@NSManaged public var __headerEnd: NSNumber?
 	@objc(headerStart)
 	@NSManaged public var __headerStart: NSNumber?
+	
+	var defaultForFileTypes: [String] {
+		get {
+			return _defaultForFileTypes.components(separatedBy: ",")
+		}
+		set {
+			_defaultForFileTypes = newValue
+				.map { $0.filter { !$0.isWhitespace } }
+				.reduce("", +)
+		}
+	}
 }
