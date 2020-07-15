@@ -105,7 +105,12 @@ extension InspectorViewController {
 					controller.directory = nil
 			}
 		case .parserInspectorTab:
-			break
+			guard let controller = tabController(ofType: ParserInspectorViewController.self) else {
+				break
+			}
+			
+			setLabel(text: nil)
+			
 		case .graphInspectorTab:
 			break
 		case .dataInspectorTab:

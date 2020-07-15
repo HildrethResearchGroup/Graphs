@@ -48,8 +48,10 @@ extension Parser {
 		return NSFetchRequest<Parser>(entityName: "Parser")
 	}
 	
-	@NSManaged public var dataSeparator: String?
-	@NSManaged public var headerSeparator: String?
+	@objc(dataSeparator)
+	@NSManaged public var _dataSeparatorRaw: String
+	@objc(headerSeparator)
+	@NSManaged public var _headerSeparatorRaw: String
 	@NSManaged public var hasFooter: Bool
 	@NSManaged public var hasHeader: Bool
 	@NSManaged public var hasExperimentDetails: Bool
@@ -66,6 +68,34 @@ extension Parser {
 	@objc(headerStart)
 	@NSManaged public var __headerStart: NSNumber?
 	
+	var dataSeparator: Separator {
+		get {
+			guard let separator = Separator(rawValue: _dataSeparatorRaw) else {
+				print("[WARNING] Invalid separator string: \(_dataSeparatorRaw) -- Replacing with valid \"comma\".")
+				_dataSeparatorRaw = Separator.comma.rawValue
+				return Separator.comma
+			}
+			return separator
+		}
+		set {
+			_dataSeparatorRaw = newValue.rawValue
+		}
+	}
+	
+	var headerSeparator: Separator {
+		get {
+			guard let separator = Separator(rawValue: _headerSeparatorRaw) else {
+				print("[WARNING] Invalid separator string: \(_dataSeparatorRaw) -- Replacing with valid \"comma\".")
+				_headerSeparatorRaw = Separator.comma.rawValue
+				return Separator.comma
+			}
+			return separator
+		}
+		set {
+			_headerSeparatorRaw = newValue.rawValue
+		}
+	}
+	
 	var defaultForFileTypes: [String] {
 		get {
 			return _defaultForFileTypes.components(separatedBy: ",")
@@ -74,6 +104,66 @@ extension Parser {
 			_defaultForFileTypes = newValue
 				.map { $0.filter { !$0.isWhitespace } }
 				.reduce("", +)
+		}
+	}
+	
+	var experimentDetailsStartOrGuess: Int {
+		return experimentDetailsStart ?? 1
+	}
+	
+	var experimentDetailsEndOrGuess: Int {
+		return experimentDetailsStartOrGuess + 1
+	}
+	
+	var headerStartOrGuess: Int {
+		if let headerStart = headerStart { return headerStart }
+		if hasExperimentDetails {
+			return experimentDetailsEndOrGuess + 1
+		} else {
+			return 1
+		}
+	}
+	
+	var headerEndOrGuess: Int {
+		return headerStartOrGuess + 1
+	}
+	
+	var dataStartOrGuess: Int {
+		if let dataStart = dataStart { return dataStart }
+		if hasHeader {
+			return headerEndOrGuess + 1
+		} else if hasExperimentDetails {
+			return experimentDetailsEndOrGuess + 1
+		} else {
+			return 1
+		}
+	}
+}
+
+extension Parser {
+	enum Separator: String, CaseIterable {
+		case whitespace
+		case space
+		case tab
+		case comma
+		case colon
+		case semicolon
+		
+		var characterSet: CharacterSet {
+			switch self {
+			case .whitespace:
+				return .whitespaces
+			case .space:
+				return CharacterSet(charactersIn: " ")
+			case .tab:
+				return CharacterSet(charactersIn: "\t")
+			case .comma:
+				return CharacterSet(charactersIn: ",")
+			case .colon:
+				return CharacterSet(charactersIn: ":")
+			case .semicolon:
+				return CharacterSet(charactersIn: ";")
+			}
 		}
 	}
 }

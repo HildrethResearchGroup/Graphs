@@ -27,7 +27,7 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 		switch item {
 		case .separator:
 			// No customization for seperators
-			return
+			break
 		case .nameAndLocationHeader:
 			view.textField?.stringValue = "Name & Location"
 		case .templatesHeader:
@@ -41,18 +41,18 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			guard let file = file else {
 				view.firstTextField.stringValue = ""
 				view.secondTextField.stringValue = ""
-				return
+				break
 			}
 			view.firstTextField.stringValue = file.displayName
 			view.secondTextField.stringValue = file.path?.path ?? ""
 		case .templatesBody:
 			// TODO: Select the correct templates
 			#warning("Not implemented")
-			return
+			break
 		case .detailsBody:
 			// TODO: Fill in the text view with the correct text
 			#warning("Not implemented")
-			return
+			break
 		}
 	}
 }

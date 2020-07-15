@@ -13,12 +13,7 @@ class InspectorTableViewCell: NSTableCellView {
 	@IBOutlet weak var addButton: NSButton!
 	@IBOutlet weak var removeButton: NSButton!
 	
-	@IBOutlet weak var delegate: InspectorTableViewCellDelegate? {
-		didSet {
-			tableView.delegate = delegate
-			tableView.dataSource = delegate
-		}
-	}
+	@IBOutlet weak var delegate: InspectorTableViewCellDelegate?
 	
 	@objc func addButtonAction(_ sender: NSButton) {
 		delegate?.addButtonPressed?(self)
@@ -32,13 +27,11 @@ class InspectorTableViewCell: NSTableCellView {
 		super.awakeFromNib()
 		addButton.action = #selector(addButtonAction(_:))
 		removeButton.action = #selector(removeButtonAction(_:))
-		tableView.delegate = delegate
-		tableView.dataSource = delegate
 	}
 }
 
 // MARK: Delegate
-@objc protocol InspectorTableViewCellDelegate: NSTableViewDelegate, NSTableViewDataSource {
+@objc protocol InspectorTableViewCellDelegate {
 	@objc optional func addButtonPressed(_ cell: InspectorTableViewCell)
 	@objc optional func removeButtonPressed(_ cell: InspectorTableViewCell)
 }

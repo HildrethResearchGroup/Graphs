@@ -14,7 +14,7 @@
         <attribute name="parserDefaultMode" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Parser" representedClassName="Parser" syncable="YES">
-        <attribute name="dataSeparator" optional="YES" attributeType="String" defaultValueString=","/>
+        <attribute name="dataSeparator" attributeType="String" defaultValueString="comma"/>
         <attribute name="dataStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
         <attribute name="defaultForFileTypes" attributeType="String" defaultValueString=""/>
         <attribute name="experimentDetailsEnd" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
@@ -23,7 +23,7 @@
         <attribute name="hasFooter" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="hasHeader" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="headerEnd" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
-        <attribute name="headerSeparator" optional="YES" attributeType="String" defaultValueString=","/>
+        <attribute name="headerSeparator" attributeType="String" defaultValueString="comma"/>
         <attribute name="headerStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
     </entity>
     <elements>

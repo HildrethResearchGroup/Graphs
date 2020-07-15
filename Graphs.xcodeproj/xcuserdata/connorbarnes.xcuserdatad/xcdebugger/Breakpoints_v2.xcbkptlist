@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5CD026CA-EAB4-431E-9604-8BC6D63BBBC9"
+            uuid = "B36BA26C-A443-4561-AA01-FDD1B81DD8E8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Graphs/View Controllers/Inspector/InspectorViewController.swift"
+            filePath = "Graphs/View Controllers/Inspector/Parser Inspector/ParserInspectorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "selectionDidChange(_:)"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "prepareView(_:item:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
