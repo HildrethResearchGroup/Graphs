@@ -8,7 +8,7 @@
         <attribute name="customDisplayName" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="URI"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directory" inverseName="children" inverseEntity="Directory"/>
-        <relationship name="parser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Parser"/>
+        <relationship name="parser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Parser" inverseName="directoryItems" inverseEntity="Parser"/>
     </entity>
     <entity name="File" representedClassName="File" parentEntity="DirectoryItem" syncable="YES">
         <attribute name="parserDefaultMode" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -26,11 +26,12 @@
         <attribute name="headerSeparator" attributeType="String" defaultValueString="comma"/>
         <attribute name="headerStart" optional="YES" attributeType="Integer 64" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="New Parser"/>
+        <relationship name="directoryItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DirectoryItem" inverseName="parser" inverseEntity="DirectoryItem"/>
     </entity>
     <elements>
         <element name="Directory" positionX="13.171875" positionY="-32.796875" width="128" height="73"/>
         <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="103"/>
         <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="58"/>
-        <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="223"/>
+        <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="238"/>
     </elements>
 </model>

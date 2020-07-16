@@ -42,8 +42,25 @@ public class Parser: NSManagedObject {
 	}
 }
 
+// MARK: Generated accessors for directoryItems
 extension Parser {
-	
+
+    @objc(addDirectoryItemsObject:)
+    @NSManaged public func addToDirectoryItems(_ value: DirectoryItem)
+
+    @objc(removeDirectoryItemsObject:)
+    @NSManaged public func removeFromDirectoryItems(_ value: DirectoryItem)
+
+    @objc(addDirectoryItems:)
+    @NSManaged public func addToDirectoryItems(_ values: NSSet)
+
+    @objc(removeDirectoryItems:)
+    @NSManaged public func removeFromDirectoryItems(_ values: NSSet)
+
+}
+
+// MARK: Core Data Properties
+extension Parser {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<Parser> {
 		return NSFetchRequest<Parser>(entityName: "Parser")
 	}
@@ -68,7 +85,11 @@ extension Parser {
 	@NSManaged public var __headerEnd: NSNumber?
 	@objc(headerStart)
 	@NSManaged public var __headerStart: NSNumber?
-	
+	@NSManaged public var directoryItems: NSSet?
+}
+
+// MARK: Derived Properties
+extension Parser {
 	var dataSeparator: Separator {
 		get {
 			guard let separator = Separator(rawValue: _dataSeparatorRaw) else {
