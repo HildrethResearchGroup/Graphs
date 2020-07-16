@@ -43,7 +43,10 @@ extension InspectorTableViewCell: NSTextFieldDelegate, NSTokenFieldDelegate {
 
 // MARK: Delegate
 @objc protocol InspectorTableViewCellDelegate {
-	@objc optional func addButtonPressed(_ cell: InspectorTableViewCell)
-	@objc optional func removeButtonPressed(_ cell: InspectorTableViewCell)
-	@objc optional func controlTextDidEndEditing(_ cell: InspectorTableViewCell, textField: NSTextField, at row: Int)
+	@objc(inspectorTableViewCellAddButtonPressed:)
+	optional func addButtonPressed(_ cell: InspectorTableViewCell)
+	@objc(inspectorTableViewCellRemoveButtonPressed:)
+	optional func removeButtonPressed(_ cell: InspectorTableViewCell)
+	@objc(inspectorTableViewCellControlTextDidEndEditing:textField:atRow:)
+	optional func controlTextDidEndEditing(_ cell: InspectorTableViewCell, textField: NSTextField, at row: Int)
 }

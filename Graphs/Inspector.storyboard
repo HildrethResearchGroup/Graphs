@@ -543,7 +543,7 @@
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-4R-Y4H">
+                                                                <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-4R-Y4H">
                                                                     <rect key="frame" x="84" y="24" width="159" height="25"/>
                                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="d2V-Gf-Sd7" id="jEY-ZK-Ia6">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -557,7 +557,7 @@
                                                                         </menu>
                                                                     </popUpButtonCell>
                                                                 </popUpButton>
-                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nTo-6s-QOs">
+                                                                <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="nTo-6s-QOs">
                                                                     <rect key="frame" x="84" y="-3" width="159" height="25"/>
                                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="6tF-oH-fIN" id="upi-XL-mUY">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -586,6 +586,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="nbN-4R-Y4H" secondAttribute="trailing" constant="2" id="znu-pv-Q9C"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="Kd2-E3-bt9" id="Nw3-Jw-SLb"/>
                                                                 <outlet property="firstPopUpButton" destination="nbN-4R-Y4H" id="TkG-lw-kST"/>
                                                                 <outlet property="secondPopUpButton" destination="nTo-6s-QOs" id="aod-n9-x8l"/>
                                                             </connections>
@@ -820,7 +821,7 @@
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VkB-yd-IhU">
+                                                                <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="VkB-yd-IhU">
                                                                     <rect key="frame" x="84" y="24" width="159" height="25"/>
                                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="j8c-eR-Sge" id="qZQ-f2-HJY">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -834,7 +835,7 @@
                                                                         </menu>
                                                                     </popUpButtonCell>
                                                                 </popUpButton>
-                                                                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-kL-06j">
+                                                                <popUpButton verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4tl-kL-06j">
                                                                     <rect key="frame" x="84" y="-3" width="159" height="25"/>
                                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="MJN-Qu-wjl" id="jSI-hv-JaK">
                                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>

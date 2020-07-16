@@ -30,9 +30,12 @@ class InspectorTwoTextFieldsOnePopUpButtonCell: NSTableCellView {
 
 // MARK: Delegate
 @objc protocol InspectorTwoTextFieldsOnePopUpButtonCellDelegate {
-	@objc(inspectorTwoTextFieldsOnePopUpButtonCellFirstTextFieldDidEndEditing:) optional func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
-	@objc(inspectorTwoTextFieldsOnePopUpButtonCellSecondTextFieldDidEndEditing:) optional func secondTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
-	@objc(inspectorTwoTextFieldsOnePopUpButtonCellPopUpButtonDidChange:) optional func popUpButtonDidChange(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
+	@objc(inspectorTwoTextFieldsOnePopUpButtonCellFirstTextFieldDidEndEditing:)
+	optional func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
+	@objc(inspectorTwoTextFieldsOnePopUpButtonCellSecondTextFieldDidEndEditing:)
+	optional func secondTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
+	@objc(inspectorTwoTextFieldsOnePopUpButtonCellPopUpButtonDidChange:)
+	optional func popUpButtonDidChange(_ cell: InspectorTwoTextFieldsOnePopUpButtonCell)
 }
 
 extension InspectorTwoTextFieldsOnePopUpButtonCell: NSTextFieldDelegate {

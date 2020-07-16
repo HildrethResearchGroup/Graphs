@@ -8,17 +8,37 @@
 
 import Cocoa
 
+// MARK: TwoTextFields
 extension FileInspectorViewController: InspectorTwoTextFieldsCellDelegate {
 	func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell) {
-		nameTextFieldDidEndEditing(cell.firstTextField)
+		// Name textField
+		if let file = file {
+			dataController?.rename(file: file, to: cell.firstTextField.stringValue)
+		}
 	}
 }
 
-// MARK: Helpers
-extension FileInspectorViewController {
-	func nameTextFieldDidEndEditing(_ textField: NSTextField) {
-		if let file = file {
-			dataController?.rename(file: file, to: textField.stringValue)
+// MARK: TwoPopUpButtons
+extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
+	func firstPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
+		// Parser popup
+		guard let dataController = dataController else { return }
+		guard let item = cell.firstPopUpButton.selectedItem else { return }
+		switch item.tag {
+		case -2:
+			// Default for file type
+			file?.defaultParserMode = .fileTypeDefault
+			file?.parser = nil
+		case -1:
+			// Default for folder
+			file?.defaultParserMode = .folderDefault
+			file?.parser = nil
+		case 0..<dataController.parsers.count:
+			file?.parser = dataController.parsers[item.tag]
+		default:
+			print("[WARNING] Invalid tag at FileInspectorViewController.firstPopUpButtonDidChange(_:)")
+			file?.parser = nil
+			break
 		}
 	}
 }

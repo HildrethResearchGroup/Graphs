@@ -26,5 +26,6 @@ class InspectorCategoryCheckBoxCell: NSTableCellView {
 
 // MARK: Delegate
 @objc protocol InspectorCategoryCheckBoxCellDelegate: class {
-	@objc(inspectorCategoryCheckBoxCellCheckBoxDidChangeState:) optional func checkBoxDidChangeState(_ cell: InspectorCategoryCheckBoxCell)
+	@objc(inspectorCategoryCheckBoxCellCheckBoxDidChangeState:)
+	optional func checkBoxDidChangeState(_ cell: InspectorCategoryCheckBoxCell)
 }

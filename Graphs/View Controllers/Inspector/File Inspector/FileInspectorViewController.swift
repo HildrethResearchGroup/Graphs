@@ -46,8 +46,57 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			view.firstTextField.stringValue = file.displayName
 			view.secondTextField.stringValue = file.path?.path ?? ""
 		case .templatesBody:
-			// TODO: Select the correct templates
-			#warning("Not implemented")
+			let view = view as! InspectorTwoPopUpButtonsCell
+			guard let dataController = dataController else { return }
+			
+			guard let file = file else { return }
+			
+			let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
+				let item = NSMenuItem(title: parser.name,
+															action: nil,
+															keyEquivalent: "")
+				item.tag = index
+				return item
+			}
+			
+			let fileTypeDefault = dataController.defaultParsers(forFileType: file.fileExtension ?? "").first
+			
+			let folderDefault = dataController.parser(for: file.parent!)
+			
+			let defaultItems = [NSMenuItem(title: "Default for File Type (\(fileTypeDefault?.name ?? "None"))",
+																		 action: nil,
+																		 keyEquivalent: ""),
+													NSMenuItem(title: "Default for Folder (\(folderDefault?.name ?? "None"))",
+																		 action: nil,
+																		 keyEquivalent: ""),
+													NSMenuItem.separator()]
+			
+			defaultItems[0].isEnabled = fileTypeDefault != nil
+			defaultItems[1].isEnabled = folderDefault != nil
+			
+			defaultItems[0].tag = -2
+			defaultItems[1].tag = -1
+			defaultItems[2].tag = Int.min
+			
+			view.firstPopUpButton.autoenablesItems = false
+			view.firstPopUpButton.menu?.items = defaultItems + items
+			
+			if file.parser == nil {
+				switch file.defaultParserMode {
+				case .fileTypeDefault:
+					view.firstPopUpButton.selectItem(withTag: -2)
+				case .folderDefault:
+					view.firstPopUpButton.selectItem(withTag: -1)
+				}
+				break
+			}
+			
+			guard let parser = dataController.parser(for: file) else { return }
+			
+			guard let index = dataController.parsers.firstIndex(of: parser) else { return }
+			
+			view.firstPopUpButton.selectItem(withTag: index)
+			
 			break
 		case .detailsBody:
 			// TODO: Fill in the text view with the correct text

@@ -23,8 +23,10 @@ class InspectorTwoTextFieldsCell: NSTableCellView {
 
 // MARK: Delegate
 @objc protocol InspectorTwoTextFieldsCellDelegate: class {
-	@objc(inspectorTwoTextFieldsCellFirstTextFieldDidEndEditing:) optional func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
-	@objc(inspectorTwoTextFieldsCellSecondTextFieldDidEndEditing:) optional func secondTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
+	@objc(inspectorTwoTextFieldsCellFirstTextFieldDidEndEditing:)
+	optional func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
+	@objc(inspectorTwoTextFieldsCellSecondTextFieldDidEndEditing:)
+	optional func secondTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell)
 }
 
 extension InspectorTwoTextFieldsCell: NSTextFieldDelegate {
