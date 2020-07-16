@@ -22,7 +22,7 @@ extension DataInspectorViewController: NSTableViewDataSource {
 			if headerRows > 0 {
 				if (0..<headerRows).contains(row) {
 					// Displaying a header row
-					return parsedFile.header[row]
+					return parsedFile.header[row + 1]
 				} else {
 					return parsedFile.data[row - headerRows]
 				}
@@ -61,17 +61,15 @@ extension DataInspectorViewController: NSTableViewDelegate {
 		return cell
 	}
 	
-	func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-		let rowView = tableView.rowView(atRow: row, makeIfNecessary: true)
-		guard let parsedFile = parsedFile else { return rowView }
+	func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+		guard let parsedFile = parsedFile else { return }
 		let headerRows = parsedFile.header.count - 1
 		if headerRows > 0 {
 			if (0..<headerRows).contains(row) {
 				// Change the background color of header rows
-				rowView?.backgroundColor = .headerColor
+				rowView.backgroundColor = .windowBackgroundColor
+				
 			}
 		}
-		
-		return rowView
 	}
 }

@@ -17,6 +17,7 @@ class DataInspectorViewController: NSViewController {
 	
 	var file: File? {
 		didSet {
+			// TODO: This needs to be called when the parser changes
 			parsedFile = parseFile()
 			prepareView()
 		}
