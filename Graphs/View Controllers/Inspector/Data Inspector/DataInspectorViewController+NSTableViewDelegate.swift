@@ -68,7 +68,6 @@ extension DataInspectorViewController: NSTableViewDelegate {
 			if (0..<headerRows).contains(row) {
 				// Change the background color of header rows
 				rowView.backgroundColor = .windowBackgroundColor
-				
 			}
 		}
 	}
