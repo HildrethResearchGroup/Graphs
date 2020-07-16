@@ -130,34 +130,44 @@ extension Parser {
 	}
 	
 	var experimentDetailsStartOrGuess: Int {
-		return experimentDetailsStart ?? 1
+		experimentDetailsStart = experimentDetailsStart ?? 1
+		return experimentDetailsStart!
 	}
 	
 	var experimentDetailsEndOrGuess: Int {
-		return experimentDetailsStartOrGuess + 1
+		if let experimentDetailsEnd = experimentDetailsEnd { return experimentDetailsEnd }
+		experimentDetailsEnd = experimentDetailsStartOrGuess
+		return experimentDetailsEnd!
 	}
 	
 	var headerStartOrGuess: Int {
 		if let headerStart = headerStart { return headerStart }
 		if hasExperimentDetails {
-			return experimentDetailsEndOrGuess + 1
+			headerStart = experimentDetailsEndOrGuess + 1
+			return headerStart!
 		} else {
-			return 1
+			headerStart = 1
+			return headerStart!
 		}
 	}
 	
 	var headerEndOrGuess: Int {
-		return headerStartOrGuess + 1
+		if let headerEnd = headerEnd { return headerEnd }
+		headerEnd = headerStartOrGuess
+		return headerEnd!
 	}
 	
 	var dataStartOrGuess: Int {
 		if let dataStart = dataStart { return dataStart }
 		if hasHeader {
-			return headerEndOrGuess + 1
+			dataStart = headerEndOrGuess + 1
+			return dataStart!
 		} else if hasExperimentDetails {
-			return experimentDetailsEndOrGuess + 1
+			dataStart = experimentDetailsEndOrGuess + 1
+			return dataStart!
 		} else {
-			return 1
+			dataStart = 1
+			return dataStart!
 		}
 	}
 }

@@ -15,12 +15,20 @@ class InspectorTableViewCell: NSTableCellView {
 	
 	@IBOutlet weak var delegate: InspectorTableViewCellDelegate?
 	
-	@IBAction func addButtonAction(_ sender: NSButton) {
+	@objc func addButtonAction(_ sender: NSButton) {
 		delegate?.addButtonPressed?(self)
 	}
 	
-	@IBAction func removeButtonAction(_ sender: NSButton) {
+	@objc func removeButtonAction(_ sender: NSButton) {
 		delegate?.removeButtonPressed?(self)
+	}
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		addButton.action = #selector(addButtonAction(_:))
+		removeButton.action = #selector(removeButtonAction(_:))
+		addButton.target = self
+		removeButton.target = self
 	}
 }
 

@@ -17,11 +17,9 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 	
 	var parser: Parser? {
 		didSet {
-			outlineView.reloadData()
+			reloadData()
 		}
 	}
-	
-	weak var selectionTableView: NSTableView?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -37,10 +35,10 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 			let view = view as! InspectorTableViewCell
 			view.tableView.delegate = self
 			view.tableView.dataSource = self
-			selectionTableView = view.tableView
 		case .experimentDetailsHeader:
 			let view = view as! InspectorCategoryCheckBoxCell
 			view.textField?.stringValue = "Experiment Details"
+			view.checkBox.isEnabled = parser != nil
 			guard let parser = parser else { return }
 			view.checkBox.state = parser.hasExperimentDetails ? .on : .off
 		case .experimentDetailsBody:
@@ -59,6 +57,7 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 			if parser.hasExperimentDetails {
 				view.firstTextField.integerValue = parser.experimentDetailsStartOrGuess
 				view.secondTextField.integerValue = parser.experimentDetailsEndOrGuess
+				dataController?.setNeedsSaved()
 			} else {
 				view.firstTextField.stringValue = ""
 				view.secondTextField.stringValue = ""
@@ -66,6 +65,7 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 		case .headerHeader:
 			let view = view as! InspectorCategoryCheckBoxCell
 			view.textField?.stringValue = "Header"
+			view.checkBox.isEnabled = parser != nil
 			guard let parser = parser else { return }
 			view.checkBox.state = parser.hasHeader ? .on : .off
 		case .headerBody:
@@ -98,6 +98,7 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 				
 				view.firstTextField.integerValue = parser.headerStartOrGuess
 				view.secondTextField.integerValue = parser.headerEndOrGuess
+				dataController?.setNeedsSaved()
 			} else {
 				view.firstTextField.stringValue = ""
 				view.secondTextField.stringValue = ""
@@ -114,7 +115,12 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 				return
 			}
 			
+			view.textField?.isEnabled = true
+			view.popUpButton.isEnabled = true
+			view.checkBox.isEnabled = true
+			
 			view.textField?.integerValue = parser.dataStartOrGuess
+			dataController?.setNeedsSaved()
 			let separatorMenu = NSMenu()
 			Parser.Separator.allCases.forEach { separator in
 				let item = NSMenuItem(title: separator.rawValue,
@@ -135,6 +141,12 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 extension ParserInspectorViewController {
 	var dataController: DataController? {
 		return DataController.shared
+	}
+	
+	func reloadData() {
+		let lastRow = outlineView.numberOfRows - 1
+		outlineView.reloadData(forRowIndexes: IndexSet(integersIn: 1...lastRow),
+													 columnIndexes: IndexSet(integer: 0))
 	}
 }
 

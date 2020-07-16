@@ -1082,9 +1082,6 @@
                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                             <font key="font" metaFont="system"/>
                                                                                         </buttonCell>
-                                                                                        <connections>
-                                                                                            <action selector="addButtonAction:" target="gnu-h8-zf3" id="6Sb-LT-bNb"/>
-                                                                                        </connections>
                                                                                     </button>
                                                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="LTL-RI-iCs">
                                                                                         <rect key="frame" x="19" y="4" width="11" height="12"/>
@@ -1092,9 +1089,6 @@
                                                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                             <font key="font" metaFont="system"/>
                                                                                         </buttonCell>
-                                                                                        <connections>
-                                                                                            <action selector="removeButtonAction:" target="gnu-h8-zf3" id="Khn-Hn-Yka"/>
-                                                                                        </connections>
                                                                                     </button>
                                                                                 </subviews>
                                                                                 <constraints>
@@ -1188,6 +1182,7 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="checkBox" destination="Zso-An-P7G" id="qKP-wf-k7O"/>
+                                                                <outlet property="delegate" destination="SdP-gU-hi2" id="WL2-5S-fVs"/>
                                                                 <outlet property="textField" destination="A82-b3-rWg" id="321-v9-77u"/>
                                                             </connections>
                                                         </tableCellView>
@@ -1245,7 +1240,7 @@
                                                                 <constraint firstAttribute="leading" secondItem="oxj-Cv-xAT" secondAttribute="trailing" constant="-80" id="upx-Sd-aZW"/>
                                                             </constraints>
                                                             <connections>
-                                                                <outlet property="delegate" destination="Kd2-E3-bt9" id="ifk-ix-Ndj"/>
+                                                                <outlet property="delegate" destination="SdP-gU-hi2" id="LLP-EF-xWI"/>
                                                                 <outlet property="firstTextField" destination="WVP-3X-tFC" id="Cqq-4q-fzE"/>
                                                                 <outlet property="secondTextField" destination="xKI-go-iFC" id="qMv-4a-qVI"/>
                                                             </connections>
@@ -1334,6 +1329,7 @@
                                                                 <constraint firstItem="zba-34-KTW" firstAttribute="trailing" secondItem="tiN-qc-5e6" secondAttribute="trailing" id="wnE-fP-kUf"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="SdP-gU-hi2" id="ZGv-t8-ruM"/>
                                                                 <outlet property="firstTextField" destination="yxv-jJ-fe1" id="kcs-PR-jJi"/>
                                                                 <outlet property="popUpButton" destination="zba-34-KTW" id="hFD-rf-5k3"/>
                                                                 <outlet property="secondTextField" destination="tiN-qc-5e6" id="AqA-VA-Fbi"/>
@@ -1412,6 +1408,7 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="checkBox" destination="soD-td-dP9" id="RtI-0T-Yzc"/>
+                                                                <outlet property="delegate" destination="SdP-gU-hi2" id="2rc-1X-MgD"/>
                                                                 <outlet property="popUpButton" destination="Qga-cP-HOl" id="bCq-Mb-oZX"/>
                                                                 <outlet property="textField" destination="Zgj-o1-yEO" id="dII-cA-hWu"/>
                                                             </connections>

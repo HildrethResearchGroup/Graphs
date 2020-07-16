@@ -20,10 +20,11 @@ class InspectorCategoryCheckBoxCell: NSTableCellView {
 	override func awakeFromNib() {
 		super.awakeFromNib()
 		checkBox.action = #selector(checkBoxAction(_:))
+		checkBox.target = self
 	}
 }
 
 // MARK: Delegate
 @objc protocol InspectorCategoryCheckBoxCellDelegate: class {
-	@objc optional func checkBoxDidChangeState(_ cell: InspectorCategoryCheckBoxCell)
+	@objc(inspectorCategoryCheckBoxCellCheckBoxDidChangeState:) optional func checkBoxDidChangeState(_ cell: InspectorCategoryCheckBoxCell)
 }
