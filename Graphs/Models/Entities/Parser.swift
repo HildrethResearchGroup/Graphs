@@ -48,6 +48,7 @@ extension Parser {
 		return NSFetchRequest<Parser>(entityName: "Parser")
 	}
 	
+	@NSManaged public var name: String
 	@objc(dataSeparator)
 	@NSManaged public var _dataSeparatorRaw: String
 	@objc(headerSeparator)
@@ -103,7 +104,7 @@ extension Parser {
 		set {
 			_defaultForFileTypes = newValue
 				.map { $0.filter { !$0.isWhitespace } }
-				.reduce("", +)
+				.joined(separator: ",")
 		}
 	}
 	

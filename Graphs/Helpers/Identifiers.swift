@@ -78,4 +78,10 @@ extension NSUserInterfaceItemIdentifier {
 	static let parserInspectorExperimentDetailsCell: Self = .init("ParserInspectorExperimentDetailsCell")
 	static let parserInspectorHeaderCell: Self = .init("ParserInspectorHeaderCell")
 	static let parserInspectorDataCell: Self = .init("ParserInspectorDataCell")
+	
+	static let parserNameColumn: Self = .init("ParserNameColumn")
+	static let parserDefaultsColumn: Self = .init("ParserDefaultsColumn")
+	
+	static let parserNameCell: Self = .init("ParserNameCell")
+	static let parserDefaultsCell: Self = .init("ParserDefaultsCell")
 }

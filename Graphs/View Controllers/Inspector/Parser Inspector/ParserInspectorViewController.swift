@@ -21,6 +21,13 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 		}
 	}
 	
+	weak var selectionTableView: NSTableView?
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		registerObservers()
+	}
+	
 	override func prepareView(_ view: NSTableCellView, item: ParserOutlineItem) {
 		switch item {
 		case .separator:
@@ -28,8 +35,9 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 			break
 		case .parserSelection:
 			let view = view as! InspectorTableViewCell
-//			view.tableView.delegate = self
-//			view.tableView.dataSource = self
+			view.tableView.delegate = self
+			view.tableView.dataSource = self
+			selectionTableView = view.tableView
 		case .experimentDetailsHeader:
 			let view = view as! InspectorCategoryCheckBoxCell
 			view.textField?.stringValue = "Experiment Details"
@@ -127,6 +135,17 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 extension ParserInspectorViewController {
 	var dataController: DataController? {
 		return DataController.shared
+	}
+}
+
+// MARK: Notifications
+extension ParserInspectorViewController {
+	func registerObservers() {
+		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded(_:)), name: .storeLoaded, object: nil)
+	}
+	
+	@objc func storeLoaded(_ notification: Notification) {
+		outlineView.reloadData()
 	}
 }
 

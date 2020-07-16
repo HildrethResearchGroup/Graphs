@@ -85,6 +85,7 @@ extension ParserController {
 	}
 	/// Creates a new parser.
 	/// - Returns: A new parser.
+	@discardableResult
 	func createParser() -> Parser {
 		let parser = Parser(context: context)
 		parsers.append(parser)
@@ -117,5 +118,21 @@ extension ParserController {
 	/// - Returns: The default parser for the given file type, or `nil` if there isn't one.
 	func defaultParsers(forFileType fileType: String) -> [Parser] {
 		return parsers.filter { $0.defaultForFileTypes.contains(fileType) }
+	}
+	/// Renames the given parser.
+	/// - Parameters:
+	///   - parser: The parser to rename.
+	///   - newName: The new name of the parser.
+	func rename(parser: Parser, to newName: String) {
+		parser.name = newName
+		dataController.setNeedsSaved()
+	}
+	/// Changes the default file types for the given parser.
+	/// - Parameters:
+	///   - parser: The parser to change its default file types.
+	///   - fileTypes: The extensions of the file types that should default to this parser.
+	func changeDefaultFileTypes(for parser: Parser, to fileTypes: [String]) {
+		parser.defaultForFileTypes = fileTypes
+		dataController.setNeedsSaved()
 	}
 }
