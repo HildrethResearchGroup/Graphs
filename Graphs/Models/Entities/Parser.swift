@@ -172,6 +172,68 @@ extension Parser {
 	}
 }
 
+// MARK: Validations
+extension Parser {
+	var experimentDetailsStartIsValid: Bool {
+		guard let sectionStart = experimentDetailsStart else { return false }
+		return sectionStart > 0
+	}
+	
+	var experimentDetailsEndIsValid: Bool {
+		guard let sectionStart = experimentDetailsStart, let sectionEnd = experimentDetailsEnd else { return false }
+		guard sectionEnd >= sectionStart else { return false }
+		return sectionEnd > 0
+	}
+	
+	var headerStartIsValid: Bool {
+		guard let sectionStart = headerStart else { return false }
+		if hasExperimentDetails {
+			guard let start = experimentDetailsStart, let end = experimentDetailsEnd else { return false }
+			// The header section starts within the experiment details section
+			if end >= start {
+				if (start...end).contains(sectionStart) { return false }
+			}
+		}
+		return sectionStart > 0
+	}
+	
+	var headerEndIsValid: Bool {
+		guard let sectionStart = headerStart, let sectionEnd = headerEnd else { return false }
+		if hasExperimentDetails {
+			guard let start = experimentDetailsStart, let end = experimentDetailsEnd else { return false }
+			// The header section intersects the experiment details section
+			if end >= start && sectionEnd >= sectionStart {
+				if (start...end).overlaps(sectionStart...sectionEnd) { return false }
+			}
+		}
+		guard sectionEnd >= sectionStart else { return false }
+		return sectionEnd > 0
+	}
+	
+	var dataStartIsValid: Bool {
+		guard let dataStart = dataStart else { return false }
+		if hasExperimentDetails {
+			guard let start = experimentDetailsStart, let end = experimentDetailsEnd else { return false }
+			// The start of the data is within the experiment details section
+			if end >= start {
+				if (start...end).contains(dataStart) { return false }
+			}
+			// The experiment details section is after the start of the data
+			if start >= dataStart { return false }
+		}
+		if hasHeader {
+			guard let start = headerStart, let end = headerEnd else { return false }
+			// The start of the data is within the header section
+			if end >= start {
+				if (start...end).contains(dataStart) { return false }
+			}
+			// The header section is after the start of the data
+			if start >= dataStart { return false }
+		}
+		return dataStart > 0
+	}
+}
+
 extension Parser {
 	enum Separator: String, CaseIterable {
 		case whitespace

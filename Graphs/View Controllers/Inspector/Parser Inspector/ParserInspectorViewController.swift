@@ -32,95 +32,86 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 			// No customization needed
 			break
 		case .parserSelection:
-			let view = view as! InspectorTableViewCell
-			view.tableView.delegate = self
-			view.tableView.dataSource = self
+			prepareParserSelection(view as! InspectorTableViewCell)
 		case .experimentDetailsHeader:
-			let view = view as! InspectorCategoryCheckBoxCell
-			view.textField?.stringValue = "Experiment Details"
-			view.checkBox.isEnabled = parser != nil
-			guard let parser = parser else { return }
-			view.checkBox.state = parser.hasExperimentDetails ? .on : .off
+			prepareExperimentDetailsHeader(view as! InspectorCategoryCheckBoxCell)
 		case .experimentDetailsBody:
-			let view = view as! InspectorTwoTextFieldsCell
-			guard let parser = parser else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-				view.firstTextField.isEnabled = false
-				view.secondTextField.isEnabled = false
-				return
-			}
-			
-			view.firstTextField.isEnabled = parser.hasExperimentDetails
-			view.secondTextField.isEnabled = parser.hasExperimentDetails
-			
-			if parser.hasExperimentDetails {
-				view.firstTextField.integerValue = parser.experimentDetailsStartOrGuess
-				view.secondTextField.integerValue = parser.experimentDetailsEndOrGuess
-				dataController?.setNeedsSaved()
-			} else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-			}
+			prepareExperimentDetailsBody(view as! InspectorTwoTextFieldsCell)
 		case .headerHeader:
-			let view = view as! InspectorCategoryCheckBoxCell
-			view.textField?.stringValue = "Header"
-			view.checkBox.isEnabled = parser != nil
-			guard let parser = parser else { return }
-			view.checkBox.state = parser.hasHeader ? .on : .off
+			prepareHeaderHeader(view as! InspectorCategoryCheckBoxCell)
 		case .headerBody:
-			let view = view as! InspectorTwoTextFieldsOnePopUpButtonCell
-			guard let parser = parser else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-				
-				view.popUpButton.isEnabled = false
-				view.firstTextField.isEnabled = false
-				view.secondTextField.isEnabled = false
-				return
-			}
-			
-			view.popUpButton.isEnabled = parser.hasHeader
-			view.firstTextField.isEnabled = parser.hasHeader
-			view.secondTextField.isEnabled = parser.hasHeader
-			
-			if parser.hasHeader {
-				let separatorMenu = NSMenu()
-				Parser.Separator.allCases.forEach { separator in
-					let item = NSMenuItem(title: separator.rawValue,
-																action: nil,
-																keyEquivalent: "")
-					separatorMenu.addItem(item)
-				}
-				
-				view.popUpButton.menu = separatorMenu
-				view.popUpButton.selectItem(withTitle: parser.headerSeparator.rawValue)
-				
-				view.firstTextField.integerValue = parser.headerStartOrGuess
-				view.secondTextField.integerValue = parser.headerEndOrGuess
-				dataController?.setNeedsSaved()
-			} else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-			}
+			prepareHeaderBody(view as! InspectorTwoTextFieldsOnePopUpButtonCell)
 		case .dataHeader:
-			view.textField?.stringValue = "Data"
+			prepareDataHeader(view)
 		case .dataBody:
-			let view = view as! InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell
-			guard let parser = parser else {
-				view.textField?.stringValue = ""
-				view.textField?.isEnabled = false
-				view.popUpButton.isEnabled = false
-				view.checkBox.isEnabled = false
-				return
-			}
+			prepareDataBody(view as! InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell)
+		}
+	}
+}
+
+// MARK: View Preparation
+extension ParserInspectorViewController {
+	func prepareParserSelection(_ view: InspectorTableViewCell) {
+		view.tableView.delegate = self
+		view.tableView.dataSource = self
+	}
+	
+	func prepareExperimentDetailsHeader(_ view: InspectorCategoryCheckBoxCell) {
+		view.textField?.stringValue = "Experiment Details"
+		view.checkBox.isEnabled = parser != nil
+		guard let parser = parser else { return }
+		view.checkBox.state = parser.hasExperimentDetails ? .on : .off
+	}
+	
+	func prepareExperimentDetailsBody(_ view: InspectorTwoTextFieldsCell) {
+		guard let parser = parser else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
+			view.firstTextField.isEnabled = false
+			view.secondTextField.isEnabled = false
+			return
+		}
+		
+		view.firstTextField.isEnabled = parser.hasExperimentDetails
+		view.secondTextField.isEnabled = parser.hasExperimentDetails
+		
+		if parser.hasExperimentDetails {
+			view.firstTextField.integerValue = parser.experimentDetailsStartOrGuess
+			view.secondTextField.integerValue = parser.experimentDetailsEndOrGuess
 			
-			view.textField?.isEnabled = true
-			view.popUpButton.isEnabled = true
-			view.checkBox.isEnabled = true
+			view.firstTextField.setValid(parser.experimentDetailsStartIsValid)
+			view.secondTextField.setValid(parser.experimentDetailsEndIsValid)
 			
-			view.textField?.integerValue = parser.dataStartOrGuess
 			dataController?.setNeedsSaved()
+		} else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
+		}
+	}
+	
+	func prepareHeaderHeader(_ view: InspectorCategoryCheckBoxCell) {
+		view.textField?.stringValue = "Header"
+		view.checkBox.isEnabled = parser != nil
+		guard let parser = parser else { return }
+		view.checkBox.state = parser.hasHeader ? .on : .off
+	}
+	
+	func prepareHeaderBody(_ view: InspectorTwoTextFieldsOnePopUpButtonCell) {
+		guard let parser = parser else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
+			
+			view.popUpButton.isEnabled = false
+			view.firstTextField.isEnabled = false
+			view.secondTextField.isEnabled = false
+			return
+		}
+		
+		view.popUpButton.isEnabled = parser.hasHeader
+		view.firstTextField.isEnabled = parser.hasHeader
+		view.secondTextField.isEnabled = parser.hasHeader
+		
+		if parser.hasHeader {
 			let separatorMenu = NSMenu()
 			Parser.Separator.allCases.forEach { separator in
 				let item = NSMenuItem(title: separator.rawValue,
@@ -130,12 +121,57 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 			}
 			
 			view.popUpButton.menu = separatorMenu
-			view.popUpButton.selectItem(withTitle: parser.dataSeparator.rawValue)
+			view.popUpButton.selectItem(withTitle: parser.headerSeparator.rawValue)
 			
-			view.checkBox.state = parser.hasFooter ? .on : .off
+			view.firstTextField.integerValue = parser.headerStartOrGuess
+			view.secondTextField.integerValue = parser.headerEndOrGuess
+			
+			view.firstTextField.setValid(parser.headerStartIsValid)
+			view.secondTextField.setValid(parser.headerEndIsValid)
+			
+			dataController?.setNeedsSaved()
+		} else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
 		}
 	}
+	
+	func prepareDataHeader(_ view: NSTableCellView) {
+		view.textField?.stringValue = "Data"
+	}
+	
+	func prepareDataBody(_ view: InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell) {
+		guard let parser = parser else {
+			view.textField?.stringValue = ""
+			view.textField?.isEnabled = false
+			view.popUpButton.isEnabled = false
+			view.checkBox.isEnabled = false
+			return
+		}
+		
+		view.textField?.isEnabled = true
+		view.popUpButton.isEnabled = true
+		view.checkBox.isEnabled = true
+		
+		view.textField?.integerValue = parser.dataStartOrGuess
+		view.textField?.setValid(parser.dataStartIsValid)
+		
+		dataController?.setNeedsSaved()
+		let separatorMenu = NSMenu()
+		Parser.Separator.allCases.forEach { separator in
+			let item = NSMenuItem(title: separator.rawValue,
+														action: nil,
+														keyEquivalent: "")
+			separatorMenu.addItem(item)
+		}
+		
+		view.popUpButton.menu = separatorMenu
+		view.popUpButton.selectItem(withTitle: parser.dataSeparator.rawValue)
+		
+		view.checkBox.state = parser.hasFooter ? .on : .off
+	}
 }
+
 
 // MARK: Helpers
 extension ParserInspectorViewController {
