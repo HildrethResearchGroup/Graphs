@@ -261,3 +261,81 @@ extension Parser {
 		}
 	}
 }
+
+// MARK: Parsing
+extension Parser {
+	func parse(file: File) -> ParsedFile? {
+		guard let url = file.path else { return nil }
+		guard let contents = try? String.detectingEncoding(ofContents: url).string else { return nil }
+		
+		let lines = contents.components(separatedBy: .newlines)
+		
+		guard let experimentDetails = { () -> String? in
+			if hasExperimentDetails {
+				guard experimentDetailsStartIsValid && experimentDetailsEndIsValid else { return nil }
+				let start = experimentDetailsStartOrGuess - 1
+				let end = experimentDetailsEndOrGuess - 1
+				if lines.count <= end {
+					if lines.count <= start {
+						return ""
+					} else {
+						return lines[start..<lines.count].joined(separator: "\n")
+					}
+				}
+				return lines[start...end].joined(separator: "\n")
+			} else {
+				return ""
+			}
+			}() else { return nil}
+		
+		let cells = lines
+			.map { $0.components(separatedBy: headerSeparator.characterSet) }
+		
+		guard let header = { () -> [[String]]? in
+			if hasHeader {
+				guard headerStartIsValid && headerEndIsValid else { return nil }
+				
+				let start = headerStartOrGuess - 1
+				let end = headerEndOrGuess - 1
+				if cells.count <= end {
+					if cells.count <= start {
+						return []
+					} else {
+						return Array(cells[start..<cells.count])
+					}
+				} else {
+					return Array(cells[start...end])
+				}
+			} else {
+				return []
+			}
+			}() else { return nil }
+		
+		guard let data = { () -> [[String]]? in
+			let start = dataStartOrGuess - 1
+			let end: Int = {
+				if hasFooter {
+					return cells.firstIndex(of: []) ?? cells.firstIndex(of: [""]) ?? cells.count - 1
+				} else {
+					return cells.count - 1
+				}
+			}()
+			
+			guard start > cells.count else { return [] }
+			if cells.count >= end {
+				return Array(cells[start..<end])
+			} else {
+				return Array(cells[start...end])
+			}
+			}() else { return nil }
+		
+		let headerNumberOfColumns = header.max { $0.count < $1.count }?.count ?? 0
+		let dataNumberOfColumns = header.max { $0.count < $1.count }?.count ?? 0
+		let numberOfColumns = max(headerNumberOfColumns, dataNumberOfColumns)
+		
+		return ParsedFile(experimentDetails: experimentDetails,
+											header: header,
+											data: data,
+											numberOfColumns: numberOfColumns)
+	}
+}

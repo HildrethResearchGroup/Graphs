@@ -58,6 +58,7 @@
 		5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */; };
 		5ABBB1BC24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */; };
 		5ABBB1BE24C02024005F658E /* NSTextFieldValidationColoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */; };
+		5ABBB1C024C0258A005F658E /* ParsedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BF24C0258A005F658E /* ParsedFile.swift */; };
 		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
 		5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52D24BD3459006D386E /* NotificationTextField.swift */; };
 		5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */; };
@@ -143,6 +144,7 @@
 		5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberedTextView.swift; sourceTree = "<group>"; };
 		5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+CellDelegates.swift"; sourceTree = "<group>"; };
 		5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextFieldValidationColoring.swift; sourceTree = "<group>"; };
+		5ABBB1BF24C0258A005F658E /* ParsedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedFile.swift; sourceTree = "<group>"; };
 		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
 		5ACFC52D24BD3459006D386E /* NotificationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTextField.swift; sourceTree = "<group>"; };
 		5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+FirstResponder.swift"; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				5A89838524BDA2F20057D511 /* Parser.swift */,
 				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51F2452A78F00450137 /* Directory.swift */,
+				5ABBB1BF24C0258A005F658E /* ParsedFile.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ABBB1C024C0258A005F658E /* ParsedFile.swift in Sources */,
 				5A73E53C2453473F00450137 /* Identifiers.swift in Sources */,
 				5A4899D824BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift in Sources */,
 				5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */,
