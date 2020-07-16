@@ -84,4 +84,6 @@ extension NSUserInterfaceItemIdentifier {
 	
 	static let parserNameCell: Self = .init("ParserNameCell")
 	static let parserDefaultsCell: Self = .init("ParserDefaultsCell")
+	
+	static let dataInspectorTableCell: Self = .init("DataInspectorTableCell")
 }

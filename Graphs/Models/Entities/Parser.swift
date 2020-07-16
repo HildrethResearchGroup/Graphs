@@ -266,7 +266,9 @@ extension Parser {
 extension Parser {
 	func parse(file: File) -> ParsedFile? {
 		guard let url = file.path else { return nil }
-		guard let contents = try? String.detectingEncoding(ofContents: url).string else { return nil }
+		guard let rawContents = try? String.detectingEncoding(ofContents: url).string else { return nil }
+		
+		let contents = rawContents.replacingOccurrences(of: "\r\n", with: "\n")
 		
 		let lines = contents.components(separatedBy: .newlines)
 		
@@ -296,13 +298,15 @@ extension Parser {
 			}
 			}() else { return nil}
 		
-		let cells = lines
-			.map { $0.components(separatedBy: headerSeparator.characterSet) }
+		
 		
 		// Try to get the header. If the header is enabled but the start and/or end is invalid then return nil
 		guard let header = { () -> [[String]]? in
 			if hasHeader {
 				guard headerStartIsValid && headerEndIsValid else { return nil }
+				
+				let cells = lines
+				.map { $0.components(separatedBy: headerSeparator.characterSet) }
 				// The index of each line is one less than its number. The line number is shown to the user rather than the line index, because for non-programmers 1-based indexing is more natural
 				// The two values can be unsafely unwrapped because if either was nil, then the previous line would return false
 				let start = headerStartOrGuess - 1
@@ -329,10 +333,13 @@ extension Parser {
 		// Try to get the data. If the data start is invalid then return nil
 		guard let data = { () -> [[String]]? in
 			guard dataStartIsValid else { return nil }
+			
+			let cells = lines
+			.map { $0.components(separatedBy: dataSeparator.characterSet) }
 			// The index of each line is one less than its number. The line number is shown to the user rather than the line index, because for non-programmers 1-based indexing is more natural
 			// This value can be unsafely unwrapped because if it was nil, then the previous line would return false
 			let start = dataStart! - 1
-			guard start > cells.count else { return [] }
+			guard start < cells.count else { return [] }
 			
 			let end: Int = {
 				if hasFooter {
@@ -357,7 +364,7 @@ extension Parser {
 		// The number of columns is used to determine how many columns to add to an NSTableView. There can be a variable number of columns, so return the maximum number of columns in the header and data sections
 		// The number of columns is calculated here to prevent having to recalculate it from within the tableview when updates are needed
 		let headerNumberOfColumns = header.max { $0.count < $1.count }?.count ?? 0
-		let dataNumberOfColumns = header.max { $0.count < $1.count }?.count ?? 0
+		let dataNumberOfColumns = data.max { $0.count < $1.count }?.count ?? 0
 		let numberOfColumns = max(headerNumberOfColumns, dataNumberOfColumns)
 		
 		return ParsedFile(experimentDetails: experimentDetails,

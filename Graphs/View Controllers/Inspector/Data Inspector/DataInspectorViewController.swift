@@ -17,9 +17,12 @@ class DataInspectorViewController: NSViewController {
 	
 	var file: File? {
 		didSet {
+			parsedFile = parseFile()
 			prepareView()
 		}
 	}
+	
+	var parsedFile: ParsedFile?
 	
 	override func viewDidLoad() {
 		// Enable horizontal scrolling to prevent word wraps
@@ -65,7 +68,16 @@ class DataInspectorViewController: NSViewController {
 
 // MARK: Helpers
 extension DataInspectorViewController {
+	var dataController: DataController? {
+		return DataController.shared
+	}
+	
 	func prepareView() {
+		prepareTextView()
+		prepareTableView()
+	}
+	
+	func prepareTextView() {
 		guard let url = file?.path else { return }
 		do {
 			let fileContents = try String.detectingEncoding(ofContents: url).string
@@ -76,5 +88,34 @@ extension DataInspectorViewController {
 			textView.string = ""
 			errorLabel.isHidden = false
 		}
+	}
+	
+	func prepareTableView() {
+		defer {
+			tableView.reloadData()
+		}
+		tableView.tableColumns.forEach { tableView.removeTableColumn($0) }
+		guard let parsedFile = parsedFile else { return }
+		
+		let header = parsedFile.header.first
+		
+		let columns: [NSTableColumn] = (0..<parsedFile.numberOfColumns).map { index in
+			let column = NSTableColumn()
+			let title: String? = {
+				guard let header = header else { return nil }
+				guard index < header.count else { return nil }
+				return header[index]
+			}()
+			column.title = title ?? ""
+			return column
+		}
+		
+		columns.forEach { tableView.addTableColumn($0) }
+	}
+	
+	func parseFile() -> ParsedFile? {
+		guard let file = file else { return nil }
+		guard let parser = dataController?.parser(for: file) else { return nil }
+		return parser.parse(file: file)
 	}
 }
