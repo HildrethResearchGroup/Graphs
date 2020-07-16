@@ -11,7 +11,7 @@ import Cocoa
 class DataInspectorViewController: NSViewController {
 	@IBOutlet weak var tabSegmentedControl: NSSegmentedControl!
 	@IBOutlet weak var tabView: NSTabView!
-	@IBOutlet var textView: NSTextView!
+	@IBOutlet var textView: CodeTextView!
 	@IBOutlet weak var tableView: NSTableView!
 	@IBOutlet weak var errorLabel: NSTextField!
 	
@@ -19,6 +19,32 @@ class DataInspectorViewController: NSViewController {
 		didSet {
 			prepareView()
 		}
+	}
+	
+	override func viewDidLoad() {
+		// Enable horizontal scrolling to prevent word wraps
+		textView.maxSize = NSSize(width: 1.0e7, height: 1.0e7)
+		textView.isHorizontallyResizable = true
+		textView.textContainer?.widthTracksTextView = false
+		textView.textContainer?.containerSize = NSSize(width: 1.0e7, height: 1.0e7)
+		
+		// Add unlimited tab stops to prevent wrapping from tabs
+		let paragraphStyle = NSMutableParagraphStyle()
+		paragraphStyle.defaultTabInterval = 36.0
+		paragraphStyle.tabStops = []
+		textView.defaultParagraphStyle = paragraphStyle
+		
+		// Add line numbers
+		if let scrollView = textView.enclosingScrollView {
+			let rulerView = LineNumberRulerView(textView: textView)
+			scrollView.verticalRulerView = rulerView
+			scrollView.hasVerticalRuler = true
+			scrollView.rulersVisible = true
+		}
+		
+		// Use a monospaced font
+		let font = NSFont.monospacedSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular)
+		textView.font = font
 	}
 	
 	@IBAction func tabSegmentedControlChanged(_ sender: NSSegmentedControl) {

@@ -55,6 +55,7 @@
 		5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */; };
 		5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E42247B76EB001FF163 /* FileListViewController.swift */; };
 		5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */; };
+		5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */; };
 		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
 		5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52D24BD3459006D386E /* NotificationTextField.swift */; };
 		5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */; };
@@ -137,6 +138,7 @@
 		5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserFileTypesCell.swift; sourceTree = "<group>"; };
 		5AA95E42247B76EB001FF163 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
 		5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
+		5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberedTextView.swift; sourceTree = "<group>"; };
 		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
 		5ACFC52D24BD3459006D386E /* NotificationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTextField.swift; sourceTree = "<group>"; };
 		5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+FirstResponder.swift"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			children = (
 				5A27B07E249733710024403E /* InspectorButton.swift */,
 				5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */,
+				5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */,
 				5A937DED24BEA56700D025B0 /* Inspector Cells */,
 			);
 			path = Views;
@@ -563,6 +566,7 @@
 				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
 				5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */,
+				5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */,
 				5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
