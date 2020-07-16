@@ -40,5 +40,6 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 			file?.parser = nil
 			break
 		}
+		dataController.setNeedsSaved()
 	}
 }

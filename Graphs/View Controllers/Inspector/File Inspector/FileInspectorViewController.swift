@@ -66,7 +66,7 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			let defaultItems = [NSMenuItem(title: "Default for File Type (\(fileTypeDefault?.name ?? "None"))",
 																		 action: nil,
 																		 keyEquivalent: ""),
-													NSMenuItem(title: "Default for Folder (\(folderDefault?.name ?? "None"))",
+													NSMenuItem(title: "Default for Directory (\(folderDefault?.name ?? "None"))",
 																		 action: nil,
 																		 keyEquivalent: ""),
 													NSMenuItem.separator()]

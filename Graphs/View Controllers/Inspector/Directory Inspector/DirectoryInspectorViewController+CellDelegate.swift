@@ -8,16 +8,31 @@
 
 import Cocoa
 
+// MARK: TwoTextFieldsCell
 extension DirectoryInspectorViewController: InspectorTwoTextFieldsCellDelegate {
 	func firstTextFieldDidEndEditing(_ cell: InspectorTwoTextFieldsCell) {
-		nameTextFieldDidEndEditing(cell.firstTextField)
+		guard let directory = directory else { return }
+		dataController?.rename(directory: directory, to: cell.textField?.stringValue)
 	}
 }
 
-// MARK: Helpers
-private extension DirectoryInspectorViewController {
-	func nameTextFieldDidEndEditing(_ textField: NSTextField) {
-		guard let directory = directory else { return }
-		dataController?.rename(directory: directory, to: textField.stringValue)
+// MARK: TwoPopUpButtonsCell
+extension DirectoryInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
+	func firstPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
+		// Parser popup
+		guard let dataController = dataController else { return }
+		guard let item = cell.firstPopUpButton.selectedItem else { return }
+		switch item.tag {
+		case -1:
+			// Default for folder
+			directory?.parser = nil
+		case 0..<dataController.parsers.count:
+			directory?.parser = dataController.parsers[item.tag]
+		default:
+			print("[WARNING] Invalid tag at DirectoryInspectorViewController.firstPopUpButtonDidChange(_:)")
+			directory?.parser = nil
+			break
+		}
+		dataController.setNeedsSaved()
 	}
 }

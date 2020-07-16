@@ -48,8 +48,41 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 		case .templatesHeader:
 			view.textField?.stringValue = "Default Templates"
 		case .templatesBody:
-			// TODO: Implement
-			#warning("Not implemented")
+			guard let dataController = dataController else { break }
+			guard let directory = directory else { break }
+			let view = view as! InspectorTwoPopUpButtonsCell
+			
+			let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
+				let item = NSMenuItem(title: parser.name,
+															action: nil,
+															keyEquivalent: "")
+				item.tag = index
+				return item
+			}
+			
+			let parentDefault = dataController.parser(for: directory.parent!)
+			
+			let defaultItems = [NSMenuItem(title: "Default for Directory (\(parentDefault?.name ?? "None"))",
+																		 action: nil,
+																		 keyEquivalent: ""),
+													NSMenuItem.separator()]
+			
+			defaultItems[0].tag = -1
+			defaultItems[1].tag = Int.min
+			
+			view.firstPopUpButton.autoenablesItems = false
+			view.firstPopUpButton.menu?.items = defaultItems + items
+			
+			guard directory.parser != nil else {
+				view.firstPopUpButton.selectItem(withTag: -1)
+				break
+			}
+			
+			guard let parser = dataController.parser(for: directory) else { break }
+			
+			guard let index = dataController.parsers.firstIndex(of: parser) else { break }
+			
+			view.firstPopUpButton.selectItem(withTag: index)
 			return
 		}
 	}

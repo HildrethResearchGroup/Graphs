@@ -864,6 +864,7 @@
                                                                 <constraint firstItem="NsH-eO-jSj" firstAttribute="trailing" secondItem="eiO-p9-cCc" secondAttribute="trailing" id="tAH-4v-RnI"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="qKW-U2-QNi" id="8S2-tB-WaZ"/>
                                                                 <outlet property="firstPopUpButton" destination="VkB-yd-IhU" id="J6G-Yq-OJ1"/>
                                                                 <outlet property="secondPopUpButton" destination="4tl-kL-06j" id="kJM-SN-gBS"/>
                                                             </connections>
