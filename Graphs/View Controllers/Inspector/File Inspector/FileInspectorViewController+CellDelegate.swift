@@ -45,6 +45,8 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 		let lastRow = outlineView.numberOfRows - 1
 		outlineView.reloadData(forRowIndexes: IndexSet(integer: lastRow),
 													 columnIndexes: IndexSet(integer: 0))
+		
+		NotificationCenter.default.post(name: .graphMayHaveChanged, object: file)
 	}
 	
 	func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
@@ -62,6 +64,7 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 			file?.graphTemplate = nil
 		}
 		dataController.setNeedsSaved()
+		NotificationCenter.default.post(name: .graphMayHaveChanged, object: file)
 	}
 }
 

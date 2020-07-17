@@ -79,15 +79,15 @@ extension GraphInspectorViewController {
 		
 		let selection = tableView.selectedRowIndexes
 		
-		let parsers = selection.map { dataController.graphTemplates[$0] }
+		let graphTemplates = selection.map { dataController.graphTemplates[$0] }
 		
-		switch parsers.count {
+		switch graphTemplates.count {
 		case 0:
 			errorLabel.isHidden = false
 			errorLabel.stringValue = "No Template Selected"
 		case 1:
 			errorLabel.isHidden = true
-			controller = parsers.first!.controller
+			controller = graphTemplates.first!.controller
 			controller?.setDrawingView(graphView)
 			controller?.setDelegate(self)
 		default:

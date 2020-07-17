@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -976,8 +976,8 @@ CA
         <scene sceneID="Xe4-4N-bKO">
             <objects>
                 <viewController title="Detail View" id="HTN-3w-kbB" customClass="FileListViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="Yoh-Dh-kY6">
-                        <rect key="frame" x="0.0" y="0.0" width="922" height="300"/>
+                    <view key="view" id="Yoh-Dh-kY6">
+                        <rect key="frame" x="0.0" y="0.0" width="922" height="375"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="kRG-WM-FJX" userLabel="Bottom Bar">
@@ -986,7 +986,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="402" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
-                                            <font key="font" metaFont="menu" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -998,11 +998,11 @@ CA
                                     <constraint firstItem="y4e-RY-MbZ" firstAttribute="centerY" secondItem="kRG-WM-FJX" secondAttribute="centerY" id="skq-mf-iis"/>
                                 </constraints>
                             </customView>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="nBB-7g-ZHY">
-                                <rect key="frame" x="0.0" y="24" width="922" height="351"/>
+                            <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="nBB-7g-ZHY">
+                                <rect key="frame" x="0.0" y="195" width="922" height="180"/>
                                 <subviews>
                                     <customView misplaced="YES" id="cPF-Dk-Bj3">
-                                        <rect key="frame" x="0.0" y="0.0" width="922" height="350"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="922" height="83"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <subviews>
                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjd-XB-03O">
@@ -1256,11 +1256,32 @@ CA
                                             <constraint firstItem="Pjd-XB-03O" firstAttribute="leading" secondItem="cPF-Dk-Bj3" secondAttribute="leading" id="qvT-6h-nMg"/>
                                         </constraints>
                                     </customView>
-                                    <customView misplaced="YES" id="wpb-2g-r4k">
-                                        <rect key="frame" x="0.0" y="351" width="922" height="0.0"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <customView misplaced="YES" id="8ib-BN-0LY">
+                                        <rect key="frame" x="0.0" y="84" width="922" height="96"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wpb-2g-r4k" customClass="DPDrawingView">
+                                                <rect key="frame" x="0.0" y="0.0" width="922" height="150"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="5JT-Tg-6Yj"/>
+                                                </constraints>
+                                            </customView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vQ-vW-piE">
+                                                <rect key="frame" x="408" y="67" width="107" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="No File Selected" id="Vvy-6r-jj3">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="5JT-Tg-6Yj"/>
+                                            <constraint firstItem="8vQ-vW-piE" firstAttribute="centerY" secondItem="8ib-BN-0LY" secondAttribute="centerY" id="4Gy-Fp-uQ6"/>
+                                            <constraint firstAttribute="bottom" secondItem="wpb-2g-r4k" secondAttribute="bottom" id="5WY-fK-FlJ"/>
+                                            <constraint firstItem="8vQ-vW-piE" firstAttribute="centerX" secondItem="8ib-BN-0LY" secondAttribute="centerX" id="Hrb-I4-Mj1"/>
+                                            <constraint firstItem="wpb-2g-r4k" firstAttribute="top" secondItem="8ib-BN-0LY" secondAttribute="top" id="hHf-di-2Oc"/>
+                                            <constraint firstAttribute="trailing" secondItem="wpb-2g-r4k" secondAttribute="trailing" id="pxM-C8-Qpa"/>
+                                            <constraint firstItem="wpb-2g-r4k" firstAttribute="leading" secondItem="8ib-BN-0LY" secondAttribute="leading" id="ttj-bN-Z9c"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -1283,6 +1304,8 @@ CA
                     <connections>
                         <outlet property="byteCountFormatter" destination="xqG-GO-f7d" id="Zvt-Y2-tfO"/>
                         <outlet property="dateFormatter" destination="UfY-uU-8Qe" id="3ZO-O9-VLQ"/>
+                        <outlet property="graphErrorLabel" destination="8vQ-vW-piE" id="A0E-G2-7Cw"/>
+                        <outlet property="graphView" destination="wpb-2g-r4k" id="z5L-bU-bUn"/>
                         <outlet property="itemsSelectedLabel" destination="y4e-RY-MbZ" id="ioP-L6-YPz"/>
                         <outlet property="progressIndicator" destination="9zr-5p-IeX" id="cel-9O-OsQ"/>
                         <outlet property="tableView" destination="pb6-fr-3Ec" id="JK7-ue-pLL"/>

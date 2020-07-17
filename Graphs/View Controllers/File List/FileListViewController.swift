@@ -9,6 +9,8 @@
 import Cocoa
 
 class FileListViewController: NSViewController {
+	@IBOutlet weak var graphView: DPDrawingView!
+	@IBOutlet weak var graphErrorLabel: NSTextField!
 	/// The table view.
 	@IBOutlet weak var tableView: NSTableView!
 	/// The label in the bottom bar of the window. Displays the numebr of files in the directory selection as well as the currently selected files in the table view.
@@ -20,6 +22,8 @@ class FileListViewController: NSViewController {
 	@IBOutlet var byteCountFormatter: ByteCountFormatter!
 	
 	var fileListIsUpdating = false
+	
+	var controller: DGController?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,6 +39,7 @@ class FileListViewController: NSViewController {
 		let filesSelected = tableView.selectedRowIndexes
 			.map { dataController.filesDisplayed[$0] }
 		dataController.filesSelected = filesSelected
+		updateGraph()
 	}
 	/// Updates the text on the bottom bar's label to indicate how many items are in the selected directories and how many are selected.
 	func updateSelectionLabel() {
@@ -97,6 +102,95 @@ extension FileListViewController {
 		tableView.removeRows(at: rows, withAnimation: .slideDown)
 		// We do not need to call directoryController.updateFilesToShow() becuase we manually manage the change to animate it. If we would also call this function, it would abort the animation.
 	}
+	
+	func updateGraph() {
+		defer {
+			graphErrorLabel.isHidden = !graphView.isHidden
+		}
+		graphView.isHidden = true
+		guard let selectedFiles = dataController?.filesSelected else {
+			graphErrorLabel.stringValue = "No File Selected"
+			return
+		}
+		
+		switch selectedFiles.count {
+		case 0:
+			graphErrorLabel.stringValue = "No File Selected"
+		case 1:
+			let file = selectedFiles.first!
+			guard let graphTemplate = dataController?.graphTemplate(for: file) else {
+				graphErrorLabel.stringValue = "No Graph Template Selected"
+				return
+			}
+			guard let controller = graphTemplate.controller else {
+				graphErrorLabel.stringValue = "Error Displaying Graph Template"
+				return
+			}
+			
+			guard let parser = dataController?.parser(for: file) else {
+				graphErrorLabel.stringValue = "No Parser Selected"
+				return
+			}
+			
+			guard let parsedFile = parser.parse(file: file) else {
+				graphErrorLabel.stringValue = "Error Parsing File"
+				return
+			}
+			
+			let data = parsedFile.data
+			
+			let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
+				.map { dataColumn in
+					return dataColumn.compactMap { $0 as NSString? }
+			}
+			
+			controller.dataColumns().forEach { dataColumn in
+				controller.removeDataColumn((dataColumn as! DGDataColumn))
+			}
+
+			(0..<parsedFile.numberOfColumns).forEach { index in
+				controller.addBinaryColumn(withName: "\(index)")
+			}
+
+			columns.enumerated().forEach { (index, element) in
+				controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
+			}
+			
+			let colors: [NSColor] = (0..<parsedFile.numberOfColumns).map { index in
+				let percent = CGFloat(index) / CGFloat(parsedFile.numberOfColumns)
+				return NSColor(calibratedHue: percent, saturation: 1.0, brightness: 1.0, alpha: 1.0)
+			}
+			
+			for index in 1..<parsedFile.numberOfColumns {
+				let plot = controller.createPlotCommand()
+				
+				plot?.setXColumn(controller.dataColumn(at: 1))
+				plot?.setYColumn(controller.dataColumn(at: Int32(index + 1)))
+				plot?.setLineColorType(DGColorNumber.init(rawValue: UInt32(11)))
+				plot?.setLineColor(colors[index - 1])
+				
+				
+				
+				controller.addDrawingCommand(byCopying: plot)
+			}
+			
+			
+			
+//			controller.dataColumn(at: 1)?.setDataFrom(["0", "2", "3", "5"])
+//			controller.dataColumn(at: 2)?.setDataFrom(["0", "3", "2", "1"])
+			
+			
+			
+			
+			controller.setDrawingView(graphView)
+			controller.setDelegate(self)
+			
+			self.controller = controller
+			graphView.isHidden = false
+		default:
+			graphErrorLabel.stringValue = "Multiple Files Selected"
+		}
+	}
 }
 
 // MARK: Collection Utilities
@@ -136,6 +230,14 @@ extension FileListViewController {
 																	 selector: #selector(fileListFinishedWork(_:)),
 																	 name: .fileListFinishedWork,
 																	 object: nil)
+		notificationCenter.addObserver(self,
+																	 selector: #selector(graphMayHaveChanged(_:)),
+																	 name: .graphMayHaveChanged,
+																	 object: nil)
+	}
+	
+	@objc func graphMayHaveChanged(_ notification: Notification) {
+		updateGraph()
 	}
 	
 	@objc func fileRenamed(_ notification: Notification) {
