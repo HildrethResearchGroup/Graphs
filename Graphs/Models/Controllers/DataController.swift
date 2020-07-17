@@ -22,6 +22,8 @@ class DataController {
 	private var fileController: FileController!
 	/// A subcontroller which manages file parsers.
 	private var parserController: ParserController!
+	/// A subcontroller which manages graph templates.
+	private var graphController: GraphController!
 	/// Creates a `DataController` and runs the completion handler after Core Data has loaded the model from the store.
 	/// - Parameter completion: The completion handler to run after Core Data has loaded the model.
 	init(completion: @escaping () -> ()) {
@@ -33,6 +35,7 @@ class DataController {
 		directoryController = .init(dataController: self)
 		fileController = .init(dataController: self)
 		parserController = .init(dataController: self)
+		graphController = .init(dataController: self)
 		
 		loadStore(completion: completion)
 		registerObservers()
@@ -140,6 +143,7 @@ extension DataController {
 			// Sometimes the NSOutlineView wrongfully collapses the root -- set it on load to not be collapsed. Without doing this, the top level items may not auto-expand on load.
 			self.directoryController.rootDirectory?.collapsed = false
 			self.parserController.loadParsers()
+			self.graphController.loadGraphTemplates()
 			completion()
 		}
 	}
@@ -293,5 +297,35 @@ extension DataController {
 	///   - fileTypes: The extensions of the file types that should default to this parser.
 	func changeDefaultFileTypes(for parser: Parser, to fileTypes: [String]) {
 		parserController.changeDefaultFileTypes(for: parser, to: fileTypes)
+	}
+}
+
+// MARK: Graph Interface
+extension DataController {
+	var graphTemplates: [GraphTemplate] {
+		return graphController.graphTemplates
+	}
+	/// Loads the imported graph templates from Core Data.
+	func loadGraphTemplates() {
+		graphController.loadGraphTemplates()
+	}
+	/// Imports a graph template from a file url.
+	/// - Parameter url: The file url of the graph template.
+	/// - Returns: The graph template and its associated controller if it could successfully be created, otherwise `nil`.
+	func importGraphTemplate(from url: URL) -> (template: GraphTemplate, controller: DGController)? {
+		return graphController.importGraphTemplate(from: url)
+	}
+	/// Deletes the diven graph template.
+	/// - Parameter graphTemplate: The graph template to remove.
+	func delete(graphTemplate: GraphTemplate) {
+		context.delete(graphTemplate)
+		return graphController.delete(graphTemplate: graphTemplate)
+	}
+	/// Renames the graph template.
+	/// - Parameters:
+	///   - graphTemplate: The graph template to rename.
+	///   - newName: The new name of the template.
+	func rename(graphTemplate: GraphTemplate, to newName: String) {
+		return graphController.rename(graphTemplate: graphTemplate, to: newName)
 	}
 }

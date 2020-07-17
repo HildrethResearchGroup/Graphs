@@ -21,3 +21,10 @@ extension GraphTemplate {
 	@NSManaged var path: URL?
 	@NSManaged var name: String
 }
+
+extension GraphTemplate {
+	var controller: DGController? {
+		guard let path = path else { return nil }
+		return DGController(contentsOfFile: path.path)
+	}
+}

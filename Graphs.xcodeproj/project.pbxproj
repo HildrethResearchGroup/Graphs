@@ -18,8 +18,8 @@
 		5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */; };
 		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
 		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
-		5A3BACC524C15C93003B07FA /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC424C15C93003B07FA /* Basic Script.dgraph */; };
 		5A3BACC724C15FB2003B07FA /* DPDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3BACC624C15FB2003B07FA /* DPDrawingView.swift */; };
+		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
 		5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */; };
 		5A4899D424BD8F1100822B80 /* DataInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */; };
 		5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D524BD9DE500822B80 /* StringEncoding.swift */; };
@@ -119,8 +119,8 @@
 		5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorOutlineViewController.swift; sourceTree = "<group>"; };
 		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
-		5A3BACC424C15C93003B07FA /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
 		5A3BACC624C15FB2003B07FA /* DPDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDrawingView.swift; sourceTree = "<group>"; };
+		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
 		5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
 		5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInspectorViewController.swift; sourceTree = "<group>"; };
 		5A4899D524BD9DE500822B80 /* StringEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEncoding.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
-				5A3BACC424C15C93003B07FA /* Basic Script.dgraph */,
+				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
 				5A73E4DE24528F5800450137 /* Graphs */,
 				5A73E4F124528F5B00450137 /* GraphsTests */,
 				5A73E4FC24528F5B00450137 /* GraphsUITests */,
@@ -564,9 +564,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
-				5A3BACC524C15C93003B07FA /* Basic Script.dgraph in Resources */,
 				5A73E4E724528F5B00450137 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
