@@ -9,7 +9,7 @@
 import CoreData
 
 @objc(GraphTemplate)
-class GraphTemplate: NSManagedObject { }
+public class GraphTemplate: NSManagedObject { }
 
 extension GraphTemplate {
 	/// Returns a fetch request for the `GraphTemplate` entity type.
@@ -20,6 +20,23 @@ extension GraphTemplate {
 	
 	@NSManaged var path: URL?
 	@NSManaged var name: String
+}
+
+// MARK: Generated accessors for directoryItems
+extension GraphTemplate {
+
+    @objc(addDirectoryItemsObject:)
+    @NSManaged public func addToDirectoryItems(_ value: DirectoryItem)
+
+    @objc(removeDirectoryItemsObject:)
+    @NSManaged public func removeFromDirectoryItems(_ value: DirectoryItem)
+
+    @objc(addDirectoryItems:)
+    @NSManaged public func addToDirectoryItems(_ values: NSSet)
+
+    @objc(removeDirectoryItems:)
+    @NSManaged public func removeFromDirectoryItems(_ values: NSSet)
+
 }
 
 extension GraphTemplate {

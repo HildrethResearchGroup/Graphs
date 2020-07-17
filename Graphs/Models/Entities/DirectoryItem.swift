@@ -34,6 +34,7 @@ extension DirectoryItem {
 	@NSManaged public var parent: Directory?
 	/// The parser to use to parse the item
 	@NSManaged public var parser: Parser?
+	@NSManaged public var graphTemplate: GraphTemplate?
 }
 
 // MARK: Derived Properties

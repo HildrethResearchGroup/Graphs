@@ -7,6 +7,7 @@
     <entity name="DirectoryItem" representedClassName="DirectoryItem" isAbstract="YES" syncable="YES">
         <attribute name="customDisplayName" optional="YES" attributeType="String"/>
         <attribute name="path" optional="YES" attributeType="URI"/>
+        <relationship name="graphTemplate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GraphTemplate" inverseName="directoryItems" inverseEntity="GraphTemplate"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directory" inverseName="children" inverseEntity="Directory"/>
         <relationship name="parser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Parser" inverseName="directoryItems" inverseEntity="Parser"/>
     </entity>
@@ -16,6 +17,7 @@
     <entity name="GraphTemplate" representedClassName="GraphTemplate" syncable="YES">
         <attribute name="name" attributeType="String" defaultValueString="New Graph Template"/>
         <attribute name="path" optional="YES" attributeType="URI"/>
+        <relationship name="directoryItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DirectoryItem" inverseName="graphTemplate" inverseEntity="DirectoryItem"/>
     </entity>
     <entity name="Parser" representedClassName="Parser" syncable="YES">
         <attribute name="dataSeparator" attributeType="String" defaultValueString="comma"/>
@@ -34,9 +36,9 @@
     </entity>
     <elements>
         <element name="Directory" positionX="13.171875" positionY="-32.796875" width="128" height="73"/>
-        <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="103"/>
+        <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="118"/>
         <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="58"/>
+        <element name="GraphTemplate" positionX="-108" positionY="45" width="128" height="88"/>
         <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="238"/>
-        <element name="GraphTemplate" positionX="-108" positionY="45" width="128" height="73"/>
     </elements>
 </model>
