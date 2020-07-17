@@ -38,5 +38,5 @@ class InspectorTwoPopUpButtonsCell: NSTableCellView {
 	@objc(inspectorTwoPopUpButtonsCellFirstPopUpButtonDidChange:)
 	optional func firstPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell)
 	@objc(inspectorTwoPopUpButtonsCellSecondPopUpButtonDidChange:)
-	optional func secondPopUpButtonDidChange(_ Cell: InspectorTwoPopUpButtonsCell)
+	optional func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell)
 }

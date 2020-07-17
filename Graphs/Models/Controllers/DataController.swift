@@ -328,4 +328,10 @@ extension DataController {
 	func rename(graphTemplate: GraphTemplate, to newName: String) {
 		return graphController.rename(graphTemplate: graphTemplate, to: newName)
 	}
+	/// The graph template to use for the given directory item.
+	/// - Parameter directoryItem: The item to find the template for.
+	/// - Returns: The graph template that should be used for file types or the default graph template for directory types.
+	func graphTemplate(for directoryItem: DirectoryItem) -> GraphTemplate? {
+		return graphController.graphTemplate(for: directoryItem)
+	}
 }

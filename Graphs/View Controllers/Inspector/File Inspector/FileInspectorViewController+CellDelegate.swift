@@ -38,7 +38,23 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 		default:
 			print("[WARNING] Invalid tag at FileInspectorViewController.firstPopUpButtonDidChange(_:)")
 			file?.parser = nil
-			break
+		}
+		dataController.setNeedsSaved()
+	}
+	
+	func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
+		// Graph template popup
+		guard let dataController = dataController else { return }
+		guard let item = cell.secondPopUpButton.selectedItem else { return }
+		switch item.tag {
+		case -1:
+			// Default for folder
+			file?.graphTemplate = nil
+		case 0..<dataController.graphTemplates.count:
+			file?.graphTemplate = dataController.graphTemplates[item.tag]
+		default:
+			print("[WARNING] Invalid tag at FileInspectorViewController.secondPopUpButtonDidChange(_:)")
+			file?.graphTemplate = nil
 		}
 		dataController.setNeedsSaved()
 	}

@@ -35,4 +35,22 @@ extension DirectoryInspectorViewController: InspectorTwoPopUpButtonsCellDelegate
 		}
 		dataController.setNeedsSaved()
 	}
+	
+	func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
+		// Graph template popup
+		guard let dataController = dataController else { return }
+		guard let item = cell.secondPopUpButton.selectedItem else { return }
+		switch item.tag {
+		case -1:
+			// Default for folder
+			directory?.graphTemplate = nil
+		case 0..<dataController.graphTemplates.count:
+			directory?.graphTemplate = dataController.graphTemplates[item.tag]
+		default:
+			print("[WARNING] Invalid tag at DirectoryInspectorViewController.secondPopUpButtonDidChange(_:)")
+			directory?.graphTemplate = nil
+			break
+		}
+		dataController.setNeedsSaved()
+	}
 }

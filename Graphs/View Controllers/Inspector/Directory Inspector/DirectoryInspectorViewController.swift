@@ -11,8 +11,6 @@ import Cocoa
 class DirectoryInspectorViewController: InspectorOutlineViewController<DirectoryOutlineItem> {
 	@IBOutlet weak var outlineView: NSOutlineView!
 	
-	var tf: NSTextField?
-	
 	override var primaryOutlineView: NSOutlineView? {
 		return outlineView
 	}
@@ -31,63 +29,131 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 	override func prepareView(_ view: NSTableCellView, item: DirectoryOutlineItem) {
 		switch item {
 		case .seperator:
-			return
+			// To customization needed for separators
+			break
 		case .nameAndLocationHeader:
-			view.textField?.stringValue = "Name & Location"
+			prepareNameAndLocationHeader(view)
 		case .nameAndLocationBody:
-			let view = view as! InspectorTwoTextFieldsCell
-			//view.firstTextField.delegate = self
-			tf = view.firstTextField
-			guard let directory = directory else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-				return
-			}
-			view.firstTextField.stringValue = directory.displayName
-			view.secondTextField.stringValue = directory.path?.path ?? ""
+			prepareNameAndLocationBody(view as! InspectorTwoTextFieldsCell)
 		case .templatesHeader:
-			view.textField?.stringValue = "Default Templates"
+			prepareTemplatesHeader(view)
 		case .templatesBody:
-			guard let dataController = dataController else { break }
-			guard let directory = directory else { break }
-			let view = view as! InspectorTwoPopUpButtonsCell
-			
-			let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
-				let item = NSMenuItem(title: parser.name,
-															action: nil,
-															keyEquivalent: "")
-				item.tag = index
-				return item
-			}
-			
-			let parentDefault = dataController.parser(for: directory.parent!)
-			
-			let defaultItems = [NSMenuItem(title: "Default for Directory (\(parentDefault?.name ?? "None"))",
-																		 action: nil,
-																		 keyEquivalent: ""),
-													NSMenuItem.separator()]
-			
-			defaultItems[0].tag = -1
-			defaultItems[1].tag = Int.min
-			
-			view.firstPopUpButton.autoenablesItems = false
-			view.firstPopUpButton.menu?.items = defaultItems + items
-			
-			guard directory.parser != nil else {
-				view.firstPopUpButton.selectItem(withTag: -1)
-				break
-			}
-			
-			guard let parser = dataController.parser(for: directory) else { break }
-			
-			guard let index = dataController.parsers.firstIndex(of: parser) else { break }
-			
-			view.firstPopUpButton.selectItem(withTag: index)
-			return
+			prepareTemplatesBody(view as! InspectorTwoPopUpButtonsCell)
 		}
 	}
 }
 
+// MARK: View Separation
+extension DirectoryInspectorViewController {
+	func prepareNameAndLocationHeader(_ view: NSTableCellView) {
+		view.textField?.stringValue = "Name & Location"
+	}
+	
+	func prepareNameAndLocationBody(_ view: InspectorTwoTextFieldsCell) {
+		guard let directory = directory else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
+			return
+		}
+		view.firstTextField.stringValue = directory.displayName
+		view.secondTextField.stringValue = directory.path?.path ?? ""
+	}
+	
+	func prepareTemplatesHeader(_ view: NSTableCellView) {
+		view.textField?.stringValue = "Default Templates"
+	}
+	
+	func prepareTemplatesBody(_ view: InspectorTwoPopUpButtonsCell) {
+		prepareParser(popUpButton: view.firstPopUpButton)
+		prepareGraphTemplate(popUpButton: view.secondPopUpButton)
+	}
+	
+	func parserMenuItems() -> [NSMenuItem] {
+		guard let dataController = dataController else { return [] }
+		guard let directory = directory else { return [] }
+		
+		let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
+			let item = NSMenuItem(title: parser.name,
+														action: nil,
+														keyEquivalent: "")
+			item.tag = index
+			return item
+		}
+		
+		let parentDefault = dataController.parser(for: directory.parent!)
+		
+		let defaultItems = [NSMenuItem(title: "Default for Directory (\(parentDefault?.name ?? "None"))",
+																	 action: nil,
+																	 keyEquivalent: ""),
+												NSMenuItem.separator()]
+		
+		defaultItems[0].tag = -1
+		defaultItems[1].tag = Int.min
+		return defaultItems + items
+	}
+	
+	func prepareParser(popUpButton: NSPopUpButton) {
+		guard let dataController = dataController else { return }
+		guard let directory = directory else { return }
+		
+		popUpButton.autoenablesItems = false
+		popUpButton.menu?.items = parserMenuItems()
+		
+		guard directory.parser != nil else {
+			popUpButton.selectItem(withTag: -1)
+			return
+		}
+		
+		guard let parser = dataController.parser(for: directory) else { return }
+		guard let index = dataController.parsers.firstIndex(of: parser) else { return }
+		
+		popUpButton.selectItem(withTag: index)
+	}
+	
+	func graphTemplateMenuItems() -> [NSMenuItem] {
+		guard let dataController = dataController else { return [] }
+		guard let directory = directory else { return [] }
+		
+		let items = dataController.graphTemplates.enumerated().map { (index, graphTemplate) -> NSMenuItem in
+			let item = NSMenuItem(title: graphTemplate.name,
+														action: nil,
+														keyEquivalent: "")
+			item.tag = index
+			return item
+		}
+		
+		let parentDefault = dataController.graphTemplate(for: directory.parent!)
+		
+		let defaultItems = [NSMenuItem(title: "Default for Directory (\(parentDefault?.name ?? "None"))",
+																	 action: nil,
+																	 keyEquivalent: ""),
+												NSMenuItem.separator()]
+		
+		defaultItems[0].tag = -1
+		defaultItems[1].tag = Int.min
+		return defaultItems + items
+	}
+	
+	func prepareGraphTemplate(popUpButton: NSPopUpButton) {
+		guard let dataController = dataController else { return }
+		guard let directory = directory else { return }
+		
+		popUpButton.autoenablesItems = false
+		popUpButton.menu?.items = graphTemplateMenuItems()
+		
+		guard directory.graphTemplate != nil else {
+			popUpButton.selectItem(withTag: -1)
+			return
+		}
+		
+		guard let parser = dataController.graphTemplate(for: directory) else { return }
+		guard let index = dataController.graphTemplates.firstIndex(of: parser) else { return }
+		
+		popUpButton.selectItem(withTag: index)
+	}
+}
+
+// MARK: OutlineView Items
 enum DirectoryOutlineItem: InspectorOutlineCellItem {
 	case seperator
 	case nameAndLocationHeader

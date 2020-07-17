@@ -70,4 +70,14 @@ extension GraphController {
 		graphTemplate.name = newName
 		dataController.setNeedsSaved()
 	}
+	/// The graph template to use for the given directory item.
+	/// - Parameter directoryItem: The item to find the template for.
+	/// - Returns: The graph template that should be used for file types or the default graph template for directory types.
+	func graphTemplate(for directoryItem: DirectoryItem) -> GraphTemplate? {
+		if let customGraphTemplate = directoryItem.graphTemplate { return customGraphTemplate }
+		if let parent = directoryItem.parent {
+			return graphTemplate(for: parent)
+		}
+		return nil
+	}
 }

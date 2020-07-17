@@ -29,85 +29,157 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			// No customization for seperators
 			break
 		case .nameAndLocationHeader:
-			view.textField?.stringValue = "Name & Location"
+			prepareNameAndLocationHeader(view)
 		case .templatesHeader:
-			view.textField?.stringValue = "Templates"
+			prepareTemplatesHeader(view)
 		case .detailsHeader:
-			let view = view as! InspectorCategoryOptionCell
-			view.popUpButton.selectItem(at: showingCustomDetails ? 1: 0)
-			view.textField?.stringValue = "Details"
+			prepareDetailsHeader(view as! InspectorCategoryOptionCell)
 		case .nameAndLocationBody:
-			let view = view as! InspectorTwoTextFieldsCell
-			guard let file = file else {
-				view.firstTextField.stringValue = ""
-				view.secondTextField.stringValue = ""
-				break
-			}
-			view.firstTextField.stringValue = file.displayName
-			view.secondTextField.stringValue = file.path?.path ?? ""
+			prepareNameAndLocationBody(view as! InspectorTwoTextFieldsCell)
 		case .templatesBody:
-			let view = view as! InspectorTwoPopUpButtonsCell
-			guard let dataController = dataController else { return }
-			
-			guard let file = file else { return }
-			
-			let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
-				let item = NSMenuItem(title: parser.name,
-															action: nil,
-															keyEquivalent: "")
-				item.tag = index
-				return item
-			}
-			
-			let fileTypeDefault = dataController.defaultParsers(forFileType: file.fileExtension ?? "").first
-			
-			let folderDefault = dataController.parser(for: file.parent!)
-			
-			let defaultItems = [NSMenuItem(title: "Default for File Type (\(fileTypeDefault?.name ?? "None"))",
-																		 action: nil,
-																		 keyEquivalent: ""),
-													NSMenuItem(title: "Default for Directory (\(folderDefault?.name ?? "None"))",
-																		 action: nil,
-																		 keyEquivalent: ""),
-													NSMenuItem.separator()]
-			
-			defaultItems[0].isEnabled = fileTypeDefault != nil
-			defaultItems[1].isEnabled = folderDefault != nil
-			
-			defaultItems[0].tag = -2
-			defaultItems[1].tag = -1
-			defaultItems[2].tag = Int.min
-			
-			view.firstPopUpButton.autoenablesItems = false
-			view.firstPopUpButton.menu?.items = defaultItems + items
-			
-			if file.parser == nil {
-				switch file.defaultParserMode {
-				case .fileTypeDefault:
-					view.firstPopUpButton.selectItem(withTag: -2)
-				case .folderDefault:
-					view.firstPopUpButton.selectItem(withTag: -1)
-				}
-				break
-			}
-			
-			guard let parser = dataController.parser(for: file) else { return }
-			
-			guard let index = dataController.parsers.firstIndex(of: parser) else { return }
-			
-			view.firstPopUpButton.selectItem(withTag: index)
-			
-			break
+			prepareTemplatesBody(view as! InspectorTwoPopUpButtonsCell)
 		case .detailsBody:
-			// TODO: Fill in the text view with the correct text
-			#warning("Not implemented")
-			break
+			prepareDetailsBody(view as! InspectorTextViewCell)
 		}
 	}
 }
 
-extension FileInspectorViewController: InspectorSubViewController {
+// MARK: View Preparation
+extension FileInspectorViewController {
+	func prepareNameAndLocationHeader(_ view: NSTableCellView) {
+		view.textField?.stringValue = "Name & Location"
+	}
 	
+	func prepareNameAndLocationBody(_ view: InspectorTwoTextFieldsCell) {
+		guard let file = file else {
+			view.firstTextField.stringValue = ""
+			view.secondTextField.stringValue = ""
+			return
+		}
+		view.firstTextField.stringValue = file.displayName
+		view.secondTextField.stringValue = file.path?.path ?? ""
+	}
+	
+	func prepareTemplatesHeader(_ view: NSTableCellView) {
+		view.textField?.stringValue = "Templates"
+	}
+	
+	func prepareTemplatesBody(_ view: InspectorTwoPopUpButtonsCell) {
+		prepareParser(popUpButton: view.firstPopUpButton)
+		prepareGraphTemplates(popUpButton: view.secondPopUpButton)
+		return
+	}
+	
+	func prepareDetailsHeader(_ view: InspectorCategoryOptionCell) {
+		view.popUpButton.selectItem(at: showingCustomDetails ? 1: 0)
+		view.textField?.stringValue = "Details"
+	}
+	
+	func prepareDetailsBody(_ view: InspectorTextViewCell) {
+		
+	}
+	
+	func parserMenuItems() -> [NSMenuItem] {
+		guard let dataController = dataController else { return [] }
+		guard let file = file else { return [] }
+		
+		let items = dataController.parsers.enumerated().map { (index, parser) -> NSMenuItem in
+			let item = NSMenuItem(title: parser.name,
+														action: nil,
+														keyEquivalent: "")
+			item.tag = index
+			return item
+		}
+		
+		let fileTypeDefault = dataController.defaultParsers(forFileType: file.fileExtension ?? "").first
+		
+		let folderDefault = dataController.parser(for: file.parent!)
+		
+		let defaultItems = [NSMenuItem(title: "Default for File Type (\(fileTypeDefault?.name ?? "None"))",
+																	 action: nil,
+																	 keyEquivalent: ""),
+												NSMenuItem(title: "Default for Directory (\(folderDefault?.name ?? "None"))",
+																	 action: nil,
+																	 keyEquivalent: ""),
+												NSMenuItem.separator()]
+		
+		defaultItems[0].isEnabled = fileTypeDefault != nil
+		defaultItems[1].isEnabled = folderDefault != nil
+		
+		defaultItems[0].tag = -2
+		defaultItems[1].tag = -1
+		defaultItems[2].tag = Int.min
+		
+		return defaultItems + items
+	}
+	
+	func prepareParser(popUpButton: NSPopUpButton) {
+		guard let dataController = dataController else { return }
+		guard let file = file else { return }
+		
+		popUpButton.autoenablesItems = false
+		popUpButton.menu?.items = parserMenuItems()
+		
+		if file.parser == nil {
+			switch file.defaultParserMode {
+			case .fileTypeDefault:
+				popUpButton.selectItem(withTag: -2)
+			case .folderDefault:
+				popUpButton.selectItem(withTag: -1)
+			}
+			return
+		}
+		
+		guard let parser = dataController.parser(for: file) else { return }
+		guard let index = dataController.parsers.firstIndex(of: parser) else { return }
+		
+		popUpButton.selectItem(withTag: index)
+	}
+	
+	func graphTemplateMenuItems() -> [NSMenuItem] {
+		guard let dataController = dataController else { return [] }
+		guard let file = file else { return [] }
+		
+		let items = dataController.graphTemplates.enumerated().map { (index, graphTemplate) -> NSMenuItem in
+			let item = NSMenuItem(title: graphTemplate.name,
+														action: nil,
+														keyEquivalent: "")
+			item.tag = index
+			return item
+		}
+		
+		let folderDefault = dataController.graphTemplate(for: file.parent!)
+		
+		let defaultItems = [NSMenuItem(title: "Default for Directory (\(folderDefault?.name ?? "None"))",
+																	 action: nil,
+																	 keyEquivalent: ""),
+												NSMenuItem.separator()]
+		
+		defaultItems[0].isEnabled = folderDefault != nil
+		
+		defaultItems[0].tag = -1
+		defaultItems[1].tag = Int.min
+		
+		return defaultItems + items
+	}
+	
+	func prepareGraphTemplates(popUpButton: NSPopUpButton) {
+		guard let dataController = dataController else { return }
+		guard let file = file else { return }
+		
+		popUpButton.autoenablesItems = false
+		popUpButton.menu?.items = graphTemplateMenuItems()
+		
+		if file.graphTemplate == nil {
+			popUpButton.selectItem(withTag: -1)
+			return
+		}
+		
+		guard let parser = dataController.graphTemplate(for: file) else { return }
+		guard let index = dataController.graphTemplates.firstIndex(of: parser) else { return }
+		
+		popUpButton.selectItem(withTag: index)
+	}
 }
 
 // MARK: OutlineView Items
