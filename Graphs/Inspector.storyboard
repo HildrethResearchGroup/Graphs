@@ -1457,7 +1457,7 @@
         <!--Graph Inspector View Controller-->
         <scene sceneID="iml-vD-jp6">
             <objects>
-                <viewController title="Graph Inspector View Controller" id="YU4-bp-XMX" sceneMemberID="viewController">
+                <viewController title="Graph Inspector View Controller" id="YU4-bp-XMX" customClass="GraphInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="iGP-Pm-upC">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1542,6 +1542,9 @@
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <action selector="addGraphTemplate:" target="YU4-bp-XMX" id="iwj-La-CPc"/>
+                                                    </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="VsM-t8-Fb8">
                                                     <rect key="frame" x="19" y="4" width="11" height="12"/>
@@ -1549,6 +1552,9 @@
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <action selector="removeGraphTemplate:" target="YU4-bp-XMX" id="DwO-NE-g2p"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1599,7 +1605,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="OSa-Oq-alN" customClass="DPDrawingView" customModule="Graphs">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="OSa-Oq-alN" customClass="DPDrawingView">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="282"/>
                             </customView>
                         </subviews>
@@ -1621,6 +1627,11 @@
                             <constraint firstAttribute="bottom" secondItem="OSa-Oq-alN" secondAttribute="bottom" id="syF-HN-gUU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="graphView" destination="OSa-Oq-alN" id="otk-zd-uxh"/>
+                        <outlet property="sourceTextField" destination="Oj8-sN-Jqm" id="qHB-4u-asM"/>
+                        <outlet property="tableView" destination="g3i-4r-Fvb" id="LMj-vg-DbF"/>
+                    </connections>
                 </viewController>
                 <customObject id="gZ5-U5-2gx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

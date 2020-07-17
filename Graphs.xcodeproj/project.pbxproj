@@ -18,6 +18,8 @@
 		5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */; };
 		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
 		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
+		5A3BACC524C15C93003B07FA /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC424C15C93003B07FA /* Basic Script.dgraph */; };
+		5A3BACC724C15FB2003B07FA /* DPDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3BACC624C15FB2003B07FA /* DPDrawingView.swift */; };
 		5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */; };
 		5A4899D424BD8F1100822B80 /* DataInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */; };
 		5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D524BD9DE500822B80 /* StringEncoding.swift */; };
@@ -27,6 +29,10 @@
 		5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */; };
 		5A6D36E624C13A6400588E05 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6D36E524C13A6400588E05 /* DataGraph.framework */; };
 		5A6D36E724C13A6400588E05 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6D36E524C13A6400588E05 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5A6D36EE24C14FA200588E05 /* GraphInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */; };
+		5A6D36F124C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */; };
+		5A6D36F324C1510300588E05 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F224C1510300588E05 /* GraphController.swift */; };
+		5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F424C151AB00588E05 /* GraphTemplate.swift */; };
 		5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4DF24528F5800450137 /* AppDelegate.swift */; };
 		5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E324528F5B00450137 /* Assets.xcassets */; };
 		5A73E4E724528F5B00450137 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E524528F5B00450137 /* Main.storyboard */; };
@@ -113,6 +119,8 @@
 		5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorOutlineViewController.swift; sourceTree = "<group>"; };
 		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
+		5A3BACC424C15C93003B07FA /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
+		5A3BACC624C15FB2003B07FA /* DPDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DPDrawingView.swift; sourceTree = "<group>"; };
 		5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
 		5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInspectorViewController.swift; sourceTree = "<group>"; };
 		5A4899D524BD9DE500822B80 /* StringEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEncoding.swift; sourceTree = "<group>"; };
@@ -122,6 +130,10 @@
 		5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryPasteboardItem.swift; sourceTree = "<group>"; };
 		5A6D36E524C13A6400588E05 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 		5A6D36EA24C13C1E00588E05 /* Graphs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Graphs-Bridging-Header.h"; sourceTree = "<group>"; };
+		5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphInspectorViewController.swift; sourceTree = "<group>"; };
+		5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphInspectorViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
+		5A6D36F224C1510300588E05 /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		5A6D36F424C151AB00588E05 /* GraphTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplate.swift; sourceTree = "<group>"; };
 		5A73E4DC24528F5800450137 /* Graphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A73E4DF24528F5800450137 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A73E4E324528F5B00450137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +219,7 @@
 				5ACFC52924BD3268006D386E /* Directory Inspector */,
 				5A937DFE24BEAE3E00D025B0 /* Parser Inspector */,
 				5A4899D224BD5AF200822B80 /* Data Inspector */,
+				5A6D36EF24C14FA600588E05 /* Graph Inspector */,
 			);
 			path = Inspector;
 			sourceTree = "<group>";
@@ -218,6 +231,14 @@
 				5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */,
 			);
 			path = "File Inspector";
+			sourceTree = "<group>";
+		};
+		5A3BACC024C159AF003B07FA /* Objc */ = {
+			isa = PBXGroup;
+			children = (
+				5A3BACC624C15FB2003B07FA /* DPDrawingView.swift */,
+			);
+			path = Objc;
 			sourceTree = "<group>";
 		};
 		5A4899D224BD5AF200822B80 /* Data Inspector */ = {
@@ -251,9 +272,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5A6D36EF24C14FA600588E05 /* Graph Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */,
+				5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */,
+			);
+			path = "Graph Inspector";
+			sourceTree = "<group>";
+		};
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
+				5A3BACC424C15C93003B07FA /* Basic Script.dgraph */,
 				5A73E4DE24528F5800450137 /* Graphs */,
 				5A73E4F124528F5B00450137 /* GraphsTests */,
 				5A73E4FC24528F5B00450137 /* GraphsUITests */,
@@ -326,6 +357,7 @@
 				5A27B07E249733710024403E /* InspectorButton.swift */,
 				5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */,
 				5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */,
+				5A3BACC024C159AF003B07FA /* Objc */,
 				5A937DED24BEA56700D025B0 /* Inspector Cells */,
 			);
 			path = Views;
@@ -346,6 +378,7 @@
 			children = (
 				5A73E51D2452A78F00450137 /* DirectoryItem.swift */,
 				5A89838524BDA2F20057D511 /* Parser.swift */,
+				5A6D36F424C151AB00588E05 /* GraphTemplate.swift */,
 				5A73E51B2452A78F00450137 /* File.swift */,
 				5A73E51F2452A78F00450137 /* Directory.swift */,
 				5ABBB1BF24C0258A005F658E /* ParsedFile.swift */,
@@ -361,6 +394,7 @@
 				5A79055E24554B0A0021CDB2 /* DirectoryController.swift */,
 				5A34A20F249872750001CD1A /* FileController.swift */,
 				5A937E0124BEEE6A00D025B0 /* ParserController.swift */,
+				5A6D36F224C1510300588E05 /* GraphController.swift */,
 				5AF83782249482F4002BF370 /* SortCache.swift */,
 			);
 			path = Controllers;
@@ -532,6 +566,7 @@
 			files = (
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
+				5A3BACC524C15C93003B07FA /* Basic Script.dgraph in Resources */,
 				5A73E4E724528F5B00450137 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -568,6 +603,7 @@
 				5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */,
 				5ABBB1BC24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift in Sources */,
 				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
+				5A6D36F124C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift in Sources */,
 				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
 				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,
 				5A937DF524BEA59400D025B0 /* InspectorTextViewCell.swift in Sources */,
@@ -587,8 +623,10 @@
 				5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */,
 				5A937DF324BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift in Sources */,
 				5A937DFB24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift in Sources */,
+				5A3BACC724C15FB2003B07FA /* DPDrawingView.swift in Sources */,
 				5A937DF924BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift in Sources */,
 				5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */,
+				5A6D36EE24C14FA200588E05 /* GraphInspectorViewController.swift in Sources */,
 				5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */,
 				5A937DEF24BEA57900D025B0 /* InspectorCategoryOptionCell.swift in Sources */,
 				5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */,
@@ -599,6 +637,7 @@
 				5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */,
 				5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */,
 				5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */,
+				5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */,
 				5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */,
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
@@ -610,6 +649,7 @@
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
 				5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */,
 				5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */,
+				5A6D36F324C1510300588E05 /* GraphController.swift in Sources */,
 				5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

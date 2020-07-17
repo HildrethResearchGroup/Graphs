@@ -2,6 +2,7 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
+//#import "DPDrawingView.h"
 #import "DataGraph.framework/Headers/DGAxisCommand.h"
 #import "DataGraph.framework/Headers/DGAxisCommandConstants.h"
 #import "DataGraph.framework/Headers/DGBarCommand.h"
@@ -67,3 +68,7 @@
 #import "DataGraph.framework/Headers/DGXAxisCommand.h"
 #import "DataGraph.framework/Headers/DGYAxisCommand.h"
 #import "DataGraph.framework/Headers/DataGraph.h"
+
+@interface DPDrawingView : NSView
+
+@end
