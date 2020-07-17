@@ -57,7 +57,7 @@ extension GraphController {
 	}
 	/// Deletes the diven graph template.
 	/// - Parameter graphTemplate: The graph template to remove.
-	func delete(graphTemplate: GraphTemplate) {
+	func remove(graphTemplate: GraphTemplate) {
 		graphTemplates.removeAll { $0 === graphTemplate }
 		context.delete(graphTemplate)
 		dataController.setNeedsSaved()

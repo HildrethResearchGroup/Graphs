@@ -86,4 +86,6 @@ extension NSUserInterfaceItemIdentifier {
 	static let parserDefaultsCell: Self = .init("ParserDefaultsCell")
 	
 	static let dataInspectorTableCell: Self = .init("DataInspectorTableCell")
+	
+	static let graphTemplateNameCell: Self = .init("GraphTemplateNameCell")
 }
