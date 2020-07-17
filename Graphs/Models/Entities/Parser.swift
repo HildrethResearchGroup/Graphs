@@ -339,9 +339,9 @@ extension Parser {
 			guard dataStartIsValid else { return nil }
 			
 			let cells = lines.map {
-				$0.components(separatedBy: headerSeparator.characterSet)
+				$0.components(separatedBy: dataSeparator.characterSet)
 					// If whitespace is used, there will be a split between each whitespcae character -- to prevent this, remove empty cells
-					.filter { headerSeparator == .whitespace ? $0 != "" : true }
+					.filter { dataSeparator == .whitespace ? $0 != "" : true }
 			}
 			// The index of each line is one less than its number. The line number is shown to the user rather than the line index, because for non-programmers 1-based indexing is more natural
 			// This value can be unsafely unwrapped because if it was nil, then the previous line would return false

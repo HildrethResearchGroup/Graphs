@@ -26,6 +26,7 @@ extension File {
 	
 	@objc(parserDefaultMode)
 	@NSManaged var _parserDefaultModeRaw: Int64
+	@NSManaged var customDetails: String
 }
 
 // MARK: Derived Properties

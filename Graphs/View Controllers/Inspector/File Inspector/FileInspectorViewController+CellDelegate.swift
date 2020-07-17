@@ -40,6 +40,11 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 			file?.parser = nil
 		}
 		dataController.setNeedsSaved()
+		
+		// This could change the experiment details
+		let lastRow = outlineView.numberOfRows - 1
+		outlineView.reloadData(forRowIndexes: IndexSet(integer: lastRow),
+													 columnIndexes: IndexSet(integer: 0))
 	}
 	
 	func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
@@ -57,5 +62,31 @@ extension FileInspectorViewController: InspectorTwoPopUpButtonsCellDelegate {
 			file?.graphTemplate = nil
 		}
 		dataController.setNeedsSaved()
+	}
+}
+
+// MARK: CategoryOption
+extension FileInspectorViewController: InspectorCategoryOptionCellDelegate {
+	func popUpDidChangeState(_ cell: InspectorCategoryOptionCell) {
+		switch cell.popUpButton.selectedTag() {
+		case 0:
+			// From file
+			showingCustomDetails = false
+		case 1:
+			// Custom
+			showingCustomDetails = true
+		default:
+			print("[WARNING] Invalid tag at FileInspectorViewController.popUpDidChangeState(_:)")
+			showingCustomDetails = true
+		}
+	}
+}
+
+// MARK: TextView
+extension FileInspectorViewController: InspectorTextViewCellDelegate {
+	func textDidEndEditing(_ cell: InspectorTextViewCell) {
+		if showingCustomDetails {
+			file?.customDetails = cell.textView.string
+		}
 	}
 }

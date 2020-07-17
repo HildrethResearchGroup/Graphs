@@ -16,5 +16,12 @@ class InspectorTextViewCell: NSTableCellView {
 
 // MARK: Delegate
 @objc protocol InspectorTextViewCellDelegate: class {
-	
+	@objc(inspectorTextViewCellTextDidEndEditing:)
+	optional func textDidEndEditing(_ cell: InspectorTextViewCell)
+}
+
+extension InspectorTextViewCell: NSTextViewDelegate {
+	func textDidEndEditing(_ notification: Notification) {
+		delegate?.textDidEndEditing?(self)
+	}
 }

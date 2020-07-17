@@ -21,7 +21,13 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 		}
 	}
 	
-	var showingCustomDetails: Bool = false
+	var showingCustomDetails: Bool = false {
+		didSet {
+			let lastRow = outlineView.numberOfRows - 1
+			outlineView.reloadData(forRowIndexes: IndexSet(integer: lastRow),
+														 columnIndexes: IndexSet(integer: 0))
+		}
+	}
 	
 	override func prepareView(_ view: NSTableCellView, item: FileInspectorItem) {
 		switch item {
@@ -76,7 +82,19 @@ extension FileInspectorViewController {
 	}
 	
 	func prepareDetailsBody(_ view: InspectorTextViewCell) {
+		view.textView.isEditable = showingCustomDetails
+		view.textView.string = ""
 		
+		if showingCustomDetails {
+			view.textView.string = file?.customDetails ?? ""
+		} else {
+			guard let file = file else { return }
+			let parser = dataController?.parser(for: file)
+			
+			guard let parsedFile = parser?.parse(file: file) else { return }
+			
+			view.textView.string = parsedFile.experimentDetails
+		}
 	}
 	
 	func parserMenuItems() -> [NSMenuItem] {

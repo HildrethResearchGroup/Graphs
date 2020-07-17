@@ -445,7 +445,7 @@
                                                                         <menu key="menu" id="b6N-X6-3hi">
                                                                             <items>
                                                                                 <menuItem title="From File" state="on" id="GUp-yc-UDe"/>
-                                                                                <menuItem title="Custom" id="a4d-z7-dic"/>
+                                                                                <menuItem title="Custom" tag="1" id="a4d-z7-dic"/>
                                                                             </items>
                                                                         </menu>
                                                                     </popUpButtonCell>
@@ -460,6 +460,7 @@
                                                                 <constraint firstItem="UJV-sB-SRA" firstAttribute="top" secondItem="KQh-bR-kOT" secondAttribute="top" id="gNE-D6-TKy"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="Kd2-E3-bt9" id="l3d-rC-hWY"/>
                                                                 <outlet property="popUpButton" destination="UJV-sB-SRA" id="bQ1-u1-jYm"/>
                                                                 <outlet property="textField" destination="laL-tu-hQE" id="MO7-ob-Ofx"/>
                                                             </connections>
@@ -609,6 +610,9 @@
                                                                                 <size key="minSize" width="236" height="78"/>
                                                                                 <size key="maxSize" width="247" height="10000000"/>
                                                                                 <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                                                <connections>
+                                                                                    <outlet property="delegate" destination="GEb-71-rHM" id="tcJ-To-haD"/>
+                                                                                </connections>
                                                                             </textView>
                                                                         </subviews>
                                                                     </clipView>
@@ -632,6 +636,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="pe5-De-vW0" secondAttribute="trailing" constant="2" id="bpA-h9-Xij"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="delegate" destination="Kd2-E3-bt9" id="m8D-S7-G4d"/>
                                                                 <outlet property="textView" destination="ufW-Ca-Eq0" id="bt0-om-HAS"/>
                                                             </connections>
                                                         </tableCellView>

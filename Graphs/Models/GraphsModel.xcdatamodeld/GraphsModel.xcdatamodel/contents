@@ -12,6 +12,7 @@
         <relationship name="parser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Parser" inverseName="directoryItems" inverseEntity="Parser"/>
     </entity>
     <entity name="File" representedClassName="File" parentEntity="DirectoryItem" syncable="YES">
+        <attribute name="customDetails" attributeType="String" defaultValueString=""/>
         <attribute name="parserDefaultMode" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="GraphTemplate" representedClassName="GraphTemplate" syncable="YES">
@@ -37,7 +38,7 @@
     <elements>
         <element name="Directory" positionX="13.171875" positionY="-32.796875" width="128" height="73"/>
         <element name="DirectoryItem" positionX="-237.24609375" positionY="-46.140625" width="128" height="118"/>
-        <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="58"/>
+        <element name="File" positionX="10.73828125" positionY="-107.984375" width="128" height="73"/>
         <element name="GraphTemplate" positionX="-108" positionY="45" width="128" height="88"/>
         <element name="Parser" positionX="-236.2734375" positionY="73.1640625" width="128" height="238"/>
     </elements>
