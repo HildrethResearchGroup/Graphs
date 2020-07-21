@@ -34,6 +34,7 @@ extension DirectoryInspectorViewController: InspectorTwoPopUpButtonsCellDelegate
 			break
 		}
 		dataController.setNeedsSaved()
+		NotificationCenter.default.post(name: .graphMayHaveChanged, object: directory)
 	}
 	
 	func secondPopUpButtonDidChange(_ cell: InspectorTwoPopUpButtonsCell) {
@@ -52,5 +53,6 @@ extension DirectoryInspectorViewController: InspectorTwoPopUpButtonsCellDelegate
 			break
 		}
 		dataController.setNeedsSaved()
+		NotificationCenter.default.post(name: .graphMayHaveChanged, object: directory)
 	}
 }
