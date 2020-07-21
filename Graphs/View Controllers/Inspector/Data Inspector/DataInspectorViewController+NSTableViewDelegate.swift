@@ -46,6 +46,7 @@ extension DataInspectorViewController: NSTableViewDelegate {
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		guard let tableColumn = tableColumn else { return nil }
 		guard let column = tableView.tableColumns.firstIndex(of: tableColumn) else { return nil }
+		guard row < numberOfRows(in: tableView) else { return nil }
 		let cell = tableView.makeView(withIdentifier: .dataInspectorTableCell, owner: self) as? NSTableCellView
 		guard let parsedFile = parsedFile else { return cell }
 		

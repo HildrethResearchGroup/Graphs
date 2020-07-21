@@ -352,19 +352,23 @@ extension Parser {
 				if hasFooter {
 					// If there is a footer, stop collecting data after the first empty line after the data begins
 					let searchCells = cells[start..<cells.count]
-					return searchCells.firstIndex(of: []) ?? searchCells.firstIndex(of: [""]) ?? cells.count - 1
+					let lineIsEmpty: ([String]) -> Bool = { row -> Bool in
+						return row.allSatisfy { $0 == "" }
+					}
+					let firstEmptyLine = searchCells.firstIndex(where: lineIsEmpty)
+					return firstEmptyLine ?? searchCells.firstIndex(of: []) ?? cells.count
 				} else {
 					// Otherwise there is no footer, so collect data until the end of the file
-					return cells.count - 1
+					return cells.count
 				}
 			}()
 			
-			if cells.count >= end {
+			if cells.count <= end {
 				// The data ends after the end of the file (this shouldn't ever happen) so just return the lines from start to the end of the file
 				return Array(cells[start..<cells.count])
 			} else {
 				// The data ends within the file, so return the whole range of lines
-				return Array(cells[start...end])
+				return Array(cells[start..<end])
 			}
 			}() else { return nil }
 		
