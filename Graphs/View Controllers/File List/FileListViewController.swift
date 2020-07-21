@@ -143,44 +143,10 @@ extension FileListViewController {
 				.map { dataColumn in
 					return dataColumn.compactMap { $0 as NSString? }
 			}
-			
-			controller.dataColumns().forEach { dataColumn in
-				controller.removeDataColumn((dataColumn as! DGDataColumn))
-			}
-
-			(0..<parsedFile.numberOfColumns).forEach { index in
-				controller.addBinaryColumn(withName: "\(index)")
-			}
 
 			columns.enumerated().forEach { (index, element) in
 				controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
 			}
-			
-			let colors: [NSColor] = (0..<parsedFile.numberOfColumns).map { index in
-				let percent = CGFloat(index) / CGFloat(parsedFile.numberOfColumns)
-				return NSColor(calibratedHue: percent, saturation: 1.0, brightness: 1.0, alpha: 1.0)
-			}
-			
-			for index in 1..<parsedFile.numberOfColumns {
-				let plot = controller.createPlotCommand()
-				
-				plot?.setXColumn(controller.dataColumn(at: 1))
-				plot?.setYColumn(controller.dataColumn(at: Int32(index + 1)))
-				plot?.setLineColorType(DGColorNumber.init(rawValue: UInt32(11)))
-				plot?.setLineColor(colors[index - 1])
-				
-				
-				
-				controller.addDrawingCommand(byCopying: plot)
-			}
-			
-			
-			
-//			controller.dataColumn(at: 1)?.setDataFrom(["0", "2", "3", "5"])
-//			controller.dataColumn(at: 2)?.setDataFrom(["0", "3", "2", "1"])
-			
-			
-			
 			
 			controller.setDrawingView(graphView)
 			controller.setDelegate(self)
@@ -190,25 +156,6 @@ extension FileListViewController {
 		default:
 			graphErrorLabel.stringValue = "Multiple Files Selected"
 		}
-	}
-}
-
-// MARK: Collection Utilities
-extension Collection where Element: Hashable, Index == Int {
-	// This function was written to find the indicies of m elements in a collection of n elements in O(n+m) time. Calling firstIndex(of:) repeatedly instead is O(n*m)
-	func indicies(of elements: [Element]) -> IndexSet {
-		let elementSet = Set(elements)
-		var iterator = makeIterator()
-		var indicies = IndexSet()
-		var index = startIndex
-		while let element = iterator.next() {
-			if elementSet.contains(element) {
-				indicies.insert(index)
-			}
-			index = self.index(after: index)
-		}
-		
-		return indicies
 	}
 }
 
