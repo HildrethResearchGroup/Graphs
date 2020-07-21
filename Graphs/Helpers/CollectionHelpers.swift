@@ -20,15 +20,20 @@ extension RandomAccessCollection where Element: RandomAccessCollection, Index ==
 
 extension Collection where Element: Hashable, Index == Int {
 	// This function was written to find the indicies of m elements in a collection of n elements in O(n+m) time. Calling firstIndex(of:) repeatedly instead is O(n*m)
+	/// Returns the indicies of the given elements in the collection.
+	/// - Parameter elements: The elements to find the indicies of.
+	/// - Returns: The indicies of the given elements.
 	func indicies(of elements: [Element]) -> IndexSet {
 		let elementSet = Set(elements)
-		var iterator = makeIterator()
 		var indicies = IndexSet()
 		var index = startIndex
+		// Iterate over the collection
+		var iterator = makeIterator()
 		while let element = iterator.next() {
 			if elementSet.contains(element) {
 				indicies.insert(index)
 			}
+			// Increment the current index
 			index = self.index(after: index)
 		}
 		

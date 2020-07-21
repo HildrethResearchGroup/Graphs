@@ -87,54 +87,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "179C48CF-B079-4926-B924-F3031A46A74A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Graphs/Models/Entities/Parser.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
-            landmarkName = "parse(file:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "179C48CF-B079-4926-B924-F3031A46A74A - 69a80ea138d93adf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Graphs.Parser.parse(file: Graphs.File) -&gt; Swift.Optional&lt;Graphs.ParsedFile&gt;"
-                  moduleName = "Graphs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/Models/Entities/Parser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "373"
-                  endingLineNumber = "373"
-                  offsetFromSymbolStart = "1916">
-               </Location>
-               <Location
-                  uuid = "179C48CF-B079-4926-B924-F3031A46A74A - f74e320cdc1ac2bf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 (Swift.Array&lt;Swift.String&gt;, Swift.Array&lt;Swift.String&gt;) -&gt; Swift.Bool in Graphs.Parser.parse(file: Graphs.File) -&gt; Swift.Optional&lt;Graphs.ParsedFile&gt;"
-                  moduleName = "Graphs"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/Models/Entities/Parser.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "373"
-                  endingLineNumber = "373"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C378606A-1A8D-40DC-9D91-134431B6D8EE"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -142,8 +94,8 @@
             filePath = "Graphs/Models/Entities/Parser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "parse(file:)"
             landmarkType = "7">
          </BreakpointContent>

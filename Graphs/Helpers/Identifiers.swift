@@ -37,7 +37,7 @@ enum UserInfoKeys {
 	static let oldValue = "oldValue"
 }
 
-// MARK: User Interface
+// MARK: File Table Columns
 extension NSUserInterfaceItemIdentifier {
 	static let fileNameColumn: Self = .init("FileNameColumn")
 	static let fileCollectionNameColumn: Self = .init("FileCollectionNameColumn")
@@ -45,34 +45,52 @@ extension NSUserInterfaceItemIdentifier {
 	static let fileDateCreatedColumn: Self = .init("FileDateCreatedColumn")
 	static let fileDateModifiedColumn: Self = .init("FileDateModifiedColumn")
 	static let fileSizeColumn: Self = .init("FileSizeColumn")
-	
+}
+
+// MARK: File Table Cells
+extension NSUserInterfaceItemIdentifier {
 	static let fileNameCell: Self = .init("FileNameCell")
 	static let fileCollectionNameCell: Self = .init("FileCollectionNameCell")
 	static let fileDateImportedCell: Self = .init("FileDateImportedCell")
 	static let fileDateCreatedCell: Self = .init("FileDateCreatedCell")
 	static let fileDateModifiedCell: Self = .init("FileDateModifiedCell")
 	static let fileSizeCell: Self = .init("FileSizeCell")
-	
+}
+
+// MARK: Directory Table Cells
+extension NSUserInterfaceItemIdentifier {
 	static let directoryCell: Self = .init("DirectoryCell")
-	
+}
+
+// MARK: Inspector Tabs
+extension NSUserInterfaceItemIdentifier {
 	static let fileInspectorTab: Self = .init("FileInspectorTab")
 	static let directoryInspectorTab: Self = .init("DirectoryInspectorTab")
 	static let parserInspectorTab: Self = .init("ParserInspectorTab")
 	static let graphInspectorTab: Self = .init("GraphInspectorTab")
 	static let dataInspectorTab: Self = .init("DataInspectorTab")
-	
+}
+
+// MARK: File Inspector Outline Cells
+extension NSUserInterfaceItemIdentifier {
 	static let fileInspectorSeparatorCell: Self = .init("FileInspectorSeparatorCell")
 	static let fileInspectorCategoryCell: Self = .init("FileInspectorCategoryCell")
 	static let fileInspectorCategoryOptionCell: Self = .init("FileInspectorCategoryOptionCell")
 	static let fileInspectorNameAndLocationCell: Self = .init("FileInspectorNameAndLocationCell")
 	static let fileInspectorTemplatesCell: Self = .init("FileInspectorTemplatesCell")
 	static let fileInspectorDetailsCell: Self = .init("FileInspectorDetailsCell")
-	
+}
+
+// MARK: Directory Inspector Outline Cells
+extension NSUserInterfaceItemIdentifier {
 	static let directoryInspectorSeparatorCell: Self = .init("DirectoryInspectorSeparatorCell")
 	static let directoryInspectorCategoryCell: Self = .init("DirectoryInspectorCategoryCell")
 	static let directoryInspectorNameAndLocationCell: Self = .init("DirectoryInspectorNameAndLocationCell")
 	static let directoryInspectorTemplatesCell: Self = .init("DirectoryInspectorTemplatesCell")
-	
+}
+
+// MARK: Parser Inspector Outline Cells
+extension NSUserInterfaceItemIdentifier {
 	static let parserInspectorSeparatorCell: Self = .init("ParserInspectorSeparatorCell")
 	static let parserInspectorSelectionCell: Self = .init("ParserInspectorSelectionCell")
 	static let parserInspectorCategoryCell: Self = .init("ParserInspectorCategoryCell")
@@ -80,14 +98,26 @@ extension NSUserInterfaceItemIdentifier {
 	static let parserInspectorExperimentDetailsCell: Self = .init("ParserInspectorExperimentDetailsCell")
 	static let parserInspectorHeaderCell: Self = .init("ParserInspectorHeaderCell")
 	static let parserInspectorDataCell: Self = .init("ParserInspectorDataCell")
-	
+}
+
+// MARK: Parser Table Columns
+extension NSUserInterfaceItemIdentifier {
 	static let parserNameColumn: Self = .init("ParserNameColumn")
 	static let parserDefaultsColumn: Self = .init("ParserDefaultsColumn")
-	
+}
+
+// MARK: Parser Table Cells
+extension NSUserInterfaceItemIdentifier {
 	static let parserNameCell: Self = .init("ParserNameCell")
 	static let parserDefaultsCell: Self = .init("ParserDefaultsCell")
-	
+}
+
+// MARK: Data Inspector Outline Cells
+extension NSUserInterfaceItemIdentifier {
 	static let dataInspectorTableCell: Self = .init("DataInspectorTableCell")
-	
+}
+
+// MARK: Graph Template Table Cells
+extension NSUserInterfaceItemIdentifier {
 	static let graphTemplateNameCell: Self = .init("GraphTemplateNameCell")
 }

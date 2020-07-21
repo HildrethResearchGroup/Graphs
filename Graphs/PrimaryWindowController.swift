@@ -8,9 +8,9 @@
 
 import Cocoa
 
-class PrimaryWindowController: NSWindowController {
-	
-}
+// A custom window controller is defined to override the undo manager with the Core Data undo manager.
+/// A window controller which controlls the primary window in the app.
+class PrimaryWindowController: NSWindowController { }
 
 extension PrimaryWindowController: NSWindowDelegate {
 	func windowWillReturnUndoManager(_ window: NSWindow) -> UndoManager? {

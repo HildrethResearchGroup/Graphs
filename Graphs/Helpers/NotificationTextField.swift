@@ -9,6 +9,9 @@
 import Cocoa
 
 extension NSTextFieldDelegate {
+	/// Returns the `NSTextField` associed with a notification for `NSTextFieldDelegate` methods.
+	/// - Parameter notification: The notification.
+	/// - Returns: The `NSTextField` object of the notification if it has one, otherwise `nil`.
 	func textField(for notification: Notification) -> NSTextField? {
 		return notification.object as? NSTextField
 	}

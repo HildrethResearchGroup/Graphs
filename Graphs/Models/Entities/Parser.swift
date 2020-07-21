@@ -9,31 +9,40 @@
 import Foundation
 import CoreData
 
+/// An entity that represents a parser. A parser is capable of parsing text files.
 @objc(Parser)
 public class Parser: NSManagedObject {
+	/// The first line of the file that contains data.
 	@NSNumberWrapped(owner: nil as Parser?, path: \.__dataStart)
 	var dataStart: Int?
+	/// The last line of the file that contains experiment details.
 	@NSNumberWrapped(owner: nil as Parser?, path: \.__experimentDetailsEnd)
 	var experimentDetailsEnd: Int?
+	/// The first line of the file that contains experiment details.
 	@NSNumberWrapped(owner: nil as Parser?, path: \.__experimentDetailsStart)
 	var experimentDetailsStart: Int?
+	/// The last line of the file that contains the header.
 	@NSNumberWrapped(owner: nil as Parser?, path: \.__headerEnd)
 	var headerEnd: Int?
+	/// The first line of the file that contains the header.
 	@NSNumberWrapped(owner: nil as Parser?, path: \.__headerStart)
 	var headerStart: Int?
 	
-	
 	public override func awakeFromFetch() {
+		// Overriden to initialize the property wrappers. This is not done in an initializer, because Core Data recommends not overriding initializers, but insead overriting awakeFromFetch() and awakeFromInsert()
 		super.awakeFromFetch()
 		initializeWrappers()
 	}
 	
 	public override func awakeFromInsert() {
+		// Overriden to initialize the property wrappers. This is not done in an initializer, because Core Data recommends not overriding initializers, but insead overriting awakeFromFetch() and awakeFromInsert()
 		super.awakeFromNib()
 		initializeWrappers()
 	}
 	
+	/// Initializes the NSNumber property wrappers.
 	func initializeWrappers() {
+		// The property wrappers require `self` to passed to them, so they can't be fully initialized with a default value
 		_dataStart.configure(with: self)
 		_experimentDetailsEnd.configure(with: self)
 		_experimentDetailsStart.configure(with: self)
@@ -42,54 +51,78 @@ public class Parser: NSManagedObject {
 	}
 }
 
-// MARK: Generated accessors for directoryItems
-extension Parser {
-
-    @objc(addDirectoryItemsObject:)
-    @NSManaged public func addToDirectoryItems(_ value: DirectoryItem)
-
-    @objc(removeDirectoryItemsObject:)
-    @NSManaged public func removeFromDirectoryItems(_ value: DirectoryItem)
-
-    @objc(addDirectoryItems:)
-    @NSManaged public func addToDirectoryItems(_ values: NSSet)
-
-    @objc(removeDirectoryItems:)
-    @NSManaged public func removeFromDirectoryItems(_ values: NSSet)
-
-}
-
 // MARK: Core Data Properties
 extension Parser {
+	/// Returns a fetch request for the `Parser` entity type.
+	/// - Returns: A fetch request for all `Parser` entities.
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<Parser> {
 		return NSFetchRequest<Parser>(entityName: "Parser")
 	}
-	
+	/// The name of the parser.
 	@NSManaged public var name: String
+	/// The raw string value of the data separator. Do not use this value directly, use `dataSeparator` instead.
 	@objc(dataSeparator)
 	@NSManaged public var _dataSeparatorRaw: String
+	/// The raw string value of the header separator. Do not use this value directly, use `headerSeparator` instead.
 	@objc(headerSeparator)
 	@NSManaged public var _headerSeparatorRaw: String
+	/// `true` if the parser ignores data after empty lines, ortherwise `false`.
+	///
+	/// - Note: An empty line is defined as a line that contains only whitespace after being separated using the data separator.
 	@NSManaged public var hasFooter: Bool
+	/// `true` if the parser defines starting and ending lines for a header, otherwise `false`.
 	@NSManaged public var hasHeader: Bool
+	/// `true` if the parser defines starting and ending lines for experiment details, otherwise `false`.
 	@NSManaged public var hasExperimentDetails: Bool
+	/// A raw string representation of the the file types whose default parsers are this parser. Do not use this value directly, use `deaultForFileTypes` instead.
 	@objc(defaultForFileTypes)
 	@NSManaged public var _defaultForFileTypes: String
+	/// A raw `NSNumber` representation of the first line of the file that contains data. Do not use this value directly, use `dataStart` instead.
 	@objc(dataStart)
 	@NSManaged public var __dataStart: NSNumber?
+	/// A raw `NSNumber` representation of the last line of the file that contains experiment details. Do not use this value directly, use `experimentDetailsEnd` instead.
 	@objc(experimentDetailsEnd)
 	@NSManaged public var __experimentDetailsEnd: NSNumber?
+	/// A raw `NSNumber` representation of the first line of the file that contains experiment details. Do not use this value directly, use `experimentDetailsStart` instead.
 	@objc(experimentDetailsStart)
 	@NSManaged public var __experimentDetailsStart: NSNumber?
+	/// A raw `NSNumber` representation of the last line of the file that contains the header. Do not use this value directly, use `headerEnd` instead.
 	@objc(headerEnd)
 	@NSManaged public var __headerEnd: NSNumber?
+	/// A raw `NSNumber` representation of the first line of the file that contains the header. Do not use this value directly, use `headerStart` instead.
 	@objc(headerStart)
 	@NSManaged public var __headerStart: NSNumber?
+	/// The directory items who have explicitly set this parser as their default parser. This does not include folders or files who are using their parent folder's default parser or the default parser for their file type.
 	@NSManaged public var directoryItems: NSSet?
 }
 
-// MARK: Derived Properties
+// MARK: Generated accessors for directoryItems
 extension Parser {
+	/// Sets a directory item's parser to be this parser.
+	@objc(addDirectoryItemsObject:)
+	@NSManaged public func addToDirectoryItems(_ value: DirectoryItem)
+	/// Removes this parser as the given directory item's default parser.
+	///
+	/// If the directory item's default parser was not this parser, this will do nothing. Otherwise, the directory item's default parser will be `nil`; for files, the default parser will fallback on the parent folder's default or the default parser for the file's file type.
+	///
+	/// - Note: The directory item may still use this parser as its default parser if its parent directory uses this parser, or if the directory item is a file, and this is the default parser for the file's file type.
+	@objc(removeDirectoryItemsObject:)
+	@NSManaged public func removeFromDirectoryItems(_ value: DirectoryItem)
+	/// Sets a set of directory items' parsers to be this parser.
+	@objc(addDirectoryItems:)
+	@NSManaged public func addToDirectoryItems(_ values: NSSet)
+	/// Removes this parser as the given directory items' default parser.
+	///
+	/// If a directory item's default parser in the set was not this parser, this will do nothing for that item. Otherwise, the directory item's default parser will be `nil`; for files, the default parser will fallback on the parent folder's default or the default parser for the file's file type.
+	///
+	/// - Note: Each directory item may still use this parser as its default parser if its parent directory uses this parser, or if the directory item is a file, and this is the default parser for the file's file type.
+	@objc(removeDirectoryItems:)
+	@NSManaged public func removeFromDirectoryItems(_ values: NSSet)
+}
+
+// MARK: Custom Accessors
+extension Parser {
+	/// The separator that separates columns of data.
 	var dataSeparator: Separator {
 		get {
 			guard let separator = Separator(rawValue: _dataSeparatorRaw) else {
@@ -103,7 +136,7 @@ extension Parser {
 			_dataSeparatorRaw = newValue.rawValue
 		}
 	}
-	
+	/// The separator that separates columns in the header.
 	var headerSeparator: Separator {
 		get {
 			guard let separator = Separator(rawValue: _headerSeparatorRaw) else {
@@ -117,7 +150,7 @@ extension Parser {
 			_headerSeparatorRaw = newValue.rawValue
 		}
 	}
-	
+	/// The file extensions of the file types whose default parser is this parser.
 	var defaultForFileTypes: [String] {
 		get {
 			return _defaultForFileTypes.components(separatedBy: ",")
@@ -128,18 +161,24 @@ extension Parser {
 				.joined(separator: ",")
 		}
 	}
-	
+	/// The first line of the experiment details, or a guess.
+	///
+	/// - Note: Accessing this property will assign a value to `experimentDetailsStart` if it is `nil`.
 	var experimentDetailsStartOrGuess: Int {
 		experimentDetailsStart = experimentDetailsStart ?? 1
 		return experimentDetailsStart!
 	}
-	
+	/// The last line of the experiment details, or a guess.
+	///
+	/// - Note: Accessing this property will assign a value to `experimentDetailsEnd` if it is `nil`.
 	var experimentDetailsEndOrGuess: Int {
 		if let experimentDetailsEnd = experimentDetailsEnd { return experimentDetailsEnd }
 		experimentDetailsEnd = experimentDetailsStartOrGuess
 		return experimentDetailsEnd!
 	}
-	
+	/// The first line of the header, or a guess.
+	///
+	/// - Note: Accessing this property will assign a value to `headerStart` if it is `nil`.
 	var headerStartOrGuess: Int {
 		if let headerStart = headerStart { return headerStart }
 		if hasExperimentDetails {
@@ -150,13 +189,17 @@ extension Parser {
 			return headerStart!
 		}
 	}
-	
+	/// The last line of the header, or a guess.
+	///
+	/// - Note: Accessing this property will assign a value to `headerEnd` if it is `nil`.
 	var headerEndOrGuess: Int {
 		if let headerEnd = headerEnd { return headerEnd }
 		headerEnd = headerStartOrGuess
 		return headerEnd!
 	}
-	
+	/// The first line of the data, or a guess.
+	///
+	/// - Note: Accessing this property will assign a value to `dataStart` if it is `nil`.
 	var dataStartOrGuess: Int {
 		if let dataStart = dataStart { return dataStart }
 		if hasHeader {
@@ -174,17 +217,24 @@ extension Parser {
 
 // MARK: Validations
 extension Parser {
+	/// `true` if the starting line for the experiment details is valid, otherwise `false`.
+	///
+	/// The starting line for the experiment details is valid if it is not `nil` and begins on line `1` or later.
 	var experimentDetailsStartIsValid: Bool {
 		guard let sectionStart = experimentDetailsStart else { return false }
 		return sectionStart > 0
 	}
-	
+	/// `true` if the ending line for the experiment details is valid, otherwise `false`.
+	///
+	/// The ending line for the experiment details is valid if it is not `nil` and begins on or after the starting line for the experiment details.
 	var experimentDetailsEndIsValid: Bool {
 		guard let sectionStart = experimentDetailsStart, let sectionEnd = experimentDetailsEnd else { return false }
 		guard sectionEnd >= sectionStart else { return false }
 		return sectionEnd > 0
 	}
-	
+	/// `true` if the starting line for the header is valid, otherwise `false`.
+	///
+	/// The starting line for the header is valid if it is not `nil` and begins before or after the experiment details section (if there is one) or otherwise begins on line `1` or later.
 	var headerStartIsValid: Bool {
 		guard let sectionStart = headerStart else { return false }
 		if hasExperimentDetails {
@@ -196,7 +246,9 @@ extension Parser {
 		}
 		return sectionStart > 0
 	}
-	
+	/// `true` if the starting line for the header is valid, otherwise `false`.
+	///
+	/// The ending line for the header is valid if it is not `nil` and the header range (`headerStart...headerEnd`) does not fall within the experiment details range (`experimentDetailsStart...experimentDetailsEnd`) if there is an experiment details section and the header end is on or after the header start line.
 	var headerEndIsValid: Bool {
 		guard let sectionStart = headerStart, let sectionEnd = headerEnd else { return false }
 		if hasExperimentDetails {
@@ -209,7 +261,9 @@ extension Parser {
 		guard sectionEnd >= sectionStart else { return false }
 		return sectionEnd > 0
 	}
-	
+	/// `true` if the starting line for the data is valid, otherwise `false`.
+	///
+	/// The starting line for the data is valid if it starts after both the experiment details and header sections (if they exist) and begins on or after line `1`.
 	var dataStartIsValid: Bool {
 		guard let dataStart = dataStart else { return false }
 		if hasExperimentDetails {
@@ -234,15 +288,25 @@ extension Parser {
 	}
 }
 
+// MARK: Parser Separator
 extension Parser {
+	// The enum has an associaed value of string, so that the separator can be encoded and decoded as a string trivally for Core Data, and so that additional cases can be added easily in the future.
+	/// A character or character set that can divide a row string into columns.
 	enum Separator: String, CaseIterable {
+		/// Seperates the string by any amount of whitespace.
 		case whitespace
+		/// Separates the string by a single space.
 		case space
+		/// Separates the string by a single tab.
 		case tab
+		/// Separates the string by a single comma.
 		case comma
+		/// Separates the string by a single colon.
 		case colon
+		/// Separates the string by a single semicolon.
 		case semicolon
 		
+		/// The set of characters to be used to separate a row into columns.
 		var characterSet: CharacterSet {
 			switch self {
 			case .whitespace:
@@ -264,14 +328,16 @@ extension Parser {
 
 // MARK: Parsing
 extension Parser {
+	/// Parses the given file.
+	/// - Parameter file: The file to parse.
+	/// - Returns: The parsed file, or `nil` if the file couldn't be parsed.
 	func parse(file: File) -> ParsedFile? {
 		guard let url = file.path else { return nil }
+		// The file could use any encoding, so try to detect the encoding
 		guard let rawContents = try? String.detectingEncoding(ofContents: url).string else { return nil }
-		
+		// Windows encodes newlines as "\r\n", while unix and unix-like systems encodes newlines as "\n". The file's contents will be separated into lines using String.components(separatedBy:) which treats \r and \n each as a new line. Because of this, we replace all instances of "\r\n" with a single "\n".
 		let contents = rawContents.replacingOccurrences(of: "\r\n", with: "\n")
-		
 		let lines = contents.components(separatedBy: .newlines)
-		
 		// Try to get the experiment details. If there are experiment details enabled but the start and/or end is invalid then return nil
 		guard let experimentDetails = { () -> String? in
 			if hasExperimentDetails {
@@ -297,8 +363,6 @@ extension Parser {
 				return ""
 			}
 			}() else { return nil}
-		
-		
 		
 		// Try to get the header. If the header is enabled but the start and/or end is invalid then return nil
 		guard let header = { () -> [[String]]? in

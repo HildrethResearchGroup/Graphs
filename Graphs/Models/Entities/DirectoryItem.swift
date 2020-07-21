@@ -23,7 +23,6 @@ extension DirectoryItem {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<DirectoryItem> {
 		return NSFetchRequest<DirectoryItem>(entityName: "DirectoryItem")
 	}
-	
 	/// The file path for the directory if it is linked to a physical directory. For files this should never be `nil`, as all files must be stored on the file system somewhere.
 	@NSManaged public var path: URL?
 	/// A custom display name if the directory has been renamed.

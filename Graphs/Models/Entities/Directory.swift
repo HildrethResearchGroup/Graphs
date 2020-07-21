@@ -37,7 +37,6 @@ extension Directory {
 	///   - idx: The index to insert the item at.
 	@objc(insertObject:inChildrenAtIndex:)
 	@NSManaged public func __insertIntoChildren(_ value: DirectoryItem, at idx: Int)
-	
 	/// Removes the item at the given index from the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -45,7 +44,6 @@ extension Directory {
 	/// - Parameter idx: The index to remove the item at.
 	@objc(removeObjectFromChildrenAtIndex:)
 	@NSManaged public func __removeFromChildren(at idx: Int)
-	
 	/// Adds multiple items to the directory at the given index set.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -55,7 +53,6 @@ extension Directory {
 	///   - indexes: The indexes to insert the items at.
 	@objc(insertChildren:atIndexes:)
 	@NSManaged public func __insertIntoChildren(_ values: [DirectoryItem], at indexes: NSIndexSet)
-	
 	/// Removes the items at the given indexes from the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -63,7 +60,6 @@ extension Directory {
 	/// - Parameter indexes: The indexes to remove the items at.
 	@objc(removeChildrenAtIndexes:)
 	@NSManaged public func __removeFromChildren(at indexes: NSIndexSet)
-	
 	/// Replaces the item at the given index with the given item.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -73,7 +69,6 @@ extension Directory {
 	///   - value: The item to replace the existing item.
 	@objc(replaceObjectInChildrenAtIndex:withObject:)
 	@NSManaged public func __replaceChildren(at idx: Int, with value: DirectoryItem)
-	
 	/// Replaces the items at the given indexes with the given items.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -83,7 +78,6 @@ extension Directory {
 	///   - values: The items to replace the existing items.
 	@objc(replaceChildrenAtIndexes:withChildren:)
 	@NSManaged public func __replaceChildren(at indexes: NSIndexSet, with values: [DirectoryItem])
-	
 	/// Adds a new item to the end of the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -91,7 +85,6 @@ extension Directory {
 	/// - Parameter value: The item to add to the directory.
 	@objc(addChildrenObject:)
 	@NSManaged public func __addToChildren(_ value: DirectoryItem)
-	
 	/// Removes the given item from the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -99,7 +92,6 @@ extension Directory {
 	/// - Parameter value: The item to remove from the directory.
 	@objc(removeChildrenObject:)
 	@NSManaged public func __removeFromChildren(_ value: DirectoryItem)
-	
 	/// Adds new items to the end of the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -107,7 +99,6 @@ extension Directory {
 	/// - Parameter values: The items to add to the directory.
 	@objc(addChildren:)
 	@NSManaged public func __addToChildren(_ values: NSOrderedSet)
-	
 	/// Removes the given items from the directory.
 	///
 	/// This method is public because it is managed by Core Data. However, it should not be called directly. Instead call the method without underscores.
@@ -117,7 +108,7 @@ extension Directory {
 	@NSManaged public func __removeFromChildren(_ values: NSOrderedSet)
 }
 
-// MARK: Custom accessors
+// MARK: Custom Accessors
 extension Directory {
 	/// Adds a new item to the directory at the given index.
 	/// - Parameters:
@@ -127,14 +118,12 @@ extension Directory {
 		__insertIntoChildren(value, at: idx)
 		calculateSubDirectories()
 	}
-	
 	/// Removes the item at the given index from the directory.
 	/// - Parameter idx: The index to remove the item at.
 	func removeFromChildren(at idx: Int) {
 		__removeFromChildren(at: idx)
 		calculateSubDirectories()
 	}
-	
 	/// Adds multiple items to the directory at the given index set.
 	/// - Parameters:
 	///   - values: The items to add to the directory.
@@ -143,14 +132,12 @@ extension Directory {
 		__insertIntoChildren(values, at: indexes)
 		calculateSubDirectories()
 	}
-	
 	/// Removes the items at the given indexes from the directory.
 	/// - Parameter indexes: The indexes to remove the items at.
 	func removeFromChildren(at indexes: NSIndexSet) {
 		__removeFromChildren(at: indexes)
 		calculateSubDirectories()
 	}
-	
 	/// Replaces the item at the given index with the given item.
 	/// - Parameters:
 	///   - idx: The index of the item to replace.
@@ -159,7 +146,6 @@ extension Directory {
 		__replaceChildren(at: idx, with: value)
 		calculateSubDirectories()
 	}
-	
 	/// Replaces the items at the given indexes with the given items.
 	/// - Parameters:
 	///   - indexes: The indexes of the items to replace.
@@ -168,28 +154,24 @@ extension Directory {
 		__replaceChildren(at: indexes, with: values)
 		calculateSubDirectories()
 	}
-	
 	/// Adds a new item to the end of the directory.
 	/// - Parameter value: The item to add to the directory.
 	func addToChildren(_ value: DirectoryItem) {
 		__addToChildren(value)
 		calculateSubDirectories()
 	}
-	
 	/// Removes the given item from the directory.
 	/// - Parameter value: The item to remove from the directory.
 	func removeFromChildren(_ value: DirectoryItem) {
 		__removeFromChildren(value)
 		calculateSubDirectories()
 	}
-	
 	/// Adds new items to the end of the directory.
 	/// - Parameter values: The items to add to the directory.
 	func addToChildren(_ values: NSOrderedSet) {
 		__addToChildren(values)
 		calculateSubDirectories()
 	}
-	
 	/// Removes the given items from the directory.
 	/// - Parameter values: The items to remove from the directory.
 	func removeFromChildren(_ values: NSOrderedSet) {
@@ -251,7 +233,6 @@ extension Directory {
 		// None of the ancestors were the given directory, so self is not a decesndent of directory
 		return false
 	}
-	
 	/// Returns `true` if this directory is a descendent of any of the given directories.
 	/// - Parameter directories: The directories to check if this directory is a descendent of.
 	/// - Returns: `true` if this directory is a descendent of any of the given directories, otherwise `false`.
