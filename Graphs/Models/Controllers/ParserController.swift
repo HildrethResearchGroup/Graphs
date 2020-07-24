@@ -9,10 +9,12 @@
 import CoreData
 
 class ParserController {
+	/// The data controller which controls the Core Data store.
 	private unowned let dataController: DataController
-	
+	/// The parsers that have been created.
 	var parsers: [Parser] = []
-	
+	/// Creates a file controller from a data controller.
+	/// - Parameter dataController: The data controller to use.
 	init(dataController: DataController) {
 		self.dataController = dataController
 	}
@@ -20,9 +22,15 @@ class ParserController {
 
 // MARK: Helpers
 extension ParserController {
+	/// The Core Data context.
 	private var context: NSManagedObjectContext {
 		return dataController.context
 	}
+	/// Returns the default parser for the given file type if one exists.
+	///
+	/// - Note: If multiple parsers exist for the given file type, then one of those parsers will be returned, which one is not guaranteed to be the same accross subsequent calls.
+	/// - Parameter fileType: The file extension to find the default parser of.
+	/// - Returns: The default parser for the given file if one exists.
 	private func parser(for fileType: String) -> Parser? {
 		let parsers = defaultParsers(forFileType: fileType)
 		switch parsers.count {
@@ -35,6 +43,15 @@ extension ParserController {
 			return parsers.first
 		}
 	}
+	// This is a helper function which allows specifying the file type, so that if none of a file's ancestors have a default parser selected, the default parser for the file's file type can be used instead. This function is implemented so that it is tail recursive, which could not be achieved if it did not have the extra parameter.
+	/// The parser to use for the given directory item.
+	///
+	///	See `ParserController.parser(for:)`.
+	///
+	/// - Parameters:
+	///   - directoryItem: The directory item to find the parser for.
+	///   - fileType: The file extension of the file if seaching for a file.
+	/// - Returns: The parser to use for the given directory item.
 	private func parser(for directoryItem: DirectoryItem, fileType: String?) -> Parser? {
 		if let file = directoryItem as? File {
 			if let fileParser = file.parser {
@@ -43,8 +60,10 @@ extension ParserController {
 			} else {
 				switch file.defaultParserMode {
 				case .fileTypeDefault:
+					// If there is no default parser for the file's file type, then use the folder default method instead (which is the next switch case, so fallthrough -- consequently this is the first time that I have ever needed to use the fallthough keyword in Swift)
 					guard let fileType = fileType else { fallthrough }
-					return parser(for: fileType)
+					guard let fileTypeDefault = parser(for: fileType) else { fallthrough }
+					return fileTypeDefault
 				case .folderDefault:
 					guard let parent = directoryItem.parent else {
 						print("[WARNING] Trying to find default parser for parent directory of a file with no parent directory.")
@@ -55,16 +74,17 @@ extension ParserController {
 			}
 		} else {
 			if directoryItem == dataController.rootDirectory {
+				// None of the item's ancestors had a default parser defined, so see if there is a default for the file's file type instead to fall back on.
 				if let fileType = fileType {
 					return parser(for: fileType)
 				} else {
 					return nil
 				}
 			} else if let parent = directoryItem.parent {
+				// If the item has a parent, return its default parser if this item doesn't have a default specified.
 				return directoryItem.parser ?? parser(for: parent, fileType: fileType)
-			} else if let parser = directoryItem.parser {
-				return parser
 			} else {
+				// Note that the case if let parser = directoryItem.parser { ... } doesn't need to be checked for, becuase every directory item will have a parent except for the root directory, which has already been checked against.
 				print("[WARNING] Trying to find default parser for parent directory of a non-root directory with no parent directory.")
 				return nil
 			}

@@ -31,6 +31,7 @@ class DataController {
 		// By default there is no undo manager, so set a new one.
 		persistentContainer.viewContext.undoManager = UndoManager()
 		
+		// Initialize the sub controllers
 		saveController = .init(dataController: self)
 		directoryController = .init(dataController: self)
 		fileController = .init(dataController: self)
@@ -302,6 +303,7 @@ extension DataController {
 
 // MARK: Graph Interface
 extension DataController {
+	/// The graph templates that have been imported.
 	var graphTemplates: [GraphTemplate] {
 		return graphController.graphTemplates
 	}

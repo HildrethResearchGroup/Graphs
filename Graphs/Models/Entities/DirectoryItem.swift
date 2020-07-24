@@ -31,8 +31,17 @@ extension DirectoryItem {
 	@NSManaged public var customDisplayName: String?
 	/// The directory that the item is in. If this is `nil`, then the item is the root directory.
 	@NSManaged public var parent: Directory?
-	/// The parser to use to parse the item
+	/// The explicitly defined parser for the item.
+	///
+	///  For `File` entities, if this value is not `nil`, then this will be the parser used to parse that file. For `Directory` entities, if this value is not `nil`, then this will be the parser used for files within the directory that do not have an explicitly set parser, as well as for files within subdirectories of this directory that do not have an explicitly set parser. Files that are set to use the default for their file type will not fall back on their parent directory's expliticly set parser.
+	///
+	/// - Note: If this is `nil`, the parser used to parser the item is determined by the method `DataController.parser(for:)`.
 	@NSManaged public var parser: Parser?
+	/// The explicitly defined graph template for the item.
+	///
+	///  For `File` entities, if this value is not `nil`, then this will be the graph template used to graph that file. For `Directory` entities, if this value is not `nil`, then this will be the graph template used for files within the directory that do not have an explicitly set graph template, as well as for files within subdirectories of this directory that do not have an explicitly set graph template.
+	///
+	/// - Note: If this is `nil`, the parser used to parser the item is determined by the method `DataController.graphTemplate(for:)`.
 	@NSManaged public var graphTemplate: GraphTemplate?
 }
 

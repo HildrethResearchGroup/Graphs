@@ -23,7 +23,6 @@ extension File {
 	@nonobjc public class func fetchRequest() -> NSFetchRequest<File> {
 		return NSFetchRequest<File>(entityName: "File")
 	}
-	
 	/// The raw integer representation of the default parsing mode. Do not use this directly, instead use `defaultParserMode`.
 	@objc(parserDefaultMode)
 	@NSManaged var _parserDefaultModeRaw: Int64

@@ -9,6 +9,29 @@
 import Foundation
 
 extension RandomAccessCollection where Element: RandomAccessCollection, Index == Int, Element.Index == Int {
+	/// Returns the columns of the two dimensional collection.
+	///
+	/// If the collection has rows with fewer elements that `numberOfColumns`, then elements for that column will be `nil`.
+	///
+	/// **Example**
+	///
+	/// In the following example, a 2D array is transformed into columns:
+	///
+	/// ```
+	/// let array = [[1, 2, 3],
+	///              [4, 5, 6],
+	///              [7, 8, 9, 10]]
+	/// let columns = array.columns(count: 4)
+	/// /*
+	/// columns = [[1, 4, 7],
+	///            [2, 5, 8],
+	///            [3, 6, 9],
+	///            [nil, nil, 10]]
+	/// */
+	/// ```
+	///
+	/// - Parameter numberOfColumns: The number of columns in the collection to return.
+	/// - Returns: The columns of the two dimensional collection.
 	func columns(count numberOfColumns: Int) -> [[Element.Element?]] {
 		return (0..<numberOfColumns).map { columnIndex in
 			return (0..<self.count).map { rowIndex in

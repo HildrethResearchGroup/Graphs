@@ -11,7 +11,7 @@ import Cocoa
 class DataInspectorViewController: NSViewController {
 	@IBOutlet weak var tabSegmentedControl: NSSegmentedControl!
 	@IBOutlet weak var tabView: NSTabView!
-	@IBOutlet var textView: CodeTextView!
+	@IBOutlet var textView: LineNumberedTextView!
 	@IBOutlet weak var tableView: NSTableView!
 	@IBOutlet weak var errorLabel: NSTextField!
 	

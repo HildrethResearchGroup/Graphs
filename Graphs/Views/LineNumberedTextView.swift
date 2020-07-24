@@ -8,14 +8,12 @@
 
 import Cocoa
 
-class CodeTextView: NSTextView {
+// Copied from https://github.com/brutella/TextViewLineNumbers with some refactoring
+
+/// A text view which displays the line number to the left of each line.
+class LineNumberedTextView: NSTextView {
+	/// The ruler view which holds the numbered lines.
 	weak var rulerView: NSRulerView?
-	
-	var text: String {
-		get {
-			return string
-		}
-	}
 	
 	override func updateRuler() {
 		super.updateRuler()
@@ -23,14 +21,15 @@ class CodeTextView: NSTextView {
 	}
 }
 
-let NSRangeZero = NSMakeRange(0, 0)
-
-func NumberOfDigits(number: Int) -> Int {
+/// Returns the number of digits in the decimal notation of `number`.
+/// - Parameter number: The number to count the digits of.
+/// - Returns: The number of digits in the decimal notation of `number`.
+private func numberOfDigits(in number: Int) -> Int {
 	let result = log10(Double(number)) + 1
 	return Int(result)
 }
-
-func NumberAt(place: Int, number: Int) -> Int {
+// I have no idea what this function does.
+private func numberAt(place: Int, number: Int) -> Int {
 	let fplace = Double(place)
 	let fnumber = Double(number)
 	var result = fnumber.truncatingRemainder(dividingBy: pow(10.0, fplace + 1))
@@ -40,28 +39,30 @@ func NumberAt(place: Int, number: Int) -> Int {
 
 // Shameless copy from https://github.com/coteditor/CotEditor
 class LineNumberRulerView: NSRulerView {
-	let MinNumberOfDigits = 3
-	let DefaultRulerThickness = CGFloat(40)
+	let minimumNumberOfDigits = 3
+	let defaultRulerThickness: CGFloat = 40.0
 	
 	override var requiredThickness: CGFloat {
 		get {
-			return max(DefaultRulerThickness, self.ruleThickness)
+			return max(defaultRulerThickness, self.ruleThickness)
 		}
 	}
 	
-	private weak var textView: CodeTextView? {
+	private weak var textView: LineNumberedTextView? {
 		get {
-			return self.clientView as? CodeTextView
+			return self.clientView as? LineNumberedTextView
 		}
 	}
 	
+	// A monospaced font is used so that the line numbers all align
+	/// The font to use for the line numbers.
 	var font: NSFont = NSFont.monospacedSystemFont(ofSize: NSFont.smallSystemFontSize, weight: .regular) {
 		didSet {
 			invalidateLineNumber()
 		}
 	}
 	
-	init(textView: CodeTextView) {
+	init(textView: LineNumberedTextView) {
 		super.init(scrollView: textView.enclosingScrollView!, orientation: NSRulerView.Orientation.verticalRuler)
 		textView.rulerView = self
 		self.clientView = textView
@@ -73,7 +74,7 @@ class LineNumberRulerView: NSRulerView {
 	
 	override func viewDidMoveToSuperview() {
 		super.viewDidMoveToSuperview()
-		self.ruleThickness = DefaultRulerThickness
+		self.ruleThickness = defaultRulerThickness
 	}
 	
 	// Draws the line numbers
@@ -146,19 +147,19 @@ class LineNumberRulerView: NSRulerView {
 				glyphIndex = NSMaxRange(lineCharacterRange)
 				
 				while (glyphCount < glyphIndex) { // handle wrapper lines
-					var effectiveRange = NSRangeZero
+					var effectiveRange = NSRange(location: 0, length: 0)
 					let lineRect = layoutManager.lineFragmentRect(forGlyphAt: glyphCount, effectiveRange: &effectiveRange, withoutAdditionalLayout: true)
 					let y = -NSMinY(lineRect)
 					if lastLineNum == lineNum { // draw wrapped mark
-						var position = CGPoint(x: width - charWidth, y: y)
+						let position = CGPoint(x: width - charWidth, y: y)
 						context.showGlyphs([wrappedMarkGlyph], at: [position])
 					} else { // new line
-						let digit = NumberOfDigits(number: lineNum)
+						let digit = numberOfDigits(in: lineNum)
 						
 						var glyphs = Array(repeating: CGGlyph(kCGGlyphMax), count: digit)
 						var positions = Array(repeating: CGPoint.zero, count: digit)
 						for i in 0..<digit {
-							let glyph = digitGlyphs[NumberAt(place: i, number: lineNum)]
+							let glyph = digitGlyphs[numberAt(place: i, number: lineNum)]
 							glyphs[i] = glyph
 							let point = CGPoint(x: width - CGFloat(i + 1) * charWidth, y: y)
 							positions[i] = point
@@ -178,12 +179,12 @@ class LineNumberRulerView: NSRulerView {
 				let lineRect = layoutManager.extraLineFragmentRect
 				let y = -NSMinY(lineRect)
 				
-				let digit = NumberOfDigits(number: lineNum)
+				let digit = numberOfDigits(in: lineNum)
 				
 				var glyphs = Array(repeating: CGGlyph(kCGGlyphMax), count: digit)
 				var positions = Array(repeating: CGPoint.zero, count: digit)
 				for i in 0..<digit {
-					let glyph = digitGlyphs[NumberAt(place: i, number: lineNum)]
+					let glyph = digitGlyphs[numberAt(place: i, number: lineNum)]
 					glyphs[i] = glyph
 					let point = CGPoint(x: width - CGFloat(i + 1) * charWidth, y: y)
 					positions[i] = point
@@ -193,7 +194,7 @@ class LineNumberRulerView: NSRulerView {
 			context.restoreGState()
 			
 			// adjust ruler thickness
-			let length = max(NumberOfDigits(number: lineNum), MinNumberOfDigits)
+			let length = max(numberOfDigits(in: lineNum), minimumNumberOfDigits)
 			let requiredWidth = max(CGFloat(length) * charWidth + 2.0 * padding, ruleThickness)
 			self.ruleThickness = requiredWidth
 		}

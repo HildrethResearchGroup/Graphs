@@ -39,7 +39,6 @@ public class Parser: NSManagedObject {
 		super.awakeFromNib()
 		initializeWrappers()
 	}
-	
 	/// Initializes the NSNumber property wrappers.
 	func initializeWrappers() {
 		// The property wrappers require `self` to passed to them, so they can't be fully initialized with a default value
@@ -332,6 +331,7 @@ extension Parser {
 	/// - Parameter file: The file to parse.
 	/// - Returns: The parsed file, or `nil` if the file couldn't be parsed.
 	func parse(file: File) -> ParsedFile? {
+		// TODO: Add a caching mechanism, because this is called multiple times and can be an expensive operation
 		guard let url = file.path else { return nil }
 		// The file could use any encoding, so try to detect the encoding
 		guard let rawContents = try? String.detectingEncoding(ofContents: url).string else { return nil }

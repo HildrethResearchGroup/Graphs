@@ -9,10 +9,12 @@
 import CoreData
 
 class GraphController {
+	/// The data controller which controls the Core Data store.
 	unowned let dataController: DataController
-	
+	/// The graph templates that have been imported.
 	var graphTemplates: [GraphTemplate] = []
-	
+	/// Creates a file controller from a data controller.
+	/// - Parameter dataController: The data controller to use.
 	init(dataController: DataController) {
 		self.dataController = dataController
 		
@@ -21,6 +23,7 @@ class GraphController {
 
 // MARK: Helpers
 extension GraphController {
+	/// The Core Data context.
 	var context: NSManagedObjectContext {
 		return dataController.context
 	}
@@ -43,9 +46,9 @@ extension GraphController {
 	func importGraphTemplate(from url: URL) -> (template: GraphTemplate, controller: DGController)? {
 		guard url.isFileURL else { return nil }
 		guard url.lastPathComponent.split(separator: ".").last == "dgraph" else { return nil }
-		
+		// If a controller can't be created from the file, then it is an invalid template file, so don't allow the template to be imported.
 		guard let controller = DGController(contentsOfFile: url.path) else { return nil }
-		
+		// Name the graph template the name of the file it was imported from.
 		let name = url.lastPathComponent.split(separator: ".").first ?? "New Graph Template"
 		
 		let template = GraphTemplate(context: context)

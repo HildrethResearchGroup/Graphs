@@ -8,6 +8,8 @@
 
 import Cocoa
 
+/// A table view cell that contains a token field.
 class ParserFileTypesCell: NSTableCellView {
+	/// The token field.
 	@IBOutlet weak var tokenField: NSTokenField?
 }

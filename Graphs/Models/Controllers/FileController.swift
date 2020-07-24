@@ -9,7 +9,7 @@
 import CoreData
 
 class FileController {
-	/// The data controller which controlls the Core Data store.
+	/// The data controller which controls the Core Data store.
 	private unowned let dataController: DataController
 	/// The background thread to run work on.
 	// The QOS is user initiated becuase the user will have to wait while these operations perform.

@@ -29,7 +29,6 @@ extension GraphTemplate {
 
 // MARK: Generated accessors for directoryItems
 extension GraphTemplate {
-	
 	/// Sets a directory item's graph template to be this graph template.
 	@objc(addDirectoryItemsObject:)
 	@NSManaged public func addToDirectoryItems(_ value: DirectoryItem)

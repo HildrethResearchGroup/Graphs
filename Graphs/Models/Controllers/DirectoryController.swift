@@ -98,6 +98,5 @@ extension DirectoryController {
 		directory.customDisplayName = newName
 		dataController.setNeedsSaved()
 		NotificationCenter.default.post(name: .directoryRenamed, object: directory)
-		
 	}
 }
