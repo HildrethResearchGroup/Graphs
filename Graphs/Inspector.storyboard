@@ -593,21 +593,21 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="FileInspectorDetailsCell" id="GEb-71-rHM" customClass="InspectorTextViewCell" customModule="Graphs" customModuleProvider="target">
-                                                            <rect key="frame" x="4" y="192" width="242" height="80"/>
+                                                            <rect key="frame" x="4" y="192" width="242" height="240"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <scrollView borderType="line" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pe5-De-vW0">
-                                                                    <rect key="frame" x="2" y="0.0" width="238" height="80"/>
+                                                                    <rect key="frame" x="2" y="0.0" width="238" height="240"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="h0W-Yj-FrX">
-                                                                        <rect key="frame" x="1" y="1" width="236" height="78"/>
+                                                                        <rect key="frame" x="1" y="1" width="236" height="238"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ufW-Ca-Eq0">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="236" height="78"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="236" height="238"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                                <size key="minSize" width="236" height="78"/>
+                                                                                <size key="minSize" width="236" height="238"/>
                                                                                 <size key="maxSize" width="247" height="10000000"/>
                                                                                 <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                                 <connections>
@@ -617,14 +617,14 @@
                                                                         </subviews>
                                                                     </clipView>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="80" id="2ep-MV-R2q"/>
+                                                                        <constraint firstAttribute="height" constant="240" id="2ep-MV-R2q"/>
                                                                     </constraints>
                                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="y9E-Ul-8Ch">
                                                                         <rect key="frame" x="-100" y="-100" width="240" height="16"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
                                                                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="d1M-kb-psA">
-                                                                        <rect key="frame" x="221" y="1" width="16" height="78"/>
+                                                                        <rect key="frame" x="221" y="1" width="16" height="238"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
                                                                 </scrollView>
@@ -1610,7 +1610,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-Xi-c21">
-                                <rect key="frame" x="2" y="288" width="246" height="16"/>
+                                <rect key="frame" x="2" y="258" width="246" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Preview" id="O5f-UZ-wqB">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1618,13 +1618,13 @@
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="fTl-iB-NZP">
-                                <rect key="frame" x="0.0" y="0.0" width="250" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="OSa-Oq-alN" customClass="DPDrawingView">
-                                        <rect key="frame" x="0.0" y="0.0" width="250" height="280"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                     </customView>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FbN-HD-Rxj">
-                                        <rect key="frame" x="82" y="132" width="86" height="16"/>
+                                        <rect key="frame" x="82" y="117" width="86" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="No Selection" id="PMH-ww-KDD">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1642,6 +1642,7 @@
                                     <constraint firstItem="FbN-HD-Rxj" firstAttribute="centerX" secondItem="fTl-iB-NZP" secondAttribute="centerX" id="gNZ-7b-hy8"/>
                                     <constraint firstItem="FbN-HD-Rxj" firstAttribute="centerY" secondItem="fTl-iB-NZP" secondAttribute="centerY" id="jCx-C3-9p3"/>
                                     <constraint firstAttribute="trailing" secondItem="OSa-Oq-alN" secondAttribute="trailing" id="tvk-bf-9bu"/>
+                                    <constraint firstAttribute="width" secondItem="fTl-iB-NZP" secondAttribute="height" multiplier="1:1" priority="250" id="xrZ-ME-a4J"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -1654,7 +1655,7 @@
                             <constraint firstAttribute="trailing" secondItem="eYI-47-tV7" secondAttribute="trailing" constant="6" id="LP0-eK-igp"/>
                             <constraint firstItem="85h-jS-ByJ" firstAttribute="firstBaseline" secondItem="Oj8-sN-Jqm" secondAttribute="firstBaseline" id="RHf-Ct-E62"/>
                             <constraint firstItem="fTl-iB-NZP" firstAttribute="leading" secondItem="iGP-Pm-upC" secondAttribute="leading" id="ZvN-9J-OpT"/>
-                            <constraint firstItem="ctp-Xi-c21" firstAttribute="top" secondItem="Oj8-sN-Jqm" secondAttribute="bottom" constant="8" id="aTd-F5-zr4"/>
+                            <constraint firstItem="ctp-Xi-c21" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Oj8-sN-Jqm" secondAttribute="bottom" constant="8" id="aTd-F5-zr4"/>
                             <constraint firstItem="eYI-47-tV7" firstAttribute="leading" secondItem="iGP-Pm-upC" secondAttribute="leading" constant="6" id="fNS-kE-ni6"/>
                             <constraint firstItem="eYI-47-tV7" firstAttribute="top" secondItem="iGP-Pm-upC" secondAttribute="top" constant="6" id="ird-at-jz2"/>
                             <constraint firstItem="85h-jS-ByJ" firstAttribute="trailing" secondItem="iGP-Pm-upC" secondAttribute="leading" constant="82" id="lrm-5v-R5l"/>

@@ -124,7 +124,7 @@ extension DirectoryInspectorViewController {
 		
 		let parentDefault = dataController.graphTemplate(for: directory.parent!)
 		
-		let defaultItems = [NSMenuItem(title: "Default for Directory (\(parentDefault?.name ?? "None"))",
+		let defaultItems = [NSMenuItem(title: "Default from Parent (\(parentDefault?.name ?? "None"))",
 																	 action: nil,
 																	 keyEquivalent: ""),
 												NSMenuItem.separator()]
