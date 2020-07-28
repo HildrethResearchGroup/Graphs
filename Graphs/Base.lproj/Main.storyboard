@@ -109,6 +109,13 @@
                                                 <action selector="revertDocumentToSaved:" target="Ady-hI-5gd" id="iJ3-Pv-kwq"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="smO-CP-Qk2"/>
+                                        <menuItem title="Show in Finder" id="yi0-wH-Ggr">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showInFinder:" target="Ady-hI-5gd" id="ECP-Nu-sUp"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
                                         <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
                                             <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
@@ -836,6 +843,9 @@ CA
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
+                                <connections>
+                                    <outlet property="menu" destination="xT2-eR-8jV" id="qHQ-OV-cHk"/>
+                                </connections>
                             </scrollView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="XpQ-Mz-Ja3">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="26"/>
@@ -961,6 +971,35 @@ CA
                         <constraint firstItem="M3v-YF-30n" firstAttribute="centerX" secondItem="bEW-dG-cYl" secondAttribute="centerX" id="nrk-Dw-skX"/>
                     </constraints>
                 </customView>
+                <menu id="xT2-eR-8jV">
+                    <items>
+                        <menuItem title="Delete" id="dal-bT-U9q">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteRow:" target="ead-Yc-1N1" id="Wz4-QX-w2S"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Import…" id="48H-RG-a4Z">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="importItemsInRow:" target="ead-Yc-1N1" id="INi-HS-Z9L"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="New Directory" id="Umi-vY-Ei5">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="newDirectoryInRow:" target="ead-Yc-1N1" id="yLa-7F-NS1"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="AM7-Vy-ds0"/>
+                        <menuItem title="Show In Finder" id="kDh-89-AFa">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinderInRow:" target="ead-Yc-1N1" id="tUv-Uw-j4f"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-523" y="1221"/>
         </scene>

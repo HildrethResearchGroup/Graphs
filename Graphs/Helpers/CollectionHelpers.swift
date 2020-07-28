@@ -63,3 +63,12 @@ extension Collection where Element: Hashable, Index == Int {
 		return indicies
 	}
 }
+
+extension Sequence {
+	/// Returns a boolean value indicating if none of the elements of a sequence satisfy the given predicate.
+	/// - Parameter predicate: A closure that takes an element of the sequence as its argument and returns a Boolean value that indicates whether the passed element satisfies a condition.
+	/// - Returns: `true` if the sequence contains no elements that satisfy `predicate`; otherwise, `false`.
+	public func noneSatisfy(_ predicate: (Self.Element) throws -> Bool) rethrows -> Bool {
+		return try allSatisfy { try !predicate($0) }
+	}
+}

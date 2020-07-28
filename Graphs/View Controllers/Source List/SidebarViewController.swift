@@ -262,6 +262,26 @@ extension SidebarViewController {
 		// Setting this property calls a setter in DirectoryController which updates the filesToShow property
 		dataController?.selectedDirectories = selectedDirectories
 	}
+	
+	func selectClickedRow() {
+		if sidebar.clickedRow >= 0 {
+			sidebar.selectRowIndexes(IndexSet(integer: sidebar.clickedRow),
+															 byExtendingSelection: false)
+		} else {
+			sidebar.selectRowIndexes(IndexSet(),
+															 byExtendingSelection: false)
+		}
+		updateDirectorySelection()
+	}
+	
+	func selectClickedRowIfNotInSelection() {
+		if sidebar.clickedRow >= 0 && !sidebar.selectedRowIndexes.contains(sidebar.clickedRow) {
+			// Right clicking on an unselected row, so delete that row
+			sidebar.selectRowIndexes(IndexSet(integer: sidebar.clickedRow),
+															 byExtendingSelection: false)
+			updateDirectorySelection()
+		}
+	}
 }
 
 // MARK: Notifications

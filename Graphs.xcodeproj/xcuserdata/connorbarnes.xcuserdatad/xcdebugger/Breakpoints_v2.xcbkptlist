@@ -84,5 +84,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6D60ED48-A46C-4B6A-9EEB-E6D53CC9277B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Graphs/View Controllers/Source List/SidebarViewController+FirstResponder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "validateUserInterfaceItem(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6D60ED48-A46C-4B6A-9EEB-E6D53CC9277B - d9bd005820eb016a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphs.SidebarViewController.validateUserInterfaceItem(__C.NSValidatedUserInterfaceItem) -&gt; Swift.Bool"
+                  moduleName = "Graphs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/View%20Controllers/Source%20List/SidebarViewController+FirstResponder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "6666">
+               </Location>
+               <Location
+                  uuid = "6D60ED48-A46C-4B6A-9EEB-E6D53CC9277B - 4e151a83b61b2e92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Graphs.Directory) -&gt; Swift.Bool in Graphs.SidebarViewController.validateUserInterfaceItem(__C.NSValidatedUserInterfaceItem) -&gt; Swift.Bool"
+                  moduleName = "Graphs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/View%20Controllers/Source%20List/SidebarViewController+FirstResponder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "130"
+                  endingLineNumber = "130"
+                  offsetFromSymbolStart = "226">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0FDD3F0-9E2D-4F96-BF83-117539B6E158"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Graphs/Helpers/CollectionHelpers.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "noneSatisfy(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C0FDD3F0-9E2D-4F96-BF83-117539B6E158 - dec737c4ce4da7b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(extension in Graphs):Swift.Sequence.noneSatisfy((A.Element) throws -&gt; Swift.Bool) throws -&gt; Swift.Bool"
+                  moduleName = "Graphs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/Helpers/CollectionHelpers.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "147">
+               </Location>
+               <Location
+                  uuid = "C0FDD3F0-9E2D-4F96-BF83-117539B6E158 - 3c4c76dc4ed5bfa0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (A.Element) throws -&gt; Swift.Bool in (extension in Graphs):Swift.Sequence.noneSatisfy((A.Element) throws -&gt; Swift.Bool) throws -&gt; Swift.Bool"
+                  moduleName = "Graphs"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/connorbarnes/Documents/Development/Swift/Work/Graphs/Graphs/Helpers/CollectionHelpers.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "109">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
