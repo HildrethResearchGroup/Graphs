@@ -74,6 +74,7 @@ extension GraphInspectorViewController {
 			errorLabel.isHidden = false
 			graphView.isHidden = true
 			errorLabel.stringValue = "No Template Selected"
+			sourceTextField.stringValue = ""
 			return
 		}
 		
@@ -85,14 +86,17 @@ extension GraphInspectorViewController {
 		case 0:
 			errorLabel.isHidden = false
 			errorLabel.stringValue = "No Template Selected"
+			sourceTextField.stringValue = "No Template Selected"
 		case 1:
 			errorLabel.isHidden = true
 			controller = graphTemplates.first!.controller
 			controller?.setDrawingView(graphView)
 			controller?.setDelegate(self)
+			sourceTextField.stringValue = graphTemplates.first!.path?.path ?? ""
 		default:
 			errorLabel.isHidden = false
 			errorLabel.stringValue = "Multiple Templates Selected"
+			sourceTextField.stringValue = "Multiple Templates Selected"
 		}
 		
 		graphView.isHidden = !errorLabel.isHidden

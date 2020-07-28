@@ -1463,17 +1463,16 @@
         <scene sceneID="iml-vD-jp6">
             <objects>
                 <viewController title="Graph Inspector View Controller" id="YU4-bp-XMX" customClass="GraphInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="iGP-Pm-upC">
+                    <view key="view" translatesAutoresizingMaskIntoConstraints="NO" id="iGP-Pm-upC">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="500"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="eYI-47-tV7">
+                            <box horizontalCompressionResistancePriority="250" boxType="custom" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="eYI-47-tV7">
                                 <rect key="frame" x="6" y="352" width="238" height="142"/>
                                 <view key="contentView" id="Sel-5A-DXZ">
                                     <rect key="frame" x="1" y="1" width="236" height="140"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABa-MF-I1C">
+                                        <scrollView horizontalCompressionResistancePriority="250" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABa-MF-I1C">
                                             <rect key="frame" x="0.0" y="20" width="236" height="120"/>
                                             <clipView key="contentView" id="D4e-bn-Lbn">
                                                 <rect key="frame" x="0.0" y="0.0" width="236" height="120"/>
@@ -1601,7 +1600,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="85h-jS-ByJ">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="85h-jS-ByJ">
                                 <rect key="frame" x="37" y="328" width="47" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Source" id="cWv-xD-Idf">
                                     <font key="font" metaFont="system"/>
@@ -1609,7 +1608,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-Xi-c21">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ctp-Xi-c21">
                                 <rect key="frame" x="2" y="258" width="246" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Preview" id="O5f-UZ-wqB">
                                     <font key="font" metaFont="system"/>
@@ -1617,13 +1616,13 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="fTl-iB-NZP">
+                            <customView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="fTl-iB-NZP">
                                 <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="OSa-Oq-alN" customClass="DPDrawingView">
+                                    <customView horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="OSa-Oq-alN" customClass="DPDrawingView">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                     </customView>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FbN-HD-Rxj">
+                                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="FbN-HD-Rxj">
                                         <rect key="frame" x="82" y="117" width="86" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="No Selection" id="PMH-ww-KDD">
                                             <font key="font" usesAppearanceFont="YES"/>
