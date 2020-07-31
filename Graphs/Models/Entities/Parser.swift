@@ -448,3 +448,81 @@ extension Parser {
 											numberOfColumns: numberOfColumns)
 	}
 }
+
+// MARK: Saving to file
+extension Parser {
+	struct FileStorage: Codable {
+		// There is a property for each stored property of Parser that is optional -- this way if a property is removed, renamed, or added in the future the application can still manage to somewhat successfully import the parser
+		// There is no property for directories because an exported parser shouldn't be associated with any directories
+		var name: String?
+		var dataSeparatorRaw: String?
+		var headerSeparatorRaw: String?
+		var hasFooter: Bool?
+		var hasHeader: Bool?
+		var hasExperimentDetails: Bool?
+		var defaultForFileTypes: String?
+		var dataStart: Int??
+		var experimentDetailsEnd: Int??
+		var experimentDetailsStart: Int??
+		var headerEnd: Int??
+		var headerStart: Int??
+		
+		init(from parser: Parser) {
+			name = parser.name
+			dataSeparatorRaw = parser._dataSeparatorRaw
+			headerSeparatorRaw = parser._headerSeparatorRaw
+			hasFooter = parser.hasFooter
+			hasHeader = parser.hasHeader
+			hasExperimentDetails = parser.hasExperimentDetails
+			defaultForFileTypes = parser._defaultForFileTypes
+			dataStart = parser.dataStart
+		}
+	}
+	
+	func loadFrom(fileStorage: FileStorage) {
+		if let name = fileStorage.name {
+			self.name = name
+		}
+		if let dataSeparatorRaw = fileStorage.dataSeparatorRaw {
+			_dataSeparatorRaw = dataSeparatorRaw
+		}
+		if let headerSeparatorRaw = fileStorage.headerSeparatorRaw {
+			_headerSeparatorRaw = headerSeparatorRaw
+		}
+		if let hasFooter = fileStorage.hasFooter {
+			self.hasFooter = hasFooter
+		}
+		if let hasHeader = fileStorage.hasHeader {
+			self.hasHeader = hasHeader
+		}
+		if let hasExperimentDetails = fileStorage.hasExperimentDetails {
+			self.hasExperimentDetails = hasExperimentDetails
+		}
+		if let defaultForFileTypes = fileStorage.defaultForFileTypes {
+			_defaultForFileTypes = defaultForFileTypes
+		}
+		if let dataStart = fileStorage.dataStart {
+			self.dataStart = dataStart
+		}
+	}
+	
+	func export(to path: URL) {
+		let storage = FileStorage(from: self)
+		do {
+		let data = try PropertyListEncoder().encode(storage)
+		try data.write(to: path)
+		} catch {
+			print("[ERROR] Failed to export parser: \(error)")
+		}
+	}
+	
+	func `import`(from path: URL) {
+		do {
+			let data = try Data.init(contentsOf: path)
+			let storage = try PropertyListDecoder().decode(FileStorage.self, from: data)
+			loadFrom(fileStorage: storage)
+		} catch {
+			print("[ERROR] Failed to import parser: \(error)")
+		}
+	}
+}
