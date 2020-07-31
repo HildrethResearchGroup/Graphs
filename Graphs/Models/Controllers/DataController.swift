@@ -247,6 +247,12 @@ extension DataController {
 	func rename(file: File, to newName: String?) {
 		fileController.rename(file: file, to: newName)
 	}
+	/// Removes the given file.
+	/// - Parameters:
+	///    - file: The file to remove.
+	func remove(file: File) {
+		fileController.remove(file: file)
+	}
 }
 
 // MARK: Parser Interface

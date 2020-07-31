@@ -90,17 +90,14 @@ extension FileListViewController {
 			print("[WARNING] directoryController was nil at FileListViewController.remove(files:rows:).")
 			return
 		}
-		
-		files.forEach { file in
-			file.parent?.removeFromChildren(file)
-			file.parent = nil
-			context?.delete(file)
-		}
-		
 		// Get the indicies of the rows that are being removed so we can animate their removal
 		let rows = dataController.filesDisplayed.indicies(of: files)
 		tableView.removeRows(at: rows, withAnimation: .slideDown)
-		// We do not need to call directoryController.updateFilesToShow() becuase we manually manage the change to animate it. If we would also call this function, it would abort the animation.
+		// Now actaully remove those files.
+		files.forEach { file in
+			dataController.remove(file: file)
+		}
+		selectionDidChange()
 	}
 	
 	func updateGraph() {
@@ -155,6 +152,15 @@ extension FileListViewController {
 			graphView.isHidden = false
 		default:
 			graphErrorLabel.stringValue = "Multiple Files Selected"
+		}
+	}
+	
+	func selectClickedRowIfNotInSelection() {
+		if tableView.clickedRow >= 0 && !tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+			// Right clicking on an unselected row, so delete that row
+			tableView.selectRowIndexes(IndexSet(integer: tableView.clickedRow),
+																 byExtendingSelection: false)
+			selectionDidChange()
 		}
 	}
 }

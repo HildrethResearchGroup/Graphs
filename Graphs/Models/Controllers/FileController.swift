@@ -151,4 +151,13 @@ extension FileController {
 		NotificationCenter.default.post(name: .fileRenamed, object: file)
 		updateFilesToShow(animate: true)
 	}
+	/// Removes the given file.
+	/// - Parameters:
+	///    - file: The file to remove.
+	func remove(file: File) {
+		file.parent?.removeFromChildren(file)
+		file.parent = nil
+		dataController.context.delete(file)
+		filesToShow.removeAll { $0 === file }
+	}
 }
