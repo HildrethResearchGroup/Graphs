@@ -19,6 +19,7 @@
 		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
 		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
 		5A35423A24D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */; };
+		5A35423C24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */; };
 		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
 		5A3BACCB24C19FFC003B07FA /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */; };
 		5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */; };
@@ -121,6 +122,7 @@
 		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
 		5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
+		5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
 		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
 		5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelpers.swift; sourceTree = "<group>"; };
 		5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 			children = (
 				5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */,
 				5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */,
+				5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */,
 			);
 			path = "Directory Inspector";
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */,
 				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
 				5A73E53224531D2500450137 /* DataController.swift in Sources */,
+				5A35423C24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift in Sources */,
 				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
 				5A937DFD24BEA5BD00D025B0 /* InspectorTableViewCell.swift in Sources */,
 				5A89838824BDA5140057D511 /* NSNumberWrapper.swift in Sources */,
