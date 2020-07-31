@@ -18,6 +18,7 @@
 		5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */; };
 		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
 		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
+		5A35423A24D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */; };
 		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
 		5A3BACCB24C19FFC003B07FA /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */; };
 		5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */; };
@@ -119,6 +120,7 @@
 		5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorOutlineViewController.swift; sourceTree = "<group>"; };
 		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
 		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
+		5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
 		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
 		5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelpers.swift; sourceTree = "<group>"; };
 		5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			children = (
 				5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */,
 				5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */,
+				5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */,
 			);
 			path = "File Inspector";
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				5A34A212249876400001CD1A /* SaveController.swift in Sources */,
 				5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */,
 				5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */,
+				5A35423A24D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift in Sources */,
 				5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */,
 				5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */,
 				5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */,

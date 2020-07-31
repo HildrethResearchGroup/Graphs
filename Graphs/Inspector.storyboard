@@ -503,6 +503,9 @@
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <outlet property="menu" destination="cte-JM-nsd" id="RbG-e8-VHf"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -673,6 +676,16 @@
                     </connections>
                 </viewController>
                 <customObject id="TtE-Dc-ODO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="cte-JM-nsd">
+                    <items>
+                        <menuItem title="Show in Finder" id="kKy-bv-5gu">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="TtE-Dc-ODO" id="Gve-1i-EtC"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-586" y="916"/>
         </scene>
@@ -785,6 +798,9 @@
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
+                                                                    <connections>
+                                                                        <outlet property="menu" destination="Skk-Pd-ksj" id="zxD-Zl-2KI"/>
+                                                                    </connections>
                                                                 </textField>
                                                             </subviews>
                                                             <constraints>
@@ -907,6 +923,16 @@
                     </connections>
                 </viewController>
                 <customObject id="piJ-Lr-Ddd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="Skk-Pd-ksj">
+                    <items>
+                        <menuItem title="Show in Finder" id="AX7-va-MVM">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="piJ-Lr-Ddd" id="MGm-TO-JdP"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-324" y="916"/>
         </scene>
