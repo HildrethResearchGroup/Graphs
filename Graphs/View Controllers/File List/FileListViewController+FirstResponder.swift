@@ -59,7 +59,7 @@ extension FileListViewController: NSUserInterfaceValidations {
 				fallthrough
 			} else if tableView.clickedRow >= 0 {
 				// Otherwise will be selecting the row that was right clicked -- make sure that that directory has a valid path
-				guard let file = dataController?.filesSelected[tableView.clickedRow] else { return false }
+				guard let file = dataController?.filesDisplayed[tableView.clickedRow] else { return false }
 				guard let path = file.path else { return false }
 				return FileManager.default.fileExists(atPath: path.path)
 			} else {
