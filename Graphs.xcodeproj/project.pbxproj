@@ -12,6 +12,7 @@
 		5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */; };
 		5A27B07D249723820024403E /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A27B07C249723820024403E /* Inspector.storyboard */; };
 		5A27B07F249733710024403E /* InspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27B07E249733710024403E /* InspectorButton.swift */; };
+		5A29B07224DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */; };
 		5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */; };
 		5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20424973DBA0001CD1A /* InspectorViewController.swift */; };
 		5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */; };
@@ -115,6 +116,7 @@
 		5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5A27B07C249723820024403E /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
 		5A27B07E249733710024403E /* InspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorButton.swift; sourceTree = "<group>"; };
+		5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
 		5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryWindowController.swift; sourceTree = "<group>"; };
 		5A34A20424973DBA0001CD1A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
 		5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInspectorViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */,
 				5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */,
 				5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */,
+				5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */,
 			);
 			path = "Parser Inspector";
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */,
 				5A34A210249872750001CD1A /* FileController.swift in Sources */,
 				5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */,
+				5A29B07224DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift in Sources */,
 				5A34A212249876400001CD1A /* SaveController.swift in Sources */,
 				5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */,
 				5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */,

@@ -11,6 +11,8 @@ import Cocoa
 class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlineItem>{
 	@IBOutlet weak var outlineView: NSOutlineView!
 	
+	weak var tableView: NSTableView?
+	
 	override var primaryOutlineView: NSOutlineView? {
 		return outlineView
 	}
@@ -54,6 +56,7 @@ extension ParserInspectorViewController {
 	func prepareParserSelection(_ view: InspectorTableViewCell) {
 		view.tableView.delegate = self
 		view.tableView.dataSource = self
+		tableView = view.tableView
 	}
 	
 	func prepareExperimentDetailsHeader(_ view: InspectorCategoryCheckBoxCell) {

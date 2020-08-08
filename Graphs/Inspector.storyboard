@@ -1087,6 +1087,9 @@
                                                                                                     </prototypeCellViews>
                                                                                                 </tableColumn>
                                                                                             </tableColumns>
+                                                                                            <connections>
+                                                                                                <outlet property="menu" destination="PMQ-Ls-IWh" id="TWF-vB-65Y"/>
+                                                                                            </connections>
                                                                                         </tableView>
                                                                                     </subviews>
                                                                                 </clipView>
@@ -1482,6 +1485,29 @@
                     </connections>
                 </viewController>
                 <customObject id="0nK-X6-zJe" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="PMQ-Ls-IWh">
+                    <items>
+                        <menuItem title="New Parser" id="SC2-uL-Vjc">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Delete" id="wjW-OT-Ptc">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="0yT-9W-eYe"/>
+                        <menuItem title="Export…" id="dXd-ze-Jml">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="exportParser:" target="0nK-X6-zJe" id="VXe-w9-vEX"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Import…" id="FEI-CU-TfO">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="importParser:" target="0nK-X6-zJe" id="fz6-TN-LT6"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-59" y="916"/>
         </scene>
@@ -1704,7 +1730,7 @@
         <scene sceneID="pMk-ln-1pn">
             <objects>
                 <viewController title="Data Inspector View Controller" id="LQx-vr-bjc" customClass="DataInspectorViewController" customModule="Graphs" customModuleProvider="target" sceneMemberID="viewController">
-                    <customView key="view" misplaced="YES" id="EeO-bZ-MPA">
+                    <customView key="view" id="EeO-bZ-MPA">
                         <rect key="frame" x="0.0" y="0.0" width="250" height="475"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
@@ -1721,28 +1747,28 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" translatesAutoresizingMaskIntoConstraints="NO" id="G4a-5H-02T">
-                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="463"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="438"/>
                                                             <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="6Za-El-sU5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="463"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="250" height="438"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
                                                                     <textView editable="NO" importsGraphics="NO" richText="NO" horizontallyResizable="YES" verticallyResizable="YES" findStyle="bar" spellingCorrection="YES" smartInsertDelete="YES" id="DMw-m0-HiF" customClass="LineNumberedTextView" customModule="Graphs" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="463"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="438"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        <size key="minSize" width="250" height="463"/>
+                                                                        <size key="minSize" width="250" height="438"/>
                                                                         <size key="maxSize" width="10000000" height="10000000"/>
                                                                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                     </textView>
                                                                 </subviews>
                                                             </clipView>
                                                             <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="B4d-UM-2yM">
-                                                                <rect key="frame" x="0.0" y="447" width="250" height="16"/>
+                                                                <rect key="frame" x="0.0" y="422" width="250" height="16"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="DmG-VH-V3M">
-                                                                <rect key="frame" x="234" y="0.0" width="16" height="463"/>
+                                                                <rect key="frame" x="234" y="0.0" width="16" height="438"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                         </scrollView>
@@ -1764,7 +1790,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="250" height="413"/>
                                                             <clipView key="contentView" id="IrR-ls-K7D">
                                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="413"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="rUc-GT-AxT" viewBased="YES" id="FNp-yy-JAV">
                                                                         <rect key="frame" x="0.0" y="0.0" width="250" height="388"/>
@@ -1845,7 +1871,7 @@
                                         </tabViewItems>
                                     </tabView>
                                     <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNS-8u-Fm4">
-                                        <rect key="frame" x="72" y="199" width="107" height="16"/>
+                                        <rect key="frame" x="72" y="211" width="107" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" title="Cannot Read File" id="G9c-Cl-emz">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
