@@ -13,6 +13,7 @@
 		5A27B07D249723820024403E /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A27B07C249723820024403E /* Inspector.storyboard */; };
 		5A27B07F249733710024403E /* InspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27B07E249733710024403E /* InspectorButton.swift */; };
 		5A29B07224DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */; };
+		5A29B07424DF41A1003C3D2C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07324DF41A1003C3D2C /* TableView.swift */; };
 		5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */; };
 		5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20424973DBA0001CD1A /* InspectorViewController.swift */; };
 		5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */; };
@@ -117,6 +118,7 @@
 		5A27B07C249723820024403E /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
 		5A27B07E249733710024403E /* InspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorButton.swift; sourceTree = "<group>"; };
 		5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
+		5A29B07324DF41A1003C3D2C /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryWindowController.swift; sourceTree = "<group>"; };
 		5A34A20424973DBA0001CD1A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
 		5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInspectorViewController.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 				5A89838724BDA5140057D511 /* NSNumberWrapper.swift */,
 				5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */,
 				5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */,
+				5A29B07324DF41A1003C3D2C /* TableView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */,
 				5A937DF324BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift in Sources */,
 				5A937DFB24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift in Sources */,
+				5A29B07424DF41A1003C3D2C /* TableView.swift in Sources */,
 				5A937DF924BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift in Sources */,
 				5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */,
 				5A6D36EE24C14FA200588E05 /* GraphInspectorViewController.swift in Sources */,

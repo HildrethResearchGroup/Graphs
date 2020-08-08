@@ -14,7 +14,7 @@ extension FileListViewController {
 		removeSelectedFiles()
 	}
 	@objc func deleteRow(_ sender: Any?) {
-		selectClickedRowIfNotInSelection()
+		selectClickedRowIfNotInSelection(in: tableView)
 		removeSelectedFiles()
 	}
 	@objc func showInFinder(_ sender: Any?) {
@@ -23,7 +23,7 @@ extension FileListViewController {
 		NSWorkspace.shared.activateFileViewerSelecting(selectedPaths)
 	}
 	@objc func showInFinderInRow(_ sender: Any?) {
-		selectClickedRowIfNotInSelection()
+		selectClickedRowIfNotInSelection(in: tableView)
 		showInFinder(sender)
 	}
 }

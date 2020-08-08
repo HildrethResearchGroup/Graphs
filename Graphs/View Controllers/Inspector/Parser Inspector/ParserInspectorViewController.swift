@@ -187,6 +187,24 @@ extension ParserInspectorViewController {
 		outlineView.reloadData(forRowIndexes: IndexSet(integersIn: 1...lastRow),
 													 columnIndexes: IndexSet(integer: 0))
 	}
+	
+	func exportSelectedParser() {
+		guard let dataController = dataController else { return }
+		guard let tableView = tableView else { return }
+		guard tableView.selectedRowIndexes.count == 1 else { return }
+		let parser = dataController.parsers[tableView.selectedRowIndexes.first!]
+		
+		let savePanel = NSSavePanel()
+		savePanel.allowedFileTypes = ["gparser"]
+		savePanel.canCreateDirectories = true
+		savePanel.nameFieldStringValue = parser.name
+		guard let window = view.window else { return }
+		savePanel.beginSheetModal(for: window) { (response) in
+			if response == .OK, let url = savePanel.url {
+				parser.export(to: url)
+			}
+		}
+	}
 }
 
 // MARK: Notifications

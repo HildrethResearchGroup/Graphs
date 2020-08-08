@@ -155,14 +155,14 @@ extension FileListViewController {
 		}
 	}
 	
-	func selectClickedRowIfNotInSelection() {
-		if tableView.clickedRow >= 0 && !tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-			// Right clicking on an unselected row, so delete that row
-			tableView.selectRowIndexes(IndexSet(integer: tableView.clickedRow),
-																 byExtendingSelection: false)
-			selectionDidChange()
-		}
-	}
+//	func selectClickedRowIfNotInSelection() {
+//		if tableView.clickedRow >= 0 && !tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+//			// Right clicking on an unselected row, so delete that row
+//			tableView.selectRowIndexes(IndexSet(integer: tableView.clickedRow),
+//																 byExtendingSelection: false)
+//			selectionDidChange()
+//		}
+//	}
 }
 
 // MARK: Notifications

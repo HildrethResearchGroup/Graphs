@@ -1497,7 +1497,7 @@
                         <menuItem title="Export…" id="dXd-ze-Jml">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="exportParser:" target="0nK-X6-zJe" id="VXe-w9-vEX"/>
+                                <action selector="exportParserRow:" target="0nK-X6-zJe" id="Acy-sw-Ir2"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Import…" id="FEI-CU-TfO">
