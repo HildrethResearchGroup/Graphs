@@ -1489,9 +1489,15 @@
                     <items>
                         <menuItem title="New Parser" id="SC2-uL-Vjc">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="newParser:" target="0nK-X6-zJe" id="pV0-xF-JY6"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Delete" id="wjW-OT-Ptc">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteRow:" target="0nK-X6-zJe" id="Yxc-p6-KcB"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="0yT-9W-eYe"/>
                         <menuItem title="Export…" id="dXd-ze-Jml">
@@ -1576,6 +1582,7 @@
                                                         <connections>
                                                             <outlet property="dataSource" destination="YU4-bp-XMX" id="jjq-4f-E48"/>
                                                             <outlet property="delegate" destination="YU4-bp-XMX" id="J9w-8E-pKI"/>
+                                                            <outlet property="menu" destination="DgG-z0-1Ri" id="6gA-De-KfS"/>
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
@@ -1723,6 +1730,22 @@
                     </connections>
                 </viewController>
                 <customObject id="gZ5-U5-2gx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="DgG-z0-1Ri">
+                    <items>
+                        <menuItem title="Delete" id="zCm-Ns-Ljo">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteRow:" target="gZ5-U5-2gx" id="lmB-zi-JLv"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Import…" id="iZg-Zb-fIu">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="importGraphTemplate:" target="gZ5-U5-2gx" id="sOG-RR-HcN"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="204" y="916"/>
         </scene>

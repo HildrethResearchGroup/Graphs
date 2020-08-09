@@ -22,7 +22,7 @@ class GraphInspectorViewController: NSViewController {
 		updateGraph()
 	}
 	
-	@IBAction func addGraphTemplate(_ button: NSButton)  {
+	@IBAction func addGraphTemplate(_ sender: Any?)  {
 		guard let dataController = dataController else { return }
 		let openPanel = NSOpenPanel()
 		openPanel.canChooseDirectories = false
@@ -43,13 +43,7 @@ class GraphInspectorViewController: NSViewController {
 	}
 	
 	@IBAction func removeGraphTemplate(_ button: NSButton) {
-		guard let dataController = dataController else { return }
-		let selection = tableView.selectedRowIndexes
-		
-		selection.map { dataController.graphTemplates[$0] }
-			.forEach { dataController.remove(graphTemplate: $0) }
-		
-		tableView.removeRows(at: selection, withAnimation: .slideDown)
+		removeSelectedGraphTemplates()
 	}
 	
 }
@@ -58,6 +52,16 @@ class GraphInspectorViewController: NSViewController {
 extension GraphInspectorViewController {
 	var dataController: DataController? {
 		return DataController.shared
+	}
+	
+	func removeSelectedGraphTemplates() {
+		guard let dataController = dataController else { return }
+		let selection = tableView.selectedRowIndexes
+		
+		selection.map { dataController.graphTemplates[$0] }
+			.forEach { dataController.remove(graphTemplate: $0) }
+		
+		tableView.removeRows(at: selection, withAnimation: .slideDown)
 	}
 	
 	func updateGraph() {

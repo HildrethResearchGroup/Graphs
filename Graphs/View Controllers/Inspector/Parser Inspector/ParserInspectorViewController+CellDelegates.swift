@@ -11,18 +11,11 @@ import Cocoa
 // MARK: TableViewCell
 extension ParserInspectorViewController: InspectorTableViewCellDelegate {
 	func addButtonPressed(_ cell: InspectorTableViewCell) {
-		guard let dataController = dataController else { return }
-		dataController.createParser()
-		let lastRow = IndexSet(integer: dataController.parsers.count - 1)
-		cell.tableView.insertRows(at: lastRow, withAnimation: .slideDown)
+		addParser(in: cell.tableView)
 	}
 	
 	func removeButtonPressed(_ cell: InspectorTableViewCell) {
-		guard let dataController = dataController else { return }
-		let rows = cell.tableView.selectedRowIndexes
-		let parsers = rows.map { dataController.parsers[$0] }
-		parsers.forEach { dataController.remove(parser: $0) }
-		cell.tableView.removeRows(at: rows, withAnimation: .slideDown)
+		deleteSelectedRows(in: cell.tableView)
 	}
 	
 	func controlTextDidEndEditing(_ cell: InspectorTableViewCell, textField: NSTextField, at row: Int) {

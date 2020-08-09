@@ -18,6 +18,7 @@ extension ParserInspectorViewController {
 	@objc func exportParser(_ sender: Any?) {
 		exportSelectedParser()
 	}
+	
 	@objc func importParser(_ sender: Any?) {
 		guard let dataController = dataController else { return }
 		guard let tableView = tableView else { return }
@@ -33,6 +34,22 @@ extension ParserInspectorViewController {
 				tableView.insertRows(at: IndexSet(integer: tableView.numberOfRows), withAnimation: .slideDown)
 			}
 		}
+	}
+	
+	@objc func deleteRow(_ sender: Any?) {
+		guard let tableView = tableView else { return }
+		selectClickedRowIfNotInSelection(in: tableView)
+		deleteSelectedRows(in: tableView)
+	}
+	
+	@objc func delete(_ sender: Any?) {
+		guard let tableView = tableView else { return }
+		deleteSelectedRows(in: tableView)
+	}
+	
+	@objc func newParser(_ sender: Any?) {
+		guard let tableView = tableView else { return }
+		addParser(in: tableView)
 	}
 }
 
@@ -62,6 +79,23 @@ extension ParserInspectorViewController: NSUserInterfaceValidations {
 		case #selector(importParser(_:)):
 			guard tableView != nil && dataController != nil else { return false }
 			return true
+		case #selector(deleteRow(_:)):
+			guard let tableView = tableView else { return false }
+			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
+			if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
+				// Right clicked on the selection, so will be deleting all selected files which is equivelant to the selector delete(_:)
+				fallthrough
+			} else if tableView.clickedRow >= 0 {
+				// Otherwise will be selecting the row that was right clicked -- can always delete that row
+				return true
+			} else {
+				// No selection, so don't validate
+				return false
+			}
+		case #selector(delete(_:)):
+			guard let tableView = tableView else { return false }
+			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
+			return tableView.selectedRowIndexes.count > 0
 		default:
 			return true
 		}

@@ -86,6 +86,12 @@ extension FileListViewController: NSTableViewDelegate {
 			return nil
 		}
 		
+		if let path = file.path {
+			view.textField?.setValid(FileManager.default.fileExists(atPath: path.path))
+		} else {
+			view.textField?.setValid(false)
+		}
+		
 		return view
 	}
 	

@@ -174,26 +174,10 @@
             filePath = "Graphs/View Controllers/Inspector/Parser Inspector/ParserInspectorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "didImportParser(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E4E9AAAB-0FE6-4C72-BED5-4D0F9BA4CAEA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Graphs/View Controllers/Inspector/Parser Inspector/ParserInspectorViewController+NSTableViewDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "numberOfRows(in:)"
-            landmarkType = "7">
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

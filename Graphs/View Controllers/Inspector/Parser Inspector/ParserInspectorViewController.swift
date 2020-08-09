@@ -206,6 +206,21 @@ extension ParserInspectorViewController {
 			}
 		}
 	}
+	
+	func deleteSelectedRows(in tableView: NSTableView) {
+		guard let dataController = dataController else { return }
+		let rows = tableView.selectedRowIndexes
+		let parsers = rows.map { dataController.parsers[$0] }
+		parsers.forEach { dataController.remove(parser: $0) }
+		tableView.removeRows(at: rows, withAnimation: .slideDown)
+	}
+	
+	func addParser(in tableView: NSTableView) {
+		guard let dataController = dataController else { return }
+		dataController.createParser()
+		let lastRow = IndexSet(integer: dataController.parsers.count - 1)
+		tableView.insertRows(at: lastRow, withAnimation: .slideDown)
+	}
 }
 
 // MARK: Notifications
