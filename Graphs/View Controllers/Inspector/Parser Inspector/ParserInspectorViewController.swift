@@ -57,6 +57,7 @@ extension ParserInspectorViewController {
 		view.tableView.delegate = self
 		view.tableView.dataSource = self
 		tableView = view.tableView
+		view.tableView.reloadData()
 	}
 	
 	func prepareExperimentDetailsHeader(_ view: InspectorCategoryCheckBoxCell) {

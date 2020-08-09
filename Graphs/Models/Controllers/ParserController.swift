@@ -165,6 +165,18 @@ extension ParserController {
 		do {
 			let data = try Data(contentsOf: url)
 			let storage = try PropertyListDecoder().decode(Parser.FileStorage.self, from: data)
+			
+			// Check if there is an existing parser with the same storage -- if there is, then use that one instead
+			if let name = storage.name {
+				let candidates = dataController.parsers.filter { $0.name == name }
+				if let existing = candidates.first(where: { parser -> Bool in
+					let existingStorage = Parser.FileStorage(from: parser)
+					return storage == existingStorage
+				}) {
+					return existing
+				}
+			}
+			
 			let parser = dataController.createParser()
 			parser.loadFrom(fileStorage: storage)
 			

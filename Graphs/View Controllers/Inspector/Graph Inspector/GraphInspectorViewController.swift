@@ -18,16 +18,7 @@ class GraphInspectorViewController: NSViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		if let controller = DGController(fileInBundle: "Sample Graph") {
-			self.controller = controller
-			controller.setDrawingView(graphView)
-			controller.setDelegate(self)
-			
-		} else {
-			print("[WARNING] Failed to init controller")
-		}
-		
+		registerObservers()
 		updateGraph()
 	}
 	
@@ -100,5 +91,30 @@ extension GraphInspectorViewController {
 		}
 		
 		graphView.isHidden = !errorLabel.isHidden
+	}
+}
+
+// MARK: Notifications
+extension GraphInspectorViewController {
+	func registerObservers() {
+		let notificationCenter = NotificationCenter.default
+		notificationCenter.addObserver(self,
+																	 selector: #selector(storeLoaded(_:)),
+																	 name: .storeLoaded,
+																	 object: nil)
+		notificationCenter.addObserver(self,
+																	 selector: #selector(didImportGraphTemplate(_:)),
+																	 name: .didImportGraphTemplate,
+																	 object: nil)
+	}
+	
+	@objc func storeLoaded(_ notification: Notification) {
+		tableView.reloadData()
+		updateGraph()
+	}
+	
+	@objc func didImportGraphTemplate(_ notifcation: Notification) {
+		tableView.reloadData()
+		updateGraph()
 	}
 }

@@ -81,11 +81,26 @@ extension DirectoryController {
 		} else {
 			switch url.pathExtension {
 			case "dgraph":
-				// Adding a graph template -- set the parent folder's default graph template to this template
+				// Adding a graph tempalte
+				// Check if this graph template already exists
+				if let name = url.lastPathComponent.split(separator: ".").first {
+					let candidates = dataController.graphTemplates.filter { $0.name == name }
+					if let existing = candidates.first(where: { (template) -> Bool in
+						guard let existingURL = template.path else { return false }
+						return FileManager.default.contentsEqual(atPath: url.path, andPath: existingURL.path)
+					}) {
+						// There is already an existing graph template with this same name and same contents, so don't re-import it
+						parent.graphTemplate = existing
+						return
+					}
+				}
+				
+				// Set the parent folder's default graph template to this template
 				guard let template = dataController.importGraphTemplate(from: url)?.template else { break }
 				parent.graphTemplate = template
 			case "gparser":
-				// Adding a parser -- set the parent folder's deafult parser to this parser
+				// Adding a parser
+				// Set the parent folder's deafult parser to this parser
 				guard let parser = dataController.importParser(from: url) else { break }
 				parent.parser = parser
 			default:

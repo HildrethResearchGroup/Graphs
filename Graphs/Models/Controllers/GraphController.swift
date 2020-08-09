@@ -43,7 +43,7 @@ extension GraphController {
 	/// Imports a graph template from a file url.
 	/// - Parameter url: The file url of the graph template.
 	/// - Returns: The graph template and its associated controller if it could successfully be created, otherwise `nil`.
-	func importGraphTemplate(from url: URL) -> (template: GraphTemplate, controller: DGController)? {
+	func importGraphTemplate(from url: URL, notify: Bool = true) -> (template: GraphTemplate, controller: DGController)? {
 		guard url.isFileURL else { return nil }
 		guard url.lastPathComponent.split(separator: ".").last == "dgraph" else { return nil }
 		// If a controller can't be created from the file, then it is an invalid template file, so don't allow the template to be imported.
@@ -56,6 +56,11 @@ extension GraphController {
 		template.name = String(name)
 		graphTemplates.append(template)
 		dataController.setNeedsSaved()
+		
+		if notify {
+			NotificationCenter.default.post(name: .didImportGraphTemplate, object: template)
+		}
+		
 		return (template: template, controller: controller)
 	}
 	/// Deletes the diven graph template.

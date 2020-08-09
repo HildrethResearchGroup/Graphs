@@ -23,22 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "23465A13-9057-4291-A380-16C8C3C0815E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Graphs/View Controllers/Inspector/Graph Inspector/GraphInspectorViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "addGraphTemplate(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "722BCDAA-A6CA-4AA5-BDD8-86A4ADA868DB"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,8 +30,8 @@
             filePath = "Graphs/View Controllers/Inspector/Graph Inspector/GraphInspectorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "addGraphTemplate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -133,7 +117,7 @@
             <Locations>
                <Location
                   uuid = "C0FDD3F0-9E2D-4F96-BF83-117539B6E158 - dec737c4ce4da7b0"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "(extension in Graphs):Swift.Sequence.noneSatisfy((A.Element) throws -&gt; Swift.Bool) throws -&gt; Swift.Bool"
@@ -148,7 +132,7 @@
                </Location>
                <Location
                   uuid = "C0FDD3F0-9E2D-4F96-BF83-117539B6E158 - 3c4c76dc4ed5bfa0"
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (A.Element) throws -&gt; Swift.Bool in (extension in Graphs):Swift.Sequence.noneSatisfy((A.Element) throws -&gt; Swift.Bool) throws -&gt; Swift.Bool"
@@ -177,6 +161,38 @@
             startingLineNumber = "70"
             endingLineNumber = "70"
             landmarkName = "validateUserInterfaceItem(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92F4608B-4FA4-4ADD-8670-1BA555D7FCBD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Graphs/View Controllers/Inspector/Parser Inspector/ParserInspectorViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "didImportParser(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4E9AAAB-0FE6-4C72-BED5-4D0F9BA4CAEA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Graphs/View Controllers/Inspector/Parser Inspector/ParserInspectorViewController+NSTableViewDelegate.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "numberOfRows(in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

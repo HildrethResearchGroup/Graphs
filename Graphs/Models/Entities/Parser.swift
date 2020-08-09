@@ -451,7 +451,7 @@ extension Parser {
 
 // MARK: Saving to file
 extension Parser {
-	struct FileStorage: Codable {
+	struct FileStorage: Codable, Equatable {
 		// There is a property for each stored property of Parser that is optional -- this way if a property is removed, renamed, or added in the future the application can still manage to somewhat successfully import the parser
 		// There is no property for directories because an exported parser shouldn't be associated with any directories
 		var name: String?

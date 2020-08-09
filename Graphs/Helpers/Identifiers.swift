@@ -32,6 +32,7 @@ extension Notification.Name {
 	static let graphMayHaveChanged = Notification.Name(rawValue: "graphMayHaveChanged")
 	/// A notification that is fired when a new parser was imported.
 	static let didImportParser = Notification.Name(rawValue: "didImportParser")
+	static let didImportGraphTemplate = Notification.Name(rawValue: "didImportGraphTempalte")
 }
 
 // MARK: UserInfo keys
