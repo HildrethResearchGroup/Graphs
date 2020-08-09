@@ -155,4 +155,27 @@ extension ParserController {
 		parser.defaultForFileTypes = fileTypes
 		dataController.setNeedsSaved()
 	}
+	/// Imports a parser from the given url.
+	/// - Parameters:
+	///   - notify: If `true`, a notification will be sent to reload the parser table.
+	///   - tableView: The table view to animate the changes to.
+	/// - Returns: The parser if it could be imported, otherwise `nil`.
+	@discardableResult
+	func importParser(from url: URL, notify: Bool = true) -> Parser? {
+		do {
+			let data = try Data(contentsOf: url)
+			let storage = try PropertyListDecoder().decode(Parser.FileStorage.self, from: data)
+			let parser = dataController.createParser()
+			parser.loadFrom(fileStorage: storage)
+			
+			if notify {
+				NotificationCenter.default.post(name: .didImportParser, object: parser)
+			}
+			
+			return parser
+		} catch {
+			print("[ERROR] Failed to import parser: \(error)")
+			return nil
+		}
+	}
 }

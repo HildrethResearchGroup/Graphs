@@ -314,6 +314,15 @@ extension DataController {
 	func changeDefaultFileTypes(for parser: Parser, to fileTypes: [String]) {
 		parserController.changeDefaultFileTypes(for: parser, to: fileTypes)
 	}
+	/// Imports a parser from the given url.
+	/// - Parameters:
+	///   - notify: If `true`, a notification will be sent to reload the parser table.
+	///   - tableView: The table view to animate the changes to.
+	/// - Returns: The parser if it could be imported, otherwise `nil`.
+	@discardableResult
+	func importParser(from url: URL, notify: Bool = true) -> Parser? {
+		return parserController.importParser(from: url, notify: notify)
+	}
 }
 
 // MARK: Graph Interface

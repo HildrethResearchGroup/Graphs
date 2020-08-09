@@ -28,8 +28,10 @@ extension Notification.Name {
 	static let directoryRenamed = Notification.Name(rawValue: "directoryRenamed")
 	/// A notification that is fired when a file is renamed.
 	static let fileRenamed = Notification.Name(rawValue: "fileRenamed")
-	/// A notification that is fired when a parser or graph template is changed
+	/// A notification that is fired when a parser or graph template is changed.
 	static let graphMayHaveChanged = Notification.Name(rawValue: "graphMayHaveChanged")
+	/// A notification that is fired when a new parser was imported.
+	static let didImportParser = Notification.Name(rawValue: "didImportParser")
 }
 
 // MARK: UserInfo keys

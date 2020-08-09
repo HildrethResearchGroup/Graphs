@@ -79,11 +79,22 @@ extension DirectoryController {
 			}
 			
 		} else {
-			// The item being added is just a file
-			let file = File(context: context)
-			file.path = url
-			file.dateImported = Date()
-			parent.addToChildren(file)
+			switch url.pathExtension {
+			case "dgraph":
+				// Adding a graph template -- set the parent folder's default graph template to this template
+				guard let template = dataController.importGraphTemplate(from: url)?.template else { break }
+				parent.graphTemplate = template
+			case "gparser":
+				// Adding a parser -- set the parent folder's deafult parser to this parser
+				guard let parser = dataController.importParser(from: url) else { break }
+				parent.parser = parser
+			default:
+				// The item being added is just a file
+				let file = File(context: context)
+				file.path = url
+				file.dateImported = Date()
+				parent.addToChildren(file)
+			}
 		}
 	}
 }

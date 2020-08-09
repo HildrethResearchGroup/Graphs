@@ -29,8 +29,7 @@ extension ParserInspectorViewController {
 		guard let window = view.window else { return }
 		openPanel.beginSheetModal(for: window) { (response) in
 			if response == .OK, let url = openPanel.url {
-				let newParser = dataController.createParser()
-				newParser.import(from: url)
+				dataController.importParser(from: url, notify: false)
 				tableView.insertRows(at: IndexSet(integer: tableView.numberOfRows), withAnimation: .slideDown)
 			}
 		}

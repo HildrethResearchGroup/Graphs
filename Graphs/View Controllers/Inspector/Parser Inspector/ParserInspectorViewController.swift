@@ -210,10 +210,21 @@ extension ParserInspectorViewController {
 // MARK: Notifications
 extension ParserInspectorViewController {
 	func registerObservers() {
-		NotificationCenter.default.addObserver(self, selector: #selector(storeLoaded(_:)), name: .storeLoaded, object: nil)
+		NotificationCenter.default.addObserver(self,
+																					 selector: #selector(storeLoaded(_:)),
+																					 name: .storeLoaded,
+																					 object: nil)
+		NotificationCenter.default.addObserver(self,
+																					 selector: #selector(didImportParser(_:)),
+																					 name: .didImportParser,
+																					 object: nil)
 	}
 	
 	@objc func storeLoaded(_ notification: Notification) {
+		outlineView.reloadData()
+	}
+	
+	@objc func didImportParser(_ notification: Notification) {
 		outlineView.reloadData()
 	}
 }
