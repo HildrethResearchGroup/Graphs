@@ -28,6 +28,8 @@ extension File {
 	@NSManaged var _parserDefaultModeRaw: Int64
 	/// A user inputed string describing the data.
 	@NSManaged var customDetails: String
+	/// The date that the file was imported.
+	@NSManaged public var dateImported: Date?
 }
 
 // MARK: Derived Properties

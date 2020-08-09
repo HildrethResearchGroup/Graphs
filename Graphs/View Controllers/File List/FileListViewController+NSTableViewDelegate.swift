@@ -58,9 +58,11 @@ extension FileListViewController: NSTableViewDelegate {
 		case .fileCollectionNameColumn:
 			view.textField?.stringValue = collectionName(forFile: file)
 		case .fileDateImportedColumn:
-			// TODO: Add import date
-			#warning("Unimplemented")
-			view.textField?.stringValue = "0/0/0"
+			if let formattedDate = dateFormatter.string(for: file.dateImported) {
+				view.textField?.stringValue = formattedDate
+			} else {
+				view.textField?.stringValue = ""
+			}
 		case .fileDateCreatedColumn:
 			if let formattedDate = dateFormatter.string(for: file.dateCreated) {
 				view.textField?.stringValue = formattedDate

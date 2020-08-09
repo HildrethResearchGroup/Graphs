@@ -129,65 +129,17 @@ extension SidebarViewController {
 	///   - childIndex: The index of the child inside the directory that files are being added at. If `nil`, the items are added to the end of the directory.
 	///   - includeSubdirectories: Whether or not to include subdirectories of the selection.
 	func importURLs(_ urls: [URL], dropDirectory: Directory?, childIndex: Int?, includeSubdirectories: Bool) {
-		
+		// If no drop directory is specified then add it to the root directory
 		guard let dropDirectory = dropDirectory ?? rootDirectory else {
 			print("[WARNING] Could not determine drop directory.")
 			return
 		}
-		
+		// If no child index is scpecified then append it
 		let childIndex = childIndex ?? dropDirectory.subdirectories.count
 		
-		// There must be a data context in order to drag items
-		guard let dataContext = dataContext else { return }
-		// Don't process if there are no URL's
-		guard !urls.isEmpty else { return }
-		
-		func addFileSystemObject(in parent: Directory, at url: URL, index: Int? = nil, animate: Bool = false, includeSubdirectories: Bool) {
-			if url.isFolder {
-				// The item being added is a folder (directory)
-				let directory = Directory(context: dataContext)
-				directory.path = url
-				directory.collapsed = true
-				if let index = index {
-					parent.insertIntoChildren(directory, at: index)
-				} else {
-					// Index should only be nil for adding files not folders, but if it is nil just add the directory to the end of the set of children
-					parent.addToChildren(directory)
-				}
-				
-				// Add all of the directory's contents
-				do {
-					let fileURLS = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [], options: [.skipsHiddenFiles])
-					if includeSubdirectories {
-						fileURLS.forEach { url in
-							addFileSystemObject(in: directory, at: url, includeSubdirectories: true)
-						}
-					} else {
-						// If not including subdirectories, filter out subfolders
-						fileURLS.filter { !$0.isFolder }
-							.forEach { url in
-							addFileSystemObject(in: directory,
-																	at: url,
-																	includeSubdirectories: true)
-						}
-					}
-				} catch {
-					// Error reading directories content
-					print("[WARNING] Failed to read directory content: \(error)")
-				}
-				
-			} else {
-				// The item being added is just a file
-				let file = File(context: dataContext)
-				file.path = url
-				parent.addToChildren(file)
-			}
-		}
-		
-		// addFileSystemObject inserts the directories in the ordered set at the given index. Inserting objects one at a time at a given index will result in it being reversed, so reverse before iterating
-		urls.reversed().forEach { url in
-			addFileSystemObject(in: dropDirectory, at: url, index: childIndex, animate: true, includeSubdirectories: includeSubdirectories)
-		}
+		guard let dataController = dataController else { return }
+		// Update the model
+		dataController.importURLs(urls, to: dropDirectory, childIndex: childIndex, includeSubdirectories: includeSubdirectories)
 		
 		// Animate
 		let outlineParent = dropDirectory == rootDirectory ? nil : dropDirectory
@@ -196,7 +148,7 @@ extension SidebarViewController {
 		sidebar.insertItems(at: insertionIndexSet, inParent: outlineParent, withAnimation: .slideDown)
 		
 		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
-		dataController?.updateFilesDisplayed(animate: true)
+		dataController.updateFilesDisplayed(animate: true)
 	}
 	
 	/// Removes the given directories from the sidbar and updates the model.

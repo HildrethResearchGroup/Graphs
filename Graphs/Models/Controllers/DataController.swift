@@ -200,6 +200,15 @@ extension DataController {
 	func rename(directory: Directory, to newName: String?) {
 		directoryController.rename(directory: directory, to: newName)
 	}
+	/// Imports files and/or directories from the given urls into the given directory.
+	/// - Parameters:
+	///   - urls: The urls of the files and/or directories to add.
+	///   - dropDirectory: The directory to add the files and/or directories to.
+	///   - childIndex: The index of the child inside the directory that files are being added at.
+	///   - includeSubdirectories: Wheather or not to include subdirectories of the selection.
+	func importURLs(_ urls: [URL], to dropDirectory: Directory, childIndex: Int, includeSubdirectories: Bool) {
+		directoryController.importURLs(urls, to: dropDirectory, childIndex: childIndex, includeSubdirectories: includeSubdirectories)
+	}
 }
 
 // MARK: File Interface
