@@ -8,15 +8,13 @@
 
 import Cocoa
 
+/// A view controller which manages the parser inspector.
 class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlineItem>{
+	/// The outline view.
 	@IBOutlet weak var outlineView: NSOutlineView!
-	
+	/// The parser selection table view.
 	weak var tableView: NSTableView?
-	
-	override var primaryOutlineView: NSOutlineView? {
-		return outlineView
-	}
-	
+	/// The parser that the view controller is showing information for.
 	var parser: Parser? {
 		didSet {
 			reloadData()
@@ -26,6 +24,10 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()
+	}
+	
+	override var primaryOutlineView: NSOutlineView? {
+		return outlineView
 	}
 	
 	override func prepareView(_ view: NSTableCellView, item: ParserOutlineItem) {
@@ -53,20 +55,24 @@ class ParserInspectorViewController: InspectorOutlineViewController<ParserOutlin
 
 // MARK: View Preparation
 extension ParserInspectorViewController {
+	/// Prepares the parser selection table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareParserSelection(_ view: InspectorTableViewCell) {
 		view.tableView.delegate = self
 		view.tableView.dataSource = self
 		tableView = view.tableView
 		view.tableView.reloadData()
 	}
-	
+	/// Prepares the experiment details header table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareExperimentDetailsHeader(_ view: InspectorCategoryCheckBoxCell) {
 		view.textField?.stringValue = "Experiment Details"
 		view.checkBox.isEnabled = parser != nil
 		guard let parser = parser else { return }
 		view.checkBox.state = parser.hasExperimentDetails ? .on : .off
 	}
-	
+	/// Prepares the experiment details body table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareExperimentDetailsBody(_ view: InspectorTwoTextFieldsCell) {
 		guard let parser = parser else {
 			view.firstTextField.stringValue = ""
@@ -92,14 +98,16 @@ extension ParserInspectorViewController {
 			view.secondTextField.stringValue = ""
 		}
 	}
-	
+	/// Prepares the header header table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareHeaderHeader(_ view: InspectorCategoryCheckBoxCell) {
 		view.textField?.stringValue = "Header"
 		view.checkBox.isEnabled = parser != nil
 		guard let parser = parser else { return }
 		view.checkBox.state = parser.hasHeader ? .on : .off
 	}
-	
+	/// Prepares the header body table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareHeaderBody(_ view: InspectorTwoTextFieldsOnePopUpButtonCell) {
 		guard let parser = parser else {
 			view.firstTextField.stringValue = ""
@@ -139,11 +147,13 @@ extension ParserInspectorViewController {
 			view.secondTextField.stringValue = ""
 		}
 	}
-	
+	/// Prepares the data header table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareDataHeader(_ view: NSTableCellView) {
 		view.textField?.stringValue = "Data"
 	}
-	
+	/// Prepares the data body table cell view.
+	/// - Parameter view: The view to prepare.
 	func prepareDataBody(_ view: InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell) {
 		guard let parser = parser else {
 			view.textField?.stringValue = ""
@@ -179,16 +189,17 @@ extension ParserInspectorViewController {
 
 // MARK: Helpers
 extension ParserInspectorViewController {
+	/// The application's shared data controller.
 	var dataController: DataController? {
 		return DataController.shared
 	}
-	
+	/// Reloads the view's data.
 	func reloadData() {
 		let lastRow = outlineView.numberOfRows - 1
 		outlineView.reloadData(forRowIndexes: IndexSet(integersIn: 1...lastRow),
 													 columnIndexes: IndexSet(integer: 0))
 	}
-	
+	/// Exports the currently selected parser in the table view.
 	func exportSelectedParser() {
 		guard let dataController = dataController else { return }
 		guard let tableView = tableView else { return }
@@ -206,15 +217,19 @@ extension ParserInspectorViewController {
 			}
 		}
 	}
-	
-	func deleteSelectedRows(in tableView: NSTableView) {
+	/// Deletes the selected parsers in the given table view.
+	/// - Parameter tableView: The table view to delete the rows in.
+	func deleteSelectedParsers(in tableView: NSTableView) {
 		guard let dataController = dataController else { return }
+		// Remove the parsers from the model.
 		let rows = tableView.selectedRowIndexes
 		let parsers = rows.map { dataController.parsers[$0] }
 		parsers.forEach { dataController.remove(parser: $0) }
+		// Update the table view
 		tableView.removeRows(at: rows, withAnimation: .slideDown)
 	}
-	
+	/// Adds a new parser in the given table view.
+	/// - Parameter tableView: The table view to add the row to.
 	func addParser(in tableView: NSTableView) {
 		guard let dataController = dataController else { return }
 		dataController.createParser()
@@ -225,21 +240,24 @@ extension ParserInspectorViewController {
 
 // MARK: Notifications
 extension ParserInspectorViewController {
+	/// Registers the view controller to recieve notificaitons.
 	func registerObservers() {
+		// When the store is loaded, the avialable parsers change, so we need to be notified when this happens so we can update the table view.
 		NotificationCenter.default.addObserver(self,
 																					 selector: #selector(storeLoaded(_:)),
 																					 name: .storeLoaded,
 																					 object: nil)
+		// When a parser is imported we need to be notified in order to update the table view.
 		NotificationCenter.default.addObserver(self,
 																					 selector: #selector(didImportParser(_:)),
 																					 name: .didImportParser,
 																					 object: nil)
 	}
-	
+	/// Called when the Core Data store has loaded.
 	@objc func storeLoaded(_ notification: Notification) {
 		outlineView.reloadData()
 	}
-	
+	/// Called when a new parser was imported.
 	@objc func didImportParser(_ notification: Notification) {
 		outlineView.reloadData()
 	}
@@ -247,13 +265,21 @@ extension ParserInspectorViewController {
 
 // MARK: OutlineView Items
 enum ParserOutlineItem: InspectorOutlineCellItem {
+	/// A separator item.
 	case separator
+	/// The parser selection section.
 	case parserSelection
+	/// The header for the experiment details section.
 	case experimentDetailsHeader
+	/// The body for the experiment details.
 	case experimentDetailsBody
+	/// The header for the header section.
 	case headerHeader
+	/// The body for the header section.
 	case headerBody
+	/// The header for the data section.
 	case dataHeader
+	/// The body for the data section.
 	case dataBody
 	
 	static var outline: [InspectorOutlineCell<Self>] {

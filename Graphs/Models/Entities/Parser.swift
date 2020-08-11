@@ -304,7 +304,6 @@ extension Parser {
 		case colon
 		/// Separates the string by a single semicolon.
 		case semicolon
-		
 		/// The set of characters to be used to separate a row into columns.
 		var characterSet: CharacterSet {
 			switch self {
@@ -451,22 +450,36 @@ extension Parser {
 
 // MARK: Saving to file
 extension Parser {
+	/// A structure that stores the contents of a parser which can be saved and loaded from files.
 	struct FileStorage: Codable, Equatable {
 		// There is a property for each stored property of Parser that is optional -- this way if a property is removed, renamed, or added in the future the application can still manage to somewhat successfully import the parser
 		// There is no property for directories because an exported parser shouldn't be associated with any directories
+		/// The name of the parser.
 		var name: String?
+		/// The raw string value of the data separator.
 		var dataSeparatorRaw: String?
+		/// The raw string value of the header separator.
 		var headerSeparatorRaw: String?
+		/// `true` if the parser ignores data after empty lines, ortherwise `false`.
 		var hasFooter: Bool?
+		/// `true` if the parser defines starting and ending lines for a header, otherwise `false`.
 		var hasHeader: Bool?
+		/// `true` if the parser defines starting and ending lines for experiment details, otherwise `false`.
 		var hasExperimentDetails: Bool?
+		/// A raw string representation of the the file types whose default parsers are this parser. Do not use this value directly, use `deaultForFileTypes` instead.
 		var defaultForFileTypes: String?
+		/// The first line of the file that contains data.
 		var dataStart: Int??
+		/// The last line of the file that contains experiment details.
 		var experimentDetailsEnd: Int??
+		/// The first line of the file that contains experiment details.
 		var experimentDetailsStart: Int??
+		/// The last line of the file that contains the experiment details.
 		var headerEnd: Int??
+		/// The first line of the file that contains the experiment details.
 		var headerStart: Int??
-		
+		/// Initializes a file storage with the contents of an existing parser entity.
+		/// - Parameter parser: The parser to create the storage from.
 		init(from parser: Parser) {
 			name = parser.name
 			dataSeparatorRaw = parser._dataSeparatorRaw
@@ -478,7 +491,8 @@ extension Parser {
 			dataStart = parser.dataStart
 		}
 	}
-	
+	/// Updates the contents of the parser with the contents of the given storage.
+	/// - Parameter fileStorage: The file storage to update the contents with.
 	func loadFrom(fileStorage: FileStorage) {
 		if let name = fileStorage.name {
 			self.name = name
@@ -505,7 +519,7 @@ extension Parser {
 			self.dataStart = dataStart
 		}
 	}
-	
+	/// Exports the parser to a file at the given path.
 	func export(to path: URL) {
 		let storage = FileStorage(from: self)
 		do {
@@ -513,16 +527,6 @@ extension Parser {
 		try data.write(to: path)
 		} catch {
 			print("[ERROR] Failed to export parser: \(error)")
-		}
-	}
-	
-	func `import`(from path: URL) {
-		do {
-			let data = try Data.init(contentsOf: path)
-			let storage = try PropertyListDecoder().decode(FileStorage.self, from: data)
-			loadFrom(fileStorage: storage)
-		} catch {
-			print("[ERROR] Failed to import parser: \(error)")
 		}
 	}
 }

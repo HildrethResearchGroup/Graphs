@@ -8,21 +8,25 @@
 
 import Cocoa
 
+/// A view controller which manages the list of files.
 class FileListViewController: NSViewController {
+	/// The view which displays the graphed file contents.
 	@IBOutlet weak var graphView: DPDrawingView!
+	/// The error label to display if a file cannot be graphed.
 	@IBOutlet weak var graphErrorLabel: NSTextField!
 	/// The table view.
 	@IBOutlet weak var tableView: NSTableView!
 	/// The label in the bottom bar of the window. Displays the numebr of files in the directory selection as well as the currently selected files in the table view.
 	@IBOutlet weak var itemsSelectedLabel: NSTextField!
-	
+	/// The progress indicator that is showed when background work is being performed.
 	@IBOutlet weak var progressIndicator: NSProgressIndicator!
-	
+	/// The date formatter to format date cells in the table view.
 	@IBOutlet var dateFormatter: DateFormatter!
+	/// The byte count formatter to format file size cells in the table view.
 	@IBOutlet var byteCountFormatter: ByteCountFormatter!
-	
+	/// `true` if the file list is currently updating, `false` otherwise.
 	var fileListIsUpdating = false
-	
+	/// The data graph controller for displaying the graph.
 	var controller: DGController?
 	
 	override func viewDidLoad() {
@@ -30,6 +34,18 @@ class FileListViewController: NSViewController {
 		registerObservers()
 		// Allows dragging files to the trash can to delete them
 		tableView.setDraggingSourceOperationMask([.delete], forLocal: false)
+	}
+}
+
+// MARK: Helper Functions
+extension FileListViewController {
+	/// The application's shared data controller.
+	var dataController: DataController? {
+		return DataController.shared
+	}
+	/// The application's shared core data context.
+	var context: NSManagedObjectContext? {
+		return dataController?.context
 	}
 	/// Updates the model with a list of the currently selected files as well as updates the bottom bar's label.
 	func selectionDidChange() {
@@ -66,25 +82,14 @@ class FileListViewController: NSViewController {
 			itemsSelectedLabel.stringValue = "\(numberOfSelectedFiles) of \(numberOfFiles) files selected in \(directoriesText)"
 		}
 	}
-}
-
-// MARK: Helper Functions
-extension FileListViewController {
-	var dataController: DataController? {
-		return DataController.shared
-	}
-	
-	var context: NSManagedObjectContext? {
-		return dataController?.context
-	}
-	
+	/// Removes the selected files.
 	func removeSelectedFiles() {
 		let files = tableView.selectedRowIndexes.compactMap { index in
 			dataController?.filesDisplayed[index]
 		}
 		remove(files: files)
 	}
-	
+	/// Removes the given files.
 	func remove(files: [File]) {
 		guard let dataController = dataController else {
 			print("[WARNING] directoryController was nil at FileListViewController.remove(files:rows:).")
@@ -99,7 +104,7 @@ extension FileListViewController {
 		}
 		selectionDidChange()
 	}
-	
+	/// Updates the graph view.
 	func updateGraph() {
 		defer {
 			graphErrorLabel.isHidden = !graphView.isHidden
@@ -154,19 +159,11 @@ extension FileListViewController {
 			graphErrorLabel.stringValue = "Multiple Files Selected"
 		}
 	}
-	
-//	func selectClickedRowIfNotInSelection() {
-//		if tableView.clickedRow >= 0 && !tableView.selectedRowIndexes.contains(tableView.clickedRow) {
-//			// Right clicking on an unselected row, so delete that row
-//			tableView.selectRowIndexes(IndexSet(integer: tableView.clickedRow),
-//																 byExtendingSelection: false)
-//			selectionDidChange()
-//		}
-//	}
 }
 
 // MARK: Notifications
 extension FileListViewController {
+	/// Registers the view controller to observe notifications.
 	func registerObservers() {
 		let notificationCenter = NotificationCenter.default
 		// Needs to be notified when the directory selection has changed in order to update the files to show
@@ -183,16 +180,17 @@ extension FileListViewController {
 																	 selector: #selector(fileListFinishedWork(_:)),
 																	 name: .fileListFinishedWork,
 																	 object: nil)
+		// Needs to be notified when the graph may have changed in order to regraph the file's contents.
 		notificationCenter.addObserver(self,
 																	 selector: #selector(graphMayHaveChanged(_:)),
 																	 name: .graphMayHaveChanged,
 																	 object: nil)
 	}
-	
+	/// Called when the graph for the selected file may have changed.
 	@objc func graphMayHaveChanged(_ notification: Notification) {
 		updateGraph()
 	}
-	
+	/// Called when a file was renamed.
 	@objc func fileRenamed(_ notification: Notification) {
 		guard let file = notification.object as? File else {
 			print("[WARNING] fileRenamed notification did not have an object of type File.")
@@ -206,22 +204,22 @@ extension FileListViewController {
 		
 		tableView.reloadData(forRowIndexes: IndexSet(integer: row), columnIndexes: IndexSet(integer: column))
 	}
-	
+	/// Called when the file list has started background work.
 	@objc func fileListStartedWork(_ notification: Notification) {
 		fileListIsUpdating = true
 		tableView.reloadData()
 		progressIndicator.startAnimation(self)
 	}
-	
+	/// Called when the file list has finished background work.
 	@objc func fileListFinishedWork(_ notification: Notification) {
 		fileListIsUpdating = false
 		tableView.reloadData()
 		progressIndicator.stopAnimation(self)
 	}
-	
+	/// Called when the files to be displayed has changed.
 	@objc func filesToShowDidChange(_ notification: Notification) {
 		let initiallySelectedFiles = dataController?.filesSelected
-		
+		/// Updates the currently selected files.
 		func updateSelection() {
 			defer {
 				selectionDidChange()

@@ -51,9 +51,11 @@ protocol NSNumberWrappable {
 
 // MARK: Int Conformance to NSNumberWrappable
 extension Int: NSNumberWrappable {
+	/// Initializes an `Int` from the value of an `NSNumber`.
+	/// - Parameter nsNumber: An `NSNumber` value.
 	init(nsNumber: NSNumber) {
 		self = nsNumber.intValue
 	}
-	
+	/// The `NSNumber` representation of the integer.
 	var nsNumber: NSNumber { return NSNumber(integerLiteral: self) }
 }

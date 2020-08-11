@@ -8,13 +8,11 @@
 
 import Cocoa
 
+/// A view controller which manages the directory inspector.
 class DirectoryInspectorViewController: InspectorOutlineViewController<DirectoryOutlineItem> {
+	/// The outline view.
 	@IBOutlet weak var outlineView: NSOutlineView!
-	
-	override var primaryOutlineView: NSOutlineView? {
-		return outlineView
-	}
-	
+	/// The directory that the controller is displaying.
 	var directory: Directory? {
 		didSet {
 			outlineView.reloadData()
@@ -24,6 +22,10 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()
+	}
+	
+	override var primaryOutlineView: NSOutlineView? {
+		return outlineView
 	}
 	
 	override func prepareView(_ view: NSTableCellView, item: DirectoryOutlineItem) {
@@ -45,10 +47,13 @@ class DirectoryInspectorViewController: InspectorOutlineViewController<Directory
 
 // MARK: View Separation
 extension DirectoryInspectorViewController {
+	/// Prepares the name and location header table cell view.
+	/// - Parameter view: The view to be prepared.
 	func prepareNameAndLocationHeader(_ view: NSTableCellView) {
 		view.textField?.stringValue = "Name & Location"
 	}
-	
+	/// Prepares the name and location body table cell view.
+	/// - Parameter view: The view to be prepared.
 	func prepareNameAndLocationBody(_ view: InspectorTwoTextFieldsCell) {
 		guard let directory = directory else {
 			view.firstTextField.stringValue = ""
@@ -58,16 +63,19 @@ extension DirectoryInspectorViewController {
 		view.firstTextField.stringValue = directory.displayName
 		view.secondTextField.stringValue = directory.path?.path ?? ""
 	}
-	
+	/// Prepares the templates header table cell view.
+	/// - Parameter view: The view to be prepared.
 	func prepareTemplatesHeader(_ view: NSTableCellView) {
 		view.textField?.stringValue = "Default Templates"
 	}
-	
+	/// Prepares the templates body table cell view.
+	/// - Parameter view: The view to be prepared.
 	func prepareTemplatesBody(_ view: InspectorTwoPopUpButtonsCell) {
 		prepareParser(popUpButton: view.firstPopUpButton)
 		prepareGraphTemplate(popUpButton: view.secondPopUpButton)
 	}
-	
+	/// Retunrs the menu items to be displayed in the parser pop up button.
+	/// - Returns: The menu items to be displayed in the parser pop up button.
 	func parserMenuItems() -> [NSMenuItem] {
 		guard let dataController = dataController else { return [] }
 		guard let directory = directory else { return [] }
@@ -91,7 +99,8 @@ extension DirectoryInspectorViewController {
 		defaultItems[1].tag = Int.min
 		return defaultItems + items
 	}
-	
+	/// Prepares the parser pop up button.
+	/// - Parameter popUpButton: The pop up button to prepare.
 	func prepareParser(popUpButton: NSPopUpButton) {
 		guard let dataController = dataController else { return }
 		guard let directory = directory else { return }
@@ -109,7 +118,8 @@ extension DirectoryInspectorViewController {
 		
 		popUpButton.selectItem(withTag: index)
 	}
-	
+	/// Returns the menu items to be displayed in the graph templates pop up button.
+	/// - Returns: The menu items to be displayed in the graph templates pop up button.
 	func graphTemplateMenuItems() -> [NSMenuItem] {
 		guard let dataController = dataController else { return [] }
 		guard let directory = directory else { return [] }
@@ -133,7 +143,8 @@ extension DirectoryInspectorViewController {
 		defaultItems[1].tag = Int.min
 		return defaultItems + items
 	}
-	
+	/// Prepares the graph template pop up button
+	/// - Parameter popUpButton: The pop up button to prepare.
 	func prepareGraphTemplate(popUpButton: NSPopUpButton) {
 		guard let dataController = dataController else { return }
 		guard let directory = directory else { return }
@@ -155,10 +166,15 @@ extension DirectoryInspectorViewController {
 
 // MARK: OutlineView Items
 enum DirectoryOutlineItem: InspectorOutlineCellItem {
+	/// A separator item.
 	case seperator
+	/// The header for the name and location section.
 	case nameAndLocationHeader
+	/// The body fot the name and location section.
 	case nameAndLocationBody
+	/// The header for the templates section.
 	case templatesHeader
+	/// The body for the templates section.
 	case templatesBody
 	
 	static var outline: [InspectorOutlineCell<DirectoryOutlineItem>] {
@@ -187,6 +203,7 @@ enum DirectoryOutlineItem: InspectorOutlineCellItem {
 
 // MARK: Helpers
 extension DirectoryInspectorViewController {
+	/// The application's shared data controller.
 	var dataController: DataController? {
 		return DataController.shared
 	}
@@ -194,10 +211,11 @@ extension DirectoryInspectorViewController {
 
 // MARK: Notificatoins
 extension DirectoryInspectorViewController {
+	/// Registers the view controller for notifications
 	func registerObservers() {
 		NotificationCenter.default.addObserver(self, selector: #selector(reloadData(_:)), name: .directoryRenamed, object: nil)
 	}
-	
+	/// Reloads the view's data.
 	@objc func reloadData(_ notification: Notification) {
 		if notification.object as? Directory == directory && directory != nil {
 			outlineView.reloadData()

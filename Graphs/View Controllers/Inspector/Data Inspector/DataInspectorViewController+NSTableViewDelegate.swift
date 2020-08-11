@@ -8,14 +8,21 @@
 
 import Cocoa
 
+// MARK: NSTableViewDataSource
 extension DataInspectorViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		guard let parsedFile = parsedFile else { return 0 }
 		// The table view header can only be one row long, so display the other headers at the top of the data list. If there is no header, then there should be 0 row allocated (not -1) hence the max()
 		return min(parsedFile.header.count - 1, 0) + parsedFile.data.count
 	}
-	
+	/// Returns the cell contents for the given table view row and column.
+	/// - Parameters:
+	///   - row: The row of the table view.
+	///   - column: The column of the table view.
+	/// - Returns: The textual contents of the given cell.
 	func cells(forRow row: Int, column: Int) -> String {
+		/// Retunrs the cells to be displayed at the given table view row.
+		/// - Returns: The cells for the given row.
 		func getRow() -> [String] {
 			guard let parsedFile = parsedFile else { return [] }
 			let headerRows = min(parsedFile.header.count - 1, 0)
@@ -42,6 +49,7 @@ extension DataInspectorViewController: NSTableViewDataSource {
 	}
 }
 
+// MARK: NSTableViewDelegate
 extension DataInspectorViewController: NSTableViewDelegate {
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		guard let tableColumn = tableColumn else { return nil }

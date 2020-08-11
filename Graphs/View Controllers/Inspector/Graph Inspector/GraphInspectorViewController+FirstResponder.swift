@@ -9,15 +9,16 @@
 import Cocoa
 
 extension GraphInspectorViewController {
+	/// Deletes the selected graph templates.
 	@objc func delete(_ sender: Any?) {
 		removeSelectedGraphTemplates()
 	}
-	
+	/// Deletes the clicked graph template or selection of graph templates.
 	@objc func deleteRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection(in: tableView)
 		removeSelectedGraphTemplates()
 	}
-	
+	/// Imports a new graph template.
 	@objc func importGraphTemplate(_ sender: Any?) {
 		addGraphTemplate(sender)
 	}

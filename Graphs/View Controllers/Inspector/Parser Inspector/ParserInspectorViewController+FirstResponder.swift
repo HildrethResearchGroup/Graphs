@@ -9,16 +9,17 @@
 import Cocoa
 
 extension ParserInspectorViewController {
+	/// Exports the clicked parser or selection of parsers.
 	@objc func exportParserRow(_ sender: Any?) {
 		guard let tableView = tableView else { return }
 		selectClickedRowIfNotInSelection(in: tableView)
 		exportSelectedParser()
 	}
-	
+	/// Exports the selected parsers.
 	@objc func exportParser(_ sender: Any?) {
 		exportSelectedParser()
 	}
-	
+	/// Imports a parser.
 	@objc func importParser(_ sender: Any?) {
 		guard let dataController = dataController else { return }
 		guard let tableView = tableView else { return }
@@ -35,18 +36,18 @@ extension ParserInspectorViewController {
 			}
 		}
 	}
-	
+	/// Deletes the clicked parser or selection of parsers.
 	@objc func deleteRow(_ sender: Any?) {
 		guard let tableView = tableView else { return }
 		selectClickedRowIfNotInSelection(in: tableView)
-		deleteSelectedRows(in: tableView)
+		deleteSelectedParsers(in: tableView)
 	}
-	
+	/// Deletes the selected parsers.
 	@objc func delete(_ sender: Any?) {
 		guard let tableView = tableView else { return }
-		deleteSelectedRows(in: tableView)
+		deleteSelectedParsers(in: tableView)
 	}
-	
+	/// Creates a new parser.
 	@objc func newParser(_ sender: Any?) {
 		guard let tableView = tableView else { return }
 		addParser(in: tableView)

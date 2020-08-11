@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: Columns
 extension RandomAccessCollection where Element: RandomAccessCollection, Index == Int, Element.Index == Int {
 	/// Returns the columns of the two dimensional collection.
 	///
@@ -41,6 +42,7 @@ extension RandomAccessCollection where Element: RandomAccessCollection, Index ==
 	}
 }
 
+// MARK: Indicies of elements
 extension Collection where Element: Hashable, Index == Int {
 	// This function was written to find the indicies of m elements in a collection of n elements in O(n+m) time. Calling firstIndex(of:) repeatedly instead is O(n*m)
 	/// Returns the indicies of the given elements in the collection.
@@ -64,6 +66,7 @@ extension Collection where Element: Hashable, Index == Int {
 	}
 }
 
+// MARK: None satisfy
 extension Sequence {
 	/// Returns a boolean value indicating if none of the elements of a sequence satisfy the given predicate.
 	/// - Parameter predicate: A closure that takes an element of the sequence as its argument and returns a Boolean value that indicates whether the passed element satisfies a condition.

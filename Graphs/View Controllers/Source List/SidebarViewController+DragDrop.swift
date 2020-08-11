@@ -135,7 +135,6 @@ extension SidebarViewController {
 			return !url.isFolder
 		}
 	}
-	
 	/// Handles dropping internal items onto the sidebar.
 	/// - Parameters:
 	///   - outlineView: The outlineview being dropped onto.
@@ -191,7 +190,12 @@ extension SidebarViewController {
 		}
 		outlineView.endUpdates()
 	}
-	
+	/// Handles dropping internal files onto the sidebar.
+	/// - Parameters:
+	///   - outlineView: The outlineview being dropped onto.
+	///   - draggingInfo: The dragging info.
+	///   - dropDirectory: The directory that the items are being dropped into.
+	///   - index: The child index of the directory that the items are being dropped at.
 	private func handleInternalFileDrops(_ outlineView: NSOutlineView, draggingInfo: NSDraggingInfo, dropDirectory: Directory, childIndex index: Int) {
 		var itemsToMove: [File] = []
 		
@@ -213,7 +217,6 @@ extension SidebarViewController {
 		// The moved files will require the file list to refresh its contents
 		dataController?.updateFilesDisplayed(animate: true)
 	}
-	
 	/// Handles dropping external items onto the sidebar.
 	/// - Parameters:
 	///   - outlineView: The outlineview being dropped onto.
@@ -257,7 +260,6 @@ extension SidebarViewController {
 							 childIndex: index,
 							 includeSubdirectories: true)
 	}
-	
 	/// Extracts the directory from an NSPasteboardItem instance.
 	/// - Parameter item: The pasteboard item.
 	/// - Returns: The directory associated with the pasteboard item if there is one.
@@ -268,21 +270,12 @@ extension SidebarViewController {
 		// Ask the sidebar for the directory at that row
 		return sidebar.item(atRow: row) as? Directory
 	}
-	
+	/// Returns the file associted with a given pasteboard item.
 	private func fileFromPasteboardItem(_ item: NSPasteboardItem) -> File? {
 		// Get the row number from the property list
 		guard let plist = item.propertyList(forType: .fileRowPasteboardType) as? [String: Any] else { return nil }
 		guard let row = plist[DirectoryPasteboardWriter.UserInfoKeys.row] as? Int else { return nil }
 		// We don't have access to the tableview showing the files, but we do have access to the source for the tableview
 		return dataController?.filesDisplayed[row]
-	}
-}
-
-extension URL {
-	/// Returns true if the url is a file system container. (Packages are not considered containers)
-	var isFolder: Bool {
-		guard let resources = try? resourceValues(forKeys: [.isDirectoryKey, .isPackageKey]) else { return false }
-		
-		return (resources.isDirectory ?? false) && !(resources.isPackage ?? false)
 	}
 }

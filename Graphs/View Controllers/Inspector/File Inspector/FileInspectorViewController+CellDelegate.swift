@@ -88,6 +88,7 @@ extension FileInspectorViewController: InspectorCategoryOptionCellDelegate {
 // MARK: TextView
 extension FileInspectorViewController: InspectorTextViewCellDelegate {
 	func textDidEndEditing(_ cell: InspectorTextViewCell) {
+		// Only can edit custom details
 		if showingCustomDetails {
 			file?.customDetails = cell.textView.string
 		}

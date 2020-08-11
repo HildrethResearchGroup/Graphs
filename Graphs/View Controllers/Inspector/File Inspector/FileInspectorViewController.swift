@@ -12,10 +12,6 @@ import Cocoa
 class FileInspectorViewController: InspectorOutlineViewController<FileInspectorItem> {
 	/// The outline view.
 	@IBOutlet weak var outlineView: NSOutlineView!
-	
-	override var primaryOutlineView: NSOutlineView? {
-		return outlineView
-	}
 	/// The file that the inspector is showing information for.
 	var file: File? {
 		didSet {
@@ -30,6 +26,10 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 			outlineView.reloadData(forRowIndexes: IndexSet(integer: lastRow),
 														 columnIndexes: IndexSet(integer: 0))
 		}
+	}
+	
+	override var primaryOutlineView: NSOutlineView? {
+		return outlineView
 	}
 	
 	override func prepareView(_ view: NSTableCellView, item: FileInspectorItem) {

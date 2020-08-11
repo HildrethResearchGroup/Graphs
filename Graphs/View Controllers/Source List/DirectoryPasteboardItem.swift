@@ -8,6 +8,7 @@
 
 import Cocoa
 
+/// A paste board writter for directories.
 class DirectoryPasteboardWriter: NSFilePromiseProvider {
 	/// An enum holding a list of all the used keys in userDictionary.
 	enum UserInfoKeys {
@@ -20,7 +21,6 @@ class DirectoryPasteboardWriter: NSFilePromiseProvider {
 	}
 	
 	// MARK: NSPasteboardWriting
-	
 	override func writableTypes(for pasteboard: NSPasteboard) -> [NSPasteboard.PasteboardType] {
 		var types = super.writableTypes(for: pasteboard)
 		// As well as promise files, add internal directory pasteboard type and fileURLs.
@@ -43,7 +43,6 @@ class DirectoryPasteboardWriter: NSFilePromiseProvider {
 }
 
 // MARK: Utilities
-
 extension DirectoryPasteboardWriter {
 	/// Returns the url of a file promise provider.
 	/// - Parameter filePromiseProvider: The file promise provider.

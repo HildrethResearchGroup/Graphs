@@ -16,34 +16,22 @@ class SidebarViewController: NSViewController {
 	@IBOutlet weak var addButton: NSButton!
 	/// A button which removes a directory.
 	@IBOutlet weak var removeButton: NSButton!
-	
+	/// An accessory view to add to NSOpenPanel to allow additional import options.
 	@IBOutlet var importAccessoryView: NSView!
-	
+	/// A checkbox which determines if subdirectories should be imported during import.
 	@IBOutlet weak var importSubdirectoriesCheckbox: NSButton!
-	
 	/// Queue used for reading and writing file promises.
 	lazy var workQueue: OperationQueue = {
 			let providerQueue = OperationQueue()
 			providerQueue.qualityOfService = .userInitiated
 			return providerQueue
 	}()
-	
 	/// Directory for accepting promised files.
 	lazy var promiseDestinationURL: URL = {
 			let promiseDestinationURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("Drops")
 			try? FileManager.default.createDirectory(at: promiseDestinationURL, withIntermediateDirectories: true, attributes: nil)
 			return promiseDestinationURL
 	}()
-	
-	override func viewDidLoad() {
-		registerObservers()
-		// Allow dropping internal directory types and external files on the sidebar
-		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileRowPasteboardType, .fileURL])
-		// Allow dragging rows to the trash to delete them
-		sidebar.setDraggingSourceOperationMask([.delete], forLocal: false)
-		sidebar.reloadData()
-	}
-	
 	/// Adds a new directory in the selected directory in the sourcelist. If no directory is selected, the directory is placed at the root directory.
 	/// - Parameter sender: The sender.
 	@IBAction func addDirectory(_ sender: Any?) {
@@ -86,7 +74,6 @@ class SidebarViewController: NSViewController {
 		
 		view?.textField?.becomeFirstResponder()
 	}
-	
 	/// Removes the selected directories in the source-list.
 	@IBAction func removeSelectedDirectories(_ sender: Any?) {
 		let selection = sidebar.selectedRowIndexes
@@ -102,6 +89,14 @@ class SidebarViewController: NSViewController {
 		remove(directories: selectedDirectories)
 	}
 	
+	override func viewDidLoad() {
+		registerObservers()
+		// Allow dropping internal directory types and external files on the sidebar
+		sidebar.registerForDraggedTypes([.directoryRowPasteboardType, .fileRowPasteboardType, .fileURL])
+		// Allow dragging rows to the trash to delete them
+		sidebar.setDraggingSourceOperationMask([.delete], forLocal: false)
+		sidebar.reloadData()
+	}
 }
 
 // MARK: Helper Functions
@@ -110,17 +105,14 @@ extension SidebarViewController {
 	var dataController: DataController? {
 		return .shared
 	}
-	
 	/// The root directory.
 	var rootDirectory: Directory? {
 		return dataController?.rootDirectory
 	}
-	
 	/// The managed object context for the model.
 	var dataContext: NSManagedObjectContext? {
 		return dataController?.context
 	}
-	
 	/// Inserts files/directories in the given directory.
 	/// - Parameters:
 	///   - urls: The urls of the files and directories to add.
@@ -150,7 +142,6 @@ extension SidebarViewController {
 		// If a file/directory is dropped into a selected directory, its file contents will change, and the files to show in the file list may change
 		dataController.updateFilesDisplayed(animate: true)
 	}
-	
 	/// Removes the given directories from the sidbar and updates the model.
 	/// - Parameter directories: The directories to remove.
 	func remove(directories: [Directory]) {
@@ -179,7 +170,6 @@ extension SidebarViewController {
 		}
 		sidebar.endUpdates()
 	}
-	
 	/// Recursivley expands the items in the directory based on their `collapsed` property.
 	/// - Parameters:
 	///   - directory: The directory to expand the items of.
@@ -196,7 +186,6 @@ extension SidebarViewController {
 			sidebar.collapseItem(directory)
 		}
 	}
-	
 	/// Returns the directory from the `item` parameter that the `NSOutlineView` uses.
 	/// - Parameter item: The `item` parameter returned from the `NSOutlineView`.
 	/// - Returns: The directory that the item represents.
@@ -206,7 +195,6 @@ extension SidebarViewController {
 		// Otherwise the parent directory will have set the item to be a Direcotry object.
 		return item as? Directory
 	}
-	
 	/// Updates the directory selection in the directory controller. This is called to indicate that the files to show in the file list may have changed.
 	func updateDirectorySelection() {
 		let selectedRows = sidebar.selectedRowIndexes
@@ -214,7 +202,7 @@ extension SidebarViewController {
 		// Setting this property calls a setter in DirectoryController which updates the filesToShow property
 		dataController?.selectedDirectories = selectedDirectories
 	}
-	
+	/// Selectes the clicked row or selection of rows.
 	func selectClickedRow() {
 		if sidebar.clickedRow >= 0 {
 			sidebar.selectRowIndexes(IndexSet(integer: sidebar.clickedRow),
@@ -225,7 +213,7 @@ extension SidebarViewController {
 		}
 		updateDirectorySelection()
 	}
-	
+	/// Selectes the clicked row if it is not in the current selection.
 	func selectClickedRowIfNotInSelection() {
 		if sidebar.clickedRow >= 0 && !sidebar.selectedRowIndexes.contains(sidebar.clickedRow) {
 			// Right clicking on an unselected row, so delete that row
@@ -259,7 +247,6 @@ extension SidebarViewController {
 																	 name: .directoryRenamed,
 																	 object: nil)
 	}
-	
 	/// Called when the Core Data store has loaded.
 	@objc func storeLoaded() {
 		sidebar.reloadData()
@@ -267,7 +254,6 @@ extension SidebarViewController {
 		// NSOutlineView cannot remember the configuration of which items are collapsed without implementing persistance methods in the delegate, so the items must be manually expanded.
 		expandNeededItems(in: rootDirectory)
 	}
-	
 	/// Called when undo or redo is called.
 	@objc func didUndo(_ notification: Notification) {
 		// We don't know what is being un/redone, so we have to reload the data rather than perform an insert/delete/move
@@ -278,7 +264,6 @@ extension SidebarViewController {
 		// Calling reload data changed the selection
 		updateDirectorySelection()
 	}
-	
 	/// Called when a directory has been renamed.
 	@objc func directoryRenamed(_ notification: Notification) {
 		guard let directory = notification.object as? Directory else {

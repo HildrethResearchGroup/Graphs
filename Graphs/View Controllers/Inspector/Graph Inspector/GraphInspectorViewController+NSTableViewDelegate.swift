@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// MARK: NSTableViewDataSource
 extension GraphInspectorViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		guard let dataController = dataController else { return 0 }
@@ -15,6 +16,7 @@ extension GraphInspectorViewController: NSTableViewDataSource {
 	}
 }
 
+// MARK: NSTableViewDelegate
 extension GraphInspectorViewController: NSTableViewDelegate {
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		guard let template = dataController?.graphTemplates[row] else { return nil }
@@ -32,6 +34,7 @@ extension GraphInspectorViewController: NSTableViewDelegate {
 	}
 }
 
+// MARK: NSTextFieldDelegate
 extension GraphInspectorViewController: NSTextFieldDelegate {
 	func controlTextDidEndEditing(_ notification: Notification) {
 		guard let textField = textField(for: notification) else { return }

@@ -16,6 +16,7 @@ extension FileInspectorViewController {
 	}
 }
 
+// MARK: Validations
 extension FileInspectorViewController: NSUserInterfaceValidations {
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		switch item.action {

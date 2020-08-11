@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// MARK: NSTableViewDataSource
 extension FileListViewController: NSTableViewDataSource {
 	func numberOfRows(in tableView: NSTableView) -> Int {
 		// When the file list is updating hide the elements
@@ -25,6 +26,7 @@ extension FileListViewController: NSTableViewDataSource {
 	}
 }
 
+// MARK: NSTableViewDelegate
 extension FileListViewController: NSTableViewDelegate {
 	func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 		guard let tableColumn = tableColumn else { return nil }
@@ -81,6 +83,7 @@ extension FileListViewController: NSTableViewDelegate {
 				view.textField?.stringValue = formattedSize
 			} else {
 				view.textField?.stringValue = ""
+				
 			}
 		default:
 			return nil
@@ -115,6 +118,9 @@ extension FileListViewController: NSTableViewDelegate {
 
 // MARK: Helper Functions
 extension FileListViewController {
+	/// Returns the name of the directory that the given file is in.
+	/// - Parameter file: The file to find the parent of.
+	/// - Returns: The name of the file's parent directory.
 	func collectionName(forFile file: File) -> String {
 		guard let parent = file.parent else {
 			// Every file should belong to a directory so this should never happen

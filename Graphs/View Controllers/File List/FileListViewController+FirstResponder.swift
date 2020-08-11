@@ -13,15 +13,18 @@ extension FileListViewController {
 	@objc func delete(_ sender: Any?) {
 		removeSelectedFiles()
 	}
+	/// Deletes the clicked file or selection of files.
 	@objc func deleteRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection(in: tableView)
 		removeSelectedFiles()
 	}
+	/// Shows the selected files in Finder.
 	@objc func showInFinder(_ sender: Any?) {
 		guard let dataController = dataController else { return }
 		let selectedPaths = dataController.filesSelected.compactMap { $0.path }
 		NSWorkspace.shared.activateFileViewerSelecting(selectedPaths)
 	}
+	/// Shows the clicked file or selection of files in Finder.
 	@objc func showInFinderInRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection(in: tableView)
 		showInFinder(sender)

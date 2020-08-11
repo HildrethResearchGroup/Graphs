@@ -44,6 +44,8 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	// Overrided by subclasses to customize cells.
 	/// Prepares the given table cell view with the given item's data.
 	func prepareView(_ view: NSTableCellView, item: Item) { }
+	/// The static outline view which is managed by `InspectorOutlineViewController`.
+	var primaryOutlineView: NSOutlineView? { return nil }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -51,13 +53,9 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 			primaryOutlineView?.expandItem(index(for: $0))
 		}
 	}
-	/// The static outline view which is managed by `InspectorOutlineViewController`.
-	var primaryOutlineView: NSOutlineView? { return nil }
 	
 	// Because this class uses generics, conformace to NSOutlineViewDataSource and NSOutlineViewDelegate cannot be done in an extension, nor can the methods be placed in an extension
-	
 	// MARK: NSOutlineViewDataSource
-	
 	func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
 		guard let cell = cellFromItem(item) else {
 			// item is nil for the top level. Return the number of cells in the Item type's outline.
@@ -96,7 +94,6 @@ class InspectorOutlineViewController<Item: InspectorOutlineCellItem>: NSViewCont
 	}
 	
 	// MARK: NSOutlineViewDelegate
-	
 	func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
 		// NSOutlineView requires a data source method that returns the outline view's items. The actual items are a Swift enum type with associated values, which was not working with NSOutlineView (written in Objective-C), so the enum has to be converted into a type that works well with Objective-C, and that can be converted back into the cell. NSNumber is used because it is easy to map the cell to and from the flattened index of the cell.
 		let cell = cellFromItem(item)!

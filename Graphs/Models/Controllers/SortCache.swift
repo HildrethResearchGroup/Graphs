@@ -36,9 +36,7 @@ extension SortCache {
 }
 
 // MARK: Sort Terminated Error
-struct SortTerminatedError: Error {
-	
-}
+struct SortTerminatedError: Error { }
 
 // MARK: Helpers
 extension SortCache {

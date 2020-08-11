@@ -14,23 +14,21 @@ extension SidebarViewController {
 	@objc func delete(_ sender: Any?) {
 		removeSelectedDirectories(sender)
 	}
-	
+	/// Deletes the clicked directory or selection of directories.
 	@objc func deleteRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection()
 		
 		removeSelectedDirectories(sender)
 	}
-	
 	/// Creates a new directory.
 	@objc func newDirectory(_ sender: Any?) {
 		addDirectory(sender)
 	}
-	
+	/// Creates a new directory as a child of the clicked row.
 	@objc func newDirectoryInRow(_ sender: Any?) {
 		selectClickedRow()
 		addDirectory(sender)
 	}
-	
 	/// Asks the user to import new items.
 	@objc func importItems(_ sender: Any?) {
 		let dropDirectory: Directory? = {
@@ -57,18 +55,18 @@ extension SidebarViewController {
 			}
 		}
 	}
-	
+	/// Imports items into the clicked directory.
 	@objc func importItemsInRow(_ sender: Any?) {
 		selectClickedRow()
 		importItems(sender)
 	}
-	
+	/// Shows the selected directories in Finder.
 	@objc func showInFinder(_ sender: Any?) {
 		guard let dataController = dataController else { return }
 		let selectedPaths = dataController.selectedDirectories.compactMap { $0.path }
 		NSWorkspace.shared.activateFileViewerSelecting(selectedPaths)
 	}
-	
+	/// Shows the clicked directory or selection of directories in Finder.
 	@objc func showInFinderInRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection()
 		showInFinder(sender)

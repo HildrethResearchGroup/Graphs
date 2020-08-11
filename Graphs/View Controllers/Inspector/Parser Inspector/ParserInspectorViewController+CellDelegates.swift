@@ -15,7 +15,7 @@ extension ParserInspectorViewController: InspectorTableViewCellDelegate {
 	}
 	
 	func removeButtonPressed(_ cell: InspectorTableViewCell) {
-		deleteSelectedRows(in: cell.tableView)
+		deleteSelectedParsers(in: cell.tableView)
 	}
 	
 	func controlTextDidEndEditing(_ cell: InspectorTableViewCell, textField: NSTextField, at row: Int) {

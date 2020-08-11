@@ -36,7 +36,6 @@ extension DirectoryController {
 	private var context: NSManagedObjectContext {
 		return dataController.context
 	}
-	
 	/// Adds a file or directory to the given directory.
 	/// - Parameters:
 	///   - parent: The directory to add the item into.

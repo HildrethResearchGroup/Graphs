@@ -8,6 +8,7 @@
 
 import Cocoa
 
+// MARK: NSTextFieldDelegate
 extension FileListViewController: NSTextFieldDelegate {
 	/// Called when an NSTextField ends editing.
 	func controlTextDidEndEditing(_ notification: Notification) {

@@ -16,6 +16,7 @@ extension DirectoryInspectorViewController {
 	}
 }
 
+// MARK: Validations
 extension DirectoryInspectorViewController: NSUserInterfaceValidations {
 	func validateUserInterfaceItem(_ item: NSValidatedUserInterfaceItem) -> Bool {
 		switch item.action {

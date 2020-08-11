@@ -25,8 +25,6 @@ class InspectorViewController: NSViewController, InspectorButtonGroup {
 	/// The label which is displayed if there is an invalid selection for the given inspector tab.
 	@IBOutlet weak var invalidSelectionLabel: NSTextField!
 	
-	var inspectorButtons: [InspectorButton] = []
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -40,6 +38,10 @@ class InspectorViewController: NSViewController, InspectorButtonGroup {
 		select(inspectorButton: fileInspectorButton)
 		registerObservers()
 	}
+	
+	// MARK: Inspector button group
+	
+	var inspectorButtons: [InspectorButton] = []
 	
 	func didSelect(button: InspectorButton) {
 		selectionDidChange(nil)
@@ -62,6 +64,12 @@ extension InspectorViewController {
 																	 name: .directoriesSelectedDidChange,
 																	 object: nil)
 	}
+	/// Returns the first child view controller in the tab view that is of the given type.
+	/// - Parameter type: The type of the view controller.
+	/// - Returns: The first child view controller in the tab view that is of the given type.
+	private func tabController<T: NSViewController>(ofType type: T.Type) -> T? {
+		return children.first { $0 is T } as? T
+	}
 	/// Selects the proper tab view to display and updates the tab's view controller.
 	@objc func selectionDidChange(_ notification: Notification?) {
 		/// Sets the error label's text, or hides the label if `text` is `nil`.
@@ -77,13 +85,6 @@ extension InspectorViewController {
 		guard let tabIdentifier = tabView.selectedTabViewItem?.identifier as? NSUserInterfaceItemIdentifier else {
 			setLabel(text: "No Tab Selected")
 			return
-		}
-		
-		/// Returns the first child view controller in the tab view that is of the given type.
-		/// - Parameter type: The type of the view controller.
-		/// - Returns: The first child view controller in the tab view that is of the given type.
-		func tabController<T: NSViewController>(ofType type: T.Type) -> T? {
-			return children.first { $0 is T } as? T
 		}
 		
 		switch tabIdentifier {
