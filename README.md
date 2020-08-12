@@ -22,12 +22,12 @@ Now that you've got Graph Templates, Parsers, and Data, you are ready to go.  Si
 
 ![Overview of Graphs](Images/Overview.png)
 
-![File Inspector](Images/File_Inspector.png]
+![File Inspector](Images/File Inspector.png)
 
-![Directory Inspector](Images/Directory_Inspector.png)
+![Directory Inspector](Images/Directory Inspector.png)
 
-![Parser Inspector](Images/Parser_Inspector.pg)
+![Parser Inspector](Images/Parser Inspector.png)
 
-![Text Inspector](Images/Text_Inspector.png)
+![Text Inspector](Images/Text Inspector.png)
 
-![Table Inspector](Images/Table_Inspector.png)
+![Table Inspector](Images/Table Inspector.png)
