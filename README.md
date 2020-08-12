@@ -32,4 +32,4 @@ Now that you've got Graph Templates, Parsers, and Data, you are ready to go.  Si
 
 ![Text Inspector](Images/Inspector-Text.png)
 
-![Table Inspector](Images/TInspector-Table.png)
+![Table Inspector](Images/Inspector-Table.png)
