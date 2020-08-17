@@ -25,7 +25,7 @@ extension SidebarViewController {
 		addDirectory(sender)
 	}
 	/// Creates a new directory as a child of the clicked row.
-	@objc func newDirectoryInRow(_ sender: Any?) {
+	@objc func newDirectoryRow(_ sender: Any?) {
 		selectClickedRow()
 		addDirectory(sender)
 	}
@@ -56,7 +56,7 @@ extension SidebarViewController {
 		}
 	}
 	/// Imports items into the clicked directory.
-	@objc func importItemsInRow(_ sender: Any?) {
+	@objc func importItemsRow(_ sender: Any?) {
 		selectClickedRow()
 		importItems(sender)
 	}
@@ -67,7 +67,7 @@ extension SidebarViewController {
 		NSWorkspace.shared.activateFileViewerSelecting(selectedPaths)
 	}
 	/// Shows the clicked directory or selection of directories in Finder.
-	@objc func showInFinderInRow(_ sender: Any?) {
+	@objc func showInFinderRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection()
 		showInFinder(sender)
 	}
@@ -100,7 +100,7 @@ extension SidebarViewController: NSUserInterfaceValidations {
 		case #selector(importItems(_:)):
 			// Don't allow importing items when multiple items are selected becuase it may be ambigious to the user where the items are being imported to. An empty selection is allowed and will have items be imported at the root directory.
 			return sidebar.selectedRowIndexes.count <= 1
-		case #selector(showInFinderInRow(_:)):
+		case #selector(showInFinderRow(_:)):
 			// Don't allow show in finder if all of the selected directories no longer exist
 			if sidebar.selectedRowIndexes.contains(sidebar.clickedRow) {
 				// Right clicked on the selection, so will be showing all the directories in the selection, which is equivelant to the selector showInFinder(_:)

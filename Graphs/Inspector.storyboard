@@ -1499,7 +1499,7 @@
                                 <action selector="deleteRow:" target="0nK-X6-zJe" id="Yxc-p6-KcB"/>
                             </connections>
                         </menuItem>
-                        <menuItem isSeparatorItem="YES" id="0yT-9W-eYe"/>
+                        <menuItem isSeparatorItem="YES" id="TRO-AU-9Tv"/>
                         <menuItem title="Export…" id="dXd-ze-Jml">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -1732,16 +1732,29 @@
                 <customObject id="gZ5-U5-2gx" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="DgG-z0-1Ri">
                     <items>
+                        <menuItem title="Import…" id="iZg-Zb-fIu">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="importGraphTemplate:" target="gZ5-U5-2gx" id="sOG-RR-HcN"/>
+                            </connections>
+                        </menuItem>
                         <menuItem title="Delete" id="zCm-Ns-Ljo">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="deleteRow:" target="gZ5-U5-2gx" id="lmB-zi-JLv"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Import…" id="iZg-Zb-fIu">
+                        <menuItem isSeparatorItem="YES" id="0yT-9W-eYe"/>
+                        <menuItem title="Show in Finder" id="UGj-QG-OpI">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="importGraphTemplate:" target="gZ5-U5-2gx" id="sOG-RR-HcN"/>
+                                <action selector="showInFinderRow:" target="gZ5-U5-2gx" id="Hnt-Gq-xla"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Open in DataGraph" id="QnM-b4-wkT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openInDataGraphRow:" target="gZ5-U5-2gx" id="JL2-7A-mk0"/>
                             </connections>
                         </menuItem>
                     </items>

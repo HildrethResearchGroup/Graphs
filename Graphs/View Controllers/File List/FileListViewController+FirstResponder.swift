@@ -25,7 +25,7 @@ extension FileListViewController {
 		NSWorkspace.shared.activateFileViewerSelecting(selectedPaths)
 	}
 	/// Shows the clicked file or selection of files in Finder.
-	@objc func showInFinderInRow(_ sender: Any?) {
+	@objc func showInFinderRow(_ sender: Any?) {
 		selectClickedRowIfNotInSelection(in: tableView)
 		showInFinder(sender)
 	}
@@ -55,7 +55,7 @@ extension FileListViewController: NSUserInterfaceValidations {
 		case #selector(delete(_:)):
 			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
 			return tableView.selectedRowIndexes.count > 0
-		case #selector(showInFinderInRow(_:)):
+		case #selector(showInFinderRow(_:)):
 			// Don't allow show in finder if all of the selected files no longer exist
 			if tableView.selectedRowIndexes.contains(tableView.clickedRow) {
 				// Right clicked on the selection, so will be showing all the files in the selection, which is equivelant to the selector showInFinder(_:)

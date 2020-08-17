@@ -20,6 +20,8 @@ class GraphInspectorViewController: NSViewController {
 	@IBOutlet weak var errorLabel: NSTextField!
 	/// The DataGraph controller which displays the preview.
 	var controller: DGController?
+	/// A background queue for opening files in DataGraph.
+	let queue = DispatchQueue(label: "openInDataGraph", qos: .background)
 	/// Adds a new graph template by asking the user to import one.
 	@IBAction func addGraphTemplate(_ sender: Any?)  {
 		guard let dataController = dataController else { return }

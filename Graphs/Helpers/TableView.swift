@@ -19,3 +19,23 @@ extension NSTableViewDelegate {
 		}
 	}
 }
+
+extension NSTableView {
+	/// `true` if the table view has no selected rows, otherwise `false`.
+	var hasEmptyRowSelection: Bool {
+		return selectedRowIndexes.count == 0
+	}
+	/// `true` if the table view has no selected rows and the user has not just clicked on a row, otherwise `false`.
+	var hasEmptyClickRowSelection: Bool {
+		if selectedRowIndexes.contains(clickedRow) {
+			// Right clicked on the selection
+			return hasEmptyRowSelection
+		} else if clickedRow >= 0 {
+			// Otherwise will be selecting the row that was right clicked
+			return false
+		} else {
+			// No selection
+			return true
+		}
+	}
+}

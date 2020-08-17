@@ -26,6 +26,10 @@ extension GraphInspectorViewController: NSTableViewDelegate {
 		
 		view?.textField?.stringValue = template.name
 		
+		let isValid = FileManager.default.fileExists(atPath: template.path?.path ?? "")
+		
+		view?.textField?.setValid(isValid)
+		
 		return view
 	}
 	

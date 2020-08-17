@@ -982,20 +982,20 @@ CA
                         <menuItem title="Import…" toolTip="Import new files or directories" id="48H-RG-a4Z">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="importItemsInRow:" target="ead-Yc-1N1" id="INi-HS-Z9L"/>
+                                <action selector="importItemsRow:" target="ead-Yc-1N1" id="INi-HS-Z9L"/>
                             </connections>
                         </menuItem>
                         <menuItem title="New Directory" toolTip="Add a new directory" id="Umi-vY-Ei5">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="newDirectoryInRow:" target="ead-Yc-1N1" id="yLa-7F-NS1"/>
+                                <action selector="newDirectoryRow:" target="ead-Yc-1N1" id="yLa-7F-NS1"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="AM7-Vy-ds0"/>
                         <menuItem title="Show In Finder" toolTip="Show the directories in Finder" id="kDh-89-AFa">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="showInFinderInRow:" target="ead-Yc-1N1" id="tUv-Uw-j4f"/>
+                                <action selector="showInFinderRow:" target="ead-Yc-1N1" id="tUv-Uw-j4f"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -1025,7 +1025,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="402" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="label" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -1365,7 +1365,7 @@ CA
                         <menuItem title="Show in Finder" toolTip="Show the files in Finder" id="uiT-st-0xt">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="showInFinderInRow:" target="3As-aY-nYF" id="p8P-S7-kv5"/>
+                                <action selector="showInFinderRow:" target="3As-aY-nYF" id="p8P-S7-kv5"/>
                             </connections>
                         </menuItem>
                     </items>
