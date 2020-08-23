@@ -84,19 +84,10 @@ extension SidebarViewController: NSUserInterfaceValidations {
 		switch action {
 		case #selector(deleteRow(_:)):
 			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
-			if sidebar.selectedRowIndexes.contains(sidebar.clickedRow) {
-				// Right clicked on the selection, so will be deleting all selected directories which is equivelant to the selector delete(_:)
-				fallthrough
-			} else if sidebar.clickedRow >= 0 {
-				// Otherwise will be selecting the row that was right clicked -- can always delete that row
-				return true
-			} else {
-				// No selection, so don't validate
-				return false
-			}
+			return !sidebar.hasEmptyClickRowSelection
 		case #selector(delete(_:)):
 			// When no item is selected, invalidate the "delete" button so that the user doesn't mistakenly think they are deleting an item/items when they are not
-			return sidebar.selectedRowIndexes.count > 0
+			return !sidebar.hasEmptyRowSelection
 		case #selector(importItems(_:)):
 			// Don't allow importing items when multiple items are selected becuase it may be ambigious to the user where the items are being imported to. An empty selection is allowed and will have items be imported at the root directory.
 			return sidebar.selectedRowIndexes.count <= 1
@@ -116,7 +107,7 @@ extension SidebarViewController: NSUserInterfaceValidations {
 			}
 		case #selector(showInFinder(_:)):
 			// Don't allow show in finder if all of the selected directories no longer exist
-			guard sidebar.selectedRowIndexes.count >= 1 else { return false }
+			guard !sidebar.hasEmptyRowSelection else { return false }
 			guard let dataController = dataController else { return false }
 			return !dataController.selectedDirectories.noneSatisfy { directory in
 				// Returns true if it can open the file

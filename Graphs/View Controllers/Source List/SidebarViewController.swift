@@ -38,22 +38,7 @@ class SidebarViewController: NSViewController {
 		guard let dataController = dataController else { return }
 		guard let rootDirectory = rootDirectory else { return }
 		
-		let selection = sidebar.selectedRowIndexes
-		let parent: Directory
-		
-		switch selection.count {
-		case 0:
-			// If no cell is selected, place the new directory in the root directory.
-			parent = rootDirectory
-		case 1:
-			// If one cell is selected, place the new directory in that cell's directory.
-			let selectedItem = sidebar.item(atRow: sidebar.selectedRow)
-			parent = directoryFromItem(selectedItem) ?? rootDirectory
-		default:
-			// If multiple cells are selected, place the new directory in the last cell's directory.
-			let selectedItem = sidebar.item(atRow: selection.last!)
-			parent = directoryFromItem(selectedItem) ?? rootDirectory
-		}
+		let parent = insertionDirectory() ?? rootDirectory
 		
 		let newDirectory = dataController.createSubdirectory(in: parent)
 		newDirectory.customDisplayName = Directory.defaultDisplayName
@@ -220,6 +205,22 @@ extension SidebarViewController {
 			sidebar.selectRowIndexes(IndexSet(integer: sidebar.clickedRow),
 															 byExtendingSelection: false)
 			updateDirectorySelection()
+		}
+	}
+	/// The folder that new folder's should be inserted into or imported into.
+	func insertionDirectory() -> Directory? {
+		switch sidebar.selectedRowIndexes.count {
+		case 0:
+			// If no cell is selected, place the new directory in the root directory.
+			return nil
+		case 1:
+			// If one cell is selected, place the new directory in that cell's directory.
+			let selectedItem = sidebar.item(atRow: sidebar.selectedRow)
+			return directoryFromItem(selectedItem)
+		default:
+			// If multiple cells are selected, place the new directory in the last cell's directory.
+			let selectedItem = sidebar.item(atRow: sidebar.selectedRowIndexes.last!)
+			return directoryFromItem(selectedItem)
 		}
 	}
 }

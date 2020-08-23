@@ -79,7 +79,7 @@ extension FileListViewController {
 			itemsSelectedLabel.stringValue = "\(numberOfFiles) \(filesText) in \(numberOfSelectedDirectories) \(directoriesText)"
 		} else {
 			
-			itemsSelectedLabel.stringValue = "\(numberOfSelectedFiles) of \(numberOfFiles) files selected in \(directoriesText)"
+			itemsSelectedLabel.stringValue = "\(numberOfSelectedFiles) of \(numberOfFiles) files selected in \(numberOfSelectedDirectories) \(directoriesText)"
 		}
 	}
 	/// Removes the selected files.
