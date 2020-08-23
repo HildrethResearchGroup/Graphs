@@ -120,34 +120,33 @@ extension FileListViewController {
 			graphErrorLabel.stringValue = "No File Selected"
 		case 1:
 			let file = selectedFiles.first!
-			guard let graphTemplate = dataController?.graphTemplate(for: file) else {
-				graphErrorLabel.stringValue = "No Graph Template Selected"
-				return
-			}
-			guard let controller = graphTemplate.controller else {
-				graphErrorLabel.stringValue = "Error Displaying Graph Template"
-				return
-			}
-			
-			guard let parser = dataController?.parser(for: file) else {
-				graphErrorLabel.stringValue = "No Parser Selected"
-				return
-			}
-			
-			guard let parsedFile = parser.parse(file: file) else {
+			guard let dataController = dataController else {
 				graphErrorLabel.stringValue = "Error Parsing File"
-				return
+				break
 			}
 			
-			let data = parsedFile.data
-			
-			let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
-				.map { dataColumn in
-					return dataColumn.compactMap { $0 as NSString? }
-			}
-
-			columns.enumerated().forEach { (index, element) in
-				controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
+			let controller: DGController
+			do {
+				try controller = dataController.graphController(for: file)
+			} catch let error as GraphControllerError {
+				// Couldn't create the controller -- hide the graph and write an error
+				let errorString: String
+				switch error {
+				case .noTemplate:
+					errorString = "No Graph Template Selected"
+				case .noParser:
+					errorString = "No Parser Selected"
+				case .noController:
+					errorString = "Error Displaying Graph Template"
+				case .failedToParse:
+					errorString = "Error Parsing File"
+				}
+				graphErrorLabel.stringValue = errorString
+				// Break to ensure that the graph remains hidden
+				break
+			} catch {
+				print("[WARNING] Unknown error thrown from DataController.graphController(for:)")
+				break
 			}
 			
 			controller.setDrawingView(graphView)

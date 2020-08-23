@@ -160,4 +160,43 @@ extension FileController {
 		dataController.context.delete(file)
 		filesToShow.removeAll { $0 === file }
 	}
+	/// Returns a data graph controller for the given file.
+	/// - Parameter file: The file to graph.
+	/// - Throws: a `GraphControllerError` if the file could not be converted into a graph controller.
+	/// - Returns: A DataGraph controller using the file's default graph template and parser.
+	func graphController(for file: File) throws -> DGController {
+		guard let template = dataController.graphTemplate(for: file) else {
+			throw GraphControllerError.noTemplate
+		}
+		guard let controller = template.controller else {
+			throw GraphControllerError.noController
+		}
+		guard let parser = dataController.parser(for: file) else {
+			throw GraphControllerError.noParser
+		}
+		guard let parsedFile = parser.parse(file: file) else {
+			throw GraphControllerError.failedToParse
+		}
+		
+		let data = parsedFile.data
+		
+		let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
+			.map { dataColumn in
+				return dataColumn.compactMap { $0 as NSString? }
+		}
+
+		columns.enumerated().forEach { (index, element) in
+			controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
+		}
+		
+		return controller
+	}
+}
+
+
+enum GraphControllerError: Error {
+	case noTemplate
+	case noParser
+	case noController
+	case failedToParse
 }

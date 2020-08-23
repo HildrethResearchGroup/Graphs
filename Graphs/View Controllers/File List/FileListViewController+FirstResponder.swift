@@ -55,28 +55,13 @@ extension FileListViewController {
 			let name = UUID().uuidString
 			let url = parentURL.appendingPathComponent("\(name).dgraph")
 			
-			// Try to create a controller
-			guard let controller = dataController.graphTemplate(for: file)?.controller,
-				let parser = dataController.parser(for: file),
-				let parsedFile = parser.parse(file: file) else { return }
-			
-			let data = parsedFile.data
-			
-			let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
-				.map { dataColumn in
-					return dataColumn.compactMap { $0 as NSString? }
-			}
-
-			columns.enumerated().forEach { (index, element) in
-				controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
-			}
-			
-			controller.setDrawingView(graphView)
-			
 			do {
-				
+				let controller = try dataController.graphController(for: file)
+				controller.setDrawingView(graphView)
 				try controller.write(to: url)
 				NSWorkspace.shared.openFile(url.path, withApplication: "DataGraph")
+			} catch where error is GraphControllerError {
+				print("[ERROR] Failed to create controller: \(error)")
 			} catch {
 				print("[ERROR] Failed to write data graph file: \(error)")
 			}

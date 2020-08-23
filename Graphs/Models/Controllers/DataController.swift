@@ -262,6 +262,13 @@ extension DataController {
 	func remove(file: File) {
 		fileController.remove(file: file)
 	}
+	/// Returns a data graph controller for the given file.
+	/// - Parameter file: The file to graph.
+	/// - Throws: a `GraphControllerError` if the file could not be converted into a graph controller.
+	/// - Returns: A DataGraph controller using the file's default graph template and parser.
+	func graphController(for file: File) throws -> DGController {
+		return try fileController.graphController(for: file)
+	}
 }
 
 // MARK: Parser Interface
