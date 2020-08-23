@@ -1025,7 +1025,7 @@ CA
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="402" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
-                                            <font key="font" metaFont="label" size="11"/>
+                                            <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -1366,6 +1366,19 @@ CA
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="showInFinderRow:" target="3As-aY-nYF" id="p8P-S7-kv5"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="p66-Hw-Wxw"/>
+                        <menuItem title="Open in DataGraph" id="mBk-7j-TGZ">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openInDataGraphRow:" target="3As-aY-nYF" id="j4H-ox-PiE"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Save as DataGraph…" id="Cc7-N9-SyI">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="saveAsDataGraphRow:" target="3As-aY-nYF" id="1MY-tv-vKS"/>
                             </connections>
                         </menuItem>
                     </items>
