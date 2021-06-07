@@ -48,7 +48,7 @@ class FileInspectorViewController: InspectorOutlineViewController<FileInspectorI
 		case .templatesBody:
 			prepareTemplatesBody(view as! InspectorTwoPopUpButtonsCell)
 		case .detailsBody:
-			prepareDetailsBody(view as! InspectorTextViewCell)
+            prepareDetailsBody(view as! InspectorTextViewCell) {}
 		}
 	}
 }
@@ -92,7 +92,7 @@ extension FileInspectorViewController {
 	}
 	/// Set's the cell's text to the file's current details (either from file or custom), and enables or disables editing depending on the source of the details.
 	/// - Parameter view: The table cell view to prepare.
-	func prepareDetailsBody(_ view: InspectorTextViewCell) {
+    func prepareDetailsBody(_ view: InspectorTextViewCell, completion: @escaping (() -> Void)) {
 		// Custom details can be editied by the user, but experiment details are derived from the file's contents, so prevent editing
 		view.textView.isEditable = showingCustomDetails
 		// Set the string to empty in case this function returns early
@@ -104,10 +104,13 @@ extension FileInspectorViewController {
 			// The file has to be parsed in order to determine its experiment details
 			guard let file = file else { return }
 			let parser = dataController?.parser(for: file)
-			
-			guard let parsedFile = parser?.parse(file: file) else { return }
-			
-			view.textView.string = parsedFile.experimentDetails
+            parser?.parse(file: file) {
+                result in
+                if let parsedFile = result {
+                    view.textView.string = parsedFile.experimentDetails
+                    completion()
+                }
+            }
 		}
 	}
 	/// Returns the menu items that should be shown in the parser pop up menu.

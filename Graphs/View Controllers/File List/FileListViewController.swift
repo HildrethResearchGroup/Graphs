@@ -125,35 +125,33 @@ extension FileListViewController {
 				break
 			}
 			
-			let controller: DGController
-			do {
-				try controller = dataController.graphController(for: file)
-			} catch let error as GraphControllerError {
-				// Couldn't create the controller -- hide the graph and write an error
-				let errorString: String
-				switch error {
-				case .noTemplate:
-					errorString = "No Graph Template Selected"
-				case .noParser:
-					errorString = "No Parser Selected"
-				case .noController:
-					errorString = "Error Displaying Graph Template"
-				case .failedToParse:
-					errorString = "Error Parsing File"
-				}
-				graphErrorLabel.stringValue = errorString
-				// Break to ensure that the graph remains hidden
-				break
-			} catch {
-				print("[WARNING] Unknown error thrown from DataController.graphController(for:)")
-				break
-			}
-			
-			controller.setDrawingView(graphView)
-			controller.setDelegate(self)
-			
-			self.controller = controller
-			graphView.isHidden = false
+			dataController.graphController(for: file) {
+                (err, result) in
+                if let error = err {
+                    // Couldn't create the controller -- hide the graph and write an error
+                    let errorString: String
+                    switch error {
+                    case .noTemplate:
+                        errorString = "No Graph Template Selected"
+                    case .noParser:
+                        errorString = "No Parser Selected"
+                    case .noController:
+                        errorString = "Error Displaying Graph Template"
+                    case .failedToParse:
+                        errorString = "Error Parsing File"
+                    }
+                    self.graphErrorLabel.stringValue = errorString
+                    // Break to ensure that the graph remains hidden
+                } else {
+                    if let controller = result {
+                        controller.setDrawingView(self.graphView)
+                        controller.setDelegate(self)
+                        
+                        self.controller = controller
+                        self.graphView.isHidden = false
+                    }
+                }
+            }
 		default:
 			graphErrorLabel.stringValue = "Multiple Files Selected"
 		}

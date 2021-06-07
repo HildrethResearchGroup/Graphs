@@ -24,8 +24,11 @@ class DataInspectorViewController: NSViewController {
 	var file: File? {
 		didSet {
 			// TODO: This needs to be called when the parser changes
-			parsedFile = parseFile()
-			prepareView()
+            parseFile() {
+                result in
+                self.parsedFile = result
+                self.prepareView()
+            }
 		}
 	}
 	/// The parsed file.
@@ -122,9 +125,17 @@ extension DataInspectorViewController {
 		columns.forEach { tableView.addTableColumn($0) }
 	}
 	/// Parses the currently displayed file.
-	func parseFile() -> ParsedFile? {
-		guard let file = file else { return nil }
-		guard let parser = dataController?.parser(for: file) else { return nil }
-		return parser.parse(file: file)
+    func parseFile(completion:@escaping((ParsedFile?) -> Void)) {
+		guard let file = file else {
+            completion(nil)
+            return
+        }
+		guard let parser = dataController?.parser(for: file) else {
+            completion(nil)
+            return
+        }
+        parser.parse(file: file) { result in
+            completion(result)
+        }
 	}
 }
