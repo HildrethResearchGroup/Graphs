@@ -134,7 +134,8 @@ extension DataInspectorViewController {
             completion(nil)
             return
         }
-        parser.parse(file: file) { result in
+        parser.parse(file: file) { userInfo, result in
+            print("Parsing completed (1) for \(file.path)")
             completion(result)
         }
 	}

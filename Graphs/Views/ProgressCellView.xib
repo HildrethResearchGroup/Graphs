@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="ProgressCellView" customModule="Graphs" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="95" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <progressIndicator maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="oke-lZ-N0P">
+                    <rect key="frame" x="2" y="1" width="91" height="20"/>
+                </progressIndicator>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wnA-3v-F7V">
+                    <rect key="frame" x="0.0" y="2" width="95" height="18"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="pdR-QE-eoX">
+                        <font key="font" usesAppearanceFont="YES"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="oke-lZ-N0P" secondAttribute="trailing" constant="2" id="0UC-Ab-NrV"/>
+                <constraint firstItem="wnA-3v-F7V" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="2" id="MOQ-ht-Gop"/>
+                <constraint firstAttribute="bottom" secondItem="oke-lZ-N0P" secondAttribute="bottom" constant="2" id="OhV-6V-4Xf"/>
+                <constraint firstAttribute="trailing" secondItem="wnA-3v-F7V" secondAttribute="trailing" constant="2" id="P7D-n7-v9T"/>
+                <constraint firstAttribute="bottom" secondItem="wnA-3v-F7V" secondAttribute="bottom" constant="2" id="XLi-fV-cH6"/>
+                <constraint firstItem="oke-lZ-N0P" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="hEz-Ig-4gc"/>
+                <constraint firstItem="wnA-3v-F7V" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="2" id="naP-7e-hy8"/>
+                <constraint firstItem="oke-lZ-N0P" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="2" id="v27-E1-ni4"/>
+            </constraints>
+            <connections>
+                <outlet property="progressIndicator" destination="oke-lZ-N0P" id="Cqj-tw-HiD"/>
+                <outlet property="readyLabel" destination="wnA-3v-F7V" id="WOA-O3-dcr"/>
+            </connections>
+            <point key="canvasLocation" x="-206.5" y="125"/>
+        </customView>
+    </objects>
+</document>

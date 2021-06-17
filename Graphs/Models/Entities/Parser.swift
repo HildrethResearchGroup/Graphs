@@ -326,19 +326,79 @@ extension Parser {
 
 // MARK: Parsing
 extension Parser {
+    /// cached parsed data
+    static let cache = NSCache<NSString, ParsedFile>()
+    static func resetCache() {
+        Parser.cache.removeAllObjects()
+        Parser.activeFiles.removeAllObjects()
+    }
+    /// List of active files
+    static let activeFiles = NSCache<NSString, NSString>()
 	/// Parses the given file.
 	/// - Parameter file: The file to parse.
 	/// - Returns: The parsed file, or `nil` if the file couldn't be parsed.
-    func parse(file: File, completion: @escaping ((ParsedFile?) -> Void)) {
-		// TODO: Add a caching mechanism, because this is called multiple times and can be an expensive operation
+    func parse(file: File, completion: @escaping (([String: String]?, ParsedFile?) -> Void)) {
+        var userInfo : [String: String] = [:]
+        let notificationCenter = NotificationCenter.default
 		guard let url = file.path else {
-            completion(nil)
+            userInfo["error"] = "Invalid file URL"
+            DispatchQueue.main.async {
+                let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                notificationCenter.post(endedNotification)
+                completion(userInfo, nil)
+            }
+            return
+        }
+        let fileKey = url.absoluteString as NSString
+        if let _ = Parser.activeFiles.object(forKey: fileKey) {
+            userInfo["error"] = "Already started"
+            userInfo["state"] = "\(ParsingState.started.rawValue)"
+            DispatchQueue.main.async {
+                let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                notificationCenter.post(endedNotification)
+                completion(userInfo, nil)
+                Parser.activeFiles.removeObject(forKey: fileKey)
+            }
+            return
+        }
+        Parser.activeFiles.setObject("Active", forKey: fileKey)
+        userInfo["url"] = url.absoluteString
+        let startedNotification = Notification(name: .parserDidStarted, object: nil, userInfo: userInfo)
+        notificationCenter.post(startedNotification)
+        if let cachedFile = Parser.cache.object(forKey: fileKey) {
+            debugPrint("Cache hit for \(fileKey)")
+            userInfo["state"] = "\(ParsingState.ready.rawValue)"
+            DispatchQueue.main.async {
+                let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                notificationCenter.post(endedNotification)
+                completion(userInfo, cachedFile)
+                Parser.activeFiles.removeObject(forKey: fileKey)
+            }
+            return
+        }
+        let allowedExtensions = ["dat", "csv", "txt"]
+        if !allowedExtensions.contains(url.pathExtension) {
+            debugPrint("Skipping \(fileKey)")
+            userInfo["state"] = "\(ParsingState.skipped.rawValue)"
+            DispatchQueue.main.async {
+                let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                notificationCenter.post(endedNotification)
+                completion(userInfo, nil)
+                Parser.activeFiles.removeObject(forKey: fileKey)
+            }
             return
         }
         DispatchQueue.global(qos: .background).async {
             // The file could use any encoding, so try to detect the encoding
             guard let rawContents = try? String.detectingEncoding(ofContents: url).string else {
-                completion(nil)
+                userInfo["error"] = "Error reading file"
+                debugPrint("ERORR READING \(userInfo["url"])")
+                DispatchQueue.main.async {
+                    let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                    notificationCenter.post(endedNotification)
+                    completion(userInfo, nil)
+                    Parser.activeFiles.removeObject(forKey: fileKey)
+                }
                 return
             }
             // Windows encodes newlines as "\r\n", while unix and unix-like systems encodes newlines as "\n". The file's contents will be separated into lines using String.components(separatedBy:) which treats \r and \n each as a new line. Because of this, we replace all instances of "\r\n" with a single "\n".
@@ -369,7 +429,13 @@ extension Parser {
                     return ""
                 }
             }() else {
-                completion(nil)
+                userInfo["error"] = "Invalid experiment details parameters"
+                DispatchQueue.main.async {
+                    let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                    notificationCenter.post(endedNotification)
+                    completion(userInfo, nil)
+                    Parser.activeFiles.removeObject(forKey: fileKey)
+                }
                 return
             }
             
@@ -406,7 +472,13 @@ extension Parser {
                     return []
                 }
             }() else {
-                completion(nil)
+                userInfo["error"] = "Invalid header parameters"
+                DispatchQueue.main.async {
+                    let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                    notificationCenter.post(endedNotification)
+                    completion(userInfo, nil)
+                    Parser.activeFiles.removeObject(forKey: fileKey)
+                }
                 return
             }
             
@@ -447,7 +519,13 @@ extension Parser {
                     return Array(cells[start..<end])
                 }
             }() else {
-                completion(nil)
+                userInfo["error"] = "Invalid data parameters"
+                DispatchQueue.main.async {
+                    let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                    notificationCenter.post(endedNotification)
+                    completion(userInfo, nil)
+                    Parser.activeFiles.removeObject(forKey: fileKey)
+                }
                 return
             }
             
@@ -457,10 +535,16 @@ extension Parser {
             let dataNumberOfColumns = data.max { $0.count < $1.count }?.count ?? 0
             let numberOfColumns = max(headerNumberOfColumns, dataNumberOfColumns)
             DispatchQueue.main.async {
-                completion(ParsedFile(experimentDetails: experimentDetails,
-                                                    header: header,
-                                                    data: data,
-                                                    numberOfColumns: numberOfColumns))
+                let result = ParsedFile(experimentDetails: experimentDetails,
+                                        header: header,
+                                        data: data,
+                                        numberOfColumns: numberOfColumns)
+                Parser.cache.setObject(result, forKey: fileKey)
+                userInfo["state"] = "\(ParsingState.ready.rawValue)"
+                let endedNotification = Notification(name: .parserDidEnded, object: nil, userInfo: userInfo)
+                notificationCenter.post(endedNotification)
+                completion(userInfo, result)
+                Parser.activeFiles.removeObject(forKey: fileKey)
             }
         }
 	}

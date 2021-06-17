@@ -102,16 +102,14 @@ extension FileInspectorViewController {
 			view.textView.string = file?.customDetails ?? ""
 		} else {
 			// The file has to be parsed in order to determine its experiment details
-			guard let file = file else { return }
-			let parser = dataController?.parser(for: file)
-            parser?.parse(file: file) {
-                result in
-                if let parsedFile = result {
+            guard let file = file else { return }
+            if let url = file.path?.absoluteString as NSString? {
+                if let parsedFile = Parser.cache.object(forKey: url ) {
                     view.textView.string = parsedFile.experimentDetails
                     completion()
                 }
             }
-		}
+        }
 	}
 	/// Returns the menu items that should be shown in the parser pop up menu.
 	func parserMenuItems() -> [NSMenuItem] {

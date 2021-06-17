@@ -7,7 +7,16 @@
 //
 
 /// The parsed contents of a file.
-struct ParsedFile {
+class ParsedFile {
+    
+    init(experimentDetails: String, header: [[String]], data: [[String]], numberOfColumns: Int) {
+        self.experimentDetails = experimentDetails
+        self.header = header
+        self.data = data
+        self.numberOfColumns = numberOfColumns
+    }
+    
+    
 	/// A string made from the lines spanning the parser's experiment details paramaters, or an empty string if the parser does not include experimental details.
 	///
 	/// - Note: This section may contain newline characters.

@@ -33,6 +33,8 @@ extension Notification.Name {
 	/// A notification that is fired when a new parser was imported.
 	static let didImportParser = Notification.Name(rawValue: "didImportParser")
 	static let didImportGraphTemplate = Notification.Name(rawValue: "didImportGraphTempalte")
+    static let parserDidStarted = Notification.Name(rawValue: "parserDidStarted")
+    static let parserDidEnded = Notification.Name(rawValue: "parserDidEnded")
 }
 
 // MARK: UserInfo keys
@@ -42,6 +44,7 @@ enum UserInfoKeys {
 
 // MARK: File Table Columns
 extension NSUserInterfaceItemIdentifier {
+    static let fileProgressColumn: Self = .init("FileProgressColumn")
 	static let fileNameColumn: Self = .init("FileNameColumn")
 	static let fileCollectionNameColumn: Self = .init("FileCollectionNameColumn")
 	static let fileDateImportedColumn: Self = .init("FileDateImportedColumn")
@@ -52,6 +55,7 @@ extension NSUserInterfaceItemIdentifier {
 
 // MARK: File Table Cells
 extension NSUserInterfaceItemIdentifier {
+    static let fileProgressCell: Self = .init("FileProgressCell")
 	static let fileNameCell: Self = .init("FileNameCell")
 	static let fileCollectionNameCell: Self = .init("FileCollectionNameCell")
 	static let fileDateImportedCell: Self = .init("FileDateImportedCell")
@@ -123,4 +127,8 @@ extension NSUserInterfaceItemIdentifier {
 // MARK: Graph Template Table Cells
 extension NSUserInterfaceItemIdentifier {
 	static let graphTemplateNameCell: Self = .init("GraphTemplateNameCell")
+}
+
+enum ParsingState: Int {
+    case error = -1, started = 0, ready = 1, skipped = 2
 }

@@ -12,7 +12,11 @@ import Cocoa
 class FileListViewController: NSViewController {
 	/// The view which displays the graphed file contents.
 	@IBOutlet weak var graphView: DPDrawingView!
-	/// The error label to display if a file cannot be graphed.
+    @IBOutlet weak var graphTitle: NSTextField!
+    /// The secondary graph view
+    @IBOutlet weak var secondaryGraphView: DPDrawingView!
+    @IBOutlet weak var secondaryGraphTitle: NSTextField!
+    /// The error label to display if a file cannot be graphed.
 	@IBOutlet weak var graphErrorLabel: NSTextField!
 	/// The table view.
 	@IBOutlet weak var tableView: NSTableView!
@@ -26,14 +30,17 @@ class FileListViewController: NSViewController {
 	@IBOutlet var byteCountFormatter: ByteCountFormatter!
 	/// `true` if the file list is currently updating, `false` otherwise.
 	var fileListIsUpdating = false
-	/// The data graph controller for displaying the graph.
-	var controller: DGController?
+	/// Data graph controllers for displaying the graph.
+	var controller, secondaryController: DGController?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		registerObservers()
 		// Allows dragging files to the trash can to delete them
 		tableView.setDraggingSourceOperationMask([.delete], forLocal: false)
+        let progressViewCellNib = NSNib(nibNamed: "ProgressCellView", bundle: nil)
+        tableView.usesAutomaticRowHeights = true
+        tableView.register(progressViewCellNib, forIdentifier: .fileProgressCell)
 	}
 }
 
@@ -106,10 +113,14 @@ extension FileListViewController {
 	}
 	/// Updates the graph view.
 	func updateGraph() {
+        graphErrorLabel.stringValue = ""
 		defer {
 			graphErrorLabel.isHidden = !graphView.isHidden
 		}
 		graphView.isHidden = true
+        secondaryGraphView.isHidden = true
+        self.graphTitle.isHidden = true
+        self.secondaryGraphTitle.isHidden = true
 		guard let selectedFiles = dataController?.filesSelected else {
 			graphErrorLabel.stringValue = "No File Selected"
 			return
@@ -120,35 +131,47 @@ extension FileListViewController {
 			graphErrorLabel.stringValue = "No File Selected"
 		case 1:
 			let file = selectedFiles.first!
-			guard let dataController = dataController else {
-				graphErrorLabel.stringValue = "Error Parsing File"
-				break
-			}
-			
-			dataController.graphController(for: file) {
-                (err, result) in
-                if let error = err {
-                    // Couldn't create the controller -- hide the graph and write an error
-                    let errorString: String
-                    switch error {
-                    case .noTemplate:
-                        errorString = "No Graph Template Selected"
-                    case .noParser:
-                        errorString = "No Parser Selected"
-                    case .noController:
-                        errorString = "Error Displaying Graph Template"
-                    case .failedToParse:
-                        errorString = "Error Parsing File"
-                    }
-                    self.graphErrorLabel.stringValue = errorString
-                    // Break to ensure that the graph remains hidden
+            updateGraphView(file: file) {
+                err, controller in
+                if !err.isEmpty {
+                    self.graphErrorLabel.stringValue = err
                 } else {
-                    if let controller = result {
+                    self.graphView.isHidden = false
+                    if let controller = controller {
+                        self.controller = controller
                         controller.setDrawingView(self.graphView)
                         controller.setDelegate(self)
-                        
+                    }
+                }
+            }
+        case 2:
+            self.graphTitle.isHidden = false
+            self.secondaryGraphTitle.isHidden = false
+            self.graphTitle.stringValue = selectedFiles[0].displayName
+            self.secondaryGraphTitle.stringValue = selectedFiles[1].displayName
+            updateGraphView(file: selectedFiles[0]) {
+                err, controller in
+                if !err.isEmpty {
+                    self.graphErrorLabel.stringValue = err
+                } else {
+                    self.graphView.isHidden = false
+                    if let controller = controller {
                         self.controller = controller
-                        self.graphView.isHidden = false
+                        controller.setDrawingView(self.graphView)
+                        controller.setDelegate(self)
+                    }
+                }
+            }
+            updateGraphView(file: selectedFiles[1]) {
+                err, controller in
+                if !err.isEmpty {
+                    self.graphErrorLabel.stringValue = err
+                } else {
+                    self.secondaryGraphView.isHidden = false
+                    if let controller = controller {
+                        self.secondaryController = controller
+                        controller.setDrawingView(self.secondaryGraphView)
+                        controller.setDelegate(self)
                     }
                 }
             }
@@ -156,6 +179,35 @@ extension FileListViewController {
 			graphErrorLabel.stringValue = "Multiple Files Selected"
 		}
 	}
+    
+    func updateGraphView(file: File, completion:@escaping((String, DGController?) -> Void)) {
+        guard let dataController = dataController else {
+            completion("Error Parsing File", nil)
+            return
+        }
+        
+        dataController.graphController(for: file) {
+            (err, result) in
+            if let error = err {
+                // Couldn't create the controller -- hide the graph and write an error
+                let errorString: String
+                switch error {
+                case .noTemplate:
+                    errorString = "No Graph Template Selected"
+                case .noParser:
+                    errorString = "No Parser Selected"
+                case .noController:
+                    errorString = "Error Displaying Graph Template"
+                case .failedToParse:
+                    errorString = "Error Parsing File"
+                }
+                completion(errorString, nil)
+                // Break to ensure that the graph remains hidden
+            } else {
+                completion("", result)
+            }
+        }
+    }
 }
 
 // MARK: Notifications
@@ -182,9 +234,13 @@ extension FileListViewController {
 																	 selector: #selector(graphMayHaveChanged(_:)),
 																	 name: .graphMayHaveChanged,
 																	 object: nil)
+        notificationCenter.addObserver(self, selector: #selector(reloadData(_:)), name: .parserDidEnded, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(parseSelection(_:)), name: .directoriesSelectedDidChange, object: nil)
 	}
 	/// Called when the graph for the selected file may have changed.
 	@objc func graphMayHaveChanged(_ notification: Notification) {
+        Parser.resetCache()
+        parseSelection(nil)
 		updateGraph()
 	}
 	/// Called when a file was renamed.
@@ -273,5 +329,37 @@ extension FileListViewController {
 		tableView.reloadData()
 		// The selection may change so update the row selection label
 		updateSelection()
-	}
+    }
+    @objc func reloadData(_ notification: Notification) {
+        if let userInfo = notification.userInfo {
+            if let url = userInfo["url"] as? String {
+                if let file = dataController?.filesDisplayed.filter({ next in
+                    return next.path?.absoluteString ?? "" == url
+                }).first {
+                    updateState(file: file, userInfo: userInfo as! [String: String])
+                }
+            }
+        }
+    }
+    @objc func parseSelection(_ notification: Notification?) {
+        dataController?.filesDisplayed.forEach {
+            file in
+            // The file has to be parsed in order to determine its experiment details
+            let parser = dataController?.parser(for: file)
+            parser?.parse(file: file) {
+                userInfo, result in
+                debugPrint("Parsing completed (3) for \(file.path!)")
+                self.updateState(file: file, userInfo: userInfo!)
+            }
+        }
+    }
+    func updateState(file: File, userInfo: [String: String]) {
+        let stateValue = userInfo["state"] ?? "-1"
+        let state = ParsingState(rawValue: Int(stateValue) ?? -1) ?? .error
+        file.parsingState = state
+        debugPrint("UPDATED: \(file.parsingState) \(file.displayName)")
+        if let rows = dataController?.filesDisplayed.indicies(of: [file]) {
+            tableView.reloadData(forRowIndexes: rows, columnIndexes:[0])
+        }
+    }
 }

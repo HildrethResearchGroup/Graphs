@@ -56,8 +56,12 @@ extension FileController {
 	private func files(in directories: [Directory], knownNoDescendents: Bool) -> [File] {
 		
 		let map: (Directory) -> [File] = { directory -> [File] in
-			// Add this directories children and its subdirectories' children recursivley
-			let directChildren = directory.children.compactMap { $0 as? File }
+            // Add this directories children and its subdirectories' children recursivley
+            let directChildren = directory.children.compactMap { $0 as? File }.filter {
+                $0.displayName.hasSuffix("txt")
+                    || $0.displayName.hasSuffix("dat")
+                    || $0.displayName.hasSuffix("csv")
+            }
 			// We know that none of the passed directories are descendents of eachother because they all have the same parent.
 			let recursiveChildren = self.files(in: directory.subdirectories, knownNoDescendents: true)
 			return directChildren + recursiveChildren
@@ -176,7 +180,8 @@ extension FileController {
             return
 		}
         parser.parse(file: file) {
-            result in
+            (userInfo, result) in
+            print("Parsing completed (2) for \(file.path)")
             if let parsedFile = result {
                 let data = parsedFile.data
                 
