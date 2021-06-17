@@ -80,6 +80,8 @@
 		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
 		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
 		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
+		77D3D059266580A80006167B /* ProgressCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D3D058266580A80006167B /* ProgressCellView.swift */; };
+		77D3D05B266580BB0006167B /* ProgressCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77D3D05A266580BB0006167B /* ProgressCellView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +196,8 @@
 		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
 		5AF83782249482F4002BF370 /* SortCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCache.swift; sourceTree = "<group>"; };
+		77D3D058266580A80006167B /* ProgressCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCellView.swift; sourceTree = "<group>"; };
+		77D3D05A266580BB0006167B /* ProgressCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressCellView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +367,8 @@
 				5A27B07E249733710024403E /* InspectorButton.swift */,
 				5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */,
 				5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */,
+				77D3D05A266580BB0006167B /* ProgressCellView.xib */,
+				77D3D058266580A80006167B /* ProgressCellView.swift */,
 				5A937DED24BEA56700D025B0 /* Inspector Cells */,
 			);
 			path = Views;
@@ -532,7 +538,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Connor Barnes";
 				TargetAttributes = {
 					5A73E4DB24528F5800450137 = {
@@ -576,6 +582,7 @@
 			files = (
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
+				77D3D05B266580BB0006167B /* ProgressCellView.xib in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
 				5A73E4E724528F5B00450137 /* Main.storyboard in Resources */,
 			);
@@ -611,6 +618,7 @@
 				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
 				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
 				5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */,
+				77D3D059266580A80006167B /* ProgressCellView.swift in Sources */,
 				5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */,
 				5ABBB1BC24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift in Sources */,
 				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
@@ -739,6 +747,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -799,6 +808,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -832,12 +842,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -847,9 +858,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
 				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -862,12 +875,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				EXCLUDED_ARCHS = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
@@ -877,9 +891,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
 				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

@@ -50,21 +50,26 @@ extension FileListViewController {
 			controller.setDelegate(graphView)
 		}
 		
-		dataController.filesSelected.forEach { file in
+        dataController.filesSelected.forEach { file in
 			// Name the file some (almost certainly) unique name.
 			let name = UUID().uuidString
 			let url = parentURL.appendingPathComponent("\(name).dgraph")
-			
-			do {
-				let controller = try dataController.graphController(for: file)
-				controller.setDrawingView(graphView)
-				try controller.write(to: url)
-				NSWorkspace.shared.openFile(url.path, withApplication: "DataGraph")
-			} catch where error is GraphControllerError {
-				print("[ERROR] Failed to create controller: \(error)")
-			} catch {
-				print("[ERROR] Failed to write data graph file: \(error)")
-			}
+            dataController.graphController(for: file) {
+                (err, result) in
+                if let error = err {
+                    print("[ERROR] Failed to create controller: \(error)")
+                } else {
+                    if let controller = result {
+                        controller.setDrawingView(self.graphView)
+                        do {
+                            try controller.write(to: url)
+                            NSWorkspace.shared.openFile(url.path, withApplication: "DataGraph")
+                        } catch {
+                            print("[ERROR] graph error")
+                        }
+                    }
+                }
+            }
 		}
 	}
 	/// Opens the clicked file or selection of files in DataGraph.

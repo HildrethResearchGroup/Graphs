@@ -56,8 +56,12 @@ extension FileController {
 	private func files(in directories: [Directory], knownNoDescendents: Bool) -> [File] {
 		
 		let map: (Directory) -> [File] = { directory -> [File] in
-			// Add this directories children and its subdirectories' children recursivley
-			let directChildren = directory.children.compactMap { $0 as? File }
+            // Add this directories children and its subdirectories' children recursivley
+            let directChildren = directory.children.compactMap { $0 as? File }.filter {
+                $0.displayName.hasSuffix("txt")
+                    || $0.displayName.hasSuffix("dat")
+                    || $0.displayName.hasSuffix("csv")
+            }
 			// We know that none of the passed directories are descendents of eachother because they all have the same parent.
 			let recursiveChildren = self.files(in: directory.subdirectories, knownNoDescendents: true)
 			return directChildren + recursiveChildren
@@ -162,34 +166,38 @@ extension FileController {
 	}
 	/// Returns a data graph controller for the given file.
 	/// - Parameter file: The file to graph.
-	/// - Throws: a `GraphControllerError` if the file could not be converted into a graph controller.
-	/// - Returns: A DataGraph controller using the file's default graph template and parser.
-	func graphController(for file: File) throws -> DGController {
+    func graphController(for file: File, completion: @escaping((GraphControllerError?, DGController?) -> Void)) {
 		guard let template = dataController.graphTemplate(for: file) else {
-			throw GraphControllerError.noTemplate
+			completion(GraphControllerError.noTemplate, nil)
+            return
 		}
 		guard let controller = template.controller else {
-			throw GraphControllerError.noController
+			completion(GraphControllerError.noController, nil)
+            return
 		}
 		guard let parser = dataController.parser(for: file) else {
-			throw GraphControllerError.noParser
+			completion(GraphControllerError.noParser, nil)
+            return
 		}
-		guard let parsedFile = parser.parse(file: file) else {
-			throw GraphControllerError.failedToParse
-		}
-		
-		let data = parsedFile.data
-		
-		let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
-			.map { dataColumn in
-				return dataColumn.compactMap { $0 as NSString? }
-		}
+        parser.parse(file: file) {
+            (userInfo, result) in
+            print("Parsing completed (2) for \(file.path)")
+            if let parsedFile = result {
+                let data = parsedFile.data
+                
+                let columns: [[NSString]] = data.columns(count: parsedFile.numberOfColumns)
+                    .map { dataColumn in
+                        return dataColumn.compactMap { $0 as NSString? }
+                }
 
-		columns.enumerated().forEach { (index, element) in
-			controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
-		}
-		
-		return controller
+                columns.enumerated().forEach { (index, element) in
+                    controller.dataColumn(at: Int32(index + 1))?.setDataFrom(element)
+                }
+                completion(nil, controller)
+            } else {
+                completion(GraphControllerError.failedToParse, nil)
+            }
+        }
 	}
 }
 

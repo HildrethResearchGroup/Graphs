@@ -35,6 +35,8 @@ extension FileListViewController: NSTableViewDelegate {
 		let cellIdentifier: NSUserInterfaceItemIdentifier
 		
 		switch tableColumn.identifier {
+        case .fileProgressColumn:
+            cellIdentifier = .fileProgressCell
 		case .fileNameColumn:
 			cellIdentifier = .fileNameCell
 		case .fileCollectionNameColumn:
@@ -54,8 +56,15 @@ extension FileListViewController: NSTableViewDelegate {
 		guard let view = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
 		
 		// We use the column identifier rather than a tag becuase the performance impact is negligable and the column identifiers are more descriptive to aid in debuging
-		switch tableColumn.identifier {
-		case .fileNameColumn:
+        switch tableColumn.identifier {
+        case .fileProgressColumn:
+            if let progressViewCell = view as? ProgressCellView {
+                progressViewCell.progressIndicator.isHidden = true
+                progressViewCell.readyLabel.isHidden = false
+                progressViewCell.readyLabel.stringValue = "●"
+                progressViewCell.readyLabel.textColor = parsingStateToColor(state: file.parsingState)
+            }
+        case .fileNameColumn:
 			view.textField?.stringValue = file.displayName
 		case .fileCollectionNameColumn:
 			view.textField?.stringValue = collectionName(forFile: file)
@@ -94,7 +103,6 @@ extension FileListViewController: NSTableViewDelegate {
 		} else {
 			view.textField?.setValid(false)
 		}
-		
 		return view
 	}
 	
@@ -136,4 +144,15 @@ extension FileListViewController {
 			return parent.displayName
 		}
 	}
+}
+
+func parsingStateToColor(state: ParsingState) -> NSColor {
+    switch state {
+    case .ready:
+        return .systemGreen
+    case .error:
+        return .systemRed
+    default:
+        return .systemYellow
+    }
 }

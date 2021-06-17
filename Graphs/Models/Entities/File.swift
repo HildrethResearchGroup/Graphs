@@ -14,7 +14,9 @@ import CoreData
 ///
 /// This should always point to an actual file on the system, even if its parent does not.
 @objc(File)
-public class File: DirectoryItem { }
+public class File: DirectoryItem {
+    var parsingState : ParsingState = .started
+}
 
 // MARK: Core Data Properties
 extension File {
