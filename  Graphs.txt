@@ -1,0 +1,37 @@
+Source Code: https://github.com/HildrethResearchGroup/Graphs
+
+Compiled App: https://github.com/HildrethResearchGroup/Graphs/blob/master/Graphs.app.zip
+
+
+
+Hi Everyone,
+
+  Above are some links to the source code and compiled app for Graphs.  Graphs is a Database program for data written using the DataGraph framework.   The objective of this program is to make it easy to organize and visualize data.  In grad. school, I noticed that I collected a lot of data that I never looked at (or just look at is quickly on the machine that collected it), so I wrote a program to collect, parse, and graph my data using the DataGraph framework as a basis for graphing.  As a professor, I noticed that my students weren't looking at their data in detail either - so I had an undergraduate student rewrite Graphs in Swift so that it would run on the latest macOS.
+
+  The way Graphs works is, you make templates in DataGraph for how you want your different types of data to be graphed.  Then you import those templates along with your raw text data files into Graphs.  Next you create some Parse Templates in Graphs to tell Graphs how to parse your data.  Lastly, you assign the Graph and Parse Templates to be the default templates for specific folders or individual data files (don't worry, this is super easy).  Select the folders you are interested in looking at using the Source List on the left and then the individual data files in the table view in the middle (the UI was directly inspired by Papers and Xcode).  Graphs will automatically parse your data using the assigned Parse Template, create a new DataGraph file using the assigned Graph Template, then over write the data columns in new DataGraph file with the parsed data, and then finally present your graph in the bottom graph view.  
+  This parsing and graphing process is pretty fast and works fine for files less than 1 MB in size (we haven't implemented async/multithreading yet).  
+
+
+How to use Graphs:
+  1) Import your text data
+	- you can import individual files or folders
+  2) Create any necessary Parse Templates (usually one per type of data/machine)
+	- Use the Parse Inspector on the left panel
+	- Create a new Parse Template
+	- Select if there are any experimental details, headers, and what lines they start and end at.
+	- Set the separator used for the data (e.g. comma for CSV files)
+  3) Import your Datagraph Files to act as Graph Templates
+  4) Assign Parse and Graph Templates to act as default templates for relevant folders
+  5) Select the data you are interested in view using the Source List on the left and the Table in the center.
+
+
+Current Limitations:
+  1) Graphs is currently free to use and open source.  However, like most free, open source software, we don't make any claims as to its stability, stability, or future work.
+  2) Parsing and Graphing is currently done on the main thread, so looking at large files can freeze the UI for a little while.
+	- I'm hoping to fix that this Spring Semester once I get a better handle of using Apple's Combine framework.
+	- We will also probably rewrite everything in SwiftUI this Summer to further future-proof the application
+  3) We can only show one graph at a time.  If you select multiple files to graph, it won't show any.
+  4) The current DataGraph framework only supports visualizing one graph.  So Graphs only shows you the first graph in the series
+
+
+Please let me know if you have any questions or requests (not that I have much time to get to them, but I'll put them in my long-term todo list).  https://hildrethlab.mines.edu

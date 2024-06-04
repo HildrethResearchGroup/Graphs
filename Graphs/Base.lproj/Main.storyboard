@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,6 +23,13 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Settings" id="2kj-jb-Qjw">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showPreferences:" target="Voe-Tx-rLC" id="bVq-kh-hAB"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Yui-Mk-Isq"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
@@ -454,7 +462,7 @@ CA
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn width="237" minWidth="16" maxWidth="1000" id="7Ke-GS-jYN">
+                                                <tableColumn width="208" minWidth="16" maxWidth="1000" id="7Ke-GS-jYN">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -467,11 +475,11 @@ CA
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="HeaderCell" id="78b-7N-0cG">
-                                                            <rect key="frame" x="1" y="1" width="237" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="217" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yfd-XD-O65">
-                                                                    <rect key="frame" x="0.0" y="1" width="237" height="14"/>
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yfd-XD-O65">
+                                                                    <rect key="frame" x="0.0" y="1" width="217" height="14"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="lFW-kq-TVr">
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -485,7 +493,7 @@ CA
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="DirectoryCell" wantsLayer="YES" id="7hJ-vu-1HB">
-                                                            <rect key="frame" x="1" y="20" width="237" height="17"/>
+                                                            <rect key="frame" x="11" y="20" width="217" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DaL-Ck-vW6">
@@ -493,8 +501,8 @@ CA
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyDown" image="NSFolder" id="5JA-bf-A9A"/>
                                                                 </imageView>
-                                                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LCE-IT-ZRm">
-                                                                    <rect key="frame" x="25" y="0.0" width="212" height="17"/>
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LCE-IT-ZRm">
+                                                                    <rect key="frame" x="25" y="0.0" width="192" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="iHt-ON-u7e">
                                                                         <font key="font" metaFont="system"/>
@@ -544,15 +552,15 @@ CA
                                                 <rect key="frame" x="0.0" y="0.0" width="26" height="26"/>
                                                 <subviews>
                                                     <button toolTip="Add a new directory" translatesAutoresizingMaskIntoConstraints="NO" id="0jV-uR-RQh">
-                                                        <rect key="frame" x="8" y="8" width="11" height="11"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="11" id="W3j-On-sza"/>
-                                                            <constraint firstAttribute="height" constant="11" id="v3n-cU-12p"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="8" y="6.5" width="11.5" height="15"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSAddTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="XO5-bh-D6t">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="11" id="W3j-On-sza"/>
+                                                            <constraint firstAttribute="height" constant="11" id="v3n-cU-12p"/>
+                                                        </constraints>
                                                         <connections>
                                                             <action selector="addDirectory:" target="wL6-OG-lOu" id="rJw-PA-zw3"/>
                                                         </connections>
@@ -568,15 +576,15 @@ CA
                                                 <rect key="frame" x="26" y="0.0" width="26" height="26"/>
                                                 <subviews>
                                                     <button toolTip="Remove the selected directories or files" translatesAutoresizingMaskIntoConstraints="NO" id="nwC-eB-DrR">
-                                                        <rect key="frame" x="8" y="8" width="11" height="11"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="11" id="2Ko-Xx-u2u"/>
-                                                            <constraint firstAttribute="width" constant="11" id="h0V-en-8lo"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="8" y="11" width="11.5" height="6"/>
                                                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRemoveTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="0KQ-BC-5Pe">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="11" id="2Ko-Xx-u2u"/>
+                                                            <constraint firstAttribute="width" constant="11" id="h0V-en-8lo"/>
+                                                        </constraints>
                                                         <connections>
                                                             <action selector="delete:" target="ead-Yc-1N1" id="Qui-h6-RFg"/>
                                                         </connections>
@@ -584,6 +592,7 @@ CA
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="nwC-eB-DrR" firstAttribute="centerY" secondItem="ktv-L5-w8O" secondAttribute="centerY" id="CQ0-vI-Iys"/>
+                                                    <constraint firstAttribute="width" secondItem="ktv-L5-w8O" secondAttribute="height" multiplier="1:1" id="LaI-Vd-zvK"/>
                                                     <constraint firstAttribute="width" secondItem="ktv-L5-w8O" secondAttribute="height" multiplier="1:1" id="SWB-Vc-CP6"/>
                                                     <constraint firstItem="nwC-eB-DrR" firstAttribute="centerX" secondItem="ktv-L5-w8O" secondAttribute="centerX" id="aHS-5F-4tF"/>
                                                 </constraints>
@@ -591,7 +600,6 @@ CA
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="ktv-L5-w8O" secondAttribute="bottom" id="F7a-4i-UiE"/>
-                                            <constraint firstItem="ktv-L5-w8O" firstAttribute="width" secondItem="ktv-L5-w8O" secondAttribute="height" multiplier="1:1" id="LaI-Vd-zvK"/>
                                             <constraint firstItem="ktv-L5-w8O" firstAttribute="leading" secondItem="H6N-ti-mix" secondAttribute="trailing" id="Rvc-24-5Tv"/>
                                             <constraint firstItem="ktv-L5-w8O" firstAttribute="top" secondItem="7An-0A-fwj" secondAttribute="top" id="Tey-0f-wWR"/>
                                             <constraint firstItem="H6N-ti-mix" firstAttribute="top" secondItem="7An-0A-fwj" secondAttribute="top" id="UUy-I0-tCO"/>
@@ -633,7 +641,7 @@ CA
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <subviews>
                         <gridView xPlacement="leading" yPlacement="bottom" rowAlignment="none" translatesAutoresizingMaskIntoConstraints="NO" id="M3v-YF-30n">
-                            <rect key="frame" x="29" y="14" width="149" height="14"/>
+                            <rect key="frame" x="26" y="13" width="155" height="16"/>
                             <rows>
                                 <gridRow id="HoO-dx-ygg"/>
                             </rows>
@@ -643,7 +651,7 @@ CA
                             <gridCells>
                                 <gridCell row="HoO-dx-ygg" column="uma-gs-dFe" id="aUr-uz-xTy">
                                     <button key="contentView" toolTip="If selected, directories within this directory will also be imported along with their subsequent subdirectories recursivley" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kyt-7I-gMB">
-                                        <rect key="frame" x="-2" y="-2" width="153" height="18"/>
+                                        <rect key="frame" x="-2" y="-1" width="157" height="18"/>
                                         <buttonCell key="cell" type="check" title="Import subdirectories" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="WdX-O1-yFG">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -709,7 +717,7 @@ CA
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="kRG-WM-FJX" userLabel="Bottom Bar">
                                 <rect key="frame" x="0.0" y="0.0" width="922" height="24"/>
                                 <subviews>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
+                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-RY-MbZ">
                                         <rect key="frame" x="402" y="5" width="119" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" lineBreakMode="clipping" title="0 directories selected" id="3Ma-v0-lbN">
                                             <font key="font" metaFont="message" size="11"/>
@@ -744,7 +752,7 @@ CA
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                             <tableColumns>
-                                                                <tableColumn identifier="FileNameColumn" width="282" minWidth="40" maxWidth="1000" headerToolTip="The name of the file" id="oJ6-30-WPR">
+                                                                <tableColumn identifier="FileNameColumn" width="267.5" minWidth="40" maxWidth="1000" headerToolTip="The name of the file" id="oJ6-30-WPR">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -758,11 +766,11 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileNameCell" id="3QA-ug-juS">
-                                                                            <rect key="frame" x="1" y="1" width="282" height="43"/>
+                                                                            <rect key="frame" x="11" y="1" width="273" height="43"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UYf-Ov-Pyu">
-                                                                                    <rect key="frame" x="0.0" y="26" width="282" height="17"/>
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UYf-Ov-Pyu">
+                                                                                    <rect key="frame" x="0.0" y="26" width="273" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="File" id="OL4-Je-2j3">
                                                                                         <font key="font" metaFont="system"/>
@@ -780,7 +788,7 @@ CA
                                                                         </tableCellView>
                                                                     </prototypeCellViews>
                                                                 </tableColumn>
-                                                                <tableColumn identifier="FileCollectionNameColumn" width="282" minWidth="40" maxWidth="1000" headerToolTip="The name of the directory that the file is in" id="nmL-Zi-03J">
+                                                                <tableColumn identifier="FileCollectionNameColumn" width="267.5" minWidth="40" maxWidth="1000" headerToolTip="The name of the directory that the file is in" id="nmL-Zi-03J">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Collection Name">
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -794,11 +802,11 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileCollectionNameCell" id="At1-j9-gpb">
-                                                                            <rect key="frame" x="286" y="1" width="282" height="0.0"/>
+                                                                            <rect key="frame" x="286.5" y="1" width="267" height="0.0"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hq1-2g-HEv">
-                                                                                    <rect key="frame" x="0.0" y="-17" width="282" height="17"/>
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hq1-2g-HEv">
+                                                                                    <rect key="frame" x="0.0" y="-17" width="267" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Folder" id="naJ-Ot-7zx">
                                                                                         <font key="font" metaFont="system"/>
@@ -826,10 +834,10 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileDateImportedCell" id="5Hp-iE-w6W">
-                                                                            <rect key="frame" x="571" y="1" width="85" height="0.0"/>
+                                                                            <rect key="frame" x="557" y="1" width="85" height="0.0"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHM-wC-7gl">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uHM-wC-7gl">
                                                                                     <rect key="frame" x="0.0" y="-17" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="1/1/1970" id="nPA-Zj-d3I">
@@ -859,10 +867,10 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileDateCreatedCell" id="vEb-oj-wrt">
-                                                                            <rect key="frame" x="659" y="1" width="85" height="17"/>
+                                                                            <rect key="frame" x="645" y="1" width="85" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zu7-mn-vyx">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zu7-mn-vyx">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0/0/0" id="euB-JL-OHe">
@@ -892,10 +900,10 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileDateModifiedCell" id="GCM-GC-YV2">
-                                                                            <rect key="frame" x="747" y="1" width="85" height="17"/>
+                                                                            <rect key="frame" x="733" y="1" width="85" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wIu-Op-d5h">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wIu-Op-d5h">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0/0/0" id="izx-gb-eHc">
@@ -925,11 +933,11 @@ CA
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView identifier="FileSizeCell" id="3bB-fN-nO7">
-                                                                            <rect key="frame" x="835" y="1" width="85" height="17"/>
+                                                                            <rect key="frame" x="821" y="1" width="89" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfI-lt-kN0">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="17"/>
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hfI-lt-kN0">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="89" height="17"/>
                                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="0" id="RnQ-FR-9Nt">
                                                                                         <font key="font" metaFont="system"/>
@@ -965,7 +973,7 @@ CA
                                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
-                                                <tableHeaderView key="headerView" id="7ge-iG-Y1D">
+                                                <tableHeaderView key="headerView" wantsLayer="YES" id="7ge-iG-Y1D">
                                                     <rect key="frame" x="0.0" y="0.0" width="922" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
@@ -993,7 +1001,7 @@ CA
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="5JT-Tg-6Yj"/>
                                                 </constraints>
                                             </customView>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vQ-vW-piE">
+                                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vQ-vW-piE">
                                                 <rect key="frame" x="408" y="67" width="107" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="No File Selected" id="Vvy-6r-jj3">
                                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1075,8 +1083,8 @@ CA
         </scene>
     </scenes>
     <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSFolder" width="32" height="32"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="18" height="5"/>
     </resources>
 </document>

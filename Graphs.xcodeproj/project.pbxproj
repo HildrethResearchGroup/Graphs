@@ -80,6 +80,9 @@
 		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
 		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
 		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
+		C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB4792A7484E90090D102 /* PreferencesViewController.swift */; };
+		C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */; };
+		C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C05CB47D2A74867D0090D102 /* Preferences.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +197,9 @@
 		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
 		5AF83782249482F4002BF370 /* SortCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCache.swift; sourceTree = "<group>"; };
+		C05CB4792A7484E90090D102 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
+		C05CB47D2A74867D0090D102 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +327,7 @@
 				5A73E50C2452966B00450137 /* Views */,
 				5A73E50D2452966F00450137 /* View Controllers */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
+				C05CB47D2A74867D0090D102 /* Preferences.storyboard */,
 				5A27B07C249723820024403E /* Inspector.storyboard */,
 				5A73E4E524528F5B00450137 /* Main.storyboard */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
@@ -371,6 +378,7 @@
 		5A73E50D2452966F00450137 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C05CB4782A7484D00090D102 /* Preferences */,
 				5A34A20324973DAD0001CD1A /* Inspector */,
 				5AA95E41247B76D4001FF163 /* File List */,
 				5A69FB37245BD619003E2F56 /* Source List */,
@@ -466,6 +474,15 @@
 				5A39A61424E26097001C5D1E /* URL.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C05CB4782A7484D00090D102 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C05CB4792A7484E90090D102 /* PreferencesViewController.swift */,
+				C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */,
+			);
+			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -577,6 +594,7 @@
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
+				C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */,
 				5A73E4E724528F5B00450137 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,9 +682,11 @@
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
 				5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */,
 				5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */,
+				C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */,
 				5A6D36F324C1510300588E05 /* GraphController.swift in Sources */,
 				5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */,
 				5A3BACCB24C19FFC003B07FA /* CollectionHelpers.swift in Sources */,
+				C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +849,7 @@
 		5A73E50324528F5B00450137 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
@@ -836,7 +857,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
+				DEVELOPMENT_TEAM = Z553N3QGMH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -847,6 +868,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
 				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -859,6 +881,7 @@
 		5A73E50424528F5B00450137 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = x86_64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
@@ -866,7 +889,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
+				DEVELOPMENT_TEAM = Z553N3QGMH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -877,6 +900,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
 				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
