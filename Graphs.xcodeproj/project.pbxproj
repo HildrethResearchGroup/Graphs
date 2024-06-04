@@ -79,6 +79,7 @@
 		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
 		C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */; };
 		C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA192C0FBEC5002FC7D2 /* ContentView.swift */; };
+		C019CA1C2C0FC2A3002FC7D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E524528F5B00450137 /* Main.storyboard */; };
 		C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB4792A7484E90090D102 /* PreferencesViewController.swift */; };
 		C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */; };
 		C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C05CB47D2A74867D0090D102 /* Preferences.storyboard */; };
@@ -260,7 +261,6 @@
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
-				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
 				5A73E4DE24528F5800450137 /* Graphs */,
 				5A73E4DD24528F5800450137 /* Products */,
 				5A6D36E424C13A6400588E05 /* Frameworks */,
@@ -282,11 +282,9 @@
 				C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */,
 				C019CA192C0FBEC5002FC7D2 /* ContentView.swift */,
 				5A73E4DF24528F5800450137 /* AppDelegate.swift */,
-				5A73E53924533BF300450137 /* Debug.swift */,
-				5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */,
 				5ACFC52C24BD3433006D386E /* Helpers */,
-				5A73E50B2452966200450137 /* Models */,
 				C019CA162C0FBE6F002FC7D2 /* AppKit */,
+				C019CA1B2C0FC064002FC7D2 /* Resources */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
 				5A73E4E924528F5B00450137 /* Graphs.entitlements */,
@@ -294,14 +292,14 @@
 			path = Graphs;
 			sourceTree = "<group>";
 		};
-		5A73E50B2452966200450137 /* Models */ = {
+		5A73E50B2452966200450137 /* CoreData Models */ = {
 			isa = PBXGroup;
 			children = (
 				5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */,
 				5A79055D24554AF10021CDB2 /* Controllers */,
 				5A73E52F24531D0200450137 /* Entities */,
 			);
-			path = Models;
+			path = "CoreData Models";
 			sourceTree = "<group>";
 		};
 		5A73E50C2452966B00450137 /* Views */ = {
@@ -404,6 +402,7 @@
 		5ACFC52C24BD3433006D386E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				5A73E53924533BF300450137 /* Debug.swift */,
 				5A73E53B2453473F00450137 /* Identifiers.swift */,
 				5ACFC52D24BD3459006D386E /* NotificationTextField.swift */,
 				5A4899D524BD9DE500822B80 /* StringEncoding.swift */,
@@ -419,6 +418,8 @@
 		C019CA162C0FBE6F002FC7D2 /* AppKit */ = {
 			isa = PBXGroup;
 			children = (
+				5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */,
+				5A73E50B2452966200450137 /* CoreData Models */,
 				5A73E50D2452966F00450137 /* View Controllers */,
 				5A73E50C2452966B00450137 /* Views */,
 				C05CB47D2A74867D0090D102 /* Preferences.storyboard */,
@@ -426,6 +427,14 @@
 				5A73E4E524528F5B00450137 /* Main.storyboard */,
 			);
 			path = AppKit;
+			sourceTree = "<group>";
+		};
+		C019CA1B2C0FC064002FC7D2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		C05CB4782A7484D00090D102 /* Preferences */ = {
@@ -498,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
+				C019CA1C2C0FC2A3002FC7D2 /* Main.storyboard in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
 				C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */,
@@ -720,6 +730,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = alpha_001;
@@ -755,6 +766,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Graphs/Graphs.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = alpha_001;

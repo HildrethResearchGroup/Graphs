@@ -18,7 +18,7 @@ extension String {
 		// The resulting string for NSString.stringEncoding(for:encodingOptions:convertedString:usedLossyConversion:) is returned by a pointer argument. (Boo ObjC)
 		var result: NSString?
 		// NSString.stringEncoding(for:encodingOptions:convertedString:usedLossyConversion:) takes a dictionary of options -- include the .likelyLanguageKey for the user's Locale, so that the encoding can be guess more precisley.
-        let options = [StringEncodingDetectionOptionsKey.likelyLanguageKey: Locale.current.language.languageCode.identifier ?? "en"]
+        let options = [StringEncodingDetectionOptionsKey.likelyLanguageKey: Locale.current.language.languageCode?.identifier ?? "en"]
 		let encoding = NSString.stringEncoding(for: data,
 																					 encodingOptions: options,
 																					 convertedString: &result,
