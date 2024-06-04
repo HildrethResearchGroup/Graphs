@@ -30,7 +30,7 @@ class InspectorCategoryOptionCell: NSTableCellView {
 
 // MARK: Delegate
 /// A set of optional methods to respond to changes of state for the cell.
-@objc protocol InspectorCategoryOptionCellDelegate: class {
+@objc protocol InspectorCategoryOptionCellDelegate: AnyObject {
 	// Custom Objective-C names are given becuase otherwise there would be certain cell delegates with matching signatures, which would prevent them from being simultaneously conformed to by types. 
 	/// Called when the pop up button's selection changed.
 	/// - Parameter cell: The cell that the pop up view is in.

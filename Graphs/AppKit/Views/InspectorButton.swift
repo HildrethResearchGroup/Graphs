@@ -50,7 +50,7 @@ class InspectorButton: NSButton {
 }
 
 /// A group of buttons that map to a tab view.
-protocol InspectorButtonGroup: class {
+protocol InspectorButtonGroup: AnyObject {
 	/// The buttons which belong to the group and determine which tab is displayed.
 	var inspectorButtons: [InspectorButton] { get set }
 	/// The tab view that holds the views that the buttons map to.

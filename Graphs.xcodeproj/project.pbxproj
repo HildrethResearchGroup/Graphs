@@ -41,9 +41,6 @@
 		5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F424C151AB00588E05 /* GraphTemplate.swift */; };
 		5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4DF24528F5800450137 /* AppDelegate.swift */; };
 		5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E324528F5B00450137 /* Assets.xcassets */; };
-		5A73E4E724528F5B00450137 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E524528F5B00450137 /* Main.storyboard */; };
-		5A73E4F324528F5B00450137 /* GraphsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4F224528F5B00450137 /* GraphsTests.swift */; };
-		5A73E4FE24528F5B00450137 /* GraphsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4FD24528F5B00450137 /* GraphsUITests.swift */; };
 		5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E50E2452969B00450137 /* SidebarViewController.swift */; };
 		5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */; };
 		5A73E5212452A78F00450137 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51B2452A78F00450137 /* File.swift */; };
@@ -80,27 +77,12 @@
 		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
 		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
 		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
+		C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */; };
+		C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA192C0FBEC5002FC7D2 /* ContentView.swift */; };
 		C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB4792A7484E90090D102 /* PreferencesViewController.swift */; };
 		C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */; };
 		C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C05CB47D2A74867D0090D102 /* Preferences.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5A73E4EF24528F5B00450137 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A73E4D424528F5800450137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5A73E4DB24528F5800450137;
-			remoteInfo = Graphs;
-		};
-		5A73E4FA24528F5B00450137 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A73E4D424528F5800450137 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5A73E4DB24528F5800450137;
-			remoteInfo = Graphs;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5A6D36E824C13A6400588E05 /* Embed Frameworks */ = {
@@ -155,12 +137,6 @@
 		5A73E4E624528F5B00450137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A73E4E824528F5B00450137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A73E4E924528F5B00450137 /* Graphs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Graphs.entitlements; sourceTree = "<group>"; };
-		5A73E4EE24528F5B00450137 /* GraphsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraphsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A73E4F224528F5B00450137 /* GraphsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsTests.swift; sourceTree = "<group>"; };
-		5A73E4F424528F5B00450137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A73E4F924528F5B00450137 /* GraphsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraphsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A73E4FD24528F5B00450137 /* GraphsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsUITests.swift; sourceTree = "<group>"; };
-		5A73E4FF24528F5B00450137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A73E50E2452969B00450137 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		5A73E51324529BC000450137 /* GraphsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphsModel.xcdatamodel; sourceTree = "<group>"; };
 		5A73E51B2452A78F00450137 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -197,6 +173,8 @@
 		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
 		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
 		5AF83782249482F4002BF370 /* SortCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCache.swift; sourceTree = "<group>"; };
+		C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsApp.swift; sourceTree = "<group>"; };
+		C019CA192C0FBEC5002FC7D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C05CB4792A7484E90090D102 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		C05CB47D2A74867D0090D102 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
@@ -208,20 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6D36E624C13A6400588E05 /* DataGraph.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A73E4EB24528F5B00450137 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A73E4F624528F5B00450137 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +262,6 @@
 			children = (
 				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
 				5A73E4DE24528F5800450137 /* Graphs */,
-				5A73E4F124528F5B00450137 /* GraphsTests */,
-				5A73E4FC24528F5B00450137 /* GraphsUITests */,
 				5A73E4DD24528F5800450137 /* Products */,
 				5A6D36E424C13A6400588E05 /* Frameworks */,
 				5A6D36EA24C13C1E00588E05 /* Graphs-Bridging-Header.h */,
@@ -310,8 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				5A73E4DC24528F5800450137 /* Graphs.app */,
-				5A73E4EE24528F5B00450137 /* GraphsTests.xctest */,
-				5A73E4F924528F5B00450137 /* GraphsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,39 +279,19 @@
 		5A73E4DE24528F5800450137 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
+				C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */,
+				C019CA192C0FBEC5002FC7D2 /* ContentView.swift */,
 				5A73E4DF24528F5800450137 /* AppDelegate.swift */,
 				5A73E53924533BF300450137 /* Debug.swift */,
 				5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */,
 				5ACFC52C24BD3433006D386E /* Helpers */,
 				5A73E50B2452966200450137 /* Models */,
-				5A73E50C2452966B00450137 /* Views */,
-				5A73E50D2452966F00450137 /* View Controllers */,
+				C019CA162C0FBE6F002FC7D2 /* AppKit */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
-				C05CB47D2A74867D0090D102 /* Preferences.storyboard */,
-				5A27B07C249723820024403E /* Inspector.storyboard */,
-				5A73E4E524528F5B00450137 /* Main.storyboard */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
 				5A73E4E924528F5B00450137 /* Graphs.entitlements */,
 			);
 			path = Graphs;
-			sourceTree = "<group>";
-		};
-		5A73E4F124528F5B00450137 /* GraphsTests */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E4F224528F5B00450137 /* GraphsTests.swift */,
-				5A73E4F424528F5B00450137 /* Info.plist */,
-			);
-			path = GraphsTests;
-			sourceTree = "<group>";
-		};
-		5A73E4FC24528F5B00450137 /* GraphsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E4FD24528F5B00450137 /* GraphsUITests.swift */,
-				5A73E4FF24528F5B00450137 /* Info.plist */,
-			);
-			path = GraphsUITests;
 			sourceTree = "<group>";
 		};
 		5A73E50B2452966200450137 /* Models */ = {
@@ -476,6 +416,18 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		C019CA162C0FBE6F002FC7D2 /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				5A73E50D2452966F00450137 /* View Controllers */,
+				5A73E50C2452966B00450137 /* Views */,
+				C05CB47D2A74867D0090D102 /* Preferences.storyboard */,
+				5A27B07C249723820024403E /* Inspector.storyboard */,
+				5A73E4E524528F5B00450137 /* Main.storyboard */,
+			);
+			path = AppKit;
+			sourceTree = "<group>";
+		};
 		C05CB4782A7484D00090D102 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,42 +458,6 @@
 			productReference = 5A73E4DC24528F5800450137 /* Graphs.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5A73E4ED24528F5B00450137 /* GraphsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5A73E50524528F5B00450137 /* Build configuration list for PBXNativeTarget "GraphsTests" */;
-			buildPhases = (
-				5A73E4EA24528F5B00450137 /* Sources */,
-				5A73E4EB24528F5B00450137 /* Frameworks */,
-				5A73E4EC24528F5B00450137 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5A73E4F024528F5B00450137 /* PBXTargetDependency */,
-			);
-			name = GraphsTests;
-			productName = GraphsTests;
-			productReference = 5A73E4EE24528F5B00450137 /* GraphsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5A73E4F824528F5B00450137 /* GraphsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5A73E50824528F5B00450137 /* Build configuration list for PBXNativeTarget "GraphsUITests" */;
-			buildPhases = (
-				5A73E4F524528F5B00450137 /* Sources */,
-				5A73E4F624528F5B00450137 /* Frameworks */,
-				5A73E4F724528F5B00450137 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5A73E4FB24528F5B00450137 /* PBXTargetDependency */,
-			);
-			name = GraphsUITests;
-			productName = GraphsUITests;
-			productReference = 5A73E4F924528F5B00450137 /* GraphsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -555,14 +471,6 @@
 					5A73E4DB24528F5800450137 = {
 						CreatedOnToolsVersion = 11.4.1;
 						LastSwiftMigration = 1160;
-					};
-					5A73E4ED24528F5B00450137 = {
-						CreatedOnToolsVersion = 11.4.1;
-						TestTargetID = 5A73E4DB24528F5800450137;
-					};
-					5A73E4F824528F5B00450137 = {
-						CreatedOnToolsVersion = 11.4.1;
-						TestTargetID = 5A73E4DB24528F5800450137;
 					};
 				};
 			};
@@ -580,8 +488,6 @@
 			projectRoot = "";
 			targets = (
 				5A73E4DB24528F5800450137 /* Graphs */,
-				5A73E4ED24528F5B00450137 /* GraphsTests */,
-				5A73E4F824528F5B00450137 /* GraphsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -595,21 +501,6 @@
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
 				C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */,
-				5A73E4E724528F5B00450137 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A73E4EC24528F5B00450137 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A73E4F724528F5B00450137 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +528,7 @@
 				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,
 				5A937DF524BEA59400D025B0 /* InspectorTextViewCell.swift in Sources */,
 				5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */,
+				C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */,
 				5AF83783249482F4002BF370 /* SortCache.swift in Sources */,
 				5A89838624BDA2F20057D511 /* Parser.swift in Sources */,
 				5A937DF724BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift in Sources */,
@@ -680,6 +572,7 @@
 				5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */,
 				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
 				5A73E5212452A78F00450137 /* File.swift in Sources */,
+				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
 				5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */,
 				5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */,
 				C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */,
@@ -690,36 +583,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5A73E4EA24528F5B00450137 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5A73E4F324528F5B00450137 /* GraphsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A73E4F524528F5B00450137 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5A73E4FE24528F5B00450137 /* GraphsUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5A73E4F024528F5B00450137 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5A73E4DB24528F5800450137 /* Graphs */;
-			targetProxy = 5A73E4EF24528F5B00450137 /* PBXContainerItemProxy */;
-		};
-		5A73E4FB24528F5B00450137 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5A73E4DB24528F5800450137 /* Graphs */;
-			targetProxy = 5A73E4FA24528F5B00450137 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5A73E4E524528F5B00450137 /* Main.storyboard */ = {
@@ -737,6 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -783,7 +648,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -797,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -837,7 +703,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -856,6 +722,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = alpha_001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z553N3QGMH;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -864,13 +731,15 @@
 					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.HRG.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -888,6 +757,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = alpha_001;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z553N3QGMH;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -896,100 +766,18 @@
 					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 2.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.Graphs;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.HRG.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		5A73E50624528F5B00450137 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
-				INFOPLIST_FILE = GraphsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.GraphsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graphs.app/Contents/MacOS/Graphs";
-			};
-			name = Debug;
-		};
-		5A73E50724528F5B00450137 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
-				INFOPLIST_FILE = GraphsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.GraphsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graphs.app/Contents/MacOS/Graphs";
-			};
-			name = Release;
-		};
-		5A73E50924528F5B00450137 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
-				INFOPLIST_FILE = GraphsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.GraphsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Graphs;
-			};
-			name = Debug;
-		};
-		5A73E50A24528F5B00450137 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 3ER597LK99;
-				INFOPLIST_FILE = GraphsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = connorbarnes.GraphsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Graphs;
 			};
 			name = Release;
 		};
@@ -1010,24 +798,6 @@
 			buildConfigurations = (
 				5A73E50324528F5B00450137 /* Debug */,
 				5A73E50424528F5B00450137 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5A73E50524528F5B00450137 /* Build configuration list for PBXNativeTarget "GraphsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5A73E50624528F5B00450137 /* Debug */,
-				5A73E50724528F5B00450137 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5A73E50824528F5B00450137 /* Build configuration list for PBXNativeTarget "GraphsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5A73E50924528F5B00450137 /* Debug */,
-				5A73E50A24528F5B00450137 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

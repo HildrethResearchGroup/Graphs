@@ -26,7 +26,7 @@ class InspectorTwoTextFieldsCell: NSTableCellView {
 
 // MARK: Delegate
 /// A set of optional methods to respond to changes of state for the cell.
-@objc protocol InspectorTwoTextFieldsCellDelegate: class {
+@objc protocol InspectorTwoTextFieldsCellDelegate: AnyObject {
 	// Custom Objective-C names are given becuase otherwise there would be certain cell delegates with matching signatures, which would prevent them from being simultaneously conformed to by types.
 	/// Called when the first text field has ended editing.
 	/// - Parameter cell: The cell that the text field is in.

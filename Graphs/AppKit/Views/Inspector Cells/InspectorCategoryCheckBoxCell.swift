@@ -29,7 +29,7 @@ class InspectorCategoryCheckBoxCell: NSTableCellView {
 
 // MARK: Delegate
 /// A set of optional methods to respond to changes of state for the cell.
-@objc protocol InspectorCategoryCheckBoxCellDelegate: class {
+@objc protocol InspectorCategoryCheckBoxCellDelegate: AnyObject {
 	// Custom Objective-C names are given becuase otherwise there would be certain cell delegates with matching signatures, which would prevent them from being simultaneously conformed to by types.
 	/// Called when the check box is pressed.
 	/// - Parameter cell: The cell that the check box is in.
