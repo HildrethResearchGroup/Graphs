@@ -10,19 +10,23 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationSplitView {
-            Text("Source List")
-                //.frame(minHeight: 100, maxHeight: .infinity)
-        } content: {
-            VSplitView {
-                Text("Content List")
-                Text("Graphs")
-            }
-            //.frame(minHeight: 100, maxHeight: .infinity)
-        } detail: {
-            Text("Inspector")
-                //.frame(minHeight: 100, maxHeight: .infinity)
-        }
+        Text("Graphs v2.0")
+        /*
+         NavigationSplitView {
+             Text("Source List")
+                 //.frame(minHeight: 100, maxHeight: .infinity)
+         } content: {
+             VSplitView {
+                 Text("Content List")
+                 Text("Graphs")
+             }
+             //.frame(minHeight: 100, maxHeight: .infinity)
+         } detail: {
+             Text("Inspector")
+                 //.frame(minHeight: 100, maxHeight: .infinity)
+         }
+         */
+        
     }
 }
 

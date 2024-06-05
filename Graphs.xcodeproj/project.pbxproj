@@ -3,86 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */; };
-		5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */; };
-		5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */; };
-		5A27B07D249723820024403E /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A27B07C249723820024403E /* Inspector.storyboard */; };
-		5A27B07F249733710024403E /* InspectorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A27B07E249733710024403E /* InspectorButton.swift */; };
-		5A29B07224DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */; };
-		5A29B07424DF41A1003C3D2C /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07324DF41A1003C3D2C /* TableView.swift */; };
-		5A29B07A24E0ADA2003C3D2C /* GraphInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29B07924E0ADA2003C3D2C /* GraphInspectorViewController+FirstResponder.swift */; };
-		5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */; };
-		5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20424973DBA0001CD1A /* InspectorViewController.swift */; };
-		5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */; };
-		5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */; };
-		5A34A210249872750001CD1A /* FileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A20F249872750001CD1A /* FileController.swift */; };
-		5A34A212249876400001CD1A /* SaveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A34A211249876400001CD1A /* SaveController.swift */; };
-		5A35423A24D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */; };
-		5A35423C24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */; };
-		5A39A61524E26097001C5D1E /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A39A61424E26097001C5D1E /* URL.swift */; };
 		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
-		5A3BACCB24C19FFC003B07FA /* CollectionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */; };
-		5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */; };
-		5A4899D424BD8F1100822B80 /* DataInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */; };
-		5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D524BD9DE500822B80 /* StringEncoding.swift */; };
-		5A4899D824BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4899D724BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift */; };
-		5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */; };
-		5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */; };
-		5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */; };
-		5A6D36E624C13A6400588E05 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6D36E524C13A6400588E05 /* DataGraph.framework */; };
-		5A6D36E724C13A6400588E05 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6D36E524C13A6400588E05 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5A6D36EE24C14FA200588E05 /* GraphInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */; };
-		5A6D36F124C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */; };
-		5A6D36F324C1510300588E05 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F224C1510300588E05 /* GraphController.swift */; };
-		5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D36F424C151AB00588E05 /* GraphTemplate.swift */; };
-		5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E4DF24528F5800450137 /* AppDelegate.swift */; };
 		5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E324528F5B00450137 /* Assets.xcassets */; };
-		5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E50E2452969B00450137 /* SidebarViewController.swift */; };
-		5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */; };
-		5A73E5212452A78F00450137 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51B2452A78F00450137 /* File.swift */; };
-		5A73E5232452A78F00450137 /* DirectoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51D2452A78F00450137 /* DirectoryItem.swift */; };
-		5A73E5252452A78F00450137 /* Directory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E51F2452A78F00450137 /* Directory.swift */; };
-		5A73E53224531D2500450137 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53124531D2500450137 /* DataController.swift */; };
-		5A73E53A24533BF300450137 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53924533BF300450137 /* Debug.swift */; };
-		5A73E53C2453473F00450137 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A73E53B2453473F00450137 /* Identifiers.swift */; };
-		5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A79055E24554B0A0021CDB2 /* DirectoryController.swift */; };
-		5A89838624BDA2F20057D511 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A89838524BDA2F20057D511 /* Parser.swift */; };
-		5A89838824BDA5140057D511 /* NSNumberWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A89838724BDA5140057D511 /* NSNumberWrapper.swift */; };
-		5A937DEF24BEA57900D025B0 /* InspectorCategoryOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DEE24BEA57900D025B0 /* InspectorCategoryOptionCell.swift */; };
-		5A937DF124BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DF024BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift */; };
-		5A937DF324BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DF224BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift */; };
-		5A937DF524BEA59400D025B0 /* InspectorTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DF424BEA59400D025B0 /* InspectorTextViewCell.swift */; };
-		5A937DF724BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DF624BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift */; };
-		5A937DF924BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DF824BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift */; };
-		5A937DFB24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DFA24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift */; };
-		5A937DFD24BEA5BD00D025B0 /* InspectorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */; };
-		5A937E0024BEAE5100D025B0 /* ParserInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */; };
-		5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0124BEEE6A00D025B0 /* ParserController.swift */; };
-		5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */; };
-		5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */; };
-		5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E42247B76EB001FF163 /* FileListViewController.swift */; };
-		5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */; };
-		5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */; };
-		5ABBB1BC24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */; };
-		5ABBB1BE24C02024005F658E /* NSTextFieldValidationColoring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */; };
-		5ABBB1C024C0258A005F658E /* ParsedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ABBB1BF24C0258A005F658E /* ParsedFile.swift */; };
-		5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */; };
-		5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACFC52D24BD3459006D386E /* NotificationTextField.swift */; };
-		5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */; };
-		5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */; };
-		5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */; };
-		5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */; };
-		5AF83783249482F4002BF370 /* SortCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF83782249482F4002BF370 /* SortCache.swift */; };
 		C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */; };
 		C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C019CA192C0FBEC5002FC7D2 /* ContentView.swift */; };
-		C019CA1C2C0FC2A3002FC7D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A73E4E524528F5B00450137 /* Main.storyboard */; };
-		C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB4792A7484E90090D102 /* PreferencesViewController.swift */; };
-		C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */; };
-		C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C05CB47D2A74867D0090D102 /* Preferences.storyboard */; };
+		C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; };
+		C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -92,7 +22,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				5A6D36E724C13A6400588E05 /* DataGraph.framework in Embed Frameworks */,
+				C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,85 +30,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+DragDrop.swift"; sourceTree = "<group>"; };
-		5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
-		5A27B07C249723820024403E /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
-		5A27B07E249733710024403E /* InspectorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorButton.swift; sourceTree = "<group>"; };
-		5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5A29B07324DF41A1003C3D2C /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		5A29B07924E0ADA2003C3D2C /* GraphInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryWindowController.swift; sourceTree = "<group>"; };
-		5A34A20424973DBA0001CD1A /* InspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorViewController.swift; sourceTree = "<group>"; };
-		5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInspectorViewController.swift; sourceTree = "<group>"; };
-		5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorOutlineViewController.swift; sourceTree = "<group>"; };
-		5A34A20F249872750001CD1A /* FileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileController.swift; sourceTree = "<group>"; };
-		5A34A211249876400001CD1A /* SaveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveController.swift; sourceTree = "<group>"; };
-		5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5A39A61424E26097001C5D1E /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
-		5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHelpers.swift; sourceTree = "<group>"; };
-		5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
-		5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInspectorViewController.swift; sourceTree = "<group>"; };
-		5A4899D524BD9DE500822B80 /* StringEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringEncoding.swift; sourceTree = "<group>"; };
-		5A4899D724BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataInspectorViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
-		5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryInspectorViewController.swift; sourceTree = "<group>"; };
-		5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+DragDrop.swift"; sourceTree = "<group>"; };
-		5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryPasteboardItem.swift; sourceTree = "<group>"; };
-		5A6D36E524C13A6400588E05 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 		5A6D36EA24C13C1E00588E05 /* Graphs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Graphs-Bridging-Header.h"; sourceTree = "<group>"; };
-		5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphInspectorViewController.swift; sourceTree = "<group>"; };
-		5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphInspectorViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
-		5A6D36F224C1510300588E05 /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
-		5A6D36F424C151AB00588E05 /* GraphTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplate.swift; sourceTree = "<group>"; };
 		5A73E4DC24528F5800450137 /* Graphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A73E4DF24528F5800450137 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A73E4E324528F5B00450137 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5A73E4E624528F5B00450137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5A73E4E824528F5B00450137 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A73E4E924528F5B00450137 /* Graphs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Graphs.entitlements; sourceTree = "<group>"; };
-		5A73E50E2452969B00450137 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
-		5A73E51324529BC000450137 /* GraphsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphsModel.xcdatamodel; sourceTree = "<group>"; };
-		5A73E51B2452A78F00450137 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		5A73E51D2452A78F00450137 /* DirectoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryItem.swift; sourceTree = "<group>"; };
-		5A73E51F2452A78F00450137 /* Directory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directory.swift; sourceTree = "<group>"; };
-		5A73E53124531D2500450137 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		5A73E53924533BF300450137 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
-		5A73E53B2453473F00450137 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
-		5A79055E24554B0A0021CDB2 /* DirectoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryController.swift; sourceTree = "<group>"; wrapsLines = 1; };
-		5A89838524BDA2F20057D511 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
-		5A89838724BDA5140057D511 /* NSNumberWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSNumberWrapper.swift; sourceTree = "<group>"; };
-		5A937DEE24BEA57900D025B0 /* InspectorCategoryOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorCategoryOptionCell.swift; sourceTree = "<group>"; };
-		5A937DF024BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTwoTextFieldsCell.swift; sourceTree = "<group>"; };
-		5A937DF224BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTwoPopUpButtonsCell.swift; sourceTree = "<group>"; };
-		5A937DF424BEA59400D025B0 /* InspectorTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTextViewCell.swift; sourceTree = "<group>"; };
-		5A937DF624BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorCategoryCheckBoxCell.swift; sourceTree = "<group>"; };
-		5A937DF824BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTwoTextFieldsOnePopUpButtonCell.swift; sourceTree = "<group>"; };
-		5A937DFA24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift; sourceTree = "<group>"; };
-		5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorTableViewCell.swift; sourceTree = "<group>"; };
-		5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserInspectorViewController.swift; sourceTree = "<group>"; };
-		5A937E0124BEEE6A00D025B0 /* ParserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserController.swift; sourceTree = "<group>"; };
-		5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
-		5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserFileTypesCell.swift; sourceTree = "<group>"; };
-		5AA95E42247B76EB001FF163 /* FileListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileListViewController.swift; sourceTree = "<group>"; };
-		5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileListViewController+NSTableViewDelegate.swift"; sourceTree = "<group>"; };
-		5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberedTextView.swift; sourceTree = "<group>"; };
-		5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ParserInspectorViewController+CellDelegates.swift"; sourceTree = "<group>"; };
-		5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTextFieldValidationColoring.swift; sourceTree = "<group>"; };
-		5ABBB1BF24C0258A005F658E /* ParsedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedFile.swift; sourceTree = "<group>"; };
-		5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInspectorViewController+CellDelegate.swift"; sourceTree = "<group>"; };
-		5ACFC52D24BD3459006D386E /* NotificationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTextField.swift; sourceTree = "<group>"; };
-		5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+FirstResponder.swift"; sourceTree = "<group>"; };
-		5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSOutlineViewDelegate.swift"; sourceTree = "<group>"; };
-		5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSTextFieldDelegate.swift"; sourceTree = "<group>"; };
-		5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SidebarViewController+NSFilePromiseProviderDelegate.swift"; sourceTree = "<group>"; };
-		5AF83782249482F4002BF370 /* SortCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCache.swift; sourceTree = "<group>"; };
 		C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphsApp.swift; sourceTree = "<group>"; };
 		C019CA192C0FBEC5002FC7D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		C05CB4792A7484E90090D102 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
-		C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
-		C05CB47D2A74867D0090D102 /* Preferences.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		C0EB49892C10076E0057A593 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,81 +46,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A6D36E624C13A6400588E05 /* DataGraph.framework in Frameworks */,
+				C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5A34A20324973DAD0001CD1A /* Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A34A20424973DBA0001CD1A /* InspectorViewController.swift */,
-				5A34A20B24975DC90001CD1A /* InspectorOutlineViewController.swift */,
-				5A34A2062497486F0001CD1A /* File Inspector */,
-				5ACFC52924BD3268006D386E /* Directory Inspector */,
-				5A937DFE24BEAE3E00D025B0 /* Parser Inspector */,
-				5A4899D224BD5AF200822B80 /* Data Inspector */,
-				5A6D36EF24C14FA600588E05 /* Graph Inspector */,
-			);
-			path = Inspector;
-			sourceTree = "<group>";
-		};
-		5A34A2062497486F0001CD1A /* File Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A34A207249748AB0001CD1A /* FileInspectorViewController.swift */,
-				5A4899D024BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift */,
-				5A35423924D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift */,
-			);
-			path = "File Inspector";
-			sourceTree = "<group>";
-		};
-		5A4899D224BD5AF200822B80 /* Data Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A4899D324BD8F1100822B80 /* DataInspectorViewController.swift */,
-				5A4899D724BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift */,
-			);
-			path = "Data Inspector";
-			sourceTree = "<group>";
-		};
-		5A69FB37245BD619003E2F56 /* Source List */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E50E2452969B00450137 /* SidebarViewController.swift */,
-				5AF55147246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift */,
-				5A69FB35245BD38F003E2F56 /* SidebarViewController+DragDrop.swift */,
-				5AF55149246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift */,
-				5AF5514B246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift */,
-				5AF55145246C340B00029E40 /* SidebarViewController+FirstResponder.swift */,
-				5A69FB38245BD698003E2F56 /* DirectoryPasteboardItem.swift */,
-			);
-			path = "Source List";
-			sourceTree = "<group>";
-		};
 		5A6D36E424C13A6400588E05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5A6D36E524C13A6400588E05 /* DataGraph.framework */,
+				C0EB49892C10076E0057A593 /* DataGraph.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5A6D36EF24C14FA600588E05 /* Graph Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A6D36ED24C14FA200588E05 /* GraphInspectorViewController.swift */,
-				5A6D36F024C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift */,
-				5A29B07924E0ADA2003C3D2C /* GraphInspectorViewController+FirstResponder.swift */,
-			);
-			path = "Graph Inspector";
 			sourceTree = "<group>";
 		};
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
+				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
 				5A73E4DE24528F5800450137 /* Graphs */,
 				5A73E4DD24528F5800450137 /* Products */,
 				5A6D36E424C13A6400588E05 /* Frameworks */,
@@ -281,169 +85,11 @@
 			children = (
 				C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */,
 				C019CA192C0FBEC5002FC7D2 /* ContentView.swift */,
-				5A73E4DF24528F5800450137 /* AppDelegate.swift */,
-				5ACFC52C24BD3433006D386E /* Helpers */,
-				C019CA162C0FBE6F002FC7D2 /* AppKit */,
-				C019CA1B2C0FC064002FC7D2 /* Resources */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
 				5A73E4E924528F5B00450137 /* Graphs.entitlements */,
 			);
 			path = Graphs;
-			sourceTree = "<group>";
-		};
-		5A73E50B2452966200450137 /* CoreData Models */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */,
-				5A79055D24554AF10021CDB2 /* Controllers */,
-				5A73E52F24531D0200450137 /* Entities */,
-			);
-			path = "CoreData Models";
-			sourceTree = "<group>";
-		};
-		5A73E50C2452966B00450137 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				5A27B07E249733710024403E /* InspectorButton.swift */,
-				5A937E0524BF006000D025B0 /* ParserFileTypesCell.swift */,
-				5ABBB1B924BFFCEF005F658E /* LineNumberedTextView.swift */,
-				5A937DED24BEA56700D025B0 /* Inspector Cells */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		5A73E50D2452966F00450137 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C05CB4782A7484D00090D102 /* Preferences */,
-				5A34A20324973DAD0001CD1A /* Inspector */,
-				5AA95E41247B76D4001FF163 /* File List */,
-				5A69FB37245BD619003E2F56 /* Source List */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		5A73E52F24531D0200450137 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E51D2452A78F00450137 /* DirectoryItem.swift */,
-				5A89838524BDA2F20057D511 /* Parser.swift */,
-				5A6D36F424C151AB00588E05 /* GraphTemplate.swift */,
-				5A73E51B2452A78F00450137 /* File.swift */,
-				5A73E51F2452A78F00450137 /* Directory.swift */,
-				5ABBB1BF24C0258A005F658E /* ParsedFile.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		5A79055D24554AF10021CDB2 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E53124531D2500450137 /* DataController.swift */,
-				5A34A211249876400001CD1A /* SaveController.swift */,
-				5A79055E24554B0A0021CDB2 /* DirectoryController.swift */,
-				5A34A20F249872750001CD1A /* FileController.swift */,
-				5A937E0124BEEE6A00D025B0 /* ParserController.swift */,
-				5A6D36F224C1510300588E05 /* GraphController.swift */,
-				5AF83782249482F4002BF370 /* SortCache.swift */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		5A937DED24BEA56700D025B0 /* Inspector Cells */ = {
-			isa = PBXGroup;
-			children = (
-				5A937DEE24BEA57900D025B0 /* InspectorCategoryOptionCell.swift */,
-				5A937DF624BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift */,
-				5A937DF024BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift */,
-				5A937DF224BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift */,
-				5A937DF424BEA59400D025B0 /* InspectorTextViewCell.swift */,
-				5A937DF824BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift */,
-				5A937DFA24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift */,
-				5A937DFC24BEA5BD00D025B0 /* InspectorTableViewCell.swift */,
-			);
-			path = "Inspector Cells";
-			sourceTree = "<group>";
-		};
-		5A937DFE24BEAE3E00D025B0 /* Parser Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A937DFF24BEAE5100D025B0 /* ParserInspectorViewController.swift */,
-				5A937E0324BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift */,
-				5ABBB1BB24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift */,
-				5A29B07124DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift */,
-			);
-			path = "Parser Inspector";
-			sourceTree = "<group>";
-		};
-		5AA95E41247B76D4001FF163 /* File List */ = {
-			isa = PBXGroup;
-			children = (
-				5AA95E42247B76EB001FF163 /* FileListViewController.swift */,
-				5AA95E44247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift */,
-				5A24AD91248CD4A800569BE1 /* FileListViewController+DragDrop.swift */,
-				5A24AD95248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift */,
-				5A24AD93248CDE7100569BE1 /* FileListViewController+FirstResponder.swift */,
-			);
-			path = "File List";
-			sourceTree = "<group>";
-		};
-		5ACFC52924BD3268006D386E /* Directory Inspector */ = {
-			isa = PBXGroup;
-			children = (
-				5A5427F72499B94D0079B259 /* DirectoryInspectorViewController.swift */,
-				5ACFC52A24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift */,
-				5A35423B24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift */,
-			);
-			path = "Directory Inspector";
-			sourceTree = "<group>";
-		};
-		5ACFC52C24BD3433006D386E /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				5A73E53924533BF300450137 /* Debug.swift */,
-				5A73E53B2453473F00450137 /* Identifiers.swift */,
-				5ACFC52D24BD3459006D386E /* NotificationTextField.swift */,
-				5A4899D524BD9DE500822B80 /* StringEncoding.swift */,
-				5A89838724BDA5140057D511 /* NSNumberWrapper.swift */,
-				5ABBB1BD24C02024005F658E /* NSTextFieldValidationColoring.swift */,
-				5A3BACCA24C19FFC003B07FA /* CollectionHelpers.swift */,
-				5A29B07324DF41A1003C3D2C /* TableView.swift */,
-				5A39A61424E26097001C5D1E /* URL.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C019CA162C0FBE6F002FC7D2 /* AppKit */ = {
-			isa = PBXGroup;
-			children = (
-				5A2B8E1A248474950056ECB4 /* PrimaryWindowController.swift */,
-				5A73E50B2452966200450137 /* CoreData Models */,
-				5A73E50D2452966F00450137 /* View Controllers */,
-				5A73E50C2452966B00450137 /* Views */,
-				C05CB47D2A74867D0090D102 /* Preferences.storyboard */,
-				5A27B07C249723820024403E /* Inspector.storyboard */,
-				5A73E4E524528F5B00450137 /* Main.storyboard */,
-			);
-			path = AppKit;
-			sourceTree = "<group>";
-		};
-		C019CA1B2C0FC064002FC7D2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		C05CB4782A7484D00090D102 /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				C05CB4792A7484E90090D102 /* PreferencesViewController.swift */,
-				C05CB47B2A7485300090D102 /* PreferencesWindowController.swift */,
-			);
-			path = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -473,8 +119,9 @@
 		5A73E4D424528F5800450137 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "Connor Barnes";
 				TargetAttributes = {
 					5A73E4DB24528F5800450137 = {
@@ -507,10 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
-				C019CA1C2C0FC2A3002FC7D2 /* Main.storyboard in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
-				5A27B07D249723820024403E /* Inspector.storyboard in Resources */,
-				C05CB47E2A74867D0090D102 /* Preferences.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,97 +165,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5ABBB1C024C0258A005F658E /* ParsedFile.swift in Sources */,
-				5A73E53C2453473F00450137 /* Identifiers.swift in Sources */,
-				5A4899D824BD9F9300822B80 /* DataInspectorViewController+NSTableViewDelegate.swift in Sources */,
-				5A2B8E1B248474950056ECB4 /* PrimaryWindowController.swift in Sources */,
-				5A69FB39245BD698003E2F56 /* DirectoryPasteboardItem.swift in Sources */,
-				5A39A61524E26097001C5D1E /* URL.swift in Sources */,
-				5A79055F24554B0A0021CDB2 /* DirectoryController.swift in Sources */,
-				5A73E51424529BC000450137 /* GraphsModel.xcdatamodeld in Sources */,
-				5A937E0624BF006000D025B0 /* ParserFileTypesCell.swift in Sources */,
-				5A937E0424BEFF0200D025B0 /* ParserInspectorViewController+NSTableViewDelegate.swift in Sources */,
-				5ABBB1BC24C00D74005F658E /* ParserInspectorViewController+CellDelegates.swift in Sources */,
-				5A24AD92248CD4A800569BE1 /* FileListViewController+DragDrop.swift in Sources */,
-				5A6D36F124C1509700588E05 /* GraphInspectorViewController+NSTableViewDelegate.swift in Sources */,
-				5AF55148246C344F00029E40 /* SidebarViewController+NSOutlineViewDelegate.swift in Sources */,
-				5A34A20524973DBA0001CD1A /* InspectorViewController.swift in Sources */,
-				5A937DF524BEA59400D025B0 /* InspectorTextViewCell.swift in Sources */,
-				5A4899D624BD9DE500822B80 /* StringEncoding.swift in Sources */,
 				C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */,
-				5AF83783249482F4002BF370 /* SortCache.swift in Sources */,
-				5A89838624BDA2F20057D511 /* Parser.swift in Sources */,
-				5A937DF724BEA59D00D025B0 /* InspectorCategoryCheckBoxCell.swift in Sources */,
-				5A73E5252452A78F00450137 /* Directory.swift in Sources */,
-				5A937E0024BEAE5100D025B0 /* ParserInspectorViewController.swift in Sources */,
-				5A937DF124BEA58400D025B0 /* InspectorTwoTextFieldsCell.swift in Sources */,
-				5A34A208249748AB0001CD1A /* FileInspectorViewController.swift in Sources */,
-				5A4899D424BD8F1100822B80 /* DataInspectorViewController.swift in Sources */,
-				5ABBB1BE24C02024005F658E /* NSTextFieldValidationColoring.swift in Sources */,
-				5A29B07A24E0ADA2003C3D2C /* GraphInspectorViewController+FirstResponder.swift in Sources */,
-				5A73E5232452A78F00450137 /* DirectoryItem.swift in Sources */,
-				5A73E53A24533BF300450137 /* Debug.swift in Sources */,
-				5A27B07F249733710024403E /* InspectorButton.swift in Sources */,
-				5A73E50F2452969B00450137 /* SidebarViewController.swift in Sources */,
-				5A937DF324BEA58C00D025B0 /* InspectorTwoPopUpButtonsCell.swift in Sources */,
-				5A937DFB24BEA5B500D025B0 /* InspectorOneTextFieldOnePopUpButtonOneCheckBoxCell.swift in Sources */,
-				5A29B07424DF41A1003C3D2C /* TableView.swift in Sources */,
-				5A937DF924BEA5AC00D025B0 /* InspectorTwoTextFieldsOnePopUpButtonCell.swift in Sources */,
-				5ACFC52B24BD32D8006D386E /* DirectoryInspectorViewController+CellDelegate.swift in Sources */,
-				5A6D36EE24C14FA200588E05 /* GraphInspectorViewController.swift in Sources */,
-				5AF55146246C340B00029E40 /* SidebarViewController+FirstResponder.swift in Sources */,
-				5A937DEF24BEA57900D025B0 /* InspectorCategoryOptionCell.swift in Sources */,
-				5AA95E45247B79BC001FF163 /* FileListViewController+NSTableViewDelegate.swift in Sources */,
-				5A34A210249872750001CD1A /* FileController.swift in Sources */,
-				5A69FB36245BD38F003E2F56 /* SidebarViewController+DragDrop.swift in Sources */,
-				5A29B07224DF3857003C3D2C /* ParserInspectorViewController+FirstResponder.swift in Sources */,
-				5A34A212249876400001CD1A /* SaveController.swift in Sources */,
-				5A24AD96248DB54F00569BE1 /* FileListViewController+NSTextFieldDelegate.swift in Sources */,
-				5A937E0224BEEE6B00D025B0 /* ParserController.swift in Sources */,
-				5A35423A24D4084A00BAAAE8 /* FileInspectorViewController+FirstResponder.swift in Sources */,
-				5A4899D124BD46A400822B80 /* FileInspectorViewController+CellDelegate.swift in Sources */,
-				5A34A20C24975DCA0001CD1A /* InspectorOutlineViewController.swift in Sources */,
-				5A6D36F524C151AB00588E05 /* GraphTemplate.swift in Sources */,
-				5ACFC52E24BD3459006D386E /* NotificationTextField.swift in Sources */,
-				5AF5514C246C382900029E40 /* SidebarViewController+NSFilePromiseProviderDelegate.swift in Sources */,
-				5A73E53224531D2500450137 /* DataController.swift in Sources */,
-				5A35423C24D40C0B00BAAAE8 /* DirectoryInspectorViewController+FirstResponder.swift in Sources */,
-				5AA95E43247B76EB001FF163 /* FileListViewController.swift in Sources */,
-				5A937DFD24BEA5BD00D025B0 /* InspectorTableViewCell.swift in Sources */,
-				5A89838824BDA5140057D511 /* NSNumberWrapper.swift in Sources */,
-				5A5427F82499B94D0079B259 /* DirectoryInspectorViewController.swift in Sources */,
-				5A73E4E024528F5800450137 /* AppDelegate.swift in Sources */,
-				5A73E5212452A78F00450137 /* File.swift in Sources */,
 				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
-				5A24AD94248CDE7100569BE1 /* FileListViewController+FirstResponder.swift in Sources */,
-				5ABBB1BA24BFFCEF005F658E /* LineNumberedTextView.swift in Sources */,
-				C05CB47C2A7485300090D102 /* PreferencesWindowController.swift in Sources */,
-				5A6D36F324C1510300588E05 /* GraphController.swift in Sources */,
-				5AF5514A246C34EE00029E40 /* SidebarViewController+NSTextFieldDelegate.swift in Sources */,
-				5A3BACCB24C19FFC003B07FA /* CollectionHelpers.swift in Sources */,
-				C05CB47A2A7484E90090D102 /* PreferencesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		5A73E4E524528F5B00450137 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5A73E4E624528F5B00450137 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5A73E50024528F5B00450137 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -634,6 +199,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -641,9 +207,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -658,7 +226,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -672,7 +240,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -695,6 +262,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -702,9 +270,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -713,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -734,12 +304,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = alpha_001;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z553N3QGMH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -747,9 +320,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.HRG.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
@@ -770,12 +344,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = alpha_001;
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Z553N3QGMH;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/**",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -783,9 +360,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0.0;
 				MODULEMAP_FILE = "$(SRCROOT)/module.map";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.HRG.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
@@ -815,19 +393,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5A73E51224529BC000450137 /* GraphsModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5A73E51324529BC000450137 /* GraphsModel.xcdatamodel */,
-			);
-			currentVersion = 5A73E51324529BC000450137 /* GraphsModel.xcdatamodel */;
-			path = GraphsModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5A73E4D424528F5800450137 /* Project object */;
 }
