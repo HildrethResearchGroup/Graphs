@@ -12,7 +12,7 @@ import SwiftData
 @Model
 class DataItem {
     // MARK: - Properties
-    var id: UUID
+    //var id: UUID
     var url: URL
     
     var name: String
@@ -25,7 +25,7 @@ class DataItem {
     
     // MARK: - Initialization
     init(url: URL, node: Node) {
-        self.id = UUID()
+        //self.id = UUID()
         
         self.url = url
         

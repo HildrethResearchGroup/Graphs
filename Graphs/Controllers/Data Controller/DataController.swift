@@ -57,13 +57,13 @@ class DataController {
     }
     
 
-    var selectedImageItemIDs: [PersistentIdentifier] = [] {
+    var selectedDataItemIDs: [PersistentIdentifier] = [] {
         didSet {
-            updateImageItems()
+            updateDataItems()
         }
     }
     
-    var selectedImageItems: [DataItem] = []
+    var selectedDataItems: [DataItem] = []
     
     
     init(withDelegate delegate: DataControllerDelegate?) {
@@ -105,13 +105,13 @@ class DataController {
     }
     
     // ADD
-    // MARK: - Filtering Selected ImageItems
-    func updateImageItems() {
-        let ids = selectedImageItemIDs
+    // MARK: - Filtering Selected DataItems
+    func updateDataItems() {
+        let ids = selectedDataItemIDs
         let items = self.visableItems
         let filteredItems = items.filter({ids.contains([$0.id])})
         
-        selectedImageItems = filteredItems
+        selectedDataItems = filteredItems
     }
     
     
@@ -122,7 +122,7 @@ class DataController {
         
         modelContext.insert(newNode)
         
-        delegate?.newData(nodes: [newNode], andImages: [])
+        delegate?.newData(nodes: [newNode], andDataItems: [])
         
         fetchData()
     }

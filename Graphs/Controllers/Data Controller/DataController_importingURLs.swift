@@ -1,6 +1,6 @@
 //
 //  DataModel_importingURLs.swift
-//  Images-LectureDevelopment
+//  Graphs
 //
 //  Created by Owen Hildreth on 3/5/24.
 //
@@ -32,8 +32,8 @@ extension DataController {
         if let parentNode {
             for nextFile in files {
                 // UPDATE
-                if let newImageItem = importFile(nextFile, intoNode: parentNode) {
-                    newDataItems.append(newImageItem)
+                if let newDataItem = importFile(nextFile, intoNode: parentNode) {
+                    newDataItems.append(newDataItem)
                 }
             }
         }
@@ -54,7 +54,7 @@ extension DataController {
         fetchData()
         
         // ADD
-        delegate?.newData(nodes: newNodes, andImages: newDataItems)
+        delegate?.newData(nodes: newNodes, andDataItems: newDataItems)
     }
     
     
@@ -154,14 +154,14 @@ extension DataController {
         
         
         if url.isDirectory {
-            print("Trying to add a url as an image")
+            print("Trying to add a url as a dataItem")
             
             // UPDATE
             return nil
         }
         
         
-        guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedImageFileExtensions) as? [String] else {
+        guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
             print("Error needed, no allowed extensions")
             
             // UPDATE

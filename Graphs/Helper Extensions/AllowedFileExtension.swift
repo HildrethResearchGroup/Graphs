@@ -1,6 +1,6 @@
 //
 //  AllowedFileExtensions.swift
-//  Images-LectureDevelopment
+//  Graphs
 //
 //  Created by Owen Hildreth on 2/28/24.
 //

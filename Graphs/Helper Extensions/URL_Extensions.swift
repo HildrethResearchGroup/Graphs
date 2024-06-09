@@ -7,10 +7,17 @@
 //
 
 import Foundation
+import Cocoa
 
 
 extension URL {
     var fileName: String { self.deletingPathExtension().lastPathComponent }
+    
+    /// Opens Finder and highlights the file at the url's path.
+    func showInFinder() {
+        NSWorkspace.shared
+            .activateFileViewerSelecting([self])
+    }
     
     var isDirectory: Bool {
        (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
@@ -38,4 +45,6 @@ extension URL {
             }
         }
     }
+    
+    
 }

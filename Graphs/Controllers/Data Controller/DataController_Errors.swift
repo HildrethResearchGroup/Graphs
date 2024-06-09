@@ -1,6 +1,6 @@
 //
 //  DataModel_Errors.swift
-//  Images-LectureDevelopment
+//  Graphs
 //
 //  Created by Owen Hildreth on 3/23/24.
 //

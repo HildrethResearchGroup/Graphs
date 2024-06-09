@@ -11,9 +11,9 @@ import SwiftData
 
 @Model
 class Node {
-    
     // MARK: - Properties
-    var id: UUID
+    //var id: UUID
+    
     var originalURL: URL?
     
     var name: String
@@ -38,13 +38,10 @@ class Node {
     }
     
     
-        
-    
-    
     // MARK: - Initializers
     init(url: URL?, parent: Node?) {
-        id = UUID()
-        
+        //self.id = UUID()
+
         self.originalURL = url
         self.parent = parent
         
@@ -78,6 +75,7 @@ class Node {
     }
 
 }
+
 
 
 extension Node {

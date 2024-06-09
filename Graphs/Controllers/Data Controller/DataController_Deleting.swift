@@ -1,6 +1,6 @@
 //
-//  DataModel_Deleting.swift
-//  Images-LectureDevelopment
+//  DataController_Deleting.swift
+//  Graphs
 //
 //  Created by Owen Hildreth on 4/29/24.
 //
@@ -40,7 +40,7 @@ extension DataController {
     // ADD Menu
     func delete(_ dataItems: [DataItem], andThenTheNodes nodes: [Node]) {
         
-        // It is important to delete the ImageItems first so that the selection manager removes the image items from the selection.
+        // It is important to delete the DataItems first so that the selection manager removes the data items from the selection.
         if dataItems.count > 0 {
             delete(dataItems)
             return
