@@ -354,7 +354,7 @@
 - (void)copyOpaqueTIFFOnly:(id)sender;
 // Output to use somewhere else
 - (NSData *)epsData;
-- (NSEPSImageRep *)eps;
+//- (NSEPSImageRep *)eps;
 - (NSData *)pdfData;
 - (NSPDFImageRep *)pdf;
 - (NSBitmapImageRep *)bitmapWithAlpha:(BOOL)alpha;
