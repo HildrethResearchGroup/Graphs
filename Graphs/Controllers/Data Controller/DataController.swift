@@ -71,7 +71,7 @@ class DataController {
             let schema = Schema([
                 Node.self, DataItem.self
             ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
 
             do {
                 return try ModelContainer(for: schema, configurations: [modelConfiguration])

@@ -7,16 +7,26 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct GraphsApp: App {
+    
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    @State var appController = AppController()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
+        .environment(appController)
         
+        Settings {
+            Preferences()
+        }
     }
+    
 }
 
 

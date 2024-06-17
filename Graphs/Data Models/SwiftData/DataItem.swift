@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 @Model
-class DataItem {
+final class DataItem {
     // MARK: - Properties
     //var id: UUID
     var url: URL
@@ -18,6 +18,11 @@ class DataItem {
     var name: String
     
     var node: Node?
+    
+    var graphTemplate: GraphTemplate?
+    
+    var parserSettings: ParserSettings?
+    
     
     @Transient
     private var resourceValues: URLResourceValues?

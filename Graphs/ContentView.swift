@@ -10,7 +10,18 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Graphs v2.0")
+        HSplitView {
+            Text("SourceList")
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            VSplitView {
+                Text("Items")
+                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+                Text("Graphs")
+                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            }
+            Text("Inspector")
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+        }
         /*
          NavigationSplitView {
              Text("Source List")

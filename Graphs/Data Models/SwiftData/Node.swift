@@ -10,7 +10,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Node {
+final class Node {
     // MARK: - Properties
     //var id: UUID
     
@@ -23,8 +23,13 @@ class Node {
     @Relationship(deleteRule: .cascade, inverse: \Node.parent)
     var subNodes: [Node]? = []
     
-    @Relationship(deleteRule: .cascade, inverse: \DataItem.node)
+    @Relationship(deleteRule: .nullify, inverse: \DataItem.node)
     var dataItems: [DataItem]
+    
+    
+    var graphTemplate: GraphTemplate?
+    
+    var parserSettings: ParserSettings?
     
     var nodeTypeStorage: Int
     
