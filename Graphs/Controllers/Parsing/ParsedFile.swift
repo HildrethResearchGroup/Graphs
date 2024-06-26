@@ -9,7 +9,7 @@
 import Foundation
 
 /// The parsed contents of a file.
-struct ParsedFile: Sendable {
+struct ParsedFile: Sendable, Codable {
     
     /// A string made from the lines spanning the Data's Experimental Details or an empty string if the parser does not include any Experimental Details
     ///

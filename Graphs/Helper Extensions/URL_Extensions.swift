@@ -46,5 +46,10 @@ extension URL {
         }
     }
     
-    
+    static var swiftDataStorageLocation: URL {
+        var location = URL.applicationSupportDirectory
+        location.append(path: "Graphs/Data/GraphsDatabase.sqlite")
+        
+        return location
+    }
 }

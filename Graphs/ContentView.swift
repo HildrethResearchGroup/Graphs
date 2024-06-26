@@ -22,6 +22,10 @@ struct ContentView: View {
             Text("Inspector")
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
         }
+        .onAppear() {
+            print("Database Location:")
+            print(URL.swiftDataStorageLocation)
+        }
         /*
          NavigationSplitView {
              Text("Source List")

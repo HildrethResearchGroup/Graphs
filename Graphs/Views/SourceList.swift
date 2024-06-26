@@ -74,14 +74,6 @@ struct SourceList: View {
     
     
     private var importAlert: Alert {
-        Alert(title: Text("Import Error"), message: Text("Image Files must be imported into an existing group"))
+        Alert(title: Text("Import Error"), message: Text("Files must be imported into an existing Group"))
     }
 }
-
-
-
-/*
- #Preview {
-     SourceList()
- }
- */
