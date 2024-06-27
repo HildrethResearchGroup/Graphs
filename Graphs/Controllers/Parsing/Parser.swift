@@ -85,10 +85,10 @@ struct Parser {
         
     }
     
-    private static func parse(line: String, withSeparator separator: SeparatorType) throws -> [String] {
+    private static func parse(line: String, withSeparator separator: Separator) throws -> [String] {
         var headerLine: [String] = []
         
-        for nextComponent in line.components(separatedBy: separator.seporatorLiteral) {
+        for nextComponent in line.components(separatedBy: separator.characterSet) {
             headerLine.append(nextComponent)
         }
         

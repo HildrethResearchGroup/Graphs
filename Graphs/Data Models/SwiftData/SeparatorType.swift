@@ -13,10 +13,10 @@ import SwiftData
 @Model
 class SeparatorType {
     var name: String
-    var seporatorLiteral: String
+    var separatorLiteral: String
     
     init(seporatorLiteral: String) {
         self.name = "Separator Name"
-        self.seporatorLiteral = seporatorLiteral
+        self.separatorLiteral = seporatorLiteral
     }
 }

@@ -21,19 +21,19 @@ final class ParserSettings {
     var dataItems: [DataItem]?
     
     var hasExperimentalDetails: Bool = false
-    var experimentalDetailsSeparator: SeparatorType?
+    var experimentalDetailsSeparator: Separator?
     var experimentalDetailsStart: Int = 0
     var experimentalDetailsEnd: Int = 0
     
     var hasHeader: Bool = false
-    var headerSepatator: SeparatorType?
+    var headerSepatator: Separator?
     var headerStart: Int = 0
     var headerEnd: Int = 0
     
     var hasData: Bool = false
     var dataStart: Int = 0
     var dataEnd: Int = 0
-    var dataSeparator: SeparatorType?
+    var dataSeparator: Separator?
     
     
     var hasFooter: Bool = false
