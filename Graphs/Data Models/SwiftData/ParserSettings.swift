@@ -20,6 +20,8 @@ final class ParserSettings {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.parserSettings)
     var dataItems: [DataItem]?
     
+    var newLineType: NewLineType
+    
     var hasExperimentalDetails: Bool = false
     var experimentalDetailsSeparator: Separator?
     var experimentalDetailsStart: Int = 0
@@ -47,7 +49,7 @@ final class ParserSettings {
         self.nodes = []
         self.dataItems = []
        
-
+        self.newLineType = .LF
         
         self.hasExperimentalDetails = false
         
@@ -67,6 +69,5 @@ final class ParserSettings {
         
         }
 }
-
 
 

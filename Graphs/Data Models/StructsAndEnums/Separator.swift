@@ -55,6 +55,11 @@ enum Separator: String, CaseIterable, Codable, Identifiable {
     }
     
     
+    
+}
+
+
+extension Separator: PresentableName {
     /// GUI usable name of the Separator
     var name: String {
         switch self {
@@ -67,3 +72,4 @@ enum Separator: String, CaseIterable, Codable, Identifiable {
         }
     }
 }
+

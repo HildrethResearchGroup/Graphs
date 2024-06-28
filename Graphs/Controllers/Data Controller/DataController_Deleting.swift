@@ -22,7 +22,6 @@ extension DataController {
         fetchData()
     }
     
-    // ADD Menu
     func delete(_ dataItems: [DataItem]) {
         
         // ADD
@@ -37,7 +36,6 @@ extension DataController {
         fetchData()
     }
     
-    // ADD Menu
     func delete(_ dataItems: [DataItem], andThenTheNodes nodes: [Node]) {
         
         // It is important to delete the DataItems first so that the selection manager removes the data items from the selection.
@@ -50,5 +48,17 @@ extension DataController {
             delete(nodes)
             return
         }
+    }
+    
+    func delete(_ parserSettings: ParserSettings) {
+        modelContext.delete(parserSettings)
+        try? modelContext.save()
+        fetchData()
+    }
+    
+    func delete(_ graphTemplate: GraphTemplate) {
+        modelContext.delete(graphTemplate)
+        try? modelContext.save()
+        fetchData()
     }
 }

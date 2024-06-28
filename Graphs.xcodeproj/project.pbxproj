@@ -33,10 +33,21 @@
 		C0263D8A2C1676D1008C929F /* SourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0263D892C1676D1008C929F /* SourceList.swift */; };
 		C0263D8C2C1677B1008C929F /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0263D8B2C1677B1008C929F /* Preferences.swift */; };
 		C0263D8E2C16872A008C929F /* ParserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0263D8D2C16872A008C929F /* ParserSettings.swift */; };
-		C0263D902C168E68008C929F /* SeparatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0263D8F2C168E68008C929F /* SeparatorType.swift */; };
 		C02E38162C1F8B6B00107EAD /* GraphTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E38152C1F8B6B00107EAD /* GraphTemplate.swift */; };
 		C02E38192C1F910100107EAD /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E38182C1F910100107EAD /* Parser.swift */; };
 		C02E381B2C1F911800107EAD /* ParsedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E381A2C1F911800107EAD /* ParsedFile.swift */; };
+		C078BC352C2F332D00A06887 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC342C2F332D00A06887 /* GraphController.swift */; };
+		C078BC372C2F333400A06887 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC362C2F333400A06887 /* GraphView.swift */; };
+		C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */; };
+		C078BC3C2C2F336C00A06887 /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = C078BC3B2C2F336C00A06887 /* Basic Script.dgraph */; };
+		C078BC402C2F347900A06887 /* GraphTemplateInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC3F2C2F347900A06887 /* GraphTemplateInspector.swift */; };
+		C078BC422C2F363700A06887 /* GraphTemplateEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC412C2F363700A06887 /* GraphTemplateEditor.swift */; };
+		C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC432C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift */; };
+		C078BC462C2F3A6A00A06887 /* Inspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC452C2F3A6A00A06887 /* Inspector.swift */; };
+		C078BC492C2F3DC500A06887 /* TemporaryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */; };
+		C078BC4C2C2F4B0300A06887 /* PresentableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC4B2C2F4B0300A06887 /* PresentableName.swift */; };
+		C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC502C2F4B5B00A06887 /* NewLineType.swift */; };
+		C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */; };
 		C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */; };
 		C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529822C2DEA0B002D3F97 /* Separator.swift */; };
 		C0A93A662C1261390037BAE3 /* DataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A93A652C1261390037BAE3 /* DataItem.swift */; };
@@ -91,10 +102,21 @@
 		C0263D892C1676D1008C929F /* SourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceList.swift; sourceTree = "<group>"; };
 		C0263D8B2C1677B1008C929F /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		C0263D8D2C16872A008C929F /* ParserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserSettings.swift; sourceTree = "<group>"; };
-		C0263D8F2C168E68008C929F /* SeparatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorType.swift; sourceTree = "<group>"; };
 		C02E38152C1F8B6B00107EAD /* GraphTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplate.swift; sourceTree = "<group>"; };
 		C02E38182C1F910100107EAD /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		C02E381A2C1F911800107EAD /* ParsedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedFile.swift; sourceTree = "<group>"; };
+		C078BC342C2F332D00A06887 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		C078BC362C2F333400A06887 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
+		C078BC3B2C2F336C00A06887 /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
+		C078BC3F2C2F347900A06887 /* GraphTemplateInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplateInspector.swift; sourceTree = "<group>"; };
+		C078BC412C2F363700A06887 /* GraphTemplateEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplateEditor.swift; sourceTree = "<group>"; };
+		C078BC432C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplateEditor_EmptySelection.swift; sourceTree = "<group>"; };
+		C078BC452C2F3A6A00A06887 /* Inspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inspector.swift; sourceTree = "<group>"; };
+		C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryDataModel.swift; sourceTree = "<group>"; };
+		C078BC4B2C2F4B0300A06887 /* PresentableName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableName.swift; sourceTree = "<group>"; };
+		C078BC502C2F4B5B00A06887 /* NewLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLineType.swift; sourceTree = "<group>"; };
+		C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidesToolTip.swift; sourceTree = "<group>"; };
 		C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseEditor_EmptySelection.swift; sourceTree = "<group>"; };
 		C09529822C2DEA0B002D3F97 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		C0A93A652C1261390037BAE3 /* DataItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItem.swift; sourceTree = "<group>"; };
@@ -149,7 +171,8 @@
 				C019CA192C0FBEC5002FC7D2 /* ContentView.swift */,
 				C0263D762C163714008C929F /* Controllers */,
 				C0263D672C162C65008C929F /* Data Models */,
-				C0A93A692C1266E60037BAE3 /* Helper Extensions */,
+				C078BC522C2F4BCD00A06887 /* Helper */,
+				C078BC3A2C2F335E00A06887 /* Resources */,
 				C0A93A632C12401E0037BAE3 /* View Models */,
 				C0A93A642C12402B0037BAE3 /* Views */,
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
@@ -162,24 +185,28 @@
 		C012AB692C2CC4C800BC59B7 /* Inspectors */ = {
 			isa = PBXGroup;
 			children = (
-				C012AB6C2C2CCA4800BC59B7 /* Parser Settings */,
+				C078BC472C2F3C9F00A06887 /* Data Inspector */,
+				C078BC312C2F2F5E00A06887 /* Graph Template Inspector */,
+				C012AB6C2C2CCA4800BC59B7 /* Parser Setting Inspector */,
+				C078BC452C2F3A6A00A06887 /* Inspector.swift */,
 			);
 			path = Inspectors;
 			sourceTree = "<group>";
 		};
-		C012AB6C2C2CCA4800BC59B7 /* Parser Settings */ = {
+		C012AB6C2C2CCA4800BC59B7 /* Parser Setting Inspector */ = {
 			isa = PBXGroup;
 			children = (
 				C012AB6A2C2CC4E100BC59B7 /* ParserInspector.swift */,
 				C012AB6D2C2CCA5F00BC59B7 /* ParserEditor.swift */,
 				C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */,
 			);
-			path = "Parser Settings";
+			path = "Parser Setting Inspector";
 			sourceTree = "<group>";
 		};
 		C0263D672C162C65008C929F /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				C078BC4F2C2F4B4100A06887 /* StructsAndEnums */,
 				C0A93A622C1240170037BAE3 /* SwiftData */,
 			);
 			path = "Data Models";
@@ -232,6 +259,77 @@
 			path = Parsing;
 			sourceTree = "<group>";
 		};
+		C078BC312C2F2F5E00A06887 /* Graph Template Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC3F2C2F347900A06887 /* GraphTemplateInspector.swift */,
+				C078BC412C2F363700A06887 /* GraphTemplateEditor.swift */,
+				C078BC432C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift */,
+			);
+			path = "Graph Template Inspector";
+			sourceTree = "<group>";
+		};
+		C078BC322C2F32AC00A06887 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC342C2F332D00A06887 /* GraphController.swift */,
+				C078BC362C2F333400A06887 /* GraphView.swift */,
+				C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */,
+				C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		C078BC332C2F32B400A06887 /* Source List */ = {
+			isa = PBXGroup;
+			children = (
+				C0263D892C1676D1008C929F /* SourceList.swift */,
+			);
+			path = "Source List";
+			sourceTree = "<group>";
+		};
+		C078BC3A2C2F335E00A06887 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC3B2C2F336C00A06887 /* Basic Script.dgraph */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C078BC472C2F3C9F00A06887 /* Data Inspector */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Data Inspector";
+			sourceTree = "<group>";
+		};
+		C078BC4A2C2F4AF600A06887 /* Helper Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC4B2C2F4B0300A06887 /* PresentableName.swift */,
+				C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */,
+			);
+			path = "Helper Protocols";
+			sourceTree = "<group>";
+		};
+		C078BC4F2C2F4B4100A06887 /* StructsAndEnums */ = {
+			isa = PBXGroup;
+			children = (
+				C09529822C2DEA0B002D3F97 /* Separator.swift */,
+				C078BC502C2F4B5B00A06887 /* NewLineType.swift */,
+			);
+			path = StructsAndEnums;
+			sourceTree = "<group>";
+		};
+		C078BC522C2F4BCD00A06887 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC4A2C2F4AF600A06887 /* Helper Protocols */,
+				C0A93A692C1266E60037BAE3 /* Helper Extensions */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		C095297C2C2DD62F002D3F97 /* Convience Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,8 +357,6 @@
 				C0263D5E2C162999008C929F /* DataItem_FileProperties.swift */,
 				C02E38152C1F8B6B00107EAD /* GraphTemplate.swift */,
 				C0263D8D2C16872A008C929F /* ParserSettings.swift */,
-				C0263D8F2C168E68008C929F /* SeparatorType.swift */,
-				C09529822C2DEA0B002D3F97 /* Separator.swift */,
 			);
 			path = SwiftData;
 			sourceTree = "<group>";
@@ -276,9 +372,10 @@
 		C0A93A642C12402B0037BAE3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C078BC322C2F32AC00A06887 /* Graphs */,
 				C095297C2C2DD62F002D3F97 /* Convience Views */,
 				C012AB692C2CC4C800BC59B7 /* Inspectors */,
-				C0263D892C1676D1008C929F /* SourceList.swift */,
+				C078BC332C2F32B400A06887 /* Source List */,
 				C0263D8B2C1677B1008C929F /* Preferences.swift */,
 			);
 			path = Views;
@@ -358,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C078BC3C2C2F336C00A06887 /* Basic Script.dgraph in Resources */,
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
 			);
@@ -373,32 +471,42 @@
 				C0263D622C162B22008C929F /* AllowedFileExtension.swift in Sources */,
 				C0263D692C162CE5008C929F /* DataController.swift in Sources */,
 				C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */,
+				C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */,
+				C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */,
 				C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */,
+				C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */,
+				C078BC492C2F3DC500A06887 /* TemporaryDataModel.swift in Sources */,
 				C0263D852C167070008C929F /* SourceListViewModel.swift in Sources */,
 				C0263D6B2C162E78008C929F /* DataControllerDelegate.swift in Sources */,
 				C0263D712C1634E1008C929F /* DataController_importingURLs.swift in Sources */,
 				C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */,
 				C012AB6E2C2CCA5F00BC59B7 /* ParserEditor.swift in Sources */,
 				C0263D6D2C163390008C929F /* DataController_Deleting.swift in Sources */,
+				C078BC422C2F363700A06887 /* GraphTemplateEditor.swift in Sources */,
+				C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */,
 				C0263D802C1668B9008C929F /* AppController.swift in Sources */,
 				C0263D5F2C162999008C929F /* DataItem_FileProperties.swift in Sources */,
 				C0A93A662C1261390037BAE3 /* DataItem.swift in Sources */,
 				C0A93A682C1261B00037BAE3 /* Node.swift in Sources */,
-				C0263D902C168E68008C929F /* SeparatorType.swift in Sources */,
+				C078BC352C2F332D00A06887 /* GraphController.swift in Sources */,
 				C0263D7C2C165FEB008C929F /* SelectionManager.swift in Sources */,
 				C0263D8A2C1676D1008C929F /* SourceList.swift in Sources */,
 				C02E381B2C1F911800107EAD /* ParsedFile.swift in Sources */,
 				C0263D742C163622008C929F /* Number_spelledOut.swift in Sources */,
 				C0263D8C2C1677B1008C929F /* Preferences.swift in Sources */,
 				C0263D7A2C163736008C929F /* SelectionManagerDelegate.swift in Sources */,
+				C078BC462C2F3A6A00A06887 /* Inspector.swift in Sources */,
 				C0263D882C167526008C929F /* PreferencesController.swift in Sources */,
+				C078BC4C2C2F4B0300A06887 /* PresentableName.swift in Sources */,
 				C0263D8E2C16872A008C929F /* ParserSettings.swift in Sources */,
 				C0263D642C162B9E008C929F /* UserDefaults_allowedDataFileExtensions.swift in Sources */,
 				C02E38192C1F910100107EAD /* Parser.swift in Sources */,
+				C078BC402C2F347900A06887 /* GraphTemplateInspector.swift in Sources */,
 				C012AB6B2C2CC4E100BC59B7 /* ParserInspector.swift in Sources */,
 				C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */,
 				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
 				C0263D6F2C163402008C929F /* DataController_Errors.swift in Sources */,
+				C078BC372C2F333400A06887 /* GraphView.swift in Sources */,
 				C0263D822C166F48008C929F /* Collections_Extensions.swift in Sources */,
 				C0263D782C16372A008C929F /* AppDelegate.swift in Sources */,
 				C02E38162C1F8B6B00107EAD /* GraphTemplate.swift in Sources */,

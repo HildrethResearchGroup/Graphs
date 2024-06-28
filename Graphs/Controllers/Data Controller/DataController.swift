@@ -25,9 +25,13 @@ class DataController {
     
     var rootNodes: [Node] = []
     
+    var parserSettings: [ParserSettings] = []
+    
+    var graphTemplates: [GraphTemplate] = []
+    
     var sortNodesKeyPaths: [KeyPathComparator<Node>] = [
         .init(\.name)]
-
+    
     
     // This is temporary and used to make the visibleItems a computed property
     // TODO: Remove when visibleItems transitioned to stored property that is updated manually
@@ -56,7 +60,7 @@ class DataController {
         }
     }
     
-
+    
     var selectedDataItemIDs: [PersistentIdentifier] = [] {
         didSet {
             updateDataItems()
@@ -69,14 +73,14 @@ class DataController {
     init(withDelegate delegate: DataControllerDelegate?) {
         let sharedModelContainer: ModelContainer = {
             let schema = Schema([
-                Node.self, DataItem.self
+                Node.self, DataItem.self, GraphTemplate.self, ParserSettings.self
             ])
             
             let storageLocation = URL.swiftDataStorageLocation
             
             
             let modelConfiguration = ModelConfiguration(schema: schema, url: storageLocation, allowsSave: true)
-
+            
             do {
                 return try ModelContainer(for: schema, configurations: [modelConfiguration])
             } catch {
@@ -97,6 +101,12 @@ class DataController {
     
     // MARK: - Fetching Data
     func fetchData() {
+        fetchRootNodes()
+        fetchParserSettings()
+        fetchGraphTemplates()
+    }
+    
+    private func fetchRootNodes() {
         do {
             let sortOrder = [SortDescriptor<Node>(\.name)]
             let predicate = #Predicate<Node>{ $0.nodeTypeStorage == 0}
@@ -104,11 +114,36 @@ class DataController {
             let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: sortOrder)
             rootNodes = try modelContext.fetch(descriptor)
         } catch {
+            print("Failed to Fetch Root Nodes")
+        }
+    }
+    
+    
+    private func fetchParserSettings() {
+        do {
+            let sortOrder = [SortDescriptor<ParserSettings>(\.name)]
+            
+            let descriptor = FetchDescriptor<ParserSettings>(sortBy: sortOrder)
+            parserSettings = try modelContext.fetch(descriptor)
+        } catch {
+            print("Failed to Fetch ParserSettings")
+        }
+    }
+    
+    
+    private func fetchGraphTemplates() {
+        do {
+            let sortOrder = [SortDescriptor<GraphTemplate>(\.name)]
+            
+            let descriptor = FetchDescriptor<GraphTemplate>(sortBy: sortOrder)
+            graphTemplates = try modelContext.fetch(descriptor)
+        } catch {
             print("Fetch failed")
         }
     }
     
-    // ADD
+    
+    
     // MARK: - Filtering Selected DataItems
     func updateDataItems() {
         let ids = selectedDataItemIDs

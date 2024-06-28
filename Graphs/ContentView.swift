@@ -9,39 +9,45 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var visibility_sourceList: NavigationSplitViewVisibility = .all
+    @State private var visibility_inspector = true
+    
     var body: some View {
-        HSplitView {
-            Text("SourceList")
+        NavigationSplitView {
+            Text("Source List")
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+        } detail: {
             VSplitView {
-                Text("Items")
+                Text("Content List")
                     .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
                 Text("Graphs")
                     .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
             }
-            Text("Inspector")
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            //.frame(minHeight: 100, maxHeight: .infinity)
         }
-        .onAppear() {
-            print("Database Location:")
-            print(URL.swiftDataStorageLocation)
+        .inspector(isPresented: $visibility_inspector) {
+            Inspector()
+                .frame(minHeight: 100, maxHeight: .infinity)
+                .toolbar() {
+                    InspectorVisibilityButton
+                }
         }
-        /*
-         NavigationSplitView {
-             Text("Source List")
-                 //.frame(minHeight: 100, maxHeight: .infinity)
-         } content: {
-             VSplitView {
-                 Text("Content List")
-                 Text("Graphs")
-             }
-             //.frame(minHeight: 100, maxHeight: .infinity)
-         } detail: {
-             Text("Inspector")
-                 //.frame(minHeight: 100, maxHeight: .infinity)
-         }
-         */
-        
+        .navigationSplitViewStyle(.prominentDetail)
+    }
+    
+    
+    
+    // MARK: - Buttons
+    @ToolbarContentBuilder
+    var InspectorVisibilityButton: some ToolbarContent {
+        ToolbarItem(id: "inspector") {
+            Button {
+                visibility_inspector.toggle()
+            } label: {
+                Image(systemName: "sidebar.right")
+            }
+        }
     }
 }
 
