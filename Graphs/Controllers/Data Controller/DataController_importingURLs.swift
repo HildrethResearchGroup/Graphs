@@ -57,7 +57,6 @@ extension DataController {
         delegate?.newData(nodes: newNodes, andDataItems: newDataItems)
     }
     
-    
     private func importDirectory(_ url: URL, intoNode parentNode: Node?) -> Node? {
         
         // Check that url exists and is a director

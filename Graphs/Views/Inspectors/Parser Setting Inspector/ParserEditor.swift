@@ -28,7 +28,26 @@ struct ParserEditor: View {
         VStack {
             HStack {
                 Text("Name:").font(fontType)
-                TextField("Name:", text: $parseSettings.name).frame(width: 200)
+                TextField("Name:", text: $parseSettings.name)
+                    .frame(minWidth: 100, maxWidth: .infinity)
+                Spacer()
+            }
+            HStack {
+                Picker("New Line", selection: $parseSettings.newLineType) {
+                    ForEach(NewLineType.allCases) { nextLineType in
+                        Text(nextLineType.name)
+                    }
+
+                }
+                .frame(width: 120)
+                
+                Picker("Encoding", selection: $parseSettings.stringEncodingType) {
+                    ForEach(StringEncodingType.allCases) { nextEncoding in
+                        Text(nextEncoding.rawValue)
+                    }
+                }
+                .frame(minWidth: 150, maxWidth: 200)
+                
                 Spacer()
             }
             

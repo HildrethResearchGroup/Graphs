@@ -12,6 +12,8 @@ struct ParseEditor_EmptySelection: View {
     @State var name: String = ""
     @State var number: Int = 0
     @State var toggleState = false
+    @State var newLineType: NewLineType = .CRLF
+    @State var stringEncoding: StringEncodingType = .ascii
     
     @State var separator: Separator = .comma
     
@@ -23,8 +25,27 @@ struct ParseEditor_EmptySelection: View {
             HStack {
                 Text("Name:").font(fontType)
                 TextField("Name:", text: $name)
-                    .frame(width: 200)
-                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .frame(minWidth: 100, maxWidth: .infinity)
+                    .disabled(true)
+                Spacer()
+            }
+            HStack {
+                Picker("New Line", selection: $newLineType) {
+                    ForEach(NewLineType.allCases) { nextLineType in
+                        Text(nextLineType.name)
+                    }
+                }
+                .frame(width: 120)
+                .disabled(true)
+                
+                Picker("Encoding", selection: $stringEncoding) {
+                    ForEach(StringEncodingType.allCases) { nextEncoding in
+                        Text(nextEncoding.rawValue)
+                    }
+                }
+                .frame(minWidth: 150, maxWidth: 200)
+                .disabled(true)
+                
                 Spacer()
             }
             

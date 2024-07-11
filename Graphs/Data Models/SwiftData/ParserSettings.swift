@@ -14,6 +14,7 @@ final class ParserSettings {
     
     var name: String
     
+    
     @Relationship(deleteRule: .nullify, inverse: \Node.parserSettings)
     var nodes: [Node]?
     
@@ -21,6 +22,8 @@ final class ParserSettings {
     var dataItems: [DataItem]?
     
     var newLineType: NewLineType
+    
+    var stringEncodingType: StringEncodingType
     
     var hasExperimentalDetails: Bool = false
     var experimentalDetailsSeparator: Separator?
@@ -50,6 +53,7 @@ final class ParserSettings {
         self.dataItems = []
        
         self.newLineType = .LF
+        self.stringEncodingType = .ascii
         
         self.hasExperimentalDetails = false
         

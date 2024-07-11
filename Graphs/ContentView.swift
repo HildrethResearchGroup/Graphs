@@ -28,12 +28,13 @@ struct ContentView: View {
         }
         .inspector(isPresented: $visibility_inspector) {
             Inspector()
-                .frame(minHeight: 100, maxHeight: .infinity)
+                //.frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+                .inspectorColumnWidth(min: 300, ideal: 350, max: 800)
                 .toolbar() {
                     InspectorVisibilityButton
                 }
         }
-        .navigationSplitViewStyle(.prominentDetail)
+        .navigationSplitViewStyle(.automatic)
     }
     
     

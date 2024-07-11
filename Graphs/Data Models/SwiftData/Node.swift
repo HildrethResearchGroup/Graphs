@@ -29,7 +29,12 @@ final class Node {
     
     var graphTemplate: GraphTemplate?
     
+    
+    
     var parserSettings: ParserSettings?
+    
+    
+    
     
     var nodeTypeStorage: Int
     

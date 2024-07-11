@@ -20,7 +20,7 @@ class GraphTemplate {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.graphTemplate)
     var dataItems: [DataItem]?
     
-    init(name: String?, url: URL) {
+    init(name: String? = nil, url: URL) {
         self.name = name ?? url.fileName
         self.url = url
     }

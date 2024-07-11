@@ -9,16 +9,20 @@
 import SwiftUI
 
 struct Inspector: View {
+    var dataItem: DataItem?
+    
     var body: some View {
         TabView {
             ParserInspector()
-                .tabItem { Image(systemName: "list.dash") }
+                .tabItem { Text("􀋱") }
             GraphTemplateInspector()
-                .tabItem { Image(systemName: "waveform.path.ecg.rectangle") }
+                .tabItem { Text("􀟪") }
+            TextInspector(dataItem: dataItem)
+                .tabItem { Text("􀈷") }
         }
     }
 }
 
 #Preview {
-    Inspector()
+    Inspector(dataItem: DataItem(url: Bundle.main.url(forResource: "diluteHF - 3 - Volts", withExtension: "dat") ?? URL(fileURLWithPath: ""), node: Node(url: nil, parent: nil)))
 }
