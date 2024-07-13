@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ProvidesToolTip {
-    var toolTip: String { get }
+    static var toolTip: String { get }
 }

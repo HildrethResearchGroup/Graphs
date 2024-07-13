@@ -73,3 +73,10 @@ extension Separator: PresentableName {
     }
 }
 
+
+extension Separator: ProvidesToolTip {
+    static var toolTip: String {
+        "Select the type of delimiter for your data.  Common types are: Tab and Comma are common."
+    }
+}
+

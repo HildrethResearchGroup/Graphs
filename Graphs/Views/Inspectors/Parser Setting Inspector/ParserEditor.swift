@@ -40,6 +40,7 @@ struct ParserEditor: View {
 
                 }
                 .frame(width: 120)
+                .help(NewLineType.toolTip)
                 
                 Picker("Encoding", selection: $parseSettings.stringEncodingType) {
                     ForEach(StringEncodingType.allCases) { nextEncoding in
@@ -47,6 +48,7 @@ struct ParserEditor: View {
                     }
                 }
                 .frame(minWidth: 150, maxWidth: 200)
+                .help(StringEncodingType.toolTip)
                 
                 Spacer()
             }
@@ -120,7 +122,7 @@ struct ParserEditor: View {
                     .disabled(!parseSettings.hasHeader)
                 Spacer()
             }.padding(.leading)
-            Picker(selection: $parseSettings.headerSepatator) {
+            Picker(selection: $parseSettings.headerSeparator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
                 }
@@ -130,7 +132,8 @@ struct ParserEditor: View {
                 }
             }
             .frame(width: 2*width + 25, alignment: .leading)
-                .disabled(!parseSettings.hasHeader)
+            .help(Separator.toolTip)
+            .disabled(!parseSettings.hasHeader)
         }
         
     }
@@ -165,6 +168,8 @@ struct ParserEditor: View {
                     .disabled(!parseSettings.hasData)
                 Spacer()
             }.padding(.leading)
+            
+            // Data Separator
             Picker(selection: $parseSettings.dataSeparator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
@@ -173,8 +178,10 @@ struct ParserEditor: View {
                 HStack {
                     Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
                 }
-            }.frame(width: 2*width + 25, alignment: .leading)
-                .disabled(!parseSettings.hasData)
+            }
+            .frame(width: 2*width + 25, alignment: .leading)
+            .help(Separator.toolTip)
+            .disabled(!parseSettings.hasData)
         }
         
     }

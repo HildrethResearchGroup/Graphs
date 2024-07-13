@@ -31,7 +31,7 @@ final class ParserSettings {
     var experimentalDetailsEnd: Int = 0
     
     var hasHeader: Bool = false
-    var headerSepatator: Separator?
+    var headerSeparator: Separator?
     var headerStart: Int = 0
     var headerEnd: Int = 0
     
@@ -52,7 +52,7 @@ final class ParserSettings {
         self.nodes = []
         self.dataItems = []
        
-        self.newLineType = .LF
+        self.newLineType = .CRLF
         self.stringEncodingType = .ascii
         
         self.hasExperimentalDetails = false
@@ -61,7 +61,7 @@ final class ParserSettings {
         self.experimentalDetailsEnd = 0
 
         self.hasHeader = false
-        self.headerSepatator = nil
+        self.headerSeparator = nil
         self.headerStart = 0
         self.headerEnd = 0
         

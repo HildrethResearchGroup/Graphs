@@ -11,18 +11,60 @@ import SwiftUI
 struct TextInspector: View {
     var dataItem: DataItem?
     
-    @State private var provider: LineNumberProvider
+    @State private var controller: LineNumberController
+    
+    @AppStorage("textInspectorIsSimple") private var textInspectorIsSimple = false
+    
     
     init(dataItem: DataItem?) {
         self.dataItem = dataItem
-        self._provider = State(initialValue: LineNumberProvider(dataItem))
+        self._controller = State(initialValue: LineNumberController(dataItem))
     }
     
     var body: some View {
-        TextWithLineNumbers(lineNumbers: provider.lineNumbers, content: provider.content)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(alignment:.leading ) {
+            HStack {
+                ParsingOptions()
+                Toggle("Simplified", isOn: $textInspectorIsSimple)
+                    .help("Some data files have hidden characters that cause extra wrapping.  View your data using the Simplified view to verify that the lines numbers are correct.")
+            }
+            if textInspectorIsSimple {
+                SimpleTextWithLineNumbers(controller.combinedLineNumbersAndContent)
+            } else {
+                LineNumbersView(lineNumbers: controller.lineNumbers, content: controller.content)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onChange(of: dataItem) {
+            controller.dataItem = dataItem
+        }
+        
     }
+    
+    
+    @ViewBuilder
+    func ParsingOptions() -> some View {
+        HStack {
+            Picker("New Line", selection: $controller.newLineType) {
+                ForEach(NewLineType.allCases) { nextLineType in
+                    Text(nextLineType.name)
+                }
+            }
+            .frame(width: 120)
+            .help(NewLineType.toolTip)
+            
+            Picker("Encoding", selection: $controller.stringEncodingType) {
+                ForEach(StringEncodingType.allCases) { nextEncoding in
+                    Text(nextEncoding.rawValue)
+                }
+            }
+            .frame(minWidth: 150, maxWidth: 200)
+            .help(StringEncodingType.toolTip)
+        }
+    }
+    
 }
+
 
 
  #Preview {

@@ -15,8 +15,6 @@ struct ParserInspector: View {
     
     @State var selection: ParserSettings? = nil
     
-    
-    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -33,7 +31,6 @@ struct ParserInspector: View {
                 }
             }
             Spacer()
-            
         }
     }
     

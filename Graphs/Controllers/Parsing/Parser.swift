@@ -31,12 +31,12 @@ struct Parser {
                 experimentalDetails.append("\n")
                 experimentalDetails.append(nextLine)
             } else if try lineIsHeader(index: index, parseSettings: parserSettings) {
-                guard let separator = parserSettings.headerSepatator else { throw ParserError.noHeaderSeparator }
+                guard let separator = parserSettings.headerSeparator else { throw ParserError.noHeaderSeparator }
                 
                 let nextheaderLine = try parse(line: nextLine, withSeparator: separator)
                 header.append(nextheaderLine)
             } else if try lineIsData(index: index, parseSettings: parserSettings) {
-                guard let separator = parserSettings.headerSepatator else { throw ParserError.noDataSeparator }
+                guard let separator = parserSettings.headerSeparator else { throw ParserError.noDataSeparator }
                 
                 let nextDataLine = try parse(line: nextLine, withSeparator: separator)
                 
@@ -67,7 +67,7 @@ struct Parser {
     
     private static func lineIsHeader(index: Int, parseSettings: ParserSettings) throws -> Bool {
         
-        if parseSettings.headerSepatator == nil {throw ParserError.noHeaderSeparator}
+        if parseSettings.headerSeparator == nil {throw ParserError.noHeaderSeparator}
         
         if parseSettings.hasHeader == false {return false}
         

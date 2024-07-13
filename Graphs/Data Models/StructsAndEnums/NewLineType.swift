@@ -15,9 +15,16 @@ import Foundation
 enum NewLineType: String, Codable, CaseIterable, Identifiable {
     var id: Self {self}
     
+    /// Default for macOS: \n
     case LF
+    
+    /// Default for Windows: \r\n
     case CRLF
+    
+    /// Classic macOS and macOS 9: \r
     case CR
+    
+    /// Risc OS: "\n\r"
     case LFCR
     
     var shouldSkipLines: Bool {
@@ -51,7 +58,7 @@ extension NewLineType: PresentableName {
 }
 
 extension NewLineType: ProvidesToolTip {
-    var toolTip: String {
+    static var toolTip: String {
         "Modern macOS uses \\n as the new line character, but other operating systems, such as Windows, might use a different character set to designate a new line.  Sometimes, this causes the file Parser to add empty lines.  Change this property if the Parser is adding or missing lines.  Note, macOS applications use \\n to indicate a new line while Windows applications typically use \\r\\n to indicate a new line.  More information can be found on Wikipedia at: https://en.wikipedia.org/wiki/Newline"
     }
 }

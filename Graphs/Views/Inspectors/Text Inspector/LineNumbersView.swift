@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextWithLineNumbers: View {
+struct LineNumbersView: View {
     var lineNumbers: String
     var content: String
     
@@ -32,5 +32,5 @@ struct TextWithLineNumbers: View {
 
 
 #Preview {
-    TextWithLineNumbers(lineNumbers: "1\n2\n3", content: "Hello.\nHow are you?  This will be a long line to make sure the line numbers line up properly.  Don't stop typing.\nThird Line")
+    LineNumbersView(lineNumbers: "1\n2\n3", content: "Hello.\nHow are you?  This will be a long line to make sure the line numbers line up properly.  Don't stop typing.\nThird Line")
 }
