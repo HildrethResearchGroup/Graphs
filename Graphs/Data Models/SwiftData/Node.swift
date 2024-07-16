@@ -26,15 +26,9 @@ final class Node {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.node)
     var dataItems: [DataItem]
     
-    
     var graphTemplate: GraphTemplate?
     
-    
-    
     var parserSettings: ParserSettings?
-    
-    
-    
     
     var nodeTypeStorage: Int
     
@@ -71,17 +65,28 @@ final class Node {
     
     
     func flattenedDataItems() -> [DataItem] {
+        
         var localItems: [DataItem] = self.dataItems
         
-        guard let localSubNodes = self.subNodes else {
-            return localItems
-        }
+        let allSubNodes = self.flattendSubNodes()
         
-        for nextSubNode in localSubNodes {
+        for nextSubNode in allSubNodes {
             localItems.append(contentsOf: nextSubNode.flattenedDataItems())
         }
         
         return localItems
+    }
+    
+    func flattendSubNodes() -> [Node] {
+        let localSubNodes: [Node] = self.subNodes ?? []
+        
+        var output: [Node] = localSubNodes
+        
+        for nextSubNodes in localSubNodes {
+            output.append(contentsOf: nextSubNodes.flattendSubNodes())
+        }
+        
+        return output
     }
 
 }

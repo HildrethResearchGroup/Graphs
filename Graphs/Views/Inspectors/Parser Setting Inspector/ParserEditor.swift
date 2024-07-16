@@ -163,9 +163,6 @@ struct ParserEditor: View {
             HStack {
                 Text("Ending Line")
                     .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $parseSettings.dataEnd, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasData)
                 Spacer()
             }.padding(.leading)
             

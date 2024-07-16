@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class LineNumberController {
+class LineNumberViewModel {
     
     var dataItem: DataItem? {
         didSet {
@@ -175,7 +175,7 @@ class LineNumberController {
 }
 
 
-extension LineNumberController {
+extension LineNumberViewModel {
     func updateParserSettings() {
         if let parserSettings = dataItem?.parserSettings {
             parserSettings.newLineType = self.newLineType

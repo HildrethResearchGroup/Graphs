@@ -37,9 +37,8 @@ final class ParserSettings {
     
     var hasData: Bool = false
     var dataStart: Int = 0
-    var dataEnd: Int = 0
     var dataSeparator: Separator?
-    
+    var stopDataAtFirstEmptyLine: Bool = true
     
     var hasFooter: Bool = false
     
@@ -61,17 +60,96 @@ final class ParserSettings {
         self.experimentalDetailsEnd = 0
 
         self.hasHeader = false
-        self.headerSeparator = nil
+        self.headerSeparator = .comma
         self.headerStart = 0
         self.headerEnd = 0
         
         self.hasData = false
+        self.dataSeparator = .comma
         self.dataStart = 0
-        self.dataEnd = 0
-
+        
+        self.stopDataAtFirstEmptyLine = true
         self.hasFooter = false
         
         }
+    
+    init(from decoder: any Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        name = try values.decode(String.self, forKey: .name)
+        nodes = []
+        dataItems = []
+        
+        newLineType = try values.decode(NewLineType.self, forKey: .newLineType)
+        stringEncodingType = try values.decode(StringEncodingType.self, forKey: .stringEncodingType)
+        
+        hasExperimentalDetails = try values.decode(Bool.self, forKey: .hasExperimentalDetails)
+        experimentalDetailsStart = try values.decode(Int.self, forKey: .experimentalDetailsStart)
+        experimentalDetailsEnd = try values.decode(Int.self, forKey: .experimentalDetailsEnd)
+        
+        hasHeader = try values.decode(Bool.self, forKey: .hasExperimentalDetails)
+        headerSeparator = try values.decode(Separator.self, forKey: .headerSeparator)
+        headerStart = try values.decode(Int.self, forKey: .headerStart)
+        headerEnd = try values.decode(Int.self, forKey: .headerEnd)
+        
+        hasData = try values.decode(Bool.self, forKey: .hasData)
+        dataSeparator = try values.decode(Separator.self, forKey: .dataSeparator)
+        dataStart = try values.decode(Int.self, forKey: .dataStart)
+        
+        stopDataAtFirstEmptyLine = try values.decode(Bool.self, forKey: .stopDataAtFirstEmptyLine)
+        hasFooter = try values.decode(Bool.self, forKey: .hasFooter)
+    }
+    
+    
 }
 
 
+extension ParserSettings: Codable {
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+        
+        case newLineType
+        case stringEncodingType
+        case hasExperimentalDetails
+        case experimentalDetailsStart
+        case experimentalDetailsEnd
+        
+        case hasHeader
+        case headerSeparator
+        case headerStart
+        case headerEnd
+        
+        case hasData
+        case dataStart
+        case dataSeparator
+        
+        case stopDataAtFirstEmptyLine
+        case hasFooter
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(newLineType, forKey: .newLineType)
+        try container.encode(hasExperimentalDetails, forKey: .hasExperimentalDetails)
+        
+        try container.encode(experimentalDetailsStart, forKey: .experimentalDetailsStart)
+        try container.encode(experimentalDetailsEnd, forKey: .experimentalDetailsEnd)
+        
+        try container.encode(hasHeader, forKey: .hasHeader)
+        try container.encode(headerSeparator, forKey: .headerSeparator)
+        try container.encode(headerStart, forKey: .headerStart)
+        try container.encode(headerEnd, forKey: .headerEnd)
+        
+        
+        try container.encode(hasData, forKey: .hasData)
+        try container.encode(dataStart, forKey: .dataStart)
+        try container.encode(dataSeparator, forKey: .dataSeparator)
+        
+        try container.encode(stopDataAtFirstEmptyLine, forKey: .stopDataAtFirstEmptyLine)
+        try container.encode(stopDataAtFirstEmptyLine, forKey: .stopDataAtFirstEmptyLine)
+    }
+    
+}

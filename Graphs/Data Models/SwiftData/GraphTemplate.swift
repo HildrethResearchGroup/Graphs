@@ -20,8 +20,21 @@ class GraphTemplate {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.graphTemplate)
     var dataItems: [DataItem]?
     
-    init(name: String? = nil, url: URL) {
+    init?(name: String? = nil, url: URL) {
+        
+        if url.pathExtension != URL.dataGraphFileExtension {
+            return nil
+        }
+        
+        let fm = FileManager.default
+        
+        if fm.fileExists(atPath: url.path()) == false {
+            return nil
+        }
+        
         self.name = name ?? url.fileName
         self.url = url
     }
+    
 }
+

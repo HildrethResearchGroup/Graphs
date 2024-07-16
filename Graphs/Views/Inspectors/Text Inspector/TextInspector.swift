@@ -11,14 +11,14 @@ import SwiftUI
 struct TextInspector: View {
     var dataItem: DataItem?
     
-    @State private var controller: LineNumberController
+    @State private var viewModel: LineNumberViewModel
     
     @AppStorage("textInspectorIsSimple") private var textInspectorIsSimple = false
     
     
     init(dataItem: DataItem?) {
         self.dataItem = dataItem
-        self._controller = State(initialValue: LineNumberController(dataItem))
+        self._viewModel = State(initialValue: LineNumberViewModel(dataItem))
     }
     
     var body: some View {
@@ -29,14 +29,14 @@ struct TextInspector: View {
                     .help("Some data files have hidden characters that cause extra wrapping.  View your data using the Simplified view to verify that the lines numbers are correct.")
             }
             if textInspectorIsSimple {
-                SimpleTextWithLineNumbers(controller.combinedLineNumbersAndContent)
+                SimpleTextWithLineNumbers(viewModel.combinedLineNumbersAndContent)
             } else {
-                LineNumbersView(lineNumbers: controller.lineNumbers, content: controller.content)
+                LineNumbersView(lineNumbers: viewModel.lineNumbers, content: viewModel.content)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onChange(of: dataItem) {
-            controller.dataItem = dataItem
+            viewModel.dataItem = dataItem
         }
         
     }
@@ -45,7 +45,7 @@ struct TextInspector: View {
     @ViewBuilder
     func ParsingOptions() -> some View {
         HStack {
-            Picker("New Line", selection: $controller.newLineType) {
+            Picker("New Line", selection: $viewModel.newLineType) {
                 ForEach(NewLineType.allCases) { nextLineType in
                     Text(nextLineType.name)
                 }
@@ -53,7 +53,7 @@ struct TextInspector: View {
             .frame(width: 120)
             .help(NewLineType.toolTip)
             
-            Picker("Encoding", selection: $controller.stringEncodingType) {
+            Picker("Encoding", selection: $viewModel.stringEncodingType) {
                 ForEach(StringEncodingType.allCases) { nextEncoding in
                     Text(nextEncoding.rawValue)
                 }

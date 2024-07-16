@@ -30,9 +30,11 @@ class AppController {
 
 
 extension AppController: DataControllerDelegate {
+    
+    // MARK: - Nodes and Data
     func newData(nodes: [Node], andDataItems dataItems: [DataItem]) {
         // Pass the information down to the Selection Manager because the selectionManager is responsible for knowing how selection state should be udpated
-        selectionManager.newData(nodes: nodes, addDataItems: dataItems)    }
+        selectionManager.newData(nodes: nodes, andDataItems: dataItems)    }
     
     func preparingToDelete(nodes: [Node]) {
         selectionManager.preparingToDelete(nodes: nodes)
@@ -41,6 +43,28 @@ extension AppController: DataControllerDelegate {
     func preparingToDelete(dataItems: [DataItem]) {
         selectionManager.preparingToDelete(dataItems: dataItems)
     }
+    
+    
+    // MARK: - Graph Template
+    func newGraphTemplate(graphTemplate: GraphTemplate) {
+        selectionManager.selectedGraphTemplate = graphTemplate
+    }
+    
+    func preparingToDeleteGraphTemplate(graphTemplate: GraphTemplate) {
+        selectionManager.preparingToDelete(graphTemplate: graphTemplate)
+    }
+    
+    
+    
+    // MARK: - Parsersettings
+    func newParserSetting(parserSettings: ParserSettings) {
+        selectionManager.selectedParserSetting = parserSettings
+    }
+    
+    func preparingToDelete(parserSettings: ParserSettings) {
+        selectionManager.preparingToDelete(parserSetting: parserSettings)
+    }
+    
 }
 
 

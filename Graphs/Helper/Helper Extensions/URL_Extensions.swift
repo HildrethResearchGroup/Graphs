@@ -23,6 +23,10 @@ extension URL {
        (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
     }
     
+    static var parserSettingsFileExtension = "gparser"
+    
+    static var dataGraphFileExtension = "dgraph"
+    
     enum URLType {
         case file
         case directory

@@ -14,3 +14,4 @@ protocol SelectionManagerDelegate {
     
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<PersistentIdentifier>)
 }
+

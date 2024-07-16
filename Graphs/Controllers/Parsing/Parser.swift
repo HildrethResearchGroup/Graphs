@@ -81,7 +81,7 @@ struct Parser {
         
         if parseSettings.hasData == false {return false}
         
-        return try indexInRange(index, startRange: parseSettings.dataStart, endRange: parseSettings.dataEnd)
+        return true
         
     }
     

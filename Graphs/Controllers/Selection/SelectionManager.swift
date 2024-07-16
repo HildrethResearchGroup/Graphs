@@ -14,17 +14,38 @@ import SwiftData
 
 @Observable
 class SelectionManager {
-    @ObservationIgnored var delegate: SelectionManagerDelegate?
+    var delegate: SelectionManagerDelegate?
     
     var selectedNodes: Set<Node> = [] {
         didSet { delegate?.selectedNodesDidChange(selectedNodes) }
     }
     
+    
     var selectedDataItemIDs: Set<PersistentIdentifier> = [] {
         didSet { delegate?.selectedDataItemsDidChange(selectedDataItemIDs) }
     }
     
-    func newData(nodes: [Node], addDataItems dataItems: [DataItem]) {
+    
+    var selectedParserSetting: ParserSettings? = nil
+    
+    var selectedGraphTemplate: GraphTemplate? = nil
+        
+    
+    func deselectAll() {
+        selectedDataItemIDs = []
+        selectedNodes = []
+        selectedParserSetting = nil
+        selectedGraphTemplate = nil
+    }
+    
+    
+}
+
+
+//MARK: - Handling New Objects
+extension SelectionManager {
+    
+    func newData(nodes: [Node], andDataItems dataItems: [DataItem]) {
         
         // A single new node has been added.  Make that the selection
         if let firstNode = nodes.first {
@@ -35,7 +56,7 @@ class SelectionManager {
         }
 
         
-        // Only data items have been created.  Update the dataItems
+        // Only data items have been created.  Update the new dataItems to be selected
         if !nodes.isEmpty {
             
             let dataItemIDs = dataItems.map( {$0.id} )
@@ -56,18 +77,56 @@ class SelectionManager {
         }
     }
     
+    func newParserSetting(_ parserSettings: ParserSettings) {
+        selectedParserSetting = parserSettings
+    }
+    
+    func newGraphTemplate(_ graphTemplate: GraphTemplate) {
+        selectedGraphTemplate = graphTemplate
+    }
+}
+
+
+//MARK: -  Handling Deletion
+extension SelectionManager {
+    
     
     func preparingToDelete(nodes: [Node]) {
+        
+        if nodes.count == 0 {
+            return
+        }
+    
+        // Get all possible nodes that will be deleted due to cascade rule
+        var allNodes = Set(nodes)
+        
+        for nextNode in nodes {
+            allNodes.formUnion(nextNode.flattendSubNodes())
+        }
+        
+        
+        // Make sure any possible dataItems aren't selected
+        var dataItems: Set<DataItem> = []
+        
+        for nextNode in nodes {
+            dataItems.formUnion(nextNode.flattenedDataItems())
+        }
+        
+        // Clear out the selected Data Items
+        self.preparingToDelete(dataItems: Array(dataItems))
+                
+        
         // Next Clear out any deleted Nodes
         if nodes.count > 0 {
-            let remainingNodes = selectedNodes.subtracting(nodes)
+            let remainingNodes = selectedNodes.subtracting(allNodes)
             selectedNodes = remainingNodes
             return
         }
     }
 
+    
     func preparingToDelete(dataItems: [DataItem]) {
-        // Next Clear out any deleted Nodes
+        // Next Clear out any deleted dataItems
         if dataItems.count > 0 {
             let dataItemsToDelete = dataItems.map( {$0.id} )
             
@@ -77,8 +136,21 @@ class SelectionManager {
         }
     }
     
-    func deselectAll() {
-        selectedDataItemIDs = []
-        selectedNodes = []
+    
+    func preparingToDelete(parserSetting: ParserSettings) {
+
+        if selectedParserSetting?.id == parserSetting.id {
+            selectedParserSetting = nil
+        }
+    }
+    
+    
+    func preparingToDelete(graphTemplate: GraphTemplate) {
+        
+        if selectedGraphTemplate?.id == graphTemplate.id {
+            selectedGraphTemplate = nil
+        }
     }
 }
+
+
