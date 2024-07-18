@@ -11,6 +11,9 @@ import SwiftData
 
 extension DataController {
     
+  
+    
+    
     // MARK: - Importing General URLs
     func importURLs(_ urls: [URL], intoNode parentNode: Node?) throws  {
         // No need to do anything if there aren't any URLs in the array
@@ -83,14 +86,19 @@ extension DataController {
         
         modelContext.insert(newNode)
         
-        if let parentNode {
-            if parentNode.subNodes != nil {
-                parentNode.subNodes?.append(newNode)
-            } else {
-                parentNode.subNodes = []
-                parentNode.subNodes?.append(newNode)
-            }
-        }
+        
+        newNode.setParent(parentNode)
+        /*
+         if let parentNode {
+             if parentNode.subNodes != nil {
+                 parentNode.subNodes?.append(newNode)
+             } else {
+                 parentNode.subNodes = []
+                 parentNode.subNodes?.append(newNode)
+             }
+         }
+         */
+        
         
         
         // Get the contenst of the original URL and sort into directories and filesg
@@ -187,6 +195,33 @@ extension DataController {
         
         // ADD
         return newItem
+    }
+    
+    
+    // MARK: - Adding Nodes
+    func createEmptyNode(withParent parent: Node?) {
+        let newNode = Node(url: nil, parent: parent)
+        
+        modelContext.insert(newNode)
+        
+        
+        newNode.setParent(parent)
+        
+        /*
+         if let parent {
+             if parent.subNodes != nil {
+                 parent.subNodes?.append(newNode)
+             } else {
+                 parent.subNodes = []
+                 parent.subNodes?.append(newNode)
+             }
+         }
+         */
+         
+ 
+        delegate?.newData(nodes: [newNode], andDataItems: [])
+        
+        fetchData()
     }
     
     

@@ -12,6 +12,6 @@ protocol SelectionManagerDelegate {
 
     func selectedNodesDidChange(_ nodes: Set<Node>)
     
-    func selectedDataItemsDidChange(_ dataItemsIDs: Set<PersistentIdentifier>)
+    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>)
 }
 

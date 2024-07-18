@@ -8,9 +8,11 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
+import UniformTypeIdentifiers
 
 @Model
-final class DataItem {
+final class DataItem: Identifiable, Hashable {
     // MARK: - Properties
     //var id: UUID
     var url: URL
@@ -49,7 +51,5 @@ final class DataItem {
         return resourceValues
     }
 }
-
-
 
 

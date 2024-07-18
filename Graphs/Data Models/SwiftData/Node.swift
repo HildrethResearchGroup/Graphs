@@ -49,6 +49,11 @@ final class Node {
         self.id = UUID()
 
         self.originalURL = url
+        
+        if parent?.subNodes == nil {
+            parent?.subNodes = []
+        }
+        
         self.parent = parent
         
         self.dataItems = []
@@ -68,6 +73,18 @@ final class Node {
     }
     
     
+    func setParent(_ node: Node?) {
+        if let node {
+            if node.subNodes != nil {
+                node.subNodes?.append(self)
+            } else {
+                node.subNodes = []
+                node.subNodes?.append(self)
+            }
+        }
+    }
+    
+    
     func flattenedDataItems() -> [DataItem] {
         
         var localItems: [DataItem] = self.dataItems
@@ -80,6 +97,7 @@ final class Node {
         
         return localItems
     }
+    
     
     func flattendSubNodes() -> [Node] {
         let localSubNodes: [Node] = self.subNodes ?? []

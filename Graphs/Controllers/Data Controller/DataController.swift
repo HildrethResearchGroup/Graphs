@@ -61,7 +61,7 @@ class DataController {
     }
     
     
-    var selectedDataItemIDs: [PersistentIdentifier] = [] {
+    var selectedDataItemIDs: [DataItem.ID] = [] {
         didSet {
             updateDataItems()
         }
@@ -96,6 +96,19 @@ class DataController {
         
         fetchData()
         
+    }
+    
+    
+    func allNodes() -> [Node] {
+        do {
+            let descriptor = FetchDescriptor<Node>()
+            let output = try modelContext.fetch(descriptor)
+            
+            return output
+            
+        } catch  {
+            return []
+        }
     }
     
     
@@ -151,18 +164,5 @@ class DataController {
         let filteredItems = items.filter({ids.contains([$0.id])})
         
         selectedDataItems = filteredItems
-    }
-    
-    
-    
-    // MARK: - Adding Nodes
-    func createEmptyNode(withParent parent: Node?) {
-        let newNode = Node(url: nil, parent: parent)
-        
-        modelContext.insert(newNode)
-        
-        delegate?.newData(nodes: [newNode], andDataItems: [])
-        
-        fetchData()
     }
 }

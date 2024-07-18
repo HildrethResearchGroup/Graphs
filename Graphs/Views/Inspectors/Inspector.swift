@@ -17,7 +17,7 @@ struct Inspector: View {
     
     var body: some View {
         TabView {
-            ParserInspector()
+            ParserInspector(viewModel.parserSettingsVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
             GraphTemplateInspector()

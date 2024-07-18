@@ -85,7 +85,7 @@ extension AppController: SelectionManagerDelegate {
         dataController.selectedNodes = Array(nodes).sorted(using: sort)
     }
     
-    func selectedDataItemsDidChange(_ dataItemsIDs: Set<PersistentIdentifier>) {
+    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
     }
     

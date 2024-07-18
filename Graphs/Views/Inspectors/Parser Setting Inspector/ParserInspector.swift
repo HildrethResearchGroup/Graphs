@@ -84,5 +84,5 @@ struct ParserInspector: View {
 
 
 #Preview {
-    ParserInspector(selection: ParserSettings()).frame(height: 1000)
+    ParserInspector(ParserSettingsViewModel(DataController(withDelegate: nil), SelectionManager())).frame(height: 1000)
 }

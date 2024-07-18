@@ -99,9 +99,43 @@ extension SourceListViewModel {
 }
 
 
+
+// MARK: - Drag-and-Drop
+extension SourceListViewModel {
+    func drop(uuids: [UUID], onto node: Node) {
+        
+        dataController.tryToMove(uuids: uuids, to: node)
+    }
+}
+
+
+
 // MARK: - Selection and Deselection
 extension SourceListViewModel {
     func deselectNodes() {
         selectionManager.deselectNodes()
+    }
+}
+
+
+
+// MARK: - ButtonDisabled
+extension SourceListViewModel {
+    var disabledButton_importFile: Bool {
+        
+        switch selectionManager.selectedNodes.count {
+        case 0: return true
+        case 1: return false
+        default: return true
+        }
+        
+    }
+}
+
+
+// MARK: - Tool Tips
+extension SourceListViewModel {
+    var toolTip_importFile: String {
+        "Import Data Files into selected Folder.  Note, only one Folder can be selected to import Data Files"
     }
 }

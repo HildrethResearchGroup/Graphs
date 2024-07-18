@@ -21,7 +21,7 @@ class SelectionManager {
     }
     
     
-    var selectedDataItemIDs: Set<PersistentIdentifier> = [] {
+    var selectedDataItemIDs: Set<DataItem.ID> = [] {
         didSet { delegate?.selectedDataItemsDidChange(selectedDataItemIDs) }
     }
     

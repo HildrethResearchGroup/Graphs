@@ -68,6 +68,10 @@
 		C0DDEC932C41AB7E003C78B6 /* TextInspectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDEC922C41AB7E003C78B6 /* TextInspectorType.swift */; };
 		C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; };
 		C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C0ED09042C499E3D00052208 /* UUID_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED09032C499E3D00052208 /* UUID_Extensions.swift */; };
+		C0ED09062C49A32700052208 /* DataController_MovingObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED09052C49A32700052208 /* DataController_MovingObjects.swift */; };
+		C0ED09092C49AC5800052208 /* DataItemsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED09082C49AC5800052208 /* DataItemsListView.swift */; };
+		C0ED090B2C49AD5500052208 /* DataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED090A2C49AD5500052208 /* DataListViewModel.swift */; };
 		C0EE43C12C45B22100EE74FE /* DataController_Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE43C02C45B22100EE74FE /* DataController_Saving.swift */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +154,10 @@
 		C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iterator_allLines.swift; sourceTree = "<group>"; };
 		C0DDEC922C41AB7E003C78B6 /* TextInspectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInspectorType.swift; sourceTree = "<group>"; };
 		C0EB49892C10076E0057A593 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
+		C0ED09032C499E3D00052208 /* UUID_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID_Extensions.swift; sourceTree = "<group>"; };
+		C0ED09052C49A32700052208 /* DataController_MovingObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_MovingObjects.swift; sourceTree = "<group>"; };
+		C0ED09082C49AC5800052208 /* DataItemsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsListView.swift; sourceTree = "<group>"; };
+		C0ED090A2C49AD5500052208 /* DataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataListViewModel.swift; sourceTree = "<group>"; };
 		C0EE43C02C45B22100EE74FE /* DataController_Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_Saving.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -264,6 +272,7 @@
 		C0201EA92C471EBB007CABD4 /* DataList View Model */ = {
 			isa = PBXGroup;
 			children = (
+				C0ED090A2C49AD5500052208 /* DataListViewModel.swift */,
 			);
 			path = "DataList View Model";
 			sourceTree = "<group>";
@@ -390,11 +399,11 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		C095297C2C2DD62F002D3F97 /* Convience Views */ = {
+		C095297C2C2DD62F002D3F97 /* Convenience Views */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Convience Views";
+			path = "Convenience Views";
 			sourceTree = "<group>";
 		};
 		C0A93A612C12400F0037BAE3 /* Data Controller */ = {
@@ -406,6 +415,7 @@
 				C0263D6E2C163402008C929F /* DataController_Errors.swift */,
 				C078BC552C2F6B0200A06887 /* DataController_NewObjects.swift */,
 				C0EE43C02C45B22100EE74FE /* DataController_Saving.swift */,
+				C0ED09052C49A32700052208 /* DataController_MovingObjects.swift */,
 			);
 			path = "Data Controller";
 			sourceTree = "<group>";
@@ -437,7 +447,8 @@
 			isa = PBXGroup;
 			children = (
 				C078BC322C2F32AC00A06887 /* Graphs */,
-				C095297C2C2DD62F002D3F97 /* Convience Views */,
+				C0ED09072C49ABC700052208 /* Data Items Views */,
+				C095297C2C2DD62F002D3F97 /* Convenience Views */,
 				C012AB692C2CC4C800BC59B7 /* Inspectors */,
 				C078BC332C2F32B400A06887 /* Source List */,
 				C0263D8B2C1677B1008C929F /* Preferences.swift */,
@@ -456,6 +467,7 @@
 				C0263D632C162B9E008C929F /* UserDefaults_allowedDataFileExtensions.swift */,
 				C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */,
 				C0263D812C166F48008C929F /* Collections_Extensions.swift */,
+				C0ED09032C499E3D00052208 /* UUID_Extensions.swift */,
 			);
 			path = "Helper Extensions";
 			sourceTree = "<group>";
@@ -466,6 +478,14 @@
 				C0263D842C167070008C929F /* SourceListViewModel.swift */,
 			);
 			path = "Source List View Model";
+			sourceTree = "<group>";
+		};
+		C0ED09072C49ABC700052208 /* Data Items Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0ED09082C49AC5800052208 /* DataItemsListView.swift */,
+			);
+			path = "Data Items Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -548,6 +568,7 @@
 				C01A9D0B2C3DC75300A555B9 /* TextInspector.swift in Sources */,
 				C0263D622C162B22008C929F /* AllowedFileExtension.swift in Sources */,
 				C0263D692C162CE5008C929F /* DataController.swift in Sources */,
+				C0ED09092C49AC5800052208 /* DataItemsListView.swift in Sources */,
 				C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */,
 				C01A9D112C3DC85C00A555B9 /* LineNumberViewModel.swift in Sources */,
 				C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */,
@@ -555,6 +576,7 @@
 				C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */,
 				C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */,
 				C01A86362C484CFF006219C8 /* ParserSettingsViewModel.swift in Sources */,
+				C0ED09062C49A32700052208 /* DataController_MovingObjects.swift in Sources */,
 				C078BC492C2F3DC500A06887 /* TemporaryDataModel.swift in Sources */,
 				C0263D852C167070008C929F /* SourceListViewModel.swift in Sources */,
 				C01A9D132C3DC8DF00A555B9 /* LineNumbersView.swift in Sources */,
@@ -562,6 +584,7 @@
 				C01A9D082C3DC27200A555B9 /* StringEncodingType.swift in Sources */,
 				C019CA1A2C0FBEC5002FC7D2 /* ContentView.swift in Sources */,
 				C012AB6E2C2CCA5F00BC59B7 /* ParserEditor.swift in Sources */,
+				C0ED09042C499E3D00052208 /* UUID_Extensions.swift in Sources */,
 				C0263D6D2C163390008C929F /* DataController_Deleting.swift in Sources */,
 				C078BC422C2F363700A06887 /* GraphTemplateEditor.swift in Sources */,
 				C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */,
@@ -592,6 +615,7 @@
 				C012AB6B2C2CC4E100BC59B7 /* ParserInspector.swift in Sources */,
 				C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */,
 				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
+				C0ED090B2C49AD5500052208 /* DataListViewModel.swift in Sources */,
 				C0263D6F2C163402008C929F /* DataController_Errors.swift in Sources */,
 				C078BC372C2F333400A06887 /* GraphView.swift in Sources */,
 				C0263D822C166F48008C929F /* Collections_Extensions.swift in Sources */,
