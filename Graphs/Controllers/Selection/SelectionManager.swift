@@ -29,16 +29,6 @@ class SelectionManager {
     var selectedParserSetting: ParserSettings? = nil
     
     var selectedGraphTemplate: GraphTemplate? = nil
-        
-    
-    func deselectAll() {
-        selectedDataItemIDs = []
-        selectedNodes = []
-        selectedParserSetting = nil
-        selectedGraphTemplate = nil
-    }
-    
-    
 }
 
 
@@ -154,3 +144,29 @@ extension SelectionManager {
 }
 
 
+// MARK: - Deselection
+extension SelectionManager {
+    func deselectAll() {
+        deselectNodes()
+        deselectGraphTemplate()
+        deselectParserSettings()
+        
+    }
+    
+    func deselectDataItems() {
+        selectedDataItemIDs = []
+    }
+    
+    func deselectNodes() {
+        deselectDataItems()
+        selectedNodes = []
+    }
+    
+    func deselectParserSettings() {
+        selectedParserSetting = nil
+    }
+    
+    func deselectGraphTemplate() {
+        selectedGraphTemplate = nil
+    }
+}

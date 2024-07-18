@@ -114,7 +114,7 @@ class DataController {
             let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: sortOrder)
             rootNodes = try modelContext.fetch(descriptor)
         } catch {
-            print("Failed to Fetch Root Nodes")
+            print("DataController: Failed to Fetch Root Nodes")
         }
     }
     
@@ -126,7 +126,7 @@ class DataController {
             let descriptor = FetchDescriptor<ParserSettings>(sortBy: sortOrder)
             parserSettings = try modelContext.fetch(descriptor)
         } catch {
-            print("Failed to Fetch ParserSettings")
+            print("DataController: Failed to Fetch ParserSettings")
         }
     }
     
@@ -138,7 +138,7 @@ class DataController {
             let descriptor = FetchDescriptor<GraphTemplate>(sortBy: sortOrder)
             graphTemplates = try modelContext.fetch(descriptor)
         } catch {
-            print("Fetch failed")
+            print("DataController: Failed to Fetch GraphTemplate")
         }
     }
     

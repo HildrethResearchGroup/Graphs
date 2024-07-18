@@ -9,20 +9,28 @@
 import SwiftUI
 
 struct Inspector: View {
-    var dataItem: DataItem?
+    var viewModel: InspectorViewModel
+    
+    init(_ viewModel: InspectorViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         TabView {
             ParserInspector()
+                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
             GraphTemplateInspector()
+                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀟪") }
-            TextInspector(dataItem: dataItem)
+            TextInspector(dataItem: viewModel.firstDataItem)
+                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀈷") }
-        }
+        }.frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
+        
     }
 }
 
 #Preview {
-    Inspector(dataItem: DataItem(url: Bundle.main.url(forResource: "diluteHF - 3 - Volts", withExtension: "dat") ?? URL(fileURLWithPath: ""), node: Node(url: nil, parent: nil)))
+    Inspector(InspectorViewModel(DataController(withDelegate: nil), SelectionManager()))
 }

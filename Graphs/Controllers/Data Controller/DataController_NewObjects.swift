@@ -152,12 +152,14 @@ extension DataController {
         
         if url.pathExtension == URL.dataGraphFileExtension {
             _ = importGraphTemplate(withURL: url, intoNode: parentNode)
+            return nil
         }
         
         
         // TODO:
         if url.pathExtension == URL.parserSettingsFileExtension {
             _ = createNewParserSetting(intoNode: parentNode)
+            return nil
         }
         
         
@@ -198,7 +200,7 @@ extension DataController {
         node?.graphTemplate = newGraphTemplate
         
         
-        delegate?.newGraphTemplate(graphTemplate: newGraphTemplate)
+        delegate?.newGraphTemplate(newGraphTemplate)
         
         return newGraphTemplate
     }
@@ -215,7 +217,9 @@ extension DataController {
             node?.parserSettings = newParserSettings
         }
         
-        delegate?.newParserSetting(parserSettings: newParserSettings)
+        fetchData()
+        
+        delegate?.newParserSetting(newParserSettings)
         
         return newParserSettings
     }
@@ -238,7 +242,9 @@ extension DataController {
             
             parentNode?.parserSettings = newParserSettings
             
-            delegate?.newParserSetting(parserSettings: newParserSettings)
+            fetchData()
+            
+            delegate?.newParserSetting(newParserSettings)
             
             return newParserSettings
             
@@ -250,3 +256,46 @@ extension DataController {
 
 }
 
+
+// MARK: - Duplicating Objects
+extension DataController {
+    func duplicate(_ graphTemplate: GraphTemplate) -> GraphTemplate? {
+        let name = graphTemplate.name + " Copy"
+        let url = graphTemplate.url
+        
+        guard let duplicateGraphTemplate = GraphTemplate(name: name, url: url) else { return nil }
+        
+        modelContext.insert(duplicateGraphTemplate)
+        
+        fetchData()
+        
+        delegate?.newGraphTemplate(duplicateGraphTemplate)
+        
+        return duplicateGraphTemplate
+    }
+    
+    func duplicate(_ parserSettings: ParserSettings) -> ParserSettings? {
+        do {
+            let encoder = JSONEncoder()
+            let transientData = try encoder.encode(parserSettings)
+            
+            let decoder = JSONDecoder()
+            
+            let duplicatedParserSettings = try decoder.decode(ParserSettings.self, from: transientData)
+            
+            modelContext.insert(duplicatedParserSettings)
+            
+            fetchData()
+            
+            delegate?.newParserSetting(duplicatedParserSettings)
+            
+            return duplicatedParserSettings
+
+        } catch  {
+            print(error)
+            
+            return nil
+        }
+        
+    }
+}

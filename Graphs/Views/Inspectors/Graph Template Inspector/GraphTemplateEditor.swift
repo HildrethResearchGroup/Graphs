@@ -15,13 +15,17 @@ struct GraphTemplateEditor: View {
     
     @State var graphController = GraphController()
     
+    private let width = 100.0
+    private let fontType: Font = .headline
+    
     var body: some View {
         
         VStack {
             HStack {
                 Text("Name:")
+                    .font(fontType)
                 TextField("Name:", text: $graphTemplate.name)
-                    .frame(width: 200)
+                    .frame(minWidth: width, maxWidth: .infinity)
                 Spacer()
             }
             

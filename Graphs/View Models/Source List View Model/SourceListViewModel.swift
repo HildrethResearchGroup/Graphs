@@ -28,7 +28,7 @@ class SourceListViewModel {
     var sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodeName)]
     
     // MARK: - Initialization
-    init(dataController: DataController, selectionManager: SelectionManager) {
+    init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
     }
@@ -38,7 +38,6 @@ class SourceListViewModel {
 extension SourceListViewModel {
     
     func shouldAllowDrop(ofURLs urls: [URL]) -> Bool {
-        
         if urls.count == 0 { return false }
         
         let numberOfNodes = selectionManager.selectedNodes.count
@@ -96,5 +95,13 @@ extension SourceListViewModel {
     
     func createEmptyNode(withParent parent: Node?) {
         dataController.createEmptyNode(withParent: parent)
+    }
+}
+
+
+// MARK: - Selection and Deselection
+extension SourceListViewModel {
+    func deselectNodes() {
+        selectionManager.deselectNodes()
     }
 }

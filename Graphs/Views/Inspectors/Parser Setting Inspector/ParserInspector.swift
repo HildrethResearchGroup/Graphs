@@ -11,9 +11,13 @@ import SwiftData
 
 struct ParserInspector: View {
     
-    @Query(sort: \ParserSettings.name) var parserSettings: [ParserSettings]
+    @Bindable var viewModel: ParserSettingsViewModel
     
-    @State var selection: ParserSettings? = nil
+    init(_ viewModel: ParserSettingsViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    //@State var selection: ParserSettings? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,7 +26,7 @@ struct ParserInspector: View {
             
             Divider()
             ScrollView {
-                if let selectedParser = selection {
+                if let selectedParser = viewModel.selection {
                     ParserEditor(parseSettings: selectedParser)
                         .padding(.horizontal)
                 } else {
@@ -37,8 +41,8 @@ struct ParserInspector: View {
     
     @ViewBuilder
     var AvailableParserSettings: some View {
-        List(selection: $selection) {
-            ForEach(parserSettings, id: \.self) { nextParser in
+        List(selection: $viewModel.selection) {
+            ForEach(viewModel.parserSettings, id: \.self) { nextParser in
                 Text(nextParser.name)
             }
         }
@@ -47,8 +51,9 @@ struct ParserInspector: View {
         HStack {
             NewParserSettingButton
             DeleteParserSettingButton
-                .disabled(selection == nil)
+                .disabled(viewModel.selection == nil)
         }
+        .padding(.horizontal)
     }
     
     

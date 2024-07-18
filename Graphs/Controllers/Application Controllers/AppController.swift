@@ -14,7 +14,12 @@ class AppController {
     var dataController: DataController
     var selectionManager: SelectionManager
     
+    // View Models
+    var sourceListVM: SourceListViewModel
+    var inspectorVM: InspectorViewModel
+    
     init() {
+        // Controllers and Managers
         let localDataController = DataController(withDelegate: nil)
         
         let localSelectionManager = SelectionManager()
@@ -23,6 +28,12 @@ class AppController {
         selectionManager = localSelectionManager
         
         
+        // View Models
+        sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
+        inspectorVM = InspectorViewModel(localDataController, localSelectionManager)
+        
+        
+        // Delegates and DataSources
         localDataController.delegate = self
         localSelectionManager.delegate = self
     }
@@ -46,18 +57,18 @@ extension AppController: DataControllerDelegate {
     
     
     // MARK: - Graph Template
-    func newGraphTemplate(graphTemplate: GraphTemplate) {
+    func newGraphTemplate(_ graphTemplate: GraphTemplate) {
         selectionManager.selectedGraphTemplate = graphTemplate
     }
     
-    func preparingToDeleteGraphTemplate(graphTemplate: GraphTemplate) {
+    func preparingToDelete(graphTemplate: GraphTemplate) {
         selectionManager.preparingToDelete(graphTemplate: graphTemplate)
     }
     
     
     
     // MARK: - Parsersettings
-    func newParserSetting(parserSettings: ParserSettings) {
+    func newParserSetting(_ parserSettings: ParserSettings) {
         selectionManager.selectedParserSetting = parserSettings
     }
     

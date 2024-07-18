@@ -21,6 +21,8 @@ final class ParserSettings {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.parserSettings)
     var dataItems: [DataItem]?
     
+    var creationDate: Date
+    
     var newLineType: NewLineType
     
     var stringEncodingType: StringEncodingType
@@ -44,12 +46,15 @@ final class ParserSettings {
     
     
     
+    
     // MARK: Initializer
     init() {
         self.name = "Parser Name"
         
         self.nodes = []
         self.dataItems = []
+        
+        self.creationDate = .now
        
         self.newLineType = .CRLF
         self.stringEncodingType = .ascii
@@ -77,6 +82,8 @@ final class ParserSettings {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
         name = try values.decode(String.self, forKey: .name)
+        creationDate = try values.decode(Date.self, forKey: .creationDate)
+        
         nodes = []
         dataItems = []
         
@@ -98,6 +105,7 @@ final class ParserSettings {
         
         stopDataAtFirstEmptyLine = try values.decode(Bool.self, forKey: .stopDataAtFirstEmptyLine)
         hasFooter = try values.decode(Bool.self, forKey: .hasFooter)
+        
     }
     
     
@@ -108,6 +116,7 @@ extension ParserSettings: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case name
+        case creationDate
         
         case newLineType
         case stringEncodingType
@@ -132,6 +141,7 @@ extension ParserSettings: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(name, forKey: .name)
+        try container.encode(creationDate, forKey: .creationDate)
         try container.encode(newLineType, forKey: .newLineType)
         try container.encode(hasExperimentalDetails, forKey: .hasExperimentalDetails)
         

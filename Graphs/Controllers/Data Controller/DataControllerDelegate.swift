@@ -18,15 +18,15 @@ protocol DataControllerDelegate {
     
     
     //MARK: - ParserSettings
-    func newParserSetting(parserSettings: ParserSettings)
+    func newParserSetting(_ parserSettings: ParserSettings)
     
     func preparingToDelete(parserSettings: ParserSettings)
     
 
     // MARK: - Graph Templates
-    func newGraphTemplate(graphTemplate: GraphTemplate)
+    func newGraphTemplate(_ graphTemplate: GraphTemplate)
     
-    func preparingToDeleteGraphTemplate(graphTemplate: GraphTemplate)
+    func preparingToDelete(graphTemplate: GraphTemplate)
 }
 
 

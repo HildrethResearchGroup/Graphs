@@ -12,7 +12,7 @@ import SwiftData
 @Model
 final class Node {
     // MARK: - Properties
-    //var id: UUID
+    var id: UUID
     
     var originalURL: URL?
     
@@ -25,6 +25,8 @@ final class Node {
     
     @Relationship(deleteRule: .nullify, inverse: \DataItem.node)
     var dataItems: [DataItem]
+    
+    var creationDate: Date
     
     var graphTemplate: GraphTemplate?
     
@@ -44,12 +46,14 @@ final class Node {
     
     // MARK: - Initializers
     init(url: URL?, parent: Node?) {
-        //self.id = UUID()
+        self.id = UUID()
 
         self.originalURL = url
         self.parent = parent
         
         self.dataItems = []
+        
+        self.creationDate = .now
         
         if parent == nil {
             nodeTypeStorage = NodeType.root.intForStorage()
@@ -92,6 +96,11 @@ final class Node {
 }
 
 
+extension Node: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.id)
+    }
+}
 
 extension Node {
     static let defaultName = "New Node"

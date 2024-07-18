@@ -51,12 +51,18 @@ extension DataController {
     }
     
     func delete(_ parserSettings: ParserSettings) {
+        
+        delegate?.preparingToDelete(parserSettings: parserSettings)
+        
         modelContext.delete(parserSettings)
         try? modelContext.save()
         fetchData()
     }
     
     func delete(_ graphTemplate: GraphTemplate) {
+        
+        delegate?.preparingToDelete(graphTemplate: graphTemplate)
+        
         modelContext.delete(graphTemplate)
         try? modelContext.save()
         fetchData()

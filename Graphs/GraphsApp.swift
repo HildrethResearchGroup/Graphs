@@ -18,7 +18,7 @@ struct GraphsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(appController)
         }
         .environment(appController)
         

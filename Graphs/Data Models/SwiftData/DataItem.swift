@@ -23,6 +23,7 @@ final class DataItem {
     
     var parserSettings: ParserSettings?
     
+    var creationDate: Date
     
     @Transient
     private var resourceValues: URLResourceValues?
@@ -33,10 +34,10 @@ final class DataItem {
         //self.id = UUID()
         
         self.url = url
-        
         self.name = url.fileName
-        
         self.node = node
+        
+        self.creationDate = .now
     }
     
     

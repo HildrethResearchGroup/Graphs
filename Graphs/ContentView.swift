@@ -10,12 +10,20 @@ import SwiftUI
 
 struct ContentView: View {
     
+    var appController: AppController
+    
     @State private var visibility_sourceList: NavigationSplitViewVisibility = .all
     @State private var visibility_inspector = true
     
+    
+    init(_ appController: AppController) {
+        self.appController = appController
+    }
+    
+    
     var body: some View {
         NavigationSplitView {
-            Text("Source List")
+            SourceList(sourceListVM: appController.sourceListVM)
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
         } detail: {
             VSplitView {
@@ -27,7 +35,7 @@ struct ContentView: View {
             //.frame(minHeight: 100, maxHeight: .infinity)
         }
         .inspector(isPresented: $visibility_inspector) {
-            Inspector()
+            Inspector(appController.inspectorVM)
                 //.frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
                 .inspectorColumnWidth(min: 300, ideal: 350, max: 800)
                 .toolbar() {
@@ -53,5 +61,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(AppController())
 }

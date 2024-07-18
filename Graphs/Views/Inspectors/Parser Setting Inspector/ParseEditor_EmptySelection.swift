@@ -128,7 +128,7 @@ struct ParseEditor_EmptySelection: View {
                     Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
                 }
             }
-            .frame(width: 2*width + 25, alignment: .leading)
+            .frame(minWidth: 2*width + 25, alignment: .leading)
                 .disabled(true)
         }
     }

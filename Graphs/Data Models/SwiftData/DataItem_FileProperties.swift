@@ -30,7 +30,7 @@ extension DataItem {
     }
     
     @Transient
-    var creationDate: Date {
+    var contentCreationDate: Date {
         return urlResources()?.creationDate ?? .distantPast
     }
     

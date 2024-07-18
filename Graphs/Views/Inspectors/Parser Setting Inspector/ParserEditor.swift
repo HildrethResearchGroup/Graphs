@@ -176,7 +176,7 @@ struct ParserEditor: View {
                     Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
                 }
             }
-            .frame(width: 2*width + 25, alignment: .leading)
+            .frame(minWidth: 2*width + 25, alignment: .leading)
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasData)
         }

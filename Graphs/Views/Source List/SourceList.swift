@@ -13,65 +13,51 @@ struct SourceList: View {
     
     var body: some View {
         List(selection: $sourceListVM.selection) {
-            // UPDATE
             OutlineGroup(sourceListVM.rootNodes, id: \.self, children: \.subNodes) { nextNode in
                 HStack {
                     Image(systemName: "folder.fill")
                         .foregroundStyle(.secondary)
                     Text(nextNode.name)
                 }
-                // ADD
                 .contextMenu {
-                    Button("Create New Folder") {
-                        sourceListVM.createEmptyNode(withParent: nextNode)
-                    }
-                    Button("Delete \(sourceListVM.selection.count) Folders") {
-                        sourceListVM.deleteSelectedNodes()
-                    }
+                    Button_newFolder(withParent: nextNode)
+                    Button_DeleteSelectedNode()
                 }
                 .dropDestination(for: URL.self) { urls, _  in
-                    
-                    // UPDATE
                     let success = sourceListVM.importURLs(urls, intoNode: nextNode)
                     return success
                 }
-                // UPDATE
                 .alert(isPresented: $sourceListVM.presentURLImportError) { importAlert }
             }
-            
         }
-        
-        // ADD
         .contextMenu {
-            Button("Create New Folder") {
-                sourceListVM.createEmptyNode(withParent: nil)
+            Button_newFolder(withParent: nil)
+            Button("Deselect") {
+                sourceListVM.deselectNodes()
             }
         }
-        // UPDATE
         .dropDestination(for: URL.self) { urls, _  in
-            // UPDATE
             let success = sourceListVM.importURLs(urls, intoNode: nil)
             return success
         }
         .alert(isPresented: $sourceListVM.presentURLImportError) { return importAlert }
+        
     }
     
-    // REMOVE
-    /*
-     private func importURLs(_ urls: [URL], intoNode parentNode: Node?) {
-     do {
-     try sourceListVM.importURLs(urls, intoNode: parentNode)
-     } catch {
-     if let importError = error as? DataModel.ImportError {
-     if importError == .cannotImportFileWithoutANode {
-     self.showingAlert = true
-     }
-     }
-     }
-     }
-     
-     */
     
+    @ViewBuilder
+    private func Button_newFolder(withParent parentNode: Node?) -> some View {
+        Button("Create New Folder") {
+            sourceListVM.createEmptyNode(withParent: parentNode)
+        }
+    }
+    
+    @ViewBuilder
+    private func Button_DeleteSelectedNode() -> some View {
+        Button("Delete \(sourceListVM.selection.count) Folders") {
+            sourceListVM.deleteSelectedNodes()
+        }
+    }
     
     private var importAlert: Alert {
         Alert(title: Text("Import Error"), message: Text("Files must be imported into an existing Group"))

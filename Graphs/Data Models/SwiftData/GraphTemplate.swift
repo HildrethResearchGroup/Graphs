@@ -20,6 +20,8 @@ class GraphTemplate {
     @Relationship(deleteRule: .nullify, inverse: \DataItem.graphTemplate)
     var dataItems: [DataItem]?
     
+    var creationDate: Date
+    
     init?(name: String? = nil, url: URL) {
         
         if url.pathExtension != URL.dataGraphFileExtension {
@@ -34,6 +36,7 @@ class GraphTemplate {
         
         self.name = name ?? url.fileName
         self.url = url
+        self.creationDate = .now
     }
     
 }

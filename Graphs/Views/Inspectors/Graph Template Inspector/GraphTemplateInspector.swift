@@ -21,13 +21,13 @@ struct GraphTemplateInspector: View {
             AvailableGraphTemplates
             
             Divider()
-            
-            if let selectedGraphTemplate = selection {
-                GraphTemplateEditor(graphTemplate: selectedGraphTemplate)
-            } else {
-                GraphTemplateEditor_EmptySelection()
+            ScrollView {
+                if let selectedGraphTemplate = selection {
+                    GraphTemplateEditor(graphTemplate: selectedGraphTemplate)
+                } else {
+                    GraphTemplateEditor_EmptySelection()
+                }
             }
-            
             Spacer()
         }
     }
@@ -47,6 +47,7 @@ struct GraphTemplateInspector: View {
             DeleteGraphTemplateButton
                 .disabled(selection == nil)
         }
+        .padding(.horizontal)
     }
     
     // MARK: - Buttons

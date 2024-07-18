@@ -12,13 +12,17 @@ struct GraphTemplateEditor_EmptySelection: View {
     
     @State var name: String = ""
     
+    private let width = 100.0
+    private let fontType: Font = .headline
+    
     var body: some View {
         VStack {
             HStack {
                 Text("Name:")
+                    .font(fontType)
                 TextField("Name:", text: $name)
-                    .frame(width: 200)
-                    .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+                    .frame(minWidth: width, maxWidth: .infinity)
+                    .disabled(true)
                 Spacer()
             }
         }
