@@ -22,7 +22,7 @@ struct Parser {
         
         var index = 0
         
-        guard let parserSettings = dataItem.parserSettings else {throw ParserError.noParseSettings}
+        guard let parserSettings = dataItem.getAssociatedParserSettings() else {throw ParserError.noParseSettings}
         
                 
         for try await nextLine in dataItem.url.lines {

@@ -43,7 +43,7 @@ class LineNumberViewModel {
         self.lineNumbers = ""
         self.combinedLineNumbersAndContent = ""
         
-        if let parserSettings = dataItem?.parserSettings {
+        if let parserSettings = dataItem?.getAssociatedParserSettings() {
             self.newLineType = parserSettings.newLineType
             self.stringEncodingType = parserSettings.stringEncodingType
         } else {
@@ -177,14 +177,14 @@ class LineNumberViewModel {
 
 extension LineNumberViewModel {
     func updateParserSettings() {
-        if let parserSettings = dataItem?.parserSettings {
+        if let parserSettings = dataItem?.getAssociatedParserSettings() {
             parserSettings.newLineType = self.newLineType
             parserSettings.stringEncodingType = self.stringEncodingType
         }
     }
     
     func updateParserIsDisabled() -> Bool {
-        if dataItem?.parserSettings == nil {
+        if dataItem?.getAssociatedParserSettings() == nil {
             return true
         } else {
             return false

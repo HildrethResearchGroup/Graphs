@@ -232,9 +232,8 @@ extension DataController {
        
         modelContext.insert(newGraphTemplate)
         
-        node?.graphTemplate = newGraphTemplate
-        
-        
+        node?.setGraphTemplate(withInputType: .directlySet, and: newGraphTemplate)
+                
         delegate?.newGraphTemplate(newGraphTemplate)
         
         return newGraphTemplate
@@ -248,9 +247,7 @@ extension DataController {
         
         modelContext.insert(newParserSettings)
         
-        if node != nil {
-            node?.parserSettings = newParserSettings
-        }
+        node?.setParserSetting(withInputType: .directlySet, and: newParserSettings)
         
         fetchData()
         
@@ -275,7 +272,9 @@ extension DataController {
             
             modelContext.insert(newParserSettings)
             
-            parentNode?.parserSettings = newParserSettings
+            parentNode?.setParserSetting(withInputType: .directlySet, and: newParserSettings)
+            
+            //parentNode?.parserSettings = newParserSettings
             
             fetchData()
             

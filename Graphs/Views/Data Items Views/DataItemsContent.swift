@@ -1,5 +1,5 @@
 //
-//  DataItemsListView.swift
+//  DataItemsContent.swift
 //  Graphs
 //
 //  Created by Owen Hildreth on 7/18/24.
@@ -8,25 +8,25 @@
 
 import SwiftUI
 
-struct DataItemsListView: View {
+struct DataItemsContent: View {
+    
     @Bindable var viewModel: DataListViewModel
     
     init(_ viewModel: DataListViewModel) {
         self.viewModel = viewModel
     }
     
+    
     var body: some View {
-        List(viewModel.dataItems, id: \.id, selection: $viewModel.selection) { nextDataItem in
-            Text(nextDataItem.name)
+        VSplitView {
+            DataItemsListView(viewModel)
+            Text("Graphs")
         }
     }
 }
 
 
 // MARK: - Preview
-/*
- #Preview {
-     DataItemsListView()
- }
- */
-
+#Preview {
+    DataItemsContent(DataListViewModel(DataController(withDelegate: nil), SelectionManager()))
+}

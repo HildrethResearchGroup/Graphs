@@ -21,11 +21,16 @@ final class DataItem: Identifiable, Hashable {
     
     var node: Node?
     
-    var graphTemplate: GraphTemplate?
+    private var graphTemplate: GraphTemplate?
     
-    var parserSettings: ParserSettings?
+    private var parserSettings: ParserSettings?
     
     var creationDate: Date
+    
+    var graphTemplateInputType: InputType
+    
+    var parserSettingsInputType: InputType
+    
     
     @Transient
     private var resourceValues: URLResourceValues?
@@ -40,6 +45,8 @@ final class DataItem: Identifiable, Hashable {
         self.node = node
         
         self.creationDate = .now
+        self.graphTemplateInputType = .defaultFromParent
+        self.parserSettingsInputType = .defaultFromParent
     }
     
     
@@ -50,6 +57,65 @@ final class DataItem: Identifiable, Hashable {
         
         return resourceValues
     }
+    
+    
+    func setGraphTemplate(withInputType inputType: InputType, and newGraphTemplate: GraphTemplate?) {
+        self.graphTemplateInputType = inputType
+        
+        switch inputType {
+        case .none:
+            self.graphTemplate = nil
+        case .defaultFromParent:
+            self.graphTemplate = nil
+        case .directlySet:
+            if let newGraphTemplate {
+                self.graphTemplate = newGraphTemplate
+            } else {
+                self.graphTemplateInputType = .none
+                self.graphTemplate = nil
+            }
+        }
+    }
+    
+    
+    func getAssociatedGraphTemplate() -> GraphTemplate? {
+        switch graphTemplateInputType {
+        case .none: return nil
+        case .directlySet: return self.graphTemplate
+        case .defaultFromParent:
+            return node?.getAssociatedGraphTemplate()
+        }
+    }
+    
+    
+    func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
+        
+        self.parserSettingsInputType = inputType
+        
+        switch inputType {
+        case .none:
+            self.parserSettings = nil
+        case .defaultFromParent:
+            self.parserSettings = nil
+        case .directlySet:
+            if let newParserSettings {
+                self.parserSettings = newParserSettings
+            } else {
+                self.parserSettingsInputType = .none
+                self.parserSettings = nil
+            }
+        }
+    }
+    
+    
+    func getAssociatedParserSettings() -> ParserSettings? {
+        switch parserSettingsInputType {
+        case .none: return nil
+        case .directlySet: return self.parserSettings
+        case .defaultFromParent: return node?.getAssociatedParserSettings()
+        }
+    }
+
 }
 
 

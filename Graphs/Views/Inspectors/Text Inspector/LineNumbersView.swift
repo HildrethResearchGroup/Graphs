@@ -30,7 +30,7 @@ struct LineNumbersView: View {
 }
 
 
-
+// MARK: - Preview
 #Preview {
     LineNumbersView(lineNumbers: "1\n2\n3", content: "Hello.\nHow are you?  This will be a long line to make sure the line numbers line up properly.  Don't stop typing.\nThird Line")
 }

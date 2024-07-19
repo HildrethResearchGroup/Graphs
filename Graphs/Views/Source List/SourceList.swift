@@ -160,3 +160,10 @@ struct SourceList: View {
         Alert(title: Text("Import Error"), message: Text("Files must be imported into an existing Group"))
     }
 }
+
+// MARK: - Preview
+/*
+ #Preview {
+     SourceList()
+ }
+ */

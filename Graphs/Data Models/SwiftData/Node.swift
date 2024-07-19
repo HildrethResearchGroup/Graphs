@@ -28,9 +28,13 @@ final class Node {
     
     var creationDate: Date
     
-    var graphTemplate: GraphTemplate?
     
-    var parserSettings: ParserSettings?
+    private var graphTemplate: GraphTemplate?
+    var graphTemplateInputType: InputType
+    
+    private var parserSettings: ParserSettings?
+    var parserSettingsInputType: InputType
+    
     
     var nodeTypeStorage: Int
     
@@ -70,6 +74,15 @@ final class Node {
         self.subNodes = []
         
         self.name = url?.fileName ?? Node.defaultName
+        
+        
+        if parent != nil {
+            parserSettingsInputType = .defaultFromParent
+            graphTemplateInputType = .defaultFromParent
+        } else {
+            parserSettingsInputType = .none
+            graphTemplateInputType = .none
+        }
     }
     
     
@@ -84,6 +97,66 @@ final class Node {
         }
     }
     
+    
+    func setGraphTemplate(withInputType inputType: InputType, and newGraphTemplate: GraphTemplate?) {
+        self.graphTemplateInputType = inputType
+        
+        switch inputType {
+        case .none:
+            self.graphTemplate = nil
+        case .defaultFromParent:
+            self.graphTemplate = nil
+        case .directlySet:
+            if let newGraphTemplate {
+                self.graphTemplate = newGraphTemplate
+            } else {
+                self.graphTemplateInputType = .none
+                self.graphTemplate = nil
+            }
+        }
+    }
+    
+    
+    func getAssociatedGraphTemplate() -> GraphTemplate? {
+        switch graphTemplateInputType {
+        case .none: return nil
+        case .directlySet: return self.graphTemplate
+        case .defaultFromParent:
+            return parent?.getAssociatedGraphTemplate()
+        }
+    }
+    
+    
+    func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
+        
+        self.parserSettingsInputType = inputType
+        
+        switch inputType {
+        case .none:
+            self.parserSettings = nil
+        case .defaultFromParent:
+            self.parserSettings = nil
+        case .directlySet:
+            if let newParserSettings {
+                self.parserSettings = newParserSettings
+            } else {
+                self.parserSettingsInputType = .none
+                self.parserSettings = nil
+            }
+        }
+    }
+    
+    
+    func getAssociatedParserSettings() -> ParserSettings? {
+        switch parserSettingsInputType {
+        case .none: return nil
+        case .directlySet: return self.parserSettings
+        case .defaultFromParent:
+            return parent?.getAssociatedParserSettings()
+        }
+    }
+    
+
     
     func flattenedDataItems() -> [DataItem] {
         
@@ -110,7 +183,6 @@ final class Node {
         
         return output
     }
-
 }
 
 

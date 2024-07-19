@@ -66,7 +66,7 @@ struct TextInspector: View {
 }
 
 
-
+// MARK: - Preview
  #Preview {
      TextInspector(dataItem: DataItem(url: Bundle.main.url(forResource: "diluteHF - 3 - Volts", withExtension: "dat") ?? URL(fileURLWithPath: ""), node: Node(url: nil, parent: nil)))
  }

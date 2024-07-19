@@ -31,6 +31,8 @@ struct Inspector: View {
     }
 }
 
+
+// MARK: - Preview
 #Preview {
     Inspector(InspectorViewModel(DataController(withDelegate: nil), SelectionManager()))
 }

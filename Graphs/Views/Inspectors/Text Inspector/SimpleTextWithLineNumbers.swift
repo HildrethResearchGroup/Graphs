@@ -23,6 +23,8 @@ struct SimpleTextWithLineNumbers: View {
     }
 }
 
+
+// MARK: - Preview
 #Preview {
     SimpleTextWithLineNumbers("1:\tHello.\n2:\tHow are you?  This will be a long line to make sure the line numbers line up properly.  Don't stop typing.\n3:\tThird Line")
 }

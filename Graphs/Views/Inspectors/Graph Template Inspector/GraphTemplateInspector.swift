@@ -75,6 +75,8 @@ struct GraphTemplateInspector: View {
     
 }
 
+
+// MARK: - Preview
 #Preview {
     GraphTemplateInspector()
 }

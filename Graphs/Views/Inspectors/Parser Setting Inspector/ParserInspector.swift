@@ -83,6 +83,7 @@ struct ParserInspector: View {
 
 
 
+// MARK: - Preview
 #Preview {
     ParserInspector(ParserSettingsViewModel(DataController(withDelegate: nil), SelectionManager())).frame(height: 1000)
 }

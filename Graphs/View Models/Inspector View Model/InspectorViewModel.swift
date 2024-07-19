@@ -18,6 +18,8 @@ class InspectorViewModel {
     
     var graphTemplateInspectorVM: GraphTemplateInspectorViewModel
     
+    var dataItemsVM: DataItemsInspectorViewModel
+    
     var firstDataItem: DataItem? {
         dataController.selectedDataItems.first
     }
@@ -30,5 +32,8 @@ class InspectorViewModel {
         self.parserSettingsVM = ParserSettingsViewModel(dataController, selectionManager)
         
         self.graphTemplateInspectorVM = GraphTemplateInspectorViewModel(dataController, selectionManager)
+        
+        self.dataItemsVM = DataItemsInspectorViewModel(dataController, selectionManager)
+        
     }
 }

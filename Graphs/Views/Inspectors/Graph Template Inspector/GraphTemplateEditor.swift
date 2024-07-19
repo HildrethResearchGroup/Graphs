@@ -32,10 +32,14 @@ struct GraphTemplateEditor: View {
             GraphViewRepresentable(graphController: graphController)
             
         }
-        
-        
-        
-        
     }
-    
 }
+
+
+// MARK: - Preview
+/*
+ #Preview {
+     GraphTemplateEditor()
+ }
+ */
+

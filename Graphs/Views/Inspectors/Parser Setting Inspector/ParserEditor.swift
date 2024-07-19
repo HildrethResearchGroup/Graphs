@@ -185,6 +185,8 @@ struct ParserEditor: View {
 
 }
 
+
+// MARK: - Preview
 #Preview {
     ParserEditor(parseSettings: ParserSettings())
 }

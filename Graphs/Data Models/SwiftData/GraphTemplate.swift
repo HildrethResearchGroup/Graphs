@@ -14,11 +14,14 @@ class GraphTemplate {
     var name: String
     var url: URL
     
-    @Relationship(deleteRule: .nullify, inverse: \Node.graphTemplate)
-    var node: [Node]?
+    /*
+     @Relationship(deleteRule: .nullify, inverse: \Node.graphTemplate)
+     var node: [Node]?
+     
+     @Relationship(deleteRule: .nullify, inverse: \DataItem.graphTemplate)
+     var dataItems: [DataItem]?
+     */
     
-    @Relationship(deleteRule: .nullify, inverse: \DataItem.graphTemplate)
-    var dataItems: [DataItem]?
     
     var creationDate: Date
     

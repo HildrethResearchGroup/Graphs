@@ -14,12 +14,14 @@ final class ParserSettings {
     
     var name: String
     
+    /*
+     @Relationship(deleteRule: .nullify, inverse: \Node.parserSettings)
+     var nodes: [Node]?
+     
+     @Relationship(deleteRule: .nullify, inverse: \DataItem.parserSettings)
+     var dataItems: [DataItem]?
+     */
     
-    @Relationship(deleteRule: .nullify, inverse: \Node.parserSettings)
-    var nodes: [Node]?
-    
-    @Relationship(deleteRule: .nullify, inverse: \DataItem.parserSettings)
-    var dataItems: [DataItem]?
     
     var creationDate: Date
     
@@ -51,8 +53,8 @@ final class ParserSettings {
     init() {
         self.name = "Parser Name"
         
-        self.nodes = []
-        self.dataItems = []
+        //self.nodes = []
+        //self.dataItems = []
         
         self.creationDate = .now
        
@@ -84,8 +86,8 @@ final class ParserSettings {
         name = try values.decode(String.self, forKey: .name)
         creationDate = try values.decode(Date.self, forKey: .creationDate)
         
-        nodes = []
-        dataItems = []
+        //nodes = []
+        //dataItems = []
         
         newLineType = try values.decode(NewLineType.self, forKey: .newLineType)
         stringEncodingType = try values.decode(StringEncodingType.self, forKey: .stringEncodingType)
