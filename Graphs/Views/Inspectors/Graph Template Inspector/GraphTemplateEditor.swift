@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftData
 
+
 struct GraphTemplateEditor: View {
     
     @Bindable var graphTemplate: GraphTemplate
@@ -20,18 +21,10 @@ struct GraphTemplateEditor: View {
     
     var body: some View {
         
-        VStack {
-            HStack {
-                Text("Name:")
-                    .font(fontType)
-                TextField("Name:", text: $graphTemplate.name)
-                    .frame(minWidth: width, maxWidth: .infinity)
-                Spacer()
-            }
-            
+        Form() {
+            TextField("Name:", text: $graphTemplate.name)
             GraphViewRepresentable(graphController: graphController)
-            
-        }
+        }.formStyle(.grouped)
     }
 }
 

@@ -1,19 +1,18 @@
 //
-//  DataItemsInspector.swift
+//  NodesInspectorView.swift
 //  Graphs
 //
-//  Created by Owen Hildreth on 7/18/24.
+//  Created by Owen Hildreth on 7/19/24.
 //  Copyright © 2024 Connor Barnes. All rights reserved.
 //
 
 import SwiftUI
 
-struct DataItemsInspector: View {
+struct NodesInspectorView: View {
     
-    @Bindable var viewModel: DataItemsInspectorViewModel
+    @Bindable var viewModel: NodeInspectorViewModel
     
-    
-    init(_ viewModel: DataItemsInspectorViewModel) {
+    init(_ viewModel: NodeInspectorViewModel) {
         self.viewModel = viewModel
     }
     
@@ -22,17 +21,7 @@ struct DataItemsInspector: View {
         Form {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
-                //.disabled(viewModel.disableNameTextfield)
-            
-            HStack {
-                Text("FilePath:")
-                Text(viewModel.filePath)
-                Spacer()
-                Button("􀉣") {
-                    
-                }
-                .disabled(viewModel.disableNameFilepath)
-            }
+                .disabled(viewModel.disableNameTextfield)
             
             VStack {
                 HStack {
@@ -63,7 +52,6 @@ struct DataItemsInspector: View {
             }
             
         }.formStyle(.grouped)
-        
     }
     
     
@@ -103,10 +91,11 @@ struct DataItemsInspector: View {
             }
         }
     }
+    
 }
 
 
 // MARK: - Preview
 #Preview {
-    DataItemsInspector(DataItemsInspectorViewModel(DataController(withDelegate: nil), SelectionManager()))
+    NodesInspectorView(NodeInspectorViewModel(DataController(withDelegate: nil), SelectionManager()))
 }

@@ -17,36 +17,30 @@ struct ParseEditor_EmptySelection: View {
     
     @State var separator: Separator = .comma
     
-    private let width = 100.0
+    //private let width = 100.0
     private let fontType: Font = .headline
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Name:").font(fontType)
-                TextField("Name:", text: $name)
-                    .frame(minWidth: 100, maxWidth: .infinity)
-                    .disabled(true)
-                Spacer()
-            }
-            HStack {
-                Picker("New Line", selection: $newLineType) {
+        Form() {
+            TextField("Name:", text: $name)
+            //.frame(minWidth: 100, maxWidth: .infinity)
+                .disabled(true)
+            VStack {
+                Picker("New Line:", selection: $newLineType) {
                     ForEach(NewLineType.allCases) { nextLineType in
                         Text(nextLineType.name)
                     }
                 }
-                .frame(width: 120)
-                .disabled(true)
+                .help(NewLineType.toolTip)
                 
-                Picker("Encoding", selection: $stringEncoding) {
+                Picker("Encoding:", selection: $stringEncoding) {
                     ForEach(StringEncodingType.allCases) { nextEncoding in
                         Text(nextEncoding.rawValue)
                     }
                 }
-                .frame(minWidth: 150, maxWidth: 200)
-                .disabled(true)
+                .help(StringEncodingType.toolTip)
                 
-                Spacer()
+                
             }
             
             EditExperimentalDetails
@@ -55,37 +49,17 @@ struct ParseEditor_EmptySelection: View {
             
             EditData
         }
+        .formStyle(.grouped)
+        .disabled(true)
     }
     
     @ViewBuilder
     var EditExperimentalDetails: some View {
-        
-        VStack {
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $toggleState).disabled(true)
-                Text("Experimental Details")
-                    .font(fontType)
-                Spacer()
-            }
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-                
-            }.padding(.leading)
-            
-            HStack {
-                
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-            }.padding(.leading)
+        VStack(alignment: .leading) {
+            Toggle("Experimental Details:", isOn: $toggleState)
+                .font(.headline)
+            TextField("Starting Line:", value: $number, format: .number)
+            TextField("Ending Line:", value: $number, format: .number)
         }
     }
     
@@ -94,42 +68,20 @@ struct ParseEditor_EmptySelection: View {
     var EditHeader: some View {
         
         VStack(alignment: .leading) {
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $toggleState).disabled(true)
-                Text("Header")
-                    .font(fontType)
-                Spacer()
-            }
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-                
-            }.padding(.leading)
+            Toggle("Header:", isOn: $toggleState)
+                .font(fontType)
             
-            HStack {
-                
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-            }.padding(.leading)
-            Picker(selection: $separator) {
+            TextField("Starting Line:", value: $number, format: .number)
+
+            TextField("Ending Line:", value: $number, format: .number)
+            
+            Picker("Separator:", selection: $separator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
                 }
-            } label: {
-                HStack {
-                    Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
-                }
             }
-            .frame(minWidth: 2*width + 25, alignment: .leading)
-                .disabled(true)
+            .help(Separator.toolTip)
+            //.padding(.leading, 10)
         }
     }
     
@@ -138,42 +90,27 @@ struct ParseEditor_EmptySelection: View {
     var EditData: some View {
         
         VStack(alignment: .leading) {
+            Toggle("Data:", isOn: $toggleState)
+                .font(fontType)
+                .disabled(true)
             
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $toggleState)
-                    .disabled(true)
-                Text("Data")
-                    .font(fontType)
-                Spacer()
-            }
+            TextField("Starting Line:", value: $number, format: .number)
+                .disabled(true)
             
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-                
-            }.padding(.leading)
-            
-            HStack {
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $number, format: .number)
-                    .frame(width: width)
-                    .disabled(true)
-                Spacer()
-            }.padding(.leading)
-            Picker(selection: $separator) {
+            // Data Separator
+            Picker("Separator:", selection: $separator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
                 }
-            } label: {
-                HStack {
-                    Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
-                }
-            }.frame(width: 2*width + 25, alignment: .leading)
+            }
+            //.frame(minWidth: 2*width + 25, alignment: .leading)
+            .help(Separator.toolTip)
+            .disabled(true)
+            .padding(.leading, 10)
+            
+            Toggle("Stop at Empty Line", isOn: $toggleState)
+                .padding(.leading, 10)
+                .padding(.vertical, 10)
                 .disabled(true)
         }
         

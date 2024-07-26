@@ -25,16 +25,14 @@ struct ParserInspector: View {
             AvailableParserSettings
             
             Divider()
-            ScrollView {
+            ScrollView(.vertical) {
                 if let selectedParser = viewModel.selection {
                     ParserEditor(parseSettings: selectedParser)
-                        .padding(.horizontal)
                 } else {
                     ParseEditor_EmptySelection()
-                        .padding(.horizontal)
                 }
             }
-            Spacer()
+            
         }
     }
     

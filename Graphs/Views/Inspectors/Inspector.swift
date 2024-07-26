@@ -17,6 +17,10 @@ struct Inspector: View {
     
     var body: some View {
         TabView {
+            NodesInspectorView(viewModel.nodeInspectorVM)
+                .tabItem { Text("􀈕") }
+            DataItemsInspector(viewModel.dataItemsVM)
+                .tabItem { Text("􀈿") }
             ParserInspector(viewModel.parserSettingsVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
@@ -25,8 +29,9 @@ struct Inspector: View {
                 .tabItem { Text("􀟪") }
             TextInspector(dataItem: viewModel.firstDataItem)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem { Text("􀈷") }
-        }.frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
+                .tabItem { Text("T") }
+        }
+        .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         
     }
 }

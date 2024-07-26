@@ -13,11 +13,6 @@ struct ParserEditor: View {
     
     @Bindable var parseSettings: ParserSettings
     
-    //@AppStorage("parserInspector_experimentalDetailsDisclosed") var experimentalDetailsDisclosed = false
-    //@AppStorage("parserInspector_headerDisclosed") var headerDisclosed = false
-    //@AppStorage("parserInspector_dataDisclosed") var dataDisclosed = false
-    
-    
     
     private let width = 100.0
     private let fontType: Font = .headline
@@ -25,32 +20,27 @@ struct ParserEditor: View {
     
     var body: some View {
         
-        VStack {
-            HStack {
-                Text("Name:").font(fontType)
-                TextField("Name:", text: $parseSettings.name)
-                    .frame(minWidth: 100, maxWidth: .infinity)
-                Spacer()
-            }
-            HStack {
-                Picker("New Line", selection: $parseSettings.newLineType) {
+        Form() {
+            TextField("Name:", text: $parseSettings.name)
+                //.frame(minWidth: 100, maxWidth: .infinity)
+            
+            VStack {
+                Picker("New Line:", selection: $parseSettings.newLineType) {
                     ForEach(NewLineType.allCases) { nextLineType in
                         Text(nextLineType.name)
                     }
-
                 }
-                .frame(width: 120)
+                //.frame(minWidth: 150, maxWidth: 200)
                 .help(NewLineType.toolTip)
                 
-                Picker("Encoding", selection: $parseSettings.stringEncodingType) {
+                Picker("Encoding:", selection: $parseSettings.stringEncodingType) {
                     ForEach(StringEncodingType.allCases) { nextEncoding in
                         Text(nextEncoding.rawValue)
                     }
                 }
-                .frame(minWidth: 150, maxWidth: 200)
+                //.frame(minWidth: 150, maxWidth: 200)
                 .help(StringEncodingType.toolTip)
                 
-                Spacer()
             }
             
             EditExperimentalDetails
@@ -59,81 +49,44 @@ struct ParserEditor: View {
             
             EditData
 
-        }
+        }.formStyle(.grouped)
         
     }
     
     @ViewBuilder
     var EditExperimentalDetails: some View {
         VStack {
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $parseSettings.hasExperimentalDetails)
-                Text("Experimental Details")
-                    .font(fontType)
-                Spacer()
-            }
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $parseSettings.experimentalDetailsStart, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasExperimentalDetails)
-                Spacer()
-                
-            }.padding(.leading)
-            
-            HStack {
-                
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $parseSettings.experimentalDetailsEnd, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasExperimentalDetails)
-                Spacer()
-            }.padding(.leading)
+            Toggle("Experimental Details:", isOn: $parseSettings.hasExperimentalDetails)
+                .font(.headline)
+            TextField("Starting Line:", value: $parseSettings.experimentalDetailsStart, format: .number)
+                .disabled(!parseSettings.hasExperimentalDetails)
+            TextField("Ending Line:", value: $parseSettings.experimentalDetailsEnd, format: .number)
+                .disabled(!parseSettings.hasExperimentalDetails)
         }
     }
     
     @ViewBuilder
     var EditHeader: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $parseSettings.hasHeader)
-                Text("Header")
-                    .font(fontType)
-                Spacer()
-            }
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $parseSettings.headerStart, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasHeader)
-                Spacer()
-                
-            }.padding(.leading)
+            Toggle("Header:", isOn: $parseSettings.hasHeader)
+                .font(fontType)
             
-            HStack {
-                
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Ending Line", value: $parseSettings.headerEnd, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasHeader)
-                Spacer()
-            }.padding(.leading)
-            Picker(selection: $parseSettings.headerSeparator) {
+            TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
+                //.frame(width: width)
+                .disabled(!parseSettings.hasHeader)
+
+            TextField("Ending Line:", value: $parseSettings.headerEnd, format: .number)
+                //.frame(width: width)
+                .disabled(!parseSettings.hasHeader)
+            
+            Picker("Separator:", selection: $parseSettings.headerSeparator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
                 }
-            } label: {
-                HStack {
-                    Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
-                }
             }
-            .frame(width: 2*width + 25, alignment: .leading)
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasHeader)
+            .padding(.leading, 10)
         }
         
     }
@@ -142,43 +95,26 @@ struct ParserEditor: View {
     var EditData: some View {
         
         VStack(alignment: .leading) {
-            
-            HStack(alignment: .bottom) {
-                Toggle("", isOn: $parseSettings.hasData)
-                Text("Data")
-                    .font(fontType)
-                Spacer()
-            }
-            
-            HStack {
-                Text("Starting Line")
-                    .frame(width: width, alignment: .leading)
-                TextField("Starting Line", value: $parseSettings.dataStart, format: .number)
-                    .frame(width: width)
-                    .disabled(!parseSettings.hasData)
-                Spacer()
-                
-            }.padding(.leading)
-            
-            HStack {
-                Text("Ending Line")
-                    .frame(width: width, alignment: .leading)
-                Spacer()
-            }.padding(.leading)
+            Toggle("Data:", isOn: $parseSettings.hasData)
+                .font(fontType)
+            TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
+                .disabled(!parseSettings.hasData)
             
             // Data Separator
-            Picker(selection: $parseSettings.dataSeparator) {
+            Picker("Separator:", selection: $parseSettings.dataSeparator) {
                 ForEach(Separator.allCases) { nextSeparator in
                     Text(nextSeparator.name)
                 }
-            } label: {
-                HStack {
-                    Text("Separator").frame(width: width, alignment: .leading).padding(.leading)
-                }
             }
-            .frame(minWidth: 2*width + 25, alignment: .leading)
+            //.frame(minWidth: 2*width + 25, alignment: .leading)
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasData)
+            .padding(.leading, 10)
+            
+            Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
+                .padding(.leading, 10)
+                .padding(.vertical, 10)
+                .disabled(!parseSettings.hasData)
         }
         
     }

@@ -21,14 +21,13 @@ struct GraphTemplateInspector: View {
             AvailableGraphTemplates
             
             Divider()
-            ScrollView {
+            ScrollView(.vertical) {
                 if let selectedGraphTemplate = selection {
                     GraphTemplateEditor(graphTemplate: selectedGraphTemplate)
                 } else {
                     GraphTemplateEditor_EmptySelection()
                 }
             }
-            Spacer()
         }
     }
     

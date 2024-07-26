@@ -19,14 +19,29 @@ class DataItemsInspectorViewModel {
     }
     
     
+    var availableParserSettings: [ParserSettings] {
+        get { dataController.parserSettings }
+    }
+    
+    var availableGraphTemplates: [GraphTemplate] {
+        get { dataController.graphTemplates }
+    }
+    
+    
     var name: String {
         didSet {
-            if dataItems.count == 1 {
-                if let onlyDataItem = dataItems.first {
-                    onlyDataItem.name = name
+            if name != oldValue {
+                if dataItems.count == 1 {
+                    if let onlyDataItem = dataItems.first {
+                        onlyDataItem.name = name
+                    }
                 }
             }
         }
+    }
+    
+    var dataItemsCount: Int {
+        dataItems.count
     }
     
     
@@ -41,7 +56,7 @@ class DataItemsInspectorViewModel {
     
     
     private func setInitialName() {
-        switch dataController.selectedDataItems.count {
+        switch dataItemsCount {
         case 0: name = "No Selection"
         case 1: name = dataController.selectedDataItems.first?.name ?? "No Name"
         default: name = "Multiple Selection"
@@ -57,7 +72,7 @@ class DataItemsInspectorViewModel {
     }
     
     var disableNameTextfield: Bool {
-        if dataController.selectedDataItems.count == 0 {
+        if dataItemsCount == 0 {
             return true
         } else {
             return false
@@ -67,7 +82,7 @@ class DataItemsInspectorViewModel {
     
     // MARK: - FilePath Content
     var filePath: String {
-        switch dataController.selectedDataItems.count {
+        switch dataItemsCount {
         case 0: return "No Selection"
         case 1: return dataController.selectedDataItems.first?.url.path() ?? "No Filepath Could be Created"
         default: return "Multiple Selection"
@@ -75,25 +90,80 @@ class DataItemsInspectorViewModel {
     }
     
     var disableNameFilepath: Bool {
-        switch dataController.selectedDataItems.count {
+        switch dataItemsCount {
         case 0: return true
         case 1: return false
         default: return true
         }
     }
     
+    var disableSettingsUpdate: Bool {
+        if dataItemsCount == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
+
+
+// MARK: - Settings
+extension DataItemsInspectorViewModel {
+    // MARK: - Parser Selection
     
-    // MARK: - Parser Selection Content
-    func availableParsers() -> [String] {
-        var output = ["None", "From Parent"]
+    func updateParserSetting(with inputType: InputType, and newParserSettings: ParserSettings?) {
+        for nextDataItem in dataItems {
+            nextDataItem.setParserSetting(withInputType: inputType, and: newParserSettings)
+        }
+    }
+    
+    var parserSettingsName: String {
+        switch dataItemsCount {
+        case 0: return "No Data Selected"
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
+            
+            switch dataItem.parserSettingsInputType {
+            case .none:
+                return "No Parser Selected"
+            case .defaultFromParent:
+                return "Folder - \(dataItem.getAssociatedParserSettings()?.name ?? "Unamed Parser")"
+            case .directlySet:
+                return dataItem.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
+            }
         
-        output.append(contentsOf: dataController.parserSettings.map( {$0.name} ))
-        
-        return output
+        default: return "Multiple Selection"
+        }
     }
     
     
+    // MARK: - Graph Template Selection
+    func updateGraphtemplate(with inputType: InputType, and newGraphTemplate: GraphTemplate?) {
+        for nextDataItem in dataItems {
+            nextDataItem.setGraphTemplate(withInputType: inputType, and: newGraphTemplate)
+        }
+    }
     
+    
+    var graphTemplateName: String {
+        switch dataItemsCount {
+        case 0: return "No Data Selected"
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
+            
+            switch dataItem.graphTemplateInputType {
+            case .none:
+                return "No Graph Selected"
+            case .defaultFromParent:
+                return "Folder - \(dataItem.getAssociatedGraphTemplate()?.name ?? "Unamed Graph")"
+            case .directlySet:
+                return dataItem.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
+            }
+        
+        default: return "Multiple Selection"
+        }
+    }
 }
 
 

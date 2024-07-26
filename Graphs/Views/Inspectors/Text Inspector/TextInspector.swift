@@ -23,34 +23,36 @@ struct TextInspector: View {
     
     var body: some View {
         VStack(alignment:.leading ) {
-            HStack {
-                ParsingOptions()
+            Form() {
                 Toggle("Simplified", isOn: $textInspectorIsSimple)
                     .help("Some data files have hidden characters that cause extra wrapping.  View your data using the Simplified view to verify that the lines numbers are correct.")
+                ParsingOptions()
             }
+            .formStyle(.grouped)
+            .frame(maxHeight: 135)
+            
             if textInspectorIsSimple {
                 SimpleTextWithLineNumbers(viewModel.combinedLineNumbersAndContent)
+                    .frame(maxHeight: .infinity)
             } else {
                 LineNumbersView(lineNumbers: viewModel.lineNumbers, content: viewModel.content)
+                    .frame(maxHeight: .infinity)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onChange(of: dataItem) {
             viewModel.dataItem = dataItem
         }
-        
     }
     
     
     @ViewBuilder
     func ParsingOptions() -> some View {
-        HStack {
+        VStack {
             Picker("New Line", selection: $viewModel.newLineType) {
                 ForEach(NewLineType.allCases) { nextLineType in
                     Text(nextLineType.name)
                 }
             }
-            .frame(width: 120)
             .help(NewLineType.toolTip)
             
             Picker("Encoding", selection: $viewModel.stringEncodingType) {
@@ -58,7 +60,6 @@ struct TextInspector: View {
                     Text(nextEncoding.rawValue)
                 }
             }
-            .frame(minWidth: 150, maxWidth: 200)
             .help(StringEncodingType.toolTip)
         }
     }

@@ -14,7 +14,7 @@ import UniformTypeIdentifiers
 @Model
 final class DataItem: Identifiable, Hashable {
     // MARK: - Properties
-    //var id: UUID
+    var localID: UUID
     var url: URL
     
     var name: String
@@ -38,7 +38,7 @@ final class DataItem: Identifiable, Hashable {
     
     // MARK: - Initialization
     init(url: URL, node: Node) {
-        //self.id = UUID()
+        self.localID = UUID()
         
         self.url = url
         self.name = url.fileName
@@ -115,7 +115,16 @@ final class DataItem: Identifiable, Hashable {
         case .defaultFromParent: return node?.getAssociatedParserSettings()
         }
     }
-
+    
+    
+    func cacheStorageDirectory() -> URL {
+        var location = URL.cacheStorageDirectory
+        
+        let dataItemFolder = String(self.name + "-" + self.localID.uuidString)
+        
+        
+        location.append(path: dataItemFolder)
+        
+        return location
+    }
 }
-
-

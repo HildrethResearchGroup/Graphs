@@ -20,6 +20,8 @@ class InspectorViewModel {
     
     var dataItemsVM: DataItemsInspectorViewModel
     
+    var nodeInspectorVM: NodeInspectorViewModel
+    
     var firstDataItem: DataItem? {
         dataController.selectedDataItems.first
     }
@@ -35,5 +37,6 @@ class InspectorViewModel {
         
         self.dataItemsVM = DataItemsInspectorViewModel(dataController, selectionManager)
         
+        self.nodeInspectorVM = NodeInspectorViewModel(dataController, selectionManager)
     }
 }

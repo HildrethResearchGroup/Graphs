@@ -7,8 +7,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct GraphTemplateEditor_EmptySelection: View {
+    
+    @State var graphController = GraphController()
     
     @State var name: String = ""
     
@@ -16,16 +19,11 @@ struct GraphTemplateEditor_EmptySelection: View {
     private let fontType: Font = .headline
     
     var body: some View {
-        VStack {
-            HStack {
-                Text("Name:")
-                    .font(fontType)
-                TextField("Name:", text: $name)
-                    .frame(minWidth: width, maxWidth: .infinity)
-                    .disabled(true)
-                Spacer()
-            }
-        }
+        Form() {
+            TextField("Name:", text: $name)
+            GraphViewRepresentable(graphController: graphController)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }.formStyle(.grouped)
         
     }
 }
