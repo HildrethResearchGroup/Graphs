@@ -45,6 +45,8 @@
 		C02E38192C1F910100107EAD /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E38182C1F910100107EAD /* Parser.swift */; };
 		C02E381B2C1F911800107EAD /* ParsedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E381A2C1F911800107EAD /* ParsedFile.swift */; };
 		C076AF612C4A0FA6007BECEC /* DataItemsInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */; };
+		C077B3EB2C55E8C90056137E /* ProcessedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C077B3EA2C55E8C90056137E /* ProcessedData.swift */; };
+		C077B3ED2C55F3F20056137E /* CachedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C077B3EC2C55F3F20056137E /* CachedData.swift */; };
 		C078BC352C2F332D00A06887 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC342C2F332D00A06887 /* GraphController.swift */; };
 		C078BC372C2F333400A06887 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC362C2F333400A06887 /* GraphView.swift */; };
 		C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */; };
@@ -139,6 +141,8 @@
 		C02E38182C1F910100107EAD /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		C02E381A2C1F911800107EAD /* ParsedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedFile.swift; sourceTree = "<group>"; };
 		C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsInspector.swift; sourceTree = "<group>"; };
+		C077B3EA2C55E8C90056137E /* ProcessedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedData.swift; sourceTree = "<group>"; };
+		C077B3EC2C55F3F20056137E /* CachedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedData.swift; sourceTree = "<group>"; };
 		C078BC342C2F332D00A06887 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		C078BC362C2F333400A06887 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
@@ -307,9 +311,9 @@
 		C0263D762C163714008C929F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C02E38172C1F90EF00107EAD /* Parsing */,
 				C0263D7E2C166805008C929F /* Application Controllers */,
 				C0A93A612C12400F0037BAE3 /* Data Controller */,
+				C02E38172C1F90EF00107EAD /* Parsing */,
 				C0263D862C167514008C929F /* Preferences */,
 				C0B05E8E2C50572F00535E59 /* Processed Data */,
 				C0263D7D2C165FF4008C929F /* Selection */,
@@ -503,6 +507,8 @@
 			isa = PBXGroup;
 			children = (
 				C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */,
+				C077B3EA2C55E8C90056137E /* ProcessedData.swift */,
+				C077B3EC2C55F3F20056137E /* CachedData.swift */,
 			);
 			path = "Processed Data";
 			sourceTree = "<group>";
@@ -652,6 +658,7 @@
 				C0263D7C2C165FEB008C929F /* SelectionManager.swift in Sources */,
 				C0C55F9F2C408C20001F2554 /* Iterator_allLines.swift in Sources */,
 				C076AF612C4A0FA6007BECEC /* DataItemsInspector.swift in Sources */,
+				C077B3EB2C55E8C90056137E /* ProcessedData.swift in Sources */,
 				C0263D8A2C1676D1008C929F /* SourceList.swift in Sources */,
 				C02E381B2C1F911800107EAD /* ParsedFile.swift in Sources */,
 				C0263D742C163622008C929F /* Number_spelledOut.swift in Sources */,
@@ -664,6 +671,7 @@
 				C078BC462C2F3A6A00A06887 /* Inspector.swift in Sources */,
 				C0263D882C167526008C929F /* PreferencesController.swift in Sources */,
 				C078BC4C2C2F4B0300A06887 /* PresentableName.swift in Sources */,
+				C077B3ED2C55F3F20056137E /* CachedData.swift in Sources */,
 				C0263D8E2C16872A008C929F /* ParserSettings.swift in Sources */,
 				C01A86382C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift in Sources */,
 				C01A86342C484994006219C8 /* InspectorViewModel.swift in Sources */,

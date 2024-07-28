@@ -12,7 +12,10 @@ import SwiftData
 @Observable
 class AppController {
     var dataController: DataController
+    
+    // Managers
     var selectionManager: SelectionManager
+    var processedDataManager: ProcessDataManager
     
     // View Models
     var sourceListVM: SourceListViewModel
@@ -22,7 +25,9 @@ class AppController {
         // Controllers and Managers
         let localDataController = DataController(withDelegate: nil)
         
+        // Managers
         let localSelectionManager = SelectionManager()
+        processedDataManager = ProcessDataManager()
         
         dataController = localDataController
         selectionManager = localSelectionManager
@@ -31,6 +36,7 @@ class AppController {
         // View Models
         sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
         inspectorVM = InspectorViewModel(localDataController, localSelectionManager)
+        
         
         
         // Delegates and DataSources
@@ -53,6 +59,7 @@ extension AppController: DataControllerDelegate {
     
     func preparingToDelete(dataItems: [DataItem]) {
         selectionManager.preparingToDelete(dataItems: dataItems)
+        processedDataManager.preparingToDelete(dataItems: dataItems)
     }
     
     

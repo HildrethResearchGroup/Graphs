@@ -9,7 +9,8 @@
 import Foundation
 
 
-struct ProcessDataManager {
+@MainActor
+class ProcessDataManager {
     
     var cachedData: [DataItem.ID : ProcessedData] = [:]
     
@@ -19,99 +20,19 @@ struct ProcessDataManager {
         
     }
     
-}
-
-
-struct ProcessedData: Codable {
     
-    var dataItemID: DataItem.ID
-    
-    var lineNumbers: [String] = []
-    var lines: [String] = []
-    var simpleNumberLines: String = ""
-    
-    var data: [[String]] = []
-    
-    var dgController: DGController?
-    var dataItem: DataItem?
-    
-    
-    init(from decoder: any Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        
-        self.dataItemID = try values.decode(DataItem.ID.self, forKey: .dataItemID)
-        self.lineNumbers = try values.decode([String].self, forKey: .lineNumbers)
-        self.lines = try values.decode([String].self, forKey: .lines)
-        self.simpleNumberLines = try values.decode(String.self, forKey: .simpleNumberLines)
-        self.data = try values.decode([[String]].self, forKey: .data)
-        
-        self.dgController = nil
-        self.dataItem = nil
-    
-    }
-    
-    enum CodingKeys: CodingKey {
-        case dataItemID
-        case lineNumbers
-        case lines
-        case simpleNumberLines
-        case data
-    }
-    
-}
-
-extension ProcessedData {
-    mutating func loadCachedData(from url: URL) throws {
-        let data = try Data(contentsOf: url)
-        
-        let decoder = JSONDecoder()
-        
-        let localData = try decoder.decode(ProcessedData.self, from: data)
-        
-        if localData.dataItemID != self.dataItemID {
-            throw ProcessedDataError.dataItemIDDoesNotMatchCachedData
+    func preparingToDelete(dataItems: [DataItem]) {
+        for nextDataItem in dataItems {
+            delete(dataItem: nextDataItem)
         }
-        
-        self.lineNumbers = localData.lineNumbers
-        self.lines = localData.lines
-        self.simpleNumberLines = localData.simpleNumberLines
-        self.data = localData.data
     }
     
-    
-    
-    mutating func loadDGController(from url: URL) throws {
-        let localDGController = DGController(contentsOfFile: url.path())
+    private func delete(dataItem: DataItem) {
         
-        self.dgController = localDGController
-    }
-    
-    
-    
-    func cacheData(to url: URL) throws {
-        var encoder = JSONEncoder()
+        guard let processedData = cachedData[dataItem.id] else { return }
         
-        let data = try encoder.encode(self)
+        processedData.deleteCache()
         
-        try data.write(to: url)
-    }
-    
-    func cacheDGController(to url: URL) throws {
-        try dgController?.write(to: url)
-    }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        
-        try container.encode(dataItemID, forKey: .dataItemID)
-        try container.encode(lineNumbers, forKey: .lineNumbers)
-        try container.encode(lines, forKey: .lines)
-        try container.encode(simpleNumberLines, forKey: .simpleNumberLines)
-        try container.encode(data, forKey: .data)
-        
-    }
-    
-    enum ProcessedDataError: Error {
-        case dataItemIDDoesNotMatchCachedData
+        cachedData.removeValue(forKey: dataItem.id)
     }
 }

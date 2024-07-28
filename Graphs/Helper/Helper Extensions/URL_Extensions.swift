@@ -50,6 +50,7 @@ extension URL {
         }
     }
     
+    
     static var swiftDataStorageLocation: URL {
         var location = URL.applicationSupportDirectory
         location.append(path: "Graphs/Data/GraphsDatabase.sqlite")
@@ -57,10 +58,22 @@ extension URL {
         return location
     }
     
+    
     static var cacheStorageDirectory: URL {
-        var location = URL.applicationSupportDirectory
-        location.append(path: "Graphs/Cached/")
+        let location = URL.applicationSupportDirectory
+        return location.appending(path: "Graphs/Cached/")
+    }
+    
+    
+    static var cachedProcessedDataDirectory: URL {
+        let location = URL.cacheStorageDirectory
         
-        return location
+        return location.appending(path: "Processed Data/")
+    }
+    
+    
+    static var cachedGraphedDataDirectory: URL {
+        let location = URL.cacheStorageDirectory
+        return location.appending(path: "Processed Graphs/")
     }
 }
