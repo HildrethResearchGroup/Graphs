@@ -23,8 +23,8 @@ class ProcessedData {
     
     var lineNumbersVM: LineNumberViewModel
     
-    var parsedFileState: TemplateState
-    var graphTemplateState: TemplateState
+    var parsedFileState: ProcessedDataState
+    var graphTemplateState: ProcessedDataState
     
     
     
@@ -43,11 +43,55 @@ class ProcessedData {
             parsedFile = nil
         }
         
+        // TODO: Set Processed Data State
+        // Initialize values so actual state determining methods can be called
+        parsedFileState = .outOfDate
+        graphTemplateState = .outOfDate
         
         
+        parsedFileState = self.determineParsedFileState()
+        graphTemplateState = self.determineGraphControllerState()
     }
     
     
+    private func determineParsedFileState() -> ProcessedDataState {
+        guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
+            return .noTemplate
+        }
+        
+        let settingsDate = parsedSettings.lastModified
+        
+        guard let parsedFile else {
+            return .notProcessed
+        }
+        
+        if parsedFile.lastParsedDate < settingsDate {
+            return .outOfDate
+        }
+        
+        return .upToDate
+    }
+    
+    
+    private func determineGraphControllerState() -> ProcessedDataState {
+        guard let graphTemplate = dataItem.getAssociatedGraphTemplate() else {
+            return .noTemplate
+        }
+        
+        guard let graphController else {
+            return .notProcessed
+        }
+        
+        guard let templateDate = graphTemplate.url.dateLastModified else {
+            return .noTemplate
+        }
+        
+        if graphController.lastModified < templateDate {
+            return .outOfDate
+        }
+        
+        return .upToDate
+    }
     
     
     

@@ -78,7 +78,7 @@
 		C0C82E202C4B039800C6D104 /* NodeInspectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C82E1F2C4B039800C6D104 /* NodeInspectorViewModel.swift */; };
 		C0C82E232C4B138E00C6D104 /* NodesInspectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C82E222C4B138E00C6D104 /* NodesInspectorView.swift */; };
 		C0DDEC932C41AB7E003C78B6 /* TextInspectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DDEC922C41AB7E003C78B6 /* TextInspectorType.swift */; };
-		C0DF8D1F2CBA18DE006C4574 /* TemplateState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF8D1E2CBA18DE006C4574 /* TemplateState.swift */; };
+		C0DF8D1F2CBA18DE006C4574 /* ProcessedDataState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */; };
 		C0DF8D212CBA1908006C4574 /* ProcessedData_Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF8D202CBA1908006C4574 /* ProcessedData_Error.swift */; };
 		C0E8187F2C4ABF6000C4A015 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8187E2C4ABF6000C4A015 /* InputType.swift */; };
 		C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; };
@@ -182,7 +182,7 @@
 		C0C82E1F2C4B039800C6D104 /* NodeInspectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInspectorViewModel.swift; sourceTree = "<group>"; };
 		C0C82E222C4B138E00C6D104 /* NodesInspectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodesInspectorView.swift; sourceTree = "<group>"; };
 		C0DDEC922C41AB7E003C78B6 /* TextInspectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInspectorType.swift; sourceTree = "<group>"; };
-		C0DF8D1E2CBA18DE006C4574 /* TemplateState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateState.swift; sourceTree = "<group>"; };
+		C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedDataState.swift; sourceTree = "<group>"; };
 		C0DF8D202CBA1908006C4574 /* ProcessedData_Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedData_Error.swift; sourceTree = "<group>"; };
 		C0E8187E2C4ABF6000C4A015 /* InputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
 		C0EB49892C10076E0057A593 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
@@ -572,7 +572,7 @@
 			isa = PBXGroup;
 			children = (
 				C09E8FAC2CAB5D2F0014988C /* CachedState.swift */,
-				C0DF8D1E2CBA18DE006C4574 /* TemplateState.swift */,
+				C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */,
 			);
 			path = "Helper Files";
 			sourceTree = "<group>";
@@ -681,7 +681,7 @@
 				C0ED09092C49AC5800052208 /* DataItemsListView.swift in Sources */,
 				C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */,
 				C01A9D112C3DC85C00A555B9 /* LineNumberViewModel.swift in Sources */,
-				C0DF8D1F2CBA18DE006C4574 /* TemplateState.swift in Sources */,
+				C0DF8D1F2CBA18DE006C4574 /* ProcessedDataState.swift in Sources */,
 				C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */,
 				C0B05E902C5057D000535E59 /* ProcessDataManager.swift in Sources */,
 				C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */,

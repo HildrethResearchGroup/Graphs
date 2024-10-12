@@ -8,8 +8,10 @@
 
 import Foundation
 
-enum TemplateState {
-    case upToDate
-    case outOfDate
+enum ProcessedDataState {
     case noTemplate
+    case notProcessed
+    case outOfDate
+    case processing
+    case upToDate
 }
