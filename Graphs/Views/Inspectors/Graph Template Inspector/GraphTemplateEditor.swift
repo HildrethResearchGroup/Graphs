@@ -14,7 +14,7 @@ struct GraphTemplateEditor: View {
     
     @Bindable var graphTemplate: GraphTemplate
     
-    @State var graphController = GraphController()
+    //@State var graphController = GraphController(<#DataItem#>)
     
     private let width = 100.0
     private let fontType: Font = .headline
@@ -23,7 +23,7 @@ struct GraphTemplateEditor: View {
         
         Form() {
             TextField("Name:", text: $graphTemplate.name)
-            GraphViewRepresentable(graphController: graphController)
+            //GraphViewRepresentable(graphController: graphController)
         }.formStyle(.grouped)
     }
 }

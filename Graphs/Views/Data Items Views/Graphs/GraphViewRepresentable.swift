@@ -11,7 +11,7 @@ import SwiftUI
 struct GraphViewRepresentable: NSViewRepresentable {
     typealias NSViewType = GraphView
     
-    @ObservedObject var graphController: GraphController
+    var graphController: GraphController
     
     
     func makeNSView(context: Context) -> GraphView {

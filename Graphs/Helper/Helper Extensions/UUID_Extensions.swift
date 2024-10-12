@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
-extension UUID: Transferable {
+extension UUID: @retroactive Transferable {
     public static var transferRepresentation: some TransferRepresentation {
             CodableRepresentation(for: UUID.self, contentType: .uuid)
     }

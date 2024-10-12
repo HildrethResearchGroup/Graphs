@@ -42,5 +42,49 @@ class GraphTemplate {
         self.creationDate = .now
     }
     
+    
+    @Transient
+    private var resourceValues: URLResourceValues?
+    
+    
+}
+
+extension GraphTemplate {
+    
+    func urlResources() -> URLResourceValues? {
+        if resourceValues == nil {
+            resourceValues = try? url.resourceValues(forKeys: [.totalFileSizeKey, .creationDateKey, .contentModificationDateKey])
+        }
+        
+        return resourceValues
+    }
+    
+    
+    @Transient
+    var fileSize: Int {
+        urlResources()?.totalFileSize ?? 0
+    }
+    
+    
+    @Transient
+    var scaledFileSize: String {
+        //Source: https://stackoverflow.com/questions/42722498/print-the-size-megabytes-of-data-in-swift
+        let bcf = ByteCountFormatter()
+        bcf.allowedUnits = [.useKB, .useMB, .useGB]
+        bcf.countStyle = .file
+        
+        return bcf.string(fromByteCount: Int64(fileSize))
+    }
+    
+    @Transient
+    var contentCreationDate: Date {
+        return urlResources()?.creationDate ?? .distantPast
+    }
+    
+    
+    @Transient
+    var contentModificationDate: Date {
+        return urlResources()?.contentModificationDate ?? .distantPast
+    }
 }
 

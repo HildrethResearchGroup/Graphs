@@ -76,4 +76,10 @@ extension URL {
         let location = URL.cacheStorageDirectory
         return location.appending(path: "Processed Graphs/")
     }
+    
+    var dateLastModified: Date? {
+        let resourceValues = try? self.resourceValues(forKeys: [.contentModificationDateKey])
+        
+        return resourceValues?.contentModificationDate
+    }
 }

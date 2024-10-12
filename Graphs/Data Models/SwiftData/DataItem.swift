@@ -21,9 +21,37 @@ final class DataItem: Identifiable, Hashable {
     
     var node: Node?
     
-    private var graphTemplate: GraphTemplate?
+    private var graphTemplate: GraphTemplate? {
+        didSet {
+            let nc = NotificationCenter.default
+            
+            let info: [String: Any] = [
+                "dataItem.ids" : [id],
+                
+                "oldGraphTemplate.id" : oldValue.id,
+                
+                "newGraphTemplate.id" : graphTemplate.id
+            ]
+            
+            nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
+        }
+    }
     
-    private var parserSettings: ParserSettings?
+    private var parserSettings: ParserSettings? {
+        didSet {
+            let nc = NotificationCenter.default
+            
+            let info: [String: Any] = [
+                "dataItem.ids" : [id],
+                
+                "oldParserSettings.id" : oldValue.id,
+                
+                "newParserSettings.id" : parserSettings.id
+            ]
+            
+            nc.post(name: .parserOnDataItemDidChange, object: nil, userInfo: info)
+        }
+    }
     
     var creationDate: Date
     

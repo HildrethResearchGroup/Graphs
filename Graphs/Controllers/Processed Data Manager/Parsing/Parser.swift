@@ -12,20 +12,23 @@ struct Parser {
     
     static func parseDataItem(_ dataItem: DataItem) async throws -> ParsedFile {
         
+        var lines: [String] = []
+        
         var experimentalDetails = ""
         var header: [[String]] = []
         var data: [[String]] = []
         
         var footer = ""
         
+
+        guard let parserSettings = dataItem.getAssociatedParserSettings() else {throw ParserError.noParseSettings}
         
         
         var index = 0
         
-        guard let parserSettings = dataItem.getAssociatedParserSettings() else {throw ParserError.noParseSettings}
-        
-                
         for try await nextLine in dataItem.url.lines {
+            lines.append(nextLine)
+            
             
             if try lineIsExperimentalDetails(index: index, parseSettings: parserSettings) {
                 experimentalDetails.append("\n")
@@ -49,10 +52,15 @@ struct Parser {
             index += 1
         }
         
-        
+        // Set the number of lines using the index
         let numberOfColumns = data.first?.count ?? 0
         
-        return ParsedFile(experimentDetails: experimentalDetails, header: header, data: data, footer: footer, numberOfColumns: numberOfColumns)
+        return ParsedFile(dataItemID: dataItem.id,
+                          experimentDetails: experimentalDetails,
+                          header: header,
+                          data: data,
+                          footer: footer,
+                          numberOfColumns: numberOfColumns)
     }
     
     
@@ -106,6 +114,40 @@ struct Parser {
         } else {
             return false
         }
+    }
+    
+    
+    private static func generateSimpleLineNumbers(withLines lines: [String]) -> String {
+        if lines.isEmpty {
+            return "0:"
+        }
+        
+        let numberOfLines = lines.count
+        
+        let size = numberOfLines.size
+        
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = size
+        
+        var output = ""
+        var index = 1
+        
+        for nextLine in lines {
+            let numberString = formatter.string(from: index as NSNumber) ?? ""
+            
+            let nextString = numberString + "\t" + nextLine
+            
+            if index == numberOfLines {
+                output.append(nextString)
+                
+            } else {
+                output.append(nextString + "\n")
+            }
+            
+            index += 1
+        }
+        
+        return output
     }
     
     

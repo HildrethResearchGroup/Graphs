@@ -29,10 +29,46 @@ final class Node {
     var creationDate: Date
     
     
-    private var graphTemplate: GraphTemplate?
+    private var graphTemplate: GraphTemplate? {
+        didSet {
+            let nc = NotificationCenter.default
+            
+            let dataItemIDS = flattenedDataItems().map({ $0.id })
+            
+            let info: [String: Any] = [
+                "dataItem.ids" : dataItemIDS,
+                
+                "oldGraphTemplate.id" : oldValue.id,
+                
+                "newGraphTemplate.id" : parserSettings.id
+            ]
+            
+            nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
+        }
+    }
+    
+    
+    
     var graphTemplateInputType: InputType
     
-    private var parserSettings: ParserSettings?
+    private var parserSettings: ParserSettings? {
+        didSet {
+            let nc = NotificationCenter.default
+            
+            let dataItemIDS = flattenedDataItems().map({ $0.id })
+            
+            let info: [String: Any] = [
+                "dataItem.ids" : dataItemIDS,
+                
+                "oldParserSettings.id" : oldValue.id,
+                
+                "newParserSettings.id" : parserSettings.id
+            ]
+            
+            nc.post(name: .parserDidChange, object: nil, userInfo: info)
+        }
+    }
+    
     var parserSettingsInputType: InputType
     
     

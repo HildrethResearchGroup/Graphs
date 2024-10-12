@@ -24,29 +24,101 @@ final class ParserSettings {
     
     
     var creationDate: Date
+    var lastModified: Date
     
-    var newLineType: NewLineType
+    var newLineType: NewLineType {
+        didSet {
+            updateLastModified()
+        }
+    }
     
-    var stringEncodingType: StringEncodingType
+    var stringEncodingType: StringEncodingType {
+        didSet {
+            updateLastModified()
+        }
+    }
     
-    var hasExperimentalDetails: Bool = false
-    var experimentalDetailsSeparator: Separator?
-    var experimentalDetailsStart: Int = 0
-    var experimentalDetailsEnd: Int = 0
+    var hasExperimentalDetails: Bool = false {
+        didSet {
+            updateLastModified()
+        }
+    }
     
-    var hasHeader: Bool = false
-    var headerSeparator: Separator?
-    var headerStart: Int = 0
-    var headerEnd: Int = 0
+    var experimentalDetailsSeparator: Separator? {
+        didSet {
+            updateLastModified()
+        }
+    }
     
-    var hasData: Bool = false
-    var dataStart: Int = 0
-    var dataSeparator: Separator?
-    var stopDataAtFirstEmptyLine: Bool = true
+    var experimentalDetailsStart: Int = 0 {
+        didSet {
+            updateLastModified()
+        }
+    }
     
-    var hasFooter: Bool = false
+    var experimentalDetailsEnd: Int = 0 {
+        didSet {
+            updateLastModified()
+        }
+    }
     
+    var hasHeader: Bool = false {
+        didSet {
+            updateLastModified()
+        }
+    }
     
+    var headerSeparator: Separator? {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var headerStart: Int = 0 {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var headerEnd: Int = 0 {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var hasData: Bool = false {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var dataStart: Int = 0 {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var dataSeparator: Separator? {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var stopDataAtFirstEmptyLine: Bool = true {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    var hasFooter: Bool = false {
+        didSet {
+            updateLastModified()
+        }
+    }
+    
+    private func updateLastModified() {
+        self.lastModified = .now
+    }
     
     
     // MARK: Initializer
@@ -57,6 +129,7 @@ final class ParserSettings {
         //self.dataItems = []
         
         self.creationDate = .now
+        self.lastModified = .now
        
         self.newLineType = .CRLF
         self.stringEncodingType = .ascii
@@ -77,6 +150,8 @@ final class ParserSettings {
         
         self.stopDataAtFirstEmptyLine = true
         self.hasFooter = false
+        
+        self.lastModified = .now
         
         }
     
@@ -108,6 +183,7 @@ final class ParserSettings {
         stopDataAtFirstEmptyLine = try values.decode(Bool.self, forKey: .stopDataAtFirstEmptyLine)
         hasFooter = try values.decode(Bool.self, forKey: .hasFooter)
         
+        lastModified = try values.decode(Date.self, forKey: .lastModified)
     }
     
     
@@ -119,6 +195,7 @@ extension ParserSettings: Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case creationDate
+        case lastModified
         
         case newLineType
         case stringEncodingType

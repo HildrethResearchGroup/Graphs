@@ -11,7 +11,6 @@ import SwiftData
 
 struct GraphTemplateEditor_EmptySelection: View {
     
-    @State var graphController = GraphController()
     
     @State var name: String = ""
     
@@ -21,7 +20,8 @@ struct GraphTemplateEditor_EmptySelection: View {
     var body: some View {
         Form() {
             TextField("Name:", text: $name)
-            GraphViewRepresentable(graphController: graphController)
+                .disabled(true)
+            //GraphViewRepresentable(graphController: graphController)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }.formStyle(.grouped)
         
