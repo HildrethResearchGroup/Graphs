@@ -9,10 +9,8 @@
 import Foundation
 import SwiftData
 import SwiftUI
+import OrderedCollections
 
-
-// TODO: Import Collections
-// import OrderedCollections
 
 
 @Observable
@@ -37,26 +35,16 @@ class DataController {
     // TODO: Remove when visibleItems transitioned to stored property that is updated manually
     var selectedNodes: [Node] = []
     
-    var visableItems: [DataItem] {
+    var visableItems: OrderedSet<DataItem> {
         
         // For initial simplicity, we will make this a computed property
-        // TODO: Switch visibleItems to stored property that is updated manually
         get {
-            // UPDATE
-            // Make this an OrderedSet to ensure that items aren't duplicated
-            // TODO: Make OrderedSet
-            // var items: OrderedSet<ImageItem> = []
-            var items: Set<DataItem> = []
-            
-            // U
+            var items: OrderedSet<DataItem> = []
             for nextNode in selectedNodes {
-                //items.append(contentsOf: nextNode.flattenedDataItems())
-                // TODO: Replace with OrderedSet
                 items.formUnion(nextNode.flattenedDataItems())
             }
             
-            // UPDATE
-            return Array(items)
+            return items
         }
     }
     
@@ -67,7 +55,7 @@ class DataController {
         }
     }
     
-    var selectedDataItems: [DataItem] = []
+    var selectedDataItems: OrderedSet<DataItem> = []
     
     
     init(withDelegate delegate: DataControllerDelegate?) {

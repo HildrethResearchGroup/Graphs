@@ -12,43 +12,29 @@ import Foundation
 // MARK: - Load Cached Data and Graphs
 extension ProcessedData {
     
-    func cachedGraph() -> DGController? {
+    func loadCachedGraph() -> DGController? {
         
-        guard let url = try? self.cacheGraphURL() else { return nil}
+        let cm = CacheManager.shared
         
-        let fm = FileManager()
-                
-        if fm.fileExists(atPath: url.path) {
-            return nil
-        }
-        
-        let controller = DGController(contentsOfFile: url.path())
+        guard let controller = cm.loadGraphController(for: dataItem) else { return nil }
         
         return controller
-        }
+    }
     
     
-    func loadCachedParsedData() throws {
+    func loadCachedParsedData() throws -> ParsedFile? {
         
-        guard let url = self.cachedDataURL() else {
-            throw ProcessedDataError.cacheDataURLwasNil
+        switch self.parsedFileState {
+            case .noTemplate: return nil
+            case .outOfDate: return nil
+            default: break
         }
         
-        let fm = FileManager()
-                
-        if !fm.fileExists(atPath: url.path) {
-            throw ProcessedDataError.noCachedFileAtURL
-        }
+        let cm = CacheManager.shared
         
-        let data = try Data(contentsOf: url)
+        let cachedParsedFile = cm.loadCachedParsedData(for: dataItem)
         
-        let decoder = JSONDecoder()
-        
-        let cachedParsedFile = try decoder.decode(ParsedFile.self, from: data)
-        
-        if cachedParsedFile.dataItemID != dataItem.id {
-            throw ProcessedDataError.currentDataItemIDDoesNotMatchCachedDataID
-        }
+        return cachedParsedFile
     }
     
     
@@ -117,55 +103,13 @@ extension ProcessedData {
     // MARK: - Cache Processed Data
     func cacheData() throws {
         
-        guard let targetURL = cachedDataURL() else {
-            throw ProcessedDataError.cacheDataURLwasNil
+        let cacheManager = CacheManager.shared
+        
+        guard let parsedFile else {
+            return
         }
         
-        // Create the Cache Processed Data Directory if necessary
-        let cacheDirectoryURL = URL.cachedProcessedDataDirectory
-        
-        let fm = FileManager.default
-        
-        if fm.fileExists(atPath: cacheDirectoryURL.path) == false {
-            try fm.createDirectory(
-                at: cacheDirectoryURL,
-                withIntermediateDirectories: true,
-                attributes: nil
-            )
-        }
-        
-        // Get the Parsed File to cache
-        let cachedParsedFile = parsedFile
-        
-        let encoder = JSONEncoder()
-        let data = try encoder.encode(cachedParsedFile)
-        
-        // Try to save the data
-        try data.write(to: targetURL)
-    }
-    
-    
-    private func cacheDataFileName() -> String {
-        
-        // guard let dataItem else { throw ProcessedDataError.noDataItemToCache }
-        
-        let fileName = dataItem.name + "-cachedData-" + dataItem.localID.uuidString
-        
-        return fileName
-    }
-    
-    
-    
-    private func cachedDataURL() -> URL? {
-        
-        let fileName = cacheDataFileName()
-         
-        let startingURL = URL.cachedProcessedDataDirectory
-        
-    
-        let cacheDataURL = startingURL.appending(path: fileName)
-        
-        return cacheDataURL
+        cacheManager.cacheData(parsedFile: parsedFile, for: dataItem)
     }
 }
 
@@ -175,31 +119,22 @@ extension ProcessedData {
 // MARK: - Deleting Cache
 extension ProcessedData {
     func deleteCache() {
-        do {
-            try deleteProcessedDataCache()
-            
-            try deleteGraphCache()
-        } catch  {
-            print(error)
-        }
+        deleteParsedFileCache()
+        deleteGraphCache()
     }
     
     
-    private func deleteProcessedDataCache() throws {
+    private func deleteParsedFileCache() {
+        let cm = CacheManager.shared
         
-        guard let url = self.cachedDataURL() else { return }
-        
-        let fm = FileManager()
-        
-        try fm.removeItem(at: url)
+        cm.deleteProcessedDataCache(for: dataItem)
     }
     
     
-    private func deleteGraphCache() throws {
-        let url = try self.cacheGraphURL()
+    private func deleteGraphCache() {
         
-        let fm = FileManager()
+        let cm = CacheManager.shared
         
-        try fm.removeItem(at: url)
+        cm.deleteGraphCache(for: dataItem)
     }
 }

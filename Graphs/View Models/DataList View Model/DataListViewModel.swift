@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import Collections
 
 @Observable
 class DataListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
     
-    var dataItems: [DataItem] {
+    var dataItems: OrderedSet<DataItem> {
         get { dataController.visableItems }
     }
     

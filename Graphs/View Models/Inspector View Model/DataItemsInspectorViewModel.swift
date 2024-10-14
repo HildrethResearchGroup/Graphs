@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Collections
 
 @Observable
 class DataItemsInspectorViewModel {
@@ -14,7 +15,7 @@ class DataItemsInspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
     
-    var dataItems: [DataItem] {
+    var dataItems: OrderedSet<DataItem> {
         get { dataController.selectedDataItems }
     }
     

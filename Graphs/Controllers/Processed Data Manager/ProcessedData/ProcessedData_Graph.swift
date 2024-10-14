@@ -11,59 +11,20 @@ import Foundation
 
 extension ProcessedData {
     // MARK: - Caching Graphs
-    func cacheDGController() throws {
+    func cacheDGController() {
         
-        let url = try cacheGraphURL()
+        guard let dgController = graphController?.dgController else { return }
         
-        let cacheDirectory = url.deletingLastPathComponent()
+        let cm = CacheManager.shared
         
-        // Check to see if directory exists, if not, create directory
-        
-        let fm = FileManager.default
-        
-        if fm.fileExists(atPath: cacheDirectory.path()) == false {
-            try fm.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
-        }
-        
-        
-        try graphController?.dgController?.write(to: url)
+        cm.cacheDGController(dgController: dgController, for: dataItem)
     }
     
-    
-    func cacheGraphURL() throws -> URL {
-        let fileName = try cacheDataGraphFileName()
-        
-        let startingURL = URL.cachedGraphedDataDirectory
-        
-        let cacheGraphURL = startingURL.appending(path: fileName)
-        
-        return cacheGraphURL
-    }
-    
-    
-    private func cacheDataGraphFileName() throws -> String {
-        
-        // guard let dataItem else { throw ProcessedDataError.noDataItemToCache }
-        
-        let fileName = dataItem.name + "-cachedGraph-" + dataItem.localID.uuidString
-        
-        return fileName
-    }
     
     func graphCacheState() -> CachedState {
-        guard let dateCacheLastModified = try? self.cacheGraphURL().dateLastModified else {
-            return .noCache
-        }
+        let cm = CacheManager()
         
-        guard let dateGraphTemplateLastModified = dataItem.getAssociatedGraphTemplate()?.contentModificationDate else {
-            return .cacheShouldBeRemoved
-        }
-        
-        if dateGraphTemplateLastModified > dateCacheLastModified {
-            return .cacheNeedsUpdate
-        } else {
-            return .cachedStorageUpToDate
-        }
+        return cm.graphCacheState(for: dataItem)
     }
     
     
@@ -71,18 +32,12 @@ extension ProcessedData {
     // MARK: - Loading Graph
     func loadGraphController() {
         
-        // TODO: Working Here
-        
         let cacheState = self.graphCacheState()
         
         if cacheState == .cachedStorageUpToDate {
-            let dgController = cachedGraph()
+            let dgController = loadCachedGraph()
             
             self.graphController = GraphController(dgController: dgController, data: nil)
         }
-        
     }
-    
-    
-    
 }

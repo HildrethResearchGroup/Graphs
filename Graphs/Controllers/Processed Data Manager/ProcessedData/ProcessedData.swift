@@ -11,13 +11,10 @@ import Foundation
 @Observable
 class ProcessedData {
     
+    // MARK: - Properties
     var dataItem: DataItem
     
-    var parsedFile: ParsedFile? {
-        didSet {
-            
-        }
-    }
+    private(set) var parsedFile: ParsedFile?
     
     var graphController: GraphController?
     
@@ -28,6 +25,7 @@ class ProcessedData {
     
     
     
+    // MARK: - Initialization
     init(dataItem: DataItem) async {
         self.dataItem = dataItem
         self.lineNumbersVM = LineNumberViewModel(dataItem)
@@ -54,6 +52,8 @@ class ProcessedData {
     }
     
     
+    
+    // MARK: - State Determination
     private func determineParsedFileState() -> ProcessedDataState {
         guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
             return .noTemplate
@@ -111,7 +111,6 @@ class ProcessedData {
         }
     }
 
-    
     
     func graphTemplateDidChange() {
         let newGraphTemplate = dataItem.getAssociatedGraphTemplate()
