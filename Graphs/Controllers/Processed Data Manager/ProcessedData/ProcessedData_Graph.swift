@@ -35,9 +35,10 @@ extension ProcessedData {
         let cacheState = self.graphCacheState()
         
         if cacheState == .cachedStorageUpToDate {
-            let dgController = loadCachedGraph()
-            
+            let dgController = self.cachedGraph()
+                
             self.graphController = GraphController(dgController: dgController, data: nil)
         }
+        
     }
 }

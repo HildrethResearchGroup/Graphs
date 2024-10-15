@@ -69,7 +69,7 @@ final class DataItem: Identifiable, Hashable {
         self.localID = UUID()
         
         self.url = url
-        self.name = url.fileName
+        self.name = url.fileName ?? "No File Name"
         self.node = node
         
         self.creationDate = .now

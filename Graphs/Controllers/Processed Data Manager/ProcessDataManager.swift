@@ -12,6 +12,14 @@ class ProcessDataManager {
     
     private var activeProcessedData: [DataItem.ID : ProcessedData] = [:]
     
+    private var cacheManager: CacheManager
+    
+    
+    // MARK: - Initialization
+    init(cacheManager: CacheManager) {
+        self.cacheManager = cacheManager
+    }
+    
     
     
     func loadData(for dataItem: DataItem) {
@@ -22,7 +30,7 @@ class ProcessDataManager {
         if let output = activeProcessedData[dataItem.id] {
             return output
         } else {
-            let newProcessedData = await ProcessedData(dataItem: dataItem)
+            let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
             
             activeProcessedData[dataItem.id] = newProcessedData
             
@@ -40,11 +48,11 @@ class ProcessDataManager {
     
     private func delete(dataItem: DataItem) {
         
-        guard let processedData = activeProcessedData[dataItem.id] else { return }
-        
-        processedData.deleteCache()
-        
-        activeProcessedData.removeValue(forKey: dataItem.id)
+        if activeProcessedData[dataItem.id] != nil {
+            self.deleteCache(for: dataItem)
+            
+            activeProcessedData.removeValue(forKey: dataItem.id)
+        }
     }
 }
 
@@ -95,4 +103,33 @@ extension ProcessDataManager {
     private func graphTemplateOnDataItemDidChange() {
         
     }
+}
+
+
+// MARK: - ProcessedDataDelegate
+extension ProcessDataManager: ProcessedDataDelegate {
+    
+    func cachedGraph(for dataItem: DataItem) -> DGController? {
+        guard let controller = cacheManager.loadGraphController(for: dataItem) else { return nil }
+        
+        return controller
+    }
+    
+    
+    func cachedParsedFile(for dataItem: DataItem) -> ParsedFile? {
+        let cachedParsedFile = cacheManager.loadCachedParsedData(for: dataItem)
+        
+        return cachedParsedFile
+    }
+    
+    
+    func deleteCache(for dataItem: DataItem) {
+        cacheManager.clearCache(for: [dataItem])
+    }
+    
+    
+    func deleteCache(for dataItems: [DataItem]) {
+        cacheManager.clearCache(for: dataItems)
+    }
+    
 }

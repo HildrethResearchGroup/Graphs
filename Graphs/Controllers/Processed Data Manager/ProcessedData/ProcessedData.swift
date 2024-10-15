@@ -14,6 +14,8 @@ class ProcessedData {
     // MARK: - Properties
     var dataItem: DataItem
     
+    var delegate: ProcessedDataDelegate
+    
     private(set) var parsedFile: ParsedFile?
     
     var graphController: GraphController?
@@ -26,8 +28,10 @@ class ProcessedData {
     
     
     // MARK: - Initialization
-    init(dataItem: DataItem) async {
+    init(dataItem: DataItem, delegate: ProcessedDataDelegate) async {
         self.dataItem = dataItem
+        self.delegate = delegate
+        
         self.lineNumbersVM = LineNumberViewModel(dataItem)
         
         
@@ -127,16 +131,3 @@ class ProcessedData {
 
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

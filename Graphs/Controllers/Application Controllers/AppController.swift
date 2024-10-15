@@ -15,7 +15,9 @@ class AppController {
     
     // Managers
     var selectionManager: SelectionManager
+    var cacheManager: CacheManager
     var processedDataManager: ProcessDataManager
+    
     
     // View Models
     var sourceListVM: SourceListViewModel
@@ -27,10 +29,15 @@ class AppController {
         
         // Managers
         let localSelectionManager = SelectionManager()
-        processedDataManager = ProcessDataManager()
+        let localCacheManager = CacheManager()
+        let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager)
         
+        cacheManager = localCacheManager
+        processedDataManager = localProcessedDataManager
         dataController = localDataController
         selectionManager = localSelectionManager
+        
+        
         
         
         // View Models

@@ -269,31 +269,52 @@ extension CacheManager {
 
 // MARK: - Deleting Cache
 extension CacheManager {
-    func deleteProcessedDataCache(for dataItem: DataItem) {
-        
-        guard let url = self.cachedDataURL(for: dataItem) else { return }
-        
-        let fm = FileManager.default
+    
+    func clearCache(for dataItems: [DataItem]) {
+        self.deleteProcessedDataCache(for: dataItems)
+        self.deleteGraphCache(for: dataItems)
+    }
+    
+    func emptyEntireCache() {
+        let url = URL.cacheStorageDirectory
         
         do {
+            let fm = FileManager.default
             try fm.removeItem(at: url)
-        } catch {
-            return
+        } catch  {
+            let logger = Logger(subsystem: "edu.HRG.Graphs", category: "Caching")
+            logger.error("Cannot remove entire Cache direcotry at: \(url)")
         }
-        
         
     }
     
     
-    func deleteGraphCache(for dataItem: DataItem) {
-        guard let url = try? self.cacheGraphURL(for: dataItem) else { return }
-        
-        let fm = FileManager.default
-        
-        do {
-            try fm.removeItem(at: url)
-        } catch {
-            return
+    private func deleteProcessedDataCache(for dataItems: [DataItem]) {
+        for nextDataItem in dataItems {
+            guard let url = self.cachedDataURL(for: nextDataItem) else { return }
+            
+            let fm = FileManager.default
+            
+            do {
+                try fm.removeItem(at: url)
+            } catch {
+                return
+            }
+        }
+    }
+    
+    
+    private func deleteGraphCache(for dataItems: [DataItem]) {
+        for nextDataItem in dataItems {
+            guard let url = try? self.cacheGraphURL(for: nextDataItem) else { return }
+            
+            let fm = FileManager.default
+            
+            do {
+                try fm.removeItem(at: url)
+            } catch {
+                return
+            }
         }
     }
     

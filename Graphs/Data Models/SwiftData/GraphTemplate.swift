@@ -37,7 +37,7 @@ class GraphTemplate {
             return nil
         }
         
-        self.name = name ?? url.fileName
+        self.name = name ?? url.fileName ?? "No File Name"
         self.url = url
         self.creationDate = .now
     }

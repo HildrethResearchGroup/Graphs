@@ -12,17 +12,15 @@ import Foundation
 // MARK: - Load Cached Data and Graphs
 extension ProcessedData {
     
-    func loadCachedGraph() -> DGController? {
+    func cachedGraph() -> DGController? {
         
-        let cm = CacheManager.shared
-        
-        guard let controller = cm.loadGraphController(for: dataItem) else { return nil }
+        guard let controller = delegate.cachedGraph(for: dataItem) else { return nil }
         
         return controller
     }
     
     
-    func loadCachedParsedData() throws -> ParsedFile? {
+    func cachedParsedData() throws -> ParsedFile? {
         
         switch self.parsedFileState {
             case .noTemplate: return nil
@@ -30,9 +28,7 @@ extension ProcessedData {
             default: break
         }
         
-        let cm = CacheManager.shared
-        
-        let cachedParsedFile = cm.loadCachedParsedData(for: dataItem)
+        let cachedParsedFile = delegate.cachedParsedFile(for: dataItem)
         
         return cachedParsedFile
     }
@@ -110,31 +106,5 @@ extension ProcessedData {
         }
         
         cacheManager.cacheData(parsedFile: parsedFile, for: dataItem)
-    }
-}
-
-
-
-
-// MARK: - Deleting Cache
-extension ProcessedData {
-    func deleteCache() {
-        deleteParsedFileCache()
-        deleteGraphCache()
-    }
-    
-    
-    private func deleteParsedFileCache() {
-        let cm = CacheManager.shared
-        
-        cm.deleteProcessedDataCache(for: dataItem)
-    }
-    
-    
-    private func deleteGraphCache() {
-        
-        let cm = CacheManager.shared
-        
-        cm.deleteGraphCache(for: dataItem)
     }
 }

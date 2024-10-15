@@ -116,7 +116,7 @@ extension DataController {
                     subdirectories.append(nextURL)
                 case .file:
                     files.append(nextURL)
-                case .fileDoesNotExist:
+                case .fileOrDirectoryDoesNotExist:
                     continue
                 }
             }
