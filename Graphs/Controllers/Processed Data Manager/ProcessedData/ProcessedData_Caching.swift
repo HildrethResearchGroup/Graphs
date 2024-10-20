@@ -9,14 +9,27 @@
 import Foundation
 
 
-// MARK: - Load Cached Data and Graphs
+// MARK: - Cached Data and Graphs
 extension ProcessedData {
     
-    func cachedGraph() -> DGController? {
+    func cacheProcessedData() throws {
+        cacheGraphController()
+        cacheParsedFile()
+    }
+    
+    
+    func cacheGraphController() {
         
-        guard let controller = delegate.cachedGraph(for: dataItem) else { return nil }
+        guard let graphController else { return }
         
-        return controller
+        delegate?.cacheGraphController(graphController, for: dataItem)
+    }
+    
+    
+    func cacheParsedFile() {
+        guard let parsedFile else { return }
+        
+        delegate?.cacheParsedFile(parsedFile, for: dataItem)
     }
     
     
@@ -28,83 +41,72 @@ extension ProcessedData {
             default: break
         }
         
-        let cachedParsedFile = delegate.cachedParsedFile(for: dataItem)
+        let cachedParsedFile = delegate?.cachedParsedFile(for: dataItem)
         
         return cachedParsedFile
     }
     
-    
-    private func generateLineNumbers(upto numberOfLines: Int) -> String {
-        
-        let size = numberOfLines.size
-        
-        let formatter = NumberFormatter()
-        formatter.minimumIntegerDigits = size
-        
-        var output = ""
-        
-        for nextLineNumber in 1...numberOfLines {
-            let numberString = formatter.string(from: nextLineNumber + 1 as NSNumber) ?? ""
-            
-            if nextLineNumber == numberOfLines {
-                output.append(numberString)
-            } else {
-                output.append(numberString + "\n")
-            }
-        }
-        
-        return output
-    }
-    
-    
-    private func generateSimpleLineNumbers(withLines lines: [String]) -> String {
-        if lines.isEmpty {
-            return "0:"
-        }
-        
-        let numberOfLines = lines.count
-        
-        let size = numberOfLines.size
-        
-        let formatter = NumberFormatter()
-        formatter.minimumIntegerDigits = size
-        
-        var output = ""
-        var index = 1
-        
-        for nextLine in lines {
-            let numberString = formatter.string(from: index as NSNumber) ?? ""
-            
-            let nextString = numberString + "\t" + nextLine
-            
-            if index == numberOfLines {
-                output.append(nextString)
-                
-            } else {
-                output.append(nextString + "\n")
-            }
-            
-            index += 1
-        }
-        
-        return output
-    }
 }
 
 
 
-// MARK: - Storing Cached Data and Graphs
-extension ProcessedData {
-    
-    // MARK: - Cache Processed Data
-    func cacheData() throws {
-        
-        let cacheManager = CacheManager.shared
-        
-        guard let parsedFile else {
-            return
-        }
-        
-        cacheManager.cacheData(parsedFile: parsedFile, for: dataItem)
-    }
-}
+
+// MARK: - Moved to LineNumberViewModel
+
+/*
+ private func generateLineNumbers(upto numberOfLines: Int) -> String {
+     
+     let size = numberOfLines.size
+     
+     let formatter = NumberFormatter()
+     formatter.minimumIntegerDigits = size
+     
+     var output = ""
+     
+     for nextLineNumber in 1...numberOfLines {
+         let numberString = formatter.string(from: nextLineNumber + 1 as NSNumber) ?? ""
+         
+         if nextLineNumber == numberOfLines {
+             output.append(numberString)
+         } else {
+             output.append(numberString + "\n")
+         }
+     }
+     
+     return output
+ }
+ 
+ 
+ private func generateSimpleLineNumbers(withLines lines: [String]) -> String {
+     if lines.isEmpty {
+         return "0:"
+     }
+     
+     let numberOfLines = lines.count
+     
+     let size = numberOfLines.size
+     
+     let formatter = NumberFormatter()
+     formatter.minimumIntegerDigits = size
+     
+     var output = ""
+     var index = 1
+     
+     for nextLine in lines {
+         let numberString = formatter.string(from: index as NSNumber) ?? ""
+         
+         let nextString = numberString + "\t" + nextLine
+         
+         if index == numberOfLines {
+             output.append(nextString)
+             
+         } else {
+             output.append(nextString + "\n")
+         }
+         
+         index += 1
+     }
+     
+     return output
+ }
+ */

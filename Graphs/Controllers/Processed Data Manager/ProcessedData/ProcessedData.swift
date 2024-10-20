@@ -14,7 +14,7 @@ class ProcessedData {
     // MARK: - Properties
     var dataItem: DataItem
     
-    var delegate: ProcessedDataDelegate
+    var delegate: ProcessedDataDelegate?
     
     private(set) var parsedFile: ParsedFile?
     
@@ -37,13 +37,22 @@ class ProcessedData {
         
         // TODO: Implement data caching
         
-        do {
-            parsedFile = try await Parser.parseDataItem(dataItem)
-        } catch  {
-            print("ERROR during processedData initializer parsing file")
-            print(error)
+        let url = dataItem.url
+        if let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic {
+            let id = dataItem.localID
+            
+            
+            do {
+                parsedFile = try await Parser.parse(url, using: staticSettings, into: id)
+            } catch  {
+                print("ERROR during processedData initializer parsing file")
+                print(error)
+                parsedFile = nil
+            }
+        } else {
             parsedFile = nil
         }
+        
         
         // TODO: Set Processed Data State
         // Initialize values so actual state determining methods can be called
@@ -58,7 +67,7 @@ class ProcessedData {
     
     
     // MARK: - State Determination
-    private func determineParsedFileState() -> ProcessedDataState {
+    func determineParsedFileState() -> ProcessedDataState {
         guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
             return .noTemplate
         }
@@ -77,7 +86,7 @@ class ProcessedData {
     }
     
     
-    private func determineGraphControllerState() -> ProcessedDataState {
+    func determineGraphControllerState() -> ProcessedDataState {
         guard let graphTemplate = dataItem.getAssociatedGraphTemplate() else {
             return .noTemplate
         }
@@ -101,8 +110,15 @@ class ProcessedData {
     
     // MARK: - Handling Changes
     func parserDidChange() {
+        
+        let url = dataItem.url
+        guard let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic else {
+            return
+        }
+        let id = dataItem.localID
+        
         Task {
-            let newParsedFile = try? await Parser.parseDataItem(dataItem)
+            let newParsedFile = try? await Parser.parse(url, using: staticSettings, into: id)
             
             await MainActor.run {
                 parsedFile = newParsedFile

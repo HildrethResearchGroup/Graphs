@@ -10,11 +10,8 @@ import Foundation
 
 extension DataController {
     func saveParserSettings(_ parserSettings: ParserSettings, to url: URL) {
-        let encoder = JSONEncoder()
-        
         do {
-            let data = try encoder.encode(parserSettings)
-            try data.write(to: url)
+            try parserSettings.save(to: url)
         } catch  {
             print(error)
         }

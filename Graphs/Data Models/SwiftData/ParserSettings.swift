@@ -14,6 +14,8 @@ final class ParserSettings {
     
     var name: String
     
+    var localID: UUID
+    
     /*
      @Relationship(deleteRule: .nullify, inverse: \Node.parserSettings)
      var nodes: [Node]?
@@ -116,14 +118,17 @@ final class ParserSettings {
         }
     }
     
-    private func updateLastModified() {
-        self.lastModified = .now
+    
+    var parserSettingsStatic: ParserSettingsStatic {
+        ParserSettingsStatic(using: self)
     }
     
     
-    // MARK: Initializer
+    
+    // MARK: - Initializer
     init() {
         self.name = "Parser Name"
+        self.localID = UUID()
         
         //self.nodes = []
         //self.dataItems = []
@@ -155,90 +160,70 @@ final class ParserSettings {
         
         }
     
-    init(from decoder: any Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
+    
+    init(from parserSettingsStatic: ParserSettingsStatic) {
         
-        name = try values.decode(String.self, forKey: .name)
-        creationDate = try values.decode(Date.self, forKey: .creationDate)
+        name = parserSettingsStatic.name
+        localID = parserSettingsStatic.localID
+        creationDate = parserSettingsStatic.creationDate
         
         //nodes = []
         //dataItems = []
         
-        newLineType = try values.decode(NewLineType.self, forKey: .newLineType)
-        stringEncodingType = try values.decode(StringEncodingType.self, forKey: .stringEncodingType)
+        newLineType = parserSettingsStatic.newLineType
+        stringEncodingType = parserSettingsStatic.stringEncodingType
         
-        hasExperimentalDetails = try values.decode(Bool.self, forKey: .hasExperimentalDetails)
-        experimentalDetailsStart = try values.decode(Int.self, forKey: .experimentalDetailsStart)
-        experimentalDetailsEnd = try values.decode(Int.self, forKey: .experimentalDetailsEnd)
+        hasExperimentalDetails = parserSettingsStatic.hasExperimentalDetails
+        experimentalDetailsStart = parserSettingsStatic.experimentalDetailsStart
+        experimentalDetailsEnd = parserSettingsStatic.experimentalDetailsEnd
         
-        hasHeader = try values.decode(Bool.self, forKey: .hasExperimentalDetails)
-        headerSeparator = try values.decode(Separator.self, forKey: .headerSeparator)
-        headerStart = try values.decode(Int.self, forKey: .headerStart)
-        headerEnd = try values.decode(Int.self, forKey: .headerEnd)
+        hasHeader = parserSettingsStatic.hasExperimentalDetails
+        headerSeparator = parserSettingsStatic.headerSeparator
+        headerStart = parserSettingsStatic.headerStart
+        headerEnd = parserSettingsStatic.headerEnd
         
-        hasData = try values.decode(Bool.self, forKey: .hasData)
-        dataSeparator = try values.decode(Separator.self, forKey: .dataSeparator)
-        dataStart = try values.decode(Int.self, forKey: .dataStart)
+        hasData = parserSettingsStatic.hasData
+        dataSeparator = parserSettingsStatic.dataSeparator
+        dataStart = parserSettingsStatic.dataStart
         
-        stopDataAtFirstEmptyLine = try values.decode(Bool.self, forKey: .stopDataAtFirstEmptyLine)
-        hasFooter = try values.decode(Bool.self, forKey: .hasFooter)
+        stopDataAtFirstEmptyLine = parserSettingsStatic.stopDataAtFirstEmptyLine
+        hasFooter = parserSettingsStatic.hasFooter
         
-        lastModified = try values.decode(Date.self, forKey: .lastModified)
+        lastModified = parserSettingsStatic.lastModified
     }
     
-    
-}
-
-
-extension ParserSettings: Codable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case name
-        case creationDate
-        case lastModified
+    static func load(url: URL) throws -> ParserSettings {
         
-        case newLineType
-        case stringEncodingType
-        case hasExperimentalDetails
-        case experimentalDetailsStart
-        case experimentalDetailsEnd
+        let data = try Data(contentsOf: url)
         
-        case hasHeader
-        case headerSeparator
-        case headerStart
-        case headerEnd
+        let decoder = JSONDecoder()
         
-        case hasData
-        case dataStart
-        case dataSeparator
+        let parserSettingsStatic =  try decoder.decode(ParserSettingsStatic.self, from: data)
         
-        case stopDataAtFirstEmptyLine
-        case hasFooter
+        let parserSettings = ParserSettings.init(from: parserSettingsStatic)
+        
+        return parserSettings
     }
     
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+    private func updateLastModified() {
+        self.lastModified = .now
         
-        try container.encode(name, forKey: .name)
-        try container.encode(creationDate, forKey: .creationDate)
-        try container.encode(newLineType, forKey: .newLineType)
-        try container.encode(hasExperimentalDetails, forKey: .hasExperimentalDetails)
+        let nc = NotificationCenter.default
         
-        try container.encode(experimentalDetailsStart, forKey: .experimentalDetailsStart)
-        try container.encode(experimentalDetailsEnd, forKey: .experimentalDetailsEnd)
+        let userInfo: [String:UUID] = [Notification.Name.parserSettingPropertyDidChange.rawValue : self.localID]
         
-        try container.encode(hasHeader, forKey: .hasHeader)
-        try container.encode(headerSeparator, forKey: .headerSeparator)
-        try container.encode(headerStart, forKey: .headerStart)
-        try container.encode(headerEnd, forKey: .headerEnd)
+        nc.post(name: .parserSettingPropertyDidChange, object: nil, userInfo: userInfo)
+    }
+    
+    func save(to url: URL) throws  {
+        let staticParserSettings = self.parserSettingsStatic
         
+        let encoder = JSONEncoder()
         
-        try container.encode(hasData, forKey: .hasData)
-        try container.encode(dataStart, forKey: .dataStart)
-        try container.encode(dataSeparator, forKey: .dataSeparator)
+        let data = try encoder.encode(staticParserSettings)
         
-        try container.encode(stopDataAtFirstEmptyLine, forKey: .stopDataAtFirstEmptyLine)
-        try container.encode(stopDataAtFirstEmptyLine, forKey: .stopDataAtFirstEmptyLine)
+        try data.write(to: url)
     }
     
 }
+

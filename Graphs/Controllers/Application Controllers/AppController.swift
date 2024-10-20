@@ -102,6 +102,4 @@ extension AppController: SelectionManagerDelegate {
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
     }
-    
-    
 }

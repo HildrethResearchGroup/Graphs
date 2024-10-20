@@ -32,6 +32,7 @@ class ParserSettingsViewModel {
 }
 
 
+// MARK: - Managing Parser Settings
 extension ParserSettingsViewModel {
     func shouldAllowDrop(ofURLs urls: [URL]) -> Bool {
         if urls.count == 0 { return false }
@@ -52,4 +53,19 @@ extension ParserSettingsViewModel {
             _ = dataController.importParser(from: nextURL, intoNode: nil)
         }
     }
+    
+    func deleteSelectedParserSetting() {
+        if let selectedParserSetting = selection {
+            delete(parserSetting: selectedParserSetting)
+        }
+    }
+    
+    func delete(parserSetting: ParserSettings) {
+        dataController.delete(parserSetting)
+    }
+    
+    func newParserSettings() {
+        _ = dataController.createNewParserSetting()
+    }
 }
+

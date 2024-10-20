@@ -47,12 +47,9 @@ class ProcessDataManager {
     
     
     private func delete(dataItem: DataItem) {
+        self.deleteCache(for: dataItem)
         
-        if activeProcessedData[dataItem.id] != nil {
-            self.deleteCache(for: dataItem)
-            
-            activeProcessedData.removeValue(forKey: dataItem.id)
-        }
+        activeProcessedData.removeValue(forKey: dataItem.id)
     }
 }
 
@@ -108,6 +105,16 @@ extension ProcessDataManager {
 
 // MARK: - ProcessedDataDelegate
 extension ProcessDataManager: ProcessedDataDelegate {
+    
+    
+    func cacheGraphController(_ graphController: GraphController, for dataItem: DataItem) {
+        cacheManager.cacheGraphController(graphController: graphController, for: dataItem)
+    }
+    
+    func cacheParsedFile(_ parsedFile: ParsedFile, for dataItem: DataItem) {
+        cacheManager.cacheData(parsedFile: parsedFile, for: dataItem)
+    }
+    
     
     func cachedGraph(for dataItem: DataItem) -> DGController? {
         guard let controller = cacheManager.loadGraphController(for: dataItem) else { return nil }

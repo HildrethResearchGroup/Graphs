@@ -10,6 +10,10 @@ import Foundation
 
 
 protocol ProcessedDataDelegate {
+    
+    func cacheGraphController(_ graphController: GraphController, for dataItem: DataItem)
+    func cacheParsedFile(_ parsedFile: ParsedFile, for dataItem: DataItem)
+    
     func cachedGraph(for dataItem: DataItem) -> DGController?
     
     func cachedParsedFile(for dataItem: DataItem) -> ParsedFile?

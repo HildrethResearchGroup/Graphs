@@ -149,7 +149,7 @@ extension CacheManager {
         
         
         
-        if cachedParsedFile?.dataItemID != dataItem.id {
+        if cachedParsedFile?.dataItemID != dataItem.localID {
             let logger = Logger(subsystem: "edu.HRG.Graphs", category: "Caching")
             logger.error("Current DataItem ID does not Match Cached DataItem ID")
             
@@ -211,9 +211,11 @@ extension CacheManager {
     }
     
     
-    func cacheDGController(dgController: DGController, for dataItem: DataItem) {
+    func cacheGraphController(graphController: GraphController, for dataItem: DataItem) {
         
         guard let targetURL = try? cacheGraphURL(for: dataItem) else { return }
+        
+        guard let dgController = graphController.dgController else { return }
         
         let cacheDirectoryURL = targetURL.deletingLastPathComponent()
         

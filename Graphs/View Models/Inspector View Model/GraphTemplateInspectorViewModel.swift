@@ -57,6 +57,6 @@ extension GraphTemplateInspectorViewModel {
     
     
     func duplicate(graphTemplate: GraphTemplate) {
-        
+        _ = dataController.duplicate(graphTemplate)
     }
 }

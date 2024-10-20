@@ -268,7 +268,9 @@ extension DataController {
             
             let decoder = JSONDecoder()
             
-            let newParserSettings = try decoder.decode(ParserSettings.self, from: data)
+            let newParserSettingsStatic = try decoder.decode(ParserSettingsStatic.self, from: data)
+            
+            let newParserSettings = ParserSettings(from: newParserSettingsStatic)
             
             modelContext.insert(newParserSettings)
             
@@ -311,11 +313,18 @@ extension DataController {
     func duplicate(_ parserSettings: ParserSettings) -> ParserSettings? {
         do {
             let encoder = JSONEncoder()
-            let transientData = try encoder.encode(parserSettings)
+            
+            var staticSettings = parserSettings.parserSettingsStatic
+            
+            staticSettings.localID = UUID()
+            
+            let transientData = try encoder.encode(staticSettings)
             
             let decoder = JSONDecoder()
             
-            let duplicatedParserSettings = try decoder.decode(ParserSettings.self, from: transientData)
+            let duplicatedParserSettingsStatic = try decoder.decode(ParserSettingsStatic.self, from: transientData)
+            
+            let duplicatedParserSettings = ParserSettings(from: duplicatedParserSettingsStatic)
             
             modelContext.insert(duplicatedParserSettings)
             
