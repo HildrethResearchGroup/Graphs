@@ -30,7 +30,7 @@ class AppController {
         // Managers
         let localSelectionManager = SelectionManager()
         let localCacheManager = CacheManager()
-        let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager)
+        let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager, dataSource: nil)
         
         cacheManager = localCacheManager
         processedDataManager = localProcessedDataManager
@@ -49,6 +49,7 @@ class AppController {
         // Delegates and DataSources
         localDataController.delegate = self
         localSelectionManager.delegate = self
+        localProcessedDataManager.dataSource = self
     }
 }
 
@@ -101,5 +102,12 @@ extension AppController: SelectionManagerDelegate {
     
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
+    }
+}
+
+
+extension AppController: ProcessDataManagerDataSource {
+    func currentSelection() -> [DataItem.ID] {
+        return Array(selectionManager.selectedDataItemIDs)
     }
 }

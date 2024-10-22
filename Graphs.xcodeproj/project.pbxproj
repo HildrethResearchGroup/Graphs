@@ -63,6 +63,8 @@
 		C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC502C2F4B5B00A06887 /* NewLineType.swift */; };
 		C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */; };
 		C078BC562C2F6B0200A06887 /* DataController_NewObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC552C2F6B0200A06887 /* DataController_NewObjects.swift */; };
+		C07921E62CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */; };
+		C07921E82CC7135400A5002C /* ProcessDataManagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
 		C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */; };
 		C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529822C2DEA0B002D3F97 /* Separator.swift */; };
@@ -172,6 +174,8 @@
 		C078BC502C2F4B5B00A06887 /* NewLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLineType.swift; sourceTree = "<group>"; };
 		C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidesToolTip.swift; sourceTree = "<group>"; };
 		C078BC552C2F6B0200A06887 /* DataController_NewObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_NewObjects.swift; sourceTree = "<group>"; };
+		C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessDataManager_ProcessedDataDelegate .swift"; sourceTree = "<group>"; };
+		C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessDataManagerDataSource.swift; sourceTree = "<group>"; };
 		C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseEditor_EmptySelection.swift; sourceTree = "<group>"; };
 		C09529822C2DEA0B002D3F97 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		C09E8FA42CAB48450014988C /* DGDataColumn_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGDataColumn_extensions.swift; sourceTree = "<group>"; };
@@ -544,6 +548,8 @@
 			isa = PBXGroup;
 			children = (
 				C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */,
+				C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */,
+				C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */,
 				C0762C952CBB779D0018BDC7 /* Caching */,
 				C0DE7AEF2C67E5AD00586FF9 /* Graph Controller */,
 				C02E38172C1F90EF00107EAD /* Parsing */,
@@ -710,6 +716,7 @@
 				C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */,
 				C0B05E902C5057D000535E59 /* ProcessDataManager.swift in Sources */,
 				C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */,
+				C07921E82CC7135400A5002C /* ProcessDataManagerDataSource.swift in Sources */,
 				C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */,
 				C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */,
 				C0DF8D212CBA1908006C4574 /* ProcessedDataError.swift in Sources */,
@@ -763,6 +770,7 @@
 				C042F5952CC4BC0D00692678 /* ParserSettingsStatic.swift in Sources */,
 				C078BC402C2F347900A06887 /* GraphTemplateInspector.swift in Sources */,
 				C012AB6B2C2CC4E100BC59B7 /* ParserInspector.swift in Sources */,
+				C07921E62CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift in Sources */,
 				C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */,
 				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
 				C0ED090B2C49AD5500052208 /* DataListViewModel.swift in Sources */,

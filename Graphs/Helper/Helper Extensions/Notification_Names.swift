@@ -14,8 +14,6 @@ extension Notification.Name {
     
     static var graphTemplateOnDataItemDidChange = Notification.Name("graphTemplateOnDataItemDidChange")
     
-    
-    
     static var parserSettingPropertyDidChange = Notification.Name("parserSettingPropertyDidChange")
     
 }

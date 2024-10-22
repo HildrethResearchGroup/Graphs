@@ -20,8 +20,6 @@ class ProcessedData {
     
     var graphController: GraphController?
     
-    var lineNumbersVM: LineNumberViewModel
-    
     var parsedFileState: ProcessedDataState
     var graphTemplateState: ProcessedDataState
     
@@ -31,9 +29,6 @@ class ProcessedData {
     init(dataItem: DataItem, delegate: ProcessedDataDelegate) async {
         self.dataItem = dataItem
         self.delegate = delegate
-        
-        self.lineNumbersVM = LineNumberViewModel(dataItem)
-        
         
         // TODO: Implement data caching
         
@@ -145,5 +140,4 @@ class ProcessedData {
         self.graphController?.setDGController(withController: newDGcontroller, andData: self.parsedFile?.data)
     }
 
-    
 }

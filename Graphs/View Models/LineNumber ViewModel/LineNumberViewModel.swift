@@ -10,6 +10,7 @@ import Foundation
 @Observable
 class LineNumberViewModel {
     
+    // MARK: - Properties
     var dataItem: DataItem? {
         didSet {
             updateSettingsFromParser()
@@ -37,6 +38,7 @@ class LineNumberViewModel {
     }
     
     
+    // MARK: - Initialization
     init(_ dataItem: DataItem?) {
         self.dataItem = dataItem
         self.content = ""
@@ -50,9 +52,36 @@ class LineNumberViewModel {
             self.newLineType = .CRLF
             self.stringEncodingType = .ascii
         }
+        self.registerForNotifications()
+        
         self.updateState()
     }
     
+    
+    // MARK: - Notifications
+    private func registerForNotifications() {
+        let nc = NotificationCenter.default
+        
+        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingsDidChange(_:))    }
+    
+    
+    private func parserSettingsDidChange(_ notification: Notification) {
+        guard let settings = dataItem?.getAssociatedParserSettings() else {
+            return
+        }
+        
+        let info = notification.userInfo
+        let key = Notification.Name.parserSettingPropertyDidChange
+        
+        guard let changedParserSettingsID: UUID = info?[key.rawValue] as? UUID else { return }
+        
+        if changedParserSettingsID == settings.localID {
+            self.updateState()
+        }
+    }
+    
+    
+    // MARK: - Updating State
     private func updateSettingsFromParser() {
         self.newLineType = .CRLF
         self.stringEncodingType = .ascii

@@ -30,91 +30,91 @@ final class ParserSettings {
     
     var newLineType: NewLineType {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var stringEncodingType: StringEncodingType {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var hasExperimentalDetails: Bool = false {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var experimentalDetailsSeparator: Separator? {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var experimentalDetailsStart: Int = 0 {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var experimentalDetailsEnd: Int = 0 {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var hasHeader: Bool = false {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var headerSeparator: Separator? {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var headerStart: Int = 0 {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var headerEnd: Int = 0 {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var hasData: Bool = false {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var dataStart: Int = 0 {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var dataSeparator: Separator? {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var stopDataAtFirstEmptyLine: Bool = true {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
     var hasFooter: Bool = false {
         didSet {
-            updateLastModified()
+            propertyChanged()
         }
     }
     
@@ -205,7 +205,7 @@ final class ParserSettings {
         return parserSettings
     }
     
-    private func updateLastModified() {
+    private func propertyChanged() {
         self.lastModified = .now
         
         let nc = NotificationCenter.default

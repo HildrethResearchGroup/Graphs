@@ -8,18 +8,22 @@
 
 import Foundation
 
+
+@Observable
 class ProcessDataManager {
     
-    private var activeProcessedData: [DataItem.ID : ProcessedData] = [:]
+    private var processedData: [DataItem.ID : ProcessedData] = [:]
     
-    private var cacheManager: CacheManager
+    var cacheManager: CacheManager
+    
+    var dataSource: ProcessDataManagerDataSource?
     
     
     // MARK: - Initialization
-    init(cacheManager: CacheManager) {
+    init(cacheManager: CacheManager, dataSource: ProcessDataManagerDataSource?) {
         self.cacheManager = cacheManager
+        self.dataSource = dataSource
     }
-    
     
     
     func loadData(for dataItem: DataItem) {
@@ -27,12 +31,12 @@ class ProcessDataManager {
     }
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
-        if let output = activeProcessedData[dataItem.id] {
+        if let output = processedData[dataItem.id] {
             return output
         } else {
             let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
             
-            activeProcessedData[dataItem.id] = newProcessedData
+            processedData[dataItem.id] = newProcessedData
             
             return newProcessedData
         }
@@ -49,7 +53,7 @@ class ProcessDataManager {
     private func delete(dataItem: DataItem) {
         self.deleteCache(for: dataItem)
         
-        activeProcessedData.removeValue(forKey: dataItem.id)
+        processedData.removeValue(forKey: dataItem.id)
     }
 }
 
@@ -61,26 +65,47 @@ extension ProcessDataManager {
         
         nc.addObserver(forName: .parserOnDataItemDidChange, object: nil, queue: nil, using: parserOnDataItemDidChange(_:))
         
+        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingPropertyDidChange(_:))
+        
         nc.addObserver(forName: .graphTemplateOnDataItemDidChange, object: nil, queue: nil, using: graphTemplateOnDataItemDidChange(_:))
     }
+    
+    
     
     private func parserOnDataItemDidChange(_ notification: Notification) {
         let info = notification.userInfo
         
         let dataItemIDs: [DataItem.ID] = info?["dataItem.ids"] as? [DataItem.ID] ?? []
         
-        
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDs)
     }
 
+    
     private func graphTemplateOnDataItemDidChange(_ notification: Notification) {
         self.graphTemplateOnDataItemDidChange()
     }
     
     
+    private func parserSettingPropertyDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let key = Notification.Name.parserSettingPropertyDidChange.rawValue
+        
+        guard let parserSettingID: UUID = userInfo[key] as? UUID else { return }
+        
+        let processedDataToUpdate: [ProcessedData] = processedData.values.filter( { $0.dataItem.getAssociatedParserSettings()?.localID == parserSettingID})
+        
+        let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.id})
+        
+        
+        parserOnDataItemDidChange(forDataItemIDS: dataItemIDsToUpdate)
+    }
+    
+    
+    
+    
     private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.ID]) {
         
-        let processedDataToUpdate = activeProcessedData.filter( {id, data in
+        let processedDataToUpdate = processedData.filter( {id, data in
             if ids.contains(id) {
                 return true
             } else {
@@ -88,13 +113,26 @@ extension ProcessDataManager {
             }
         } )
         
-        // TODO: Batch Process
-        
+        // Update parsedFileState to be out of date so that the data is reparsed and regraphed next time the processed data is used
         for nextData in processedDataToUpdate.values {
-            nextData.parserDidChange()
+            nextData.parsedFileState = .outOfDate
         }
         
         
+        // Process only current selection to save resources
+        if let currentSelection = dataSource?.currentSelection() {
+            let dataItemsToUpdate = processedDataToUpdate.filter( {id, data in
+                currentSelection.contains(id)
+            })
+            
+            // Directly update the ProcessedData for the current selection
+            Task {
+                for nextData in dataItemsToUpdate.values {
+                    nextData.parserDidChange()
+                }
+            }// END: Task
+        }// END: Current Selection update
+    
     }
     
     private func graphTemplateOnDataItemDidChange() {
@@ -103,40 +141,6 @@ extension ProcessDataManager {
 }
 
 
-// MARK: - ProcessedDataDelegate
-extension ProcessDataManager: ProcessedDataDelegate {
-    
-    
-    func cacheGraphController(_ graphController: GraphController, for dataItem: DataItem) {
-        cacheManager.cacheGraphController(graphController: graphController, for: dataItem)
-    }
-    
-    func cacheParsedFile(_ parsedFile: ParsedFile, for dataItem: DataItem) {
-        cacheManager.cacheData(parsedFile: parsedFile, for: dataItem)
-    }
-    
-    
-    func cachedGraph(for dataItem: DataItem) -> DGController? {
-        guard let controller = cacheManager.loadGraphController(for: dataItem) else { return nil }
-        
-        return controller
-    }
-    
-    
-    func cachedParsedFile(for dataItem: DataItem) -> ParsedFile? {
-        let cachedParsedFile = cacheManager.loadCachedParsedData(for: dataItem)
-        
-        return cachedParsedFile
-    }
-    
-    
-    func deleteCache(for dataItem: DataItem) {
-        cacheManager.clearCache(for: [dataItem])
-    }
-    
-    
-    func deleteCache(for dataItems: [DataItem]) {
-        cacheManager.clearCache(for: dataItems)
-    }
-    
+protocol ProcessDataManagerDataSource {
+    func currentSelection() -> [DataItem.ID]
 }
