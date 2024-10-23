@@ -42,11 +42,11 @@ final class DataItem: Identifiable, Hashable {
             let nc = NotificationCenter.default
             
             let info: [String: Any] = [
-                "dataItem.ids" : [id],
+                Notification.UserInfoKey.dataItemIDs : [id],
                 
-                "oldParserSettings.id" : oldValue.id,
+                Notification.UserInfoKey.oldParserSettingID : oldValue.id,
                 
-                "newParserSettings.id" : parserSettings.id
+                Notification.UserInfoKey.newParserSettingID : parserSettings.id
             ]
             
             nc.post(name: .parserOnDataItemDidChange, object: nil, userInfo: info)

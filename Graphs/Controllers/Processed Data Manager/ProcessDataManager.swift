@@ -26,8 +26,15 @@ class ProcessDataManager {
     }
     
     
-    func loadData(for dataItem: DataItem) {
+    func processedData(for dataItems: [DataItem]) async -> [ProcessedData] {
+        var output: [ProcessedData] = []
         
+        for nextDataItem in dataItems {
+            let nextProcessedData = await processedData(for: nextDataItem)
+            output.append(nextProcessedData)
+        }
+        
+        return output
     }
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
@@ -63,44 +70,76 @@ extension ProcessDataManager {
     private func registerForNotifications() {
         let nc = NotificationCenter.default
         
-        nc.addObserver(forName: .parserOnDataItemDidChange, object: nil, queue: nil, using: parserOnDataItemDidChange(_:))
+        nc.addObserver(forName: .parserOnNodeOrDataItemDidChange, object: nil, queue: nil, using: parserOnNodeOrDataItemDidChange(_:))
         
         nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingPropertyDidChange(_:))
         
-        nc.addObserver(forName: .graphTemplateOnDataItemDidChange, object: nil, queue: nil, using: graphTemplateOnDataItemDidChange(_:))
+        nc.addObserver(forName: .graphTemplateDidChange, object: nil, queue: nil, using: graphTemplateOnNodeOrDataItemsDidChange(_:))
     }
     
     
     
-    private func parserOnDataItemDidChange(_ notification: Notification) {
+    private func parserOnNodeOrDataItemDidChange(_ notification: Notification) {
         let info = notification.userInfo
         
-        let dataItemIDs: [DataItem.ID] = info?["dataItem.ids"] as? [DataItem.ID] ?? []
+        let dataItemIDs: [DataItem.ID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.ID] ?? []
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDs)
     }
 
     
-    private func graphTemplateOnDataItemDidChange(_ notification: Notification) {
-        self.graphTemplateOnDataItemDidChange()
+    private func graphTemplateOnNodeOrDataItemsDidChange(_ notification: Notification) {
+        guard let userInfo = notification.userInfo else { return }
+        let dataItemsKey = Notification.UserInfoKey.dataItemIDs
+        
+        guard let dataItemIDs: [DataItem.ID] = userInfo[dataItemsKey] as? [DataItem.ID] else { return }
+        
+        self.graphTemplateChanged(for: dataItemIDs)
     }
     
     
+    // MARK: - Implement Graph Template Changes
+    private func graphTemplateChanged(for dataItemIDs: [DataItem.ID]) {
+        let processedDataToUpdate = processedData.filter({id, data in
+            dataItemIDs.contains( where: { $0 == id})
+        })
+        
+        
+        // Update parsedFileState to be out of date so that the data is reparsed and regraphed next time the processed data is used
+        for nextData in processedDataToUpdate.values {
+            nextData.graphTemplateState = .outOfDate
+        }
+        
+        
+        // Process only current selection to save resources
+        if let currentSelection = dataSource?.currentSelection() {
+            let dataItemsToUpdate = processedDataToUpdate.filter( {id, data in
+                currentSelection.contains(id) })
+            
+            for nextProcessedData in dataItemsToUpdate.values {
+                nextProcessedData.loadGraphController()
+            }
+        }
+        
+    }
+    
+    
+    // MARK: - Implement Parser Settings Changes
     private func parserSettingPropertyDidChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
-        let key = Notification.Name.parserSettingPropertyDidChange.rawValue
+        let key = Notification.UserInfoKey.parserSettingsIDs
         
-        guard let parserSettingID: UUID = userInfo[key] as? UUID else { return }
+        guard let parserSettingIDs: [UUID] = userInfo[key] as? [UUID] else { return }
         
-        let processedDataToUpdate: [ProcessedData] = processedData.values.filter( { $0.dataItem.getAssociatedParserSettings()?.localID == parserSettingID})
+        guard let parserSettingsID = parserSettingIDs.first else { return }
+        
+        let processedDataToUpdate: [ProcessedData] = processedData.values.filter( { $0.dataItem.getAssociatedParserSettings()?.localID == parserSettingsID})
         
         let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.id})
         
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDsToUpdate)
     }
-    
-    
     
     
     private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.ID]) {
@@ -112,6 +151,7 @@ extension ProcessDataManager {
                 return false
             }
         } )
+        
         
         // Update parsedFileState to be out of date so that the data is reparsed and regraphed next time the processed data is used
         for nextData in processedDataToUpdate.values {
@@ -133,10 +173,6 @@ extension ProcessDataManager {
             }// END: Task
         }// END: Current Selection update
     
-    }
-    
-    private func graphTemplateOnDataItemDidChange() {
-        
     }
 }
 

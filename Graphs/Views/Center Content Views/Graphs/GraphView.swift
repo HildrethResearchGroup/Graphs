@@ -17,12 +17,10 @@ class GraphView: NSView {
         let newFrame = NSRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: 100.0, height: 100.0))
         self.init(frame: newFrame)
         
-        
         graphController = graphControllerIn
         
         graph = DPDrawingView()
         
-        graph = DPDrawingView()
         graph.frame = newFrame
         graph.autoresizingMask = [.width, .height]
         

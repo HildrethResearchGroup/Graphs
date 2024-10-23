@@ -210,7 +210,7 @@ final class ParserSettings {
         
         let nc = NotificationCenter.default
         
-        let userInfo: [String:UUID] = [Notification.Name.parserSettingPropertyDidChange.rawValue : self.localID]
+        let userInfo: [ String: [ParserSettings.ID]] = [Notification.UserInfoKey.parserSettingsIDs : [id]]
         
         nc.post(name: .parserSettingPropertyDidChange, object: nil, userInfo: userInfo)
     }

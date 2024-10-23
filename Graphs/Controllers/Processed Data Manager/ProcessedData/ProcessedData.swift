@@ -9,9 +9,11 @@
 import Foundation
 
 @Observable
-class ProcessedData {
+class ProcessedData: Identifiable {
     
     // MARK: - Properties
+    var id = UUID()
+    
     var dataItem: DataItem
     
     var delegate: ProcessedDataDelegate?
@@ -22,6 +24,7 @@ class ProcessedData {
     
     var parsedFileState: ProcessedDataState
     var graphTemplateState: ProcessedDataState
+    
     
     
     

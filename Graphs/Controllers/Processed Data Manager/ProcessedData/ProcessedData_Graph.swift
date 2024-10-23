@@ -67,6 +67,7 @@ extension ProcessedData {
             let parsedFile = self.parsedFile
                 
             self.graphController = GraphController(dgController: controller, data: parsedFile?.data)
+
         }
         
     }

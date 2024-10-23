@@ -36,11 +36,11 @@ final class Node {
             let dataItemIDS = flattenedDataItems().map({ $0.id })
             
             let info: [String: Any] = [
-                "dataItem.ids" : dataItemIDS,
+                Notification.UserInfoKey.dataItemIDs : dataItemIDS,
                 
-                "oldGraphTemplate.id" : oldValue.id,
+                Notification.UserInfoKey.oldGraphTemplateID : oldValue.id,
                 
-                "newGraphTemplate.id" : parserSettings.id
+                Notification.UserInfoKey.newGraphTemplateID : parserSettings.id
             ]
             
             nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
@@ -58,14 +58,14 @@ final class Node {
             let dataItemIDS = flattenedDataItems().map({ $0.id })
             
             let info: [String: Any] = [
-                "dataItem.ids" : dataItemIDS,
+                Notification.UserInfoKey.dataItemIDs : dataItemIDS,
                 
-                "oldParserSettings.id" : oldValue.id,
+                Notification.UserInfoKey.oldParserSettingID : oldValue.id,
                 
-                "newParserSettings.id" : parserSettings.id
+                Notification.UserInfoKey.newParserSettingID : parserSettings.id
             ]
             
-            nc.post(name: .parserDidChange, object: nil, userInfo: info)
+            nc.post(name: .parserOnNodeOrDataItemDidChange, object: nil, userInfo: info)
         }
     }
     

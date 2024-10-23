@@ -22,6 +22,7 @@ class AppController {
     // View Models
     var sourceListVM: SourceListViewModel
     var inspectorVM: InspectorViewModel
+    var graphListVM: GraphListViewModel
     
     init() {
         // Controllers and Managers
@@ -31,11 +32,13 @@ class AppController {
         let localSelectionManager = SelectionManager()
         let localCacheManager = CacheManager()
         let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager, dataSource: nil)
+        let localGraphListVM = GraphListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
         
         cacheManager = localCacheManager
         processedDataManager = localProcessedDataManager
         dataController = localDataController
         selectionManager = localSelectionManager
+        graphListVM = localGraphListVM
         
         
         
@@ -102,6 +105,7 @@ extension AppController: SelectionManagerDelegate {
     
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
+        graphListVM.updateProcessedData()
     }
 }
 
