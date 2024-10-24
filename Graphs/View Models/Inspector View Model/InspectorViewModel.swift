@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 @Observable
+@MainActor
 class InspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager

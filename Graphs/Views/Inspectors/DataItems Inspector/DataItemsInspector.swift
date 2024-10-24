@@ -12,6 +12,9 @@ struct DataItemsInspector: View {
     
     @Bindable var viewModel: DataItemsInspectorViewModel
     
+    @AppStorage("openLotsOfFinderItems") private var openLotsOfFinderItems = true
+    @State private var shouldDisplayFinderWarning = false
+    
     
     init(_ viewModel: DataItemsInspectorViewModel) {
         self.viewModel = viewModel
@@ -22,17 +25,9 @@ struct DataItemsInspector: View {
         Form {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
-                //.disabled(viewModel.disableNameTextfield)
+                .disabled(viewModel.disableNameTextfield)
             
-            HStack {
-                Text("FilePath:")
-                Text(viewModel.filePath)
-                Spacer()
-                Button("􀉣") {
-                    
-                }
-                .disabled(viewModel.disableNameFilepath)
-            }
+            openFilesView()
             
             VStack {
                 HStack {
@@ -69,7 +64,7 @@ struct DataItemsInspector: View {
     
     @ViewBuilder
     func parserSettingsView() -> some View {
-        Menu("Parser:") {
+        Menu(viewModel.parserSettingsMenuText) {
             Button("None") {
                 viewModel.updateParserSetting(with: .none, and: nil)
             }
@@ -88,7 +83,7 @@ struct DataItemsInspector: View {
     
     @ViewBuilder
     func graphTemplateView() -> some View {
-        Menu("Graph Template:") {
+        Menu(viewModel.graphMenuText) {
             Button("None") {
                 viewModel.updateGraphtemplate(with: .none, and: nil)
             }
@@ -100,6 +95,37 @@ struct DataItemsInspector: View {
                 Button(nextGraphTemplate.name) {
                     viewModel.updateGraphtemplate(with: .directlySet, and: nextGraphTemplate)
                 }
+            }
+        }
+    }
+    
+    
+    
+    @ViewBuilder
+    func openFilesView() -> some View {
+        HStack {
+            Text("FilePath:")
+            Text(viewModel.filePath)
+            Spacer()
+            Button("􀉣") { openDataItemsInFinder()}
+            .disabled(viewModel.disableNameFilepath)
+            .alert("This will open \(viewModel.dataItemsCount) Finder Windows.  Are you sure you want to do this?", isPresented: $shouldDisplayFinderWarning) {
+                Button("Yes", role: .cancel) {viewModel.openInFinder()}
+                Button("No", role: .destructive) {}
+            }
+        }
+    }
+    
+    func openDataItemsInFinder() {
+        let count = viewModel.dataItemsCount
+        
+        if openLotsOfFinderItems == true {
+            viewModel.openInFinder()
+        } else {
+            if count <= 10 {
+                viewModel.openInFinder()
+            } else {
+                self.shouldDisplayFinderWarning = true
             }
         }
     }

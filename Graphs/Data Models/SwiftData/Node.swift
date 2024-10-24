@@ -18,9 +18,10 @@ final class Node {
     
     var name: String
     
+    @Relationship(deleteRule: .nullify, inverse: \Node.subNodes)
     var parent: Node?
     
-    @Relationship(deleteRule: .cascade, inverse: \Node.parent)
+    //@Relationship(deleteRule: .cascade, inverse: \Node.parent)
     var subNodes: [Node]? = []
     
     @Relationship(deleteRule: .nullify, inverse: \DataItem.node)
@@ -72,49 +73,86 @@ final class Node {
     var parserSettingsInputType: InputType
     
     
-    var nodeTypeStorage: Int
+    /*
+     var nodeTypeStorage: Int
+     
+     @Transient
+     var nodeType: NodeType {
+         set {
+             nodeTypeStorage = newValue.intForStorage()
+         } get {
+             NodeType(rawValue: nodeTypeStorage) ?? .child
+         }
+     }
+     */
     
-    @Transient
-    var nodeType: NodeType {
-        set {
-            nodeTypeStorage = newValue.intForStorage()
-        } get {
-            NodeType(rawValue: nodeTypeStorage) ?? .child
-        }
-    }
     
     
     // MARK: - Initializers
-    init(url: URL?, parent: Node?) {
+    init(url: URL?) {
         self.id = UUID()
 
         self.originalURL = url
         
-        if parent?.subNodes == nil {
-            parent?.subNodes = []
-        }
+        // TODO: Cleanup
+        /* Moved to postModelContextInsertInitialization
+         if parent?.subNodes == nil {
+             parent?.subNodes = []
+         }
+         
+         self.parent = parent
+         */
         
-        self.parent = parent
         
         self.dataItems = []
         
         self.creationDate = .now
         
-        if parent == nil {
-            nodeTypeStorage = NodeType.root.intForStorage()
-        } else {
-            nodeTypeStorage = NodeType.child.intForStorage()
-        }
+        /*
+         if parent == nil {
+             nodeTypeStorage = NodeType.root.intForStorage()
+         } else {
+             nodeTypeStorage = NodeType.child.intForStorage()
+         }
+         */
         
-        // TODO: Implement Subnodes
+
         self.subNodes = []
         
         self.name = url?.fileName ?? Node.defaultName
         
         
-        if parent != nil {
-            parserSettingsInputType = .defaultFromParent
-            graphTemplateInputType = .defaultFromParent
+        // Set initial input types.  This will be updated using postModelContextInsertInitialization
+        self.parent = nil
+        parserSettingsInputType = .none
+        graphTemplateInputType = .none
+        
+        
+        // TODO: Cleanup
+        /* Moved to postModelContextInsertInitialization
+         if parent != nil {
+             parserSettingsInputType = .defaultFromParent
+             graphTemplateInputType = .defaultFromParent
+         } else {
+             parserSettingsInputType = .none
+             graphTemplateInputType = .none
+         }
+         */
+        
+    }
+    
+    func postModelContextInsertInitialization(_ parent: Node?) {
+        
+        self.setParent(parent)
+        
+        if let parent {
+            if parent.parent == nil {
+                self.graphTemplateInputType = .defaultFromParent
+                self.parserSettingsInputType = .defaultFromParent
+            } else {
+                self.graphTemplateInputType = parent.graphTemplateInputType
+                self.parserSettingsInputType = parent.parserSettingsInputType
+            }
         } else {
             parserSettingsInputType = .none
             graphTemplateInputType = .none
@@ -124,13 +162,15 @@ final class Node {
     
     func setParent(_ node: Node?) {
         if let node {
+            
             if node.subNodes != nil {
-                node.subNodes?.append(self)
+                self.parent = node
             } else {
                 node.subNodes = []
-                node.subNodes?.append(self)
+                self.parent = node
             }
         }
+
     }
     
     

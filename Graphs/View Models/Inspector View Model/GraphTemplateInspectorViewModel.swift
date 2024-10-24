@@ -9,6 +9,7 @@
 import Foundation
 
 @Observable
+@MainActor
 class GraphTemplateInspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager

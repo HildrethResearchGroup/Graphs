@@ -118,16 +118,15 @@ class ProcessedData: Identifiable {
         Task {
             let newParsedFile = try? await Parser.parse(url, using: staticSettings, into: id)
             
-            await MainActor.run {
-                parsedFile = newParsedFile
-                
-                let data = newParsedFile?.data ?? [[]]
-                
-                graphController?.updateGraphWithData(data)
-                
-            }
+            parsedFile = newParsedFile
+            
+            let data = newParsedFile?.data ?? [[]]
+            
+            graphController?.updateGraphWithData(data)
+            
         }
     }
+    
 
     
     func graphTemplateDidChange() {

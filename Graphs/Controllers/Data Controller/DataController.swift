@@ -89,12 +89,14 @@ class DataController {
     
     func allNodes() -> [Node] {
         do {
-            let descriptor = FetchDescriptor<Node>()
+            let sortOrder = [SortDescriptor<Node>(\.name)]
+            let descriptor = FetchDescriptor<Node>(sortBy: sortOrder)
             let output = try modelContext.fetch(descriptor)
             
             return output
             
         } catch  {
+            print("DataController: Failed to Fetch All Nodes")
             return []
         }
     }
@@ -108,15 +110,18 @@ class DataController {
     }
     
     private func fetchRootNodes() {
-        do {
-            let sortOrder = [SortDescriptor<Node>(\.name)]
-            let predicate = #Predicate<Node>{ $0.nodeTypeStorage == 0}
-            
-            let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: sortOrder)
-            rootNodes = try modelContext.fetch(descriptor)
-        } catch {
-            print("DataController: Failed to Fetch Root Nodes")
-        }
+         do {
+             let sortOrder = [SortDescriptor<Node>(\.name)]
+             //let predicate = #Predicate<Node>{ $0.nodeTypeStorage == 0}
+             let predicate = #Predicate<Node> { $0.parent == nil}
+             
+             let descriptor = FetchDescriptor<Node>(predicate: predicate, sortBy: sortOrder)
+             
+             rootNodes = try modelContext.fetch(descriptor)
+             
+         } catch {
+             print("DataController: Failed to Fetch Root Nodes")
+         }
     }
     
     

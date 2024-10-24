@@ -21,7 +21,6 @@ extension ProcessedData {
     
     
     // MARK: - Load ParsedFile
-    @MainActor
     func loadParsedFile() async throws -> ParsedFile? {
         
         var parsedfile: ParsedFile? = nil

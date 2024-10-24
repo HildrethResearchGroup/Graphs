@@ -10,6 +10,7 @@ import Foundation
 
 
 @Observable
+@MainActor
 class NodeInspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
@@ -71,19 +72,23 @@ class NodeInspectorViewModel {
     }
     
     var disableNameTextfield: Bool {
-        if nodesCount == 0 {
-            return true
-        } else {
-            return false
+        switch nodesCount {
+        case 0: return true
+        case 1: return false
+        default: return true
         }
     }
     
     var disableSettingsUpdate: Bool {
-        if nodesCount == 0 {
-            return true
-        } else {
-            return false
+        switch nodesCount {
+        case 0: return true
+        case 1: return false
+        default: return true
         }
+    }
+    
+    func selectedNodeDidChange() {
+        setInitialName()
     }
     
 }
@@ -102,20 +107,35 @@ extension NodeInspectorViewModel {
     
     var parserSettingsName: String {
         switch nodesCount {
-        case 0: return "No Nodes Selected"
+        case 0: return ""
         case 1:
             guard let node = nodes.first else { return "No Selection" }
             
             switch node.parserSettingsInputType {
             case .none:
-                return "No Parser Selected"
+                return "No Parser Set"
             case .defaultFromParent:
-                return "Folder - \(node.getAssociatedParserSettings()?.name ?? "Unamed Parser")"
+                return "From Parent: \(node.getAssociatedParserSettings()?.name ?? "None")"
             case .directlySet:
                 return node.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
             }
         
         default: return "Multiple Selection"
+        }
+    }
+    
+    
+    var parserSettingsMenuText: String {
+        switch nodesCount {
+        case 0: return ""
+        case 1:
+            guard let onlyNode = nodes.first else { return ""}
+            switch onlyNode.parserSettingsInputType {
+            case .none: return "None"
+            case .defaultFromParent: return "Inhert"
+            case .directlySet: return "Set to: \(onlyNode.getAssociatedParserSettings()?.name ?? "")"
+            }
+        default: return ""
         }
     }
     
@@ -131,15 +151,15 @@ extension NodeInspectorViewModel {
     
     var graphTemplateName: String {
         switch nodesCount {
-        case 0: return "No Data Selected"
+        case 0: return ""
         case 1:
             guard let onlyNode = nodes.first else { return "No Selection" }
             
             switch onlyNode.graphTemplateInputType {
             case .none:
-                return "No Graph Selected"
+                return "No Graph Set"
             case .defaultFromParent:
-                return "Folder - \(onlyNode.getAssociatedGraphTemplate()?.name ?? "Unamed Graph")"
+                return "From Parent: \(onlyNode.getAssociatedGraphTemplate()?.name ?? "None")"
             case .directlySet:
                 return onlyNode.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
             }
@@ -147,4 +167,19 @@ extension NodeInspectorViewModel {
         default: return "Multiple Selection"
         }
     }
+    
+    var graphMenuText: String {
+        switch nodesCount {
+        case 0: return ""
+        case 1:
+            guard let onlyNode = nodes.first else { return ""}
+            switch onlyNode.graphTemplateInputType {
+            case .none: return "None"
+            case .defaultFromParent: return "Inhert"
+            case .directlySet: return "Set to: \(onlyNode.getAssociatedGraphTemplate()?.name ?? "")"
+            }
+        default: return ""
+        }
+    }
+    
 }

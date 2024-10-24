@@ -96,7 +96,7 @@
 		C0ED09062C49A32700052208 /* DataController_MovingObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED09052C49A32700052208 /* DataController_MovingObjects.swift */; };
 		C0ED09092C49AC5800052208 /* DataItemsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED09082C49AC5800052208 /* DataItemsListView.swift */; };
 		C0ED090B2C49AD5500052208 /* DataListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED090A2C49AD5500052208 /* DataListViewModel.swift */; };
-		C0ED090D2C49B34C00052208 /* DataItemsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED090C2C49B34C00052208 /* DataItemsContent.swift */; };
+		C0ED090D2C49B34C00052208 /* CenterContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED090C2C49B34C00052208 /* CenterContent.swift */; };
 		C0ED09102C49B81F00052208 /* DataItemsInspectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED090F2C49B81F00052208 /* DataItemsInspectorViewModel.swift */; };
 		C0EE43C12C45B22100EE74FE /* DataController_Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EE43C02C45B22100EE74FE /* DataController_Saving.swift */; };
 /* End PBXBuildFile section */
@@ -207,7 +207,7 @@
 		C0ED09052C49A32700052208 /* DataController_MovingObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_MovingObjects.swift; sourceTree = "<group>"; };
 		C0ED09082C49AC5800052208 /* DataItemsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsListView.swift; sourceTree = "<group>"; };
 		C0ED090A2C49AD5500052208 /* DataListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataListViewModel.swift; sourceTree = "<group>"; };
-		C0ED090C2C49B34C00052208 /* DataItemsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsContent.swift; sourceTree = "<group>"; };
+		C0ED090C2C49B34C00052208 /* CenterContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterContent.swift; sourceTree = "<group>"; };
 		C0ED090F2C49B81F00052208 /* DataItemsInspectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsInspectorViewModel.swift; sourceTree = "<group>"; };
 		C0EE43C02C45B22100EE74FE /* DataController_Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_Saving.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -479,7 +479,6 @@
 			isa = PBXGroup;
 			children = (
 				C0ED09082C49AC5800052208 /* DataItemsListView.swift */,
-				C0ED090C2C49B34C00052208 /* DataItemsContent.swift */,
 			);
 			path = "Data Items";
 			sourceTree = "<group>";
@@ -540,7 +539,7 @@
 		C0A93A642C12402B0037BAE3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C0ED09072C49ABC700052208 /* Center Content Views */,
+				C0ED09072C49ABC700052208 /* Center Content */,
 				C095297C2C2DD62F002D3F97 /* Convenience Views */,
 				C012AB692C2CC4C800BC59B7 /* Inspectors */,
 				C0ED090E2C49B71A00052208 /* Preferences */,
@@ -628,13 +627,14 @@
 			path = ProcessedData;
 			sourceTree = "<group>";
 		};
-		C0ED09072C49ABC700052208 /* Center Content Views */ = {
+		C0ED09072C49ABC700052208 /* Center Content */ = {
 			isa = PBXGroup;
 			children = (
+				C0ED090C2C49B34C00052208 /* CenterContent.swift */,
 				C07921E92CC82CEE00A5002C /* Data Items */,
 				C078BC322C2F32AC00A06887 /* Graphs */,
 			);
-			path = "Center Content Views";
+			path = "Center Content";
 			sourceTree = "<group>";
 		};
 		C0ED090E2C49B71A00052208 /* Preferences */ = {
@@ -801,7 +801,7 @@
 				C0263D6F2C163402008C929F /* DataController_Errors.swift in Sources */,
 				C09E8FAF2CAB5D7B0014988C /* ProcessedData_Graph.swift in Sources */,
 				C078BC372C2F333400A06887 /* GraphView.swift in Sources */,
-				C0ED090D2C49B34C00052208 /* DataItemsContent.swift in Sources */,
+				C0ED090D2C49B34C00052208 /* CenterContent.swift in Sources */,
 				C0263D822C166F48008C929F /* Collections_Extensions.swift in Sources */,
 				C0263D782C16372A008C929F /* AppDelegate.swift in Sources */,
 				C02E38162C1F8B6B00107EAD /* GraphTemplate.swift in Sources */,
@@ -970,6 +970,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1010,6 +1011,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.HRG.Graphs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Graphs-Bridging-Header.h";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

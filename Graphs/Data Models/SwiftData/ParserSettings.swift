@@ -192,6 +192,12 @@ final class ParserSettings {
         lastModified = parserSettingsStatic.lastModified
     }
     
+    
+    func postModelContextInsertInitialization(_ node: Node?) {
+        node?.setParserSetting(withInputType: .directlySet, and: self)
+    }
+    
+    
     static func load(url: URL) throws -> ParserSettings {
         
         let data = try Data(contentsOf: url)

@@ -65,19 +65,30 @@ final class DataItem: Identifiable, Hashable {
     
     
     // MARK: - Initialization
-    init(url: URL, node: Node) {
+    init(url: URL) {
         self.localID = UUID()
         
         self.url = url
         self.name = url.fileName ?? "No File Name"
-        self.node = node
+        self.node = nil
         
         self.creationDate = .now
-        self.graphTemplateInputType = .defaultFromParent
-        self.parserSettingsInputType = .defaultFromParent
+        self.graphTemplateInputType = .none
+        self.parserSettingsInputType = .none
     }
     
     
+    func postModelContextInsertInitialization(_ node: Node?) {
+        self.node = node
+        
+        if node != nil {
+            self.graphTemplateInputType = .defaultFromParent
+            self.parserSettingsInputType = .defaultFromParent
+        }
+    }
+    
+    
+    // MARK: - URL Resources
     func urlResources() -> URLResourceValues? {
         if resourceValues == nil {
             resourceValues = try? url.resourceValues(forKeys: [.totalFileSizeKey, .creationDateKey, .contentModificationDateKey])

@@ -8,6 +8,7 @@
 import Foundation
 
 @Observable
+@MainActor
 class LineNumberViewModel {
     
     // MARK: - Properties
@@ -62,10 +63,13 @@ class LineNumberViewModel {
     private func registerForNotifications() {
         let nc = NotificationCenter.default
         
-        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingsDidChange(_:))    }
+        //nc.addObserver(self, selector: #selector(LineNumberViewModel.parserSettingsDidChange(_:)), name: .parserSettingPropertyDidChange, object: nil)
+        
+        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingsDidChange(_:))
+    }
     
     
-    private func parserSettingsDidChange(_ notification: Notification) {
+    @objc private func parserSettingsDidChange(_ notification: Notification) {
         guard let settings = dataItem?.getAssociatedParserSettings() else {
             return
         }

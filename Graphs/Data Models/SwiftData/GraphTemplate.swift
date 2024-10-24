@@ -43,6 +43,11 @@ class GraphTemplate {
     }
     
     
+    func postModelContextInsertInitialization(_ node: Node?) {
+        node?.setGraphTemplate(withInputType: .directlySet, and: self)
+    }
+    
+    
     @Transient
     private var resourceValues: URLResourceValues?
     

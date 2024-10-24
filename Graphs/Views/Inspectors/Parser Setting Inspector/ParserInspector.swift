@@ -71,11 +71,11 @@ struct ParserInspector: View {
     
     // MARK: - Functions
     private func newParser() {
-        print("Implment new Parser")
+        viewModel.newParserSettings()
     }
     
     private func deleteParser() {
-        print("Implement delete Parser")
+        viewModel.deleteSelectedParserSetting()
     }
 }
 

@@ -82,12 +82,16 @@ extension DataController {
         }
         
         // Create Node and Insert into context
-        let newNode = Node(url: url, parent: parentNode)
+        let newNode = Node(url: url)
         
         modelContext.insert(newNode)
         
+        newNode.postModelContextInsertInitialization(parentNode)
         
-        newNode.setParent(parentNode)
+        
+        // TODO: Cleanup
+        // Moved to postModelContextInsertInitialization
+        // newNode.setParent(parentNode)
         /*
          if let parentNode {
              if parentNode.subNodes != nil {
@@ -164,7 +168,6 @@ extension DataController {
         }
         
         
-        // TODO:
         if url.pathExtension == URL.parserSettingsFileExtension {
             _ = createNewParserSetting(intoNode: parentNode)
             return nil
@@ -186,42 +189,30 @@ extension DataController {
             return nil
         }
         
-        let newItem = DataItem(url: url, node: parentNode)
+        let newItem = DataItem(url: url)
         
         modelContext.insert(newItem)
         
-        newItem.node = parentNode
-        
-        
-        // ADD
+        newItem.postModelContextInsertInitialization(parentNode)
+
         return newItem
     }
     
     
     // MARK: - Adding Nodes
     func createEmptyNode(withParent parent: Node?) {
-        let newNode = Node(url: nil, parent: parent)
+        let newNode = Node(url: nil)
         
         modelContext.insert(newNode)
         
+        newNode.postModelContextInsertInitialization(parent)
         
-        newNode.setParent(parent)
+        try? modelContext.save()
         
-        /*
-         if let parent {
-             if parent.subNodes != nil {
-                 parent.subNodes?.append(newNode)
-             } else {
-                 parent.subNodes = []
-                 parent.subNodes?.append(newNode)
-             }
-         }
-         */
          
+        fetchData()
  
         delegate?.newData(nodes: [newNode], andDataItems: [])
-        
-        fetchData()
     }
     
     
@@ -232,7 +223,7 @@ extension DataController {
        
         modelContext.insert(newGraphTemplate)
         
-        node?.setGraphTemplate(withInputType: .directlySet, and: newGraphTemplate)
+        newGraphTemplate.postModelContextInsertInitialization(node)
                 
         delegate?.newGraphTemplate(newGraphTemplate)
         
@@ -247,7 +238,7 @@ extension DataController {
         
         modelContext.insert(newParserSettings)
         
-        node?.setParserSetting(withInputType: .directlySet, and: newParserSettings)
+        newParserSettings.postModelContextInsertInitialization(node)
         
         fetchData()
         
@@ -274,9 +265,7 @@ extension DataController {
             
             modelContext.insert(newParserSettings)
             
-            parentNode?.setParserSetting(withInputType: .directlySet, and: newParserSettings)
-            
-            //parentNode?.parserSettings = newParserSettings
+            newParserSettings.postModelContextInsertInitialization(parentNode)
             
             fetchData()
             
@@ -309,6 +298,7 @@ extension DataController {
         
         return duplicateGraphTemplate
     }
+    
     
     func duplicate(_ parserSettings: ParserSettings) -> ParserSettings? {
         do {

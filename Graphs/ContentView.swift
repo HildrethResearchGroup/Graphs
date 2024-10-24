@@ -26,12 +26,7 @@ struct ContentView: View {
             SourceList(sourceListVM: appController.sourceListVM)
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
         } detail: {
-            VSplitView {
-                Text("Content List")
-                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
-                Text("Graphs")
-                    .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
-            }
+            CenterContent(appController.dataListVM, appController.graphListVM)
             //.frame(minHeight: 100, maxHeight: .infinity)
         }
         .inspector(isPresented: $visibility_inspector) {

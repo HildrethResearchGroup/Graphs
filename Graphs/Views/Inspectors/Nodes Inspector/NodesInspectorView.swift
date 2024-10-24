@@ -57,7 +57,7 @@ struct NodesInspectorView: View {
     
     @ViewBuilder
     func parserSettingsView() -> some View {
-        Menu("Parser:") {
+        Menu(viewModel.parserSettingsMenuText) {
             Button("None") {
                 viewModel.updateParserSetting(with: .none, and: nil)
             }
@@ -76,7 +76,7 @@ struct NodesInspectorView: View {
     
     @ViewBuilder
     func graphTemplateView() -> some View {
-        Menu("Graph Template:") {
+        Menu(viewModel.graphMenuText) {
             Button("None") {
                 viewModel.updateGraphtemplate(with: .none, and: nil)
             }

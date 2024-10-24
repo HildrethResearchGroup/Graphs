@@ -33,10 +33,7 @@ class GraphListViewModel {
         
         Task {
             let localProcessedData = await processedDataManager.processedData(for: selectedDataItems)
-            
-            await MainActor.run {
-                self.processedData = localProcessedData
-            }
+            self.processedData = localProcessedData
         }
         
     }

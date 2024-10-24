@@ -10,6 +10,7 @@ import Foundation
 import Collections
 
 @Observable
+@MainActor
 class DataListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager

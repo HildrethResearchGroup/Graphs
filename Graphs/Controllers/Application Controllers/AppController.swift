@@ -10,6 +10,7 @@ import Foundation
 import SwiftData
 
 @Observable
+@MainActor
 class AppController {
     var dataController: DataController
     
@@ -22,6 +23,7 @@ class AppController {
     // View Models
     var sourceListVM: SourceListViewModel
     var inspectorVM: InspectorViewModel
+    var dataListVM: DataListViewModel
     var graphListVM: GraphListViewModel
     
     init() {
@@ -32,21 +34,19 @@ class AppController {
         let localSelectionManager = SelectionManager()
         let localCacheManager = CacheManager()
         let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager, dataSource: nil)
-        let localGraphListVM = GraphListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
+        
         
         cacheManager = localCacheManager
         processedDataManager = localProcessedDataManager
         dataController = localDataController
         selectionManager = localSelectionManager
-        graphListVM = localGraphListVM
-        
-        
         
         
         // View Models
         sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
         inspectorVM = InspectorViewModel(localDataController, localSelectionManager)
-        
+        dataListVM = DataListViewModel(localDataController, localSelectionManager)
+        graphListVM = GraphListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
         
         
         // Delegates and DataSources
@@ -57,12 +57,13 @@ class AppController {
 }
 
 
-extension AppController: DataControllerDelegate {
+extension AppController: @preconcurrency DataControllerDelegate {
     
     // MARK: - Nodes and Data
     func newData(nodes: [Node], andDataItems dataItems: [DataItem]) {
         // Pass the information down to the Selection Manager because the selectionManager is responsible for knowing how selection state should be udpated
-        selectionManager.newData(nodes: nodes, andDataItems: dataItems)    }
+        selectionManager.newData(nodes: nodes, andDataItems: dataItems)
+    }
     
     func preparingToDelete(nodes: [Node]) {
         selectionManager.preparingToDelete(nodes: nodes)
@@ -97,10 +98,11 @@ extension AppController: DataControllerDelegate {
 }
 
 
-extension AppController: SelectionManagerDelegate {
+extension AppController: @preconcurrency SelectionManagerDelegate {
     func selectedNodesDidChange(_ nodes: Set<Node>) {
         let sort = SortDescriptor<Node>(\.name)
         dataController.selectedNodes = Array(nodes).sorted(using: sort)
+        inspectorVM.nodeInspectorVM.selectedNodeDidChange()
     }
     
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
@@ -110,7 +112,7 @@ extension AppController: SelectionManagerDelegate {
 }
 
 
-extension AppController: ProcessDataManagerDataSource {
+extension AppController: @preconcurrency ProcessDataManagerDataSource {
     func currentSelection() -> [DataItem.ID] {
         return Array(selectionManager.selectedDataItemIDs)
     }

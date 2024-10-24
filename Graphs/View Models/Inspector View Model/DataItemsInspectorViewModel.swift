@@ -10,6 +10,7 @@ import Foundation
 import Collections
 
 @Observable
+@MainActor
 class DataItemsInspectorViewModel {
     
     private var dataController: DataController
@@ -46,6 +47,7 @@ class DataItemsInspectorViewModel {
     }
     
     
+    
     // MARK: - Initializers
     init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
@@ -65,12 +67,17 @@ class DataItemsInspectorViewModel {
     }
     
     
+    func selectedNodeDidChange() {
+        setInitialName()
+    }
+    
     // MARK: - Name Content
     func updateNames() {
         for nextDataItem in dataItems {
             nextDataItem.name = name
         }
     }
+    
     
     var disableNameTextfield: Bool {
         if dataItemsCount == 0 {
@@ -84,7 +91,7 @@ class DataItemsInspectorViewModel {
     // MARK: - FilePath Content
     var filePath: String {
         switch dataItemsCount {
-        case 0: return "No Selection"
+        case 0: return ""
         case 1: return dataController.selectedDataItems.first?.url.path() ?? "No Filepath Could be Created"
         default: return "Multiple Selection"
         }
@@ -121,15 +128,15 @@ extension DataItemsInspectorViewModel {
     
     var parserSettingsName: String {
         switch dataItemsCount {
-        case 0: return "No Data Selected"
+        case 0: return ""
         case 1:
             guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
             
             switch dataItem.parserSettingsInputType {
             case .none:
-                return "No Parser Selected"
+                return "No Parser Set"
             case .defaultFromParent:
-                return "Folder - \(dataItem.getAssociatedParserSettings()?.name ?? "Unamed Parser")"
+                return "From Parent: \(dataItem.getAssociatedParserSettings()?.name ?? "None")"
             case .directlySet:
                 return dataItem.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
             }
@@ -137,6 +144,22 @@ extension DataItemsInspectorViewModel {
         default: return "Multiple Selection"
         }
     }
+    
+    
+    var parserSettingsMenuText: String {
+        switch dataItemsCount {
+        case 0: return ""
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else { return ""}
+            switch dataItem.parserSettingsInputType {
+            case .none: return "None"
+            case .defaultFromParent: return "Inhert"
+            case .directlySet: return "Set to: \(dataItem.getAssociatedParserSettings()?.name ?? "")"
+            }
+        default: return ""
+        }
+    }
+    
     
     
     // MARK: - Graph Template Selection
@@ -149,7 +172,7 @@ extension DataItemsInspectorViewModel {
     
     var graphTemplateName: String {
         switch dataItemsCount {
-        case 0: return "No Data Selected"
+        case 0: return ""
         case 1:
             guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
             
@@ -157,7 +180,7 @@ extension DataItemsInspectorViewModel {
             case .none:
                 return "No Graph Selected"
             case .defaultFromParent:
-                return "Folder - \(dataItem.getAssociatedGraphTemplate()?.name ?? "Unamed Graph")"
+                return "From Parent: \(dataItem.getAssociatedGraphTemplate()?.name ?? "None")"
             case .directlySet:
                 return dataItem.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
             }
@@ -165,8 +188,30 @@ extension DataItemsInspectorViewModel {
         default: return "Multiple Selection"
         }
     }
+    
+    var graphMenuText: String {
+        switch dataItemsCount {
+        case 0: return ""
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else { return ""}
+            switch dataItem.parserSettingsInputType {
+            case .none: return "None"
+            case .defaultFromParent: return "Inhert"
+            case .directlySet: return "Set to: \(dataItem.getAssociatedGraphTemplate()?.name ?? "")"
+            }
+        default: return ""
+        }
+    }
 }
 
+
+// MARK: - Open in Finder
+extension DataItemsInspectorViewModel {
+    func openInFinder() {
+        let urls = dataItems.map({ $0.url})
+        urls.showInFinder()
+    }
+}
 
 extension UserDefaults {
     static let showUpdateNamesAlertKey = "showUpdateNamesAlertKey"

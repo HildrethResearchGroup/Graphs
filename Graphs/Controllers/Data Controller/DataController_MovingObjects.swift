@@ -35,6 +35,8 @@ extension DataController {
             nextMovableNode.setParent(node)
         }
         
+        self.fetchData()
+        
     }
     
     

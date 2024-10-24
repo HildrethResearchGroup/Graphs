@@ -10,6 +10,7 @@ import Foundation
 
 
 @Observable
+@MainActor
 class ParserSettingsViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
