@@ -31,7 +31,6 @@ extension String {
     enum NumberOfLinesError: Error {
         case noLineSepatorProvided
         case newLineSeparatorNotFound
-        
     }
 }
 

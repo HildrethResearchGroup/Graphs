@@ -58,7 +58,7 @@ extension DataController {
     
     private func importDirectory(_ url: URL, intoNode parentNode: Node?) -> Node? {
         
-        // Check that url exists and is a director
+        // Check that url exists and is a directory
         let fm = FileManager.default
         var isDir = ObjCBool(false)
         
@@ -66,7 +66,6 @@ extension DataController {
         guard fm.fileExists(atPath: url.path, isDirectory: &isDir) else {
             print("File does not exist")
             
-            // UPDATE
             return nil
         }
 
@@ -77,7 +76,6 @@ extension DataController {
             print("Error.  importDirectory should only be seeing directories")
             print("\(url)\n is not a directory")
             
-            // UPDATE
             return nil
         }
         
@@ -87,22 +85,6 @@ extension DataController {
         modelContext.insert(newNode)
         
         newNode.postModelContextInsertInitialization(parentNode)
-        
-        
-        // TODO: Cleanup
-        // Moved to postModelContextInsertInitialization
-        // newNode.setParent(parentNode)
-        /*
-         if let parentNode {
-             if parentNode.subNodes != nil {
-                 parentNode.subNodes?.append(newNode)
-             } else {
-                 parentNode.subNodes = []
-                 parentNode.subNodes?.append(newNode)
-             }
-         }
-         */
-        
         
         
         // Get the contenst of the original URL and sort into directories and filesg

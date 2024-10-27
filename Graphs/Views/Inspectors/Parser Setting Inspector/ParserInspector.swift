@@ -32,7 +32,6 @@ struct ParserInspector: View {
                     ParseEditor_EmptySelection()
                 }
             }
-            
         }
     }
     

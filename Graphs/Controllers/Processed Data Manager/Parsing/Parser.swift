@@ -26,22 +26,33 @@ struct Parser {
             
             lines.append(nextLine)
             
-            
+            // Experimental Details
             if try lineIsExperimentalDetails(index: index, staticParseSettings: staticSettings) {
                 experimentalDetails.append("\n")
                 experimentalDetails.append(nextLine)
-            } else if try lineIsHeader(index: index, staticParseSettings: staticSettings) {
-                guard let separator = staticSettings.headerSeparator else { throw ParserError.noHeaderSeparator }
+            }
+            // Header
+            else if try lineIsHeader(index: index, staticParseSettings: staticSettings) {
                 
-                let nextheaderLine = try parse(line: nextLine, withSeparator: separator)
+                let separator = staticSettings.headerSeparator
+                
+                if separator == .none { throw ParserError.noHeaderSeparator }
+                
+                let nextheaderLine = parse(line: nextLine, withSeparator: separator)
                 header.append(nextheaderLine)
-            } else if try lineIsData(index: index, staticParseSettings: staticSettings) {
-                guard let separator = staticSettings.headerSeparator else { throw ParserError.noDataSeparator }
+            }
+            // Data
+            else if try lineIsData(index: index, staticParseSettings: staticSettings) {
                 
-                let nextDataLine = try parse(line: nextLine, withSeparator: separator)
+                let separator = staticSettings.dataSeparator
                 
+                if separator == .none { throw ParserError.noDataSeparator }
+                
+                let nextDataLine = parse(line: nextLine, withSeparator: separator)
                 data.append(nextDataLine)
-            } else {
+            }
+            // Footer
+            else {
                 footer.append("\n")
                 footer.append(nextLine)
             }
@@ -120,16 +131,16 @@ struct Parser {
     
     private static func lineIsExperimentalDetails(index: Int, staticParseSettings: ParserSettingsStatic) throws -> Bool {
         
-        if staticParseSettings.experimentalDetailsSeparator == nil {throw ParserError.noExperimentalDetailsSeparator}
+        //if staticParseSettings.experimentalDetailsSeparator == .none { return false }
         
-        if staticParseSettings.hasExperimentalDetails == false {return false }
+        if staticParseSettings.hasExperimentalDetails == false { return false }
         
         return try indexInRange(index, startRange: staticParseSettings.experimentalDetailsStart, endRange: staticParseSettings.experimentalDetailsStart)
     }
     
     private static func lineIsHeader(index: Int, staticParseSettings : ParserSettingsStatic) throws -> Bool {
         
-        if staticParseSettings.headerSeparator == nil {throw ParserError.noHeaderSeparator}
+        //if staticParseSettings.headerSeparator == .none {throw ParserError.noHeaderSeparator}
         
         if staticParseSettings.hasHeader == false {return false}
         
@@ -139,17 +150,28 @@ struct Parser {
     
     
     private static func lineIsData(index: Int, staticParseSettings: ParserSettingsStatic) throws -> Bool {
-        if staticParseSettings.dataSeparator == nil { throw ParserError.noDataSeparator }
         
-        if staticParseSettings.hasData == false {return false}
+        //if staticParseSettings.dataSeparator == .none { throw ParserError.noDataSeparator }
         
-        return true
+        // if staticParseSettings.hasData == false { return false}
+        
+        return staticParseSettings.hasData
+        
+        //return true
     }
     
-    private static func parse(line: String, withSeparator separator: Separator) throws -> [String] {
+    private static func parse(line: String, withSeparator separator: Separator) -> [String] {
         var headerLine: [String] = []
         
-        for nextComponent in line.components(separatedBy: separator.characterSet) {
+        if separator == .none {
+            return [line]
+        }
+        
+        guard let separatorCharacterSet = separator.characterSet else {
+            return [line]
+        }
+        
+        for nextComponent in line.components(separatedBy: separatorCharacterSet) {
             headerLine.append(nextComponent)
         }
         
@@ -208,6 +230,8 @@ struct Parser {
         case noParseSettings
         
         case startingIndexHigherThanEndingIndex
+        
+        case separatorIsNone
         
         case noExperimentalDetailsSeparator
         

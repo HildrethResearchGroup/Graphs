@@ -13,6 +13,7 @@ import SwiftData
 // import OrderedCollections
 
 @Observable
+@MainActor
 class SelectionManager {
     var delegate: SelectionManagerDelegate?
     

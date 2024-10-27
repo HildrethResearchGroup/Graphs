@@ -46,7 +46,7 @@ final class ParserSettings {
         }
     }
     
-    var experimentalDetailsSeparator: Separator? {
+    var experimentalDetailsSeparator: Separator {
         didSet {
             propertyChanged()
         }
@@ -70,7 +70,7 @@ final class ParserSettings {
         }
     }
     
-    var headerSeparator: Separator? {
+    var headerSeparator: Separator {
         didSet {
             propertyChanged()
         }
@@ -100,7 +100,7 @@ final class ParserSettings {
         }
     }
     
-    var dataSeparator: Separator? {
+    var dataSeparator: Separator {
         didSet {
             propertyChanged()
         }
@@ -133,31 +133,34 @@ final class ParserSettings {
         //self.nodes = []
         //self.dataItems = []
         
+        // Date
         self.creationDate = .now
         self.lastModified = .now
        
+        // String Configuration
         self.newLineType = .CRLF
         self.stringEncodingType = .ascii
         
+        // Experimental Details
         self.hasExperimentalDetails = false
-        
+        self.experimentalDetailsSeparator = .comma
         self.experimentalDetailsStart = 0
         self.experimentalDetailsEnd = 0
 
+        // Header
         self.hasHeader = false
         self.headerSeparator = .comma
         self.headerStart = 0
         self.headerEnd = 0
         
+        // Data
         self.hasData = false
         self.dataSeparator = .comma
         self.dataStart = 0
         
+        // Footer
         self.stopDataAtFirstEmptyLine = true
         self.hasFooter = false
-        
-        self.lastModified = .now
-        
         }
     
     
@@ -165,31 +168,39 @@ final class ParserSettings {
         
         name = parserSettingsStatic.name
         localID = parserSettingsStatic.localID
+        
+        // Dates
         creationDate = parserSettingsStatic.creationDate
+        lastModified = parserSettingsStatic.lastModified
         
         //nodes = []
         //dataItems = []
         
+        // String Encoding
         newLineType = parserSettingsStatic.newLineType
         stringEncodingType = parserSettingsStatic.stringEncodingType
         
+        // Experimental Details
         hasExperimentalDetails = parserSettingsStatic.hasExperimentalDetails
+        experimentalDetailsSeparator = parserSettingsStatic.experimentalDetailsSeparator
         experimentalDetailsStart = parserSettingsStatic.experimentalDetailsStart
         experimentalDetailsEnd = parserSettingsStatic.experimentalDetailsEnd
         
+        // Header
         hasHeader = parserSettingsStatic.hasExperimentalDetails
         headerSeparator = parserSettingsStatic.headerSeparator
         headerStart = parserSettingsStatic.headerStart
         headerEnd = parserSettingsStatic.headerEnd
         
+        // Data
         hasData = parserSettingsStatic.hasData
         dataSeparator = parserSettingsStatic.dataSeparator
         dataStart = parserSettingsStatic.dataStart
         
+        // Footer
         stopDataAtFirstEmptyLine = parserSettingsStatic.stopDataAtFirstEmptyLine
         hasFooter = parserSettingsStatic.hasFooter
         
-        lastModified = parserSettingsStatic.lastModified
     }
     
     

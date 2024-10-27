@@ -23,7 +23,7 @@ struct ParserSettingsStatic: Codable, Sendable {
     
     var hasExperimentalDetails: Bool
     
-    var experimentalDetailsSeparator: Separator?
+    var experimentalDetailsSeparator: Separator
     
     var experimentalDetailsStart: Int
     
@@ -31,7 +31,7 @@ struct ParserSettingsStatic: Codable, Sendable {
     
     var hasHeader: Bool = false
     
-    var headerSeparator: Separator?
+    var headerSeparator: Separator
     
     var headerStart: Int
     
@@ -41,7 +41,7 @@ struct ParserSettingsStatic: Codable, Sendable {
     
     var dataStart: Int
     
-    var dataSeparator: Separator?
+    var dataSeparator: Separator
     
     var stopDataAtFirstEmptyLine: Bool
     

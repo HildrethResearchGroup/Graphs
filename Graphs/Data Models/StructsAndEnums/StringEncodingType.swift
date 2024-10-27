@@ -68,6 +68,6 @@ enum StringEncodingType: String, Codable, CaseIterable, Identifiable {
 
 extension StringEncodingType: ProvidesToolTip {
     static var toolTip: String {
-        "Select the type of encoding used to encode your data. ascii is one of the simpliest and common to a lot of research equipment outputs followed by utf8."
+        "Select the type of encoding used to encode your data. ascii is one of the simpliest and common to a lot of research equipment outputs. utf8 is another common encoding."
     }
 }

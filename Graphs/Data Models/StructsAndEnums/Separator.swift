@@ -13,6 +13,8 @@ enum Separator: String, CaseIterable, Codable, Identifiable {
     
     var id: Self { self }
     
+    case none
+    
     /// Separates the string by a single colon.
     case colon
     
@@ -35,8 +37,9 @@ enum Separator: String, CaseIterable, Codable, Identifiable {
     
     
     /// The set of characters to be used to separate a row into columns.
-    var characterSet: CharacterSet {
+    var characterSet: CharacterSet? {
         switch self {
+        case .none: return nil
         case .colon:
             return CharacterSet(charactersIn: ":")
         case .comma:
@@ -63,11 +66,12 @@ extension Separator: PresentableName {
     /// GUI usable name of the Separator
     var name: String {
         switch self {
-        case .colon: return "Colon (:)"
-        case .comma: return "Comma (,)"
-        case .semicolon: return "Semicolon (;)"
+        case .none: return "None"
+        case .colon: return ":"
+        case .comma: return ","
+        case .semicolon: return ";"
         case .space: return "Single Space"
-        case .tab: return "Tab (\t)"
+        case .tab: return "Tab"
         case .whitespace: return "Multiple Spaces"
         }
     }

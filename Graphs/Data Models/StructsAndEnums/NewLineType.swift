@@ -59,6 +59,6 @@ extension NewLineType: PresentableName {
 
 extension NewLineType: ProvidesToolTip {
     static var toolTip: String {
-        "Modern macOS uses \\n as the new line character, but other operating systems, such as Windows, might use a different character set to designate a new line.  Sometimes, this causes the file Parser to add empty lines.  Change this property if the Parser is adding or missing lines.  Note, macOS applications use \\n to indicate a new line while Windows applications typically use \\r\\n to indicate a new line.  More information can be found on Wikipedia at: https://en.wikipedia.org/wiki/Newline"
+        "Windows: \\r\\n \nmacOS: \\n \nModern macOS uses \\n as the new line character, but other operating systems, such as Windows, might use a different character set to designate a new line.  Sometimes, this causes the file Parser to add empty lines.  Change this property if the Parser is adding or missing lines.  Note, that Windows Applications (such as Excel) still use \\r\\n even when running on macOS.  More information can be found on Wikipedia at: https://en.wikipedia.org/wiki/Newline."
     }
 }
