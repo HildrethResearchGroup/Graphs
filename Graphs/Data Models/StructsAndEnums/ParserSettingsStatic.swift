@@ -69,4 +69,29 @@ struct ParserSettingsStatic: Codable, Sendable {
         self.hasFooter = parserSettings.hasFooter
     }
     
+    
+    func parseLineType(for index: Int) -> ParseLineType {
+        
+        switch index {
+        case experimentalDetailsStart...experimentalDetailsEnd:
+            if self.hasExperimentalDetails {
+                return .experimentalDetails
+            } else {
+                return .skip
+            }
+        case headerStart...headerEnd:
+            if self.hasHeader {
+                return .header
+            } else {
+                return .skip
+            }
+        case _ where index >= dataStart:
+            if self.hasData {
+                return .data
+            } else {
+                return .skip
+            }
+        default: return .error
+        }
+    }
 }

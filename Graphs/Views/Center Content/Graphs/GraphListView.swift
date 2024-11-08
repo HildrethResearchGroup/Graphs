@@ -10,34 +10,30 @@ import SwiftUI
 
 struct GraphListView: View {
     
-    var viewModel: GraphListViewModel
+    @Bindable var viewModel: GraphControllerListViewModel
     
     
     var body: some View {
+        
         ScrollView(.horizontal) {
-            
             LazyHStack {
-                ForEach(viewModel.processedData) { nextData in
-                    if let graphViewController = nextData.graphController {
-                        GraphViewRepresentable(graphController: graphViewController)
+                if viewModel.processedData.count != 0 {
+                    ForEach(viewModel.processedData, id: \.id) { nextData in
+                        VStack {
+                            Text(nextData.dataItem.name)
+                            GraphViewRepresentable(graphController: nextData.graphController)
+                                .aspectRatio(1.3, contentMode: .fit)
+                        }
+                    }
+                } else {
+                    HStack {
+                        Text("Select Data")
                     }
                 }
-                
-                /*
-                 ForEach(viewModel.processedData, id: \.id) { nextItem in
-                     if let image = NSImage(contentsOf: nextItem.url) {
-                         Image(nsImage: image)
-                             .resizable()
-                             .scaledToFill()
-                     } else {
-                         Text("\(nextItem.name) could not be found")
-                     }
-                 }
-                 */
-                
             }
+            
         }
-        .frame(minHeight: 300, maxHeight: .infinity)    }
+    }
 }
 
 

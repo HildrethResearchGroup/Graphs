@@ -20,12 +20,11 @@ class ProcessedData: Identifiable {
     
     private(set) var parsedFile: ParsedFile?
     
-    var graphController: GraphController?
+    private(set) var graphController: GraphController?
     
     var parsedFileState: ProcessedDataState
+    
     var graphTemplateState: ProcessedDataState
-    
-    
     
     
     // MARK: - Initialization
@@ -36,12 +35,13 @@ class ProcessedData: Identifiable {
         // TODO: Implement data caching
         
         let url = dataItem.url
+        
         if let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic {
             let id = dataItem.localID
             
-            
             do {
                 parsedFile = try await Parser.parse(url, using: staticSettings, into: id)
+                
             } catch  {
                 print("ERROR during processedData initializer parsing file")
                 print(error)
@@ -59,13 +59,68 @@ class ProcessedData: Identifiable {
         
         
         parsedFileState = self.determineParsedFileState()
-        graphTemplateState = self.determineGraphControllerState()
+        graphTemplateState = await self.determineGraphControllerState()
+        
+        do {
+            try await self.loadGraphController()
+        } catch  {
+            print("Could not generate graphController for: \(dataItem.name)")
+        }
+        
+    }
+    
+    
+    // MARK: - Loading Graph
+    
+    func graphCacheState() -> CachedState {
+        let cm = CacheManager()
+        
+        return cm.graphCacheState(for: dataItem)
+    }
+    
+    func loadGraphController() async throws {
+        
+        
+        // TODO: Fix local state loading
+        /*
+         let localState = self.graphTemplateState
+         
+         // Start with the immediately available states
+         // Immediately available states must return value right away to avoid reparsing or regraphing system
+         switch localState {
+         case .noTemplate: return
+         case .upToDate: return
+         case .processing: return
+         case .outOfDate: break
+         case .notProcessed: break
+         }
+         
+         if self.graphCacheState() == .cachedStorageUpToDate {
+             if let cachedGraph = delegate?.cachedGraph(for: dataItem) {
+                 self.graphController =  await GraphController(dgController: cachedGraph, data: nil)
+             }
+         }
+         */
+        
+        
+        
+        let localParsedFile = try await self.loadParsedFile()
+        
+        guard let graphTemplate = dataItem.getAssociatedGraphTemplate() else {
+            return
+        }
+        
+        let localGraphController = await GraphController(from: graphTemplate.url, data: localParsedFile?.data)
+        
+        
+        
+        self.graphController = localGraphController
     }
     
     
     
     // MARK: - State Determination
-    func determineParsedFileState() -> ProcessedDataState {
+    private func determineParsedFileState() -> ProcessedDataState {
         guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
             return .noTemplate
         }
@@ -84,7 +139,7 @@ class ProcessedData: Identifiable {
     }
     
     
-    func determineGraphControllerState() -> ProcessedDataState {
+    @MainActor private func determineGraphControllerState() -> ProcessedDataState {
         guard let graphTemplate = dataItem.getAssociatedGraphTemplate() else {
             return .noTemplate
         }
@@ -106,6 +161,8 @@ class ProcessedData: Identifiable {
     
     
     
+    
+    
     // MARK: - Handling Changes
     func parserDidChange() {
         
@@ -122,7 +179,8 @@ class ProcessedData: Identifiable {
             
             let data = newParsedFile?.data ?? [[]]
             
-            graphController?.updateGraphWithData(data)
+            await graphController?.updateGraphWithData(data)
+            
             
         }
     }
@@ -133,13 +191,24 @@ class ProcessedData: Identifiable {
         let newGraphTemplate = dataItem.getAssociatedGraphTemplate()
         
         guard let graphTemplateURL = newGraphTemplate?.url else {
-            graphController?.setDGController(withController: nil, andData: nil)
+            Task {
+                await MainActor.run {
+                    graphController?.setDGController(withController: nil, andData: nil)
+                }
+            }
+            
+            
             return
         }
         
-        let newDGcontroller = DGController(contentsOfFile: graphTemplateURL.path())
+        let newDGcontroller = DGController(contentsOfFile: graphTemplateURL.path(percentEncoded: false))
         
-        self.graphController?.setDGController(withController: newDGcontroller, andData: self.parsedFile?.data)
+        Task {
+            await MainActor.run {
+                self.graphController?.setDGController(withController: newDGcontroller, andData: self.parsedFile?.data)
+            }
+        }
+        
     }
 
 }

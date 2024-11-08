@@ -210,7 +210,7 @@ extension CacheManager {
         return cacheGraphURL
     }
     
-    
+    @MainActor
     func cacheGraphController(graphController: GraphController, for dataItem: DataItem) {
         
         guard let targetURL = try? cacheGraphURL(for: dataItem) else { return }
@@ -260,7 +260,7 @@ extension CacheManager {
             return nil
         }
         
-        let controller = DGController(contentsOfFile: cacheURL.path())
+        let controller = DGController(contentsOfFile: cacheURL.path(percentEncoded: false))
         
         return controller
         

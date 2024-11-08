@@ -33,7 +33,14 @@ extension URL {
     
     /// Convience property stating if the URL is a directory
     var isDirectory: Bool {
-       (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
+        
+        let fileExtension = self.pathExtension
+        
+        if fileExtension == URL.dataGraphFileExtension {
+            return false
+        }
+        
+        return (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
     }
     
     
@@ -45,13 +52,27 @@ extension URL {
     static var dataGraphFileExtension = "dgraph"
     
     
+    var urlType: URLType {
+        return URLType(withURL: self)
+    }
+    
     
     /// Convience Enum of the type of URL
     ///
     /// - **file**: URL is a file
     /// - **directory**: URL is a directory
     /// - **fileDoesNotExist**: URL points to a file or directory that doesn't exist
+    /// - **dgraph**: URL is a DataGraph file
+    /// - **gparser**: URL is a Parser Settings file
     enum URLType {
+        
+        /// URL is a DataGraph file
+        case dgraph
+        
+        /// URL is a Graphs Parser Settings File
+        case gparser
+        
+        
         /// URL is a file
         case file
         
@@ -61,7 +82,19 @@ extension URL {
         /// URL points to a file or directory that doesn't exist
         case fileOrDirectoryDoesNotExist
         
+        
+        
         init(withURL url: URL) {
+            
+            let fileExtension = url.pathExtension
+            
+            if fileExtension == URL.dataGraphFileExtension {
+                self = .dgraph
+                return
+            } else if fileExtension == URL.parserSettingsFileExtension {
+                self = .gparser
+                return
+            }
             
             if url.isDirectory {
                 self = .directory

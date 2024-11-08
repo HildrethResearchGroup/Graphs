@@ -10,8 +10,6 @@ import SwiftUI
 import SwiftData
 
 struct GraphTemplateEditor_EmptySelection: View {
-    
-    
     @State var name: String = ""
     
     private let width = 100.0

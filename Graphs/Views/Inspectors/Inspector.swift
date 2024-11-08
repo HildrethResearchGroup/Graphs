@@ -24,7 +24,7 @@ struct Inspector: View {
             ParserInspector(viewModel.parserSettingsVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
-            GraphTemplateInspector()
+            GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀟪") }
             TextInspector(dataItem: viewModel.firstDataItem)

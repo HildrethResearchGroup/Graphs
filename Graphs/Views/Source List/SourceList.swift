@@ -17,8 +17,14 @@ struct SourceList: View {
                 OutlineGroup(sourceListVM.rootNodes, id: \.self, children: \.subNodes) { nextNode in
                     NodeContent(nextNode)
                 }
+
             }
+            
             Spacer()
+                .dropDestination(for: URL.self) { urls, _  in
+                    let success = sourceListVM.importURLs(urls, intoNode: nil)
+                    return success
+                }
             HStack {
                 Menu_plus()
                 Menu_minus()
@@ -28,10 +34,6 @@ struct SourceList: View {
         .contextMenu {
             Button_newFolder(withParent: nil)
             Button_deselectNodes()
-        }
-        .dropDestination(for: URL.self) { urls, _  in
-            let success = sourceListVM.importURLs(urls, intoNode: nil)
-            return success
         }
         .alert(isPresented: $sourceListVM.presentURLImportError) { return importAlert }
     }
@@ -56,6 +58,7 @@ struct SourceList: View {
             Button_DeleteSelectedNode()
         }
         .dropDestination(for: URL.self) { urls, _  in
+            
             let success = sourceListVM.importURLs(urls, intoNode: node)
             return success
         }
@@ -108,14 +111,34 @@ struct SourceList: View {
     @ViewBuilder
     private func Button_importDirectories() -> some View {
         Button("Import Folders") {
-            print("TODO: Import Folders")
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = true
+            panel.canCreateDirectories = false
+            panel.allowsMultipleSelection = true
+            panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText]
+            
+            if panel.runModal() == .OK {
+                let urls = panel.urls
+                _ = sourceListVM.importURLs(urls)
+            }
         }
     }
     
     @ViewBuilder
     private func Button_importFile() -> some View {
         Button("Import Data") {
-            print("TODO: Import Data")
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.canCreateDirectories = false
+            panel.allowsMultipleSelection = true
+            panel.allowedContentTypes = [.data, .delimitedText]
+            
+            if panel.runModal() == .OK {
+                let urls = panel.urls
+                _ = sourceListVM.importURLs(urls)
+            }
         }
         .help(sourceListVM.toolTip_importFile)
         .disabled(sourceListVM.disabledButton_importFile)
@@ -126,14 +149,34 @@ struct SourceList: View {
     @ViewBuilder
     private func Button_importParserSettings() -> some View {
         Button("Import Parser") {
-            print("TODO: Import Parser")
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.canCreateDirectories = false
+            panel.allowsMultipleSelection = true
+            panel.allowedContentTypes = [.gparser ?? .json]
+            
+            if panel.runModal() == .OK {
+                let urls = panel.urls
+                _ = sourceListVM.importURLs(urls)
+            }
         }
     }
     
     @ViewBuilder
     private func Button_importGraphTemplate() -> some View {
         Button("Import Graph Template") {
-            print("TODO: Import Graph Template")
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.canCreateDirectories = false
+            panel.allowsMultipleSelection = true
+            panel.allowedContentTypes = [.dgraph ?? .data]
+            
+            if panel.runModal() == .OK {
+                let urls = panel.urls
+                _ = sourceListVM.importURLs(urls)
+            }
         }
     }
     

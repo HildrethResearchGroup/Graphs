@@ -34,7 +34,11 @@ struct ParserEditor: View {
                 .help(NewLineType.toolTip)
                 
                 Picker("Encoding:", selection: $parseSettings.stringEncodingType) {
-                    ForEach(StringEncodingType.allCases) { nextEncoding in
+                    ForEach(StringEncodingType.primaryEncodings) { nextEncoding in
+                        Text(nextEncoding.rawValue)
+                    }
+                    Divider()
+                    ForEach(StringEncodingType.secondaryEncodings) { nextEncoding in
                         Text(nextEncoding.rawValue)
                     }
                 }

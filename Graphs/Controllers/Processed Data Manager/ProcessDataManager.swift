@@ -10,6 +10,7 @@ import Foundation
 
 
 @Observable
+@MainActor
 class ProcessDataManager {
     
     private var processedData: [DataItem.ID : ProcessedData] = [:]
@@ -38,15 +39,28 @@ class ProcessDataManager {
     }
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
-        if let output = processedData[dataItem.id] {
-            return output
-        } else {
-            let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
-            
-            processedData[dataItem.id] = newProcessedData
-            
-            return newProcessedData
-        }
+        
+        let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
+        
+        processedData[dataItem.id] = newProcessedData
+        
+        return newProcessedData
+        
+        /*
+         if let output = processedData[dataItem.id] {
+             
+             return output
+             
+         } else {
+             let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
+             
+             processedData[dataItem.id] = newProcessedData
+             
+             return newProcessedData
+         }
+
+         */
+        
     }
     
     
@@ -117,7 +131,15 @@ extension ProcessDataManager {
                 currentSelection.contains(id) })
             
             for nextProcessedData in dataItemsToUpdate.values {
-                nextProcessedData.loadGraphController()
+                Task {
+                    do {
+                        try await nextProcessedData.loadGraphController()
+                    } catch  {
+                        print(error)
+                    }
+                    
+                }
+                
             }
         }
         

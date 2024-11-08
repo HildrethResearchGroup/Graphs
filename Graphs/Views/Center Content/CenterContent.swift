@@ -11,10 +11,10 @@ import SwiftUI
 struct CenterContent: View {
     
     @Bindable var dataListVM: DataListViewModel
-    var graphListVM: GraphListViewModel
+    var graphListVM: GraphControllerListViewModel
     
     
-    init(_ dataListVM: DataListViewModel, _ graphListVM: GraphListViewModel ) {
+    init(_ dataListVM: DataListViewModel, _ graphListVM: GraphControllerListViewModel ) {
         self.dataListVM = dataListVM
         self.graphListVM = graphListVM
     }
@@ -23,7 +23,10 @@ struct CenterContent: View {
     var body: some View {
         VSplitView {
             DataItemsListView(dataListVM)
+                .frame(minHeight: 300, maxHeight: .infinity)
             GraphListView(viewModel: graphListVM)
+                .frame(minWidth: 300, maxWidth: .infinity, minHeight: 300, maxHeight: 1000)
+            
         }
     }
 }

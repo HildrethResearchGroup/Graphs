@@ -19,10 +19,15 @@ class GraphTemplateInspectorViewModel {
         set { selectionManager.selectedGraphTemplate = newValue }
     }
     
+    var graphTemplates: [GraphTemplate] {
+        self.dataController.graphTemplates
+    }
+    
     init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
     }
+    
 }
 
 extension GraphTemplateInspectorViewModel {
@@ -41,9 +46,14 @@ extension GraphTemplateInspectorViewModel {
     }
     
     func importURLs(_ urls: [URL]) {
-        for nextURL in urls {
-            _ = dataController.importGraphTemplate(withURL: nextURL)
+        do {
+            
+            try dataController.importURLs(urls, intoNode: nil)
+        } catch  {
+            print("Error when trying to import: \(urls)")
+            print(error)
         }
+        
     }
     
     func deleteSelectedGraphTemplate() {

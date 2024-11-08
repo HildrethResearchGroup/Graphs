@@ -10,12 +10,17 @@ import Foundation
 import Collections
 
 @Observable
-class GraphListViewModel {
+@MainActor
+class GraphControllerListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
     private var processedDataManager: ProcessDataManager
     
-    var processedData: [ProcessedData] = []
+    var processedData: [ProcessedData] = [] {
+        didSet {
+            print("Updated Processed Data with \(processedData.count) items")
+        }
+    }
     
     init(dataController: DataController, selectionManager: SelectionManager, processedDataManager: ProcessDataManager) {
         self.dataController = dataController
@@ -23,18 +28,24 @@ class GraphListViewModel {
         self.processedDataManager = processedDataManager
         self.processedData = []
         
-        
+        self.updateProcessedData()
     }
     
     func updateProcessedData() {
         //let selectedDataItemIDs = selectionManager.selectedDataItemIDs
+        
         let selectedDataItems = Array(dataController.selectedDataItems)
         
         
         Task {
             let localProcessedData = await processedDataManager.processedData(for: selectedDataItems)
-            self.processedData = localProcessedData
+            
+            await MainActor.run {
+                self.processedData = localProcessedData
+                
+            }
+            
         }
-        
     }
+    
 }

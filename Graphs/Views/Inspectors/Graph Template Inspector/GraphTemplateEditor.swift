@@ -14,17 +14,26 @@ struct GraphTemplateEditor: View {
     
     @Bindable var graphTemplate: GraphTemplate
     
-    //@State var graphController = GraphController(<#DataItem#>)
-    
+    private var graphController: GraphController {
+        let url = graphTemplate.url
+        
+        let dgController = DGController(contentsOfFile: url.path(percentEncoded: false))
+        
+        let graphController = GraphController(dgController: dgController, data: nil)
+        
+        return graphController
+    }
     private let width = 100.0
     private let fontType: Font = .headline
     
     var body: some View {
-        
-        Form() {
-            TextField("Name:", text: $graphTemplate.name)
-            //GraphViewRepresentable(graphController: graphController)
-        }.formStyle(.grouped)
+        VStack {
+            Form() {
+                TextField("Name:", text: $graphTemplate.name)
+                
+            }.formStyle(.grouped)
+            GraphViewRepresentable(graphController: graphController)
+        }
     }
 }
 

@@ -26,7 +26,6 @@ class SelectionManager {
         didSet { delegate?.selectedDataItemsDidChange(selectedDataItemIDs) }
     }
     
-    
     var selectedParserSetting: ParserSettings? = nil
     
     var selectedGraphTemplate: GraphTemplate? = nil
@@ -36,7 +35,7 @@ class SelectionManager {
 //MARK: - Handling New Objects
 extension SelectionManager {
     
-    func newData(nodes: [Node], andDataItems dataItems: [DataItem]) {
+    func newObjects(nodes: [Node], dataItems: [DataItem], graphTemplates: [GraphTemplate], parserSettings: [ParserSettings]) {
         
         // A single new node has been added.  Make that the selection
         if let firstNode = nodes.first {
@@ -47,24 +46,50 @@ extension SelectionManager {
         }
 
         
-        // Only data items have been created.  Update the new dataItems to be selected
-        if !nodes.isEmpty {
+        // Update the new dataItems to be selected
+        if !nodes.isEmpty && !dataItems.isEmpty{
             
             let dataItemIDs = dataItems.map( {$0.id} )
-            
-            if dataItems.isEmpty {
-                return
-            }
             
             let completeSelection = selectedDataItemIDs.union(dataItemIDs)
             
             selectedDataItemIDs = completeSelection
-            return
         } else {
             // Only update selection of the selectedNodes
             let completeSelection = selectedNodes.union(nodes)
             
             selectedNodes = completeSelection
+        }
+        
+        
+        // Update the Graph Template selection
+        if !graphTemplates.isEmpty {
+            
+            if nodes.isEmpty {
+                if let first = graphTemplates.first {
+                    self.newGraphTemplate(first)
+                }
+            } else {
+                if let nodeGraph = nodes.first?.getAssociatedGraphTemplate() {
+                    newGraphTemplate(nodeGraph)
+                }
+            }
+            
+            
+        }
+        
+        // Update the Parser Settings selection
+        if !parserSettings.isEmpty {
+            
+            if nodes.isEmpty {
+                if let firstParserSetting = parserSettings.first {
+                    self.newParserSetting(firstParserSetting)
+                }
+            } else {
+                if let nodeParser = nodes.first?.getAssociatedParserSettings() {
+                    newParserSetting(nodeParser)
+                }
+            }
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 protocol DataControllerDelegate {
     
     // MARK: - Nodes and DataItems
-    func newData(nodes: [Node], andDataItems dataItems: [DataItem])
+    func newObjects(nodes: [Node], dataItems: [DataItem], graphTemplates: [GraphTemplate], parserSettings: [ParserSettings])
     
     func preparingToDelete(nodes: [Node])
     

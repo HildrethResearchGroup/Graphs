@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 @Observable
+@MainActor
 class GraphController {
     
     var lastModified: Date = .now
@@ -23,9 +24,16 @@ class GraphController {
         if let dgController {
             self.setDGController(withController: dgController, andData: data)
         }
+        
     }
     
     
+    convenience init(from url: URL, data: [[String]]?) {
+        
+        let localDGController = DGController(contentsOfFile: url.path(percentEncoded: false))
+        
+        self.init(dgController: localDGController, data: data)
+    }
     
     
     
@@ -36,6 +44,7 @@ class GraphController {
     }
     
     func updateGraphWithData(_ data: [[String]]) {
+        
         self.update(controller: self.dgController, withData: data)
     }
     
@@ -52,7 +61,6 @@ class GraphController {
             guard  let dgColumn = controller.dataColumn(at: Int32(index + 1)) else {continue}
             
             dgColumn.setDataFrom(columnOfData)
-            
         }
     }
     
@@ -60,5 +68,27 @@ class GraphController {
         dgController = nil
     }
     
+    
+    func aspectRatio() -> CGFloat {
+        var ratio = 1.3
+        
+        guard let controller = dgController else { return ratio }
+        
+        guard let sizeString = controller.canvasSettings().sizeString() else { return ratio }
+        
+        let filterSize = sizeString.filter({ "01234567890.,".contains($0)} )
+        
+        let sizes = filterSize.components(separatedBy: ",")
+        
+        if sizes.count == 2 {
+            guard let width = Double(sizes[0]) else { return ratio }
+            guard let height = Double(sizes[1]) else { return ratio }
+            
+            ratio = width / height
+                        
+        }
+        
+        return ratio
+    }
 }
 

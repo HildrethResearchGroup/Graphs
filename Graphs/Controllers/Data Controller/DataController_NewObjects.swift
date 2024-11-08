@@ -19,27 +19,52 @@ extension DataController {
         // No need to do anything if there aren't any URLs in the array
         if urls.isEmpty {throw ImportError.noURLsToImport}
         
-        // Import Files first because we want to exit scope if the user is trying to import a
-        let files = urls.filter( { !$0.isDirectory})
         
-
-        if files.count != 0 && parentNode == nil {
-            throw ImportError.cannotImportFileWithoutANode
+        // Get the contenst of the original URL and sort into directories and files
+        var directories: [URL] = []
+        var files: [URL] = []
+        var graphURLs: [URL] = []
+        var parserURLs: [URL] = []
+        
+        for nextURL in urls {
+            let type = URL.URLType(withURL: nextURL)
+            
+            switch type {
+            case .dgraph: graphURLs.append(nextURL)
+            case .gparser: parserURLs.append(nextURL)
+            case .directory: directories.append(nextURL)
+            case .file: files.append(nextURL)
+            case .fileOrDirectoryDoesNotExist: continue
+            }
         }
+        
+        /*
+         if files.count != 0 && parentNode == nil {
+             throw ImportError.cannotImportFileWithoutANode
+         }
+         */
+        
         
         var newDataItems: [DataItem] = []
         
+        var targetNode: Node? = nil
+        
+        if parentNode != nil {
+            targetNode = parentNode
+        } else if selectedNodes.count == 1 {
+            targetNode = selectedNodes.first
+        }
+        
         // Data Items must be imported into a node.
-        if let parentNode {
+        if let targetNode  {
             for nextFile in files {
-                if let newDataItem = importFile(nextFile, intoNode: parentNode) {
+                if let newDataItem = importFile(nextFile, intoNode: targetNode) {
                     newDataItems.append(newDataItem)
                 }
             }
         }
         
         
-        let directories = urls.filter( { $0.isDirectory } )
         
         var newNodes: [Node] = []
         
@@ -50,9 +75,26 @@ extension DataController {
             }
         }
         
+        
+        var newGraphTemplates: [GraphTemplate] = []
+        for nextGraphURL in graphURLs {
+            if let newGraphTemplate = importGraphTemplate(withURL: nextGraphURL, intoNode: targetNode) {
+                newGraphTemplates.append(newGraphTemplate)
+            }
+        }
+        
+        
+        var newParsers: [ParserSettings] = []
+        for nextParserURL in parserURLs {
+            
+            if let newParser = importParser(from: nextParserURL, intoNode: targetNode)  {
+                newParsers.append(newParser)
+            }
+        }
+        
         fetchData()
         
-        delegate?.newData(nodes: newNodes, andDataItems: newDataItems)
+        delegate?.newObjects(nodes: newNodes, dataItems: newDataItems, graphTemplates: newGraphTemplates, parserSettings: newParsers)
     }
     
     
@@ -87,38 +129,58 @@ extension DataController {
         newNode.postModelContextInsertInitialization(parentNode)
         
         
-        // Get the contenst of the original URL and sort into directories and filesg
-        var subdirectories: [URL] = []
-        var files: [URL] = []
+        /*
+         // Get the contenst of the original URL and sort into directories and files
+         var subdirectories: [URL] = []
+         var files: [URL] = []
+         var graphTemplates: [URL] = []
+         var parseFiles: [URL] = []
+         
+         
+         if let contentURLs = try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey]) {
+             for nextURL in contentURLs {
+                 
+                 let nextType = URL.URLType(withURL: nextURL)
+                 
+                 switch nextType {
+                 case .directory:
+                     subdirectories.append(nextURL)
+                 case .file:
+                     files.append(nextURL)
+                 case .dgraph: graphTemplates.append(nextURL)
+                 case .gparser: parseFiles.append(nextURL)
+                 case .fileOrDirectoryDoesNotExist:
+                     continue
+                 }
+             }
+         }
+         
+         
+         for nextGraphTemplateURL in graphTemplates {
+             _ = self.importGraphTemplate(withURL: nextGraphTemplateURL, intoNode: newNode)
+         }
+         
+         for nextParerURL in parseFiles {
+             _ = self.importParser(from: nextParerURL, intoNode: newNode)
+         }
+         
+         // Add any files directly owned by the directory into the new Node
+         for nextFile in files {
+             _ = self.importFile(nextFile, intoNode: newNode)
+         }
+         
+         
+         // Recusively transform any subdirectores into subnodes
+         for nextDirectory in subdirectories {
+             _ = self.importDirectory(nextDirectory, intoNode: newNode)
+         }
+         */
         
         
         if let contentURLs = try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey]) {
-            for nextURL in contentURLs {
-                
-                let nextType = URL.URLType(withURL: nextURL)
-                
-                switch nextType {
-                case .directory:
-                    subdirectories.append(nextURL)
-                case .file:
-                    files.append(nextURL)
-                case .fileOrDirectoryDoesNotExist:
-                    continue
-                }
-            }
+            try? self.importURLs(contentURLs, intoNode: newNode)
         }
         
-        
-        // Add any files directly owned by the directory into the new Node
-        for nextFile in files {
-            _ = self.importFile(nextFile, intoNode: newNode)
-        }
-        
-        
-        // Recusively transform any subdirectores into subnodes
-        for nextDirectory in subdirectories {
-            _ = self.importDirectory(nextDirectory, intoNode: newNode)
-        }
         
         
         return newNode
@@ -136,24 +198,11 @@ extension DataController {
             return nil
         }
         
-        
-        if url.isDirectory {
-            print("Trying to add a url as a dataItem")
-            
+        if url.urlType != .file {
+            print("importFile Error: trying to import: \(url.urlType) as a DataItem from:\n \(url)")
             return nil
         }
         
-        
-        if url.pathExtension == URL.dataGraphFileExtension {
-            _ = importGraphTemplate(withURL: url, intoNode: parentNode)
-            return nil
-        }
-        
-        
-        if url.pathExtension == URL.parserSettingsFileExtension {
-            _ = createNewParserSetting(intoNode: parentNode)
-            return nil
-        }
         
         
         guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
@@ -194,7 +243,7 @@ extension DataController {
          
         fetchData()
  
-        delegate?.newData(nodes: [newNode], andDataItems: [])
+        delegate?.newObjects(nodes: [newNode], dataItems: [], graphTemplates: [], parserSettings: [])
     }
     
     

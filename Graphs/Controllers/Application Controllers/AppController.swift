@@ -24,7 +24,7 @@ class AppController {
     var sourceListVM: SourceListViewModel
     var inspectorVM: InspectorViewModel
     var dataListVM: DataListViewModel
-    var graphListVM: GraphListViewModel
+    var graphListVM: GraphControllerListViewModel
     
     init() {
         // Controllers and Managers
@@ -46,7 +46,7 @@ class AppController {
         sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
         inspectorVM = InspectorViewModel(localDataController, localSelectionManager)
         dataListVM = DataListViewModel(localDataController, localSelectionManager)
-        graphListVM = GraphListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
+        graphListVM = GraphControllerListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
         
         
         // Delegates and DataSources
@@ -60,9 +60,11 @@ class AppController {
 extension AppController: @preconcurrency DataControllerDelegate {
     
     // MARK: - Nodes and Data
-    func newData(nodes: [Node], andDataItems dataItems: [DataItem]) {
+    func newObjects(nodes: [Node], dataItems: [DataItem], graphTemplates: [GraphTemplate], parserSettings: [ParserSettings]) {
         // Pass the information down to the Selection Manager because the selectionManager is responsible for knowing how selection state should be udpated
-        selectionManager.newData(nodes: nodes, andDataItems: dataItems)
+        selectionManager.newObjects(nodes: nodes, dataItems: dataItems, graphTemplates: graphTemplates, parserSettings: parserSettings)
+        
+        
     }
     
     func preparingToDelete(nodes: [Node]) {
@@ -78,6 +80,7 @@ extension AppController: @preconcurrency DataControllerDelegate {
     // MARK: - Graph Template
     func newGraphTemplate(_ graphTemplate: GraphTemplate) {
         selectionManager.selectedGraphTemplate = graphTemplate
+        
     }
     
     func preparingToDelete(graphTemplate: GraphTemplate) {

@@ -31,12 +31,6 @@ class GraphTemplate {
             return nil
         }
         
-        let fm = FileManager.default
-        
-        if fm.fileExists(atPath: url.path()) == false {
-            return nil
-        }
-        
         self.name = name ?? url.fileName ?? "No File Name"
         self.url = url
         self.creationDate = .now

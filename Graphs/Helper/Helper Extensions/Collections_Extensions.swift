@@ -16,3 +16,19 @@ extension Collection where Element == URL {
             .activateFileViewerSelecting(map { $0 })
     }
 }
+
+
+extension Collection where Element == String {
+    func allAreEmpty() -> Bool {
+        var areEmpty = true
+        
+        for nextString in self {
+            if !nextString.isEmpty {
+                areEmpty = false
+                break
+            }
+        }
+        
+        return areEmpty
+    }
+}

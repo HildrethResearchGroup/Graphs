@@ -11,12 +11,16 @@ import SwiftUI
 struct GraphViewRepresentable: NSViewRepresentable {
     typealias NSViewType = GraphView
     
-    var graphController: GraphController
+    var graphController: GraphController?
+    
+    
     
     
     func makeNSView(context: Context) -> GraphView {
         
         let graphView = GraphView(graphController)
+        
+        //print("Size String: \(graphController?.dgController?.canvasSettings().sizeString())")
         
         graphView.autoresizingMask = [.width, .height]
         
@@ -26,4 +30,5 @@ struct GraphViewRepresentable: NSViewRepresentable {
     func updateNSView(_ nsView: GraphView, context: Context) {
         
     }
+    
 }

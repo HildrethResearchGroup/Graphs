@@ -10,10 +10,10 @@ import Foundation
 
 
 // MARK: - ProcessedDataDelegate
-extension ProcessDataManager: ProcessedDataDelegate {
+extension ProcessDataManager: @preconcurrency ProcessedDataDelegate {
     
     
-    func cacheGraphController(_ graphController: GraphController, for dataItem: DataItem) {
+    @MainActor func cacheGraphController(_ graphController: GraphController, for dataItem: DataItem) {
         cacheManager.cacheGraphController(graphController: graphController, for: dataItem)
     }
     

@@ -29,3 +29,13 @@ class DataListViewModel {
         self.selectionManager = selectionManager
     }
 }
+
+
+// MARK: - Deleting Data
+extension DataListViewModel {
+    func deleteSelectedDataItems() {
+        let dataItemsToDelete = Array(dataController.selectedDataItems)
+        
+        dataController.delete(dataItemsToDelete, andThenTheNodes: [])
+    }
+}
