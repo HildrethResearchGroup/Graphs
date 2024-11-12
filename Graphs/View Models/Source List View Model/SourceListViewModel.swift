@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OrderedCollections
 
 @Observable
 @MainActor
@@ -100,6 +101,14 @@ extension SourceListViewModel {
 }
 
 
+// MARK: - Deleting DataItems
+extension SourceListViewModel {
+    func deleteSelectedDataItems() {
+        let dataItems = Array(dataController.selectedDataItems)
+        dataController.delete(dataItems, andThenTheNodes: [])
+    }
+}
+
 
 // MARK: - Drag-and-Drop
 extension SourceListViewModel {
@@ -115,6 +124,10 @@ extension SourceListViewModel {
 extension SourceListViewModel {
     func deselectNodes() {
         selectionManager.deselectNodes()
+    }
+    
+    func deselectedDataItems() {
+        selectionManager.deselectDataItems()
     }
 }
 

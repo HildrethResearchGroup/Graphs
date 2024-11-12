@@ -31,16 +31,21 @@ class DataItemsInspectorViewModel {
     
     
     var name: String {
-        didSet {
-            if name != oldValue {
+        get {
+            setInitialName()
+        }
+        
+        set {
+            if newValue != name {
                 if dataItems.count == 1 {
                     if let onlyDataItem = dataItems.first {
-                        onlyDataItem.name = name
+                        onlyDataItem.name = newValue
                     }
                 }
             }
         }
     }
+    
     
     var dataItemsCount: Int {
         dataItems.count
@@ -54,21 +59,21 @@ class DataItemsInspectorViewModel {
         self.selectionManager = selectionManager
         self.name = ""
         
-        setInitialName()
+        self.name = setInitialName()
     }
     
     
-    private func setInitialName() {
+    private func setInitialName() -> String {
         switch dataItemsCount {
-        case 0: name = "No Selection"
-        case 1: name = dataController.selectedDataItems.first?.name ?? "No Name"
-        default: name = "Multiple Selection"
+        case 0: return "No Selection"
+        case 1: return dataController.selectedDataItems.first?.name ?? "No Name"
+        default: return "Multiple Selection"
         }
     }
     
     
     func selectedNodeDidChange() {
-        setInitialName()
+        name = setInitialName()
     }
     
     // MARK: - Name Content
@@ -92,7 +97,7 @@ class DataItemsInspectorViewModel {
     var filePath: String {
         switch dataItemsCount {
         case 0: return ""
-        case 1: return dataController.selectedDataItems.first?.url.path() ?? "No Filepath Could be Created"
+        case 1: return dataController.selectedDataItems.first?.url.path(percentEncoded: false) ?? "No Filepath Could be Created"
         default: return "Multiple Selection"
         }
     }
@@ -153,8 +158,13 @@ extension DataItemsInspectorViewModel {
             guard let dataItem = dataController.selectedDataItems.first else { return ""}
             switch dataItem.parserSettingsInputType {
             case .none: return "None"
-            case .defaultFromParent: return "Inhert"
-            case .directlySet: return "Set to: \(dataItem.getAssociatedParserSettings()?.name ?? "")"
+            case .defaultFromParent:
+                if let template = dataItem.getAssociatedGraphTemplate() {
+                    return "Inhereted: \(template.name)"
+                } else {
+                    return "Inhert: Folder needs Template"
+                }
+            case .directlySet: return "\(dataItem.getAssociatedParserSettings()?.name ?? "")"
             }
         default: return ""
         }
@@ -170,24 +180,8 @@ extension DataItemsInspectorViewModel {
     }
     
     
-    var graphTemplateName: String {
-        switch dataItemsCount {
-        case 0: return ""
-        case 1:
-            guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
-            
-            switch dataItem.graphTemplateInputType {
-            case .none:
-                return "No Graph Selected"
-            case .defaultFromParent:
-                return "From Parent: \(dataItem.getAssociatedGraphTemplate()?.name ?? "None")"
-            case .directlySet:
-                return dataItem.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
-            }
-        
-        default: return "Multiple Selection"
-        }
-    }
+   
+    
     
     var graphMenuText: String {
         switch dataItemsCount {
@@ -196,8 +190,14 @@ extension DataItemsInspectorViewModel {
             guard let dataItem = dataController.selectedDataItems.first else { return ""}
             switch dataItem.parserSettingsInputType {
             case .none: return "None"
-            case .defaultFromParent: return "Inhert"
-            case .directlySet: return "Set to: \(dataItem.getAssociatedGraphTemplate()?.name ?? "")"
+            case .defaultFromParent:
+                
+                if let template = dataItem.getAssociatedGraphTemplate() {
+                    return "Inhereted: \(template.name)"
+                } else {
+                    return "Inhert: Folder needs Template"
+                }
+            case .directlySet: return "\(dataItem.getAssociatedGraphTemplate()?.name ?? "")"
             }
         default: return ""
         }
@@ -216,3 +216,29 @@ extension DataItemsInspectorViewModel {
 extension UserDefaults {
     static let showUpdateNamesAlertKey = "showUpdateNamesAlertKey"
 }
+
+
+
+
+
+// MARK: - Unused.  Cleanup
+/*
+ var graphTemplateName: String {
+     switch dataItemsCount {
+     case 0: return ""
+     case 1:
+         guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
+         
+         switch dataItem.graphTemplateInputType {
+         case .none:
+             return "No Graph Selected"
+         case .defaultFromParent:
+             return "From Parent: \(dataItem.getAssociatedGraphTemplate()?.name ?? "None")"
+         case .directlySet:
+             return dataItem.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
+         }
+     
+     default: return "Multiple Selection"
+     }
+ }
+ */

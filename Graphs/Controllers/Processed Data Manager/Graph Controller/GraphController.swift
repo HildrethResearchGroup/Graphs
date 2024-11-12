@@ -16,7 +16,6 @@ class GraphController {
         
     var dgController: DGController?
     
-    
     // MARK: - Setup
     init(dgController: DGController?, data: [[String]]?) {
         self.dgController = dgController

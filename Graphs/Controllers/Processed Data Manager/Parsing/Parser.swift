@@ -37,8 +37,8 @@ struct Parser {
             
             switch type {
             case .skip: continue
-            case .error:
-                print("Error during parsing at index: \(index).  For line:\n\(nextLine)")
+            case .error: continue
+                //print("Error during parsing at index: \(index).  For line:\n\(nextLine)")
             case .experimentalDetails:
                 if index == staticSettings.experimentalDetailsStart {
                     experimentalDetails.append(nextLine)

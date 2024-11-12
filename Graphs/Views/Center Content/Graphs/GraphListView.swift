@@ -16,7 +16,7 @@ struct GraphListView: View {
     var body: some View {
         
         ScrollView(.horizontal) {
-            LazyHStack {
+            LazyHStack(alignment: .center) {
                 if viewModel.processedData.count != 0 {
                     ForEach(viewModel.processedData, id: \.id) { nextData in
                         VStack {
@@ -26,9 +26,7 @@ struct GraphListView: View {
                         }
                     }
                 } else {
-                    HStack {
-                        Text("Select Data")
-                    }
+                    EmptyView()
                 }
             }
             

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@MainActor
 struct NodesInspectorView: View {
     
     @Bindable var viewModel: NodeInspectorViewModel
@@ -27,28 +28,40 @@ struct NodesInspectorView: View {
                 HStack {
                     Text("Parser:")
                     Spacer()
-                    Text(viewModel.parserSettingsName)
-                }
-                HStack {
-                    Text("Set:")
-                    Spacer()
+                    // TODO: Cleanup
+                    //Text(viewModel.parserSettingsName)
                     parserSettingsView()
                         .disabled(viewModel.disableSettingsUpdate)
                 }
+                /*
+                 HStack {
+                     Text("Set:")
+                     Spacer()
+                     parserSettingsView()
+                         .disabled(viewModel.disableSettingsUpdate)
+                 }
+                 */
+                
             }
             
             VStack {
                 HStack {
                     Text("Graph Template:")
                     Spacer()
-                    Text(viewModel.graphTemplateName)
-                }
-                HStack {
-                    Text("Set:")
-                    Spacer()
+                    // TODO: Cleanup
+                    //Text(viewModel.graphTemplateName)
                     graphTemplateView()
                         .disabled(viewModel.disableSettingsUpdate)
                 }
+                /*
+                 HStack {
+                     Text("Set:")
+                     Spacer()
+                     graphTemplateView()
+                         .disabled(viewModel.disableSettingsUpdate)
+                 }
+                 */
+                
             }
             
         }.formStyle(.grouped)
@@ -58,12 +71,14 @@ struct NodesInspectorView: View {
     @ViewBuilder
     func parserSettingsView() -> some View {
         Menu(viewModel.parserSettingsMenuText) {
+            
             Button("None") {
                 viewModel.updateParserSetting(with: .none, and: nil)
             }
             Button("Inherit") {
                 viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
             }
+            Divider()
             
             ForEach(viewModel.availableParserSettings) { nextParserSetting in
                 Button(nextParserSetting.name) {
@@ -83,6 +98,8 @@ struct NodesInspectorView: View {
             Button("Inherit") {
                 viewModel.updateGraphtemplate(with: .defaultFromParent, and: nil)
             }
+            
+            Divider()
             
             ForEach(viewModel.availableGraphTemplates) { nextGraphTemplate in
                 Button(nextGraphTemplate.name) {

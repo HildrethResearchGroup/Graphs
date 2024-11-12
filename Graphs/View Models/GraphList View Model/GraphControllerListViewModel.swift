@@ -18,7 +18,7 @@ class GraphControllerListViewModel {
     
     var processedData: [ProcessedData] = [] {
         didSet {
-            print("Updated Processed Data with \(processedData.count) items")
+            //print("Updated Processed Data with \(processedData.count) items")
         }
     }
     

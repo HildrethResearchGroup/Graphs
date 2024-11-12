@@ -69,6 +69,7 @@ extension AppController: @preconcurrency DataControllerDelegate {
     
     func preparingToDelete(nodes: [Node]) {
         selectionManager.preparingToDelete(nodes: nodes)
+        processedDataManager.preparingToDelete(nodes: nodes)
     }
     
     func preparingToDelete(dataItems: [DataItem]) {

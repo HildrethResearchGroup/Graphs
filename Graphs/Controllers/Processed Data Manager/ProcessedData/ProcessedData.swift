@@ -78,6 +78,7 @@ class ProcessedData: Identifiable {
         return cm.graphCacheState(for: dataItem)
     }
     
+    
     func loadGraphController() async throws {
         
         
@@ -111,8 +112,6 @@ class ProcessedData: Identifiable {
         }
         
         let localGraphController = await GraphController(from: graphTemplate.url, data: localParsedFile?.data)
-        
-        
         
         self.graphController = localGraphController
     }

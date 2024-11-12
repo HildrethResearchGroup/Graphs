@@ -133,7 +133,7 @@ extension NodeInspectorViewModel {
             switch onlyNode.parserSettingsInputType {
             case .none: return "None"
             case .defaultFromParent: return "Inhert"
-            case .directlySet: return "Set to: \(onlyNode.getAssociatedParserSettings()?.name ?? "")"
+            case .directlySet: return " \(onlyNode.getAssociatedParserSettings()?.name ?? "")"
             }
         default: return ""
         }
@@ -175,8 +175,13 @@ extension NodeInspectorViewModel {
             guard let onlyNode = nodes.first else { return ""}
             switch onlyNode.graphTemplateInputType {
             case .none: return "None"
-            case .defaultFromParent: return "Inhert"
-            case .directlySet: return "Set to: \(onlyNode.getAssociatedGraphTemplate()?.name ?? "")"
+            case .defaultFromParent: 
+                if let template = onlyNode.getAssociatedGraphTemplate() {
+                    return "Inhereted: \(template.name)"
+                } else {
+                    return "Inhert: Folder needs Template"
+                }
+            case .directlySet: return " \(onlyNode.getAssociatedGraphTemplate()?.name ?? "")"
             }
         default: return ""
         }

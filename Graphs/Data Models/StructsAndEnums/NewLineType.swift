@@ -54,7 +54,7 @@ enum NewLineType: String, Codable, CaseIterable, Identifiable {
 extension NewLineType: PresentableName {
     var name: String {
         switch self {
-        case .auto: return "Auto"
+        case .auto: return "automatic"
         case .LF: return "\\n"
         case .CRLF: return "\\r\\n"
         case .CR: return "\\r"
@@ -65,6 +65,6 @@ extension NewLineType: PresentableName {
 
 extension NewLineType: ProvidesToolTip {
     static var toolTip: String {
-        "Auto: Automatically replaces \\r\\n with \\n. \nmacOS: \\n \nWindows: \\r\\n \nModern macOS uses \\n as the new line character, but other operating systems, such as Windows, might use a different character set to designate a new line.  Sometimes, this causes the file Parser to add empty lines.  Change this property if the Parser is adding or missing lines.\nNote 1: The Auto setting is slower and more memory intensive.\nNote 2: Windows Applications (such as Excel) still use \\r\\n even when running on macOS.  More information can be found on Wikipedia at: https://en.wikipedia.org/wiki/Newline."
+        "automatic: Automatically replaces \\r\\n with \\n. \nmacOS: \\n \nWindows: \\r\\n \nModern macOS uses \\n as the new line character, but other operating systems, such as Windows, might use a different character set to designate a new line.  Sometimes, this causes the file Parser to add empty lines.  Change this property if the Parser is adding or missing lines.\nNote 1: The Auto setting is slower and more memory intensive.\nNote 2: Windows Applications (such as Excel) still use \\r\\n even when running on macOS.\nNote 3: More information on newline characters can be found on Wikipedia at: https://en.wikipedia.org/wiki/Newline."
     }
 }

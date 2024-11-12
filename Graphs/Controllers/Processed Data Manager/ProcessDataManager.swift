@@ -63,6 +63,18 @@ class ProcessDataManager {
         
     }
     
+    // MARK: - Deleting
+    
+    func preparingToDelete(nodes: [Node]) {
+        var dataItems: Set<DataItem> = []
+        
+        for nextNode in nodes {
+            dataItems.formUnion(nextNode.flattenedDataItems())
+        }
+        
+        self.preparingToDelete(dataItems: Array(dataItems))
+    }
+    
     
     func preparingToDelete(dataItems: [DataItem]) {
         for nextDataItem in dataItems {
@@ -72,9 +84,30 @@ class ProcessDataManager {
     
     
     private func delete(dataItem: DataItem) {
-        self.deleteCache(for: dataItem)
-        
         processedData.removeValue(forKey: dataItem.id)
+        self.deleteCache(for: dataItem)
+    }
+    
+    
+    func preparingToDelete(parserSetting: ParserSettings) {
+        
+        for nextProcessedData in self.processedData {
+            let nextDataItem = nextProcessedData.value.dataItem
+            
+            if nextDataItem.getAssociatedParserSettings()?.id == parserSetting.id {
+                nextProcessedData.value.parsedFileState = .outOfDate
+            }
+        }
+    }
+    
+    func preparingToDelete(graphTemplate: GraphTemplate) {
+        for nextProcessedData in self.processedData {
+            let nextDataItem = nextProcessedData.value.dataItem
+            
+            if nextDataItem.getAssociatedGraphTemplate()?.id == graphTemplate.id {
+                nextProcessedData.value.graphTemplateState = .outOfDate
+            }
+        }
     }
 }
 

@@ -31,4 +31,12 @@ struct GraphViewRepresentable: NSViewRepresentable {
         
     }
     
+    @ViewBuilder
+    private func noParserView() -> some View {
+        VStack {
+            Text("No Parser Selected")
+            
+        }
+    }
+    
 }

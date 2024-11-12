@@ -189,6 +189,13 @@ struct SourceList: View {
         }
     }
     
+    @ViewBuilder
+    private func Button_DeleteSelectedDataItems() -> some View {
+        Button("Delete DataItems") {
+            
+        }
+    }
+    
     
     @ViewBuilder
     private func Button_deselectNodes() -> some View {

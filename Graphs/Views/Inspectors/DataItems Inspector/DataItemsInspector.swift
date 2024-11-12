@@ -33,28 +33,40 @@ struct DataItemsInspector: View {
                 HStack {
                     Text("Parser:")
                     Spacer()
-                    Text(viewModel.parserSettingsName)
-                }
-                HStack {
-                    Text("Set:")
-                    Spacer()
                     parserSettingsView()
                         .disabled(viewModel.disableSettingsUpdate)
+                    // TODO: Cleanpu
+                    //Text(viewModel.parserSettingsName)
                 }
+                /*
+                 HStack {
+                     Text("Set:")
+                     Spacer()
+                     parserSettingsView()
+                         .disabled(viewModel.disableSettingsUpdate)
+                 }
+                 */
+                
             }
             
             VStack {
                 HStack {
                     Text("Graph Template:")
                     Spacer()
-                    Text(viewModel.graphTemplateName)
-                }
-                HStack {
-                    Text("Set:")
-                    Spacer()
                     graphTemplateView()
                         .disabled(viewModel.disableSettingsUpdate)
+                    // TODO: Cleanup
+                    //Text(viewModel.graphTemplateName)
                 }
+                /*
+                 HStack {
+                     Text("Set:")
+                     Spacer()
+                     graphTemplateView()
+                         .disabled(viewModel.disableSettingsUpdate)
+                 }
+                 */
+                
             }
             
         }.formStyle(.grouped)
@@ -71,7 +83,7 @@ struct DataItemsInspector: View {
             Button("Inherit") {
                 viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
             }
-            
+            Divider()
             ForEach(viewModel.availableParserSettings) { nextParserSetting in
                 Button(nextParserSetting.name) {
                     viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
@@ -90,7 +102,7 @@ struct DataItemsInspector: View {
             Button("Inherit") {
                 viewModel.updateGraphtemplate(with: .defaultFromParent, and: nil)
             }
-            
+            Divider()
             ForEach(viewModel.availableGraphTemplates) { nextGraphTemplate in
                 Button(nextGraphTemplate.name) {
                     viewModel.updateGraphtemplate(with: .directlySet, and: nextGraphTemplate)
