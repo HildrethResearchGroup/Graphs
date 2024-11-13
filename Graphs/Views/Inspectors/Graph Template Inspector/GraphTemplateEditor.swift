@@ -30,11 +30,28 @@ struct GraphTemplateEditor: View {
         VStack {
             Form() {
                 TextField("Name:", text: $graphTemplate.name)
+                OpenFilesView
+                
                 
             }.formStyle(.grouped)
             GraphViewRepresentable(graphController: graphController)
         }
     }
+    
+    
+    private var OpenFilesView: some View {
+        HStack {
+            Text("Filepath:")
+            Text(graphTemplate.url.path(percentEncoded: false))
+                .truncationMode(.head)
+                .lineLimit(2)
+                .help(graphTemplate.url.path(percentEncoded: false))
+            Spacer()
+            Button("􀉣") { graphTemplate.url.showInFinder()}
+        }
+    }
+    
+    
 }
 
 

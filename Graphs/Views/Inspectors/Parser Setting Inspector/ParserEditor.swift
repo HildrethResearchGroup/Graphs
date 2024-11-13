@@ -54,9 +54,6 @@ struct ParserEditor: View {
             EditData
 
         }.formStyle(.grouped)
-            .onAppear(
-                
-            )
         
     }
     

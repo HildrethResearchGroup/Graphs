@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 
 @Observable
@@ -49,10 +50,20 @@ extension ParserSettingsViewModel {
         return true
     }
     
-    func importURLs(_ urls: [URL]) {
-        for nextURL in urls {
+    
+    func importURLs(_ urls: [URL]) -> Bool{
+        
+        let parserExtension = URL.parserSettingsFileExtension
+        
+        let parserURLs = urls.filter( {$0.pathExtension == parserExtension })
+        
+        if parserURLs.isEmpty == false { return false }
+        
+        for nextURL in parserURLs {
             _ = dataController.importParser(from: nextURL, intoNode: nil)
         }
+        
+        return true
     }
     
     func deleteSelectedParserSetting() {
@@ -68,5 +79,32 @@ extension ParserSettingsViewModel {
     func newParserSettings() {
         _ = dataController.createNewParserSetting()
     }
+    
+    
+    func duplicateParserSettings() {
+        guard let parserSettings = selection else { return }
+        
+        _ = dataController.duplicate(parserSettings)
+    }
+    
+    
+     func exportParserSettings(to url: URL) {
+         guard let parserSettings = selection else { return }
+         
+         let encoder = JSONEncoder()
+         
+         let staticSettings = parserSettings.parserSettingsStatic
+         
+         do {
+             let data = try encoder.encode(staticSettings)
+             try data.write(to: url)
+         } catch  {
+             let logger = Logger(subsystem: "edu.HRG.Graphs", category: "Saving")
+             logger.error("Could not save Parser Settings \(parserSettings.name) to url: \(url)")
+             logger.error("\(error.localizedDescription)")
+         }
+     }
+     
+    
 }
 

@@ -180,9 +180,6 @@ extension DataItemsInspectorViewModel {
     }
     
     
-   
-    
-    
     var graphMenuText: String {
         switch dataItemsCount {
         case 0: return ""

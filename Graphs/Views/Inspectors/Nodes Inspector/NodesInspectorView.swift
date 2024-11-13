@@ -23,45 +23,22 @@ struct NodesInspectorView: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
-            
+            OpenInFinderView
             VStack {
                 HStack {
                     Text("Parser:")
                     Spacer()
-                    // TODO: Cleanup
-                    //Text(viewModel.parserSettingsName)
-                    parserSettingsView()
+                    ParserSettingsView()
                         .disabled(viewModel.disableSettingsUpdate)
                 }
-                /*
-                 HStack {
-                     Text("Set:")
-                     Spacer()
-                     parserSettingsView()
-                         .disabled(viewModel.disableSettingsUpdate)
-                 }
-                 */
-                
             }
-            
             VStack {
                 HStack {
                     Text("Graph Template:")
                     Spacer()
-                    // TODO: Cleanup
-                    //Text(viewModel.graphTemplateName)
-                    graphTemplateView()
+                    GraphTemplateView()
                         .disabled(viewModel.disableSettingsUpdate)
                 }
-                /*
-                 HStack {
-                     Text("Set:")
-                     Spacer()
-                     graphTemplateView()
-                         .disabled(viewModel.disableSettingsUpdate)
-                 }
-                 */
-                
             }
             
         }.formStyle(.grouped)
@@ -69,7 +46,28 @@ struct NodesInspectorView: View {
     
     
     @ViewBuilder
-    func parserSettingsView() -> some View {
+    private var OpenInFinderView: some View {
+        if viewModel.nodes.count == 1 {
+            if let url = viewModel.nodes.first?.originalURL {
+                HStack {
+                    Text("Filepath:")
+                    Text(url.path(percentEncoded: false))
+                    Button("􀉣") { url.showInFinder() }
+                }
+            }
+            else {
+                EmptyView()
+            }
+            
+        } else {
+            EmptyView()
+        }
+        
+        
+    }
+    
+    @ViewBuilder
+    private func ParserSettingsView() -> some View {
         Menu(viewModel.parserSettingsMenuText) {
             
             Button("None") {
@@ -77,9 +75,8 @@ struct NodesInspectorView: View {
             }
             Button("Inherit") {
                 viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
-            }
+            }.disabled(viewModel.inheretButtonDisabled)
             Divider()
-            
             ForEach(viewModel.availableParserSettings) { nextParserSetting in
                 Button(nextParserSetting.name) {
                     viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
@@ -90,14 +87,14 @@ struct NodesInspectorView: View {
     
     
     @ViewBuilder
-    func graphTemplateView() -> some View {
+    func GraphTemplateView() -> some View {
         Menu(viewModel.graphMenuText) {
             Button("None") {
                 viewModel.updateGraphtemplate(with: .none, and: nil)
             }
             Button("Inherit") {
                 viewModel.updateGraphtemplate(with: .defaultFromParent, and: nil)
-            }
+            }.disabled(viewModel.inheretButtonDisabled)
             
             Divider()
             
@@ -108,7 +105,6 @@ struct NodesInspectorView: View {
             }
         }
     }
-    
 }
 
 

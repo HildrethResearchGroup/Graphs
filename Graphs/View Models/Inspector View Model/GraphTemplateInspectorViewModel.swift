@@ -71,3 +71,29 @@ extension GraphTemplateInspectorViewModel {
         _ = dataController.duplicate(graphTemplate)
     }
 }
+
+
+// MARK: - View State
+extension GraphTemplateInspectorViewModel {
+    var filePath: String {
+        guard let template = selection else { return "" }
+        
+        return template.url.path(percentEncoded: false)
+    }
+    
+    func openInFinder() {
+        guard let template = selection else { return }
+        
+        let url = template.url
+        
+        url.showInFinder()
+    }
+    
+    var disableOpenButton: Bool {
+        if selection == nil {
+            return true
+        } else {
+            return false
+        }
+    }
+}

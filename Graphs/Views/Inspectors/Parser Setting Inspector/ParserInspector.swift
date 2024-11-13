@@ -41,13 +41,29 @@ struct ParserInspector: View {
         List(selection: $viewModel.selection) {
             ForEach(viewModel.parserSettings, id: \.self) { nextParser in
                 Text(nextParser.name)
+                    .contextMenu {
+                        DeleteParserSettingButton
+                        DupliateParserSettingsButton
+                        ExportParserSettingsButton
+                    }
             }
-        }
+        }.listRowSeparator(.hidden)
         .frame(height: 150)
+        .dropDestination(for: URL.self) { urls, _  in
+            
+            if viewModel.shouldAllowDrop(ofURLs: urls) == false {
+                return false
+            }
+            
+            let success = viewModel.importURLs(urls)
+            return success
+        }
+        
+        
         
         HStack {
-            NewParserSettingButton
-            DeleteParserSettingButton
+            PlusParserSettingButton
+            MinusParserSettingButton
                 .disabled(viewModel.selection == nil)
         }
         .padding(.horizontal)
@@ -56,15 +72,38 @@ struct ParserInspector: View {
     
     // MARK: - Buttons
     @ViewBuilder
-    var NewParserSettingButton: some View {
+    private var PlusParserSettingButton: some View {
         Button(action: newParser, label: { Image(systemName: "plus") } )
             .buttonStyle(.borderless)
     }
     
+    
     @ViewBuilder
-    var DeleteParserSettingButton: some View {
+    private var MinusParserSettingButton: some View {
         Button(action: deleteParser, label: { Image(systemName: "minus") } )
             .buttonStyle(.borderless)
+    }
+    
+    
+    @ViewBuilder
+    private var DeleteParserSettingButton: some View {
+        Button(action: deleteParser, label: { Text("Delete") } )
+            .buttonStyle(.borderless)
+    }
+    
+    
+    @ViewBuilder
+    private var DupliateParserSettingsButton: some View {
+        Button(action: duplateParser) {
+            Text("Duplicate")
+        }
+    }
+    
+    
+    
+    @ViewBuilder
+    private var ExportParserSettingsButton: some View {
+        Button(action: exportParser, label: { Text("Export") })
     }
     
     
@@ -75,6 +114,22 @@ struct ParserInspector: View {
     
     private func deleteParser() {
         viewModel.deleteSelectedParserSetting()
+    }
+    
+    
+    private func duplateParser() {
+        viewModel.duplicateParserSettings()
+    }
+    
+    private func exportParser() {
+        let panel = NSSavePanel()
+        panel.canCreateDirectories = true
+        panel.allowedContentTypes = [.gparser ?? .data]
+        
+        if panel.runModal() == .OK {
+            guard let url = panel.url else { return }
+            viewModel.exportParserSettings(to: url)
+        }
     }
 }
 

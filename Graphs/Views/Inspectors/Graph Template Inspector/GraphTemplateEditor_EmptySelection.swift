@@ -19,10 +19,12 @@ struct GraphTemplateEditor_EmptySelection: View {
         Form() {
             TextField("Name:", text: $name)
                 .disabled(true)
-            //GraphViewRepresentable(graphController: graphController)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            HStack {
+                Text("Filepath:")
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }.formStyle(.grouped)
-        
     }
 }
 

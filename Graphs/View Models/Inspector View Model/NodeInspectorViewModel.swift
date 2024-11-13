@@ -187,4 +187,18 @@ extension NodeInspectorViewModel {
         }
     }
     
+    var inheretButtonDisabled: Bool {
+        switch nodesCount {
+        case 0: return true
+        case 1:
+            guard let onlyNode = nodes.first else { return true }
+            if onlyNode.parent == nil {
+                return true
+            } else {
+                return false
+            }
+        default: return true
+        }
+    }
+    
 }

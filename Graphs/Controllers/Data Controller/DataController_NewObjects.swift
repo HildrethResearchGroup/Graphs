@@ -255,11 +255,16 @@ extension DataController {
         modelContext.insert(newGraphTemplate)
         
         newGraphTemplate.postModelContextInsertInitialization(node)
+        
+        fetchGraphTemplates()
                 
         delegate?.newGraphTemplate(newGraphTemplate)
         
         return newGraphTemplate
     }
+    
+    
+    
     
     
     
@@ -271,7 +276,7 @@ extension DataController {
         
         newParserSettings.postModelContextInsertInitialization(node)
         
-        fetchData()
+        fetchParserSettings()
         
         delegate?.newParserSetting(newParserSettings)
         
@@ -298,7 +303,7 @@ extension DataController {
             
             newParserSettings.postModelContextInsertInitialization(parentNode)
             
-            fetchData()
+            fetchParserSettings()
             
             delegate?.newParserSetting(newParserSettings)
             
@@ -323,7 +328,7 @@ extension DataController {
         
         modelContext.insert(duplicateGraphTemplate)
         
-        fetchData()
+        fetchGraphTemplates()
         
         delegate?.newGraphTemplate(duplicateGraphTemplate)
         
@@ -331,35 +336,22 @@ extension DataController {
     }
     
     
-    func duplicate(_ parserSettings: ParserSettings) -> ParserSettings? {
-        do {
-            let encoder = JSONEncoder()
-            
-            var staticSettings = parserSettings.parserSettingsStatic
-            
-            staticSettings.localID = UUID()
-            
-            let transientData = try encoder.encode(staticSettings)
-            
-            let decoder = JSONDecoder()
-            
-            let duplicatedParserSettingsStatic = try decoder.decode(ParserSettingsStatic.self, from: transientData)
-            
-            let duplicatedParserSettings = ParserSettings(from: duplicatedParserSettingsStatic)
-            
-            modelContext.insert(duplicatedParserSettings)
-            
-            fetchData()
-            
-            delegate?.newParserSetting(duplicatedParserSettings)
-            
-            return duplicatedParserSettings
-
-        } catch  {
-            print(error)
-            
-            return nil
-        }
+    func duplicate(_ parserSettings: ParserSettings) -> ParserSettings {
         
+        var staticSettings = parserSettings.parserSettingsStatic
+        
+        staticSettings.localID = UUID()
+        
+        staticSettings.name += " - Copy"
+        
+        let duplicatedParserSettings = ParserSettings(from: staticSettings)
+        
+        modelContext.insert(duplicatedParserSettings)
+        
+        fetchParserSettings()
+        
+        delegate?.newParserSetting(duplicatedParserSettings)
+        
+        return duplicatedParserSettings
     }
 }

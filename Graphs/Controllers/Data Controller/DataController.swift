@@ -14,6 +14,7 @@ import OrderedCollections
 
 
 @Observable
+@MainActor
 class DataController {
     private var container: ModelContainer
     
@@ -125,19 +126,20 @@ class DataController {
     }
     
     
-    private func fetchParserSettings() {
+    func fetchParserSettings() {
         do {
             let sortOrder = [SortDescriptor<ParserSettings>(\.name)]
             
             let descriptor = FetchDescriptor<ParserSettings>(sortBy: sortOrder)
             parserSettings = try modelContext.fetch(descriptor)
+            
         } catch {
             print("DataController: Failed to Fetch ParserSettings")
         }
     }
     
     
-    private func fetchGraphTemplates() {
+    func fetchGraphTemplates() {
         do {
             let sortOrder = [SortDescriptor<GraphTemplate>(\.name)]
             

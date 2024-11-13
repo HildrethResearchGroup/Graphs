@@ -27,55 +27,30 @@ struct DataItemsInspector: View {
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
             
-            openFilesView()
+            OpenFilesView()
             
             VStack {
                 HStack {
                     Text("Parser:")
                     Spacer()
-                    parserSettingsView()
+                    ParserSettingsView()
                         .disabled(viewModel.disableSettingsUpdate)
-                    // TODO: Cleanpu
-                    //Text(viewModel.parserSettingsName)
                 }
-                /*
-                 HStack {
-                     Text("Set:")
-                     Spacer()
-                     parserSettingsView()
-                         .disabled(viewModel.disableSettingsUpdate)
-                 }
-                 */
-                
             }
-            
             VStack {
                 HStack {
                     Text("Graph Template:")
                     Spacer()
-                    graphTemplateView()
+                    GraphTemplateView()
                         .disabled(viewModel.disableSettingsUpdate)
-                    // TODO: Cleanup
-                    //Text(viewModel.graphTemplateName)
                 }
-                /*
-                 HStack {
-                     Text("Set:")
-                     Spacer()
-                     graphTemplateView()
-                         .disabled(viewModel.disableSettingsUpdate)
-                 }
-                 */
-                
             }
-            
         }.formStyle(.grouped)
-        
     }
     
     
     @ViewBuilder
-    func parserSettingsView() -> some View {
+    private func ParserSettingsView() -> some View {
         Menu(viewModel.parserSettingsMenuText) {
             Button("None") {
                 viewModel.updateParserSetting(with: .none, and: nil)
@@ -94,7 +69,7 @@ struct DataItemsInspector: View {
     
     
     @ViewBuilder
-    func graphTemplateView() -> some View {
+    private func GraphTemplateView() -> some View {
         Menu(viewModel.graphMenuText) {
             Button("None") {
                 viewModel.updateGraphtemplate(with: .none, and: nil)
@@ -114,10 +89,13 @@ struct DataItemsInspector: View {
     
     
     @ViewBuilder
-    func openFilesView() -> some View {
+    private func OpenFilesView() -> some View {
         HStack {
             Text("FilePath:")
             Text(viewModel.filePath)
+                .truncationMode(.head)
+                .lineLimit(2)
+                .help(viewModel.filePath)
             Spacer()
             Button("􀉣") { openDataItemsInFinder()}
             .disabled(viewModel.disableNameFilepath)
@@ -128,7 +106,7 @@ struct DataItemsInspector: View {
         }
     }
     
-    func openDataItemsInFinder() {
+    private func openDataItemsInFinder() {
         let count = viewModel.dataItemsCount
         
         if openLotsOfFinderItems == true {

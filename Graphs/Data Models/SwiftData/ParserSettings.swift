@@ -167,7 +167,7 @@ final class ParserSettings {
     init(from parserSettingsStatic: ParserSettingsStatic) {
         
         name = parserSettingsStatic.name
-        localID = parserSettingsStatic.localID
+        localID = UUID()
         
         // Dates
         creationDate = parserSettingsStatic.creationDate
