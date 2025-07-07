@@ -47,7 +47,7 @@ struct SourceList: View {
                 .foregroundStyle(.secondary)
             Text(node.name)
         }
-        .draggable(node.id)
+        .draggable(node.localID)
             .dropDestination(for: UUID.self, action: { items, location in
                 sourceListVM.drop(uuids: items, onto: node)
                 print("Drop \(items)")

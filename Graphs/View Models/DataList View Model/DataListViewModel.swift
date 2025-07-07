@@ -35,7 +35,22 @@ class DataListViewModel {
 extension DataListViewModel {
     func deleteSelectedDataItems() {
         let dataItemsToDelete = Array(dataController.selectedDataItems)
-        
         dataController.delete(dataItemsToDelete, andThenTheNodes: [])
+    }
+}
+
+
+
+// MARK: - Open in Finder
+extension DataListViewModel {
+    func openInFinder(_ dataItem: DataItem) {
+        
+        var selectedDataItems = Set(dataController.selectedDataItems)
+        
+        selectedDataItems.insert(dataItem)
+        
+        let urls = selectedDataItems.map({ $0.url })
+        
+        urls.showInFinder()
     }
 }

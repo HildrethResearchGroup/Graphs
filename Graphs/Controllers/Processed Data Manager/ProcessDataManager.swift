@@ -24,6 +24,7 @@ class ProcessDataManager {
     init(cacheManager: CacheManager, dataSource: ProcessDataManagerDataSource?) {
         self.cacheManager = cacheManager
         self.dataSource = dataSource
+        self.registerForNotifications()
     }
     
     
@@ -117,16 +118,22 @@ extension ProcessDataManager {
     private func registerForNotifications() {
         let nc = NotificationCenter.default
         
-        nc.addObserver(forName: .parserOnNodeOrDataItemDidChange, object: nil, queue: nil, using: parserOnNodeOrDataItemDidChange(_:))
         
-        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingPropertyDidChange(_:))
+        // TODO: Swift 6 Errors
+        //nc.addObserver(forName: .parserOnNodeOrDataItemDidChange, object: nil, queue: nil, using: parserOnNodeOrDataItemDidChange(_:))
+        //nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingPropertyDidChange(_:))
+        //nc.addObserver(forName: .graphTemplateDidChange, object: nil, queue: nil, using: graphTemplateOnNodeOrDataItemsDidChange(_:))
         
-        nc.addObserver(forName: .graphTemplateDidChange, object: nil, queue: nil, using: graphTemplateOnNodeOrDataItemsDidChange(_:))
+        
+        nc.addObserver(self, selector: #selector(parserOnNodeOrDataItemDidChange(_:)), name: .parserOnNodeOrDataItemDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(parserSettingPropertyDidChange(_:)), name: .parserSettingPropertyDidChange, object: nil)
+        nc.addObserver(self, selector: #selector(graphTemplateOnNodeOrDataItemsDidChange(_:)), name: .graphTemplateDidChange, object: nil)
     }
     
     
     
-    private func parserOnNodeOrDataItemDidChange(_ notification: Notification) {
+    @objc private func parserOnNodeOrDataItemDidChange(_ notification: Notification) {
+        
         let info = notification.userInfo
         
         let dataItemIDs: [DataItem.ID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.ID] ?? []
@@ -135,7 +142,7 @@ extension ProcessDataManager {
     }
 
     
-    private func graphTemplateOnNodeOrDataItemsDidChange(_ notification: Notification) {
+    @objc private func graphTemplateOnNodeOrDataItemsDidChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         let dataItemsKey = Notification.UserInfoKey.dataItemIDs
         
@@ -180,7 +187,7 @@ extension ProcessDataManager {
     
     
     // MARK: - Implement Parser Settings Changes
-    private func parserSettingPropertyDidChange(_ notification: Notification) {
+    @objc private func parserSettingPropertyDidChange(_ notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         let key = Notification.UserInfoKey.parserSettingsIDs
         

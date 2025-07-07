@@ -34,22 +34,25 @@ class ProcessedData: Identifiable {
         
         // TODO: Implement data caching
         
-        let url = dataItem.url
+        /*  Removed.  Only parse the file when asked to do it.
+         let url = dataItem.url
+         
+         if let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic {
+             let id = dataItem.localID
+             
+             do {
+                 parsedFile = try await Parser.parse(url, using: staticSettings, into: id)
+                 
+             } catch  {
+                 print("ERROR during processedData initializer parsing file")
+                 print(error)
+                 parsedFile = nil
+             }
+         } else {
+             parsedFile = nil
+         }
+         */
         
-        if let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic {
-            let id = dataItem.localID
-            
-            do {
-                parsedFile = try await Parser.parse(url, using: staticSettings, into: id)
-                
-            } catch  {
-                print("ERROR during processedData initializer parsing file")
-                print(error)
-                parsedFile = nil
-            }
-        } else {
-            parsedFile = nil
-        }
         
         
         // TODO: Set Processed Data State
@@ -61,11 +64,17 @@ class ProcessedData: Identifiable {
         parsedFileState = self.determineParsedFileState()
         graphTemplateState = await self.determineGraphControllerState()
         
-        do {
-            try await self.loadGraphController()
-        } catch  {
-            print("Could not generate graphController for: \(dataItem.name)")
+        
+        /*  Removed, only load the graph controller when requested
+         do {
+             try await self.loadGraphController()
+         } catch  {
+           
+         
+        
+          print("Could not generate graphController for: \(dataItem.name)")
         }
+         */
         
     }
     
@@ -164,23 +173,12 @@ class ProcessedData: Identifiable {
     
     // MARK: - Handling Changes
     func parserDidChange() {
-        
-        let url = dataItem.url
-        guard let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic else {
-            return
-        }
-        let id = dataItem.localID
-        
         Task {
-            let newParsedFile = try? await Parser.parse(url, using: staticSettings, into: id)
-            
-            parsedFile = newParsedFile
-            
-            let data = newParsedFile?.data ?? [[]]
-            
-            await graphController?.updateGraphWithData(data)
-            
-            
+            let localParsedFile = try? await self.loadParsedFile()
+            _ = await MainActor.run {
+                self.parsedFile = localParsedFile
+            }
+            try? await self.loadGraphController()
         }
     }
     

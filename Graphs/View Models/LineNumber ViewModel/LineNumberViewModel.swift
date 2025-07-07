@@ -63,9 +63,12 @@ class LineNumberViewModel {
     private func registerForNotifications() {
         let nc = NotificationCenter.default
         
+        // TODO: Fix Swift 6 errors
         //nc.addObserver(self, selector: #selector(LineNumberViewModel.parserSettingsDidChange(_:)), name: .parserSettingPropertyDidChange, object: nil)
         
-        nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingsDidChange(_:))
+        //nc.addObserver(forName: .parserSettingPropertyDidChange, object: nil, queue: nil, using: parserSettingsDidChange(_:))
+        
+        nc.addObserver(self, selector: #selector(parserSettingsDidChange(_:)), name: .parserSettingPropertyDidChange, object: nil)
     }
     
     

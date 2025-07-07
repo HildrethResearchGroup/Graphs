@@ -12,8 +12,6 @@ import SwiftData
 @main
 struct GraphsApp: App {
     
-    // Change
-    
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     @State var appController = AppController()

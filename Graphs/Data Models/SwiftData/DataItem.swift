@@ -53,15 +53,18 @@ final class DataItem: Identifiable, Hashable {
         }
     }
     
+    
     var creationDate: Date
     
     var graphTemplateInputType: InputType
     
     var parserSettingsInputType: InputType
     
+    var bookmarkData: Data?
     
     @Transient
     private var resourceValues: URLResourceValues?
+    
     
     
     // MARK: - Initialization
@@ -75,6 +78,8 @@ final class DataItem: Identifiable, Hashable {
         self.creationDate = .now
         self.graphTemplateInputType = .none
         self.parserSettingsInputType = .none
+        
+        bookmarkData = self.setBookmarkData()
     }
     
     
@@ -84,6 +89,17 @@ final class DataItem: Identifiable, Hashable {
         if node != nil {
             self.graphTemplateInputType = .defaultFromParent
             self.parserSettingsInputType = .defaultFromParent
+        }
+    }
+    
+    func setBookmarkData() -> Data? {
+        
+        do {
+            let bookmarkData = try url.bookmarkData(options: .withSecurityScope)
+            return bookmarkData
+        } catch  {
+            print(error)
+            return nil
         }
     }
     
@@ -165,5 +181,29 @@ final class DataItem: Identifiable, Hashable {
         location.append(path: dataItemFolder)
         
         return location
+    }
+}
+
+
+// MARK: - Accessing Content and BookMarkData
+
+extension DataItem {
+    func bookMarkURL() -> URL? {
+        guard let bookmarkData else { return nil }
+        
+        var bookmarkDataIsStale: Bool = false
+        
+        do {
+            let outputURL = try URL(resolvingBookmarkData: bookmarkData,
+                                    relativeTo: nil,
+                                    bookmarkDataIsStale: &bookmarkDataIsStale)
+            
+            return outputURL
+        } catch  {
+            print("Error resolving bookmark data: \(error)")
+            print("Bookmark Status = \(bookmarkDataIsStale ? "Stale" : "Not Stale")")
+            return nil
+        }
+        
     }
 }

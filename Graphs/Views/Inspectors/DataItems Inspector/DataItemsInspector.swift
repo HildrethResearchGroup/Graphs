@@ -26,63 +26,58 @@ struct DataItemsInspector: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
-            
             OpenFilesView()
-            
-            VStack {
-                HStack {
-                    Text("Parser:")
-                    Spacer()
-                    ParserSettingsView()
-                        .disabled(viewModel.disableSettingsUpdate)
-                }
-            }
-            VStack {
-                HStack {
-                    Text("Graph Template:")
-                    Spacer()
-                    GraphTemplateView()
-                        .disabled(viewModel.disableSettingsUpdate)
-                }
-            }
+            ParserSettingsView()
+            GraphTemplateView()
         }.formStyle(.grouped)
     }
     
     
     @ViewBuilder
     private func ParserSettingsView() -> some View {
-        Menu(viewModel.parserSettingsMenuText) {
-            Button("None") {
-                viewModel.updateParserSetting(with: .none, and: nil)
-            }
-            Button("Inherit") {
-                viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
-            }
-            Divider()
-            ForEach(viewModel.availableParserSettings) { nextParserSetting in
-                Button(nextParserSetting.name) {
-                    viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
+        
+        HStack {
+            Text("Parser:")
+            Spacer()
+            
+            Menu(viewModel.parserSettingsMenuText) {
+                Button("None") {
+                    viewModel.updateParserSetting(with: .none, and: nil)
                 }
-            }
+                Button(viewModel.inheritParserSettingsName) {
+                    viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
+                }
+                Divider()
+                ForEach(viewModel.availableParserSettings) { nextParserSetting in
+                    Button(nextParserSetting.name) {
+                        viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
+                    }
+                }
+            }.disabled(viewModel.disableSettingsUpdate)
         }
     }
     
     
     @ViewBuilder
     private func GraphTemplateView() -> some View {
-        Menu(viewModel.graphMenuText) {
-            Button("None") {
-                viewModel.updateGraphtemplate(with: .none, and: nil)
-            }
-            Button("Inherit") {
-                viewModel.updateGraphtemplate(with: .defaultFromParent, and: nil)
-            }
-            Divider()
-            ForEach(viewModel.availableGraphTemplates) { nextGraphTemplate in
-                Button(nextGraphTemplate.name) {
-                    viewModel.updateGraphtemplate(with: .directlySet, and: nextGraphTemplate)
+        HStack {
+            Text("Graph Template:")
+            Spacer()
+            
+            Menu(viewModel.graphMenuText) {
+                Button("None") {
+                    viewModel.updateGraphtemplate(with: .none, and: nil)
                 }
-            }
+                Button(viewModel.inheritGraphTemplateName) {
+                    viewModel.updateGraphtemplate(with: .defaultFromParent, and: nil)
+                }
+                Divider()
+                ForEach(viewModel.availableGraphTemplates) { nextGraphTemplate in
+                    Button(nextGraphTemplate.name) {
+                        viewModel.updateGraphtemplate(with: .directlySet, and: nextGraphTemplate)
+                    }
+                }
+            }.disabled(viewModel.disableSettingsUpdate)
         }
     }
     

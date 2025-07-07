@@ -52,6 +52,8 @@
 		C0762C942CBB6E200018BDC7 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0762C932CBB6E200018BDC7 /* CacheManager.swift */; };
 		C076AF612C4A0FA6007BECEC /* DataItemsInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */; };
 		C077B3EB2C55E8C90056137E /* ProcessedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C077B3EA2C55E8C90056137E /* ProcessedData.swift */; };
+		C078BB922CE9498500E9DEA6 /* TableInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BB912CE9498500E9DEA6 /* TableInspector.swift */; };
+		C078BB942CE949ED00E9DEA6 /* DataColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BB932CE949ED00E9DEA6 /* DataColumn.swift */; };
 		C078BC352C2F332D00A06887 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC342C2F332D00A06887 /* GraphController.swift */; };
 		C078BC372C2F333400A06887 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC362C2F333400A06887 /* GraphView.swift */; };
 		C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */; };
@@ -70,6 +72,7 @@
 		C07921EB2CC82D1400A5002C /* GraphListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921EA2CC82D1400A5002C /* GraphListView.swift */; };
 		C07921EE2CC82E7000A5002C /* GraphControllerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921ED2CC82E7000A5002C /* GraphControllerListViewModel.swift */; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
+		C089E9B42CEE44AC00EB467D /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C089E9B32CEE44AC00EB467D /* Notes.rtf */; };
 		C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */; };
 		C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09529822C2DEA0B002D3F97 /* Separator.swift */; };
 		C09E8FA52CAB48450014988C /* DGDataColumn_extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C09E8FA42CAB48450014988C /* DGDataColumn_extensions.swift */; };
@@ -166,6 +169,9 @@
 		C0762C932CBB6E200018BDC7 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsInspector.swift; sourceTree = "<group>"; };
 		C077B3EA2C55E8C90056137E /* ProcessedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedData.swift; sourceTree = "<group>"; };
+		C078BB912CE9498500E9DEA6 /* TableInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInspector.swift; sourceTree = "<group>"; };
+		C078BB932CE949ED00E9DEA6 /* DataColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataColumn.swift; sourceTree = "<group>"; };
+		C078BB952CE9A32000E9DEA6 /* GraphsRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GraphsRelease.entitlements; sourceTree = "<group>"; };
 		C078BC342C2F332D00A06887 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		C078BC362C2F333400A06887 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 		C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessDataManagerDataSource.swift; sourceTree = "<group>"; };
 		C07921EA2CC82D1400A5002C /* GraphListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphListView.swift; sourceTree = "<group>"; };
 		C07921ED2CC82E7000A5002C /* GraphControllerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphControllerListViewModel.swift; sourceTree = "<group>"; };
+		C089E9B32CEE44AC00EB467D /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
 		C09529802C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseEditor_EmptySelection.swift; sourceTree = "<group>"; };
 		C09529822C2DEA0B002D3F97 /* Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Separator.swift; sourceTree = "<group>"; };
 		C09E8FA42CAB48450014988C /* DGDataColumn_extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGDataColumn_extensions.swift; sourceTree = "<group>"; };
@@ -257,6 +264,7 @@
 		5A73E4DE24528F5800450137 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
+				C078BB952CE9A32000E9DEA6 /* GraphsRelease.entitlements */,
 				C019CA172C0FBE90002FC7D2 /* GraphsApp.swift */,
 				C019CA192C0FBEC5002FC7D2 /* ContentView.swift */,
 				C0263D762C163714008C929F /* Controllers */,
@@ -268,6 +276,7 @@
 				5A73E4E324528F5B00450137 /* Assets.xcassets */,
 				5A73E4E824528F5B00450137 /* Info.plist */,
 				5A73E4E924528F5B00450137 /* Graphs.entitlements */,
+				C089E9B32CEE44AC00EB467D /* Notes.rtf */,
 			);
 			path = Graphs;
 			sourceTree = "<group>";
@@ -280,6 +289,7 @@
 				C078BC312C2F2F5E00A06887 /* Graph Template Inspector */,
 				C0C82E212C4B137200C6D104 /* Nodes Inspector */,
 				C012AB6C2C2CCA4800BC59B7 /* Parser Setting Inspector */,
+				C078BB902CE9496500E9DEA6 /* Table Inspector */,
 				C01A9D092C3DC73900A555B9 /* Text Inspector */,
 			);
 			path = Inspectors;
@@ -392,6 +402,24 @@
 			path = Parsing;
 			sourceTree = "<group>";
 		};
+		C04BBC8F2CE80663006AEFCE /* Graph View */ = {
+			isa = PBXGroup;
+			children = (
+				C078BC362C2F333400A06887 /* GraphView.swift */,
+				C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */,
+			);
+			path = "Graph View";
+			sourceTree = "<group>";
+		};
+		C04BBC902CE806A8006AEFCE /* General Views */ = {
+			isa = PBXGroup;
+			children = (
+				C095297C2C2DD62F002D3F97 /* Convenience Views */,
+				C04BBC8F2CE80663006AEFCE /* Graph View */,
+			);
+			path = "General Views";
+			sourceTree = "<group>";
+		};
 		C0762C952CBB779D0018BDC7 /* Caching */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,6 +438,14 @@
 			path = "DataItems Inspector";
 			sourceTree = "<group>";
 		};
+		C078BB902CE9496500E9DEA6 /* Table Inspector */ = {
+			isa = PBXGroup;
+			children = (
+				C078BB912CE9498500E9DEA6 /* TableInspector.swift */,
+			);
+			path = "Table Inspector";
+			sourceTree = "<group>";
+		};
 		C078BC312C2F2F5E00A06887 /* Graph Template Inspector */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,15 +456,13 @@
 			path = "Graph Template Inspector";
 			sourceTree = "<group>";
 		};
-		C078BC322C2F32AC00A06887 /* Graphs */ = {
+		C078BC322C2F32AC00A06887 /* Graph List */ = {
 			isa = PBXGroup;
 			children = (
-				C078BC362C2F333400A06887 /* GraphView.swift */,
-				C078BC382C2F333B00A06887 /* GraphViewRepresentable.swift */,
 				C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */,
 				C07921EA2CC82D1400A5002C /* GraphListView.swift */,
 			);
-			path = Graphs;
+			path = "Graph List";
 			sourceTree = "<group>";
 		};
 		C078BC332C2F32B400A06887 /* Source List */ = {
@@ -543,7 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				C0ED09072C49ABC700052208 /* Center Content */,
-				C095297C2C2DD62F002D3F97 /* Convenience Views */,
+				C04BBC902CE806A8006AEFCE /* General Views */,
 				C012AB692C2CC4C800BC59B7 /* Inspectors */,
 				C0ED090E2C49B71A00052208 /* Preferences */,
 				C078BC332C2F32B400A06887 /* Source List */,
@@ -621,6 +655,7 @@
 		C0DF8D222CBA194D006C4574 /* ProcessedData */ = {
 			isa = PBXGroup;
 			children = (
+				C078BB932CE949ED00E9DEA6 /* DataColumn.swift */,
 				C077B3EA2C55E8C90056137E /* ProcessedData.swift */,
 				C0DF8D202CBA1908006C4574 /* ProcessedDataError.swift */,
 				C016242C2C56CAA200F60030 /* ProcessedData_Caching.swift */,
@@ -635,7 +670,7 @@
 			children = (
 				C0ED090C2C49B34C00052208 /* CenterContent.swift */,
 				C07921E92CC82CEE00A5002C /* Data Items */,
-				C078BC322C2F32AC00A06887 /* Graphs */,
+				C078BC322C2F32AC00A06887 /* Graph List */,
 			);
 			path = "Center Content";
 			sourceTree = "<group>";
@@ -716,6 +751,7 @@
 				C0C55F992C40605F001F2554 /* diluteHF - 3 - Volts.dat in Resources */,
 				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 				5A73E4E424528F5B00450137 /* Assets.xcassets in Resources */,
+				C089E9B42CEE44AC00EB467D /* Notes.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,6 +770,7 @@
 				C0263D622C162B22008C929F /* AllowedFileExtension.swift in Sources */,
 				C0263D692C162CE5008C929F /* DataController.swift in Sources */,
 				C09E8FAD2CAB5D2F0014988C /* CachedState.swift in Sources */,
+				C078BB922CE9498500E9DEA6 /* TableInspector.swift in Sources */,
 				C0ED09092C49AC5800052208 /* DataItemsListView.swift in Sources */,
 				C09529832C2DEA0B002D3F97 /* Separator.swift in Sources */,
 				C01A9D112C3DC85C00A555B9 /* LineNumberViewModel.swift in Sources */,
@@ -760,6 +797,7 @@
 				C0ED09042C499E3D00052208 /* UUID_Extensions.swift in Sources */,
 				C0263D6D2C163390008C929F /* DataController_Deleting.swift in Sources */,
 				C078BC422C2F363700A06887 /* GraphTemplateEditor.swift in Sources */,
+				C078BB942CE949ED00E9DEA6 /* DataColumn.swift in Sources */,
 				C09E8FA72CAB48700014988C /* GraphControllerDataSource.swift in Sources */,
 				C07312652CCF371100AB81B4 /* ProcessedData_Parsing.swift in Sources */,
 				C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */,
@@ -948,7 +986,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = alpha_001;
+				CURRENT_PROJECT_VERSION = alpha_002;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z553N3QGMH;
@@ -990,7 +1028,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = alpha_001;
+				CURRENT_PROJECT_VERSION = alpha_002;
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = Z553N3QGMH;

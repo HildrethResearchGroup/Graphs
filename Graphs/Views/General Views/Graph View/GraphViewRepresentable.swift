@@ -14,13 +14,12 @@ struct GraphViewRepresentable: NSViewRepresentable {
     var graphController: GraphController?
     
     
-    
-    
     func makeNSView(context: Context) -> GraphView {
         
         let graphView = GraphView(graphController)
         
         //print("Size String: \(graphController?.dgController?.canvasSettings().sizeString())")
+        
         
         graphView.autoresizingMask = [.width, .height]
         

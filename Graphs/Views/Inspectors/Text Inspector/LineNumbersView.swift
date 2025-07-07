@@ -19,6 +19,7 @@ struct LineNumbersView: View {
                 ScrollView([.horizontal]) {
                     Text(content)
                         .textSelection(.enabled)
+                        .truncationMode(.tail)
                         .frame(maxHeight: .infinity, alignment: .top)
                 }
             }

@@ -21,12 +21,12 @@ struct Inspector: View {
                 .tabItem { Text("􀈕") }
             DataItemsInspector(viewModel.dataItemsVM)
                 .tabItem { Text("􀈿") }
+            GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
+                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                .tabItem { Text("􁂥") }
             ParserInspector(viewModel.parserSettingsVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
-            GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
-                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem { Text("􀟪") }
             TextInspector(dataItem: viewModel.firstDataItem)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("T") }

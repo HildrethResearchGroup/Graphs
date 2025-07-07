@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3588E938-7D68-4FCF-B22B-370B59A0D72A"
-            shouldBeEnabled = "No"
+            uuid = "FD55439C-5EEA-4E74-BF55-6844BF6FE17E"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Graphs/Controllers/Data Controller/DataController.swift"
+            filePath = "Graphs/Controllers/Processed Data Manager/Parsing/Parser.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "fetchParserSettings()"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "content(for:using:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

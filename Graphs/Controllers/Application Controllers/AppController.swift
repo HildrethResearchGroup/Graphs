@@ -27,6 +27,16 @@ class AppController {
     var graphListVM: GraphControllerListViewModel
     
     init() {
+        var url = try? FileManager.default.url(for: .libraryDirectory,
+                                              in: .userDomainMask,
+                                              appropriateFor: nil,
+                                              create: false)
+        
+        let fileManager = FileManager.default
+        
+        url = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "edu.HRG.Graphs")
+        
+        print("Library URL = \(String(describing: url))")
         // Controllers and Managers
         let localDataController = DataController(withDelegate: nil)
         

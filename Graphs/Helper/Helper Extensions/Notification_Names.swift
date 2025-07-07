@@ -55,7 +55,7 @@ extension Notification {
         static var newGraphTemplateID = "newGraphTemplateID"
         
         static var parserSettingsIDs = "parserSettingsIDs"
-        static var oldParserSettingID = "oldParserSettingID"
-        static var newParserSettingID = "newParserSettingID"
+        static var oldParserSettingLocalID = "oldParserSettingLocalID"
+        static var newParserSettingLocalID = "newParserSettingLocalID"
     }
 }

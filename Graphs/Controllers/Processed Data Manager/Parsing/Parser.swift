@@ -16,18 +16,21 @@ struct Parser {
         var content = try content(for: url, using: staticSettings)
         
         if staticSettings.newLineType == .auto {
+            
             content = content.replacingOccurrences(of: "\r", with: "")
+            
         }
         
         let lineSeparator = staticSettings.newLineType.stringLiteral
         
         let lines: [String] = content.components(separatedBy: lineSeparator)
         
-        var experimentalDetails = ""
-        var header: [[String]] = []
-        var data: [[String]] = []
+        var parsedFile = ParsedFile(dataItemID: id)
         
-        var footer = ""
+        //var header: [[String]] = []
+        //var data: [DataColumn] = []
+        
+        //var footer = ""
         
         
         var index = 1
@@ -36,15 +39,15 @@ struct Parser {
             let type = staticSettings.parseLineType(for: index)
             
             switch type {
-            case .skip: continue
-            case .error: continue
+            case .skip: break
+            case .error: break
                 //print("Error during parsing at index: \(index).  For line:\n\(nextLine)")
             case .experimentalDetails:
                 if index == staticSettings.experimentalDetailsStart {
-                    experimentalDetails.append(nextLine)
+                    parsedFile.experimentDetails.append(nextLine)
                 } else {
-                    experimentalDetails.append("\n")
-                    experimentalDetails.append(nextLine)
+                    parsedFile.experimentDetails.append("\n")
+                    parsedFile.experimentDetails.append(nextLine)
                 }
             case .header:
                 let separator = staticSettings.headerSeparator
@@ -52,7 +55,7 @@ struct Parser {
                 if separator == .none { throw ParserError.noHeaderSeparator }
                 
                 let nextheaderLine = parse(line: nextLine, withSeparator: separator)
-                header.append(nextheaderLine)
+                parsedFile.header.append(nextheaderLine)
             case .data:
                 
                 if staticSettings.stopDataAtFirstEmptyLine && nextLine.isEmpty {
@@ -70,7 +73,7 @@ struct Parser {
                 }
                 
                 
-                data.append(nextDataLine)
+                parsedFile.appendRow(nextDataLine)
                
             case .end:
                 break
@@ -79,46 +82,41 @@ struct Parser {
             index += 1
         }
         
-        let transposedData = transpose(data, defaultValue: "")
+      
+        return parsedFile
         
-        // Set the number of lines using the index
-        let numberOfColumns = transposedData.count
-        
-        
-        
-        return ParsedFile(dataItemID: id,
-                          experimentDetails: experimentalDetails,
-                          header: header,
-                          data: transposedData,
-                          footer: footer,
-                          numberOfColumns: numberOfColumns)
-
+        /*
+         return ParsedFile(dataItemID: id,
+                           experimentDetails: experimentalDetails,
+                           header: header,
+                           data: transposedData,
+                           footer: footer,
+                           numberOfColumns: numberOfColumns)
+         */
     }
-    
-    
-    
    
     
     
     private static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
+        print("\n\ncontent for: \(url)")
         let encoding = staticSettings.stringEncodingType.encoding
         
-        var content = ""
         
         // Automatically determine string encoding type
         if staticSettings.stringEncodingType == .automatic {
-            var determinedEncoding: String.Encoding = .ascii
+            var determinedEncoding: String.Encoding = .utf8
             
             if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
+                print("Determined Encoding = \(determinedEncoding)")
                 // String was able to determine encoding type and decode the url
-                content = localContent
+                return localContent
             } else {
                 // String was NOT able to determine encoding type.  Try to use default encoding (ascii).
                 guard let defaultContent = try? String(contentsOf: url, encoding: encoding) else {
                     print("Could not get string of type: \(encoding)\n At url: \(url)")
                     throw ParserError.couldNotGetStringFromURL
                 }
-                content = defaultContent
+                return defaultContent
             }
         } else { // String encoding type was explicitly set by the user
             
@@ -126,11 +124,9 @@ struct Parser {
                 print("Could not get string of type: \(encoding)\n At url: \(url)")
                 throw ParserError.couldNotGetStringFromURL
             }
-            
-            content = explicitContent
+            return explicitContent
         }
-        
-        return content
+
     }
     
     

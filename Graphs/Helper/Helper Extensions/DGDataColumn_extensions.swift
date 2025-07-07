@@ -13,4 +13,8 @@ extension DGDataColumn {
     func setDataWith(_ values: [Double]) {
         self.setDataFrom(values.map( {String($0)} ))
     }
+    
+    func setDataWith(_ column: DataColumn) {
+        self.setDataFrom(column.data)
+    }
 }

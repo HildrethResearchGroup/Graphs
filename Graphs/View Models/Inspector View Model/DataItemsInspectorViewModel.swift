@@ -131,25 +131,6 @@ extension DataItemsInspectorViewModel {
         }
     }
     
-    var parserSettingsName: String {
-        switch dataItemsCount {
-        case 0: return ""
-        case 1:
-            guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
-            
-            switch dataItem.parserSettingsInputType {
-            case .none:
-                return "No Parser Set"
-            case .defaultFromParent:
-                return "From Parent: \(dataItem.getAssociatedParserSettings()?.name ?? "None")"
-            case .directlySet:
-                return dataItem.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
-            }
-        
-        default: return "Multiple Selection"
-        }
-    }
-    
     
     var parserSettingsMenuText: String {
         switch dataItemsCount {
@@ -158,15 +139,20 @@ extension DataItemsInspectorViewModel {
             guard let dataItem = dataController.selectedDataItems.first else { return ""}
             switch dataItem.parserSettingsInputType {
             case .none: return "None"
-            case .defaultFromParent:
-                if let template = dataItem.getAssociatedGraphTemplate() {
-                    return "Inhereted: \(template.name)"
-                } else {
-                    return "Inhert: Folder needs Template"
-                }
+            case .defaultFromParent: return inheritParserSettingsName
             case .directlySet: return "\(dataItem.getAssociatedParserSettings()?.name ?? "")"
             }
         default: return ""
+        }
+    }
+    
+    
+    var inheritParserSettingsName: String {
+        guard let dataItem = dataController.selectedDataItems.first else { return "Inherit"}
+        if let parserSettings = dataItem.getAssociatedParserSettings() {
+            return "Inherit: \(parserSettings.name)"
+        } else {
+            return "Inherit: Folder needs Template"
         }
     }
     
@@ -187,16 +173,20 @@ extension DataItemsInspectorViewModel {
             guard let dataItem = dataController.selectedDataItems.first else { return ""}
             switch dataItem.parserSettingsInputType {
             case .none: return "None"
-            case .defaultFromParent:
-                
-                if let template = dataItem.getAssociatedGraphTemplate() {
-                    return "Inhereted: \(template.name)"
-                } else {
-                    return "Inhert: Folder needs Template"
-                }
+            case .defaultFromParent: return inheritGraphTemplateName
             case .directlySet: return "\(dataItem.getAssociatedGraphTemplate()?.name ?? "")"
             }
         default: return ""
+        }
+    }
+    
+    
+    var inheritGraphTemplateName: String {
+        guard let dataItem = dataController.selectedDataItems.first else { return "Inherit:"}
+        if let template = dataItem.getAssociatedGraphTemplate() {
+            return "Inherit: \(template.name)"
+        } else {
+            return "Inherit: Folder needs Template"
         }
     }
 }

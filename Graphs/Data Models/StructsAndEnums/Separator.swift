@@ -67,9 +67,9 @@ extension Separator: PresentableName {
     var name: String {
         switch self {
         case .none: return "None"
-        case .colon: return ":"
-        case .comma: return ","
-        case .semicolon: return ";"
+        case .colon: return "Colon"
+        case .comma: return "Comma"
+        case .semicolon: return "Semicolon"
         case .space: return "Single Space"
         case .tab: return "Tab"
         case .whitespace: return "Multiple Spaces"

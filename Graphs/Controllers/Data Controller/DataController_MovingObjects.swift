@@ -47,7 +47,7 @@ extension DataController {
         
         if allNodes.count == 0 { return [] }
         
-        let filteredNodes = allNodes.filter( { uuids.contains($0.id)} )
+        let filteredNodes = allNodes.filter( { uuids.contains($0.localID)} )
         
         return filteredNodes
     }

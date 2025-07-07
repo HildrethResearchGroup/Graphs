@@ -115,6 +115,11 @@ extension URL {
     
     /// Database storage location for Graphs application
     static var swiftDataStorageLocation: URL {
+        
+        let fm = FileManager.default
+        
+        let testURL = try? fm.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: .applicationSupportDirectory, create: true)
+        
         var location = URL.applicationSupportDirectory
         location.append(path: "Graphs/Data/GraphsDatabase.sqlite")
         

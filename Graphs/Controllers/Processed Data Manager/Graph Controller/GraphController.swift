@@ -17,7 +17,7 @@ class GraphController {
     var dgController: DGController?
     
     // MARK: - Setup
-    init(dgController: DGController?, data: [[String]]?) {
+    init(dgController: DGController?, data: [DataColumn]?) {
         self.dgController = dgController
         
         if let dgController {
@@ -27,7 +27,7 @@ class GraphController {
     }
     
     
-    convenience init(from url: URL, data: [[String]]?) {
+    convenience init(from url: URL, data: [DataColumn]?) {
         
         let localDGController = DGController(contentsOfFile: url.path(percentEncoded: false))
         
@@ -36,19 +36,19 @@ class GraphController {
     
     
     
-    func setDGController(withController dgController: DGController?, andData data: [[String]]?) {
+    func setDGController(withController dgController: DGController?, andData data: [DataColumn]?) {
         
         self.update(controller: dgController, withData: data)
         self.dgController = dgController
     }
     
-    func updateGraphWithData(_ data: [[String]]) {
+    func updateGraphWithData(_ data: [DataColumn]) {
         
         self.update(controller: self.dgController, withData: data)
     }
     
     
-    private func update(controller: DGController?, withData data: [[String]]?) {
+    private func update(controller: DGController?, withData data: [DataColumn]?) {
         
         guard let controller else { return }
         
@@ -59,7 +59,7 @@ class GraphController {
         for (index, columnOfData) in data.enumerated() {
             guard  let dgColumn = controller.dataColumn(at: Int32(index + 1)) else {continue}
             
-            dgColumn.setDataFrom(columnOfData)
+            dgColumn.setDataWith(columnOfData)
         }
     }
     

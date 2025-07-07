@@ -100,29 +100,32 @@ extension NodeInspectorViewModel {
     
     func updateParserSetting(with inputType: InputType, and newParserSettings: ParserSettings?) {
         for nextNode in nodes {
+            
             nextNode.setParserSetting(withInputType: inputType, and: newParserSettings)
         }
     }
     
+    /*
+     var parserSettingsName: String {
+         switch nodesCount {
+         case 0: return ""
+         case 1:
+             guard let node = nodes.first else { return "No Selection" }
+             
+             switch node.parserSettingsInputType {
+             case .none:
+                 return "No Parser Set"
+             case .defaultFromParent:
+                 return "From Parent: \(node.getAssociatedParserSettings()?.name ?? "None")"
+             case .directlySet:
+                 return node.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
+             }
+         
+         default: return "Multiple Selection"
+         }
+     }
+     */
     
-    var parserSettingsName: String {
-        switch nodesCount {
-        case 0: return ""
-        case 1:
-            guard let node = nodes.first else { return "No Selection" }
-            
-            switch node.parserSettingsInputType {
-            case .none:
-                return "No Parser Set"
-            case .defaultFromParent:
-                return "From Parent: \(node.getAssociatedParserSettings()?.name ?? "None")"
-            case .directlySet:
-                return node.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
-            }
-        
-        default: return "Multiple Selection"
-        }
-    }
     
     
     var parserSettingsMenuText: String {
@@ -132,10 +135,20 @@ extension NodeInspectorViewModel {
             guard let onlyNode = nodes.first else { return ""}
             switch onlyNode.parserSettingsInputType {
             case .none: return "None"
-            case .defaultFromParent: return "Inhert"
+            case .defaultFromParent: return inheritParserSettingsName
             case .directlySet: return " \(onlyNode.getAssociatedParserSettings()?.name ?? "")"
             }
         default: return ""
+        }
+    }
+    
+    
+    var inheritParserSettingsName: String {
+        guard let node = nodes.first else { return "Inherit:"}
+        if let parserSettings = node.getAssociatedParserSettings() {
+            return "Inherit: \(parserSettings.name)"
+        } else {
+            return "Inherit: Folder needs Template"
         }
     }
     
@@ -148,26 +161,7 @@ extension NodeInspectorViewModel {
         }
     }
     
-    
-    var graphTemplateName: String {
-        switch nodesCount {
-        case 0: return ""
-        case 1:
-            guard let onlyNode = nodes.first else { return "No Selection" }
-            
-            switch onlyNode.graphTemplateInputType {
-            case .none:
-                return "No Graph Set"
-            case .defaultFromParent:
-                return "From Parent: \(onlyNode.getAssociatedGraphTemplate()?.name ?? "None")"
-            case .directlySet:
-                return onlyNode.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
-            }
-        
-        default: return "Multiple Selection"
-        }
-    }
-    
+   
     var graphMenuText: String {
         switch nodesCount {
         case 0: return ""
@@ -175,19 +169,25 @@ extension NodeInspectorViewModel {
             guard let onlyNode = nodes.first else { return ""}
             switch onlyNode.graphTemplateInputType {
             case .none: return "None"
-            case .defaultFromParent: 
-                if let template = onlyNode.getAssociatedGraphTemplate() {
-                    return "Inhereted: \(template.name)"
-                } else {
-                    return "Inhert: Folder needs Template"
-                }
+            case .defaultFromParent: return inheritGraphTemplateName
             case .directlySet: return " \(onlyNode.getAssociatedGraphTemplate()?.name ?? "")"
             }
         default: return ""
         }
     }
     
-    var inheretButtonDisabled: Bool {
+    
+    var inheritGraphTemplateName: String {
+        guard let node = nodes.first else { return "Inherit:"}
+        if let template = node.getAssociatedGraphTemplate() {
+            return "Inherit: \(template.name)"
+        } else {
+            return "Inherit: Folder needs Template"
+        }
+    }
+    
+    
+    var inheritButtonDisabled: Bool {
         switch nodesCount {
         case 0: return true
         case 1:

@@ -12,7 +12,7 @@ import SwiftData
 @Model
 final class Node {
     // MARK: - Properties
-    var id: UUID
+    var localID: UUID
     
     var originalURL: URL?
     
@@ -28,6 +28,8 @@ final class Node {
     var dataItems: [DataItem]
     
     var creationDate: Date
+    
+    var bookmarkData: Data?
     
     
     private var graphTemplate: GraphTemplate? {
@@ -49,8 +51,8 @@ final class Node {
     }
     
     
-    
     var graphTemplateInputType: InputType
+    
     
     private var parserSettings: ParserSettings? {
         didSet {
@@ -73,73 +75,28 @@ final class Node {
     var parserSettingsInputType: InputType
     
     
-    /*
-     var nodeTypeStorage: Int
-     
-     @Transient
-     var nodeType: NodeType {
-         set {
-             nodeTypeStorage = newValue.intForStorage()
-         } get {
-             NodeType(rawValue: nodeTypeStorage) ?? .child
-         }
-     }
-     */
-    
-    
-    
     // MARK: - Initializers
     init(url: URL?) {
-        self.id = UUID()
+        self.localID = UUID()
 
         self.originalURL = url
-        
-        // TODO: Cleanup
-        /* Moved to postModelContextInsertInitialization
-         if parent?.subNodes == nil {
-             parent?.subNodes = []
-         }
-         
-         self.parent = parent
-         */
-        
         
         self.dataItems = []
         
         self.creationDate = .now
         
-        /*
-         if parent == nil {
-             nodeTypeStorage = NodeType.root.intForStorage()
-         } else {
-             nodeTypeStorage = NodeType.child.intForStorage()
-         }
-         */
-        
 
         self.subNodes = []
         
-        self.name = url?.fileName ?? Node.defaultName
+        self.name = url?.lastPathComponent ?? Node.defaultName
         
         
         // Set initial input types.  This will be updated using postModelContextInsertInitialization
         self.parent = nil
         parserSettingsInputType = .none
         graphTemplateInputType = .none
-        
-        
-        // TODO: Cleanup
-        /* Moved to postModelContextInsertInitialization
-         if parent != nil {
-             parserSettingsInputType = .defaultFromParent
-             graphTemplateInputType = .defaultFromParent
-         } else {
-             parserSettingsInputType = .none
-             graphTemplateInputType = .none
-         }
-         */
-        
     }
+    
     
     func postModelContextInsertInitialization(_ parent: Node?) {
         
@@ -205,6 +162,8 @@ final class Node {
     
     func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
         
+        let oldValue = self.parserSettings
+        
         self.parserSettingsInputType = inputType
         
         switch inputType {
@@ -220,6 +179,20 @@ final class Node {
                 self.parserSettings = nil
             }
         }
+        
+        let nc = NotificationCenter.default
+        
+        let dataItemIDS = flattenedDataItems().map({ $0.id })
+        
+        let info: [String: Any] = [
+            Notification.UserInfoKey.dataItemIDs : dataItemIDS,
+            
+            Notification.UserInfoKey.oldParserSettingLocalID : oldValue?.localID ?? UUID(uuidString: "1234") as Any,
+            
+            Notification.UserInfoKey.newParserSettingLocalID : parserSettings?.localID ?? UUID(uuidString: "1234") as Any
+        ]
+        
+        nc.post(name: .parserOnNodeOrDataItemDidChange, object: nil, userInfo: info)
     }
     
     
@@ -295,3 +268,6 @@ extension Node {
         }
     }
 }
+
+
+

@@ -22,7 +22,7 @@ struct GraphListView: View {
                         VStack {
                             Text(nextData.dataItem.name)
                             GraphViewRepresentable(graphController: nextData.graphController)
-                                .aspectRatio(1.3, contentMode: .fit)
+                                .aspectRatio(1.4, contentMode: .fit)
                         }
                     }
                 } else {
