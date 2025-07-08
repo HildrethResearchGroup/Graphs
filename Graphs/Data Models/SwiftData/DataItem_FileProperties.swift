@@ -3,7 +3,7 @@
 //  Graphs
 //
 //  Created by Owen Hildreth on 6/9/24.
-//  Copyright © 2024 Connor Barnes. All rights reserved.
+//  Copyright © 2024 Owen Hildreth. All rights reserved.
 //
 
 import Foundation

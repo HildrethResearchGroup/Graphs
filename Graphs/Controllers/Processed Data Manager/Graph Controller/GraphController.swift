@@ -57,6 +57,11 @@ class GraphController {
         if data.isEmpty { return }
         
         for (index, columnOfData) in data.enumerated() {
+            
+            let numberOfGraphTemplateColumns = controller.dataColumns().count
+            
+            if index + 1 >= numberOfGraphTemplateColumns { break }
+            
             guard  let dgColumn = controller.dataColumn(at: Int32(index + 1)) else {continue}
             
             dgColumn.setDataWith(columnOfData)

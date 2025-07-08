@@ -3,7 +3,7 @@
 //  Graphs
 //
 //  Created by Owen Hildreth on 7/9/24.
-//  Copyright © 2024 Connor Barnes. All rights reserved.
+//  Copyright © 2024 Owen Hildreth. All rights reserved.
 //
 
 import SwiftUI
@@ -103,7 +103,6 @@ struct TextInspector: View {
 
 // MARK: - Preview
 #Preview {
-    let controller = DataController(withDelegate: nil)
     let dataItem = DataItem(url: URL.init(filePath: ""))
     let viewModel = LineNumberViewModel(dataItem)
     TextInspector(viewModel)

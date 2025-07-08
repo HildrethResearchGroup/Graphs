@@ -3,7 +3,7 @@
 //  Graphs
 //
 //  Created by Owen Hildreth on 7/17/24.
-//  Copyright © 2024 Connor Barnes. All rights reserved.
+//  Copyright © 2024 Owen Hildreth. All rights reserved.
 //
 
 import Foundation
@@ -23,7 +23,6 @@ class InspectorViewModel {
     
     var nodeInspectorVM: NodeInspectorViewModel
     
-    var lineNumberViewModel: LineNumberViewModel
     
     var firstDataItem: DataItem? {
         dataController.selectedDataItems.first
@@ -42,6 +41,5 @@ class InspectorViewModel {
         
         self.nodeInspectorVM = NodeInspectorViewModel(dataController, selectionManager)
         
-        self.lineNumberViewModel = LineNumberViewModel(dataController)
     }
 }

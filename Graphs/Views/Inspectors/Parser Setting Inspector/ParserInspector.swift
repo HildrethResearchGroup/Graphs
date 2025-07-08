@@ -3,7 +3,7 @@
 //  Graphs
 //
 //  Created by Owen Hildreth on 6/26/24.
-//  Copyright © 2024 Connor Barnes. All rights reserved.
+//  Copyright © 2024 Owen Hildreth. All rights reserved.
 //
 
 import SwiftUI
@@ -12,11 +12,9 @@ import SwiftData
 struct ParserInspector: View {
     
     @Bindable var viewModel: ParserSettingsViewModel
-    var lineNumberViewModel: LineNumberViewModel
     
-    init(_ viewModel: ParserSettingsViewModel, lineNumberViewModel: LineNumberViewModel) {
+    init(_ viewModel: ParserSettingsViewModel) {
         self.viewModel = viewModel
-        self.lineNumberViewModel = lineNumberViewModel
     }
     
     //@State var selection: ParserSettings? = nil
@@ -86,8 +84,17 @@ struct ParserInspector: View {
     
     @ViewBuilder
     var FileContentView: some View {
+        if let dataItem = viewModel.selectedDataItem {
+            if dataItem.getAssociatedParserSettings()?.id == viewModel.selection?.id {
+                TextInspector(LineNumberViewModel(dataItem))
+            } else {
+                EmptyView()
+            }
+        } else {
+            EmptyView()
+        }
         
-        TextInspector(lineNumberViewModel)
+        
     }
     
     
@@ -163,8 +170,7 @@ struct ParserInspector: View {
     let dataController = DataController(withDelegate: nil)
     let selectionManager = SelectionManager()
     let parserSettingsViewModel = ParserSettingsViewModel(dataController, selectionManager)
-    let lineSettingsViewModel = LineNumberViewModel(nil)
     
-    ParserInspector(parserSettingsViewModel, lineNumberViewModel: lineSettingsViewModel)
+    ParserInspector(parserSettingsViewModel)
         .frame(height: 1000)
 }
