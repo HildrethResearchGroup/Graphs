@@ -42,28 +42,42 @@ class ProcessDataManager {
     func processedData(for dataItem: DataItem) async -> ProcessedData {
         
         
+        
+        /*
+         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
+         
+         processedData[dataItem.id] = newProcessedData
+         
+         return newProcessedData
+         */
+        
+        
+        // Enable Local Caching
+         if let output = processedData[dataItem.id] {
+             
+             // Check to see if cached data is up to date
+             if output.parsedFileState == .upToDate && output.graphTemplateState == .upToDate {
+                 // Cached data is up to date, return cached data
+                 return output
+             } else {
+                 // Cached data isn't up to date, reprocess the data
+                 return await generateNewProcessedData(for: dataItem)
+             }
+         } else {
+             // No cached data, process data
+             return await generateNewProcessedData(for: dataItem)
+         }
+    }
+    
+    
+    private func generateNewProcessedData(for dataItem: DataItem) async -> ProcessedData {
         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
         
         processedData[dataItem.id] = newProcessedData
         
         return newProcessedData
-        
-        /*
-         if let output = processedData[dataItem.id] {
-             
-             return output
-             
-         } else {
-             let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
-             
-             processedData[dataItem.id] = newProcessedData
-             
-             return newProcessedData
-         }
-
-         */
-        
     }
+    
     
     // MARK: - Deleting
     

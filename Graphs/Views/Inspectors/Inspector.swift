@@ -27,6 +27,8 @@ struct Inspector: View {
             ParserInspector(viewModel.parserSettingsVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
+            TextInspector(viewModel.textInspectorVM)
+                .tabItem { Text("T") }
         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         

@@ -80,6 +80,7 @@ struct ParsedFile: Sendable, Codable {
     
     
     private mutating func appendRow(_ row: [String], withHeaders headers: [String]) {
+        
         let rowCompatibility = RowCompatibility(rowCount: row.count, dataCount: data.count)
         
         switch rowCompatibility {
@@ -127,8 +128,9 @@ struct ParsedFile: Sendable, Codable {
     
     
     private mutating func appendEqualRow(_ row: [String]) {
+        
         for (index, nextNewData) in row.enumerated() {
-            if data.count <= index {
+            if data.count >= index {
                 data[index].append(nextNewData)
             } else {
                 data[index].append("")

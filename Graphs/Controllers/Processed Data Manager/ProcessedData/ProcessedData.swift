@@ -53,7 +53,6 @@ class ProcessedData: Identifiable {
         graphTemplateState = await self.determineGraphControllerState()
         
         
-        
     }
     
     
@@ -122,7 +121,8 @@ class ProcessedData: Identifiable {
     }
     
     
-    @MainActor private func determineGraphControllerState() -> ProcessedDataState {
+    @MainActor
+    private func determineGraphControllerState() -> ProcessedDataState {
         guard let graphTemplate = dataItem.getAssociatedGraphTemplate() else {
             return .noTemplate
         }

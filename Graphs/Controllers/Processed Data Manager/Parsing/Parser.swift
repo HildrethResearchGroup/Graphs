@@ -124,8 +124,7 @@ struct Parser {
     }
     
     
-    private static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
-        print("\n\ncontent for: \(url)")
+    static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
         let encoding = staticSettings.stringEncodingType.encoding
         
         
