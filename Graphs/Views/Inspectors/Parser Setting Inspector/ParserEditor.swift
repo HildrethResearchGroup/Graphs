@@ -53,7 +53,10 @@ struct ParserEditor: View {
             
             EditData
 
-        }.formStyle(.grouped)
+        }
+        .formStyle(.grouped)
+        .padding(.horizontal, -20)
+        .padding(.top, -15)
         
     }
     
@@ -90,7 +93,7 @@ struct ParserEditor: View {
             }
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasHeader)
-            .padding(.leading, 10)
+            //.padding(.leading, 10)
         }
         
     }
@@ -113,10 +116,10 @@ struct ParserEditor: View {
             //.frame(minWidth: 2*width + 25, alignment: .leading)
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasData)
-            .padding(.leading, 10)
+            //.padding(.leading, 10)
             
             Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
-                .padding(.leading, 10)
+                //.padding(.leading, 10)
                 .padding(.vertical, 10)
                 .disabled(!parseSettings.hasData)
         }

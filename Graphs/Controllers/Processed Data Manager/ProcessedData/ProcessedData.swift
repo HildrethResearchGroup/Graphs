@@ -32,49 +32,27 @@ class ProcessedData: Identifiable {
         self.dataItem = dataItem
         self.delegate = delegate
         
-        // TODO: Implement data caching
-        
-        /*  Removed.  Only parse the file when asked to do it.
-         let url = dataItem.url
-         
-         if let staticSettings = dataItem.getAssociatedParserSettings()?.parserSettingsStatic {
-             let id = dataItem.localID
-             
-             do {
-                 parsedFile = try await Parser.parse(url, using: staticSettings, into: id)
-                 
-             } catch  {
-                 print("ERROR during processedData initializer parsing file")
-                 print(error)
-                 parsedFile = nil
-             }
-         } else {
-             parsedFile = nil
-         }
-         */
-        
-        
-        
         // TODO: Set Processed Data State
         // Initialize values so actual state determining methods can be called
         parsedFileState = .outOfDate
         graphTemplateState = .outOfDate
         
         
+        // TODO: Implement Caching
+        // TODO: only load the graph controller when requested
+        do {
+            self.parsedFile = try await self.loadParsedFile()
+            
+            try await self.loadGraphController()
+        } catch  {
+            
+            print("Could not generate graphController for: \(dataItem.name)")
+        }
+        
         parsedFileState = self.determineParsedFileState()
         graphTemplateState = await self.determineGraphControllerState()
         
         
-        /*  Removed, only load the graph controller when requested
-         do {
-             try await self.loadGraphController()
-         } catch  {
-           
-         
-        
-          print("Could not generate graphController for: \(dataItem.name)")
-        }
-         */
         
     }
     
@@ -90,29 +68,26 @@ class ProcessedData: Identifiable {
     
     func loadGraphController() async throws {
         
+        let localState = await self.determineGraphControllerState()
         
-        // TODO: Fix local state loading
+        // Start with the immediately available states
+        // Immediately available states must return value right away to avoid reparsing or regraphing system
+        switch localState {
+        case .noTemplate: return
+        case .upToDate: return
+        case .processing: return
+        case .outOfDate: break
+        case .notProcessed: break
+        }
+        
+        // TODO: Implement Caching
         /*
-         let localState = self.graphTemplateState
-         
-         // Start with the immediately available states
-         // Immediately available states must return value right away to avoid reparsing or regraphing system
-         switch localState {
-         case .noTemplate: return
-         case .upToDate: return
-         case .processing: return
-         case .outOfDate: break
-         case .notProcessed: break
-         }
-         
          if self.graphCacheState() == .cachedStorageUpToDate {
-             if let cachedGraph = delegate?.cachedGraph(for: dataItem) {
-                 self.graphController =  await GraphController(dgController: cachedGraph, data: nil)
-             }
+         if let cachedGraph = delegate?.cachedGraph(for: dataItem) {
+         self.graphController =  await GraphController(dgController: cachedGraph, data: nil)
+         }
          }
          */
-        
-        
         
         let localParsedFile = try await self.loadParsedFile()
         
@@ -173,18 +148,23 @@ class ProcessedData: Identifiable {
     
     // MARK: - Handling Changes
     func parserDidChange() {
+        self.parsedFileState = .outOfDate
+        
         Task {
             let localParsedFile = try? await self.loadParsedFile()
             _ = await MainActor.run {
                 self.parsedFile = localParsedFile
+                
             }
             try? await self.loadGraphController()
         }
     }
     
-
+    
     
     func graphTemplateDidChange() {
+        self.graphTemplateState = .outOfDate
+        
         let newGraphTemplate = dataItem.getAssociatedGraphTemplate()
         
         guard let graphTemplateURL = newGraphTemplate?.url else {
@@ -207,5 +187,5 @@ class ProcessedData: Identifiable {
         }
         
     }
-
+    
 }

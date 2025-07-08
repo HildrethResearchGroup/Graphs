@@ -13,6 +13,8 @@ struct Parser {
     
     static func parse(_ url: URL, using staticSettings: ParserSettingsStatic, into id: UUID) async throws -> ParsedFile {
         
+        try validateLineStartEndSettings(staticSettings)
+        
         var content = try content(for: url, using: staticSettings)
         
         if staticSettings.newLineType == .auto {
@@ -96,6 +98,31 @@ struct Parser {
     }
    
     
+    private static func validateLineStartEndSettings(_ settings: ParserSettingsStatic) throws {
+        if settings.hasExperimentalDetails {
+            if settings.experimentalDetailsStart < 0 {
+                throw ParserError.indexBelowZero
+            } else if settings.experimentalDetailsEnd < settings.experimentalDetailsStart {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+        
+        if settings.hasHeader {
+            if settings.headerStart <= settings.experimentalDetailsEnd {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            } else if settings.headerEnd < settings.headerStart {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+        
+        if settings.hasData {
+            if settings.dataStart <= settings.headerEnd {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+    
+    }
+    
     
     private static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
         print("\n\ncontent for: \(url)")
@@ -104,6 +131,7 @@ struct Parser {
         
         // Automatically determine string encoding type
         if staticSettings.stringEncodingType == .automatic {
+            
             var determinedEncoding: String.Encoding = .utf8
             
             if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
@@ -211,8 +239,12 @@ struct Parser {
         }
     }
     
+    
+    
     enum ParserError: Error {
         case noParseSettings
+        
+        case indexBelowZero
         
         case startingIndexHigherThanEndingIndex
         

@@ -120,6 +120,7 @@ extension AppController: @preconcurrency SelectionManagerDelegate {
     }
     
     func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
+        
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
         graphListVM.updateProcessedData()
     }

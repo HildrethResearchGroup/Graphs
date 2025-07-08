@@ -12,9 +12,11 @@ import SwiftData
 struct ParserInspector: View {
     
     @Bindable var viewModel: ParserSettingsViewModel
+    var lineNumberViewModel: LineNumberViewModel
     
-    init(_ viewModel: ParserSettingsViewModel) {
+    init(_ viewModel: ParserSettingsViewModel, lineNumberViewModel: LineNumberViewModel) {
         self.viewModel = viewModel
+        self.lineNumberViewModel = lineNumberViewModel
     }
     
     //@State var selection: ParserSettings? = nil
@@ -25,15 +27,27 @@ struct ParserInspector: View {
             AvailableParserSettings
             
             Divider()
-            ScrollView(.vertical) {
-                if let selectedParser = viewModel.selection {
-                    ParserEditor(parseSettings: selectedParser)
-                } else {
-                    ParseEditor_EmptySelection()
-                }
+            
+            if let selectedParser = viewModel.selection {
+                ParserEditor(parseSettings: selectedParser)
+                    .frame(maxHeight: 425)
+                    //.padding(.horizontal, -20)
+                    //.padding(.top, -20)
+            } else {
+                ParseEditor_EmptySelection()
+                    .frame(maxHeight: 425)
+                    //.padding(.horizontal, -20)
+                    //.padding(.top, -20)
             }
+            
+            FileContentView
+            
+            Spacer()
+            
         }
     }
+    
+    
     
     
     @ViewBuilder
@@ -68,6 +82,14 @@ struct ParserInspector: View {
         }
         .padding(.horizontal)
     }
+    
+    
+    @ViewBuilder
+    var FileContentView: some View {
+        
+        TextInspector(lineNumberViewModel)
+    }
+    
     
     
     // MARK: - Buttons
@@ -137,5 +159,12 @@ struct ParserInspector: View {
 
 // MARK: - Preview
 #Preview {
-    ParserInspector(ParserSettingsViewModel(DataController(withDelegate: nil), SelectionManager())).frame(height: 1000)
+    
+    let dataController = DataController(withDelegate: nil)
+    let selectionManager = SelectionManager()
+    let parserSettingsViewModel = ParserSettingsViewModel(dataController, selectionManager)
+    let lineSettingsViewModel = LineNumberViewModel(nil)
+    
+    ParserInspector(parserSettingsViewModel, lineNumberViewModel: lineSettingsViewModel)
+        .frame(height: 1000)
 }

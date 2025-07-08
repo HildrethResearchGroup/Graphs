@@ -9,67 +9,104 @@
 import SwiftUI
 
 struct TextInspector: View {
-    var dataItem: DataItem?
-    
     @State private var viewModel: LineNumberViewModel
     
     @AppStorage("textInspectorIsSimple") private var textInspectorIsSimple = false
     
+    @State private var newLineType: NewLineType
+    @State private var stringeEncodingType: StringEncodingType
     
-    init(dataItem: DataItem?) {
-        self.dataItem = dataItem
-        self._viewModel = State(initialValue: LineNumberViewModel(dataItem))
+    init(_ viewModel: LineNumberViewModel) {
+        self._viewModel = State(initialValue: viewModel)
+        self._newLineType = State(initialValue: viewModel.newLineType ?? .CRLF)
+        self._stringeEncodingType = State(initialValue: viewModel.stringEncodingType ?? .ascii)
     }
+    
     
     var body: some View {
         VStack(alignment:.leading ) {
-            Form() {
-                Toggle("Simplified", isOn: $textInspectorIsSimple)
-                    .help("Some data files have hidden characters that cause extra wrapping.  View your data using the Simplified view to verify that the lines numbers are correct.")
-                ParsingOptions()
-            }
-            .formStyle(.grouped)
-            .frame(maxHeight: 135)
             
-            if textInspectorIsSimple {
-                SimpleTextWithLineNumbers(viewModel.combinedLineNumbersAndContent)
-                    .frame(maxHeight: .infinity)
-            } else {
-                LineNumbersView(lineNumbers: viewModel.lineNumbers, content: viewModel.content)
-                    .frame(maxHeight: .infinity)
+            Heading
+                .font(.title3)
+            
+            TabView {
+                Tab("Simple", systemImage: "house") {
+                    simpleStringView
+                }
+                
+                Tab("Lines", systemImage: "house") {
+                    SimpleTextWithLineNumbers(viewModel.combinedLineNumbersAndContent)
+                }
             }
         }
-        .onChange(of: dataItem) {
-            viewModel.dataItem = dataItem
+    }
+    
+    
+    @ViewBuilder
+    var simpleStringView: some View {
+        Text(viewModel.content)
+    }
+    
+    @ViewBuilder
+    var Heading: some View {
+        HStack {
+            Text("Example: \(viewModel.dataItem?.name ?? "")")
+            Spacer()
+            Button(action: viewModel.updateState, label: {Image(systemName: "arrow.clockwise")})
         }
     }
     
     
     @ViewBuilder
     func ParsingOptions() -> some View {
+        
         VStack {
-            Picker("New Line", selection: $viewModel.newLineType) {
+            Picker("New Line", selection: $newLineType) {
                 ForEach(NewLineType.allCases) { nextLineType in
                     Text(nextLineType.name)
                 }
             }
             .help(NewLineType.toolTip)
+            .onChange(of: newLineType) {
+                viewModel.newLineType = newLineType
+            }
             
-            Picker("Encoding", selection: $viewModel.stringEncodingType) {
+            Picker("Encoding", selection: $stringeEncodingType) {
                 ForEach(StringEncodingType.allCases) { nextEncoding in
                     Text(nextEncoding.rawValue)
                 }
             }
             .help(StringEncodingType.toolTip)
+            .onChange(of: stringeEncodingType) {
+                viewModel.stringEncodingType = stringeEncodingType
+            }
+        }
+        .onAppear {
+            updateState()
         }
     }
+    
+    private func updateState() {
+        if let newLineType = viewModel.newLineType {
+            self.newLineType = newLineType
+        }
+        
+        if let stringEncodingType = viewModel.stringEncodingType {
+            self.stringeEncodingType = stringEncodingType
+        }
+    }
+    
+    
     
 }
 
 
 // MARK: - Preview
- #Preview {
-     TextInspector(dataItem: DataItem(url: Bundle.main.url(forResource: "diluteHF - 3 - Volts", withExtension: "dat") ?? URL(fileURLWithPath: "")))
- }
- 
+#Preview {
+    let controller = DataController(withDelegate: nil)
+    let dataItem = DataItem(url: URL.init(filePath: ""))
+    let viewModel = LineNumberViewModel(dataItem)
+    TextInspector(viewModel)
+}
+
 

@@ -23,6 +23,10 @@ class ParserSettingsViewModel {
         set { selectionManager.selectedParserSetting = newValue }
     }
     
+    var selectedDataItem: DataItem? {
+        dataController.selectedDataItems.first
+    }
+    
     var parserSettings: [ParserSettings] {
         dataController.parserSettings
     }

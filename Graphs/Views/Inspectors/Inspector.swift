@@ -24,12 +24,9 @@ struct Inspector: View {
             GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􁂥") }
-            ParserInspector(viewModel.parserSettingsVM)
+            ParserInspector(viewModel.parserSettingsVM, lineNumberViewModel: viewModel.lineNumberViewModel)
                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem { Text("􀋱") }
-            TextInspector(dataItem: viewModel.firstDataItem)
-                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem { Text("T") }
         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         

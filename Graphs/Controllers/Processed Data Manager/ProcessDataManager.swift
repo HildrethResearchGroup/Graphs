@@ -41,6 +41,7 @@ class ProcessDataManager {
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
         
+        
         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
         
         processedData[dataItem.id] = newProcessedData

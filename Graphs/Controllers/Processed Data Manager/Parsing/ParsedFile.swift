@@ -59,6 +59,7 @@ struct ParsedFile: Sendable, Codable {
         appendRow(row, withHeaders: collapsedHeaders)
     }
     
+    
     private mutating func updateCollapseHeaders() {
         var localHeaders: [String] = []
         

@@ -11,13 +11,12 @@ import Foundation
 @MainActor
 class LineNumberViewModel {
     
-    // MARK: - Properties
-    var dataItem: DataItem? {
-        didSet {
-            updateSettingsFromParser()
-            updateState()
-        }
+    var dataItem: DataItem?
+    
+    var parserSetting: ParserSettings? {
+        dataItem?.getAssociatedParserSettings()
     }
+    
     
     var url: URL? {
         dataItem?.url
@@ -27,14 +26,26 @@ class LineNumberViewModel {
     var lineNumbers: String
     var combinedLineNumbersAndContent: String
     
-    var newLineType: NewLineType {
-        didSet {
-            updateState()
+
+    
+    var newLineType: NewLineType? {
+        get {
+            parserSetting?.newLineType
+        }
+        set {
+            guard let newValue else {return}
+            parserSetting?.newLineType = newValue
         }
     }
-    var stringEncodingType: StringEncodingType {
-        didSet {
-            updateState()
+    
+    
+    var stringEncodingType: StringEncodingType? {
+        get {
+            parserSetting?.stringEncodingType
+        }
+        set {
+            guard let newValue else {return}
+            parserSetting?.stringEncodingType = newValue
         }
     }
     
@@ -42,22 +53,17 @@ class LineNumberViewModel {
     // MARK: - Initialization
     init(_ dataItem: DataItem?) {
         self.dataItem = dataItem
+        
         self.content = ""
         self.lineNumbers = ""
         self.combinedLineNumbersAndContent = ""
         
-        if let parserSettings = dataItem?.getAssociatedParserSettings() {
-            self.newLineType = parserSettings.newLineType
-            self.stringEncodingType = parserSettings.stringEncodingType
-        } else {
-            self.newLineType = .CRLF
-            self.stringEncodingType = .ascii
-        }
         self.registerForNotifications()
         
         self.updateState()
     }
     
+
     
     // MARK: - Notifications
     private func registerForNotifications() {
@@ -95,13 +101,14 @@ class LineNumberViewModel {
     }
     
     
-    private func updateState() {
+    func updateState() {
         
         if dataItem == nil {
             content = ""
             lineNumbers = ""
         }
         
+       
         Task {
             let localContent = getContent()
             let localLines = contentLines()
@@ -124,17 +131,24 @@ class LineNumberViewModel {
         
         guard let url else {return ""}
         
+        guard let stringEncodingType = self.stringEncodingType else { return ""}
+        
         let encoderType = stringEncodingType.encoding
         
         do {
+            
             return try String(contentsOf: url, encoding: encoderType)
+            
         } catch  {
             print(error)
-            return "Could not decode using: \(encoderType.rawValue)"
+            return "Could not decode using: \(encoderType)"
         }
     }
     
     private func contentLines() -> [String] {
+        
+        guard let newLineType = self.newLineType else { return [""]}
+        
         let lineTypeLiteral = newLineType.stringLiteral
         
         let lines = content.components(separatedBy: lineTypeLiteral)
@@ -205,20 +219,10 @@ class LineNumberViewModel {
         
         return output
     }
-    
-    
-    
 }
 
 
 extension LineNumberViewModel {
-    func updateParserSettings() {
-        if let parserSettings = dataItem?.getAssociatedParserSettings() {
-            parserSettings.newLineType = self.newLineType
-            parserSettings.stringEncodingType = self.stringEncodingType
-        }
-    }
-    
     func updateParserIsDisabled() -> Bool {
         if dataItem?.getAssociatedParserSettings() == nil {
             return true
