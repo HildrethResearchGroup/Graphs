@@ -131,20 +131,40 @@ struct Parser {
         // Automatically determine string encoding type
         if staticSettings.stringEncodingType == .automatic {
             
+            var encodingDetermined = false
+            
             var determinedEncoding: String.Encoding = .utf8
             
+            // Try initial automatic determination with utf8
             if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
                 print("Determined Encoding = \(determinedEncoding)")
+                encodingDetermined = true
                 // String was able to determine encoding type and decode the url
                 return localContent
-            } else {
-                // String was NOT able to determine encoding type.  Try to use default encoding (ascii).
-                guard let defaultContent = try? String(contentsOf: url, encoding: encoding) else {
+            }
+            
+            // Try again with Windows default
+            if encodingDetermined == false {
+                determinedEncoding = .windowsCP1250
+                
+                if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
+                    print("Determined Encoding = \(determinedEncoding)")
+                    encodingDetermined = true
+                    // String was able to determine encoding type and decode the url
+                    return localContent
+                }
+                
+            }
+            
+            // utf8 and Windows default didn't work, try one more time with ascii
+            if encodingDetermined == false {
+                guard let defaultContent = try? String(contentsOf: url, encoding: .windowsCP1250) else {
                     print("Could not get string of type: \(encoding)\n At url: \(url)")
                     throw ParserError.couldNotGetStringFromURL
                 }
                 return defaultContent
             }
+            
         } else { // String encoding type was explicitly set by the user
             
             guard let explicitContent = try? String(contentsOf: url, encoding: encoding) else {
@@ -153,7 +173,6 @@ struct Parser {
             }
             return explicitContent
         }
-
     }
     
     

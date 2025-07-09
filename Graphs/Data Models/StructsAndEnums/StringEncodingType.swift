@@ -71,7 +71,7 @@ enum StringEncodingType: String, Codable, CaseIterable, Identifiable {
     
     /// The Primary Encodings Array contains the most likely encodings for common text files
     static var primaryEncodings: [StringEncodingType] {
-        [.automatic, .ascii, .utf8, .unicode]
+        [.automatic, .ascii, .utf8, .windowsCP1250, .unicode]
     }
     
     /// The Secondary Encodings Array contains all cases minus the Primary Encodings

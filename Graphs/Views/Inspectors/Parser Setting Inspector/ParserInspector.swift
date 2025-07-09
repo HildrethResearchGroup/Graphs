@@ -86,8 +86,7 @@ struct ParserInspector: View {
     var FileContentView: some View {
         if let dataItem = viewModel.selectedDataItem {
             if dataItem.getAssociatedParserSettings()?.id == viewModel.selection?.id {
-                //TextInspector(LineNumberViewModel(dataItem))
-                Text("Fix")
+                Text("Fix: TextInspector(LineNumberViewModel(dataItem))")
             } else {
                 EmptyView()
             }
