@@ -132,6 +132,11 @@ final class Node {
     
     
     func setGraphTemplate(withInputType inputType: InputType, and newGraphTemplate: GraphTemplate?) {
+        
+        // Prepare for posting notification
+        let oldGraphTemplateID = graphTemplate?.id
+        let newGraphTemplateID = newGraphTemplate?.id
+        
         self.graphTemplateInputType = inputType
         
         switch inputType {
@@ -147,6 +152,20 @@ final class Node {
                 self.graphTemplate = nil
             }
         }
+        
+        // Post Notification
+        let nc = NotificationCenter.default
+        
+        let info: [String: Any] = [
+            "dataItem.ids" : [id],
+            
+            "oldGraphTemplate.id" : oldGraphTemplateID as Any,
+            
+            "newGraphTemplate.id" : newGraphTemplateID as Any
+        ]
+        
+        nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
+        
     }
     
     
@@ -162,7 +181,10 @@ final class Node {
     
     func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
         
-        let oldValue = self.parserSettings
+        // Prepare for posting notification
+        let oldParserSettingID = parserSettings?.id
+        let newParserSettingID = newParserSettings?.id
+        
         
         self.parserSettingsInputType = inputType
         
@@ -187,9 +209,9 @@ final class Node {
         let info: [String: Any] = [
             Notification.UserInfoKey.dataItemIDs : dataItemIDS,
             
-            Notification.UserInfoKey.oldParserSettingLocalID : oldValue?.localID ?? UUID(uuidString: "1234") as Any,
+            Notification.UserInfoKey.oldParserSettingLocalID : oldParserSettingID as Any,
             
-            Notification.UserInfoKey.newParserSettingLocalID : parserSettings?.localID ?? UUID(uuidString: "1234") as Any
+            Notification.UserInfoKey.newParserSettingLocalID : newParserSettingID as Any
         ]
         
         nc.post(name: .parserOnNodeOrDataItemDidChange, object: nil, userInfo: info)

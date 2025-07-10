@@ -62,6 +62,7 @@ struct TextInspector: View {
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
+            .fixedSize(horizontal: false, vertical: false)
     }
     
     private var Text_numbered: some View {
@@ -71,6 +72,8 @@ struct TextInspector: View {
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
+            .fixedSize(horizontal: false, vertical: false)
+        
     }
     
     

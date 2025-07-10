@@ -25,6 +25,7 @@ struct DataItemsListView: View {
                     Button_Delete
                     Button_OpenInFinder(nextDataItem)
                 }
+                .draggable(nextDataItem.localID)
             
         }
     }

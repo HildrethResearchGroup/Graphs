@@ -112,6 +112,28 @@ extension SourceListViewModel {
 
 // MARK: - Drag-and-Drop
 extension SourceListViewModel {
+    
+    func drop(items: [DropItem], onto node: Node) {
+        var uuids: [UUID] = []
+        var urls: [URL] = []
+        
+        for nextItem in items {
+            switch nextItem {
+            case .uuid(let uuid): uuids.append(uuid)
+            case .url (let url): urls.append(url)
+            case .none: continue
+            }
+        }
+        
+        if uuids.count != 0 {
+            drop(uuids: uuids, onto: node)
+        }
+        
+        if urls.count != 0 {
+            _ = importURLs(urls, intoNode: node)
+        }
+    }
+    
     func drop(uuids: [UUID], onto node: Node) {
         
         dataController.tryToMove(uuids: uuids, to: node)

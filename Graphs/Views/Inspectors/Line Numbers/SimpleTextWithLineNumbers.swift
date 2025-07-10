@@ -19,7 +19,6 @@ struct SimpleTextWithLineNumbers: View {
         ScrollView {
             Text(combinedLineNumbersAndContent)
         }
-        
     }
 }
 

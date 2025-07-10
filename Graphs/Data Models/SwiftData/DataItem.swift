@@ -21,21 +21,7 @@ final class DataItem: Identifiable, Hashable {
     
     var node: Node?
     
-    private var graphTemplate: GraphTemplate? {
-        didSet {
-            let nc = NotificationCenter.default
-            
-            let info: [String: Any] = [
-                "dataItem.ids" : [id],
-                
-                "oldGraphTemplate.id" : oldValue.id,
-                
-                "newGraphTemplate.id" : graphTemplate.id
-            ]
-            
-            nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
-        }
-    }
+    private var graphTemplate: GraphTemplate?
     
     private var parserSettings: ParserSettings? {
         didSet {
@@ -115,7 +101,14 @@ final class DataItem: Identifiable, Hashable {
     
     
     func setGraphTemplate(withInputType inputType: InputType, and newGraphTemplate: GraphTemplate?) {
+        
+        // Prepare for posting notification
+        let oldGraphTemplateID = graphTemplate?.id
+        let newGraphTemplateID = newGraphTemplate?.id
+        
+        
         self.graphTemplateInputType = inputType
+        
         
         switch inputType {
         case .none:
@@ -130,6 +123,20 @@ final class DataItem: Identifiable, Hashable {
                 self.graphTemplate = nil
             }
         }
+        
+        
+        // Post Notification
+        let nc = NotificationCenter.default
+        
+        let info: [String: Any] = [
+            "dataItem.ids" : [id],
+            "oldGraphTemplate.id" : oldGraphTemplateID as Any,
+            "newGraphTemplate.id" : newGraphTemplateID as Any
+        ]
+        
+        nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)
+        
+        
     }
     
     
@@ -144,6 +151,10 @@ final class DataItem: Identifiable, Hashable {
     
     
     func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
+        
+        // Prepare for posting notification
+        let oldParserSettingID = parserSettings?.id
+        let newParserSettingID = newParserSettings?.id
         
         self.parserSettingsInputType = inputType
         
@@ -160,6 +171,18 @@ final class DataItem: Identifiable, Hashable {
                 self.parserSettings = nil
             }
         }
+        
+        // Post Notification
+        let nc = NotificationCenter.default
+        
+        let info: [String: Any] = [
+            "dataItem.ids" : [id],
+            "oldGraphTemplate.id" : oldParserSettingID as Any,
+            "newGraphTemplate.id" : newParserSettingID as Any
+        ]
+        
+        nc.post(name: .parserOnNodeOrDataItemDidChange, object: nil, userInfo: info)
+        
     }
     
     

@@ -26,102 +26,182 @@ final class ParserSettings {
     
     
     var creationDate: Date
-    var lastModified: Date
+    var lastModified: Date {
+        didSet {
+            print("Modified lastModifiedDate to: \(lastModified)")
+        }
+    }
     
+    
+    // DidSet not working in SwiftData anymore
+    @Transient
     var newLineType: NewLineType {
-        didSet {
+        get { _newLineType }
+        set {
+            _newLineType = newValue
             propertyChanged()
         }
     }
+    private var _newLineType: NewLineType
     
+    
+    @Transient
     var stringEncodingType: StringEncodingType {
-        didSet {
+        get { _stringEncodingType }
+        set {
+            _stringEncodingType = newValue
             propertyChanged()
         }
     }
+    private var _stringEncodingType: StringEncodingType
     
-    var hasExperimentalDetails: Bool = false {
-        didSet {
+    @Transient
+    var hasExperimentalDetails: Bool {
+        get { _hasExperimentalDetails }
+        set {
+            _hasExperimentalDetails = newValue
             propertyChanged()
         }
     }
+    private var _hasExperimentalDetails: Bool = false
     
+    @Transient
     var experimentalDetailsSeparator: Separator {
-        didSet {
+        get { _experimentalDetailsSeparator }
+        set {
+            _experimentalDetailsSeparator = newValue
             propertyChanged()
         }
     }
+    private var _experimentalDetailsSeparator: Separator
     
-    var experimentalDetailsStart: Int = 0 {
-        didSet {
+    
+    @Transient
+    var experimentalDetailsStart: Int {
+        get { _experimentalDetailsStart }
+        set {
+            _experimentalDetailsStart = newValue
             propertyChanged()
         }
     }
+    private var _experimentalDetailsStart: Int
     
-    var experimentalDetailsEnd: Int = 0 {
-        didSet {
+    
+    @Transient
+    var experimentalDetailsEnd: Int {
+        get { _experimentalDetailsEnd }
+        set {
+            _experimentalDetailsEnd = newValue
             propertyChanged()
         }
     }
+    private var _experimentalDetailsEnd: Int = 0
     
-    var hasHeader: Bool = false {
-        didSet {
+    
+    @Transient
+    var hasHeader: Bool{
+        get { _hasHeader }
+        set {
+            _hasHeader = newValue
             propertyChanged()
         }
     }
+    private var _hasHeader: Bool = false
     
+    
+    @Transient
     var headerSeparator: Separator {
-        didSet {
+        get { _headerSeparator }
+        set {
+            _headerSeparator = newValue
             propertyChanged()
         }
     }
+    private var _headerSeparator: Separator
     
-    var headerStart: Int = 0 {
-        didSet {
+    
+    
+    @Transient
+    var headerStart: Int {
+        get { _headerStart }
+        set {
+            _headerStart = newValue
             propertyChanged()
         }
     }
+    private var _headerStart: Int = 0
     
-    var headerEnd: Int = 0 {
-        didSet {
+    
+    @Transient
+    var headerEnd: Int {
+        get { _headerEnd }
+        set {
+            _headerEnd = newValue
             propertyChanged()
         }
     }
+    private var _headerEnd: Int = 0
     
-    var hasData: Bool = false {
-        didSet {
+    
+    @Transient
+    var hasData: Bool {
+        get { _hasData }
+        set {
+            _hasData = newValue
             propertyChanged()
         }
     }
+    private var _hasData: Bool = false
     
-    var dataStart: Int = 0 {
-        didSet {
+    
+    @Transient
+    var dataStart: Int {
+        get { _dataStart }
+        set {
+            _dataStart = newValue
             propertyChanged()
         }
     }
+    private var _dataStart: Int = 0
     
+    
+    @Transient
     var dataSeparator: Separator {
-        didSet {
+        get { _dataSeparator }
+        set {
+            _dataSeparator = newValue
             propertyChanged()
         }
     }
+    private var _dataSeparator: Separator
     
-    var stopDataAtFirstEmptyLine: Bool = true {
-        didSet {
+    
+    @Transient
+    var stopDataAtFirstEmptyLine: Bool {
+        get { _stopDataAtFirstEmptyLine }
+        set {
+            _stopDataAtFirstEmptyLine = newValue
             propertyChanged()
         }
     }
+    private var _stopDataAtFirstEmptyLine: Bool = true
     
-    var hasFooter: Bool = false {
-        didSet {
+    
+    @Transient
+    var hasFooter: Bool {
+        get { _hasFooter }
+        set {
+            _hasFooter = newValue
             propertyChanged()
         }
     }
+    private var _hasFooter: Bool = false
     
-    
+   
     var parserSettingsStatic: ParserSettingsStatic {
         ParserSettingsStatic(using: self)
     }
+  
     
     
     
@@ -138,29 +218,29 @@ final class ParserSettings {
         self.lastModified = .now
        
         // String Configuration
-        self.newLineType = .CRLF
-        self.stringEncodingType = .ascii
+        self._newLineType = .CRLF
+        self._stringEncodingType = .ascii
         
         // Experimental Details
-        self.hasExperimentalDetails = false
-        self.experimentalDetailsSeparator = .comma
-        self.experimentalDetailsStart = 0
-        self.experimentalDetailsEnd = 0
+        self._hasExperimentalDetails = false
+        self._experimentalDetailsSeparator = .comma
+        self._experimentalDetailsStart = 0
+        self._experimentalDetailsEnd = 0
 
         // Header
-        self.hasHeader = false
-        self.headerSeparator = .comma
-        self.headerStart = 0
-        self.headerEnd = 0
+        self._hasHeader = false
+        self._headerSeparator = .comma
+        self._headerStart = 0
+        self._headerEnd = 0
         
         // Data
-        self.hasData = false
-        self.dataSeparator = .comma
-        self.dataStart = 0
+        self._hasData = false
+        self._dataSeparator = .comma
+        self._dataStart = 0
         
         // Footer
-        self.stopDataAtFirstEmptyLine = true
-        self.hasFooter = false
+        self._stopDataAtFirstEmptyLine = true
+        self._hasFooter = false
         }
     
     
@@ -177,29 +257,29 @@ final class ParserSettings {
         //dataItems = []
         
         // String Encoding
-        newLineType = parserSettingsStatic.newLineType
-        stringEncodingType = parserSettingsStatic.stringEncodingType
+        _newLineType = parserSettingsStatic.newLineType
+        _stringEncodingType = parserSettingsStatic.stringEncodingType
         
         // Experimental Details
-        hasExperimentalDetails = parserSettingsStatic.hasExperimentalDetails
-        experimentalDetailsSeparator = parserSettingsStatic.experimentalDetailsSeparator
-        experimentalDetailsStart = parserSettingsStatic.experimentalDetailsStart
-        experimentalDetailsEnd = parserSettingsStatic.experimentalDetailsEnd
+        _hasExperimentalDetails = parserSettingsStatic.hasExperimentalDetails
+        _experimentalDetailsSeparator = parserSettingsStatic.experimentalDetailsSeparator
+        _experimentalDetailsStart = parserSettingsStatic.experimentalDetailsStart
+        _experimentalDetailsEnd = parserSettingsStatic.experimentalDetailsEnd
         
         // Header
-        hasHeader = parserSettingsStatic.hasExperimentalDetails
-        headerSeparator = parserSettingsStatic.headerSeparator
-        headerStart = parserSettingsStatic.headerStart
-        headerEnd = parserSettingsStatic.headerEnd
+        _hasHeader = parserSettingsStatic.hasExperimentalDetails
+        _headerSeparator = parserSettingsStatic.headerSeparator
+        _headerStart = parserSettingsStatic.headerStart
+        _headerEnd = parserSettingsStatic.headerEnd
         
         // Data
-        hasData = parserSettingsStatic.hasData
-        dataSeparator = parserSettingsStatic.dataSeparator
-        dataStart = parserSettingsStatic.dataStart
+        _hasData = parserSettingsStatic.hasData
+        _dataSeparator = parserSettingsStatic.dataSeparator
+        _dataStart = parserSettingsStatic.dataStart
         
         // Footer
-        stopDataAtFirstEmptyLine = parserSettingsStatic.stopDataAtFirstEmptyLine
-        hasFooter = parserSettingsStatic.hasFooter
+        _stopDataAtFirstEmptyLine = parserSettingsStatic.stopDataAtFirstEmptyLine
+        _hasFooter = parserSettingsStatic.hasFooter
         
     }
     
@@ -223,6 +303,8 @@ final class ParserSettings {
     }
     
     private func propertyChanged() {
+        
+        print("propertyChanged")
         self.lastModified = .now
         
         let nc = NotificationCenter.default

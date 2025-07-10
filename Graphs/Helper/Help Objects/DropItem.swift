@@ -1,0 +1,37 @@
+//
+//  DropItem.swift
+//  Graphs
+//
+//  Created by Owen Hildreth on 7/9/25.
+//  Copyright © 2025 Connor Barnes. All rights reserved.
+//
+
+import Foundation
+import SwiftUI
+
+// https://stackoverflow.com/questions/74290721/how-do-you-mark-a-single-container-as-a-dropdestination-for-multiple-transferabl
+enum DropItem: Codable, Transferable {
+    case none
+    case uuid(UUID)
+    case url(URL)
+    
+    static var transferRepresentation: some TransferRepresentation {
+        ProxyRepresentation { DropItem.uuid($0) }
+        ProxyRepresentation { DropItem.url($0) }
+    }
+    
+    var uuid: UUID? {
+        switch self {
+            case .uuid(let uuid): return uuid
+            default: return nil
+        }
+    }
+    
+    
+    var url: URL? {
+        switch self {
+            case.url(let url): return url
+            default: return nil
+        }
+    }
+}

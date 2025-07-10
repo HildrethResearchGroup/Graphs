@@ -38,7 +38,7 @@ struct ParserInspector: View {
                     //.padding(.top, -20)
             }
             
-            FileContentView
+            //FileContentView
             
             Spacer()
             

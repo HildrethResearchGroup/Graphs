@@ -38,12 +38,14 @@ class TextInspectorViewModel {
     var newLineType: NewLineType {
         get { parserSettings?.newLineType ?? .CRLF }
         set {
+            print("Setting newLineType to: \(newLineType)")
+            let oldValue = newLineType
             
             if newValue != parserSettings?.newLineType {
                 parserSettings?.newLineType = newValue
             }
             
-            if newValue != newLineType {
+            if newValue != oldValue {
                 updateStoredContent()
             }
         }
@@ -53,12 +55,14 @@ class TextInspectorViewModel {
     var stringEncodingType: StringEncodingType {
         get { parserSettings?.stringEncodingType ?? .ascii }
         set {
+            print("Setting stringEncodingType to: \(stringEncodingType)")
+            let oldValue = stringEncodingType
             
             if newValue != parserSettings?.stringEncodingType {
                 parserSettings?.stringEncodingType = newValue
             }
             
-            if newValue != stringEncodingType {
+            if newValue != oldValue {
                 updateStoredContent()
             }
         }
@@ -179,7 +183,7 @@ class TextInspectorViewModel {
             var lines = lines(from: localContent, using: parserSettings.newLineType)
             
             if reducedNumberOfLines {
-                if lines.count <= 50 {
+                if lines.count >= 50 {
                     lines = Array(lines[0..<50])
                 }
             }
