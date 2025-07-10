@@ -27,18 +27,13 @@ class TextInspectorViewModel {
     // MARK: View State
     var viewIsVisiable: Bool = false
     
-    var processingState: TextInspectorViewModel.ProcessingState = .upToDate {
-        didSet {
-            print("processingState = \(processingState)")
-        }
-    }
+    var processingState: TextInspectorViewModel.ProcessingState = .upToDate
     
     var reducedNumberOfLines = true
     
     var newLineType: NewLineType {
         get { parserSettings?.newLineType ?? .CRLF }
         set {
-            print("Setting newLineType to: \(newLineType)")
             let oldValue = newLineType
             
             if newValue != parserSettings?.newLineType {
@@ -54,8 +49,7 @@ class TextInspectorViewModel {
     
     var stringEncodingType: StringEncodingType {
         get { parserSettings?.stringEncodingType ?? .ascii }
-        set {
-            print("Setting stringEncodingType to: \(stringEncodingType)")
+        set {)
             let oldValue = stringEncodingType
             
             if newValue != parserSettings?.stringEncodingType {

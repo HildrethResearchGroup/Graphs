@@ -49,23 +49,9 @@ struct SourceList: View {
         }
         .draggable(node.localID)
         .dropDestination(for: DropItem.self, action: { items, location in
-            
             sourceListVM.drop(items: items, onto: node)
-            print("Drop \(items)")
             return true
         })
-        
-        .dropDestination(for: UUID.self, action: { items, location in
-            
-            sourceListVM.drop(uuids: items, onto: node)
-            print("Drop \(items)")
-            return true
-        })
-        .dropDestination(for: URL.self) { urls, _  in
-            let success = sourceListVM.importURLs(urls, intoNode: node)
-            return success
-        }
-        
         .contextMenu {
             Button_newFolder(withParent: node)
             Button_DeleteSelectedNode()

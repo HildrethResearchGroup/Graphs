@@ -264,7 +264,7 @@ extension Node: Hashable {
 }
 
 extension Node {
-    static let defaultName = "New Node"
+    static let defaultName = "New Folder"
 }
 
 

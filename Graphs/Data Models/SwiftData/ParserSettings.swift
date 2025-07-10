@@ -303,8 +303,7 @@ final class ParserSettings {
     }
     
     private func propertyChanged() {
-        
-        print("propertyChanged")
+
         self.lastModified = .now
         
         let nc = NotificationCenter.default
