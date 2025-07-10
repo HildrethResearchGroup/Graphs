@@ -86,6 +86,8 @@
 		C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */; };
 		C0B05E902C5057D000535E59 /* ProcessDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */; };
 		C0B9E1B22E1F52A400590DC3 /* StoredContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9E1B12E1F52A400590DC3 /* StoredContent.swift */; };
+		C0B9E1B42E1F595C00590DC3 /* ParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9E1B32E1F595C00590DC3 /* ParserError.swift */; };
+		C0B9E1B62E1F65C500590DC3 /* Logger_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9E1B52E1F65C500590DC3 /* Logger_extension.swift */; };
 		C0C55F992C40605F001F2554 /* diluteHF - 3 - Volts.dat in Resources */ = {isa = PBXBuildFile; fileRef = C0C55F982C40605F001F2554 /* diluteHF - 3 - Volts.dat */; };
 		C0C55F9D2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C55F9C2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift */; };
 		C0C55F9F2C408C20001F2554 /* Iterator_allLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */; };
@@ -205,6 +207,8 @@
 		C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_Extensions.swift; sourceTree = "<group>"; };
 		C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessDataManager.swift; sourceTree = "<group>"; };
 		C0B9E1B12E1F52A400590DC3 /* StoredContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredContent.swift; sourceTree = "<group>"; };
+		C0B9E1B32E1F595C00590DC3 /* ParserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserError.swift; sourceTree = "<group>"; };
+		C0B9E1B52E1F65C500590DC3 /* Logger_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger_extension.swift; sourceTree = "<group>"; };
 		C0C55F982C40605F001F2554 /* diluteHF - 3 - Volts.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "diluteHF - 3 - Volts.dat"; sourceTree = "<group>"; };
 		C0C55F9C2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextWithLineNumbers.swift; sourceTree = "<group>"; };
 		C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iterator_allLines.swift; sourceTree = "<group>"; };
@@ -403,6 +407,7 @@
 				C02E38182C1F910100107EAD /* Parser.swift */,
 				C02E381A2C1F911800107EAD /* ParsedFile.swift */,
 				C028E1642CDC052400E74C6D /* ParseLineType.swift */,
+				C0B9E1B32E1F595C00590DC3 /* ParserError.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -612,6 +617,7 @@
 				C0263D632C162B9E008C929F /* UserDefaults_allowedDataFileExtensions.swift */,
 				C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */,
 				C0ED09032C499E3D00052208 /* UUID_Extensions.swift */,
+				C0B9E1B52E1F65C500590DC3 /* Logger_extension.swift */,
 			);
 			path = "Helper Extensions";
 			sourceTree = "<group>";
@@ -801,6 +807,7 @@
 				C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */,
 				C07921EB2CC82D1400A5002C /* GraphListView.swift in Sources */,
 				C07921E82CC7135400A5002C /* ProcessDataManagerDataSource.swift in Sources */,
+				C0B9E1B62E1F65C500590DC3 /* Logger_extension.swift in Sources */,
 				C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */,
 				C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */,
 				C0DF8D212CBA1908006C4574 /* ProcessedDataError.swift in Sources */,
@@ -864,6 +871,7 @@
 				C07921E62CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift in Sources */,
 				C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */,
 				C019CA182C0FBE90002FC7D2 /* GraphsApp.swift in Sources */,
+				C0B9E1B42E1F595C00590DC3 /* ParserError.swift in Sources */,
 				C0ED090B2C49AD5500052208 /* DataListViewModel.swift in Sources */,
 				C0263D6F2C163402008C929F /* DataController_Errors.swift in Sources */,
 				C078BC372C2F333400A06887 /* GraphView.swift in Sources */,

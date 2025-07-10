@@ -17,4 +17,18 @@ enum ParseLineType {
     case header
     case skip
     
+    
+    
+}
+
+import SwiftUI
+extension ParseLineType {
+    var color: Color {
+        switch self {
+        case .data: Color.blue
+        case .experimentalDetails: Color.green
+        case .header: Color.cyan
+        default: Color.black
+        }
+    }
 }

@@ -70,6 +70,7 @@ class TextInspectorViewModel {
         return storedContent.content
     }
     
+    //var combinedLineNumbersAndContent: AttributedString {
     var combinedLineNumbersAndContent: String {
         updateStoredContent()
         return storedContent.combinedLineNumbersAndContent
@@ -95,7 +96,7 @@ class TextInspectorViewModel {
         // Sendable dataItem information
         let url = dataItem?.url
         let dataItemID = dataItem?.id
-        let parserSettings = dataItem?.getAssociatedParserSettings()
+        let parserSettings = dataItem?.getAssociatedParserSettings()?.parserSettingsStatic
         let parserSettingsDateLastModified = parserSettings?.lastModified
         
         // Sendable storedContent information

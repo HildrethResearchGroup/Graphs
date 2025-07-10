@@ -94,4 +94,34 @@ struct ParserSettingsStatic: Codable, Sendable {
         default: return .error
         }
     }
+    
+    func validateLineStartEndSettings() throws -> Bool {
+        if hasExperimentalDetails {
+            if experimentalDetailsStart < 0 {
+                throw ParserError.indexBelowZero
+            } else if experimentalDetailsEnd < experimentalDetailsStart {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+        
+        if hasHeader {
+            if headerStart <= experimentalDetailsEnd {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            } else if headerEnd < headerStart {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+        
+        if hasData {
+            if dataStart <= headerEnd {
+                throw ParserError.startingIndexHigherThanEndingIndex
+            }
+        }
+        
+        return true
+    }
+    
+    
+    
 }
+

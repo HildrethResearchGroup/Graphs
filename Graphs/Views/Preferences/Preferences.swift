@@ -17,21 +17,23 @@ struct Preferences: View {
     
     var body: some View {
         
-        List($preferencesController.allowedDataFileExtensions,
-             id: \.id,
-             editActions: [.delete, .move],
-             selection: $selection) { $nextExtension in
-            HStack {
-                Text("􀏅")
-                TextField("", text: $nextExtension.fileExtension)
-                    .onSubmit {
-                        self.preferencesController.save()
-                    }
+        VStack(alignment: .leading) {
+            List($preferencesController.allowedDataFileExtensions,
+                 id: \.id,
+                 editActions: [.delete, .move],
+                 selection: $selection) { $nextExtension in
+                HStack {
+                    Text("􀏅")
+                    TextField("", text: $nextExtension.fileExtension)
+                        .onSubmit {
+                            self.preferencesController.save()
+                        }
+                }
+                .contextMenu {
+                    Button("Delete", action: deleteSelection)
+                }
+                .frame(width: 100, alignment: .center)
             }
-            .contextMenu {
-                Button("Delete", action: deleteSelection)
-            }
-            .frame(width: 100, alignment: .center)
         }
         .toolbar() {
             ToolbarItem {

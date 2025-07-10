@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import OSLog
 
 extension DataController {
     func saveParserSettings(_ parserSettings: ParserSettings, to url: URL) {
         do {
             try parserSettings.save(to: url)
         } catch  {
-            print(error)
+            Logger.dataController.info("\(error)")
         }
     }
 }

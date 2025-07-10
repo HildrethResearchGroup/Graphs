@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 @Observable
 class ProcessedData: Identifiable {
@@ -45,8 +46,7 @@ class ProcessedData: Identifiable {
             
             try await self.loadGraphController()
         } catch  {
-            
-            print("Could not generate graphController for: \(dataItem.name)")
+            Logger.dataController.info("Could not generate graphController for: \(dataItem.name)")
         }
         
         parsedFileState = self.determineParsedFileState()

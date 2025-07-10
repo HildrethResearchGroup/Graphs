@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import OSLog
+
 
 @Observable
 @MainActor
@@ -50,8 +52,8 @@ extension GraphTemplateInspectorViewModel {
             
             try dataController.importURLs(urls, intoNode: nil)
         } catch  {
-            print("Error when trying to import: \(urls)")
-            print(error)
+            Logger.viewModel.info("Error when trying to import: \(urls)")
+            Logger.viewModel.info("\(error)")
         }
         
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 @Observable
 @MainActor
@@ -140,7 +141,7 @@ class LineNumberViewModel {
             return try String(contentsOf: url, encoding: encoderType)
             
         } catch  {
-            print(error)
+            Logger.dataController.info("\(error)")
             return "Could not decode using: \(encoderType)"
         }
     }

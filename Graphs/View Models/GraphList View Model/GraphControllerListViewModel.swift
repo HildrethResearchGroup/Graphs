@@ -16,11 +16,7 @@ class GraphControllerListViewModel {
     private var selectionManager: SelectionManager
     private var processedDataManager: ProcessDataManager
     
-    var processedData: [ProcessedData] = [] {
-        didSet {
-            //print("Updated Processed Data with \(processedData.count) items")
-        }
-    }
+    var processedData: [ProcessedData] = []
     
     init(dataController: DataController, selectionManager: SelectionManager, processedDataManager: ProcessDataManager) {
         self.dataController = dataController

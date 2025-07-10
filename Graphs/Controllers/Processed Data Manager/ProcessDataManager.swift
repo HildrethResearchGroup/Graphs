@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import OSLog
 
 
 @Observable
@@ -190,7 +191,7 @@ extension ProcessDataManager {
                     do {
                         try await nextProcessedData.loadGraphController()
                     } catch  {
-                        print(error)
+                        Logger.processingData.info("\(error)")
                     }
                     
                 }

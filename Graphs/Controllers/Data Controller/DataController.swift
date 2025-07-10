@@ -10,6 +10,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 import OrderedCollections
+import OSLog
 
 
 
@@ -97,7 +98,7 @@ class DataController {
             return output
             
         } catch  {
-            print("DataController: Failed to Fetch All Nodes")
+            Logger.dataController.info("DataController: Failed to Fetch All Nodes")
             return []
         }
     }
@@ -112,7 +113,7 @@ class DataController {
             return output
             
         } catch  {
-            print("DataController: Failed to Fetch All DataItems")
+            Logger.dataController.info("DataController: Failed to Fetch All DataItems")
             return []
         }
     }
@@ -136,7 +137,7 @@ class DataController {
              rootNodes = try modelContext.fetch(descriptor)
              
          } catch {
-             print("DataController: Failed to Fetch Root Nodes")
+             Logger.dataController.info("DataController: Failed to Fetch Root Nodes")
          }
     }
     
@@ -149,7 +150,7 @@ class DataController {
             parserSettings = try modelContext.fetch(descriptor)
             
         } catch {
-            print("DataController: Failed to Fetch ParserSettings")
+            Logger.dataController.info("DataController: Failed to Fetch ParserSettings")
         }
     }
     
@@ -161,7 +162,7 @@ class DataController {
             let descriptor = FetchDescriptor<GraphTemplate>(sortBy: sortOrder)
             graphTemplates = try modelContext.fetch(descriptor)
         } catch {
-            print("DataController: Failed to Fetch GraphTemplate")
+            Logger.dataController.info("DataController: Failed to Fetch GraphTemplate")
         }
     }
     

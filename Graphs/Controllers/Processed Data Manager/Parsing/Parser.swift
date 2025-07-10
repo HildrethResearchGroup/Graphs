@@ -13,14 +13,12 @@ struct Parser {
     
     static func parse(_ url: URL, using staticSettings: ParserSettingsStatic, into id: UUID) async throws -> ParsedFile {
         
-        try validateLineStartEndSettings(staticSettings)
+        _ = staticSettings.validateLineStartEndSettings
         
         var content = try content(for: url, using: staticSettings)
         
         if staticSettings.newLineType == .auto {
-            
             content = content.replacingOccurrences(of: "\r", with: "")
-            
         }
         
         let lineSeparator = staticSettings.newLineType.stringLiteral
@@ -97,31 +95,34 @@ struct Parser {
          */
     }
    
+    /*
+     private static func validateLineStartEndSettings(_ settings: ParserSettingsStatic) throws {
+         if settings.hasExperimentalDetails {
+             if settings.experimentalDetailsStart < 0 {
+                 throw ParserError.indexBelowZero
+             } else if settings.experimentalDetailsEnd < settings.experimentalDetailsStart {
+                 throw ParserError.startingIndexHigherThanEndingIndex
+             }
+         }
+         
+         if settings.hasHeader {
+             if settings.headerStart <= settings.experimentalDetailsEnd {
+                 throw ParserError.startingIndexHigherThanEndingIndex
+             } else if settings.headerEnd < settings.headerStart {
+                 throw ParserError.startingIndexHigherThanEndingIndex
+             }
+         }
+         
+         if settings.hasData {
+             if settings.dataStart <= settings.headerEnd {
+                 throw ParserError.startingIndexHigherThanEndingIndex
+             }
+         }
+     
+     }
+     */
     
-    private static func validateLineStartEndSettings(_ settings: ParserSettingsStatic) throws {
-        if settings.hasExperimentalDetails {
-            if settings.experimentalDetailsStart < 0 {
-                throw ParserError.indexBelowZero
-            } else if settings.experimentalDetailsEnd < settings.experimentalDetailsStart {
-                throw ParserError.startingIndexHigherThanEndingIndex
-            }
-        }
-        
-        if settings.hasHeader {
-            if settings.headerStart <= settings.experimentalDetailsEnd {
-                throw ParserError.startingIndexHigherThanEndingIndex
-            } else if settings.headerEnd < settings.headerStart {
-                throw ParserError.startingIndexHigherThanEndingIndex
-            }
-        }
-        
-        if settings.hasData {
-            if settings.dataStart <= settings.headerEnd {
-                throw ParserError.startingIndexHigherThanEndingIndex
-            }
-        }
     
-    }
     
     
     static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
@@ -137,7 +138,6 @@ struct Parser {
             
             // Try initial automatic determination with utf8
             if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
-                print("Determined Encoding = \(determinedEncoding)")
                 encodingDetermined = true
                 // String was able to determine encoding type and decode the url
                 return localContent
@@ -148,7 +148,6 @@ struct Parser {
                 determinedEncoding = .windowsCP1250
                 
                 if let localContent = try? String(contentsOf: url, usedEncoding: &determinedEncoding) {
-                    print("Determined Encoding = \(determinedEncoding)")
                     encodingDetermined = true
                     // String was able to determine encoding type and decode the url
                     return localContent
@@ -159,7 +158,6 @@ struct Parser {
             // utf8 and Windows default didn't work, try one more time with ascii
             if encodingDetermined == false {
                 guard let defaultContent = try? String(contentsOf: url, encoding: .windowsCP1250) else {
-                    print("Could not get string of type: \(encoding)\n At url: \(url)")
                     throw ParserError.couldNotGetStringFromURL
                 }
                 return defaultContent
@@ -168,7 +166,6 @@ struct Parser {
         } else { // String encoding type was explicitly set by the user
             
             guard let explicitContent = try? String(contentsOf: url, encoding: encoding) else {
-                print("Could not get string of type: \(encoding)\n At url: \(url)")
                 throw ParserError.couldNotGetStringFromURL
             }
             return explicitContent
@@ -256,28 +253,7 @@ struct Parser {
             })
         }
     }
-    
-    
-    
-    enum ParserError: Error {
-        case noParseSettings
-        
-        case indexBelowZero
-        
-        case startingIndexHigherThanEndingIndex
-        
-        case separatorIsNone
-        
-        case noExperimentalDetailsSeparator
-        
-        case noHeaderSeparator
-        
-        case noDataSeparator
-        
-        case couldNotGetStringFromURL
-        
-        }
-    
+
 }
 
 

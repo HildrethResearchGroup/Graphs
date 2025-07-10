@@ -26,11 +26,7 @@ final class ParserSettings {
     
     
     var creationDate: Date
-    var lastModified: Date {
-        didSet {
-            print("Modified lastModifiedDate to: \(lastModified)")
-        }
-    }
+    var lastModified: Date
     
     
     // DidSet not working in SwiftData anymore

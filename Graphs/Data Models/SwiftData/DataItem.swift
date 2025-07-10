@@ -10,6 +10,7 @@ import Foundation
 import SwiftData
 import SwiftUI
 import UniformTypeIdentifiers
+import OSLog
 
 @Model
 final class DataItem: Identifiable, Hashable {
@@ -84,7 +85,7 @@ final class DataItem: Identifiable, Hashable {
             let bookmarkData = try url.bookmarkData(options: .withSecurityScope)
             return bookmarkData
         } catch  {
-            print(error)
+            Logger.dataItem.info("\(error)")
             return nil
         }
     }
@@ -223,8 +224,8 @@ extension DataItem {
             
             return outputURL
         } catch  {
-            print("Error resolving bookmark data: \(error)")
-            print("Bookmark Status = \(bookmarkDataIsStale ? "Stale" : "Not Stale")")
+            Logger.dataItem.info("Error resolving bookmark data: \(error)")
+            Logger.dataItem.info("Bookmark Status = \(bookmarkDataIsStale ? "Stale" : "Not Stale")")
             return nil
         }
         

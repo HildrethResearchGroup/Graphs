@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftData
+import OSLog
 
 extension DataController {
     
@@ -109,8 +110,8 @@ extension DataController {
         
         
         guard fm.fileExists(atPath: url.path, isDirectory: &isDir) else {
-            print("File does not exist")
             
+            Logger.dataController.info("File does not exist")
             return nil
         }
 
@@ -118,9 +119,7 @@ extension DataController {
         let type = URL.URLType(withURL: url)
         
         if type == .file {
-            print("Error.  importDirectory should only be seeing directories")
-            print("\(url)\n is not a directory")
-            
+            Logger.dataController.info("Error.  importDirectory should only be seeing directories\n\(url)\n is not a directory")
             return nil
         }
         
@@ -196,22 +195,19 @@ extension DataController {
         let fm = FileManager.default
         
         guard fm.fileExists(atPath: url.path) else {
-            print("File does not exist at: \(url)")
-            
+            Logger.dataController.info("importFile: File does not exist at: \(url)")
             return nil
         }
         
         if url.urlType != .file {
-            print("importFile Error: trying to import: \(url.urlType) as a DataItem from:\n \(url)")
+            Logger.dataController.info("importFile Error: trying to import: \(url) as a DataItem")
             return nil
         }
         
         
         
         guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
-            print("Error needed, no allowed extensions")
-            
-            // UPDATE
+            Logger.dataController.info("\(url.pathExtension) is not an allowed extensions")
             return nil
         }
         
@@ -313,7 +309,7 @@ extension DataController {
             return newParserSettings
             
         } catch  {
-            print(error)
+            Logger.dataController.info("\(error)")
             return nil
         }
     }

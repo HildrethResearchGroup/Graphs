@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 struct StoredContent {
@@ -14,12 +15,13 @@ struct StoredContent {
     
     private let reducedNumberOfLines: Bool
     private(set) var content: String = ""
-    private(set) var linesNumbers: String = ""
-    private(set) var combinedLineNumbersAndContent: String = ""
+    private(set) var linesNumbers = ""
+    //private(set) var combinedLineNumbersAndContent: AttributedString = ""
+    private(set) var combinedLineNumbersAndContent = ""
     
     let date: Date = .now
     
-    init(_ dataItemID: DataItem.ID?, url: URL?, parserSettings: ParserSettings?, _  reducedNumberOfLines: Bool) {
+    init(_ dataItemID: DataItem.ID?, url: URL?, parserSettings: ParserSettingsStatic?, _  reducedNumberOfLines: Bool) {
         self.dataItemID = dataItemID
         self.reducedNumberOfLines = reducedNumberOfLines
         
@@ -28,11 +30,12 @@ struct StoredContent {
     
 
     
-    private mutating func setState(from url: URL?, using parserSettings: ParserSettings?) {
+    private mutating func setState(from url: URL?, using parserSettings: ParserSettingsStatic?) {
         
         guard let url else {
             content = "Select File"
             linesNumbers = "0"
+            //combinedLineNumbersAndContent = AttributedString(linesNumbers + "\t" + content)
             combinedLineNumbersAndContent = linesNumbers + "\t" + content
             return
         }
@@ -47,10 +50,10 @@ struct StoredContent {
         
         
         
-        
-        guard let localContent = try? Parser.content(for: url, using: parserSettings.parserSettingsStatic) else {
+        guard let localContent = try? Parser.content(for: url, using: parserSettings) else {
             content = "Could not decode file"
             linesNumbers = "0"
+            //combinedLineNumbersAndContent = AttributedString(linesNumbers + "\t" + content)
             combinedLineNumbersAndContent = linesNumbers + "\t" + content
             return
         }
@@ -65,7 +68,7 @@ struct StoredContent {
         }
         
         
-        let processedLines = processedLines(lines: lines)
+        let processedLines = processedLines(lines: lines, using: parserSettings)
         
         content = localContent
         linesNumbers = processedLines.lineNumbers
@@ -83,7 +86,22 @@ struct StoredContent {
     }
     
     
-    private func processedLines(lines: [String]) -> (lineNumbers: String, combinedLinesAndContent: String) {
+    //private func processedLines(lines: [String], using parserSettings: ParserSettingsStatic) -> (lineNumbers: String, combinedLinesAndContent: AttributedString) {
+    private func processedLines(lines: [String], using parserSettings: ParserSettingsStatic) -> (lineNumbers: String, combinedLinesAndContent: String) {
+        
+        /*
+         let useStringColors: Bool
+         
+         do {
+             useStringColors = try parserSettings.validateLineStartEndSettings()
+         } catch  {
+             useStringColors = false
+         }
+         
+         var color: Color = .black
+         */
+        
+        
         let numberOfLines = lines.count
         
         let size = numberOfLines.size
@@ -91,11 +109,27 @@ struct StoredContent {
         let formatter = NumberFormatter()
         formatter.minimumIntegerDigits = size
         
-        var lineNumbersOutput = ""
+        var lineNumbersOutput:String = ""
+        //var combinedLineNumbersAndContent: AttributedString = ""
         var combinedLineNumbersAndContent = ""
         
         for (index, nextLine) in lines.enumerated() {
+            
+            /*
+             if useStringColors {
+                 let lineType = parserSettings.parseLineType(for: index)
+                 color = lineType.color
+             }
+             */
+            
+            
+            
             let numberString = formatter.string(from: index + 1 as NSNumber) ?? ""
+            
+            
+            //var nextString:AttributedString = AttributedString(numberString + "\t" + nextLine)
+            //nextString.foregroundColor = color
+            //let nextString:AttributedString = numberString + "\t" + nextLine
             let nextString = numberString + "\t" + nextLine
             
             if index == numberOfLines {
