@@ -85,6 +85,7 @@
 		C0A93A682C1261B00037BAE3 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A93A672C1261B00037BAE3 /* Node.swift */; };
 		C0A93A6B2C1266F50037BAE3 /* URL_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */; };
 		C0B05E902C5057D000535E59 /* ProcessDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */; };
+		C0B9E1B22E1F52A400590DC3 /* StoredContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B9E1B12E1F52A400590DC3 /* StoredContent.swift */; };
 		C0C55F992C40605F001F2554 /* diluteHF - 3 - Volts.dat in Resources */ = {isa = PBXBuildFile; fileRef = C0C55F982C40605F001F2554 /* diluteHF - 3 - Volts.dat */; };
 		C0C55F9D2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C55F9C2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift */; };
 		C0C55F9F2C408C20001F2554 /* Iterator_allLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */; };
@@ -203,6 +204,7 @@
 		C0A93A672C1261B00037BAE3 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C0A93A6A2C1266F50037BAE3 /* URL_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL_Extensions.swift; sourceTree = "<group>"; };
 		C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessDataManager.swift; sourceTree = "<group>"; };
+		C0B9E1B12E1F52A400590DC3 /* StoredContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredContent.swift; sourceTree = "<group>"; };
 		C0C55F982C40605F001F2554 /* diluteHF - 3 - Volts.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "diluteHF - 3 - Volts.dat"; sourceTree = "<group>"; };
 		C0C55F9C2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTextWithLineNumbers.swift; sourceTree = "<group>"; };
 		C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iterator_allLines.swift; sourceTree = "<group>"; };
@@ -311,24 +313,25 @@
 		C01A86322C484977006219C8 /* Inspector View Models */ = {
 			isa = PBXGroup;
 			children = (
-				C01A9D062C3DC1DC00A555B9 /* LineNumber ViewModel */,
+				C01A9D062C3DC1DC00A555B9 /* Text Inspector View Model */,
 				C01A86332C484994006219C8 /* InspectorViewModel.swift */,
 				C01A86352C484CFF006219C8 /* ParserSettingsViewModel.swift */,
 				C01A86372C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift */,
 				C0ED090F2C49B81F00052208 /* DataItemsInspectorViewModel.swift */,
 				C0C82E1F2C4B039800C6D104 /* NodeInspectorViewModel.swift */,
-				C0C844862E1D8D9B00BECF08 /* TextInspectorViewModel.swift */,
 			);
 			path = "Inspector View Models";
 			sourceTree = "<group>";
 		};
-		C01A9D062C3DC1DC00A555B9 /* LineNumber ViewModel */ = {
+		C01A9D062C3DC1DC00A555B9 /* Text Inspector View Model */ = {
 			isa = PBXGroup;
 			children = (
 				C01A9D102C3DC85C00A555B9 /* LineNumberViewModel.swift */,
 				C0C55F9E2C408C20001F2554 /* Iterator_allLines.swift */,
+				C0C844862E1D8D9B00BECF08 /* TextInspectorViewModel.swift */,
+				C0B9E1B12E1F52A400590DC3 /* StoredContent.swift */,
 			);
-			path = "LineNumber ViewModel";
+			path = "Text Inspector View Model";
 			sourceTree = "<group>";
 		};
 		C01A9D092C3DC73900A555B9 /* Text Inspector */ = {
@@ -825,6 +828,7 @@
 				C0A93A662C1261390037BAE3 /* DataItem.swift in Sources */,
 				C07921EE2CC82E7000A5002C /* GraphControllerListViewModel.swift in Sources */,
 				C09E8FA52CAB48450014988C /* DGDataColumn_extensions.swift in Sources */,
+				C0B9E1B22E1F52A400590DC3 /* StoredContent.swift in Sources */,
 				C0A93A682C1261B00037BAE3 /* Node.swift in Sources */,
 				C078BC352C2F332D00A06887 /* GraphController.swift in Sources */,
 				C05B75D12E1EE37E00889F0F /* DropItem.swift in Sources */,
