@@ -22,12 +22,12 @@ class TextInspectorViewModel {
     var parserSettings: ParserSettings? {
         dataItem?.getAssociatedParserSettings()
     }
-    
+     
     
     // MARK: View State
-    var viewIsVisiable: Bool = false
+    var viewIsVisable: Bool = false
     
-    var processingState: TextInspectorViewModel.ProcessingState = .upToDate
+    var processingState: ProcessingState = .upToDate
     
     var reducedNumberOfLines = true
     
@@ -41,6 +41,7 @@ class TextInspectorViewModel {
             }
             
             if newValue != oldValue {
+                processingState = .outOfDate
                 updateStoredContent()
             }
         }
@@ -57,6 +58,7 @@ class TextInspectorViewModel {
             }
             
             if newValue != oldValue {
+                processingState = .outOfDate
                 updateStoredContent()
             }
         }
@@ -80,18 +82,22 @@ class TextInspectorViewModel {
     private var storedContent: StoredContent
     
     
+    
+    // MARK: - Initialization
     init(_ dataController: DataController) {
         self.dataController = dataController
         self.storedContent = StoredContent(nil, url: nil, parserSettings: nil, false)
         
         self.updateStoredContent()
+        self.registerForNotifications()
     }
     
     
     // MARK: - Updating State
     private func updateStoredContent() {
         
-        if viewIsVisiable == false { return }
+        if viewIsVisable == false { return }
+        
         
         // Sendable dataItem information
         let url = dataItem?.url
@@ -102,6 +108,17 @@ class TextInspectorViewModel {
         // Sendable storedContent information
         let storedContentDataID = storedContent.dataItemID
         let storedContentLastMofified = storedContent.date
+        
+        switch processingState {
+        case .none: break
+        case .outOfDate: break
+        case .inProgress:
+            if dataItemID == storedContentDataID { return }
+        case .upToDate:
+            if dataItemID == storedContentDataID { return }
+        }
+        
+        
         
         Task {
             
@@ -126,10 +143,23 @@ class TextInspectorViewModel {
             }
         }
     }
-    
-    enum ProcessingState {
-        case upToDate
-        case inProgress
+}
+
+
+// MARK: - Notifications
+extension TextInspectorViewModel {
+    fileprivate func registerForNotifications() {
+        let nc = NotificationCenter.default
+        
+        nc.addObserver(self,
+                       selector: #selector(selectedDataItemDidChange(_:)),
+                       name: .selectedDataItemDidChange,
+                       object: nil)
     }
     
+    @objc func selectedDataItemDidChange(_ notification: Notification) {
+        self.processingState = .outOfDate
+        
+        self.updateStoredContent()
+    }
 }

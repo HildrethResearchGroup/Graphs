@@ -26,6 +26,11 @@ struct DataItemsInspector: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
+            HStack {
+                Text("Folder:")
+                Spacer()
+                Text(viewModel.folderName)
+            }
             OpenFilesView()
             ParserSettingsView()
             GraphTemplateView()

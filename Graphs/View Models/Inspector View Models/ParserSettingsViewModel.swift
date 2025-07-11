@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import OSLog
 
 
@@ -108,7 +109,20 @@ extension ParserSettingsViewModel {
              logger.error("\(error.localizedDescription)")
          }
      }
-     
-    
 }
 
+
+// MARK: - UI Settings
+extension ParserSettingsViewModel {
+    func foregroundColor(for parserSetting: ParserSettings) -> Color {
+        
+        let dataItemParserSettings = selectedDataItem?.getAssociatedParserSettings()
+        
+        
+        if dataItemParserSettings?.localID == parserSetting.localID {
+            return .green
+        } else {
+            return .black
+        }
+    }
+}

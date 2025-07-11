@@ -54,7 +54,7 @@ class AppController {
         
         // View Models
         sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
-        inspectorVM = InspectorViewModel(localDataController, localSelectionManager)
+        inspectorVM = InspectorViewModel(localDataController, localSelectionManager, localProcessedDataManager)
         dataListVM = DataListViewModel(localDataController, localSelectionManager)
         graphListVM = GraphControllerListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
         
@@ -123,6 +123,9 @@ extension AppController: @preconcurrency SelectionManagerDelegate {
         
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
         graphListVM.updateProcessedData()
+        
+        let nc = NotificationCenter.default
+        nc.post(name: .selectedDataItemDidChange, object: nil, userInfo: nil)
     }
 }
 

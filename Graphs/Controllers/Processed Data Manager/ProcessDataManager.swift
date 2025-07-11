@@ -28,7 +28,7 @@ class ProcessDataManager {
         self.registerForNotifications()
     }
     
-    
+    // MARK: - Processed Data
     func processedData(for dataItems: [DataItem]) async -> [ProcessedData] {
         var output: [ProcessedData] = []
         
@@ -40,19 +40,8 @@ class ProcessDataManager {
         return output
     }
     
+    
     func processedData(for dataItem: DataItem) async -> ProcessedData {
-        
-        
-        
-        /*
-         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
-         
-         processedData[dataItem.id] = newProcessedData
-         
-         return newProcessedData
-         */
-        
-        
         // Enable Local Caching
          if let output = processedData[dataItem.id] {
              
@@ -78,6 +67,7 @@ class ProcessDataManager {
         
         return newProcessedData
     }
+    
     
     
     // MARK: - Deleting
@@ -129,8 +119,10 @@ class ProcessDataManager {
 }
 
 
+
+// MARK: - Notifications
 extension ProcessDataManager {
-    // MARK: - Notifications
+    
     private func registerForNotifications() {
         let nc = NotificationCenter.default
         
@@ -193,12 +185,9 @@ extension ProcessDataManager {
                     } catch  {
                         Logger.processingData.info("\(error)")
                     }
-                    
                 }
-                
             }
         }
-        
     }
     
     

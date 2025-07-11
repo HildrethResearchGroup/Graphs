@@ -69,7 +69,6 @@
 		C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */; };
 		C078BC562C2F6B0200A06887 /* DataController_NewObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC552C2F6B0200A06887 /* DataController_NewObjects.swift */; };
 		C07921E62CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */; };
-		C07921E82CC7135400A5002C /* ProcessDataManagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */; };
 		C07921EB2CC82D1400A5002C /* GraphListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921EA2CC82D1400A5002C /* GraphListView.swift */; };
 		C07921EE2CC82E7000A5002C /* GraphControllerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07921ED2CC82E7000A5002C /* GraphControllerListViewModel.swift */; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
@@ -97,6 +96,8 @@
 		C0CE245B2CBEF6E60088FA94 /* ProcessedDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE245A2CBEF6E60088FA94 /* ProcessedDataDelegate.swift */; };
 		C0DF8D1F2CBA18DE006C4574 /* ProcessedDataState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */; };
 		C0DF8D212CBA1908006C4574 /* ProcessedDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF8D202CBA1908006C4574 /* ProcessedDataError.swift */; };
+		C0E0B3C72E2026BE00150F7F /* TableInspectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */; };
+		C0E0B3C92E20275E00150F7F /* ProcessingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E0B3C82E20275E00150F7F /* ProcessingState.swift */; };
 		C0E8187F2C4ABF6000C4A015 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E8187E2C4ABF6000C4A015 /* InputType.swift */; };
 		C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; };
 		C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -191,7 +192,6 @@
 		C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidesToolTip.swift; sourceTree = "<group>"; };
 		C078BC552C2F6B0200A06887 /* DataController_NewObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController_NewObjects.swift; sourceTree = "<group>"; };
 		C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessDataManager_ProcessedDataDelegate .swift"; sourceTree = "<group>"; };
-		C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessDataManagerDataSource.swift; sourceTree = "<group>"; };
 		C07921EA2CC82D1400A5002C /* GraphListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphListView.swift; sourceTree = "<group>"; };
 		C07921ED2CC82E7000A5002C /* GraphControllerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphControllerListViewModel.swift; sourceTree = "<group>"; };
 		C089E9B32CEE44AC00EB467D /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
@@ -218,6 +218,8 @@
 		C0CE245A2CBEF6E60088FA94 /* ProcessedDataDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedDataDelegate.swift; sourceTree = "<group>"; };
 		C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedDataState.swift; sourceTree = "<group>"; };
 		C0DF8D202CBA1908006C4574 /* ProcessedDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedDataError.swift; sourceTree = "<group>"; };
+		C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableInspectorViewModel.swift; sourceTree = "<group>"; };
+		C0E0B3C82E20275E00150F7F /* ProcessingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingState.swift; sourceTree = "<group>"; };
 		C0E8187E2C4ABF6000C4A015 /* InputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
 		C0EB49892C10076E0057A593 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 		C0ED09032C499E3D00052208 /* UUID_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUID_Extensions.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				C01A86372C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift */,
 				C0ED090F2C49B81F00052208 /* DataItemsInspectorViewModel.swift */,
 				C0C82E1F2C4B039800C6D104 /* NodeInspectorViewModel.swift */,
+				C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */,
 			);
 			path = "Inspector View Models";
 			sourceTree = "<group>";
@@ -370,18 +373,18 @@
 				C0A93A612C12400F0037BAE3 /* Data Controller */,
 				C0263D862C167514008C929F /* Preferences */,
 				C0B05E8E2C50572F00535E59 /* Processed Data Manager */,
-				C0263D7D2C165FF4008C929F /* Selection */,
+				C0263D7D2C165FF4008C929F /* Selection Manager */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		C0263D7D2C165FF4008C929F /* Selection */ = {
+		C0263D7D2C165FF4008C929F /* Selection Manager */ = {
 			isa = PBXGroup;
 			children = (
 				C0263D792C163736008C929F /* SelectionManagerDelegate.swift */,
 				C0263D7B2C165FEB008C929F /* SelectionManager.swift */,
 			);
-			path = Selection;
+			path = "Selection Manager";
 			sourceTree = "<group>";
 		};
 		C0263D7E2C166805008C929F /* Application Controllers */ = {
@@ -627,7 +630,6 @@
 			children = (
 				C0B05E8F2C5057D000535E59 /* ProcessDataManager.swift */,
 				C07921E52CC7120D00A5002C /* ProcessDataManager_ProcessedDataDelegate .swift */,
-				C07921E72CC7135400A5002C /* ProcessDataManagerDataSource.swift */,
 				C0762C952CBB779D0018BDC7 /* Caching */,
 				C0DE7AEF2C67E5AD00586FF9 /* Graph Controller */,
 				C02E38172C1F90EF00107EAD /* Parsing */,
@@ -658,6 +660,7 @@
 			children = (
 				C0DF8D1E2CBA18DE006C4574 /* ProcessedDataState.swift */,
 				C0CE245A2CBEF6E60088FA94 /* ProcessedDataDelegate.swift */,
+				C0E0B3C82E20275E00150F7F /* ProcessingState.swift */,
 			);
 			path = "Helper Files";
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 			files = (
 				C0ED09102C49B81F00052208 /* DataItemsInspectorViewModel.swift in Sources */,
 				C0E8187F2C4ABF6000C4A015 /* InputType.swift in Sources */,
+				C0E0B3C72E2026BE00150F7F /* TableInspectorViewModel.swift in Sources */,
 				C0C55F9D2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift in Sources */,
 				C01A9D0B2C3DC75300A555B9 /* TextInspector.swift in Sources */,
 				C0263D622C162B22008C929F /* AllowedFileExtension.swift in Sources */,
@@ -806,7 +810,6 @@
 				C0B05E902C5057D000535E59 /* ProcessDataManager.swift in Sources */,
 				C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */,
 				C07921EB2CC82D1400A5002C /* GraphListView.swift in Sources */,
-				C07921E82CC7135400A5002C /* ProcessDataManagerDataSource.swift in Sources */,
 				C0B9E1B62E1F65C500590DC3 /* Logger_extension.swift in Sources */,
 				C09529812C2DE4F9002D3F97 /* ParseEditor_EmptySelection.swift in Sources */,
 				C078BC392C2F333B00A06887 /* GraphViewRepresentable.swift in Sources */,
@@ -837,6 +840,7 @@
 				C09E8FA52CAB48450014988C /* DGDataColumn_extensions.swift in Sources */,
 				C0B9E1B22E1F52A400590DC3 /* StoredContent.swift in Sources */,
 				C0A93A682C1261B00037BAE3 /* Node.swift in Sources */,
+				C0E0B3C92E20275E00150F7F /* ProcessingState.swift in Sources */,
 				C078BC352C2F332D00A06887 /* GraphController.swift in Sources */,
 				C05B75D12E1EE37E00889F0F /* DropItem.swift in Sources */,
 				C0263D7C2C165FEB008C929F /* SelectionManager.swift in Sources */,

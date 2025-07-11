@@ -10,11 +10,10 @@ import SwiftUI
 
 struct TableInspector: View {
     
-    var dataItem: DataItem
-    var dataProvider: ProcessDataManager
+    var viewModel: TableInspectorViewModel
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Working on it")
     }
 }
 

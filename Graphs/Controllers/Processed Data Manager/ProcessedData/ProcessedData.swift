@@ -101,7 +101,8 @@ class ProcessedData: Identifiable {
     
     
     
-    // MARK: - State Determination
+
+    
     private func determineParsedFileState() -> ProcessedDataState {
         guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
             return .noTemplate

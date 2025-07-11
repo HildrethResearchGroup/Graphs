@@ -53,19 +53,19 @@ struct ParserInspector: View {
         List(selection: $viewModel.selection) {
             ForEach(viewModel.parserSettings, id: \.self) { nextParser in
                 Text(nextParser.name)
+                    .foregroundStyle(viewModel.foregroundColor(for: nextParser))
                     .contextMenu {
                         DeleteParserSettingButton
                         DupliateParserSettingsButton
                         ExportParserSettingsButton
                     }
             }
-        }.listRowSeparator(.hidden)
+            .listRowSeparator(.hidden)
+        }
+        //.listRowSeparator(.hidden)
         .frame(height: 150)
         .dropDestination(for: URL.self) { urls, _  in
-            
-            if viewModel.shouldAllowDrop(ofURLs: urls) == false {
-                return false
-            }
+            if viewModel.shouldAllowDrop(ofURLs: urls) == false { return false }
             
             let success = viewModel.importURLs(urls)
             return success

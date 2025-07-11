@@ -41,6 +41,8 @@ extension Notification.Name {
      */
     static var graphTemplateDidChange = Notification.Name("graphTemplateOnDataItemsDidChange")
     
+    
+    static var selectedDataItemDidChange = Notification.Name("selectedDataItemDidChange")
 }
 
 

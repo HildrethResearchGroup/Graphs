@@ -57,6 +57,7 @@ struct ParsedFile: Sendable, Codable {
     
     mutating func appendRow(_ row: [String]) {
         appendRow(row, withHeaders: collapsedHeaders)
+        lastParsedDate = .now
     }
     
     

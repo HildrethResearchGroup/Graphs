@@ -46,6 +46,23 @@ class DataItemsInspectorViewModel {
         }
     }
     
+    var folderName: String {
+        if dataItems.count == 1 {
+            return dataItems.first?.nodeName ?? ""
+        } else if dataItems.count > 1 {
+            let folderNames = Set(dataItems.map({ $0.nodeName}))
+            
+            if folderNames.count == 1 {
+                return folderNames.first ?? ""
+            } else {
+                return "Multiple Nodes"
+            }
+        }
+        else {
+            return ""
+        }
+    }
+    
     
     var dataItemsCount: Int {
         dataItems.count

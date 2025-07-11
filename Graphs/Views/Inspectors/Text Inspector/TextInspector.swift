@@ -22,8 +22,8 @@ struct TextInspector: View {
             TabContent
             Spacer()
         }
-        .onAppear { viewModel.viewIsVisiable = true }
-        .onDisappear { viewModel.viewIsVisiable = false }
+        .onAppear { viewModel.viewIsVisable = true }
+        .onDisappear { viewModel.viewIsVisable = false }
         
     }
     

@@ -14,6 +14,7 @@ import SwiftUI
 class InspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
+    private var processDataManager: ProcessDataManager
     
     var parserSettingsVM: ParserSettingsViewModel
     
@@ -25,15 +26,18 @@ class InspectorViewModel {
     
     var textInspectorVM: TextInspectorViewModel
     
+    var tableInspectorVM: TableInspectorViewModel
+    
     
     var firstDataItem: DataItem? {
         dataController.selectedDataItems.first
     }
     
     
-    init(_ dataController: DataController, _ selectionManager: SelectionManager) {
+    init(_ dataController: DataController, _ selectionManager: SelectionManager, _ processDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
+        self.processDataManager = processDataManager
         
         self.parserSettingsVM = ParserSettingsViewModel(dataController, selectionManager)
         
@@ -44,6 +48,8 @@ class InspectorViewModel {
         self.nodeInspectorVM = NodeInspectorViewModel(dataController, selectionManager)
         
         self.textInspectorVM = TextInspectorViewModel(dataController)
+        
+        self.tableInspectorVM = TableInspectorViewModel(dataController, processDataManager)
         
     }
 }

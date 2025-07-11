@@ -29,6 +29,7 @@ struct Inspector: View {
                 .tabItem { Text("􀋱") }
             TextInspector(viewModel.textInspectorVM)
                 .tabItem { Text("T") }
+            
         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         
@@ -38,5 +39,5 @@ struct Inspector: View {
 
 // MARK: - Preview
 #Preview {
-    Inspector(InspectorViewModel(DataController(withDelegate: nil), SelectionManager()))
+    Inspector(InspectorViewModel(DataController(withDelegate: nil), SelectionManager(), ProcessDataManager(cacheManager: CacheManager(), dataSource: nil)))
 }
