@@ -202,3 +202,17 @@ extension NodeInspectorViewModel {
     }
     
 }
+
+
+// MARK: - UI
+extension NodeInspectorViewModel {
+    var folderPath: String {
+        switch nodesCount {
+        case 0: return ""
+        case 1:
+            let nodePath = dataController.selectedNodes.first?.nodePath() ?? ""
+            return nodePath
+        default: return "Multiple Selection"
+        }
+    }
+}

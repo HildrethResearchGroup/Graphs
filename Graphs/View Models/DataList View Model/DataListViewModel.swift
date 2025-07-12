@@ -52,7 +52,7 @@ extension DataListViewModel {
     func deleteSelectedDataItems() {
         
         let dataItemsToDelete = Array(dataController.selectedDataItems)
-        dataController.delete(dataItemsToDelete, andThenTheNodes: [])
+        dataController.delete(dataItemsToDelete, andThenNodes: [])
     }
 }
 
@@ -84,5 +84,13 @@ extension DataListViewModel {
         case false:
             return .red
         }
+    }
+    
+    var numberOfSelectedDataItems: Int {
+        selection.count
+    }
+    
+    var numberOfVisibleDataItems: Int {
+        dataItems.count
     }
 }

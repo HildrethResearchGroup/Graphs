@@ -23,7 +23,12 @@ struct NodesInspectorView: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
-            OpenInFinderView
+            HStack {
+                Text("Path:")
+                Spacer()
+                Text(viewModel.folderPath)
+            }
+            //OpenInFinderView
             ParserSettingsView()
             GraphTemplateView()
             

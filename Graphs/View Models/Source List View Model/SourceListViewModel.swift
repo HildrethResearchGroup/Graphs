@@ -105,7 +105,7 @@ extension SourceListViewModel {
 extension SourceListViewModel {
     func deleteSelectedDataItems() {
         let dataItems = Array(dataController.selectedDataItems)
-        dataController.delete(dataItems, andThenTheNodes: [])
+        dataController.delete(dataItems, andThenNodes: [])
     }
 }
 

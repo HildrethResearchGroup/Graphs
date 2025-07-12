@@ -22,7 +22,7 @@ extension DataController {
         fetchAllObjects()
     }
     
-    func delete(_ dataItems: [DataItem]) {
+    private func delete(_ dataItems: [DataItem]) {
         
         // ADD
         delegate?.preparingToDelete(dataItems: dataItems)
@@ -33,10 +33,10 @@ extension DataController {
         
         try? modelContext.save()
         
-        fetchAllObjects()
+        
     }
     
-    func delete(_ dataItems: [DataItem], andThenTheNodes nodes: [Node]) {
+    func delete(_ dataItems: [DataItem], andThenNodes nodes: [Node]) {
         
         // It is important to delete the DataItems first so that the selection manager removes the data items from the selection.
         if dataItems.count > 0 {
@@ -48,6 +48,8 @@ extension DataController {
             delete(nodes)
             return
         }
+        
+        fetchAllObjects()
     }
     
     func delete(_ parserSettings: ParserSettings) {

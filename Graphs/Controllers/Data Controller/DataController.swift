@@ -187,7 +187,7 @@ class DataController {
         fetchParserSettings()
         fetchGraphTemplates()
         fetchDataItems()
-        
+        updateFilteredDataItems()
     }
     
     private func fetchDataItems() {

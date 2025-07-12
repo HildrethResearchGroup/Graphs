@@ -188,7 +188,7 @@ extension URL {
             localURL = localURL.deletingLastPathComponent()
         }
         
-        return output
+        return "..." + output
         
     }
 }

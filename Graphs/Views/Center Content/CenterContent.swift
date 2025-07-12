@@ -21,12 +21,20 @@ struct CenterContent: View {
     
     
     var body: some View {
-        VSplitView {
-            DataItemsTableView(dataListVM)
-                .frame(minHeight: 300, maxHeight: .infinity)
-            GraphListView(viewModel: graphListVM)
-                .frame(minWidth: 300, maxWidth: .infinity, minHeight: 300, maxHeight: 1000)
+        VStack {
+            VSplitView {
+                DataItemsTableView(dataListVM)
+                    .frame(minHeight: 300, maxHeight: .infinity)
+                GraphListView(viewModel: graphListVM)
+                    .frame(minWidth: 300, maxWidth: .infinity, minHeight: 300, maxHeight: 1000)
+            }
+            HStack {
+                Spacer()
+                Text("\(dataListVM.numberOfSelectedDataItems) of \(dataListVM.numberOfVisibleDataItems) selected")
+                Spacer()
+            }
         }
+        
         .searchable(text: $dataListVM.filter, placement: .toolbar)
     }
 }

@@ -31,6 +31,7 @@ struct DataItemsInspector: View {
                 Spacer()
                 Text(viewModel.folderName)
             }
+            .help(viewModel.folderPath)
             OpenFilesView()
             ParserSettingsView()
             GraphTemplateView()
@@ -92,7 +93,7 @@ struct DataItemsInspector: View {
     private func OpenFilesView() -> some View {
         HStack {
             Text("FilePath:")
-            Text(viewModel.filePath)
+            Text(viewModel.truncatedFilePath)
                 .truncationMode(.head)
                 .lineLimit(2)
                 .help(viewModel.filePath)

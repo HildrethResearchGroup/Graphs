@@ -47,9 +47,26 @@ class DataItemsInspectorViewModel {
     
     var folderName: String {
         if dataItems.count == 1 {
-            return dataItems.first?.nodeName ?? ""
+            return dataItems.first?.nodePath ?? ""
         } else if dataItems.count > 1 {
-            let folderNames = Set(dataItems.map({ $0.nodeName}))
+            let folderNames = Set(dataItems.map({ $0.nodePath}))
+            
+            if folderNames.count == 1 {
+                return folderNames.first ?? ""
+            } else {
+                return "Multiple Nodes"
+            }
+        }
+        else {
+            return ""
+        }
+    }
+    
+    var folderPath: String {
+        if dataItems.count == 1 {
+            return dataItems.first?.nodePath ?? ""
+        } else if dataItems.count > 1 {
+            let folderNames = Set(dataItems.map({ $0.nodePath}))
             
             if folderNames.count == 1 {
                 return folderNames.first ?? ""
@@ -114,6 +131,14 @@ class DataItemsInspectorViewModel {
         switch dataItemsCount {
         case 0: return ""
         case 1: return dataController.selectedDataItems.first?.url.path(percentEncoded: false) ?? "No Filepath Could be Created"
+        default: return "Multiple Selection"
+        }
+    }
+    
+    var truncatedFilePath: String {
+        switch dataItemsCount {
+        case 0: return ""
+        case 1: return dataController.selectedDataItems.first?.url.truncatedPath ?? "No Filepath Could be Created"
         default: return "Multiple Selection"
         }
     }
