@@ -63,11 +63,23 @@ class AppController {
         localDataController.delegate = self
         localSelectionManager.delegate = self
         localProcessedDataManager.dataSource = self
+        
+        
+        // Set initial node selection to top-level Node
+        if let firstNode = localDataController.topNode() {
+            let firstNodeSet = Set([firstNode])
+            localSelectionManager.selectedNodes = firstNodeSet
+        }
     }
 }
 
 
 extension AppController: @preconcurrency DataControllerDelegate {
+    // MARK: - Filtering
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID]) {
+        selectionManager.filterDidChange(currentlySelectedDataItemIDs: currentlySelectedDataItemIDs)
+    }
+    
     
     // MARK: - Nodes and Data
     func newObjects(nodes: [Node], dataItems: [DataItem], graphTemplates: [GraphTemplate], parserSettings: [ParserSettings]) {

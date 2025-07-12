@@ -31,6 +31,17 @@ class SelectionManager {
     var selectedGraphTemplate: GraphTemplate? = nil
 }
 
+// MARK: - Handling Filters
+extension SelectionManager {
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID]) {
+        let currentSelectionManagerDataItemIDs = selectedDataItemIDs
+        let incomingSelectedDataItemIDs = Set(currentlySelectedDataItemIDs)
+        
+        let allowedSelectedDataItemIDs = currentSelectionManagerDataItemIDs.intersection(incomingSelectedDataItemIDs)
+        selectedDataItemIDs = allowedSelectedDataItemIDs
+    }
+}
+
 
 //MARK: - Handling New Objects
 extension SelectionManager {

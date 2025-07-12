@@ -44,4 +44,9 @@ extension DataItem {
     var nodeName: String {
         return node?.name ?? "No Folder"
     }
+    
+     @Transient
+    var nodePath: String {
+        node?.nodePath() ?? ""
+    }
 }

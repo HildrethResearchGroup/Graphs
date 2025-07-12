@@ -29,16 +29,62 @@ class DataController {
     
     var graphTemplates: [GraphTemplate] = []
     
-    var sortNodesKeyPaths: [KeyPathComparator<Node>] = [
-        .init(\.name)]
+    
+    // MARK: - Data Items
+    var allDataItems: [DataItem] = []
+    
+    private var _filter: String = ""
+    var filter: String {
+        get {
+            _filter
+        }
+        set {
+            let oldValue = _filter
+            let incomingValue = newValue
+            _filter = newValue
+            
+            if incomingValue != oldValue {
+                updateFilteredDataItems()
+            }
+        }
+    }
     
     
-    // This is temporary and used to make the visibleItems a computed property
-    // TODO: Remove when visibleItems transitioned to stored property that is updated manually
-    var selectedNodes: [Node] = []
+    private var filteredDataItems: OrderedSet<DataItem> = [] {
+        didSet {
+            updateSelectedDataItems()
+        }
+    }
+    
     
     var visableItems: OrderedSet<DataItem> {
-        
+        return filteredDataItems
+    }
+    
+    var sort: [KeyPathComparator<DataItem>] {
+        get { _sort }
+        // TODO: Always add \.name to end of sorting
+        set { _sort = newValue }
+    }
+    
+    private var _sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodePath)] {
+        didSet {
+            updateSelectedDataItems()
+        }
+    }
+    
+    
+    // MARK: - Selections
+    // This is temporary and used to make the visibleItems a computed property
+    // TODO: Remove when visibleItems transitioned to stored property that is updated manually
+    var selectedNodes: [Node] = [] {
+        didSet {
+            updateVisibileNotes()
+        }
+    }
+    
+    
+    private var dataItemsFromSelectedNodes: OrderedSet<DataItem> {
         // For initial simplicity, we will make this a computed property
         get {
             var items: OrderedSet<DataItem> = []
@@ -53,13 +99,14 @@ class DataController {
     
     var selectedDataItemIDs: [DataItem.ID] = [] {
         didSet {
-            updateDataItems()
+            updateSelectedDataItems()
         }
     }
     
-    var selectedDataItems: OrderedSet<DataItem> = []
+    var selectedDataItems: [DataItem] = []
     
     
+    // MARK: - Initialization
     init(withDelegate delegate: DataControllerDelegate?) {
         let sharedModelContainer: ModelContainer = {
             let schema = Schema([
@@ -84,11 +131,13 @@ class DataController {
         
         self.delegate = delegate
         
-        fetchData()
+        fetchAllObjects()
         
+        updateFilteredDataItems()
     }
     
     
+    // MARK: Nodes
     func allNodes() -> [Node] {
         do {
             let sortOrder = [SortDescriptor<Node>(\.name)]
@@ -103,27 +152,47 @@ class DataController {
         }
     }
     
-    
-    func allDataItems() -> [DataItem] {
-        do {
-            let sortOrder = [SortDescriptor<DataItem>(\.name)]
-            let descriptor = FetchDescriptor<DataItem>(sortBy: sortOrder)
-            let output = try modelContext.fetch(descriptor)
-            
-            return output
-            
-        } catch  {
-            Logger.dataController.info("DataController: Failed to Fetch All DataItems")
-            return []
-        }
+    func topNode() -> Node? {
+        return rootNodes.first
     }
     
     
+    /*
+     func allDataItems() -> [DataItem] {
+         do {
+             let sortOrder = [SortDescriptor<DataItem>(\.name)]
+             let descriptor = FetchDescriptor<DataItem>(sortBy: sortOrder)
+             let output = try modelContext.fetch(descriptor)
+             
+             return output
+             
+         } catch  {
+             Logger.dataController.info("DataController: Failed to Fetch All DataItems")
+             return []
+         }
+     }
+     */
+    
+    
+    
     // MARK: - Fetching Data
-    func fetchData() {
+    func fetchAllObjects() {
         fetchRootNodes()
         fetchParserSettings()
         fetchGraphTemplates()
+        fetchDataItems()
+        
+    }
+    
+    private func fetchDataItems() {
+        do {
+            let sortOrder = [SortDescriptor<DataItem>(\.name)]
+            let descriptor = FetchDescriptor<DataItem>(sortBy: sortOrder)
+            allDataItems = try modelContext.fetch(descriptor)
+        } catch  {
+            Logger.dataController.info("DataController: Failed to Fetch All DataItems")
+            allDataItems = []
+        }
     }
     
     private func fetchRootNodes() {
@@ -169,11 +238,33 @@ class DataController {
     
     
     // MARK: - Filtering Selected DataItems
-    func updateDataItems() {
+    func updateVisibileNotes() {
+        updateFilteredDataItems()
+    }
+    
+    func updateSelectedDataItems() {
         let ids = selectedDataItemIDs
         let items = self.visableItems
         let filteredItems = items.filter({ids.contains([$0.id])})
+        let sortedFilteredItems = filteredItems.sorted(using: sort)
         
-        selectedDataItems = filteredItems
+        selectedDataItems = sortedFilteredItems
     }
+    
+
+    private func updateFilteredDataItems() {
+        
+        if filter.isEmpty {
+            self.filteredDataItems = dataItemsFromSelectedNodes
+        } else {
+            let filteredItems = dataItemsFromSelectedNodes.filter({$0.containsFilter(filter)})
+            
+            let filteredItemIDs = filteredItems.map({ $0.id })
+            
+            delegate?.filterDidChange(currentlySelectedDataItemIDs: filteredItemIDs)
+            
+            self.filteredDataItems = filteredItems
+        }
+    }
+    
 }

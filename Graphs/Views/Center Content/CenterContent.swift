@@ -22,12 +22,12 @@ struct CenterContent: View {
     
     var body: some View {
         VSplitView {
-            DataItemsListView(dataListVM)
+            DataItemsTableView(dataListVM)
                 .frame(minHeight: 300, maxHeight: .infinity)
             GraphListView(viewModel: graphListVM)
                 .frame(minWidth: 300, maxWidth: .infinity, minHeight: 300, maxHeight: 1000)
-            
         }
+        .searchable(text: $dataListVM.filter, placement: .toolbar)
     }
 }
 

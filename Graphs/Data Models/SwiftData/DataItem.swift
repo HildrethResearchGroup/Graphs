@@ -231,3 +231,26 @@ extension DataItem {
         
     }
 }
+
+
+// MARK: - Filtering
+extension DataItem {
+    func containsFilter(_ filter: String) -> Bool {
+        
+        let lowerCasedFilter = filter.lowercased()
+        
+        if name.lowercased().contains(lowerCasedFilter) {
+            return true
+        } else
+        
+        if url.absoluteString.lowercased().contains(lowerCasedFilter) {
+            return true
+        }
+        
+        if nodePath.lowercased().contains(lowerCasedFilter) {
+            return true
+        }
+        
+        return false
+    }
+}

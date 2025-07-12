@@ -46,6 +46,8 @@
 		C02E38162C1F8B6B00107EAD /* GraphTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E38152C1F8B6B00107EAD /* GraphTemplate.swift */; };
 		C02E38192C1F910100107EAD /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E38182C1F910100107EAD /* Parser.swift */; };
 		C02E381B2C1F911800107EAD /* ParsedFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02E381A2C1F911800107EAD /* ParsedFile.swift */; };
+		C03748E52E219ED3007452DB /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03748E42E219ED3007452DB /* TableData.swift */; };
+		C03748E72E21CF69007452DB /* DataItemsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03748E62E21CF69007452DB /* DataItemsTableView.swift */; };
 		C039A26C2CBCCD6800185003 /* CacheManager_Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C039A26B2CBCCD6800185003 /* CacheManager_Errors.swift */; };
 		C042F5952CC4BC0D00692678 /* ParserSettingsStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */; };
 		C05B75D12E1EE37E00889F0F /* DropItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B75D02E1EE37E00889F0F /* DropItem.swift */; };
@@ -168,6 +170,8 @@
 		C02E38152C1F8B6B00107EAD /* GraphTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplate.swift; sourceTree = "<group>"; };
 		C02E38182C1F910100107EAD /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		C02E381A2C1F911800107EAD /* ParsedFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParsedFile.swift; sourceTree = "<group>"; };
+		C03748E42E219ED3007452DB /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
+		C03748E62E21CF69007452DB /* DataItemsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsTableView.swift; sourceTree = "<group>"; };
 		C039A26B2CBCCD6800185003 /* CacheManager_Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager_Errors.swift; sourceTree = "<group>"; };
 		C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserSettingsStatic.swift; sourceTree = "<group>"; };
 		C05B75D02E1EE37E00889F0F /* DropItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropItem.swift; sourceTree = "<group>"; };
@@ -319,13 +323,13 @@
 		C01A86322C484977006219C8 /* Inspector View Models */ = {
 			isa = PBXGroup;
 			children = (
+				C03748E32E2194D7007452DB /* Table Inspector View Model */,
 				C01A9D062C3DC1DC00A555B9 /* Text Inspector View Model */,
 				C01A86332C484994006219C8 /* InspectorViewModel.swift */,
 				C01A86352C484CFF006219C8 /* ParserSettingsViewModel.swift */,
 				C01A86372C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift */,
 				C0ED090F2C49B81F00052208 /* DataItemsInspectorViewModel.swift */,
 				C0C82E1F2C4B039800C6D104 /* NodeInspectorViewModel.swift */,
-				C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */,
 			);
 			path = "Inspector View Models";
 			sourceTree = "<group>";
@@ -413,6 +417,15 @@
 				C0B9E1B32E1F595C00590DC3 /* ParserError.swift */,
 			);
 			path = Parsing;
+			sourceTree = "<group>";
+		};
+		C03748E32E2194D7007452DB /* Table Inspector View Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */,
+				C03748E42E219ED3007452DB /* TableData.swift */,
+			);
+			path = "Table Inspector View Model";
 			sourceTree = "<group>";
 		};
 		C04BBC8F2CE80663006AEFCE /* Graph View */ = {
@@ -538,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				C0ED09082C49AC5800052208 /* DataItemsListView.swift */,
+				C03748E62E21CF69007452DB /* DataItemsTableView.swift */,
 			);
 			path = "Data Items";
 			sourceTree = "<group>";
@@ -853,6 +867,7 @@
 				C0C82E232C4B138E00C6D104 /* NodesInspectorView.swift in Sources */,
 				C0263D8C2C1677B1008C929F /* Preferences.swift in Sources */,
 				C0263D7A2C163736008C929F /* SelectionManagerDelegate.swift in Sources */,
+				C03748E52E219ED3007452DB /* TableData.swift in Sources */,
 				C01A9D0F2C3DC79600A555B9 /* String_newLineCharacter.swift in Sources */,
 				C0EE43C12C45B22100EE74FE /* DataController_Saving.swift in Sources */,
 				C09E8FAB2CAB5CF30014988C /* GraphState.swift in Sources */,
@@ -864,6 +879,7 @@
 				C078BC4C2C2F4B0300A06887 /* PresentableName.swift in Sources */,
 				C0263D8E2C16872A008C929F /* ParserSettings.swift in Sources */,
 				C01A86382C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift in Sources */,
+				C03748E72E21CF69007452DB /* DataItemsTableView.swift in Sources */,
 				C028E1652CDC052400E74C6D /* ParseLineType.swift in Sources */,
 				C016242D2C56CAA200F60030 /* ProcessedData_Caching.swift in Sources */,
 				C01A86342C484994006219C8 /* InspectorViewModel.swift in Sources */,

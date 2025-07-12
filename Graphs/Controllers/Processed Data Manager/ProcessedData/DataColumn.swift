@@ -9,7 +9,7 @@
 import Foundation
 
 struct DataColumn: Codable, Sendable, Identifiable {
-    var id = UUID()
+    var id = ID()
     
     /// Header for the Data Column.
     private(set) var header: String
@@ -49,6 +49,7 @@ struct DataColumn: Codable, Sendable, Identifiable {
         
         self.init(headers: headers, data: emptyColumn)
     }
+
     
     
     /// Collapses the header array of strings to a single string with \\n added to separate each header.
@@ -66,5 +67,18 @@ struct DataColumn: Codable, Sendable, Identifiable {
     /// Appends an array of data into the data array
     mutating func append(_ dataIn: [String]) {
         data.append(contentsOf: dataIn)
+    }
+    
+    func data(for rowNumber: Int) -> String {
+        if rowNumber >= data.count {
+            return ""
+        } else {
+            return data[rowNumber - 1]
+        }
+    }
+    
+    
+    struct ID: Identifiable, Hashable, Codable {
+        var id = UUID()
     }
 }

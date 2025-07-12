@@ -293,3 +293,17 @@ extension Node {
 
 
 
+// MARK: - Node Properties
+extension Node {
+    func nodePath() -> String? {
+        guard let parent else {
+            return nil
+        }
+        
+        guard let parentNodePath = parent.nodePath() else {
+            return self.name
+        }
+        
+        return parentNodePath + "\\" + self.name
+    }
+}

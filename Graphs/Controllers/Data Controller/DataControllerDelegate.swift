@@ -8,6 +8,9 @@
 import Foundation
 
 protocol DataControllerDelegate {
+    // MARK: - Filtering
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID])
+    
     
     // MARK: - Nodes and DataItems
     func newObjects(nodes: [Node], dataItems: [DataItem], graphTemplates: [GraphTemplate], parserSettings: [ParserSettings])

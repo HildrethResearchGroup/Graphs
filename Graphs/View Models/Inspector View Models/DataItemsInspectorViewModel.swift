@@ -16,7 +16,7 @@ class DataItemsInspectorViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
     
-    var dataItems: OrderedSet<DataItem> {
+    var dataItems: [DataItem] {
         get { dataController.selectedDataItems }
     }
     
@@ -34,7 +34,6 @@ class DataItemsInspectorViewModel {
         get {
             setInitialName()
         }
-        
         set {
             if newValue != name {
                 if dataItems.count == 1 {

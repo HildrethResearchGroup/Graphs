@@ -25,7 +25,11 @@ class TextInspectorViewModel {
      
     
     // MARK: View State
-    var viewIsVisable: Bool = false
+    var viewIsVisable: Bool = false {
+        didSet {
+            updateStoredContent()
+        }
+    }
     
     var processingState: ProcessingState = .upToDate
     

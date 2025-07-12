@@ -96,7 +96,7 @@ extension DataController {
             }
         }
         
-        fetchData()
+        fetchAllObjects()
         
         delegate?.newObjects(nodes: newNodes, dataItems: newDataItems, graphTemplates: newGraphTemplates, parserSettings: newParsers)
     }
@@ -240,7 +240,7 @@ extension DataController {
         try? modelContext.save()
         
          
-        fetchData()
+        fetchAllObjects()
  
         delegate?.newObjects(nodes: [newNode], dataItems: [], graphTemplates: [], parserSettings: [])
     }

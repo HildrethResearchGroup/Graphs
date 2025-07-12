@@ -55,7 +55,9 @@ struct Parser {
                 if separator == .none { throw ParserError.noHeaderSeparator }
                 
                 let nextheaderLine = parse(line: nextLine, withSeparator: separator)
+                
                 parsedFile.header.append(nextheaderLine)
+                
             case .data:
                 
                 if staticSettings.stopDataAtFirstEmptyLine && nextLine.isEmpty {
@@ -177,21 +179,22 @@ struct Parser {
     
     
     private static func parse(line: String, withSeparator separator: Separator) -> [String] {
-        var headerLine: [String] = []
+        var output: [String] = []
         
         if separator == .none {
             return [line]
         }
         
         guard let separatorCharacterSet = separator.characterSet else {
+            
             return [line]
         }
         
         for nextComponent in line.components(separatedBy: separatorCharacterSet) {
-            headerLine.append(nextComponent)
+            output.append(nextComponent)
         }
         
-        return headerLine
+        return output
     }
     
     

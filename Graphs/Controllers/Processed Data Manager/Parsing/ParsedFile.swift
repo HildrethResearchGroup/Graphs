@@ -25,7 +25,7 @@ struct ParsedFile: Sendable, Codable {
     /// An array of header rows. Each row is made by seperating the input file by the header separator character set.
     ///
     /// - NOTE: This data is NOT cached.
-    var header: [[String]] = [[]] {
+    var header: [[String]] = [[String]]() {
         didSet {
             updateCollapseHeaders()
         }
@@ -62,18 +62,32 @@ struct ParsedFile: Sendable, Codable {
     
     
     private mutating func updateCollapseHeaders() {
+        
+        let largestColumn = header.max(by: {$0.count > $1.count})
+        let maxNumberOfColumns = largestColumn?.count ?? 0
+        
+        if maxNumberOfColumns == 0 {
+            collapsedHeaders = [""]
+            return
+        }
+        
         var localHeaders: [String] = []
         
-        for nextColumn in header {
-            var nextHeader = ""
-            for (headerIndex, nextColumnHeader) in nextColumn.enumerated() {
-                if headerIndex == nextColumn.count - 1 {
-                    nextHeader.append(nextColumnHeader)
+        for _ in 1...maxNumberOfColumns {
+            localHeaders.append("")
+        }
+        
+        
+        
+        for (rowIndex, nextHeaderRow) in header.enumerated() {
+            for (columnIndex, headerString) in nextHeaderRow.enumerated() {
+                if rowIndex == 0 {
+                    localHeaders[columnIndex] = headerString
                 } else {
-                    nextHeader.append(nextColumnHeader + "\n")
+                    let currentHeader = localHeaders[columnIndex]
+                    localHeaders[columnIndex] = currentHeader + "\n" + headerString
                 }
             }
-            localHeaders.append(nextHeader)
         }
         
         collapsedHeaders = localHeaders
@@ -85,7 +99,7 @@ struct ParsedFile: Sendable, Codable {
         let rowCompatibility = RowCompatibility(rowCount: row.count, dataCount: data.count)
         
         switch rowCompatibility {
-        case .dataIsEmpty: createInitialDataColumns(withRow: row, andHeaders: headers)
+        case .dataIsEmpty: createInitialDataColumns(withRow: row, andHeaders: collapsedHeaders)
         case .equalCount:
             appendEqualRow(row)
         case let .lessColumnsThanData(numberOfNeededColumns):

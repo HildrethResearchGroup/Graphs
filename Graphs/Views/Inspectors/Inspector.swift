@@ -29,6 +29,8 @@ struct Inspector: View {
                 .tabItem { Text("􀋱") }
             TextInspector(viewModel.textInspectorVM)
                 .tabItem { Text("T") }
+            TableInspector(viewModel: viewModel.tableInspectorVM)
+                .tabItem { Text("􀏣") }
             
         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)

@@ -48,7 +48,9 @@ struct GraphTemplateInspector: View {
                         }
                     }
             }
+            .listRowSeparator(.hidden)
         }
+        
         .frame(height: 150)
         
         HStack {

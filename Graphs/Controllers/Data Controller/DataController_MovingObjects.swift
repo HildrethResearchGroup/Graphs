@@ -21,7 +21,7 @@ extension DataController {
         tryToMove(dataItems: dataItemstoMove, to: node)
         
         
-        self.fetchData()
+        self.fetchAllObjects()
         
     }
     
@@ -78,8 +78,6 @@ extension DataController {
     
     // TODO: Update to use a fetch description instead of filtering
     private func dataItems(for uuids: [UUID]) -> [DataItem] {
-        let allDataItems = allDataItems()
-        
         if allDataItems.count == 0 { return [] }
         
         let filteredDataItems = allDataItems.filter( {uuids.contains( $0.localID )} )

@@ -28,6 +28,16 @@ class DataListViewModel {
         self.dataController = dataController
         self.selectionManager = selectionManager
     }
+    
+    var sort: [KeyPathComparator<DataItem>] {
+        get { dataController.sort }
+        set { dataController.sort = newValue }
+    }
+    
+    var filter: String {
+        get { dataController.filter }
+        set { dataController.filter = newValue }
+    }
 }
 
 

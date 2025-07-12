@@ -19,7 +19,7 @@ extension DataController {
         }
         try? modelContext.save()
         
-        fetchData()
+        fetchAllObjects()
     }
     
     func delete(_ dataItems: [DataItem]) {
@@ -33,7 +33,7 @@ extension DataController {
         
         try? modelContext.save()
         
-        fetchData()
+        fetchAllObjects()
     }
     
     func delete(_ dataItems: [DataItem], andThenTheNodes nodes: [Node]) {
@@ -56,7 +56,7 @@ extension DataController {
         
         modelContext.delete(parserSettings)
         try? modelContext.save()
-        fetchData()
+        fetchAllObjects()
     }
     
     func delete(_ graphTemplate: GraphTemplate) {
@@ -65,6 +65,6 @@ extension DataController {
         
         modelContext.delete(graphTemplate)
         try? modelContext.save()
-        fetchData()
+        fetchAllObjects()
     }
 }
