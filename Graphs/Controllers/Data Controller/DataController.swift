@@ -29,6 +29,13 @@ class DataController {
     
     var graphTemplates: [GraphTemplate] = []
     
+    var bindingTest: String {
+        get { _bindingTest }
+        set { _bindingTest = newValue }
+    }
+    
+    private var _bindingTest: String = ""
+    
     
     // MARK: - Data Items
     var allDataItems: [DataItem] = []
@@ -58,18 +65,17 @@ class DataController {
     
     
     var visableItems: OrderedSet<DataItem> {
-        return filteredDataItems
+        
+        let sortedDataItems = OrderedSet(filteredDataItems.sorted(using: sort))
+        
+        return sortedDataItems
     }
     
-    var sort: [KeyPathComparator<DataItem>] {
-        get { _sort }
-        // TODO: Always add \.name to end of sorting
-        set { _sort = newValue }
-    }
+
     
-    private var _sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodePath)] {
+    var sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodePath)] {
         didSet {
-            updateSelectedDataItems()
+            updateFilteredDataItems()
         }
     }
     

@@ -19,11 +19,8 @@ struct GraphListView: View {
             LazyHStack(alignment: .center) {
                 if viewModel.processedData.count != 0 {
                     ForEach(viewModel.processedData, id: \.id) { nextData in
-                        VStack {
-                            Text(nextData.dataItem.name)
-                            GraphViewRepresentable(graphController: nextData.graphController)
-                                .aspectRatio(1.4, contentMode: .fit)
-                        }
+                        GraphViewRepresentable(graphController: nextData.graphController)
+                            .aspectRatio(1.4, contentMode: .fit)
                     }
                 } else {
                     EmptyView()

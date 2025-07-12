@@ -96,10 +96,15 @@ class ProcessedData: Identifiable {
         
         let localGraphController = await GraphController(from: graphTemplate.url, data: localParsedFile?.data)
         
+        await localGraphController.setGraphTitle(graphTitle)
+        
         self.graphController = localGraphController
     }
     
     
+    private var graphTitle: String {
+        return dataItem.name.replacingOccurrences(of: "_", with: "\\_")
+    }
     
 
     

@@ -41,6 +41,12 @@ extension DataItem {
     }
     
     @Transient
+    var fileExists: Bool {
+        return self.url.fileExists
+    }
+    
+    
+    @Transient
     var nodeName: String {
         return node?.name ?? "No Folder"
     }
@@ -48,5 +54,11 @@ extension DataItem {
      @Transient
     var nodePath: String {
         node?.nodePath() ?? ""
+    }
+    
+    
+    @Transient
+    var truncatedFilePath: String {
+        return self.url.truncatedPath
     }
 }

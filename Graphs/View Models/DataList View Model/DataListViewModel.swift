@@ -30,20 +30,27 @@ class DataListViewModel {
     }
     
     var sort: [KeyPathComparator<DataItem>] {
-        get { dataController.sort }
-        set { dataController.sort = newValue }
+        get {
+            dataController.sort
+        }
+        set {
+            print("setting sort to: \(newValue)")
+            dataController.sort = newValue
+        }
     }
     
     var filter: String {
         get { dataController.filter }
         set { dataController.filter = newValue }
     }
+    
 }
 
 
 // MARK: - Deleting Data
 extension DataListViewModel {
     func deleteSelectedDataItems() {
+        
         let dataItemsToDelete = Array(dataController.selectedDataItems)
         dataController.delete(dataItemsToDelete, andThenTheNodes: [])
     }
@@ -62,5 +69,20 @@ extension DataListViewModel {
         let urls = selectedDataItems.map({ $0.url })
         
         urls.showInFinder()
+    }
+}
+
+import SwiftUI
+// MARK: - UI
+extension DataListViewModel {
+    func foregroundColor(for dataItem: DataItem) -> Color {
+        
+        let fileExists = dataItem.fileExists
+        
+        switch fileExists {
+        case true: return .black
+        case false:
+            return .red
+        }
     }
 }

@@ -66,7 +66,10 @@ class GraphController {
             
             dgColumn.setDataWith(columnOfData)
         }
+        
+        
     }
+    
     
     func clearGraph() {
         dgController = nil
@@ -93,6 +96,13 @@ class GraphController {
         }
         
         return ratio
+    }
+    
+    
+    func setGraphTitle(_ title: String) {
+        let canvasSettings = dgController?.canvasSettings()
+        
+        canvasSettings?.setTitle(title)
     }
 }
 

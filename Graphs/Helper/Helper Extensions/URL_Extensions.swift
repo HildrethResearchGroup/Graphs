@@ -159,4 +159,36 @@ extension URL {
         
         return resourceValues?.contentModificationDate
     }
+    
+    
+    var fileExists: Bool {
+        let fm = FileManager.default
+        
+        return fm.fileExists(atPath: self.path(percentEncoded: false))
+    }
+    
+    var truncatedPath: String {
+        
+        var localURL = self
+        let pathExtension = localURL.pathExtension
+        
+        localURL = localURL.deletingPathExtension()
+        
+        var output = "." + pathExtension
+        
+        for index in 0...2 {
+            let nextComponent = localURL.lastPathComponent
+            
+            if index == 0 {
+                output = nextComponent + output
+            } else {
+                output = nextComponent + "/" + output
+            }
+
+            localURL = localURL.deletingLastPathComponent()
+        }
+        
+        return output
+        
+    }
 }

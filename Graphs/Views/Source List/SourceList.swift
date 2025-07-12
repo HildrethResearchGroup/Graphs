@@ -14,8 +14,8 @@ struct SourceList: View {
     var body: some View {
         VStack(alignment: .leading) {
             List(selection: $sourceListVM.selection) {
-                OutlineGroup(sourceListVM.rootNodes, id: \.self, children: \.subNodes) { nextNode in
-                    NodeContent(nextNode)
+                OutlineGroup(sourceListVM.rootNodes, id: \.self, children: \.sortedSubNodes) { nextNode in
+                    NodeView(sourceListVM, nextNode)
                 }
 
             }
@@ -56,8 +56,6 @@ struct SourceList: View {
             Button_newFolder(withParent: node)
             Button_DeleteSelectedNode()
         }
-        
-        
         .alert(isPresented: $sourceListVM.presentURLImportError) { importAlert }
         
     }

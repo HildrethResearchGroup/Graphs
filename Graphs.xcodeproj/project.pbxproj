@@ -51,6 +51,7 @@
 		C039A26C2CBCCD6800185003 /* CacheManager_Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C039A26B2CBCCD6800185003 /* CacheManager_Errors.swift */; };
 		C042F5952CC4BC0D00692678 /* ParserSettingsStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */; };
 		C05B75D12E1EE37E00889F0F /* DropItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B75D02E1EE37E00889F0F /* DropItem.swift */; };
+		C06F7BE22E23063D000FC70E /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F7BE12E23063D000FC70E /* NodeView.swift */; };
 		C07312652CCF371100AB81B4 /* ProcessedData_Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07312642CCF371100AB81B4 /* ProcessedData_Parsing.swift */; };
 		C0762C942CBB6E200018BDC7 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0762C932CBB6E200018BDC7 /* CacheManager.swift */; };
 		C076AF612C4A0FA6007BECEC /* DataItemsInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */; };
@@ -175,6 +176,7 @@
 		C039A26B2CBCCD6800185003 /* CacheManager_Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager_Errors.swift; sourceTree = "<group>"; };
 		C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserSettingsStatic.swift; sourceTree = "<group>"; };
 		C05B75D02E1EE37E00889F0F /* DropItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropItem.swift; sourceTree = "<group>"; };
+		C06F7BE12E23063D000FC70E /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 		C07312642CCF371100AB81B4 /* ProcessedData_Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedData_Parsing.swift; sourceTree = "<group>"; };
 		C0762C932CBB6E200018BDC7 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		C076AF602C4A0FA6007BECEC /* DataItemsInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataItemsInspector.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				C0263D892C1676D1008C929F /* SourceList.swift */,
+				C06F7BE12E23063D000FC70E /* NodeView.swift */,
 			);
 			path = "Source List";
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				C01A86382C4851CB006219C8 /* GraphTemplateInspectorViewModel.swift in Sources */,
 				C03748E72E21CF69007452DB /* DataItemsTableView.swift in Sources */,
 				C028E1652CDC052400E74C6D /* ParseLineType.swift in Sources */,
+				C06F7BE22E23063D000FC70E /* NodeView.swift in Sources */,
 				C016242D2C56CAA200F60030 /* ProcessedData_Caching.swift in Sources */,
 				C01A86342C484994006219C8 /* InspectorViewModel.swift in Sources */,
 				C0263D642C162B9E008C929F /* UserDefaults_allowedDataFileExtensions.swift in Sources */,

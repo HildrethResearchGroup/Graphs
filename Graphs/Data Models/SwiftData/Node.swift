@@ -22,7 +22,15 @@ final class Node {
     var parent: Node?
     
     //@Relationship(deleteRule: .cascade, inverse: \Node.parent)
-    var subNodes: [Node]? = []
+    private var subNodes: [Node]? = []
+    
+    @Transient
+    var sortedSubNodes: [Node]? {
+        subNodes?.sorted(using: sort)
+    }
+    
+    @Transient
+    let sort: [KeyPathComparator<Node>] = [.init(\.name), .init(\.creationDate)]
     
     @Relationship(deleteRule: .nullify, inverse: \DataItem.node)
     var dataItems: [DataItem]
@@ -30,6 +38,8 @@ final class Node {
     var creationDate: Date
     
     var bookmarkData: Data?
+    
+    //var disclosureIsOpen = false
     
     
     private var graphTemplate: GraphTemplate? {
