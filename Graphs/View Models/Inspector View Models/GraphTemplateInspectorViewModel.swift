@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import OSLog
 
 
@@ -97,5 +98,25 @@ extension GraphTemplateInspectorViewModel {
         } else {
             return false
         }
+    }
+}
+
+
+// MARK: - UI Settings
+extension GraphTemplateInspectorViewModel {
+    func foregroundColor(for graphTemplate: GraphTemplate) -> Color {
+        let selectedDataItems = dataController.selectedDataItems
+        let graphTemplateID = graphTemplate.id
+        
+        for nextSelectedDataItem in selectedDataItems {
+            let selectedDataItemGraphTemplate = nextSelectedDataItem.getAssociatedGraphTemplate()
+            let id = selectedDataItemGraphTemplate?.id
+            
+            if id == graphTemplateID {
+                return .green
+            }
+        }
+        
+        return .black
     }
 }

@@ -109,7 +109,8 @@ struct SourceList: View {
             panel.canChooseDirectories = true
             panel.canCreateDirectories = false
             panel.allowsMultipleSelection = true
-            panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText]
+            panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText, .text]
+            panel.isAccessoryViewDisclosed = true
             
             if panel.runModal() == .OK {
                 let urls = panel.urls

@@ -1,0 +1,39 @@
+Test ID	2	
+Date	2/18/2012	
+Substrate	Silicon	B9W10
+Fluid	Air	
+AFM Probe Tip	SCM-PIT - S1	
+Probe Substrate	Silicon (300 micron)	
+Probe Cantilever	SiN	
+Top Coating	20 nm Pt/Ir	
+Bottom Coating	20 nm Pt/Ir	
+		
+Frequency	75 kHz	
+Environment	Air	
+		
+		
+Thermal Tune Set Up		
+Experiment Setup	Standard Contact	
+Environment	Air	
+Laser Alignment	-2	V
+Set Point	0.000	V
+P	0.5	
+I	0.1	
+D	0	
+		
+Get microns/V		
+Point Spectroscopy		
+Samples	512	
+Approach Rate	4.2658	
+Z Start	-4	
+Z End	4	
+Trigger	1	
+Linearizer	OFF	
+Sensitivity	0.3460 microns/V	
+		
+		
+Thermal Tune		
+Frequency	8.452	
+Q	1.25	
+Sensitivity	0.1295	microns/V
+Spring Constant	0.04624	N/m

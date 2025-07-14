@@ -18,8 +18,6 @@ extension DataController {
     // MARK: - Importing General URLs
     func importURLs(_ urls: [URL], intoNode parentNode: Node?) throws  {
         
-        
-        
         // No need to do anything if there aren't any URLs in the array
         if urls.isEmpty {throw ImportError.noURLsToImport}
         

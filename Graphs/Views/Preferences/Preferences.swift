@@ -22,13 +22,12 @@ struct Preferences: View {
                  id: \.id,
                  editActions: [.delete, .move],
                  selection: $selection) { $nextExtension in
-                HStack {
-                    Text("􀏅")
-                    TextField("", text: $nextExtension.fileExtension)
-                        .onSubmit {
-                            self.preferencesController.save()
-                        }
-                }
+                Text("Imported Extensions")
+                    .help("Lists allowed file extensions.  If your files aren't importing, check to make sure their file extension is on this list.  Note, file extensions are case-insenstive.")
+                TextField("", text: $nextExtension.fileExtension)
+                    .onSubmit {
+                        self.preferencesController.save()
+                    }
                 .contextMenu {
                     Button("Delete", action: deleteSelection)
                 }

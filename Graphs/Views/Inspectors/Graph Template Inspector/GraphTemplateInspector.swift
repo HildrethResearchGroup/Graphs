@@ -39,6 +39,7 @@ struct GraphTemplateInspector: View {
         List(selection: $viewModel.selection) {
             ForEach(viewModel.graphTemplates, id: \.self) { nextGraphTemplate in
                 Text(nextGraphTemplate.name)
+                    .foregroundStyle(viewModel.foregroundColor(for: nextGraphTemplate))
                     .contextMenu {
                         Button("Delete") {
                             deleteGraphTemplate(nextGraphTemplate)

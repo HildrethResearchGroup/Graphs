@@ -1,0 +1,25 @@
+Microwave Test: 1
+
+Information: CNT
+Batch Number:	23a
+Substrate Type:	Al foil
+Substrate Thickness:	10 : micons
+Catalyst Layup: Ni/Ti/Al/Fe : 1000/300/100/30
+
+Growth Method: LPCVD
+Grown By: Anu
+Growth Temperature: 717 : C : Thermocouple
+Growth Temperature: 650 : C : IR
+
+Information: Microwave
+Microwave Power Setting: 500 : W
+Microwave Center Frequency: 6.42 : GHz
+Microwave Sweep Range: 1.15 : GHz
+Micwowave Sweep Time: 0.1 : sec
+
+Sample Information:
+Sample ID: 	Size:	Power_min:	Power Max:	Reflected Min:	Reflected Max:	Temperature Initial: 	Temperature Final
+MW-T1-S0 :	cm :	W	:	W	:	W	:	W	:	C	:		C
+MW-T1-S1 : 	1  :	476	:	527	:	38	:	97	:	107	:		136
+MW-T1-S2 : 	1  :	494	:	519	:	43	:	91	:	107	:		146
+MW-T1-S1 : 	1  :	486	:	531	:	39	:	106	:	106	:		179
