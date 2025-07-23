@@ -8,9 +8,11 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 class GraphTemplate {
+    var localID: LocalID
     var name: String
     var url: URL
     
@@ -31,6 +33,8 @@ class GraphTemplate {
             return nil
         }
         
+        self.localID = LocalID()
+        
         self.name = name ?? url.fileName ?? "No File Name"
         self.url = url
         self.creationDate = .now
@@ -48,6 +52,30 @@ class GraphTemplate {
     
 }
 
+
+
+// MARK: - LocalID
+extension GraphTemplate: SelectableCheck {
+    struct LocalID: SelectableID, Codable, Identifiable, Transferable, Equatable, Hashable {
+        
+        var id = UUID()
+        var uuidString: String {
+            id.uuidString
+        }
+        
+        static var transferRepresentation: some TransferRepresentation {
+            CodableRepresentation(contentType: .uuid)
+                ProxyRepresentation(exporting: \.id)
+            }
+    }
+    
+    func matches(_ uuid: UUID) -> Bool {
+        return localID.id == uuid
+    }
+}
+
+
+// MARK: - File Properties
 extension GraphTemplate {
     
     func urlResources() -> URLResourceValues? {

@@ -8,13 +8,14 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 @Model
 final class ParserSettings {
     
     var name: String
     
-    var localID: UUID
+    var localID: ParserSettings.LocalID
     
     /*
      @Relationship(deleteRule: .nullify, inverse: \Node.parserSettings)
@@ -204,7 +205,7 @@ final class ParserSettings {
     // MARK: - Initializer
     init() {
         self.name = "Parser Name"
-        self.localID = UUID()
+        self.localID = LocalID()
         
         //self.nodes = []
         //self.dataItems = []
@@ -243,7 +244,7 @@ final class ParserSettings {
     init(from parserSettingsStatic: ParserSettingsStatic) {
         
         name = parserSettingsStatic.name
-        localID = UUID()
+        localID = LocalID()
         
         // Dates
         creationDate = parserSettingsStatic.creationDate
@@ -304,7 +305,7 @@ final class ParserSettings {
         
         let nc = NotificationCenter.default
         
-        let userInfo: [ String: [ParserSettings.ID]] = [Notification.UserInfoKey.parserSettingsIDs : [id]]
+        let userInfo: [ String: [ParserSettings.LocalID]] = [Notification.UserInfoKey.parserSettingsIDs : [localID]]
         
         nc.post(name: .parserSettingPropertyDidChange, object: nil, userInfo: userInfo)
     }
@@ -321,3 +322,23 @@ final class ParserSettings {
     
 }
 
+
+// MARK: - LocalID
+extension ParserSettings: SelectableCheck {
+    struct LocalID: SelectableID, Codable, Identifiable, Transferable, Equatable, Hashable {
+        
+        var id = UUID()
+        var uuidString: String {
+            id.uuidString
+        }
+        
+        static var transferRepresentation: some TransferRepresentation {
+            CodableRepresentation(contentType: .uuid)
+                ProxyRepresentation(exporting: \.id)
+            }
+    }
+    
+    func matches(_ uuid: UUID) -> Bool {
+        return localID.id == uuid
+    }
+}

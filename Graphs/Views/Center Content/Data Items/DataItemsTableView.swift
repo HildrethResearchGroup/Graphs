@@ -20,8 +20,8 @@ struct DataItemsTableView: View {
     
     var body: some View {
         VStack {
-            Table(selection: $viewModel.selection,
-                  sortOrder: $viewModel.sort) {
+            //Table(selection: $viewModel.selection, sortOrder: $viewModel.sort) {
+            Table(selection: $viewModel.selection, sortOrder: $viewModel.sort) {
                 TableColumn("Name", value: \.name) {
                     Text($0.name)
                         .help($0.url.path(percentEncoded: false))
@@ -61,7 +61,7 @@ struct DataItemsTableView: View {
                 .alignment(.center)
             }
             rows: {
-                ForEach(viewModel.dataItems) { dataItem in
+                ForEach(viewModel.dataItems, id: \.localID) { dataItem in
                     TableRow(dataItem)
                         .contextMenu {
                             Button("Delete") { viewModel.deleteSelectedDataItems() }

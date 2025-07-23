@@ -29,12 +29,7 @@ class DataController {
     
     var graphTemplates: [GraphTemplate] = []
     
-    var bindingTest: String {
-        get { _bindingTest }
-        set { _bindingTest = newValue }
-    }
     
-    private var _bindingTest: String = ""
     
     
     // MARK: - Data Items
@@ -103,7 +98,7 @@ class DataController {
     }
     
     
-    var selectedDataItemIDs: [DataItem.ID] = [] {
+    var selectedDataItemIDs: [DataItem.LocalID] = [] {
         didSet {
             updateSelectedDataItems()
         }
@@ -251,7 +246,7 @@ class DataController {
     func updateSelectedDataItems() {
         let ids = selectedDataItemIDs
         let items = self.visableItems
-        let filteredItems = items.filter({ids.contains([$0.id])})
+        let filteredItems = items.filter({ids.contains([$0.localID])})
         let sortedFilteredItems = filteredItems.sorted(using: sort)
         
         selectedDataItems = sortedFilteredItems
@@ -265,7 +260,7 @@ class DataController {
         } else {
             let filteredItems = dataItemsFromSelectedNodes.filter({$0.containsFilter(filter)})
             
-            let filteredItemIDs = filteredItems.map({ $0.id })
+            let filteredItemIDs = filteredItems.map({ $0.localID })
             
             delegate?.filterDidChange(currentlySelectedDataItemIDs: filteredItemIDs)
             

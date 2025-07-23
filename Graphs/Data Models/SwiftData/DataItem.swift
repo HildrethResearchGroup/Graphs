@@ -15,7 +15,7 @@ import OSLog
 @Model
 final class DataItem: Identifiable, Hashable {
     // MARK: - Properties
-    var localID: UUID
+    var localID: LocalID
     var url: URL
     
     var name: String
@@ -56,7 +56,7 @@ final class DataItem: Identifiable, Hashable {
     
     // MARK: - Initialization
     init(url: URL) {
-        self.localID = UUID()
+        self.localID = LocalID()
         
         self.url = url
         self.name = url.fileName ?? "No File Name"
@@ -130,7 +130,7 @@ final class DataItem: Identifiable, Hashable {
         let nc = NotificationCenter.default
         
         let info: [String: Any] = [
-            "dataItem.ids" : [id],
+            "dataItem.ids" : [localID],
             "oldGraphTemplate.id" : oldGraphTemplateID as Any,
             "newGraphTemplate.id" : newGraphTemplateID as Any
         ]
@@ -154,8 +154,8 @@ final class DataItem: Identifiable, Hashable {
     func setParserSetting(withInputType inputType: InputType, and newParserSettings: ParserSettings?) {
         
         // Prepare for posting notification
-        let oldParserSettingID = parserSettings?.id
-        let newParserSettingID = newParserSettings?.id
+        let oldParserSettingID = parserSettings?.localID
+        let newParserSettingID = newParserSettings?.localID
         
         self.parserSettingsInputType = inputType
         
@@ -177,7 +177,7 @@ final class DataItem: Identifiable, Hashable {
         let nc = NotificationCenter.default
         
         let info: [String: Any] = [
-            "dataItem.ids" : [id],
+            "dataItem.ids" : [localID],
             "oldGraphTemplate.id" : oldParserSettingID as Any,
             "newGraphTemplate.id" : newParserSettingID as Any
         ]
@@ -207,6 +207,28 @@ final class DataItem: Identifiable, Hashable {
         return location
     }
 }
+
+
+// MARK: - LocalID
+extension DataItem: SelectableCheck {
+    struct LocalID: SelectableID, Codable, Identifiable, Transferable, Equatable, Hashable {
+        
+        var id = UUID()
+        var uuidString: String {
+            id.uuidString
+        }
+        
+        static var transferRepresentation: some TransferRepresentation {
+            CodableRepresentation(contentType: .uuid)
+                ProxyRepresentation(exporting: \.id)
+            }
+    }
+    
+    func matches(_ uuid: UUID) -> Bool {
+        return localID.id == uuid
+    }
+}
+
 
 
 // MARK: - Accessing Content and BookMarkData

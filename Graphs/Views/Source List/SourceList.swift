@@ -14,7 +14,7 @@ struct SourceList: View {
     var body: some View {
         VStack(alignment: .leading) {
             List(selection: $sourceListVM.selection) {
-                OutlineGroup(sourceListVM.rootNodes, id: \.self, children: \.sortedSubNodes) { nextNode in
+                OutlineGroup(sourceListVM.rootNodes, id: \.id, children: \.sortedSubNodes) { nextNode in
                     NodeView(sourceListVM, nextNode)
                 }
 
@@ -110,7 +110,6 @@ struct SourceList: View {
             panel.canCreateDirectories = false
             panel.allowsMultipleSelection = true
             panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText, .text]
-            panel.isAccessoryViewDisclosed = true
             
             if panel.runModal() == .OK {
                 let urls = panel.urls

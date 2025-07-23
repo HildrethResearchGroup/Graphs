@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct StoredContent {
-    let dataItemID: DataItem.ID?
+    let dataItemID: DataItem.LocalID?
     
     private let reducedNumberOfLines: Bool
     private(set) var content: String = ""
@@ -21,7 +21,7 @@ struct StoredContent {
     
     let date: Date = .now
     
-    init(_ dataItemID: DataItem.ID?, url: URL?, parserSettings: ParserSettingsStatic?, _  reducedNumberOfLines: Bool) {
+    init(_ dataItemID: DataItem.LocalID?, url: URL?, parserSettings: ParserSettingsStatic?, _  reducedNumberOfLines: Bool) {
         self.dataItemID = dataItemID
         self.reducedNumberOfLines = reducedNumberOfLines
         

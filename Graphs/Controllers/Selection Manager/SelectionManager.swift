@@ -22,7 +22,7 @@ class SelectionManager {
     }
     
     
-    var selectedDataItemIDs: Set<DataItem.ID> = [] {
+    var selectedDataItemIDs: Set<DataItem.LocalID> = [] {
         didSet { delegate?.selectedDataItemsDidChange(selectedDataItemIDs) }
     }
     
@@ -33,7 +33,7 @@ class SelectionManager {
 
 // MARK: - Handling Filters
 extension SelectionManager {
-    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID]) {
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.LocalID]) {
         let currentSelectionManagerDataItemIDs = selectedDataItemIDs
         let incomingSelectedDataItemIDs = Set(currentlySelectedDataItemIDs)
         
@@ -60,7 +60,7 @@ extension SelectionManager {
         // Update the new dataItems to be selected
         if !nodes.isEmpty && !dataItems.isEmpty{
             
-            let dataItemIDs = dataItems.map( {$0.id} )
+            let dataItemIDs = dataItems.map( {$0.localID} )
             
             let completeSelection = selectedDataItemIDs.union(dataItemIDs)
             
@@ -155,7 +155,7 @@ extension SelectionManager {
     func preparingToDelete(dataItems: [DataItem]) {
         // Next Clear out any deleted dataItems
         if dataItems.count > 0 {
-            let dataItemsToDelete = dataItems.map( {$0.id} )
+            let dataItemsToDelete = dataItems.map( {$0.localID} )
             
             let remiainingIds = selectedDataItemIDs.subtracting(dataItemsToDelete)
             selectedDataItemIDs = remiainingIds

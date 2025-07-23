@@ -87,7 +87,10 @@ class LineNumberViewModel {
         let info = notification.userInfo
         let key = Notification.Name.parserSettingPropertyDidChange
         
-        guard let changedParserSettingsID: UUID = info?[key.rawValue] as? UUID else { return }
+        guard let changedParserSettingsID: ParserSettings.LocalID = info?[key.rawValue] as? ParserSettings.LocalID else {
+            print("error: parserSettingsDidChange(_ notification: Notification)")
+            return
+        }
         
         if changedParserSettingsID == settings.localID {
             self.updateState()

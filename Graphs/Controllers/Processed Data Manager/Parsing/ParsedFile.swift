@@ -14,7 +14,7 @@ struct ParsedFile: Sendable, Codable {
     
     var lastParsedDate: Date = .now
     
-    var dataItemID: UUID
+    var dataItemID: DataItem.LocalID
     
     /// A string made from the lines spanning the Data's Experimental Details or an empty string if the parser does not include any Experimental Details
     ///
@@ -51,7 +51,7 @@ struct ParsedFile: Sendable, Codable {
     
     
     
-    init(dataItemID: UUID) {
+    init(dataItemID: DataItem.LocalID) {
         self.dataItemID = dataItemID
     }
     

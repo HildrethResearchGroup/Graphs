@@ -13,10 +13,40 @@ import OSLog
 extension DataController {
     
   
-    
-    
     // MARK: - Importing General URLs
-    func importURLs(_ urls: [URL], intoNode parentNode: Node?) throws  {
+    /// Public API to import urls into a parent node
+    func importURLs(_ urls: [URL], intoNode parentNode: Node?) -> Bool  {
+        let im = ImportMonitor.shared
+        
+        
+        
+        if urls.count == 0 {
+            im.importComplete()
+            return false
+        }
+        
+        im.importStarting()
+        
+        defer {
+            im.importComplete()
+        }
+        
+        do {
+            try self.internalImportURLs(urls, into: parentNode)
+            return true
+        } catch  {
+            im.importComplete()
+            Logger.dataController.info("DataController: Failed to import URLs with error: \(error)")
+            return false
+            
+        }
+    }
+    
+    
+    /// Internal import URLs into a parent node
+    ///
+    /// This function coducts all of the work
+    private func internalImportURLs(_ urls: [URL], into parentNode: Node?) throws {
         
         // No need to do anything if there aren't any URLs in the array
         if urls.isEmpty {throw ImportError.noURLsToImport}
@@ -40,11 +70,6 @@ extension DataController {
             }
         }
         
-        /*
-         if files.count != 0 && parentNode == nil {
-             throw ImportError.cannotImportFileWithoutANode
-         }
-         */
         
         
         var newDataItems: [DataItem] = []
@@ -77,10 +102,10 @@ extension DataController {
             }
         }
         
-        
+        let useImportMonitor = !urlsOnlyContainDataGraphFiles(urls)
         var newGraphTemplates: [GraphTemplate] = []
         for nextGraphURL in graphURLs {
-            if let newGraphTemplate = importGraphTemplate(withURL: nextGraphURL, intoNode: targetNode) {
+            if let newGraphTemplate = importGraphTemplate(withURL: nextGraphURL, intoNode: targetNode, shouldUseImportMonitor: useImportMonitor) {
                 newGraphTemplates.append(newGraphTemplate)
             }
         }
@@ -98,6 +123,7 @@ extension DataController {
         
         delegate?.newObjects(nodes: newNodes, dataItems: newDataItems, graphTemplates: newGraphTemplates, parserSettings: newParsers)
     }
+    
     
     
     private func importDirectory(_ url: URL, intoNode parentNode: Node?) -> Node? {
@@ -123,62 +149,15 @@ extension DataController {
         
         // Create Node and Insert into context
         let newNode = Node(url: url)
+        newNode.postModelContextInsertInitialization(parentNode)
         
         modelContext.insert(newNode)
         
-        newNode.postModelContextInsertInitialization(parentNode)
         
-        
-        /*
-         // Get the contenst of the original URL and sort into directories and files
-         var subdirectories: [URL] = []
-         var files: [URL] = []
-         var graphTemplates: [URL] = []
-         var parseFiles: [URL] = []
-         
-         
-         if let contentURLs = try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey]) {
-             for nextURL in contentURLs {
-                 
-                 let nextType = URL.URLType(withURL: nextURL)
-                 
-                 switch nextType {
-                 case .directory:
-                     subdirectories.append(nextURL)
-                 case .file:
-                     files.append(nextURL)
-                 case .dgraph: graphTemplates.append(nextURL)
-                 case .gparser: parseFiles.append(nextURL)
-                 case .fileOrDirectoryDoesNotExist:
-                     continue
-                 }
-             }
-         }
-         
-         
-         for nextGraphTemplateURL in graphTemplates {
-             _ = self.importGraphTemplate(withURL: nextGraphTemplateURL, intoNode: newNode)
-         }
-         
-         for nextParerURL in parseFiles {
-             _ = self.importParser(from: nextParerURL, intoNode: newNode)
-         }
-         
-         // Add any files directly owned by the directory into the new Node
-         for nextFile in files {
-             _ = self.importFile(nextFile, intoNode: newNode)
-         }
-         
-         
-         // Recusively transform any subdirectores into subnodes
-         for nextDirectory in subdirectories {
-             _ = self.importDirectory(nextDirectory, intoNode: newNode)
-         }
-         */
         
         
         if let contentURLs = try? fm.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isRegularFileKey]) {
-            try? self.importURLs(contentURLs, intoNode: newNode)
+            try? self.internalImportURLs(contentURLs, into: newNode)
         }
         
         
@@ -245,7 +224,19 @@ extension DataController {
     
     
     // MARK: - Graph Template
-    func importGraphTemplate(withURL url: URL, intoNode node: Node? = nil) -> GraphTemplate? {
+    private func importGraphTemplate(withURL url: URL, intoNode node: Node? = nil, shouldUseImportMonitor: Bool) -> GraphTemplate? {
+        
+        if url.pathExtension != "dgraph" {
+            return nil
+        }
+        
+        if shouldUseImportMonitor {
+            let im = ImportMonitor.shared
+            if im.shouldImportdgraphFileAsGraphTemplate() == false {
+                return nil
+            }
+        }
+        
         
         guard let newGraphTemplate = GraphTemplate(url: url) else { return nil}
        
@@ -258,9 +249,22 @@ extension DataController {
         delegate?.newGraphTemplate(newGraphTemplate)
         
         return newGraphTemplate
+
     }
+
     
-    
+    private func urlsOnlyContainDataGraphFiles(_ urls: [URL]) -> Bool {
+        // Check all of the urls.  If any of them aren't datagraph files, then return false.
+        
+        for nextURL in urls {
+            if nextURL.pathExtension != "dgraph" {
+                return false
+            }
+        }
+        
+        print("\(urls.map({$0.pathExtension})) only contain dgraph extensions")
+        return true
+    }
     
     
     
@@ -337,7 +341,7 @@ extension DataController {
         
         var staticSettings = parserSettings.parserSettingsStatic
         
-        staticSettings.localID = UUID()
+        staticSettings.localID = ParserSettings.LocalID()
         
         staticSettings.name += " - Copy"
         

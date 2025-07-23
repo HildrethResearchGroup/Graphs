@@ -9,5 +9,7 @@ import Foundation
 
 extension UserDefaults {
     static let allowedDataFileExtensions: String = "allowedDataFileExtensions"
-    static let dontAskBeforeImportingDataGraphFilesAsTemplate: String = "dontAskBeforeImportingDataGraphFilesAsTemplate"
+    static let neverAskBeforeImportingDataGraphFilesAsTemplate: String = "neverAskBeforeImportingDataGraphFilesAsTemplate"
+    
+    static let shouldAlwaysImportDataGraphFilesAsTemplate: String = "shouldAlwaysImportDataGraphFilesAsTemplate"
 }

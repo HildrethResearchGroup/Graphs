@@ -12,7 +12,7 @@ import Foundation
 struct ParserSettingsStatic: Codable, Sendable {
     var name: String
     
-    var localID: UUID
+    var localID: ParserSettings.LocalID
     
     var creationDate: Date
     var lastModified: Date

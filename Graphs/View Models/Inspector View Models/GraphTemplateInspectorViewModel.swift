@@ -49,14 +49,7 @@ extension GraphTemplateInspectorViewModel {
     }
     
     func importURLs(_ urls: [URL]) {
-        do {
-            
-            try dataController.importURLs(urls, intoNode: nil)
-        } catch  {
-            Logger.viewModel.info("Error when trying to import: \(urls)")
-            Logger.viewModel.info("\(error)")
-        }
-        
+        _ = dataController.importURLs(urls, intoNode: nil)
     }
     
     func deleteSelectedGraphTemplate() {

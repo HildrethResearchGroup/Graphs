@@ -25,6 +25,7 @@ struct NodeView: View {
         }
         .draggable(node.localID)
         .dropDestination(for: DropItem.self, action: { items, location in
+            
             sourceListVM.drop(items: items, onto: node)
             return true
         })

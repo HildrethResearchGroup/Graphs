@@ -52,19 +52,27 @@ extension SourceListViewModel {
     }
     
     func importURLs(_ urls: [URL], intoNode parentNode: Node?) -> Bool {
-        do {
-            try dataController.importURLs(urls, intoNode: parentNode)
-            
-            return true
-        } catch {
-            if let importError = error as? DataController.ImportError {
-                if importError == .cannotImportFileWithoutANode {
-                    self.presentURLImportError = true
-                    return false
-                }
-            }
-            return false
-        }
+        
+        let success = dataController.importURLs(urls, intoNode: parentNode)
+        
+        return success
+        
+        /*
+         do {
+             try dataController.importURLs(urls, intoNode: parentNode)
+             
+             return true
+         } catch {
+             if let importError = error as? DataController.ImportError {
+                 if importError == .cannotImportFileWithoutANode {
+                     self.presentURLImportError = true
+                     return false
+                 }
+             }
+             return false
+         }
+         */
+        
     }
     
     
@@ -77,13 +85,25 @@ extension SourceListViewModel {
         
         guard let parentNode = selectionManager.selectedNodes.first else {return false}
         
-        do {
-            try dataController.importURLs(urls, intoNode: parentNode)
-            return true
-        } catch {
+        let success = dataController.importURLs(urls, intoNode: parentNode)
+        
+        if success == false {
             self.presentURLImportError = true
-            return false
         }
+        
+        return success
+        
+        /*
+         do {
+             try dataController.importURLs(urls, intoNode: parentNode)
+             return true
+         } catch {
+             self.presentURLImportError = true
+             return false
+         }
+         */
+        
+        
     }
 }
 
@@ -114,29 +134,30 @@ extension SourceListViewModel {
 extension SourceListViewModel {
     
     func drop(items: [DropItem], onto node: Node) {
-        var uuids: [UUID] = []
-        var urls: [URL] = []
+        
+        var urls: [URL] = [URL]()
+        var dataItemIDs: [DataItem.LocalID] = [DataItem.LocalID]()
+        var nodeIDs: [Node.LocalID] = [Node.LocalID]()
+        
         
         for nextItem in items {
             switch nextItem {
-            case .uuid(let uuid): uuids.append(uuid)
+            case .dataItem(let dataItemID): dataItemIDs.append(dataItemID)
+            case .node(let nodeID): nodeIDs.append(nodeID)
             case .url (let url): urls.append(url)
             case .none: continue
             }
         }
         
-        if uuids.count != 0 {
-            drop(uuids: uuids, onto: node)
+        
+        if !dataItemIDs.isEmpty || !nodeIDs.isEmpty {
+            dataController.move(dataItemIDs: dataItemIDs, and: nodeIDs, to: node)
         }
+
         
         if urls.count != 0 {
             _ = importURLs(urls, intoNode: node)
         }
-    }
-    
-    func drop(uuids: [UUID], onto node: Node) {
-        
-        dataController.tryToMove(uuids: uuids, to: node)
     }
 }
 

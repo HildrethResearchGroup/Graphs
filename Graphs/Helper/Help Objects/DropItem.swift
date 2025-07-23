@@ -12,18 +12,29 @@ import SwiftUI
 // https://stackoverflow.com/questions/74290721/how-do-you-mark-a-single-container-as-a-dropdestination-for-multiple-transferabl
 enum DropItem: Codable, Transferable {
     case none
-    case uuid(UUID)
+    //case uuid(UUID)
     case url(URL)
+    case dataItem(DataItem.LocalID)
+    case node(Node.LocalID)
     
     static var transferRepresentation: some TransferRepresentation {
-        ProxyRepresentation { DropItem.uuid($0) }
+        ProxyRepresentation { DropItem.dataItem($0)}
+        ProxyRepresentation { DropItem.node($0) }
         ProxyRepresentation { DropItem.url($0) }
     }
     
-    var uuid: UUID? {
+    
+    var dataItem: DataItem.LocalID? {
         switch self {
-            case .uuid(let uuid): return uuid
-            default: return nil
+        case .dataItem(let dataItemID): return dataItemID
+        default: return nil
+        }
+    }
+    
+    var node: Node.LocalID? {
+        switch self {
+        case .node(let nodeID): return nodeID
+        default: return nil
         }
     }
     

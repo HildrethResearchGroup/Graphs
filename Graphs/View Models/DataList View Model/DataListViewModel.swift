@@ -19,7 +19,7 @@ class DataListViewModel {
         get { dataController.visableItems }
     }
     
-    var selection: Set<DataItem.ID> {
+    var selection: Set<DataItem.LocalID> {
         get { selectionManager.selectedDataItemIDs }
         set { selectionManager.selectedDataItemIDs = newValue }
     }

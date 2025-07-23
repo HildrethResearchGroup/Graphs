@@ -8,20 +8,21 @@
 
 import Foundation
 import SwiftData
+import CoreTransferable
 
 @Model
 final class Node {
     // MARK: - Properties
-    var localID: UUID
+    var localID: LocalID
     
     var originalURL: URL?
     
     var name: String
     
-    @Relationship(deleteRule: .nullify, inverse: \Node.subNodes)
+    //@Relationship(deleteRule: .cascade, inverse: \Node.subNodes)
     var parent: Node?
     
-    //@Relationship(deleteRule: .cascade, inverse: \Node.parent)
+    @Relationship(deleteRule: .cascade, inverse: \Node.parent)
     private var subNodes: [Node]? = []
     
     @Transient
@@ -87,7 +88,7 @@ final class Node {
     
     // MARK: - Initializers
     init(url: URL?) {
-        self.localID = UUID()
+        self.localID = LocalID()
 
         self.originalURL = url
         
@@ -167,7 +168,7 @@ final class Node {
         let nc = NotificationCenter.default
         
         let info: [String: Any] = [
-            "dataItem.ids" : [id],
+            "dataItem.ids" : [localID],
             
             "oldGraphTemplate.id" : oldGraphTemplateID as Any,
             
@@ -267,12 +268,36 @@ final class Node {
 }
 
 
+// MARK: - LocalID
+extension Node: SelectableCheck {
+    struct LocalID: SelectableID, Codable, Identifiable, Transferable, Equatable, Hashable {
+        
+        var id = UUID()
+        var uuidString: String {
+            id.uuidString
+        }
+        
+        static var transferRepresentation: some TransferRepresentation {
+            CodableRepresentation(contentType: .uuid)
+                ProxyRepresentation(exporting: \.id)
+            }
+    }
+    
+    func matches(_ uuid: UUID) -> Bool {
+        return localID.id == uuid
+    }
+}
+
+
+// MARK: - Hashable
 extension Node: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(self.id)
     }
 }
 
+
+// MARK: - Defaults
 extension Node {
     static let defaultName = "New Folder"
 }

@@ -9,7 +9,7 @@ import Foundation
 
 protocol DataControllerDelegate {
     // MARK: - Filtering
-    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID])
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.LocalID])
     
     
     // MARK: - Nodes and DataItems

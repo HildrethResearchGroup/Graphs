@@ -14,7 +14,7 @@ import OSLog
 @MainActor
 class ProcessDataManager {
     
-    private var processedData: [DataItem.ID : ProcessedData] = [:]
+    private var processedData: [DataItem.LocalID : ProcessedData] = [:]
     
     var cacheManager: CacheManager
     
@@ -43,7 +43,7 @@ class ProcessDataManager {
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
         // Enable Local Caching
-         if let output = processedData[dataItem.id] {
+         if let output = processedData[dataItem.localID] {
              
              // Check to see if cached data is up to date
              if output.parsedFileState == .upToDate && output.graphTemplateState == .upToDate {
@@ -63,7 +63,7 @@ class ProcessDataManager {
     private func generateNewProcessedData(for dataItem: DataItem) async -> ProcessedData {
         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
         
-        processedData[dataItem.id] = newProcessedData
+        processedData[dataItem.localID] = newProcessedData
         
         return newProcessedData
     }
@@ -91,7 +91,7 @@ class ProcessDataManager {
     
     
     private func delete(dataItem: DataItem) {
-        processedData.removeValue(forKey: dataItem.id)
+        processedData.removeValue(forKey: dataItem.localID)
         self.deleteCache(for: dataItem)
     }
     
@@ -144,7 +144,7 @@ extension ProcessDataManager {
         
         let info = notification.userInfo
         
-        let dataItemIDs: [DataItem.ID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.ID] ?? []
+        let dataItemIDs: [DataItem.LocalID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.LocalID] ?? []
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDs)
     }
@@ -154,14 +154,17 @@ extension ProcessDataManager {
         guard let userInfo = notification.userInfo else { return }
         let dataItemsKey = Notification.UserInfoKey.dataItemIDs
         
-        guard let dataItemIDs: [DataItem.ID] = userInfo[dataItemsKey] as? [DataItem.ID] else { return }
+        guard let dataItemIDs: [DataItem.LocalID] = userInfo[dataItemsKey] as? [DataItem.LocalID] else {
+            print("Error: graphTemplateOnNodeOrDataItemsDidChange")
+            return
+        }
         
         self.graphTemplateChanged(for: dataItemIDs)
     }
     
     
     // MARK: - Implement Graph Template Changes
-    private func graphTemplateChanged(for dataItemIDs: [DataItem.ID]) {
+    private func graphTemplateChanged(for dataItemIDs: [DataItem.LocalID]) {
         let processedDataToUpdate = processedData.filter({id, data in
             dataItemIDs.contains( where: { $0 == id})
         })
@@ -196,13 +199,13 @@ extension ProcessDataManager {
         guard let userInfo = notification.userInfo else { return }
         let key = Notification.UserInfoKey.parserSettingsIDs
         
-        guard let parserSettingIDs: [UUID] = userInfo[key] as? [UUID] else { return }
+        guard let parserSettingIDs: [ParserSettings.LocalID] = userInfo[key] as? [ParserSettings.LocalID] else { return }
         
         guard let parserSettingsID = parserSettingIDs.first else { return }
         
         let processedDataToUpdate: [ProcessedData] = processedData.values.filter( { $0.dataItem.getAssociatedParserSettings()?.localID == parserSettingsID})
         
-        let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.id})
+        let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.localID})
         
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDsToUpdate)
@@ -210,7 +213,7 @@ extension ProcessDataManager {
     
     
     
-    private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.ID]) {
+    private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.LocalID]) {
         
         let processedDataToUpdate = processedData.filter( {id, data in
             if ids.contains(id) {
@@ -246,5 +249,5 @@ extension ProcessDataManager {
 
 
 protocol ProcessDataManagerDataSource {
-    func currentSelection() -> [DataItem.ID]
+    func currentSelection() -> [DataItem.LocalID]
 }

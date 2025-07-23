@@ -105,7 +105,7 @@ class TextInspectorViewModel {
         
         // Sendable dataItem information
         let url = dataItem?.url
-        let dataItemID = dataItem?.id
+        let dataItemID = dataItem?.localID
         let parserSettings = dataItem?.getAssociatedParserSettings()?.parserSettingsStatic
         let parserSettingsDateLastModified = parserSettings?.lastModified
         

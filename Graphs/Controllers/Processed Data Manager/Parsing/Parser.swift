@@ -11,7 +11,7 @@ import Foundation
 struct Parser {
     
     
-    static func parse(_ url: URL, using staticSettings: ParserSettingsStatic, into id: UUID) async throws -> ParsedFile {
+    static func parse(_ url: URL, using staticSettings: ParserSettingsStatic, into localID: DataItem.LocalID) async throws -> ParsedFile {
         
         _ = staticSettings.validateLineStartEndSettings
         
@@ -25,7 +25,7 @@ struct Parser {
         
         let lines: [String] = content.components(separatedBy: lineSeparator)
         
-        var parsedFile = ParsedFile(dataItemID: id)
+        var parsedFile = ParsedFile(dataItemID: localID)
         
         //var header: [[String]] = []
         //var data: [DataColumn] = []

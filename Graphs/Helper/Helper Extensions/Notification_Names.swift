@@ -15,7 +15,7 @@ extension Notification.Name {
     /** Notification Name for when the Parser Settings on a Node or Data Item is changed
      
      UserInfo Keys : Values
-     - dataItemIDs : [DataItem.ID].  Key to an array of impacted DataItems through their .id property
+     - dataItemIDs : [DataItem.LocalID].  Key to an array of impacted DataItems through their .id property
      - oldParserSettingID : ParserSettings.ID.  Key to the previously used  Parser Settings ID for that Node/DataItem
      - newParserSettingID : ParserSettings.ID.  Key to the  new Parser Settings ID for that Node/DataItem
      **/
@@ -35,7 +35,7 @@ extension Notification.Name {
     /** Notification Name for when the Graph Template on a Node or Data Item is changed
      
      UserInfo Keys : Values
-     - dataItemIDs : [DataItem.ID].  Key to an array of impacted DataItems through their .id property
+     - dataItemIDs : [DataItem.LocalID].  Key to an array of impacted DataItems through their .id property
      - oldGraphTemplateID : GraphTemplate.ID.  Key to the previously used  Graph Template ID for that Node/DataItem
      - newGraphTemplateID : GraphTemplate.ID.  Key to the  new Graph Template ID for that Node/DataItem
      */

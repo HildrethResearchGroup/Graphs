@@ -37,7 +37,7 @@ struct GraphTemplateInspector: View {
     @ViewBuilder
     var AvailableGraphTemplates: some View {
         List(selection: $viewModel.selection) {
-            ForEach(viewModel.graphTemplates, id: \.self) { nextGraphTemplate in
+            ForEach(viewModel.graphTemplates, id: \.id) { nextGraphTemplate in
                 Text(nextGraphTemplate.name)
                     .foregroundStyle(viewModel.foregroundColor(for: nextGraphTemplate))
                     .contextMenu {
