@@ -52,6 +52,7 @@
 		C042F5952CC4BC0D00692678 /* ParserSettingsStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */; };
 		C05B75D12E1EE37E00889F0F /* DropItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05B75D02E1EE37E00889F0F /* DropItem.swift */; };
 		C06F7BE22E23063D000FC70E /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06F7BE12E23063D000FC70E /* NodeView.swift */; };
+		C070FB3A2E32E02A00A7204C /* TableDataRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C070FB392E32E02A00A7204C /* TableDataRow.swift */; };
 		C072E22F2E297559004F6260 /* LocalID.swift in Sources */ = {isa = PBXBuildFile; fileRef = C072E22E2E297559004F6260 /* LocalID.swift */; };
 		C07312652CCF371100AB81B4 /* ProcessedData_Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07312642CCF371100AB81B4 /* ProcessedData_Parsing.swift */; };
 		C0762C942CBB6E200018BDC7 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0762C932CBB6E200018BDC7 /* CacheManager.swift */; };
@@ -178,6 +179,7 @@
 		C042F5942CC4BC0D00692678 /* ParserSettingsStatic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserSettingsStatic.swift; sourceTree = "<group>"; };
 		C05B75D02E1EE37E00889F0F /* DropItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropItem.swift; sourceTree = "<group>"; };
 		C06F7BE12E23063D000FC70E /* NodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
+		C070FB392E32E02A00A7204C /* TableDataRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDataRow.swift; sourceTree = "<group>"; };
 		C072E22E2E297559004F6260 /* LocalID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalID.swift; sourceTree = "<group>"; };
 		C07312642CCF371100AB81B4 /* ProcessedData_Parsing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessedData_Parsing.swift; sourceTree = "<group>"; };
 		C0762C932CBB6E200018BDC7 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 			children = (
 				C0E0B3C62E2026BE00150F7F /* TableInspectorViewModel.swift */,
 				C03748E42E219ED3007452DB /* TableData.swift */,
+				C070FB392E32E02A00A7204C /* TableDataRow.swift */,
 			);
 			path = "Table Inspector View Model";
 			sourceTree = "<group>";
@@ -444,7 +447,6 @@
 		C04BBC902CE806A8006AEFCE /* General Views */ = {
 			isa = PBXGroup;
 			children = (
-				C095297C2C2DD62F002D3F97 /* Convenience Views */,
 				C04BBC8F2CE80663006AEFCE /* Graph View */,
 			);
 			path = "General Views";
@@ -568,13 +570,6 @@
 				C07921ED2CC82E7000A5002C /* GraphControllerListViewModel.swift */,
 			);
 			path = "GraphList View Model";
-			sourceTree = "<group>";
-		};
-		C095297C2C2DD62F002D3F97 /* Convenience Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Convenience Views";
 			sourceTree = "<group>";
 		};
 		C0A93A612C12400F0037BAE3 /* Data Controller */ = {
@@ -816,6 +811,7 @@
 				C0ED09102C49B81F00052208 /* DataItemsInspectorViewModel.swift in Sources */,
 				C0E8187F2C4ABF6000C4A015 /* InputType.swift in Sources */,
 				C0E0B3C72E2026BE00150F7F /* TableInspectorViewModel.swift in Sources */,
+				C070FB3A2E32E02A00A7204C /* TableDataRow.swift in Sources */,
 				C0C55F9D2C4088B8001F2554 /* SimpleTextWithLineNumbers.swift in Sources */,
 				C01A9D0B2C3DC75300A555B9 /* TextInspector.swift in Sources */,
 				C0D455102E26E8AF009FCE4E /* ImportMonitor.swift in Sources */,

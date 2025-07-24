@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AppKit
 
 
 @Observable
@@ -27,7 +28,7 @@ class TableInspectorViewModel {
     
     var tableData: TableData
     
-    
+    var selection: Set<TableDataRow.ID> = []
     
     // MARK: View State
     var viewIsVisable: Bool = false {
@@ -99,6 +100,43 @@ class TableInspectorViewModel {
         }
     }
 }
+
+
+// MARK: - Exporting
+extension TableInspectorViewModel {
+    
+    /// Copies selection as tab separated items
+    func copySelection() {
+        
+        if selection.isEmpty { return }
+        
+        var output = ""
+        
+        if let headerString = tableData.headerString() {
+            output.append(headerString)
+        }
+        
+        for nextSelectionID in selection {
+            let rowString = tableData.rowString(for: nextSelectionID)
+            if output.isEmpty {
+                output.append(rowString)
+            } else {
+                output.append("\n\(rowString)")
+            }
+        }
+        
+        if output.isEmpty { return }
+        
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.setString(output, forType: .string)
+    
+        
+    }
+    
+    
+}
+
 
 
 // MARK: - UI

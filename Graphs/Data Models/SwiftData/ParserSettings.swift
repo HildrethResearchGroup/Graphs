@@ -77,10 +77,26 @@ final class ParserSettings: Identifiable {
     var experimentalDetailsStart: Int {
         get { _experimentalDetailsStart }
         set {
-            _experimentalDetailsStart = newValue
+            
+            if newValue < 1 {
+                
+                if experimentalDetailsEnd < 1 {
+                    experimentalDetailsEnd = 1
+                }
+                _experimentalDetailsStart = 1
+            } else {
+                
+                if experimentalDetailsEnd < newValue {
+                    experimentalDetailsEnd = newValue
+                }
+                _experimentalDetailsStart = newValue
+            }
+            
             propertyChanged()
         }
     }
+    
+    
     private var _experimentalDetailsStart: Int
     
     
@@ -88,7 +104,16 @@ final class ParserSettings: Identifiable {
     var experimentalDetailsEnd: Int {
         get { _experimentalDetailsEnd }
         set {
-            _experimentalDetailsEnd = newValue
+            if newValue < experimentalDetailsStart {
+                _experimentalDetailsEnd = experimentalDetailsStart
+            } else {
+                
+                if headerStart < newValue {
+                    headerStart = newValue
+                }
+                _experimentalDetailsEnd = newValue
+            }
+            
             propertyChanged()
         }
     }
@@ -122,7 +147,18 @@ final class ParserSettings: Identifiable {
     var headerStart: Int {
         get { _headerStart }
         set {
-            _headerStart = newValue
+            
+            var localHeaderStart = newValue
+            
+            if newValue < experimentalDetailsEnd {
+                localHeaderStart = experimentalDetailsEnd
+            }
+            
+            if localHeaderStart > headerEnd {
+                headerEnd = localHeaderStart
+            }
+            
+            _headerStart = localHeaderStart
             propertyChanged()
         }
     }
@@ -133,7 +169,18 @@ final class ParserSettings: Identifiable {
     var headerEnd: Int {
         get { _headerEnd }
         set {
-            _headerEnd = newValue
+            
+            var localHeaderEnd = newValue
+            
+            if localHeaderEnd < headerStart {
+                localHeaderEnd = headerStart
+            }
+            
+            if dataStart < localHeaderEnd {
+                dataStart = localHeaderEnd
+            }
+            
+            _headerEnd = localHeaderEnd
             propertyChanged()
         }
     }
@@ -155,7 +202,13 @@ final class ParserSettings: Identifiable {
     var dataStart: Int {
         get { _dataStart }
         set {
-            _dataStart = newValue
+            var localDataStart = newValue
+            
+            if dataStart < headerEnd {
+                localDataStart = headerEnd
+            }
+            
+            _dataStart = localDataStart
             propertyChanged()
         }
     }

@@ -82,8 +82,17 @@ struct ParsedFile: Sendable, Codable {
         for (rowIndex, nextHeaderRow) in header.enumerated() {
             for (columnIndex, headerString) in nextHeaderRow.enumerated() {
                 if rowIndex == 0 {
+                    
+                    if columnIndex >= localHeaders.count {
+                        return
+                    }
+                    
                     localHeaders[columnIndex] = headerString
                 } else {
+                    if columnIndex >= localHeaders.count {
+                        return
+                    }
+                    
                     let currentHeader = localHeaders[columnIndex]
                     localHeaders[columnIndex] = currentHeader + "\n" + headerString
                 }
@@ -103,6 +112,41 @@ struct ParsedFile: Sendable, Codable {
         case .equalCount:
             appendEqualRow(row)
         case let .lessColumnsThanData(numberOfNeededColumns):
+                    
+            // TODO: Determine what to do if number of columns changes
+            // For now, just exit out of the appendRow and parsing process
+            
+            return
+            /*
+             for _ in 0..<numberOfNeededColumns {
+                 let numberOfNeededRows = data.first?.data.count ?? 0
+                 
+                 let emptyColumn = DataColumn(headers: headers, emptyRows: numberOfNeededRows)
+                 data.append(emptyColumn)
+             }
+             */
+           
+             
+             
+            /*
+             var localRow = row
+             for _ in 0..<numberOfNeededRows {
+                 localRow.append("")
+             }
+             
+             appendEqualRow(localRow)
+             */
+            
+        case let .moreColumnsThanData(numberOfNeededRows):
+            return
+            
+             var localRow = row
+             for _ in 0..<numberOfNeededRows {
+                 localRow.append("")
+             }
+             
+            14
+            
             /*
              for _ in 0..<numberOfNeededColumns {
                  let numberOfNeededRows = data.first?.data.count ?? 0
@@ -110,33 +154,10 @@ struct ParsedFile: Sendable, Codable {
                  let emptyColumn = DataColumn(headers: headers, emptyRows: numberOfNeededRows)
                  data.append(emptyColumn)
                  
-             
-             */
-            
-            var localRow = row
-            for _ in 0..<numberOfNeededRows {
-                localRow.append("")
-            }
-            
-            appendEqualRow(localRow)
-        case let .moreColumnsThanData(numberOfNeededRows):
-            
-            /*
-             var localRow = row
-             for _ in 0..<numberOfNeededRows {
-                 localRow.append("")
              }
+             
+             appendEqualRow(localRow)
              */
-            
-            for _ in 0..<numberOfNeededColumns {
-                let numberOfNeededRows = data.first?.data.count ?? 0
-                
-                let emptyColumn = DataColumn(headers: headers, emptyRows: numberOfNeededRows)
-                data.append(emptyColumn)
-                
-            }
-            
-            appendEqualRow(localRow)
         }
     }
     

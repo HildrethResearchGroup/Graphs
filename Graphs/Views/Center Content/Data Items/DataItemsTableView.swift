@@ -12,42 +12,55 @@ struct DataItemsTableView: View {
     
     @Bindable var viewModel: DataListViewModel
     
+    @AppStorage("dataItemTableCustomization") var customization: TableColumnCustomization<DataItem>
+    
     init(_ viewModel: DataListViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        Table(selection: $viewModel.selection, sortOrder: $viewModel.sort) {
+        Table(selection: $viewModel.selection, sortOrder: $viewModel.sort, columnCustomization: $customization) {
             TableColumn("Name", value: \.name) {
                 Text($0.name)
                     .help($0.url.path(percentEncoded: false))
             }
-            
-            
+            .customizationID("name")
+
              TableColumn("Folder", value: \.nodeName)
+                .customizationID("nodeName")
+            
              TableColumn("Folder Path", value: \.nodePath) {
                  Text($0.nodePath)
                      .help($0.nodePath)
              }
+             .customizationID("nodePath")
             
-            /*
              TableColumn("File Size", value: \.fileSize) {
                  Text($0.scaledFileSize)
              }
              .alignment(.center)
+             .customizationID("fileSize")
+            
              TableColumn("Import Date", value: \.creationDate) {
                  Text($0.creationDate.formatted(date: .numeric, time: .omitted))
              }
              .alignment(.center)
-             TableColumn("Creation Date", value: \.creationDate) {
+             .customizationID("creationDate")
+            
+            TableColumn("Creation Date", value: \.contentCreationDate) {
                  Text($0.creationDate.formatted(date: .numeric, time: .omitted))
              }
              .alignment(.center)
+             .customizationID("contentCreationDate")
+            
+            
              TableColumn("Modified Date", value: \.contentModificationDate) {
                  Text($0.contentModificationDate.formatted(date: .numeric, time: .omitted))
                  
              }
              .alignment(.center)
+             .customizationID("contentModificationDate")
+            
              TableColumn("Open in Finder", value: \.url.relativePath) { nextDataItem in
                  Button(action: {
                      nextDataItem.url.showInFinder()
@@ -59,7 +72,7 @@ struct DataItemsTableView: View {
                  })
              }
              .alignment(.center)
-             */
+             
             
         }
         rows: {

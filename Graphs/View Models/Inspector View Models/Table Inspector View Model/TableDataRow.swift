@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+
+struct TableDataRow: Identifiable, Hashable {
+    var id = ID()
+    
+    let rowNumber: Int
+    
+    struct ID: Identifiable, Hashable {
+        var id = UUID()
+    }
+}

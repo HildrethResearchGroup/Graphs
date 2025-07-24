@@ -9,15 +9,7 @@
 import Foundation
 
 
-struct TableDataRow: Identifiable {
-    var id = ID()
-    
-    let rowNumber: Int
-    
-    struct ID: Identifiable, Hashable {
-        var id = UUID()
-    }
-}
+
 
 /*
  struct TableDataColumn: Identifiable {
@@ -78,4 +70,57 @@ struct TableData: Identifiable {
     struct ID: Identifiable, Hashable {
         var id = UUID()
     }
+}
+
+
+// MARK: - Exporting
+extension TableData {
+    func headerString() -> String? {
+        var output: String?
+        
+        let headerCount = columns.count(where: {!$0.header.isEmpty})
+        
+        if headerCount != 0 {
+            for (index, nextColumn) in columns.enumerated() {
+                if index == 0 {
+                    output = nextColumn.header
+                } else {
+                    output?.append("\t\(nextColumn.header)")
+                }
+            }
+        }
+        
+        return output
+    }
+    
+    func rowString(for id: TableDataRow.ID) -> String {
+        let rowNumber = rowNumber(for: id)
+        return rowString(for: rowNumber)
+    }
+    
+    
+    private func rowNumber(for id: TableDataRow.ID) -> Int? {
+        let row = rows.first(where: { $0.id == id })
+        return row?.rowNumber
+    }
+    
+    private func rowString(for index: Int?) -> String {
+        guard let rowIndex = index else { return "" }
+        if columns.isEmpty { return "" }
+        
+        var output: String = ""
+        
+        for (columnIndex, nextColumn) in columns.enumerated() {
+            let nextDataString = nextColumn.data(for: rowIndex)
+            if columnIndex == 0 {
+                output.append(nextDataString)
+            } else {
+                output.append("\t\(nextDataString)")
+            }
+        }
+        return output
+    }
+    
+    
+    
 }

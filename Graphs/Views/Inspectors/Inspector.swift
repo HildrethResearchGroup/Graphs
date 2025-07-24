@@ -29,7 +29,7 @@ struct Inspector: View {
                 .tabItem { Text("􀋱") }
             TextInspector(viewModel.textInspectorVM)
                 .tabItem { Text("T") }
-            TableInspector(viewModel: viewModel.tableInspectorVM)
+            TableInspector(viewModel.tableInspectorVM)
                 .tabItem { Text("􀏣") }
             
         }
