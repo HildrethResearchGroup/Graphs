@@ -10,8 +10,8 @@ import SwiftData
 
 protocol SelectionManagerDelegate {
 
-    func selectedNodesDidChange(_ nodes: Set<Node>)
+    func selectedNodeIDsDidChange(_ nodeIDs: Set<Node.ID>)
     
-    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.LocalID>)
+    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>)
 }
 

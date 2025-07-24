@@ -14,7 +14,7 @@ import OSLog
 @MainActor
 class ProcessDataManager {
     
-    private var processedData: [DataItem.LocalID : ProcessedData] = [:]
+    private var processedData: [DataItem.ID : ProcessedData] = [:]
     
     var cacheManager: CacheManager
     
@@ -43,7 +43,7 @@ class ProcessDataManager {
     
     func processedData(for dataItem: DataItem) async -> ProcessedData {
         // Enable Local Caching
-         if let output = processedData[dataItem.localID] {
+         if let output = processedData[dataItem.id] {
              
              // Check to see if cached data is up to date
              if output.parsedFileState == .upToDate && output.graphTemplateState == .upToDate {
@@ -63,7 +63,7 @@ class ProcessDataManager {
     private func generateNewProcessedData(for dataItem: DataItem) async -> ProcessedData {
         let newProcessedData = await ProcessedData(dataItem: dataItem, delegate: self)
         
-        processedData[dataItem.localID] = newProcessedData
+        processedData[dataItem.id] = newProcessedData
         
         return newProcessedData
     }
@@ -91,7 +91,7 @@ class ProcessDataManager {
     
     
     private func delete(dataItem: DataItem) {
-        processedData.removeValue(forKey: dataItem.localID)
+        processedData.removeValue(forKey: dataItem.id)
         self.deleteCache(for: dataItem)
     }
     
@@ -144,7 +144,7 @@ extension ProcessDataManager {
         
         let info = notification.userInfo
         
-        let dataItemIDs: [DataItem.LocalID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.LocalID] ?? []
+        let dataItemIDs: [DataItem.ID] = info?[Notification.UserInfoKey.dataItemIDs] as? [DataItem.ID] ?? []
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDs)
     }
@@ -154,7 +154,7 @@ extension ProcessDataManager {
         guard let userInfo = notification.userInfo else { return }
         let dataItemsKey = Notification.UserInfoKey.dataItemIDs
         
-        guard let dataItemIDs: [DataItem.LocalID] = userInfo[dataItemsKey] as? [DataItem.LocalID] else {
+        guard let dataItemIDs: [DataItem.ID] = userInfo[dataItemsKey] as? [DataItem.ID] else {
             print("Error: graphTemplateOnNodeOrDataItemsDidChange")
             return
         }
@@ -164,7 +164,7 @@ extension ProcessDataManager {
     
     
     // MARK: - Implement Graph Template Changes
-    private func graphTemplateChanged(for dataItemIDs: [DataItem.LocalID]) {
+    private func graphTemplateChanged(for dataItemIDs: [DataItem.ID]) {
         let processedDataToUpdate = processedData.filter({id, data in
             dataItemIDs.contains( where: { $0 == id})
         })
@@ -205,7 +205,7 @@ extension ProcessDataManager {
         
         let processedDataToUpdate: [ProcessedData] = processedData.values.filter( { $0.dataItem.getAssociatedParserSettings()?.localID == parserSettingsID})
         
-        let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.localID})
+        let dataItemIDsToUpdate = processedDataToUpdate.map({ $0.dataItem.id})
         
         
         parserOnDataItemDidChange(forDataItemIDS: dataItemIDsToUpdate)
@@ -213,7 +213,7 @@ extension ProcessDataManager {
     
     
     
-    private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.LocalID]) {
+    private func parserOnDataItemDidChange(forDataItemIDS ids: [DataItem.ID]) {
         
         let processedDataToUpdate = processedData.filter( {id, data in
             if ids.contains(id) {
@@ -249,5 +249,5 @@ extension ProcessDataManager {
 
 
 protocol ProcessDataManagerDataSource {
-    func currentSelection() -> [DataItem.LocalID]
+    func currentSelection() -> [DataItem.ID]
 }

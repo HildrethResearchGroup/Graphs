@@ -50,6 +50,36 @@
             endingLineNumber = "50"
             landmarkName = "internalImportURLs(_:into:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "90C12370-8941-4FF6-A1A1-151990D0EA08 - a4ca80f3f5ecf603"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphs.DataController.internalImportURLs(_: Swift.Array&lt;Foundation.URL&gt;, into: Swift.Optional&lt;Graphs.Node&gt;) throws -&gt; ()"
+                  moduleName = "Graphs.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ohildret/Documents/Code/Research/Mines/Graphs/Graphs/Controllers/Data%20Controller/DataController_NewObjects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52">
+               </Location>
+               <Location
+                  uuid = "90C12370-8941-4FF6-A1A1-151990D0EA08 - a4ca80f3f5ecf603"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphs.DataController.internalImportURLs(_: Swift.Array&lt;Foundation.URL&gt;, into: Swift.Optional&lt;Graphs.Node&gt;) throws -&gt; ()"
+                  moduleName = "Graphs.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ohildret/Documents/Code/Research/Mines/Graphs/Graphs/Controllers/Data%20Controller/DataController_NewObjects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -98,6 +128,36 @@
             endingLineNumber = "258"
             landmarkName = "urlsOnlyContainDataGraphFiles(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9DF23987-EDB8-4150-85BC-0611010FC7E1 - bde596840704ded0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphs.DataController.urlsOnlyContainDataGraphFiles(Swift.Array&lt;Foundation.URL&gt;) -&gt; Swift.Bool"
+                  moduleName = "Graphs.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ohildret/Documents/Code/Research/Mines/Graphs/Graphs/Controllers/Data%20Controller/DataController_NewObjects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "259"
+                  endingLineNumber = "259">
+               </Location>
+               <Location
+                  uuid = "9DF23987-EDB8-4150-85BC-0611010FC7E1 - bde596840704ded0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Graphs.DataController.urlsOnlyContainDataGraphFiles(Swift.Array&lt;Foundation.URL&gt;) -&gt; Swift.Bool"
+                  moduleName = "Graphs.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ohildret/Documents/Code/Research/Mines/Graphs/Graphs/Controllers/Data%20Controller/DataController_NewObjects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "259"
+                  endingLineNumber = "259">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -11,7 +11,7 @@ import SwiftData
 import CoreTransferable
 
 @Model
-final class Node {
+final class Node: Identifiable {
     // MARK: - Properties
     var localID: LocalID
     
@@ -167,8 +167,10 @@ final class Node {
         // Post Notification
         let nc = NotificationCenter.default
         
+        let dataItemIDs = flattenedDataItems().map( { $0.id } )
+        
         let info: [String: Any] = [
-            "dataItem.ids" : [localID],
+            "dataItem.ids" : [dataItemIDs],
             
             "oldGraphTemplate.id" : oldGraphTemplateID as Any,
             

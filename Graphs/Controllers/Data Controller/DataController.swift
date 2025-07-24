@@ -78,9 +78,16 @@ class DataController {
     // MARK: - Selections
     // This is temporary and used to make the visibleItems a computed property
     // TODO: Remove when visibleItems transitioned to stored property that is updated manually
+    
+    var selectedNodeIDs: [Node.ID] = [] {
+        didSet {
+            
+        }
+    }
+    
     var selectedNodes: [Node] = [] {
         didSet {
-            updateVisibileNotes()
+            updateFilteredDataItems()
         }
     }
     
@@ -98,7 +105,7 @@ class DataController {
     }
     
     
-    var selectedDataItemIDs: [DataItem.LocalID] = [] {
+    var selectedDataItemIDs: [DataItem.ID] = [] {
         didSet {
             updateSelectedDataItems()
         }
@@ -239,14 +246,20 @@ class DataController {
     
     
     // MARK: - Filtering Selected DataItems
-    func updateVisibileNotes() {
-        updateFilteredDataItems()
+    func updateSelectedNodes() {
+        let ids = selectedNodeIDs
+        
+        let nodes = allNodes()
+        
+        let filteredNodes = nodes.filter( { ids.contains([$0.id]) })
+        
+        self.selectedNodes = filteredNodes
     }
     
     func updateSelectedDataItems() {
         let ids = selectedDataItemIDs
         let items = self.visableItems
-        let filteredItems = items.filter({ids.contains([$0.localID])})
+        let filteredItems = items.filter({ids.contains([$0.id])})
         let sortedFilteredItems = filteredItems.sorted(using: sort)
         
         selectedDataItems = sortedFilteredItems
@@ -260,7 +273,7 @@ class DataController {
         } else {
             let filteredItems = dataItemsFromSelectedNodes.filter({$0.containsFilter(filter)})
             
-            let filteredItemIDs = filteredItems.map({ $0.localID })
+            let filteredItemIDs = filteredItems.map({ $0.id })
             
             delegate?.filterDidChange(currentlySelectedDataItemIDs: filteredItemIDs)
             

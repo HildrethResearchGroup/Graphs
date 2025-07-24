@@ -130,7 +130,7 @@ final class DataItem: Identifiable, Hashable {
         let nc = NotificationCenter.default
         
         let info: [String: Any] = [
-            "dataItem.ids" : [localID],
+            "dataItem.ids" : [id],
             "oldGraphTemplate.id" : oldGraphTemplateID as Any,
             "newGraphTemplate.id" : newGraphTemplateID as Any
         ]
@@ -177,7 +177,7 @@ final class DataItem: Identifiable, Hashable {
         let nc = NotificationCenter.default
         
         let info: [String: Any] = [
-            "dataItem.ids" : [localID],
+            "dataItem.ids" : [id],
             "oldGraphTemplate.id" : oldParserSettingID as Any,
             "newGraphTemplate.id" : newParserSettingID as Any
         ]
@@ -211,9 +211,10 @@ final class DataItem: Identifiable, Hashable {
 
 // MARK: - LocalID
 extension DataItem: SelectableCheck {
-    struct LocalID: SelectableID, Codable, Identifiable, Transferable, Equatable, Hashable {
+    struct LocalID: SelectableID, Transferable {
         
         var id = UUID()
+        
         var uuidString: String {
             id.uuidString
         }

@@ -76,7 +76,7 @@ class AppController {
 
 extension AppController: @preconcurrency DataControllerDelegate {
     // MARK: - Filtering
-    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.LocalID]) {
+    func filterDidChange(currentlySelectedDataItemIDs: [DataItem.ID]) {
         selectionManager.filterDidChange(currentlySelectedDataItemIDs: currentlySelectedDataItemIDs)
     }
     
@@ -125,13 +125,18 @@ extension AppController: @preconcurrency DataControllerDelegate {
 
 
 extension AppController: @preconcurrency SelectionManagerDelegate {
-    func selectedNodesDidChange(_ nodes: Set<Node>) {
-        let sort = SortDescriptor<Node>(\.name)
-        dataController.selectedNodes = Array(nodes).sorted(using: sort)
+    func selectedNodeIDsDidChange(_ nodeIDs: Set<Node.ID>) {
+        /*
+         let sort = SortDescriptor<Node>(\.name)
+         dataController.selectedNodes = Array(nodes).sorted(using: sort)
+         */
+        
+        dataController.selectedNodeIDs = Array(nodeIDs)
+        
         inspectorVM.nodeInspectorVM.selectedNodeDidChange()
     }
     
-    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.LocalID>) {
+    func selectedDataItemsDidChange(_ dataItemsIDs: Set<DataItem.ID>) {
         
         dataController.selectedDataItemIDs = Array(dataItemsIDs)
         graphListVM.updateProcessedData()
@@ -143,7 +148,7 @@ extension AppController: @preconcurrency SelectionManagerDelegate {
 
 
 extension AppController: @preconcurrency ProcessDataManagerDataSource {
-    func currentSelection() -> [DataItem.LocalID] {
+    func currentSelection() -> [DataItem.ID] {
         return Array(selectionManager.selectedDataItemIDs)
     }
 }

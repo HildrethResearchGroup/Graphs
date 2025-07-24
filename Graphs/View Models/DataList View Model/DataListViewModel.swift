@@ -15,11 +15,11 @@ class DataListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
     
-    var dataItems: OrderedSet<DataItem> {
-        get { dataController.visableItems }
+    var dataItems: Array<DataItem> {
+        get { Array(dataController.visableItems) }
     }
     
-    var selection: Set<DataItem.LocalID> {
+    var selection: Set<DataItem.ID> {
         get { selectionManager.selectedDataItemIDs }
         set { selectionManager.selectedDataItemIDs = newValue }
     }
