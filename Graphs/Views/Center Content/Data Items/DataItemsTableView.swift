@@ -79,20 +79,30 @@ struct DataItemsTableView: View {
             ForEach(viewModel.dataItems, id: \.id) { dataItem in
                 TableRow(dataItem)
                     .contextMenu {
-                        Button("Delete") { viewModel.deleteSelectedDataItems() }
-                            .disabled(viewModel.selection.count == 0)
+                        Button_Delete
+                        Button_Export
                     }
                 }
             } // END: Table
-        /*
-         
-         */
-        
+    }
+    
+    
+// MARK: - Buttons
+    private var Button_Delete: some View {
+        Button("Delete") { viewModel.deleteSelectedDataItems() }
+            .disabled(viewModel.selection.count == 0)
+    }
+    
+    private var Button_Export: some View {
+        Button("Export Graphs") { viewModel.exportSelectionAsDataGraphFiles() }
+            .disabled(viewModel.selection.count == 0)
     }
 
 }
 
 #Preview {
-    @Previewable var dataListVM = DataListViewModel(DataController(withDelegate: nil), SelectionManager())
+    @Previewable var dataListVM = DataListViewModel(DataController(withDelegate: nil),
+                                                    SelectionManager(),
+                                                    ProcessDataManager(cacheManager: CacheManager(), dataSource: nil))
     DataItemsTableView(dataListVM)
 }

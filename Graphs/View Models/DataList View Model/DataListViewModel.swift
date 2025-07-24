@@ -8,12 +8,14 @@
 
 import Foundation
 import Collections
+import SwiftUI
 
 @Observable
 @MainActor
 class DataListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
+    private var processedDataManager: ProcessDataManager
     
     var dataItems: Array<DataItem> {
         get { Array(dataController.visableItems) }
@@ -24,9 +26,10 @@ class DataListViewModel {
         set { selectionManager.selectedDataItemIDs = newValue }
     }
     
-    init(_ dataController: DataController, _ selectionManager: SelectionManager) {
+    init(_ dataController: DataController, _ selectionManager: SelectionManager, _ processedDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
+        self.processedDataManager = processedDataManager
     }
     
     var sort: [KeyPathComparator<DataItem>] {
@@ -72,7 +75,7 @@ extension DataListViewModel {
     }
 }
 
-import SwiftUI
+
 // MARK: - UI
 extension DataListViewModel {
     func foregroundColor(for dataItem: DataItem) -> Color {
@@ -92,5 +95,51 @@ extension DataListViewModel {
     
     var numberOfVisibleDataItems: Int {
         dataItems.count
+    }
+}
+
+
+// MARK: - Exporting
+extension DataListViewModel {
+    func exportSelectionAsDataGraphFiles() {
+        let selectedDataItems = dataController.selectedDataItems
+        
+        if selectedDataItems.isEmpty { return }
+        
+        let panel = NSOpenPanel()
+        panel.canCreateDirectories = true
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowedContentTypes = [.directory]
+        panel.allowsOtherFileTypes = false
+        panel.title = "Export Graphs"
+        panel.message = "Select Directory to export graphs to."
+        
+        
+        
+        
+        let response = panel.runModal()
+        
+        guard response == .OK else { return }
+        
+        guard let targetDirectory = panel.directoryURL else { return }
+        
+        
+        Task {
+            let processedData = await processedDataManager.processedData(for: selectedDataItems)
+            
+            for nextData in processedData {
+                guard let nextGraphController = nextData.graphController else { continue }
+                
+                let fileName = nextData.dataItem.name + ".dgraph"
+                
+                let targetFileURL = targetDirectory.appending(path: fileName)
+                
+                try? nextGraphController.dgController?.write(to: targetFileURL)
+                
+            }
+            
+        }
+
     }
 }

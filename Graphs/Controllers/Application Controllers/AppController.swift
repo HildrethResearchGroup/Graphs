@@ -55,7 +55,7 @@ class AppController {
         // View Models
         sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
         inspectorVM = InspectorViewModel(localDataController, localSelectionManager, localProcessedDataManager)
-        dataListVM = DataListViewModel(localDataController, localSelectionManager)
+        dataListVM = DataListViewModel(localDataController, localSelectionManager, localProcessedDataManager)
         graphListVM = GraphControllerListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
         
         
