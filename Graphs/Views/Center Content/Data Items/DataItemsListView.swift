@@ -19,7 +19,7 @@ struct DataItemsListView: View {
     }
     
     var body: some View {
-        List(viewModel.dataItems, id: \.localID, selection: $viewModel.selection) { nextDataItem in
+        List(viewModel.dataItems, id: \.id, selection: $viewModel.selection) { nextDataItem in
             Text(nextDataItem.name)
                 .contextMenu {
                     Button_Delete

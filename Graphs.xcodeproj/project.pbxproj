@@ -67,7 +67,6 @@
 		C078BC422C2F363700A06887 /* GraphTemplateEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC412C2F363700A06887 /* GraphTemplateEditor.swift */; };
 		C078BC442C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC432C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift */; };
 		C078BC462C2F3A6A00A06887 /* Inspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC452C2F3A6A00A06887 /* Inspector.swift */; };
-		C078BC492C2F3DC500A06887 /* TemporaryDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */; };
 		C078BC4C2C2F4B0300A06887 /* PresentableName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC4B2C2F4B0300A06887 /* PresentableName.swift */; };
 		C078BC512C2F4B5B00A06887 /* NewLineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC502C2F4B5B00A06887 /* NewLineType.swift */; };
 		C078BC542C2F4C4100A06887 /* ProvidesToolTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */; };
@@ -195,7 +194,6 @@
 		C078BC412C2F363700A06887 /* GraphTemplateEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplateEditor.swift; sourceTree = "<group>"; };
 		C078BC432C2F381200A06887 /* GraphTemplateEditor_EmptySelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTemplateEditor_EmptySelection.swift; sourceTree = "<group>"; };
 		C078BC452C2F3A6A00A06887 /* Inspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inspector.swift; sourceTree = "<group>"; };
-		C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryDataModel.swift; sourceTree = "<group>"; };
 		C078BC4B2C2F4B0300A06887 /* PresentableName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableName.swift; sourceTree = "<group>"; };
 		C078BC502C2F4B5B00A06887 /* NewLineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLineType.swift; sourceTree = "<group>"; };
 		C078BC532C2F4C4100A06887 /* ProvidesToolTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvidesToolTip.swift; sourceTree = "<group>"; };
@@ -500,7 +498,6 @@
 		C078BC322C2F32AC00A06887 /* Graph List */ = {
 			isa = PBXGroup;
 			children = (
-				C078BC482C2F3DC500A06887 /* TemporaryDataModel.swift */,
 				C07921EA2CC82D1400A5002C /* GraphListView.swift */,
 			);
 			path = "Graph List";
@@ -841,7 +838,6 @@
 				C01A86362C484CFF006219C8 /* ParserSettingsViewModel.swift in Sources */,
 				C0CE245B2CBEF6E60088FA94 /* ProcessedDataDelegate.swift in Sources */,
 				C0ED09062C49A32700052208 /* DataController_MovingObjects.swift in Sources */,
-				C078BC492C2F3DC500A06887 /* TemporaryDataModel.swift in Sources */,
 				C0263D852C167070008C929F /* SourceListViewModel.swift in Sources */,
 				C01A9D132C3DC8DF00A555B9 /* LineNumbersView.swift in Sources */,
 				C0263D6B2C162E78008C929F /* DataControllerDelegate.swift in Sources */,

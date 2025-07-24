@@ -16,9 +16,9 @@ class SourceListViewModel {
     private var selectionManager: SelectionManager
     
     
-    var selection: Set<Node> {
-        get { selectionManager.selectedNodes }
-        set { selectionManager.selectedNodes = newValue }
+    var selection: Set<Node.ID> {
+        get { selectionManager.selectedNodeIDs }
+        set { selectionManager.selectedNodeIDs = newValue }
     }
     
     var rootNodes: [Node] {
@@ -42,7 +42,7 @@ extension SourceListViewModel {
     func shouldAllowDrop(ofURLs urls: [URL]) -> Bool {
         if urls.count == 0 { return false }
         
-        let numberOfNodes = selectionManager.selectedNodes.count
+        let numberOfNodes = selectionManager.selectedNodeIDs.count
         
         switch numberOfNodes {
         case 0: return false
@@ -83,7 +83,7 @@ extension SourceListViewModel {
             return false
         }
         
-        guard let parentNode = selectionManager.selectedNodes.first else {return false}
+        guard let parentNode = dataController.selectedNodes.first else {return false}
         
         let success = dataController.importURLs(urls, intoNode: parentNode)
         
@@ -111,8 +111,8 @@ extension SourceListViewModel {
 // MARK: - Deleting and Adding Nodes
 extension SourceListViewModel {
     func deleteSelectedNodes() {
-        let nodes = Array(selection)
-        dataController.delete(nodes)
+        let nodeIDs = Array(selection)
+        dataController.delete(nodeIDs)
     }
     
     func createEmptyNode(withParent parent: Node?) {
@@ -180,7 +180,7 @@ extension SourceListViewModel {
 extension SourceListViewModel {
     var disabledButton_importFile: Bool {
         
-        switch selectionManager.selectedNodes.count {
+        switch selectionManager.selectedNodeIDs.count {
         case 0: return true
         case 1: return false
         default: return true

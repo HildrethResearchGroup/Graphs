@@ -12,17 +12,12 @@ struct DataItemsTableView: View {
     
     @Bindable var viewModel: DataListViewModel
     
-    @State var selection: Set<DataItem.ID> = []
-    
-    @State var sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodePath)]
-    
-    
     init(_ viewModel: DataListViewModel) {
         self.viewModel = viewModel
     }
     
     var body: some View {
-        Table(selection: $selection, sortOrder: $sort) {
+        Table(selection: $viewModel.selection, sortOrder: $viewModel.sort) {
             TableColumn("Name", value: \.name) {
                 Text($0.name)
                     .help($0.url.path(percentEncoded: false))
@@ -68,7 +63,7 @@ struct DataItemsTableView: View {
             
         }
         rows: {
-            ForEach(viewModel.dataItems, id: \.localID) { dataItem in
+            ForEach(viewModel.dataItems, id: \.id) { dataItem in
                 TableRow(dataItem)
                     .contextMenu {
                         Button("Delete") { viewModel.deleteSelectedDataItems() }

@@ -27,12 +27,7 @@ struct Parser {
         
         var parsedFile = ParsedFile(dataItemID: localID)
         
-        //var header: [[String]] = []
-        //var data: [DataColumn] = []
-        
-        //var footer = ""
-        
-        
+
         var index = 1
         
         for  nextLine in lines {
@@ -87,44 +82,8 @@ struct Parser {
       
         return parsedFile
         
-        /*
-         return ParsedFile(dataItemID: id,
-                           experimentDetails: experimentalDetails,
-                           header: header,
-                           data: transposedData,
-                           footer: footer,
-                           numberOfColumns: numberOfColumns)
-         */
     }
-   
-    /*
-     private static func validateLineStartEndSettings(_ settings: ParserSettingsStatic) throws {
-         if settings.hasExperimentalDetails {
-             if settings.experimentalDetailsStart < 0 {
-                 throw ParserError.indexBelowZero
-             } else if settings.experimentalDetailsEnd < settings.experimentalDetailsStart {
-                 throw ParserError.startingIndexHigherThanEndingIndex
-             }
-         }
-         
-         if settings.hasHeader {
-             if settings.headerStart <= settings.experimentalDetailsEnd {
-                 throw ParserError.startingIndexHigherThanEndingIndex
-             } else if settings.headerEnd < settings.headerStart {
-                 throw ParserError.startingIndexHigherThanEndingIndex
-             }
-         }
-         
-         if settings.hasData {
-             if settings.dataStart <= settings.headerEnd {
-                 throw ParserError.startingIndexHigherThanEndingIndex
-             }
-         }
-     
-     }
-     */
-    
-    
+
     
     
     static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {

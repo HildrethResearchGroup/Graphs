@@ -103,6 +103,31 @@ struct ParsedFile: Sendable, Codable {
         case .equalCount:
             appendEqualRow(row)
         case let .lessColumnsThanData(numberOfNeededColumns):
+            /*
+             for _ in 0..<numberOfNeededColumns {
+                 let numberOfNeededRows = data.first?.data.count ?? 0
+                 
+                 let emptyColumn = DataColumn(headers: headers, emptyRows: numberOfNeededRows)
+                 data.append(emptyColumn)
+                 
+             
+             */
+            
+            var localRow = row
+            for _ in 0..<numberOfNeededRows {
+                localRow.append("")
+            }
+            
+            appendEqualRow(localRow)
+        case let .moreColumnsThanData(numberOfNeededRows):
+            
+            /*
+             var localRow = row
+             for _ in 0..<numberOfNeededRows {
+                 localRow.append("")
+             }
+             */
+            
             for _ in 0..<numberOfNeededColumns {
                 let numberOfNeededRows = data.first?.data.count ?? 0
                 
@@ -110,12 +135,7 @@ struct ParsedFile: Sendable, Codable {
                 data.append(emptyColumn)
                 
             }
-            appendEqualRow(row)
-        case let .moreColumnsThanData(numberOfNeededRows):
-            var localRow = row
-            for _ in 0..<numberOfNeededRows {
-                localRow.append("")
-            }
+            
             appendEqualRow(localRow)
         }
     }
@@ -124,8 +144,6 @@ struct ParsedFile: Sendable, Codable {
     
     
     private mutating func createInitialDataColumns(withRow row: [String], andHeaders headers: [String]) {
-        
-        
         for (index, nextData) in row.enumerated() {
             
             var header = ""
@@ -147,9 +165,13 @@ struct ParsedFile: Sendable, Codable {
         for (index, nextNewData) in row.enumerated() {
             if data.count >= index {
                 data[index].append(nextNewData)
-            } else {
-                data[index].append("")
             }
+            /*
+             else {
+                 data[index].append("")
+             }
+             */
+            
         }
     }
     

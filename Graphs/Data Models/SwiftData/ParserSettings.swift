@@ -11,7 +11,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-final class ParserSettings {
+final class ParserSettings: Identifiable {
     
     var name: String
     
@@ -221,19 +221,19 @@ final class ParserSettings {
         // Experimental Details
         self._hasExperimentalDetails = false
         self._experimentalDetailsSeparator = .comma
-        self._experimentalDetailsStart = 0
-        self._experimentalDetailsEnd = 0
+        self._experimentalDetailsStart = 1
+        self._experimentalDetailsEnd = 1
 
         // Header
         self._hasHeader = false
         self._headerSeparator = .comma
-        self._headerStart = 0
-        self._headerEnd = 0
+        self._headerStart = 1
+        self._headerEnd = 1
         
         // Data
         self._hasData = false
         self._dataSeparator = .comma
-        self._dataStart = 0
+        self._dataStart = 1
         
         // Footer
         self._stopDataAtFirstEmptyLine = true

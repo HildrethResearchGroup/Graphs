@@ -67,8 +67,8 @@ class AppController {
         
         // Set initial node selection to top-level Node
         if let firstNode = localDataController.topNode() {
-            let firstNodeSet = Set([firstNode])
-            localSelectionManager.selectedNodes = firstNodeSet
+            let firstNodeIDs = Set([firstNode.id])
+            localSelectionManager.selectedNodeIDs = firstNodeIDs
         }
     }
 }

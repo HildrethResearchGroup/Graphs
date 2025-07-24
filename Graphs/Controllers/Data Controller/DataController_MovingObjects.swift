@@ -76,12 +76,31 @@ extension DataController {
         return filteredNodes
     }
     
+    private func nodes(for ids: [Node.ID]) -> [Node] {
+        let allNodes = allNodes()
+        
+        if allNodes.count == 0 { return [] }
+        
+        let filteredNodes = allNodes.filter( { ids.contains($0.id)} )
+        
+        return filteredNodes
+    }
+    
     
     // TODO: Update to use a fetch description instead of filtering
     private func dataItems(for localIDs: [DataItem.LocalID]) -> [DataItem] {
         if allDataItems.count == 0 { return [] }
         
         let filteredDataItems = allDataItems.filter( {localIDs.contains( $0.localID )} )
+        
+        return filteredDataItems
+    }
+    
+    
+    private func dataItems(for ids: [DataItem.ID]) -> [DataItem] {
+        if allDataItems.count == 0 { return [] }
+        
+        let filteredDataItems = allDataItems.filter( {ids.contains( $0.id )} )
         
         return filteredDataItems
     }

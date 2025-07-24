@@ -81,7 +81,7 @@ class DataController {
     
     var selectedNodeIDs: [Node.ID] = [] {
         didSet {
-            
+            updateSelectedNodes()
         }
     }
     
@@ -257,6 +257,7 @@ class DataController {
     }
     
     func updateSelectedDataItems() {
+        
         let ids = selectedDataItemIDs
         let items = self.visableItems
         let filteredItems = items.filter({ids.contains([$0.id])})

@@ -10,8 +10,23 @@ import Foundation
 // MARK: - Delete
 extension DataController {
     
+    func delete(_ nodeIDs: [Node.ID]) {
+        var nodesToDelete: [Node] = []
+        
+        for nextNode in allNodes() {
+            if nodeIDs.contains(where: { $0 == nextNode.id}) {
+                nodesToDelete.append(nextNode)
+            }
+        }
+        
+        delete(nodesToDelete)
+    }
+    
     func delete(_ nodes: [Node]) {
         // ADD
+        
+        if nodes.isEmpty { return }
+            
         delegate?.preparingToDelete(nodes: nodes)
         
         for nextNode in nodes {
@@ -23,6 +38,7 @@ extension DataController {
     }
     
     private func delete(_ dataItems: [DataItem]) {
+        if dataItems.isEmpty { return }
         
         // ADD
         delegate?.preparingToDelete(dataItems: dataItems)

@@ -11,7 +11,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-class GraphTemplate {
+class GraphTemplate: Identifiable {
     var localID: LocalID
     var name: String
     var url: URL

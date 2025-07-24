@@ -51,7 +51,7 @@ struct ParserInspector: View {
     @ViewBuilder
     var AvailableParserSettings: some View {
         List(selection: $viewModel.selection) { // was \.self
-            ForEach(viewModel.parserSettings, id: \.id) { nextParser in
+            ForEach(viewModel.parserSettings, id: \.self) { nextParser in
                 Text(nextParser.name)
                     .foregroundStyle(viewModel.foregroundColor(for: nextParser))
                     .contextMenu {

@@ -17,7 +17,7 @@ import SwiftData
 class SelectionManager {
     var delegate: SelectionManagerDelegate?
     
-    var selectedNodes: Set<Node> = []
+    //var selectedNodes: Set<Node> = []
     
     var selectedNodeIDs: Set<Node.ID> = [] {
         didSet {
@@ -27,7 +27,11 @@ class SelectionManager {
     
     
     var selectedDataItemIDs: Set<DataItem.ID> = [] {
-        didSet { delegate?.selectedDataItemsDidChange(selectedDataItemIDs) }
+        
+        didSet {
+            
+            delegate?.selectedDataItemsDidChange(selectedDataItemIDs)
+        }
     }
     
     var selectedParserSetting: ParserSettings? = nil
@@ -55,7 +59,7 @@ extension SelectionManager {
         // A single new node has been added.  Make that the selection
         if let firstNode = nodes.first {
             if firstNode.name == Node.defaultName {
-                selectedNodes = [firstNode]
+                selectedNodeIDs = [firstNode.id]
                 return
             }
         }
@@ -71,9 +75,10 @@ extension SelectionManager {
             selectedDataItemIDs = completeSelection
         } else {
             // Only update selection of the selectedNodes
-            let completeSelection = selectedNodes.union(nodes)
+            let nodeIDs = nodes.map( {$0.id} )
+            let completeSelection = selectedNodeIDs.union(nodeIDs)
             
-            selectedNodes = completeSelection
+            selectedNodeIDs = completeSelection
         }
         
         
@@ -149,8 +154,10 @@ extension SelectionManager {
         
         // Next Clear out any deleted Nodes
         if nodes.count > 0 {
-            let remainingNodes = selectedNodes.subtracting(allNodes)
-            selectedNodes = remainingNodes
+            let allNodeIds = allNodes.map( {$0.id} )
+            
+            let remainingNodeIDs = selectedNodeIDs.subtracting(allNodeIds)
+            selectedNodeIDs = remainingNodeIDs
             return
         }
     }
@@ -200,7 +207,7 @@ extension SelectionManager {
     
     func deselectNodes() {
         deselectDataItems()
-        selectedNodes = []
+        selectedNodeIDs = []
     }
     
     func deselectParserSettings() {

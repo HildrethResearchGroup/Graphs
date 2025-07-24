@@ -19,7 +19,10 @@ class GraphTemplateInspectorViewModel {
     
     var selection: GraphTemplate? {
         get { selectionManager.selectedGraphTemplate }
-        set { selectionManager.selectedGraphTemplate = newValue }
+        set {
+            
+            selectionManager.selectedGraphTemplate = newValue
+        }
     }
     
     var graphTemplates: [GraphTemplate] {
