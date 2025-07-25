@@ -10,7 +10,7 @@ import SwiftUI
 
 struct NodeView: View {
     @Bindable var sourceListVM: SourceListViewModel
-    var node: Node
+    @Bindable var node: Node
     
     init(_ sourceListVM: SourceListViewModel, _ node: Node) {
         self.sourceListVM = sourceListVM
@@ -21,7 +21,7 @@ struct NodeView: View {
         HStack {
             Image(systemName: "folder.fill")
                 .foregroundStyle(.secondary)
-            Text(node.name)
+            TextField("", text: $node.name)
         }
         .draggable(node.localID)
         .dropDestination(for: DropItem.self, action: { items, location in

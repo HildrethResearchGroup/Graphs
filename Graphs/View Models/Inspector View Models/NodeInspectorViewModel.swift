@@ -33,11 +33,19 @@ class NodeInspectorViewModel {
     }
     
     var name: String {
-        didSet {
-            if name != oldValue {
+        get {
+            switch nodesCount {
+            case 0: return "No Selection"
+            case 1: return nodes.first?.name ?? "No Name"
+            default: return "Multiple Selection"
+            }
+        }
+        
+        set {
+            if name != newValue {
                 if nodesCount == 1 {
                     if let onlyNode = nodes.first {
-                        onlyNode.name = name
+                        onlyNode.name = newValue
                     }
                 }
             }

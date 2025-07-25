@@ -4,8 +4,8 @@
 <dict>
 	<key>Labels</key>
 	<string>AFM Force - Displacement
-Distance (µm)
-Distance (µm)
+Trace Z Position, µm
+Deflection Signal, µN
 Trace
 Re-Trace
 </string>

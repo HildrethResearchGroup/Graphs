@@ -66,6 +66,12 @@ class GraphController {
             guard  let dgColumn = controller.dataColumn(at: Int32(index + 1)) else {continue}
             
             dgColumn.setDataWith(columnOfData)
+            
+            let header = columnOfData.header
+            
+            if !header.isEmpty {
+                dgColumn.setColumnName(header)
+            }
         }
         
         self.lastModified = .now
