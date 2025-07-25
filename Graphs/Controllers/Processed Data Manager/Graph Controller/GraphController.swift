@@ -45,6 +45,7 @@ class GraphController {
     func updateGraphWithData(_ data: [DataColumn]) {
         
         self.update(controller: self.dgController, withData: data)
+        
     }
     
     
@@ -67,7 +68,7 @@ class GraphController {
             dgColumn.setDataWith(columnOfData)
         }
         
-        
+        self.lastModified = .now
     }
     
     

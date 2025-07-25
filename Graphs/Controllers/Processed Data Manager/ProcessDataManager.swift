@@ -45,6 +45,8 @@ class ProcessDataManager {
         // Enable Local Caching
          if let output = processedData[dataItem.id] {
              
+             output.updateParsedFileStates()
+             
              // Check to see if cached data is up to date
              if output.parsedFileState == .upToDate && output.graphTemplateState == .upToDate {
                  // Cached data is up to date, return cached data

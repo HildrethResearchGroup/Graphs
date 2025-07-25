@@ -107,6 +107,14 @@ class ProcessedData: Identifiable {
     }
     
 
+    // MARK: - State Determination
+    @MainActor
+    func updateParsedFileStates() {
+        
+        parsedFileState = determineParsedFileState()
+        graphTemplateState = determineGraphControllerState()
+    }
+    
     
     private func determineParsedFileState() -> ProcessedDataState {
         guard let parsedSettings = dataItem.getAssociatedParserSettings() else {
