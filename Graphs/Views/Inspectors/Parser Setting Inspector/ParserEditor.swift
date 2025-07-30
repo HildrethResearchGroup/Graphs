@@ -13,6 +13,12 @@ struct ParserEditor: View {
     
     @Bindable var parseSettings: ParserSettings
     
+    @AppStorage("expanded_parserSettings_experimentalDetails") private var expanded_parserSettings_experimentalDetails = true
+    
+    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_header = true
+    
+    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_editData = true
+    
     
     private let width = 100.0
     private let fontType: Font = .headline
@@ -56,28 +62,28 @@ struct ParserEditor: View {
         }
         .formStyle(.grouped)
         .padding(.horizontal, -20)
-        .padding(.top, -15)
-        
     }
     
     @ViewBuilder
     var EditExperimentalDetails: some View {
-        VStack {
-            Toggle("Experimental Details:", isOn: $parseSettings.hasExperimentalDetails)
-                .font(.headline)
+        DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
             TextField("Starting Line:", value: $parseSettings.experimentalDetailsStart, format: .number)
                 .disabled(!parseSettings.hasExperimentalDetails)
             TextField("Ending Line:", value: $parseSettings.experimentalDetailsEnd, format: .number)
                 .disabled(!parseSettings.hasExperimentalDetails)
+        } label: {
+            Toggle("Experimental Details:", isOn: $parseSettings.hasExperimentalDetails)
+                .font(.headline)
         }
     }
     
     @ViewBuilder
     var EditHeader: some View {
-        VStack(alignment: .leading) {
-            Toggle("Header:", isOn: $parseSettings.hasHeader)
-                .font(fontType)
-            
+        DisclosureGroup(isExpanded: $expanded_parserSettings_header) {
+            /*
+             Toggle("Header:", isOn: $parseSettings.hasHeader)
+                 .font(fontType)
+             */
             TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
                 //.frame(width: width)
                 .disabled(!parseSettings.hasHeader)
@@ -94,6 +100,9 @@ struct ParserEditor: View {
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasHeader)
             //.padding(.leading, 10)
+        } label: {
+            Toggle("Header:", isOn: $parseSettings.hasExperimentalDetails)
+                .font(fontType)
         }
         
     }
@@ -101,9 +110,11 @@ struct ParserEditor: View {
     @ViewBuilder
     var EditData: some View {
         
-        VStack(alignment: .leading) {
-            Toggle("Data:", isOn: $parseSettings.hasData)
-                .font(fontType)
+        DisclosureGroup(isExpanded: $expanded_parserSettings_editData) {
+            /*
+             Toggle("Data:", isOn: $parseSettings.hasData)
+                 .font(fontType)
+             */
             TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
                 .disabled(!parseSettings.hasData)
             
@@ -122,6 +133,9 @@ struct ParserEditor: View {
                 //.padding(.leading, 10)
                 .padding(.vertical, 10)
                 .disabled(!parseSettings.hasData)
+        } label: {
+            Toggle("Data:", isOn: $parseSettings.hasData)
+                .font(fontType)
         }
         
     }

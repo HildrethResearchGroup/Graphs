@@ -17,7 +17,10 @@ class AppController {
     // Managers
     var selectionManager: SelectionManager
     var cacheManager: CacheManager
+    var exportManager: ExportManager
+    var importManager: ImportManager
     var processedDataManager: ProcessDataManager
+    var menuManager: MenuViewModel
     
     
     // View Models
@@ -44,19 +47,33 @@ class AppController {
         let localSelectionManager = SelectionManager()
         let localCacheManager = CacheManager()
         let localProcessedDataManager = ProcessDataManager(cacheManager: localCacheManager, dataSource: nil)
+        let localImportManager = ImportManager(localDataController, localSelectionManager)
+        let localExportManager = ExportManager(localDataController, localProcessedDataManager, localSelectionManager)
         
         
+        // Use a Common Manager to simplify the API for view models
+        let commonManagers = CommonManagers(localDataController, localSelectionManager, localProcessedDataManager, localExportManager, localImportManager)
+        
+        let localMenuManager = MenuViewModel(commonManagers)
+        
+        
+        
+        // Set properties
         cacheManager = localCacheManager
-        processedDataManager = localProcessedDataManager
         dataController = localDataController
+        exportManager = localExportManager
+        importManager = localImportManager
+        processedDataManager = localProcessedDataManager
         selectionManager = localSelectionManager
+        menuManager = localMenuManager
+        
         
         
         // View Models
-        sourceListVM = SourceListViewModel(localDataController, localSelectionManager)
-        inspectorVM = InspectorViewModel(localDataController, localSelectionManager, localProcessedDataManager)
-        dataListVM = DataListViewModel(localDataController, localSelectionManager, localProcessedDataManager)
-        graphListVM = GraphControllerListViewModel(dataController: localDataController, selectionManager: localSelectionManager, processedDataManager: localProcessedDataManager)
+        dataListVM = DataListViewModel(commonManagers)
+        graphListVM = GraphControllerListViewModel(commonManagers)
+        inspectorVM = InspectorViewModel(commonManagers)
+        sourceListVM = SourceListViewModel(commonManagers)
         
         
         // Delegates and DataSources
@@ -150,5 +167,30 @@ extension AppController: @preconcurrency SelectionManagerDelegate {
 extension AppController: @preconcurrency ProcessDataManagerDataSource {
     func currentSelection() -> [DataItem.ID] {
         return Array(selectionManager.selectedDataItemIDs)
+    }
+}
+
+
+extension AppController {
+    class CommonManagers {
+        var dataController: DataController
+        var selectionManager: SelectionManager
+        var processedDataManager: ProcessDataManager
+        
+        var exportManager: ExportManager
+        var importManager: ImportManager
+        
+        init(_ dataController: DataController,
+             _ selectionManager: SelectionManager,
+             _ processedDataManager: ProcessDataManager,
+             _ exportManager: ExportManager,
+             _ importManager: ImportManager) {
+            
+            self.dataController = dataController
+            self.selectionManager = selectionManager
+            self.processedDataManager = processedDataManager
+            self.exportManager = exportManager
+            self.importManager = importManager
+        }
     }
 }

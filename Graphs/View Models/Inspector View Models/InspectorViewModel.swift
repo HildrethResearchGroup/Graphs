@@ -34,7 +34,7 @@ class InspectorViewModel {
     }
     
     
-    init(_ dataController: DataController, _ selectionManager: SelectionManager, _ processDataManager: ProcessDataManager) {
+    private init(_ dataController: DataController, _ selectionManager: SelectionManager, _ processDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
         self.processDataManager = processDataManager
@@ -51,5 +51,12 @@ class InspectorViewModel {
         
         self.tableInspectorVM = TableInspectorViewModel(dataController, processDataManager)
         
+    }
+    
+    
+    convenience init(_ commonManagers: AppController.CommonManagers) {
+        let cm = commonManagers
+        
+        self.init(cm.dataController, cm.selectionManager, cm.processedDataManager)
     }
 }

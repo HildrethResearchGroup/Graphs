@@ -151,14 +151,9 @@ struct ParserInspector: View {
     }
     
     private func exportParser() {
-        let panel = NSSavePanel()
-        panel.canCreateDirectories = true
-        panel.allowedContentTypes = [.gparser ?? .data]
+        let nc = NotificationCenter.default
         
-        if panel.runModal() == .OK {
-            guard let url = panel.url else { return }
-            viewModel.exportParserSettings(to: url)
-        }
+        nc.post(name: .exportParserSettings, object: nil)
     }
 }
 

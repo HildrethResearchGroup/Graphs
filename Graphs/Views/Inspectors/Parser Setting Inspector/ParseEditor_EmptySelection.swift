@@ -17,6 +17,13 @@ struct ParseEditor_EmptySelection: View {
     
     @State var separator: Separator = .comma
     
+    
+    @AppStorage("expanded_parserSettings_experimentalDetails") private var expanded_parserSettings_experimentalDetails = true
+    
+    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_header = true
+    
+    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_editData = true
+    
     //private let width = 100.0
     private let fontType: Font = .headline
     
@@ -50,18 +57,19 @@ struct ParseEditor_EmptySelection: View {
             EditData
         }
         .formStyle(.grouped)
-        .disabled(true)
+        //.disabled(true)
         .padding(.horizontal, -20)
-        .padding(.top, -15)
     }
     
     @ViewBuilder
     var EditExperimentalDetails: some View {
-        VStack(alignment: .leading) {
-            Toggle("Experimental Details:", isOn: $toggleState)
-                .font(.headline)
+        DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
             TextField("Starting Line:", value: $number, format: .number)
             TextField("Ending Line:", value: $number, format: .number)
+        } label: {
+            Toggle("Experimental Details:", isOn: $toggleState)
+                .font(.headline)
+                .disabled(true)
         }
     }
     
@@ -69,10 +77,11 @@ struct ParseEditor_EmptySelection: View {
     @ViewBuilder
     var EditHeader: some View {
         
-        VStack(alignment: .leading) {
-            Toggle("Header:", isOn: $toggleState)
-                .font(fontType)
-            
+        DisclosureGroup(isExpanded: $expanded_parserSettings_header) {
+            /*
+             Toggle("Header:", isOn: $toggleState)
+                 .font(fontType)
+             */
             TextField("Starting Line:", value: $number, format: .number)
 
             TextField("Ending Line:", value: $number, format: .number)
@@ -84,6 +93,10 @@ struct ParseEditor_EmptySelection: View {
             }
             .help(Separator.toolTip)
             //.padding(.leading, 10)
+        } label: {
+            Toggle("Header:", isOn: $toggleState)
+                .font(fontType)
+                .disabled(true)
         }
     }
     
@@ -91,10 +104,13 @@ struct ParseEditor_EmptySelection: View {
     @ViewBuilder
     var EditData: some View {
         
-        VStack(alignment: .leading) {
-            Toggle("Data:", isOn: $toggleState)
-                .font(fontType)
-                .disabled(true)
+        DisclosureGroup(isExpanded: $expanded_parserSettings_editData) {
+            /*
+             Toggle("Data:", isOn: $toggleState)
+                 .font(fontType)
+                 .disabled(true)
+             */
+            
             
             TextField("Starting Line:", value: $number, format: .number)
                 .disabled(true)
@@ -113,6 +129,10 @@ struct ParseEditor_EmptySelection: View {
             Toggle("Stop at Empty Line", isOn: $toggleState)
                 .padding(.leading, 10)
                 .padding(.vertical, 10)
+                .disabled(true)
+        } label: {
+            Toggle("Data:", isOn: $toggleState)
+                .font(fontType)
                 .disabled(true)
         }
         

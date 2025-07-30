@@ -32,7 +32,9 @@ struct NodesInspectorView: View {
             ParserSettingsView()
             GraphTemplateView()
             
-        }.formStyle(.grouped)
+        }
+        .formStyle(.grouped)
+        .padding(.horizontal, -20)
     }
     
     

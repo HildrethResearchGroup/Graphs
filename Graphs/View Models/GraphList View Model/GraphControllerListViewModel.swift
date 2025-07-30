@@ -18,13 +18,18 @@ class GraphControllerListViewModel {
     
     var processedData: [ProcessedData] = []
     
-    init(dataController: DataController, selectionManager: SelectionManager, processedDataManager: ProcessDataManager) {
+    private init(dataController: DataController, selectionManager: SelectionManager, processedDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
         self.processedDataManager = processedDataManager
         self.processedData = []
         
         self.updateProcessedData()
+    }
+    
+    convenience init(_ commonManagers: AppController.CommonManagers) {
+        let cm = commonManagers
+        self.init(dataController: cm.dataController, selectionManager: cm.selectionManager, processedDataManager: cm.processedDataManager)
     }
     
     func updateProcessedData() {

@@ -41,10 +41,12 @@ struct CenterContent: View {
 
 
 
-/*
+
  // MARK: - Preview
  #Preview {
-     CenterContent(DataListViewModel(DataController(withDelegate: nil), SelectionManager()))
+     @Previewable
+     @State var appController = AppController()
+     CenterContent(appController.dataListVM, appController.graphListVM)
  }
- */
+ 
 

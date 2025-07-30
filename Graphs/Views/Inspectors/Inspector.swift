@@ -11,35 +11,120 @@ import SwiftUI
 struct Inspector: View {
     var viewModel: InspectorViewModel
     
+    @AppStorage("selectedTab_Inspector") private var selectedTab: HNTab = .folder
+    
     init(_ viewModel: InspectorViewModel) {
         self.viewModel = viewModel
     }
+
     
     var body: some View {
-        TabView {
-            NodesInspectorView(viewModel.nodeInspectorVM)
-                .tabItem { Text("􀈕") }
-            DataItemsInspector(viewModel.dataItemsVM)
-                .tabItem { Text("􀈿") }
-            GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
-                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem { Text("􁂥") }
-            ParserInspector(viewModel.parserSettingsVM)
-                //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem { Text("􀋱") }
-            TextInspector(viewModel.textInspectorVM)
-                .tabItem { Text("T") }
-            TableInspector(viewModel.tableInspectorVM)
-                .tabItem { Text("􀏣") }
-            
+        VStack {
+            Tabs
+            TabContent(for: selectedTab)
         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         
+    }
+    
+    private var OriginalTab: some View {
+        TabView {
+             DataItemsInspector(viewModel.dataItemsVM)
+                 .tabItem { Text("􀈿") }
+             GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
+                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                 .tabItem { Text("􁂥") }
+             ParserInspector(viewModel.parserSettingsVM)
+                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                 .tabItem { Text("􀋱") }
+             TextInspector(viewModel.textInspectorVM)
+                 .tabItem { Text("T") }
+             TableInspector(viewModel.tableInspectorVM)
+                 .tabItem { Text("􀏣") }
+        }
+    }
+    
+    
+    private var Tabs: some View {
+        HStack {
+            Spacer()
+            ForEach(HNTab.allCases) { tab in
+                TabIcon(for: tab)
+                    .onTapGesture(count: 1) {
+                        selectedTab = tab
+                    }
+            }
+            Spacer()
+            
+        }
+    }
+    
+    
+    private func TabIcon(for tab: HNTab) -> some View {
+        HStack {
+            switch tab {
+            case .folder:
+                Image(systemName: "folder")
+                    .foregroundStyle(foreground(for: .folder))
+            case .dataItem:
+                Image(systemName: "text.document")
+                    .foregroundStyle(foreground(for: .dataItem))
+            case .graphTemplate:
+                Image(systemName: "chart.xyaxis.line")
+                    .foregroundStyle(foreground(for: .graphTemplate))
+            case .parserSettings:
+                Image(systemName: "list.bullet")
+                    .foregroundStyle(foreground(for: .parserSettings))
+            case .text:
+                Text("T")
+                    .foregroundStyle(foreground(for: .text))
+            case .table:
+                Image(systemName: "tablecells")
+                    .foregroundStyle(foreground(for: .table))
+            }
+        }
+    }
+    
+    
+    private func TabContent(for tab: HNTab) -> some View {
+        VStack {
+            switch selectedTab {
+            case .folder: NodesInspectorView(viewModel.nodeInspectorVM)
+            case .dataItem: DataItemsInspector(viewModel.dataItemsVM)
+            case .graphTemplate: GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
+            case .parserSettings: ParserInspector(viewModel.parserSettingsVM)
+            case .text: TextInspector(viewModel.textInspectorVM)
+            case .table: TableInspector(viewModel.tableInspectorVM)
+            }
+        }
+    }
+    
+    
+    private func foreground(for tab: HNTab) -> Color {
+        if selectedTab == tab {
+            return .blue
+        } else {
+            return .primary
+        }
+    }
+    
+    
+    private enum HNTab: Int, CaseIterable, Identifiable, Hashable, Codable {
+        var id: Self { self }
+        
+        case folder = 1
+        case dataItem
+        case graphTemplate
+        case parserSettings
+        case text
+        case table
     }
 }
 
 
 // MARK: - Preview
 #Preview {
-    Inspector(InspectorViewModel(DataController(withDelegate: nil), SelectionManager(), ProcessDataManager(cacheManager: CacheManager(), dataSource: nil)))
+    @Previewable
+    @State var appController = AppController()
+    Inspector(appController.inspectorVM)
 }

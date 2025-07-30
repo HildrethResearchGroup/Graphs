@@ -79,8 +79,9 @@ struct DataItemsTableView: View {
             ForEach(viewModel.dataItems, id: \.id) { dataItem in
                 TableRow(dataItem)
                     .contextMenu {
-                        Button_Delete
+                        Button_ClearSelection
                         Button_Export
+                        Button_Delete
                     }
                 }
             } // END: Table
@@ -97,12 +98,15 @@ struct DataItemsTableView: View {
         Button("Export Graphs") { viewModel.exportSelectionAsDataGraphFiles() }
             .disabled(viewModel.selection.count == 0)
     }
+    
+    private var Button_ClearSelection: some View {
+        Button("Clear Selection") { viewModel.selection = [] }
+            .disabled(viewModel.selection.count == 0)
+    }
 
 }
 
 #Preview {
-    @Previewable var dataListVM = DataListViewModel(DataController(withDelegate: nil),
-                                                    SelectionManager(),
-                                                    ProcessDataManager(cacheManager: CacheManager(), dataSource: nil))
-    DataItemsTableView(dataListVM)
+    @Previewable var appController = AppController()
+    DataItemsTableView(appController.dataListVM)
 }

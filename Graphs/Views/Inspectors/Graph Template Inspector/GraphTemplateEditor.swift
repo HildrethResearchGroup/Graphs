@@ -31,9 +31,9 @@ struct GraphTemplateEditor: View {
             Form() {
                 TextField("Name:", text: $graphTemplate.name)
                 OpenFilesView
-                
-                
-            }.formStyle(.grouped)
+            }
+            .formStyle(.grouped)
+            .padding(.horizontal, -20)
             GraphViewRepresentable(graphController: graphController)
         }
     }

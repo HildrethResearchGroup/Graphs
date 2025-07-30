@@ -11,6 +11,10 @@ import SwiftUI
 struct SourceList: View {
     @Bindable var sourceListVM: SourceListViewModel
     
+    init(_ sourceListVM: SourceListViewModel) {
+        self.sourceListVM = sourceListVM
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             List(selection: $sourceListVM.selection) {
@@ -92,6 +96,7 @@ struct SourceList: View {
     }
     
     
+    
     // MARK: - Content Buttons
     @ViewBuilder
     private func Button_newFolder(withParent parentNode: Node?) -> some View {
@@ -121,17 +126,7 @@ struct SourceList: View {
     @ViewBuilder
     private func Button_importFile() -> some View {
         Button("Import Data") {
-            let panel = NSOpenPanel()
-            panel.canChooseFiles = true
-            panel.canChooseDirectories = false
-            panel.canCreateDirectories = false
-            panel.allowsMultipleSelection = true
-            panel.allowedContentTypes = [.data, .delimitedText]
-            
-            if panel.runModal() == .OK {
-                let urls = panel.urls
-                _ = sourceListVM.importURLs(urls)
-            }
+            sourceListVM.importDataFiles()
         }
         .help(sourceListVM.toolTip_importFile)
         .disabled(sourceListVM.disabledButton_importFile)
@@ -142,34 +137,14 @@ struct SourceList: View {
     @ViewBuilder
     private func Button_importParserSettings() -> some View {
         Button("Import Parser") {
-            let panel = NSOpenPanel()
-            panel.canChooseFiles = true
-            panel.canChooseDirectories = false
-            panel.canCreateDirectories = false
-            panel.allowsMultipleSelection = true
-            panel.allowedContentTypes = [.gparser ?? .json]
-            
-            if panel.runModal() == .OK {
-                let urls = panel.urls
-                _ = sourceListVM.importURLs(urls)
-            }
+            sourceListVM.importParserSettings()
         }
     }
     
     @ViewBuilder
     private func Button_importGraphTemplate() -> some View {
         Button("Import Graph Template") {
-            let panel = NSOpenPanel()
-            panel.canChooseFiles = true
-            panel.canChooseDirectories = false
-            panel.canCreateDirectories = false
-            panel.allowsMultipleSelection = true
-            panel.allowedContentTypes = [.dgraph ?? .data]
-            
-            if panel.runModal() == .OK {
-                let urls = panel.urls
-                _ = sourceListVM.importURLs(urls)
-            }
+            sourceListVM.importGraphTemplate()
         }
     }
     
@@ -205,8 +180,10 @@ struct SourceList: View {
 }
 
 // MARK: - Preview
-/*
+
  #Preview {
-     SourceList()
+     @Previewable
+     @State var appController = AppController()
+     SourceList(appController.sourceListVM)
  }
- */
+ 

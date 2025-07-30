@@ -15,7 +15,7 @@ import SwiftUI
 class DataListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
-    private var processedDataManager: ProcessDataManager
+
     
     var dataItems: Array<DataItem> {
         get { Array(dataController.visableItems) }
@@ -26,10 +26,14 @@ class DataListViewModel {
         set { selectionManager.selectedDataItemIDs = newValue }
     }
     
-    init(_ dataController: DataController, _ selectionManager: SelectionManager, _ processedDataManager: ProcessDataManager) {
+    private init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
-        self.processedDataManager = processedDataManager
+    }
+    
+    convenience init(_ commonManagers: AppController.CommonManagers) {
+        let cm = commonManagers
+        self.init(cm.dataController, cm.selectionManager)
     }
     
     var sort: [KeyPathComparator<DataItem>] {
@@ -102,44 +106,9 @@ extension DataListViewModel {
 // MARK: - Exporting
 extension DataListViewModel {
     func exportSelectionAsDataGraphFiles() {
-        let selectedDataItems = dataController.selectedDataItems
         
-        if selectedDataItems.isEmpty { return }
+        let nc = NotificationCenter.default
         
-        let panel = NSOpenPanel()
-        panel.canCreateDirectories = true
-        panel.canChooseDirectories = true
-        panel.canChooseFiles = false
-        panel.allowedContentTypes = [.directory]
-        panel.allowsOtherFileTypes = false
-        panel.title = "Export Graphs"
-        panel.message = "Select Directory to export graphs to."
-        
-        
-        
-        
-        let response = panel.runModal()
-        
-        guard response == .OK else { return }
-        
-        guard let targetDirectory = panel.directoryURL else { return }
-        
-        
-        Task {
-            let processedData = await processedDataManager.processedData(for: selectedDataItems)
-            
-            for nextData in processedData {
-                guard let nextGraphController = nextData.graphController else { continue }
-                
-                let fileName = nextData.dataItem.name + ".dgraph"
-                
-                let targetFileURL = targetDirectory.appending(path: fileName)
-                
-                try? nextGraphController.dgController?.write(to: targetFileURL)
-                
-            }
-            
-        }
-
+        nc.post(name: .exportSelectionAsDataGraphFiles, object: nil)
     }
 }

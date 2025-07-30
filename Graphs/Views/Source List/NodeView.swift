@@ -61,7 +61,6 @@ struct NodeView: View {
 }
 
 #Preview {
-    NodeView(SourceListViewModel(DataController(withDelegate: nil),
-                                            SelectionManager()),
+    NodeView(AppController().sourceListVM,
              Node(url: nil))
 }

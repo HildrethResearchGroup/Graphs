@@ -43,6 +43,10 @@ extension Notification.Name {
     
     
     static var selectedDataItemDidChange = Notification.Name("selectedDataItemDidChange")
+    
+    static var exportSelectionAsDataGraphFiles = Notification.Name("exportSelectionAsDataGraphFiles")
+    
+    static var exportParserSettings = Notification.Name("exportParserSettings")
 }
 
 
@@ -59,5 +63,7 @@ extension Notification {
         static var parserSettingsIDs = "parserSettingsIDs"
         static var oldParserSettingLocalID = "oldParserSettingLocalID"
         static var newParserSettingLocalID = "newParserSettingLocalID"
+        
+        
     }
 }

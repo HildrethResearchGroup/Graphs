@@ -63,16 +63,15 @@ struct DataItemsListView: View {
             }
         }
     }
-
-    
-    
 }
 
 
 // MARK: - Preview
-/*
+
  #Preview {
-     DataItemsListView()
+     @Previewable
+     @State var appController = AppController()
+     DataItemsListView(appController.dataListVM)
  }
- */
+ 
 

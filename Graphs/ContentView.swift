@@ -23,7 +23,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            SourceList(sourceListVM: appController.sourceListVM)
+            SourceList(appController.sourceListVM)
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
         } detail: {
             CenterContent(appController.dataListVM, appController.graphListVM)

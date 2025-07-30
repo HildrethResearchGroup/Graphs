@@ -35,7 +35,9 @@ struct DataItemsInspector: View {
             OpenFilesView()
             ParserSettingsView()
             GraphTemplateView()
-        }.formStyle(.grouped)
+        }
+        .formStyle(.grouped)
+        .padding(.horizontal, -20)
     }
     
     

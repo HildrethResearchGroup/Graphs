@@ -14,6 +14,7 @@ import OrderedCollections
 class SourceListViewModel {
     private var dataController: DataController
     private var selectionManager: SelectionManager
+    private var importManager: ImportManager
     
     
     var selection: Set<Node.ID> {
@@ -30,14 +31,45 @@ class SourceListViewModel {
     var sort: [KeyPathComparator<DataItem>] = [.init(\.name), .init(\.nodeName)]
     
     // MARK: - Initialization
-    init(_ dataController: DataController, _ selectionManager: SelectionManager) {
+    private init(_ dataController: DataController, _ selectionManager: SelectionManager, _ importManager: ImportManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
+        self.importManager = importManager
+    }
+    
+    
+    convenience init(_ commonManagers: AppController.CommonManagers) {
+        let cm = commonManagers
+        self.init(cm.dataController, cm.selectionManager, cm.importManager)
     }
 }
 
 
 extension SourceListViewModel {
+    
+    /// Imports Data Files
+    ///
+    /// Uses ImportManager to present and open panel and process the results.
+    func importDataFiles() {
+        _ = importManager.importDataFiles()
+    }
+    
+    /// Imports Parser Settings Files
+    ///
+    /// Uses ImportManager to present and open panel and process the results.
+    func importParserSettings() {
+        _ = importManager.importParserSettings()
+    }
+    
+    
+    /// Imports Graph Template Files
+    ///
+    /// Uses ImportManager to present and open panel and process the results.
+    func importGraphTemplate() {
+        _ = importManager.importGraphTemplate()
+    }
+    
+    
     
     func shouldAllowDrop(ofURLs urls: [URL]) -> Bool {
         if urls.count == 0 { return false }
@@ -52,58 +84,30 @@ extension SourceListViewModel {
     }
     
     func importURLs(_ urls: [URL], intoNode parentNode: Node?) -> Bool {
-        
         let success = dataController.importURLs(urls, intoNode: parentNode)
         
         return success
-        
-        /*
-         do {
-             try dataController.importURLs(urls, intoNode: parentNode)
-             
-             return true
-         } catch {
-             if let importError = error as? DataController.ImportError {
-                 if importError == .cannotImportFileWithoutANode {
-                     self.presentURLImportError = true
-                     return false
-                 }
-             }
-             return false
-         }
-         */
-        
     }
     
     
-    func importURLs(_ urls: [URL]) -> Bool {
+    func importDirectories() {
+
         
+    }
+    
+    func importURLs(_ urls: [URL]) -> Bool {
         if shouldAllowDrop(ofURLs: urls) == false {
             self.presentURLImportError = true
             return false
         }
         
-        guard let parentNode = dataController.selectedNodes.first else {return false}
-        
-        let success = dataController.importURLs(urls, intoNode: parentNode)
+        let success = importManager.importDataFiles()
         
         if success == false {
             self.presentURLImportError = true
         }
         
         return success
-        
-        /*
-         do {
-             try dataController.importURLs(urls, intoNode: parentNode)
-             return true
-         } catch {
-             self.presentURLImportError = true
-             return false
-         }
-         */
-        
-        
     }
 }
 
