@@ -69,8 +69,10 @@ struct ParserEditor: View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
             TextField("Starting Line:", value: $parseSettings.experimentalDetailsStart, format: .number)
                 .disabled(!parseSettings.hasExperimentalDetails)
+                .padding(.leading, 10)
             TextField("Ending Line:", value: $parseSettings.experimentalDetailsEnd, format: .number)
                 .disabled(!parseSettings.hasExperimentalDetails)
+                .padding(.leading, 10)
         } label: {
             Toggle("Experimental Details:", isOn: $parseSettings.hasExperimentalDetails)
                 .font(.headline)
@@ -87,10 +89,12 @@ struct ParserEditor: View {
             TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
                 //.frame(width: width)
                 .disabled(!parseSettings.hasHeader)
+                .padding(.leading, 10)
 
             TextField("Ending Line:", value: $parseSettings.headerEnd, format: .number)
                 //.frame(width: width)
                 .disabled(!parseSettings.hasHeader)
+                .padding(.leading, 10)
             
             Picker("Separator:", selection: $parseSettings.headerSeparator) {
                 ForEach(Separator.allCases) { nextSeparator in
@@ -99,7 +103,7 @@ struct ParserEditor: View {
             }
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasHeader)
-            //.padding(.leading, 10)
+            .padding(.leading, 10)
         } label: {
             Toggle("Header:", isOn: $parseSettings.hasExperimentalDetails)
                 .font(fontType)
@@ -117,6 +121,7 @@ struct ParserEditor: View {
              */
             TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
                 .disabled(!parseSettings.hasData)
+                .padding(.leading, 10)
             
             // Data Separator
             Picker("Separator:", selection: $parseSettings.dataSeparator) {
@@ -127,11 +132,11 @@ struct ParserEditor: View {
             //.frame(minWidth: 2*width + 25, alignment: .leading)
             .help(Separator.toolTip)
             .disabled(!parseSettings.hasData)
-            //.padding(.leading, 10)
+            .padding(.leading, 10)
             
             Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
                 //.padding(.leading, 10)
-                .padding(.vertical, 10)
+                .padding(.leading, 10)
                 .disabled(!parseSettings.hasData)
         } label: {
             Toggle("Data:", isOn: $parseSettings.hasData)

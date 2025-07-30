@@ -65,7 +65,9 @@ struct ParseEditor_EmptySelection: View {
     var EditExperimentalDetails: some View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
             TextField("Starting Line:", value: $number, format: .number)
+                .padding(.leading, 10)
             TextField("Ending Line:", value: $number, format: .number)
+                .padding(.leading, 10)
         } label: {
             Toggle("Experimental Details:", isOn: $toggleState)
                 .font(.headline)
@@ -83,8 +85,10 @@ struct ParseEditor_EmptySelection: View {
                  .font(fontType)
              */
             TextField("Starting Line:", value: $number, format: .number)
+                .padding(.leading, 10)
 
             TextField("Ending Line:", value: $number, format: .number)
+                .padding(.leading, 10)
             
             Picker("Separator:", selection: $separator) {
                 ForEach(Separator.allCases) { nextSeparator in
@@ -92,7 +96,7 @@ struct ParseEditor_EmptySelection: View {
                 }
             }
             .help(Separator.toolTip)
-            //.padding(.leading, 10)
+            .padding(.leading, 10)
         } label: {
             Toggle("Header:", isOn: $toggleState)
                 .font(fontType)
@@ -114,6 +118,7 @@ struct ParseEditor_EmptySelection: View {
             
             TextField("Starting Line:", value: $number, format: .number)
                 .disabled(true)
+                .padding(.leading, 10)
             
             // Data Separator
             Picker("Separator:", selection: $separator) {
