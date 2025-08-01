@@ -142,6 +142,27 @@ class DataController {
         fetchAllObjects()
         
         updateFilteredDataItems()
+        
+        
+    }
+    
+    
+    private func checkInitialFileExtensions() {
+        guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
+            let defaultExtension = AllowedFileExtension.defaultFileExtensions
+            
+            UserDefaults.setValue(defaultExtension, forKey: UserDefaults.allowedDataFileExtensions)
+            
+            return
+        }
+        
+        
+        if allowedExtensions.isEmpty {
+            let defaultExtension = AllowedFileExtension.defaultFileExtensions
+            
+            UserDefaults.setValue(defaultExtension, forKey: UserDefaults.allowedDataFileExtensions)
+        }
+        
     }
     
     

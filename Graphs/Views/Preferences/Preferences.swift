@@ -17,33 +17,28 @@ struct Preferences: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
+            ExtensionsHeader
+                
+            
             List($preferencesController.allowedDataFileExtensions,
                  id: \.id,
                  editActions: [.delete, .move],
                  selection: $selection) { $nextExtension in
-                Text("Imported Extensions")
-                    .help("Lists allowed file extensions.  If your files aren't importing, check to make sure their file extension is on this list.  Note, file extensions are case-insenstive.")
                 TextField("", text: $nextExtension.fileExtension)
                     .onSubmit {
                         self.preferencesController.save()
                     }
                 .contextMenu {
+                    Button("Add New Extension", action: addNewFileExtension)
                     Button("Delete", action: deleteSelection)
                 }
                 .frame(width: 100, alignment: .center)
             }
         }
-        .toolbar() {
-            ToolbarItem {
-                Button("", systemImage: "plus", action: addNewFileExtension)
-                    .help("Add new File Extension")
-            }
-            ToolbarItem {
-                Button("", systemImage: "minus", action: deleteSelection)
-                    .help( selection.count == 0 ? "Select File Extensions to Delete" : "Delete \(selection.count) File Extensions")
-                    .disabled(selection.count == 0)
-            }
+        .background {
+            Color.white
+                .ignoresSafeArea()
         }
         .frame(maxWidth: .infinity)
     }
@@ -57,6 +52,29 @@ struct Preferences: View {
     
     private func addNewFileExtension() {
         preferencesController.addExtension()
+    }
+    
+    private var ExtensionsHeader: some View {
+        ZStack {
+            HStack {
+                Spacer()
+                Text("Import Extensions")
+                    .font(.title2)
+                    .help("Lists allowed file extensions.  If your files aren't importing, check to make sure their file extension is on this list.  Note, file extensions are case-insenstive.")
+                Spacer()
+            }
+            HStack {
+                Spacer()
+                Button("", systemImage: "plus", action: addNewFileExtension)
+                    .help("Add new File Extension")
+                    .buttonStyle(.plain)
+                Button("", systemImage: "minus", action: deleteSelection)
+                    .help( selection.count == 0 ? "Select File Extensions to Delete" : "Delete \(selection.count) File Extensions")
+                    .buttonStyle(.plain)
+                    .disabled(selection.count == 0)
+
+            }
+        }
     }
     
 }

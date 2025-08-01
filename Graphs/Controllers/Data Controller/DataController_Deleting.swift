@@ -74,7 +74,7 @@ extension DataController {
         
         modelContext.delete(parserSettings)
         try? modelContext.save()
-        fetchAllObjects()
+        //fetchAllObjects()
     }
     
     func delete(_ graphTemplate: GraphTemplate) {

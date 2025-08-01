@@ -43,7 +43,7 @@ final class Node: Identifiable {
     //var disclosureIsOpen = false
     
     
-    private var graphTemplate: GraphTemplate? {
+    var graphTemplate: GraphTemplate? {
         didSet {
             let nc = NotificationCenter.default
             
@@ -65,7 +65,7 @@ final class Node: Identifiable {
     var graphTemplateInputType: InputType
     
     
-    private var parserSettings: ParserSettings? {
+    var parserSettings: ParserSettings? {
         didSet {
             let nc = NotificationCenter.default
             

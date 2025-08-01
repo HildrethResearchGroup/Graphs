@@ -65,21 +65,27 @@ struct Inspector: View {
             switch tab {
             case .folder:
                 Image(systemName: "folder")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .folder))
             case .dataItem:
                 Image(systemName: "text.document")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .dataItem))
             case .graphTemplate:
                 Image(systemName: "chart.xyaxis.line")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .graphTemplate))
             case .parserSettings:
                 Image(systemName: "list.bullet")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .parserSettings))
             case .text:
                 Text("T")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .text))
             case .table:
                 Image(systemName: "tablecells")
+                    .font(.title2)
                     .foregroundStyle(foreground(for: .table))
             }
         }

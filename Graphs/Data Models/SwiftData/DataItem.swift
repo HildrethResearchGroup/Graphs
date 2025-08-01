@@ -22,9 +22,9 @@ final class DataItem: Identifiable, Hashable {
     
     var node: Node?
     
-    private var graphTemplate: GraphTemplate?
+    var graphTemplate: GraphTemplate?
     
-    private var parserSettings: ParserSettings? {
+    var parserSettings: ParserSettings? {
         didSet {
             let nc = NotificationCenter.default
             
