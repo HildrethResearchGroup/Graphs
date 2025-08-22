@@ -22,7 +22,7 @@ class ExportManager {
         self.registerForNotifications()
     }
     
-    
+    // MARK: - Export Data
     func exportSelectionAsDataGraphFiles() {
         let selectedDataItems = dataController.selectedDataItems
         
@@ -58,11 +58,32 @@ class ExportManager {
                 try? nextGraphController.dgController?.write(to: targetFileURL)
                 
             }
-            
         }
-
     }
     
+    
+    var isDisabled_exportGraphsFromSelectedDataItems: Bool {
+        return dataController.selectedDataItems.count == 0
+    }
+    
+    
+    var toolTip_exportGraphsFromSelectedDataItems: String {
+        let dataItems = dataController.selectedDataItems
+        let count = dataItems.count
+        
+        if count == 0 {
+            return "No Data selected to Export"
+        } else if count == 1 {
+            guard let dataItem = dataItems.first else { return "No Data selected to Export" }
+            return "Export \(dataItem.name) as DataGraph file"
+        } else {
+            return "Export \(count) as DataGraph files"
+        }
+    }
+    
+    
+
+    // MARK: - Export Parser Settings
     func exportSelectedParserSettings() {
         guard let parserSettings = selectionManager.selectedParserSetting else { return }
         
@@ -83,6 +104,19 @@ class ExportManager {
         let output = try? encoder.encode(parserSettings.parserSettingsStatic)
         
         try? output?.write(to: url)
+    }
+    
+    
+    var isDisabled_exportSelectedParserSettings: Bool {
+        return selectionManager.selectedParserSetting == nil
+    }
+    
+    
+    var toolTip_exportSelectedParserSettings: String {
+        guard let parserSetting = selectionManager.selectedParserSetting else {
+            return "No Parser selected"
+        }
+        return "Export \(parserSetting.name) Parser"
     }
     
 }

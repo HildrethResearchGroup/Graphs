@@ -20,7 +20,7 @@ class AppController {
     var exportManager: ExportManager
     var importManager: ImportManager
     var processedDataManager: ProcessDataManager
-    var menuManager: MenuViewModel
+    var menuViewModel: MenuViewModel
     
     
     // View Models
@@ -65,7 +65,7 @@ class AppController {
         importManager = localImportManager
         processedDataManager = localProcessedDataManager
         selectionManager = localSelectionManager
-        menuManager = localMenuManager
+        menuViewModel = localMenuManager
         
         
         

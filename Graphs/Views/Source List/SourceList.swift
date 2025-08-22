@@ -21,7 +21,6 @@ struct SourceList: View {
                 OutlineGroup(sourceListVM.rootNodes, id: \.id, children: \.sortedSubNodes) { nextNode in
                     NodeView(sourceListVM, nextNode)
                 }
-
             }
             
             Spacer()
@@ -29,11 +28,12 @@ struct SourceList: View {
                     let success = sourceListVM.importURLs(urls, intoNode: nil)
                     return success
                 }
+            
             HStack {
                 Menu_plus()
                 Menu_minus()
-            }.padding(.leading, 5)
-            
+            }
+            .padding(.leading, 5)
         }
         .contextMenu {
             Button_newFolder(withParent: nil)

@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
+		C03A2BC82E59213C00209B6E /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; };
+		C03A2BC92E59213C00209B6E /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
-		C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; };
-		C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0EB49892C10076E0057A593 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		5A6D36E824C13A6400588E05 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C0EB498B2C10076E0057A593 /* DataGraph.framework in Embed Frameworks */,
+				C03A2BC92E59213C00209B6E /* DataGraph.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,7 +31,7 @@
 		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
 		5A6D36EA24C13C1E00588E05 /* Graphs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Graphs-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A73E4DC24528F5800450137 /* Graphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0EB49892C10076E0057A593 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
+		C03A2BC72E59213C00209B6E /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DataGraph.framework; path = ../../../../../../../Library/Frameworks/DataGraph.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -54,7 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0870FAE2CBC282600A8F953 /* Collections in Frameworks */,
-				C0EB498A2C10076E0057A593 /* DataGraph.framework in Frameworks */,
+				C03A2BC82E59213C00209B6E /* DataGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 		5A6D36E424C13A6400588E05 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C0EB49892C10076E0057A593 /* DataGraph.framework */,
+				C03A2BC72E59213C00209B6E /* DataGraph.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -313,6 +313,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Graphs;
@@ -352,6 +353,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/**",
 					"$(PROJECT_DIR)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = Graphs/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Graphs;

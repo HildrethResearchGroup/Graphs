@@ -111,7 +111,8 @@ struct ParsedFile: Sendable, Codable {
         case .dataIsEmpty: createInitialDataColumns(withRow: row, andHeaders: collapsedHeaders)
         case .equalCount:
             appendEqualRow(row)
-        case let .lessColumnsThanData(numberOfNeededColumns):
+        case .lessColumnsThanData:
+        //case let .lessColumnsThanData(numberOfNeededColumns):
                     
             // TODO: Determine what to do if number of columns changes
             // For now, just exit out of the appendRow and parsing process
@@ -137,15 +138,18 @@ struct ParsedFile: Sendable, Codable {
              appendEqualRow(localRow)
              */
             
+
         case let .moreColumnsThanData(numberOfNeededRows):
             return
-            
+            /*
              var localRow = row
              for _ in 0..<numberOfNeededRows {
                  localRow.append("")
              }
+             */
              
-            14
+             
+            
             
             /*
              for _ in 0..<numberOfNeededColumns {
