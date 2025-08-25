@@ -17,7 +17,7 @@ struct ParserEditor: View {
     
     @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_header = true
     
-    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_editData = true
+    @AppStorage("expanded_parserSettings_editData") private var expanded_parserSettings_editData = true
     
     
     private let width = 100.0
@@ -31,26 +31,8 @@ struct ParserEditor: View {
                 //.frame(minWidth: 100, maxWidth: .infinity)
             
             VStack {
-                Picker("New Line:", selection: $parseSettings.newLineType) {
-                    ForEach(NewLineType.allCases) { nextLineType in
-                        Text(nextLineType.name)
-                    }
-                }
-                //.frame(minWidth: 150, maxWidth: 200)
-                .help(NewLineType.toolTip)
-                
-                Picker("Encoding:", selection: $parseSettings.stringEncodingType) {
-                    ForEach(StringEncodingType.primaryEncodings) { nextEncoding in
-                        Text(nextEncoding.rawValue)
-                    }
-                    Divider()
-                    ForEach(StringEncodingType.secondaryEncodings) { nextEncoding in
-                        Text(nextEncoding.rawValue)
-                    }
-                }
-                //.frame(minWidth: 150, maxWidth: 200)
-                .help(StringEncodingType.toolTip)
-                
+                Picker_newLineType($parseSettings.newLineType)
+                Picker_stringType($parseSettings.stringEncodingType)
             }
             
             EditExperimentalDetails
@@ -105,7 +87,7 @@ struct ParserEditor: View {
             .disabled(!parseSettings.hasHeader)
             .padding(.leading, 10)
         } label: {
-            Toggle("Header:", isOn: $parseSettings.hasExperimentalDetails)
+            Toggle("Header:", isOn: $parseSettings.hasHeader)
                 .font(fontType)
         }
         

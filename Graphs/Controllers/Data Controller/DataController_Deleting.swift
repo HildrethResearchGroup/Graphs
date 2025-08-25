@@ -57,12 +57,10 @@ extension DataController {
         // It is important to delete the DataItems first so that the selection manager removes the data items from the selection.
         if dataItems.count > 0 {
             delete(dataItems)
-            return
         }
         
         if nodes.count > 0 {
             delete(nodes)
-            return
         }
         
         fetchAllObjects()

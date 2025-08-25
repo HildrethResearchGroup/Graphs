@@ -22,9 +22,11 @@ struct GraphsApp: App {
         }
         .environment(appController)
         .commands{
-            ImportMenuCommands
             ExportMenuCommands
             DeleteMenuCommands
+            ImportMenuCommands
+            PasteBoardCommands
+            UndoRedoCommands
         }
         
         Settings {
@@ -120,6 +122,7 @@ extension GraphsApp {
                 Button_deleteDataItems
                 Button_deleteNodes
                 Button_deleteGraphTemplate
+                Button_deleteParserSettings
             }
         }
     }
@@ -143,5 +146,23 @@ extension GraphsApp {
         Button("Graph Template", action: menuVM.deleteSelectedGraphTemplate)
             .disabled(menuVM.isDisabled_deleteSelectedGraphTemplate)
             .help(menuVM.toolTip_deleteSelectedGraphTemplate)
+    }
+    
+    
+    private var Button_deleteParserSettings: some View {
+        Button("Parser", action: menuVM.deleteSelectedParserSettings)
+            .disabled(menuVM.isDisabled_deleteSelectedParserSettings)
+            .help(menuVM.toolTip_deleteSelectedParserSettings)
+    }
+    
+ 
+    
+    // MARK: - Commands to Remove
+    private var PasteBoardCommands: some Commands {
+        CommandGroup(replacing: .pasteboard, addition: {})
+    }
+    
+    private var UndoRedoCommands: some Commands {
+        CommandGroup(replacing: .undoRedo, addition: {})
     }
 }

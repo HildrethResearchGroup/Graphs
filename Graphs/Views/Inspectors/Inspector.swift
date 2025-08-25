@@ -34,7 +34,7 @@ struct Inspector: View {
              GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                  .tabItem { Text("􁂥") }
-             ParserInspector(viewModel.parserSettingsVM)
+             ParserInspector(viewModel)
                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
                  .tabItem { Text("􀋱") }
              TextInspector(viewModel.textInspectorVM)
@@ -98,7 +98,7 @@ struct Inspector: View {
             case .folder: NodesInspectorView(viewModel.nodeInspectorVM)
             case .dataItem: DataItemsInspector(viewModel.dataItemsVM)
             case .graphTemplate: GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
-            case .parserSettings: ParserInspector(viewModel.parserSettingsVM)
+            case .parserSettings: ParserInspector(viewModel)
             case .text: TextInspector(viewModel.textInspectorVM)
             case .table: TableInspector(viewModel.tableInspectorVM)
             }

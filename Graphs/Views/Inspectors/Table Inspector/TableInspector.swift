@@ -18,7 +18,7 @@ struct TableInspector: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.dataItemName)
+            //Text(viewModel.dataItemName)
             Table(of: TableDataRow.self, selection: $viewModel.selection)  {
                 TableColumn("#") { (nextRow: TableDataRow) in
                     Text("\(nextRow.rowNumber)")

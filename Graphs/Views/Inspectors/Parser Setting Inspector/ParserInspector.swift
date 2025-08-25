@@ -10,10 +10,9 @@ import SwiftUI
 import SwiftData
 
 struct ParserInspector: View {
-    
-    @Bindable var viewModel: ParserSettingsViewModel
-    
-    init(_ viewModel: ParserSettingsViewModel) {
+    @Bindable var viewModel: InspectorViewModel
+
+    init(_ viewModel: InspectorViewModel) {
         self.viewModel = viewModel
     }
     
@@ -26,7 +25,7 @@ struct ParserInspector: View {
             
             Divider()
             
-            if let selectedParser = viewModel.selection {
+            if let selectedParser = viewModel.parserSettingsVM.selection {
                 ParserEditor(parseSettings: selectedParser)
                     .frame(maxHeight: 425)
                     //.padding(.horizontal, -20)
@@ -38,8 +37,8 @@ struct ParserInspector: View {
                     //.padding(.top, -20)
             }
             
-            //FileContentView
-            
+            FileContentView
+
             Spacer()
             
         }
@@ -50,10 +49,10 @@ struct ParserInspector: View {
     
     @ViewBuilder
     var AvailableParserSettings: some View {
-        List(selection: $viewModel.selection) { // was \.self
-            ForEach(viewModel.parserSettings, id: \.self) { nextParser in
+        List(selection: $viewModel.parserSettingsVM.selection) { // was \.self
+            ForEach(viewModel.parserSettingsVM.parserSettings, id: \.self) { nextParser in
                 Text(nextParser.name)
-                    .foregroundStyle(viewModel.foregroundColor(for: nextParser))
+                    .foregroundStyle(viewModel.parserSettingsVM.foregroundColor(for: nextParser))
                     .contextMenu {
                         DeleteParserSettingButton
                         DupliateParserSettingsButton
@@ -65,9 +64,9 @@ struct ParserInspector: View {
         //.listRowSeparator(.hidden)
         .frame(height: 150)
         .dropDestination(for: URL.self) { urls, _  in
-            if viewModel.shouldAllowDrop(ofURLs: urls) == false { return false }
+            if viewModel.parserSettingsVM.shouldAllowDrop(ofURLs: urls) == false { return false }
             
-            let success = viewModel.importURLs(urls)
+            let success = viewModel.parserSettingsVM.importURLs(urls)
             return success
         }
         
@@ -76,7 +75,7 @@ struct ParserInspector: View {
         HStack {
             PlusParserSettingButton
             MinusParserSettingButton
-                .disabled(viewModel.selection == nil)
+                .disabled(viewModel.parserSettingsVM.selection == nil)
         }
         .padding(.horizontal)
     }
@@ -84,16 +83,19 @@ struct ParserInspector: View {
     
     @ViewBuilder
     var FileContentView: some View {
-        if let dataItem = viewModel.selectedDataItem {
-            if dataItem.getAssociatedParserSettings()?.id == viewModel.selection?.id {
-                Text("Fix: TextInspector(LineNumberViewModel(dataItem))")
+        // ParseViewer
+        if let dataItem = viewModel.parserSettingsVM.selectedDataItem {
+            if dataItem.getAssociatedParserSettings()?.id == viewModel.parserSettingsVM.selection?.id {
+                VStack {
+                    Divider()
+                }
+                ParseViewer(viewModel.tableInspectorVM, viewModel.textInspectorVM)
             } else {
                 EmptyView()
             }
         } else {
             EmptyView()
         }
-        
         
     }
     
@@ -138,16 +140,16 @@ struct ParserInspector: View {
     
     // MARK: - Functions
     private func newParser() {
-        viewModel.newParserSettings()
+        viewModel.parserSettingsVM.newParserSettings()
     }
     
     private func deleteParser() {
-        viewModel.deleteSelectedParserSetting()
+        viewModel.parserSettingsVM.deleteSelectedParserSetting()
     }
     
     
     private func duplateParser() {
-        viewModel.duplicateParserSettings()
+        viewModel.parserSettingsVM.duplicateParserSettings()
     }
     
     private func exportParser() {
@@ -161,11 +163,8 @@ struct ParserInspector: View {
 
 // MARK: - Preview
 #Preview {
-    
-    let dataController = DataController(withDelegate: nil)
-    let selectionManager = SelectionManager()
-    let parserSettingsViewModel = ParserSettingsViewModel(dataController, selectionManager)
-    
-    ParserInspector(parserSettingsViewModel)
+    @Previewable
+    @State var appController = AppController()
+    ParserInspector(appController.inspectorVM)
         .frame(height: 1000)
 }

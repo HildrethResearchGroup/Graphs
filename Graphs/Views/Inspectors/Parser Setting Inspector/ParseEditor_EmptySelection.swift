@@ -33,21 +33,10 @@ struct ParseEditor_EmptySelection: View {
             //.frame(minWidth: 100, maxWidth: .infinity)
                 .disabled(true)
             VStack {
-                Picker("New Line:", selection: $newLineType) {
-                    ForEach(NewLineType.allCases) { nextLineType in
-                        Text(nextLineType.name)
-                    }
-                }
-                .help(NewLineType.toolTip)
-                
-                Picker("Encoding:", selection: $stringEncoding) {
-                    ForEach(StringEncodingType.allCases) { nextEncoding in
-                        Text(nextEncoding.rawValue)
-                    }
-                }
-                .help(StringEncodingType.toolTip)
-                
-                
+                Picker_newLineType($newLineType)
+                    .disabled(true)
+                Picker_stringType($stringEncoding)
+                    .disabled(true)
             }
             
             EditExperimentalDetails

@@ -72,14 +72,23 @@ class TextInspectorViewModel {
     
     
     var content: String {
-        updateStoredContent()
-        return storedContent.content
+        if viewIsVisable {
+            updateStoredContent()
+            return storedContent.content
+        } else {
+            return ""
+        }
     }
+    
     
     //var combinedLineNumbersAndContent: AttributedString {
     var combinedLineNumbersAndContent: String {
-        updateStoredContent()
-        return storedContent.combinedLineNumbersAndContent
+        if viewIsVisable {
+            updateStoredContent()
+            return storedContent.combinedLineNumbersAndContent
+        } else {
+            return ""
+        }
     }
     
     

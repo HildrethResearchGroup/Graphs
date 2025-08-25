@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
-		C03A2BC82E59213C00209B6E /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; };
-		C03A2BC92E59213C00209B6E /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C03A2BCA2E5922CD00209B6E /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; };
+		C03A2BCB2E5922CD00209B6E /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
 /* End PBXBuildFile section */
 
@@ -20,7 +20,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C03A2BC92E59213C00209B6E /* DataGraph.framework in Embed Frameworks */,
+				C03A2BCB2E5922CD00209B6E /* DataGraph.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,7 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0870FAE2CBC282600A8F953 /* Collections in Frameworks */,
-				C03A2BC82E59213C00209B6E /* DataGraph.framework in Frameworks */,
+				C03A2BCA2E5922CD00209B6E /* DataGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

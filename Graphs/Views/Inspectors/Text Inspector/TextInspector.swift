@@ -17,8 +17,9 @@ struct TextInspector: View {
     
     var body: some View {
         VStack {
-            HeaderView
-            Divider()
+            // HeaderView
+            // Divider()
+            
             TabContent
             Spacer()
         }

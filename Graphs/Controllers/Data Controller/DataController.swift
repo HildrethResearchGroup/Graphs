@@ -121,10 +121,12 @@ class DataController {
                 Node.self, DataItem.self, GraphTemplate.self, ParserSettings.self
             ])
             
+            
             let storageLocation = URL.swiftDataStorageLocation
             
             
             let modelConfiguration = ModelConfiguration(schema: schema, url: storageLocation, allowsSave: true)
+            
             
             do {
                 return try ModelContainer(for: schema, configurations: [modelConfiguration])
@@ -133,10 +135,12 @@ class DataController {
             }
         }()
         
+        
         container = sharedModelContainer
         
-        modelContext = ModelContext(sharedModelContainer)
         
+        modelContext = ModelContext(sharedModelContainer)
+
         self.delegate = delegate
         
         fetchAllObjects()

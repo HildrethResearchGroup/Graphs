@@ -26,14 +26,23 @@ class TableInspectorViewModel {
         }
     }
     
-    var tableData: TableData
+    var tableData: TableData {
+        get {
+            if viewIsVisable {
+                return internalTableData
+            } else {
+                return TableData(columns: [])
+            }
+        }
+    }
+    
+    private var internalTableData: TableData
     
     var selection: Set<TableDataRow.ID> = []
     
     // MARK: View State
     var viewIsVisable: Bool = false {
         didSet {
-            
             updateProcessedData()
         }
     }
@@ -46,7 +55,7 @@ class TableInspectorViewModel {
     init(_ dataController: DataController, _ processDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.processDataManager = processDataManager
-        self.tableData = TableData(columns: [])
+        self.internalTableData = TableData(columns: [])
         registerForNotifications()
     }
     
@@ -76,7 +85,7 @@ class TableInspectorViewModel {
         
         let newTableData = TableData(columns: parsedFile.data)
         
-        tableData = newTableData
+        internalTableData = newTableData
     }
     
     

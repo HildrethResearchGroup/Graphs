@@ -243,9 +243,6 @@ class MenuViewModel {
         selectionManager.deselectAll()
     }
     
-    
-    
-    
 }
 
 // MARK: - Button State
