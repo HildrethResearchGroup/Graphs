@@ -19,22 +19,83 @@ struct Preferences: View {
         
         VStack(alignment: .center) {
             ExtensionsHeader
-                
             
-            List($preferencesController.allowedDataFileExtensions,
-                 id: \.id,
-                 editActions: [.delete, .move],
-                 selection: $selection) { $nextExtension in
-                TextField("", text: $nextExtension.fileExtension)
-                    .onSubmit {
-                        self.preferencesController.save()
-                    }
-                .contextMenu {
-                    Button("Add New Extension", action: addNewFileExtension)
-                    Button("Delete", action: deleteSelection)
+            Table($preferencesController.allowedDataFileExtensions, selection: $selection) {
+                TableColumn("Ext") {
+                    TextField("", text: $0.fileExtension)
                 }
-                .frame(width: 100, alignment: .center)
+                .width(50)
+                TableColumn("User Notes") {
+                    TextField("", text: $0.userNotes)
+                }
             }
+            //.alternatingRowBackgrounds(.disabled)
+            .contextMenu {
+                Button("Add New Extension", action: addNewFileExtension)
+                Button("Delete", action: deleteSelection)
+            }
+            
+            /*
+             List {
+                 HStack {
+                     Text("Ext.")
+                         .frame(width: 50, alignment: .center)
+                     Divider()
+                     Text("Notes")
+                 }
+                 
+                 ForEach($preferencesController.allowedDataFileExtensions, id: \.id) { $nextExtension in
+                     HStack {
+                         TextField("", text: $nextExtension.fileExtension)
+                             .frame(width: 50, alignment: .center)
+                             .onSubmit {
+                                 self.preferencesController.save()
+                             }
+                             
+                         Divider()
+                         TextField("", text: $nextExtension.userNotes)
+                             .onSubmit {
+                                 self.preferencesController.save()
+                             }
+                     }
+                     
+                     .contextMenu {
+                         Button("Add New Extension", action: addNewFileExtension)
+                         Button("Delete", action: deleteSelection)
+                     }
+                     .frame(width: 100, alignment: .center)
+                 }
+                 
+             }
+             */
+           
+            
+            /*
+             List($preferencesController.allowedDataFileExtensions,
+                  id: \.id,
+                  editActions: [.delete, .move],
+                  selection: $selection) { $nextExtension in
+                 HStack {
+                     TextField("", text: $nextExtension.fileExtension)
+                         .onSubmit {
+                             self.preferencesController.save()
+                         }
+                         .frame(width: 50, alignment: .center)
+                     Divider()
+                     TextField("", text: $nextExtension.userNotes)
+                         .onSubmit {
+                             self.preferencesController.save()
+                         }
+                 }
+                 
+                 .contextMenu {
+                     Button("Add New Extension", action: addNewFileExtension)
+                     Button("Delete", action: deleteSelection)
+                 }
+                 .frame(width: 100, alignment: .center)
+             }
+             */
+            
         }
         .background {
             Color.white

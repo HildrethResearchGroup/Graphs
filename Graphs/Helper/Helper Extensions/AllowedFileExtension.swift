@@ -26,4 +26,14 @@ struct AllowedFileExtension: Identifiable, Codable, Hashable {
             .init(fileExtension: "tab")
         ]
     }
+    
+    func contains(_ content: String) -> Bool {
+        if fileExtension.contains(content) {
+            return true
+        } else if userNotes.contains(content) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
