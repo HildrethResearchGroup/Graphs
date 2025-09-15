@@ -19,10 +19,10 @@ struct Inspector: View {
 
     
     var body: some View {
-        VStack {
-            Tabs
-            TabContent(for: selectedTab)
-        }
+         VStack {
+             Tabs
+             TabContent(for: selectedTab)
+         }
         .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
         
     }
@@ -30,17 +30,21 @@ struct Inspector: View {
     private var OriginalTab: some View {
         TabView {
              DataItemsInspector(viewModel.dataItemsVM)
-                 .tabItem { Text("􀈿") }
+                 .tabItem { Image(systemName: "document") }
              GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                 .tabItem { Text("􁂥") }
+                 //.tabItem { Text("􁂥") }
+                 .tabItem { Image(systemName: "chart.xyaxis.line") }
+
              ParserInspector(viewModel)
                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                 .tabItem { Text("􀋱") }
+                 //.tabItem { Text("􀋱") }
+                .tabItem { Image(systemName: "list.bullet") }
              TextInspector(viewModel.textInspectorVM)
                  .tabItem { Text("T") }
              TableInspector(viewModel.tableInspectorVM)
-                 .tabItem { Text("􀏣") }
+                 //.tabItem { Text("􀏣") }
+                 .tabItem { Image(systemName: "tablecells") }
         }
     }
     

@@ -33,7 +33,7 @@ struct StoredContent {
     private mutating func setState(from url: URL?, using parserSettings: ParserSettingsStatic?) {
         
         guard let url else {
-            content = "Select File"
+            content = "No File Selected"
             linesNumbers = "0"
             //combinedLineNumbersAndContent = AttributedString(linesNumbers + "\t" + content)
             combinedLineNumbersAndContent = linesNumbers + "\t" + content
@@ -41,7 +41,7 @@ struct StoredContent {
         }
         
         guard let parserSettings else {
-            content = "Set Parser for File"
+            content = "Parser needed for File"
             linesNumbers = "0\n1"
             combinedLineNumbersAndContent = "0:\tString Encoding Needed.\n1:\tSet Parser for file."
             return

@@ -20,11 +20,16 @@ struct TextInspector: View {
             // HeaderView
             // Divider()
             
-            TabContent
+            //TabContent
+            Text(viewModel.content)
+                .selectionDisabled(false)
+                .background(.white)
             Spacer()
         }
+        .frame(maxWidth: .infinity)
         .onAppear { viewModel.viewIsVisable = true }
         .onDisappear { viewModel.viewIsVisable = false }
+        .background(.white)
         
     }
     
