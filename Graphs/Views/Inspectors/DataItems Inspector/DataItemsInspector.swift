@@ -52,6 +52,7 @@ struct DataItemsInspector: View {
                 Button("None") {
                     viewModel.updateParserSetting(with: .none, and: nil)
                 }
+                
                 Button(viewModel.inheritParserSettingsName) {
                     viewModel.updateParserSetting(with: .defaultFromParent, and: nil)
                 }
@@ -92,6 +93,7 @@ struct DataItemsInspector: View {
             .help(viewModel.toolTip_GraphTemplate)
         }
     }
+    
     
     
     

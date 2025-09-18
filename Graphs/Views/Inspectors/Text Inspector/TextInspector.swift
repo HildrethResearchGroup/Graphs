@@ -13,6 +13,8 @@ struct TextInspector: View {
     
     @AppStorage("TextInspector_useNumberedText") private var useNumberedText: Bool = false
     //@State private var useNumberedText: Bool = false
+    
+    @AppStorage("TextInspector_useLineLimit") private var useLineLimit: Bool = false
 
     init(_ viewModel: TextInspectorViewModel) {
         self.viewModel = viewModel
@@ -27,7 +29,10 @@ struct TextInspector: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .onAppear { viewModel.viewIsVisable = true }
+        .onAppear {
+            
+            viewModel.viewIsVisable = true
+        }
         .onDisappear { viewModel.viewIsVisable = false }
         .backgroundStyle(.white)
         .background(.white)
@@ -40,7 +45,7 @@ struct TextInspector: View {
     // MARK: - Text Views
     private var Text_Simple: some View {
         TextEditor(text: Binding.constant(viewModel.content))
-            //.lineLimit(100)
+            .lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
@@ -51,7 +56,7 @@ struct TextInspector: View {
     
     private var Text_Numbered: some View {
         TextEditor(text: Binding.constant(viewModel.combinedLineNumbersAndContent))
-            //.lineLimit(100)
+            .lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
@@ -61,7 +66,13 @@ struct TextInspector: View {
             
     }
     
-    
+    var lineLimit: Int {
+        if useLineLimit {
+            return 100
+        } else {
+            return .max
+        }
+    }
 }
 
 

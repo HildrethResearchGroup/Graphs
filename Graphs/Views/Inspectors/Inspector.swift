@@ -15,6 +15,8 @@ struct Inspector: View {
     
     @AppStorage("TextInspector_useNumberedText") private var useNumberedText: Bool = false
     
+    @AppStorage("TextInspector_useLineLimit") private var useLineLimit: Bool = false
+    
     init(_ viewModel: InspectorViewModel) {
         self.viewModel = viewModel
     }
@@ -92,6 +94,8 @@ struct Inspector: View {
                     .contextMenu() {
                         Button_simpleSelector
                         Button_numberedSelector
+                        //Divider()
+                        //Button_useLineLimit
                     }
                     .frame(alignment: .trailing)
             case .table:
@@ -155,6 +159,7 @@ struct Inspector: View {
     
     @ViewBuilder
     private var Button_numberedSelector: some View {
+
         if useNumberedText {
             Button(action: {useNumberedText = true}) {
                 Text("Numbered")
@@ -165,7 +170,15 @@ struct Inspector: View {
                 Text("Numbered")
             }
         }
-
+    }
+    
+    
+    @ViewBuilder
+    private var Button_useLineLimit: some View {
+        Button(action: { useLineLimit.toggle() }) {
+            Text("Limit Lines")
+                .foregroundStyle(useLineLimit ? .blue : .black)
+        }
     }
 }
 
