@@ -18,7 +18,7 @@
           "image-name" : "Graphs-Icon 3.svg",
           "name" : "Graphs-Icon 3",
           "position" : {
-            "scale" : 1,
+            "scale" : 1.05,
             "translation-in-points" : [
               10.046875,
               56.84375
@@ -29,12 +29,12 @@
       "lighting" : "individual",
       "shadow" : {
         "kind" : "neutral",
-        "opacity" : 0.82
+        "opacity" : 1
       },
       "specular" : true,
       "translucency" : {
         "enabled" : true,
-        "value" : 0.38
+        "value" : 0.6
       }
     }
   ],

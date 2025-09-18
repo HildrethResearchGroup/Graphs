@@ -10,6 +10,9 @@ import SwiftUI
 
 struct TextInspector: View {
     @Bindable private var viewModel: TextInspectorViewModel
+    
+    @AppStorage("TextInspector_useNumberedText") private var useNumberedText: Bool = false
+    //@State private var useNumberedText: Bool = false
 
     init(_ viewModel: TextInspectorViewModel) {
         self.viewModel = viewModel
@@ -17,103 +20,54 @@ struct TextInspector: View {
     
     var body: some View {
         VStack {
-            // HeaderView
-            // Divider()
-            
-            //TabContent
-            Text(viewModel.content)
-                .selectionDisabled(false)
-                .background(.white)
-            Spacer()
+            if useNumberedText {
+                Text_Numbered
+            } else {
+                Text_Simple
+            }
         }
         .frame(maxWidth: .infinity)
         .onAppear { viewModel.viewIsVisable = true }
         .onDisappear { viewModel.viewIsVisable = false }
+        .backgroundStyle(.white)
         .background(.white)
         
     }
     
-    // MARK: - SubViews
-    private var HeaderView: some View {
-        VStack {
-            Text("Parser: \(viewModel.parserSettings?.name ?? "")")
-            Picker_stringEncodingType
-            Picker_newLineType
-        }
-    }
-    
-    
-    private var TabContent: some View {
-        VStack {
-            if viewModel.processingState == .upToDate {
-                TabView {
-                    Tab(content: { Text_Simple },
-                        label: { Text("Simple") })
-                    Tab(content: { Text_numbered },
-                        label: { Text("Numbered") })
-                }
-            } else {
-                ProgressView()
-                    .progressViewStyle(.circular)
-            }
-        }
-    }
-    
+
+  
     
     // MARK: - Text Views
     private var Text_Simple: some View {
         TextEditor(text: Binding.constant(viewModel.content))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
+            .selectionDisabled(false)
     }
     
-    private var Text_numbered: some View {
+    private var Text_Numbered: some View {
         TextEditor(text: Binding.constant(viewModel.combinedLineNumbersAndContent))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
-        
+            .selectionDisabled(false)
+            
     }
     
-    
-    // MARK: - Pickers
-    private var Picker_newLineType: some View {
-        Picker("New Line:", selection: $viewModel.newLineType) {
-            ForEach(NewLineType.allCases) { nextLineType in
-                Text(nextLineType.name)
-            }
-        }
-        .help(NewLineType.toolTip)
-    }
-    
-    private var Picker_stringEncodingType: some View {
-        Picker("Encoding:", selection: $viewModel.stringEncodingType) {
-            ForEach(StringEncodingType.primaryEncodings) { nextEncoding in
-                Text(nextEncoding.rawValue)
-            }
-            Divider()
-            ForEach(StringEncodingType.secondaryEncodings) { nextEncoding in
-                Text(nextEncoding.rawValue)
-            }
-        }
-        .help(StringEncodingType.toolTip)
-    }
     
 }
+
 
 
 // MARK: - Preview
 #Preview {
-    let controller = DataController(withDelegate: nil)
-    let viewModel = TextInspectorViewModel(controller)
-    TextInspector(viewModel)
+    let controller = AppController()
+    TextInspector(controller.inspectorVM.textInspectorVM)
 }
-
-

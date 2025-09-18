@@ -15,20 +15,24 @@ struct Parser {
         
         _ = staticSettings.validateLineStartEndSettings
         
-        var content = try content(for: url, using: staticSettings)
+        var localContent = try content(for: url, using: staticSettings)
         
         if staticSettings.newLineType == .auto {
-            content = content.replacingOccurrences(of: "\r", with: "")
+            localContent = localContent.replacingOccurrences(of: "\r", with: "")
         }
         
         let lineSeparator = staticSettings.newLineType.stringLiteral
         
-        let lines: [String] = content.components(separatedBy: lineSeparator)
+        let lines: [String] = localContent.components(separatedBy: lineSeparator)
         
         var parsedFile = ParsedFile(dataItemID: localID)
         
+        parsedFile.content = localContent
+        
 
         var index = 1
+        
+        let numberOfLines = lines.count
         
         for  nextLine in lines {
             let type = staticSettings.parseLineType(for: index)
@@ -69,11 +73,19 @@ struct Parser {
                     }
                 }
                 
-                
                 parsedFile.appendRow(nextDataLine)
                
             case .end:
                 break
+            }
+            
+            // Add simpleNumberedString to the parsed file
+            let numberedString = simpleLineNumber(for: nextLine, at: index, totalNumberOfLines: numberOfLines)
+            
+            if index < numberOfLines {
+                parsedFile.combinedLineNumbersAndContent.append(numberedString + "\n")
+            } else {
+                parsedFile.combinedLineNumbersAndContent.append(numberedString)
             }
             
             index += 1
@@ -170,51 +182,73 @@ struct Parser {
     }
     
     
-    private static func generateSimpleLineNumbers(withLines lines: [String]) -> String {
-        if lines.isEmpty {
-            return "0:"
-        }
-        
-        let numberOfLines = lines.count
-        
-        let size = numberOfLines.size
-        
+    private static func simpleLineNumber(for line: String, at index: Int, totalNumberOfLines: Int) -> String {
+
+        let size = totalNumberOfLines.size
         let formatter = NumberFormatter()
         formatter.minimumIntegerDigits = size
         
-        var output = ""
-        var index = 1
+        let numberString = formatter.string(from: index as NSNumber) ?? ""
         
-        for nextLine in lines {
-            let numberString = formatter.string(from: index as NSNumber) ?? ""
-            
-            let nextString = numberString + "\t" + nextLine
-            
-            if index == numberOfLines {
-                output.append(nextString)
-                
-            } else {
-                output.append(nextString + "\n")
-            }
-            
-            index += 1
-        }
+        let output = numberString + ":\t" + line
         
         return output
     }
     
     
-    // From: https://stackoverflow.com/questions/45412684/how-to-transpose-a-matrix-of-unequal-array-length-in-swift-3
-    private static func transpose<Element>(_ input: [[Element]], defaultValue: Element) -> [[Element]] {
-        let columns = input.count
-        let rows = input.reduce(0) { max($0, $1.count) }
+    
+    
+    // Unused
+    /*
+     private static func generateSimpleLineNumbers(withLines lines: [String]) -> String {
+         if lines.isEmpty {
+             return "0:"
+         }
+         
+         let numberOfLines = lines.count
+         
+         let size = numberOfLines.size
+         
+         let formatter = NumberFormatter()
+         formatter.minimumIntegerDigits = size
+         
+         var output = ""
+         var index = 1
+         
+         for nextLine in lines {
+             let numberString = formatter.string(from: index as NSNumber) ?? ""
+             
+             let nextString = numberString + "\t" + nextLine
+             
+             if index == numberOfLines {
+                 output.append(nextString)
+                 
+             } else {
+                 output.append(nextString + "\n")
+             }
+             
+             index += 1
+         }
+         
+         return output
+     }
+     */
+    
+    
+    // Unused
+    /**
+     // From: https://stackoverflow.com/questions/45412684/how-to-transpose-a-matrix-of-unequal-array-length-in-swift-3
+     private static func transpose<Element>(_ input: [[Element]], defaultValue: Element) -> [[Element]] {
+         let columns = input.count
+         let rows = input.reduce(0) { max($0, $1.count) }
 
-        return (0 ..< rows).reduce(into: []) { result, row in
-            result.append((0 ..< columns).reduce(into: []) { result, column in
-                result.append(row < input[column].count ? input[column][row] : defaultValue)
-            })
-        }
-    }
+         return (0 ..< rows).reduce(into: []) { result, row in
+             result.append((0 ..< columns).reduce(into: []) { result, column in
+                 result.append(row < input[column].count ? input[column][row] : defaultValue)
+             })
+         }
+     }
+     */
 
 }
 

@@ -13,6 +13,8 @@ struct Inspector: View {
     
     @AppStorage("selectedTab_Inspector") private var selectedTab: HNTab = .folder
     
+    @AppStorage("TextInspector_useNumberedText") private var useNumberedText: Bool = false
+    
     init(_ viewModel: InspectorViewModel) {
         self.viewModel = viewModel
     }
@@ -69,30 +71,29 @@ struct Inspector: View {
             switch tab {
             case .folder:
                 Image(systemName: "folder")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .folder))
             case .dataItem:
                 Image(systemName: "text.document")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .dataItem))
             case .graphTemplate:
                 Image(systemName: "chart.xyaxis.line")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .graphTemplate))
             case .parserSettings:
                 Image(systemName: "list.bullet")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .parserSettings))
             case .text:
                 Text("T")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .text))
+                    .contextMenu() {
+                        Button_simpleSelector
+                        Button_numberedSelector
+                    }
+                    .frame(alignment: .trailing)
             case .table:
                 Image(systemName: "tablecells")
-                    .font(.title2)
                     .foregroundStyle(foreground(for: .table))
             }
-        }
+        }.font(.title2)
     }
     
     
@@ -128,6 +129,37 @@ struct Inspector: View {
         case parserSettings
         case text
         case table
+    }
+    
+    
+    @ViewBuilder
+    private var Button_simpleSelector: some View {
+        if useNumberedText {
+            Button(action: {useNumberedText = false}) {
+                Text("Simple")
+            }
+        } else {
+            Button(action: {useNumberedText = false}) {
+                Text("Simple")
+                    .foregroundStyle(.blue)
+            }
+        }
+    }
+    
+    
+    @ViewBuilder
+    private var Button_numberedSelector: some View {
+        if useNumberedText {
+            Button(action: {useNumberedText = true}) {
+                Text("Numbered")
+                    .foregroundStyle(.blue)
+            }
+        } else {
+            Button(action: {useNumberedText = true}) {
+                Text("Numbered")
+            }
+        }
+
     }
 }
 

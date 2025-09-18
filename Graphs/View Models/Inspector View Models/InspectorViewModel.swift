@@ -47,7 +47,7 @@ class InspectorViewModel {
         
         self.nodeInspectorVM = NodeInspectorViewModel(dataController, selectionManager)
         
-        self.textInspectorVM = TextInspectorViewModel(dataController)
+        self.textInspectorVM = TextInspectorViewModel(dataController, processDataManager)
         
         self.tableInspectorVM = TableInspectorViewModel(dataController, processDataManager)
         

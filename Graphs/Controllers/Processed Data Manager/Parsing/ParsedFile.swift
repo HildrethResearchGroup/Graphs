@@ -16,6 +16,8 @@ struct ParsedFile: Sendable, Codable {
     
     var dataItemID: DataItem.LocalID
     
+    var content: String = ""
+    
     /// A string made from the lines spanning the Data's Experimental Details or an empty string if the parser does not include any Experimental Details
     ///
     /// - Note: This section may contain newline characters.  This data is cached.
@@ -48,6 +50,9 @@ struct ParsedFile: Sendable, Codable {
     ///
     /// - Note: This section may contain newline characters.
     var footer: String = ""
+    
+    
+    var combinedLineNumbersAndContent: String = ""
     
     
     

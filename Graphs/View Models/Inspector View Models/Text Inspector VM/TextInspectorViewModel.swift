@@ -13,13 +13,15 @@ import Foundation
 @MainActor
 class TextInspectorViewModel {
     // MARK: Data Sources
-    var dataController: DataController
+    private var dataController: DataController
     
-    var dataItem: DataItem? {
+    private var processedDataManager: ProcessDataManager
+    
+    private var dataItem: DataItem? {
         dataController.selectedDataItems.first
     }
     
-    var parserSettings: ParserSettings? {
+    private var parserSettings: ParserSettings? {
         dataItem?.getAssociatedParserSettings()
     }
      
@@ -27,54 +29,28 @@ class TextInspectorViewModel {
     // MARK: View State
     var viewIsVisable: Bool = false {
         didSet {
-            updateStoredContent()
-        }
-    }
-    
-    var processingState: ProcessingState = .upToDate
-    
-    var reducedNumberOfLines = true
-    
-    var newLineType: NewLineType {
-        get { parserSettings?.newLineType ?? .CRLF }
-        set {
-            let oldValue = newLineType
-            
-            if newValue != parserSettings?.newLineType {
-                parserSettings?.newLineType = newValue
-            }
-            
-            if newValue != oldValue {
-                processingState = .outOfDate
-                updateStoredContent()
+            if viewIsVisable {
+                Task { await updateProcessedData() }
             }
         }
     }
     
-    
-    var stringEncodingType: StringEncodingType {
-        get { parserSettings?.stringEncodingType ?? .ascii }
-        set {
-            let oldValue = stringEncodingType
-            
-            if newValue != parserSettings?.stringEncodingType {
-                parserSettings?.stringEncodingType = newValue
-            }
-            
-            if newValue != oldValue {
-                processingState = .outOfDate
-                updateStoredContent()
-            }
+    private var processedData: ProcessedData? {
+        didSet {
+            lastModified = .now
         }
     }
     
+    
+    private var processingState: ProcessingState = .upToDate
+    
+    private var lastModified: Date = .now
     
     
     
     var content: String {
         if viewIsVisable {
-            updateStoredContent()
-            return storedContent.content
+            return processedData?.parsedFile?.content ?? ""
         } else {
             return ""
         }
@@ -84,78 +60,41 @@ class TextInspectorViewModel {
     //var combinedLineNumbersAndContent: AttributedString {
     var combinedLineNumbersAndContent: String {
         if viewIsVisable {
-            updateStoredContent()
-            return storedContent.combinedLineNumbersAndContent
+            return processedData?.parsedFile?.combinedLineNumbersAndContent ?? ""
         } else {
             return ""
         }
     }
     
     
-    private var storedContent: StoredContent
     
     
     
     // MARK: - Initialization
-    init(_ dataController: DataController) {
+    init(_ dataController: DataController, _ processedDataManager: ProcessDataManager) {
         self.dataController = dataController
-        self.storedContent = StoredContent(nil, url: nil, parserSettings: nil, false)
+        self.processedDataManager = processedDataManager
         
-        self.updateStoredContent()
-        self.registerForNotifications()
+        Task {
+            await self.updateProcessedData()
+            self.registerForNotifications()
+        }
     }
     
     
     // MARK: - Updating State
-    private func updateStoredContent() {
+    private func updateProcessedData() async {
         
         if viewIsVisable == false { return }
         
-        
-        // Sendable dataItem information
-        let url = dataItem?.url
-        let dataItemID = dataItem?.localID
-        let parserSettings = dataItem?.getAssociatedParserSettings()?.parserSettingsStatic
-        let parserSettingsDateLastModified = parserSettings?.lastModified
-        
-        // Sendable storedContent information
-        let storedContentDataID = storedContent.dataItemID
-        let storedContentLastMofified = storedContent.date
-        
-        switch processingState {
-        case .none: break
-        case .outOfDate: break
-        case .inProgress:
-            if dataItemID == storedContentDataID { return }
-        case .upToDate:
-            if dataItemID == storedContentDataID { return }
+        guard let dataItem else {
+            processedData = nil
+            return
         }
         
-        
-        
-        Task {
-            
-            // IDs don't match, need to update the storedContent
-            // A nil dataItem will be handled by the StoredContent parsing
-            if storedContentDataID != dataItemID {
-                self.processingState = .inProgress
-                storedContent = StoredContent(dataItemID, url: url, parserSettings: parserSettings, reducedNumberOfLines)
-                self.processingState = .upToDate
-                return
-            }
-            
-            
-            // Check to see if the parserSettings have changed
-            if let lastModified = parserSettingsDateLastModified {
-                if lastModified > storedContentLastMofified {
-                    self.processingState = .inProgress
-                    storedContent = StoredContent(dataItemID, url: url, parserSettings: parserSettings, reducedNumberOfLines)
-                    self.processingState = .upToDate
-                    return
-                }
-            }
-        }
+        processedData = await processedDataManager.processedData(for: dataItem)
     }
+    
 }
 
 
@@ -171,8 +110,8 @@ extension TextInspectorViewModel {
     }
     
     @objc func selectedDataItemDidChange(_ notification: Notification) {
-        self.processingState = .outOfDate
-        
-        self.updateStoredContent()
+        Task {
+            await self.updateProcessedData()
+        }
     }
 }
