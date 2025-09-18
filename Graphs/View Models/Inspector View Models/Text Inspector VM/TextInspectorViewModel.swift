@@ -27,9 +27,17 @@ class TextInspectorViewModel {
      
     
     // MARK: View State
-    var viewIsVisable: Bool = false {
+    var textInspectorViewIsVisable: Bool = false {
         didSet {
-            if viewIsVisable {
+            if textInspectorViewIsVisable {
+                Task { await updateProcessedData() }
+            }
+        }
+    }
+    
+    var parseInpsectorViewIsVisible: Bool = false {
+        didSet {
+            if parseInpsectorViewIsVisible {
                 Task { await updateProcessedData() }
             }
         }
@@ -37,6 +45,7 @@ class TextInspectorViewModel {
     
     private var processedData: ProcessedData? {
         didSet {
+            processingState = .upToDate
             lastModified = .now
         }
     }
@@ -49,20 +58,20 @@ class TextInspectorViewModel {
     
     
     var content: String {
-        if viewIsVisable {
+        if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
             return processedData?.parsedFile?.content ?? ""
         } else {
-            return ""
+            return "View is not visible"
         }
     }
     
     
     //var combinedLineNumbersAndContent: AttributedString {
     var combinedLineNumbersAndContent: String {
-        if viewIsVisable {
+        if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
             return processedData?.parsedFile?.combinedLineNumbersAndContent ?? ""
         } else {
-            return ""
+            return "View is not visible"
         }
     }
     
@@ -74,10 +83,10 @@ class TextInspectorViewModel {
     init(_ dataController: DataController, _ processedDataManager: ProcessDataManager) {
         self.dataController = dataController
         self.processedDataManager = processedDataManager
+        self.registerForNotifications()
         
         Task {
             await self.updateProcessedData()
-            self.registerForNotifications()
         }
     }
     
@@ -85,13 +94,13 @@ class TextInspectorViewModel {
     // MARK: - Updating State
     private func updateProcessedData() async {
         
-        if viewIsVisable == false { return }
+        if !textInspectorViewIsVisable && !parseInpsectorViewIsVisible { return }
         
         guard let dataItem else {
             processedData = nil
             return
         }
-        
+        processingState = .inProgress
         processedData = await processedDataManager.processedData(for: dataItem)
     }
     
@@ -111,6 +120,7 @@ extension TextInspectorViewModel {
     
     @objc func selectedDataItemDidChange(_ notification: Notification) {
         Task {
+            
             await self.updateProcessedData()
         }
     }

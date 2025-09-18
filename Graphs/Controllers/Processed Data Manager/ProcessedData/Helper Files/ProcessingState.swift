@@ -14,4 +14,17 @@ enum ProcessingState {
     case outOfDate
     case inProgress
     case upToDate
+    
+    
+}
+
+extension ProcessingState: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .none: ""
+        case .outOfDate: "Out of Date"
+        case .inProgress: "Processing"
+        case .upToDate: "Up to Date"
+        }
+    }
 }

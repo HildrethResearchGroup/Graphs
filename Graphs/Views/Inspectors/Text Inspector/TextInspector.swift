@@ -30,10 +30,9 @@ struct TextInspector: View {
         }
         .frame(maxWidth: .infinity)
         .onAppear {
-            
-            viewModel.viewIsVisable = true
+            viewModel.textInspectorViewIsVisable = true
         }
-        .onDisappear { viewModel.viewIsVisable = false }
+        .onDisappear { viewModel.textInspectorViewIsVisable = false }
         .backgroundStyle(.white)
         .background(.white)
         
@@ -45,24 +44,28 @@ struct TextInspector: View {
     // MARK: - Text Views
     private var Text_Simple: some View {
         TextEditor(text: Binding.constant(viewModel.content))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
             .selectionDisabled(false)
+            .onAppear { viewModel.textInspectorViewIsVisable = true }
+            .onDisappear { viewModel.textInspectorViewIsVisable = false }
     }
     
     private var Text_Numbered: some View {
         TextEditor(text: Binding.constant(viewModel.combinedLineNumbersAndContent))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
             .selectionDisabled(false)
+            .onAppear { viewModel.textInspectorViewIsVisable = true }
+            .onDisappear { viewModel.textInspectorViewIsVisable = false }
             
     }
     

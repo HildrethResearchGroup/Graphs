@@ -22,14 +22,14 @@ struct ParseViewer: View {
         TabView {
             Tab("Simple", systemImage: "text.document") {
                 Text_Simple
-                    .onAppear { textViewModel.viewIsVisable = true }
-                    .onDisappear { textViewModel.viewIsVisable = false }
+                    .onAppear { textViewModel.parseInpsectorViewIsVisible = true }
+                    .onDisappear { textViewModel.parseInpsectorViewIsVisible = false }
             }
             
             Tab("Numbered", systemImage: "list.number") {
                 Text_numbered
-                    .onAppear { textViewModel.viewIsVisable = true }
-                    .onDisappear { textViewModel.viewIsVisable = false }
+                    .onAppear { textViewModel.parseInpsectorViewIsVisible = true }
+                    .onDisappear { textViewModel.parseInpsectorViewIsVisible = false }
             }
             
             Tab("Table", systemImage: "tablecells") {
@@ -44,7 +44,7 @@ struct ParseViewer: View {
     // MARK: - Text Views
     private var Text_Simple: some View {
         TextEditor(text: Binding.constant(textViewModel.content))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
@@ -54,13 +54,12 @@ struct ParseViewer: View {
     
     private var Text_numbered: some View {
         TextEditor(text: Binding.constant(textViewModel.combinedLineNumbersAndContent))
-            .lineLimit(100)
+            //.lineLimit(100)
             .frame(maxWidth: .infinity)
             .monospaced()
             .lineSpacing(2)
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
-        
     }
 }
 

@@ -21,7 +21,22 @@ class FileExtension {
         localID = LocalID()
     }
     
+    convenience init(_ fileExtension: String, _ userNotes: String) {
+        self.init()
+        
+        self.fileExtension = fileExtension
+        self.userNotes = userNotes
+    }
     
+    static var defaultExtensions: [FileExtension] {
+        let output: [FileExtension] = []
+        
+        let txtOutput = FileExtension("txt", "Generic Text file")
+        let csvOutput = FileExtension("cvs", "Comma Separated Values file")
+        let tabOutput = FileExtension("tab", "Tab Separated Values file")
+        
+        return [txtOutput, csvOutput, tabOutput]
+    }
 }
 
 

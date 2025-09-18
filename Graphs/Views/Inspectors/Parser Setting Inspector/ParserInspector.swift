@@ -19,6 +19,7 @@ struct ParserInspector: View {
     //@State var selection: ParserSettings? = nil
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             
             AvailableParserSettings
@@ -36,7 +37,6 @@ struct ParserInspector: View {
                     //.padding(.horizontal, -20)
                     //.padding(.top, -20)
             }
-            
             FileContentView
 
             Spacer()
@@ -86,9 +86,9 @@ struct ParserInspector: View {
         // ParseViewer
         if let dataItem = viewModel.parserSettingsVM.selectedDataItem {
             if dataItem.getAssociatedParserSettings()?.id == viewModel.parserSettingsVM.selection?.id {
-                VStack {
-                    Divider()
-                }
+                 VStack {
+                     Divider()
+                 }
                 ParseViewer(viewModel.tableInspectorVM, viewModel.textInspectorVM)
             } else {
                 EmptyView()

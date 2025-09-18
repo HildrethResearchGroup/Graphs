@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */; };
 		C03A2BCA2E5922CD00209B6E /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; };
 		C03A2BCB2E5922CD00209B6E /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C03A2BC72E59213C00209B6E /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C0870FAE2CBC282600A8F953 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = C0870FAD2CBC282600A8F953 /* Collections */; };
@@ -28,7 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Sample Graph.dgraph"; sourceTree = "<group>"; };
 		5A6D36EA24C13C1E00588E05 /* Graphs-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Graphs-Bridging-Header.h"; sourceTree = "<group>"; };
 		5A73E4DC24528F5800450137 /* Graphs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Graphs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C03A2BC72E59213C00209B6E /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DataGraph.framework; path = ../../../../../../../Library/Frameworks/DataGraph.framework; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 		5A73E4D324528F5800450137 = {
 			isa = PBXGroup;
 			children = (
-				5A3BACC824C164A7003B07FA /* Sample Graph.dgraph */,
 				C0D043192E33D4B200BE255A /* Graphs */,
 				5A73E4DD24528F5800450137 /* Products */,
 				5A6D36E424C13A6400588E05 /* Frameworks */,
@@ -155,7 +152,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A3BACC924C164A7003B07FA /* Sample Graph.dgraph in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -48,6 +48,10 @@ struct ParseEditor_EmptySelection: View {
         .formStyle(.grouped)
         //.disabled(true)
         .padding(.horizontal, -20)
+        //.padding(.vertical, -20)
+        .scrollContentBackground(.hidden)
+        .background(.clear)
+        
     }
     
     @ViewBuilder
