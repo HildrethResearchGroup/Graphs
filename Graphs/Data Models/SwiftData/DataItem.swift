@@ -91,6 +91,18 @@ final class DataItem: Identifiable, Hashable {
     }
     
     
+    // MARK: - Names
+    @Transient
+    var graphTemplateName: String {
+        getAssociatedGraphTemplate()?.name ?? "No Graph"
+    }
+    
+    @Transient
+    var parserSettingsName: String {
+        getAssociatedParserSettings()?.name ?? "No Parser"
+    }
+    
+    
     // MARK: - URL Resources
     func urlResources() -> URLResourceValues? {
         if resourceValues == nil {

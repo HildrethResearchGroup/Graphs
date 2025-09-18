@@ -69,7 +69,7 @@ struct DataItemsInspector: View {
     @ViewBuilder
     private func GraphTemplateView() -> some View {
         HStack {
-            Text("Graph Template:")
+            Text("Graph:")
             Spacer()
             
             Menu(viewModel.graphMenuText) {

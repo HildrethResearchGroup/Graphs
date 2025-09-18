@@ -23,11 +23,14 @@ struct NodesInspectorView: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
-            HStack {
+            /**
+             HStack {
                 Text("Path:")
                 Spacer()
                 Text(viewModel.folderPath)
             }
+             */
+             
             //OpenInFinderView
             ParserSettingsView()
             GraphTemplateView()
@@ -86,7 +89,7 @@ struct NodesInspectorView: View {
     func GraphTemplateView() -> some View {
         
         HStack {
-            Text("Graph Template:")
+            Text("Graph:")
             Spacer()
             
             

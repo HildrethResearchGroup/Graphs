@@ -35,6 +35,18 @@ struct DataItemsTableView: View {
              }
              .customizationID("nodePath")
             
+            TableColumn("Graph", value: \.graphTemplateName) {
+                Text($0.graphTemplateName)
+                    .help($0.graphTemplateName)
+            }
+            .customizationID("graphTemplate")
+            
+            TableColumn("Parser", value: \.parserSettingsName) {
+                Text($0.parserSettingsName)
+                    .help($0.parserSettingsName)
+            }
+            .customizationID("parserSettings")
+            
              TableColumn("File Size", value: \.fileSize) {
                  Text($0.scaledFileSize)
              }
@@ -61,19 +73,18 @@ struct DataItemsTableView: View {
              .alignment(.center)
              .customizationID("contentModificationDate")
             
-             TableColumn("Open in Finder", value: \.url.relativePath) { nextDataItem in
+             TableColumn("Finder", value: \.url.relativePath) { nextDataItem in
                  Button(action: {
                      nextDataItem.url.showInFinder()
                  },
                         label: {
                      Image(systemName: "link")
                          .foregroundStyle(viewModel.foregroundColor(for: nextDataItem))
-                         .help("Show in Finder:\n\(nextDataItem.truncatedFilePath)")
                  })
+                 .help("Show in Finder:\n\(nextDataItem.truncatedFilePath)")
              }
              .alignment(.center)
-             
-            
+             .customizationID("openInFinder")
         }
         rows: {
             ForEach(viewModel.dataItems, id: \.id) { dataItem in
