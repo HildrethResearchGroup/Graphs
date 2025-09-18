@@ -71,18 +71,23 @@ struct Inspector: View {
             switch tab {
             case .folder:
                 Image(systemName: "folder")
+                    .help(viewModel.toolTip_Node)
                     .foregroundStyle(foreground(for: .folder))
             case .dataItem:
                 Image(systemName: "text.document")
+                    .help(viewModel.toolTip_DataItem)
                     .foregroundStyle(foreground(for: .dataItem))
             case .graphTemplate:
                 Image(systemName: "chart.xyaxis.line")
+                    .help(viewModel.toolTip_GraphTemplate)
                     .foregroundStyle(foreground(for: .graphTemplate))
             case .parserSettings:
                 Image(systemName: "list.bullet")
+                    .help(viewModel.toolTip_ParserSettings)
                     .foregroundStyle(foreground(for: .parserSettings))
             case .text:
                 Text("T")
+                    .help(viewModel.toolTip_TextInspector)
                     .foregroundStyle(foreground(for: .text))
                     .contextMenu() {
                         Button_simpleSelector
@@ -91,6 +96,7 @@ struct Inspector: View {
                     .frame(alignment: .trailing)
             case .table:
                 Image(systemName: "tablecells")
+                    .help(viewModel.toolTip_TableInspector)
                     .foregroundStyle(foreground(for: .table))
             }
         }.font(.title2)

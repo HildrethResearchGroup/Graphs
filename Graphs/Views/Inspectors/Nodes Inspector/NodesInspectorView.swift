@@ -23,6 +23,7 @@ struct NodesInspectorView: View {
             TextField("Name:", text: $viewModel.name)
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
+                .help("Change folder name")
             /**
              HStack {
                 Text("Path:")
@@ -80,7 +81,9 @@ struct NodesInspectorView: View {
                         viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
                     }
                 }
-            }.disabled(viewModel.disableSettingsUpdate)
+            }
+            .disabled(viewModel.disableSettingsUpdate)
+            .help(viewModel.toolTip_ParserSettings)
         }
     }
     
@@ -110,6 +113,7 @@ struct NodesInspectorView: View {
                 }
             }
             .frame(alignment: .trailing)
+            .help(viewModel.toolTip_GraphTemplate)
             .disabled(viewModel.disableSettingsUpdate)
             
         }

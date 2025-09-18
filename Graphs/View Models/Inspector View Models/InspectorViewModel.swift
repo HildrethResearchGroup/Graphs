@@ -60,3 +60,55 @@ class InspectorViewModel {
         self.init(cm.dataController, cm.selectionManager, cm.processedDataManager)
     }
 }
+
+// MARK: - Tool Tips
+extension InspectorViewModel {
+    private var selectedNodesCount: Int { selectionManager.selectedNodeIDs.count }
+    private var selectedDataItemscount: Int { selectionManager.selectedDataItemIDs.count }
+    
+    
+    var toolTip_Node: String {
+        let defaultTip = "Edit Folder Properties"
+        switch selectedNodesCount {
+        case 0: return defaultTip
+        case 1:
+            guard let node = dataController.selectedNodes.first else {
+                return defaultTip
+            }
+            return "Edit \(node.name) Folder Properties"
+        default: return defaultTip
+            
+        }
+    }
+    
+    var toolTip_DataItem: String {
+        let defaultTip = "Edit Data Properties"
+        switch selectedDataItemscount {
+        case 0: return defaultTip
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else {
+                return defaultTip
+            }
+            return "Edit \(dataItem.name) Data Properties"
+        default: return defaultTip
+            
+        }
+    }
+    
+    
+    var toolTip_GraphTemplate: String {
+        return "Import and edit the DataGraph files used to graph your data"
+    }
+    
+    var toolTip_ParserSettings: String {
+        return "Create and edit data Parsers"
+    }
+    
+    var toolTip_TextInspector: String {
+        return "View your data as text.  Note: nothing will appear if the data doesn't have a Parser with the proper string encoding set."
+    }
+    
+    var toolTip_TableInspector: String {
+        return "View your parsed data in a table.  Note: nothing will appear if the Data doesn't have a Parser with the proper settings."
+    }
+}

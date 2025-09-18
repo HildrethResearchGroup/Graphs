@@ -214,6 +214,8 @@ extension NodeInspectorViewModel {
 
 // MARK: - UI
 extension NodeInspectorViewModel {
+    
+    
     var folderPath: String {
         switch nodesCount {
         case 0: return ""
@@ -221,6 +223,40 @@ extension NodeInspectorViewModel {
             let nodePath = dataController.selectedNodes.first?.nodePath() ?? ""
             return nodePath
         default: return "Multiple Selection"
+        }
+    }
+    
+    
+    var toolTip_ParserSettings: String {
+        let defaultOutput = "Set Parser for Folder"
+        let numberOfSelectedNodes = selectionManager.selectedNodeIDs.count
+        
+        switch numberOfSelectedNodes {
+        case 0: return defaultOutput
+        case 1:
+            guard let node = dataController.selectedNodes.first else {
+                return defaultOutput
+            }
+            
+            return "Set Parser for \(node.name) Folder"
+        default: return defaultOutput + "s"
+        }
+    }
+    
+    
+    var toolTip_GraphTemplate: String {
+        let defaultOutput = "Set Graph for Folder"
+        let numberOfSelectedNodes = selectionManager.selectedNodeIDs.count
+        
+        switch numberOfSelectedNodes {
+        case 0: return defaultOutput
+        case 1:
+            guard let node = dataController.selectedNodes.first else {
+                return defaultOutput
+            }
+            
+            return "Set Graph for \(node.name) Folder"
+        default: return defaultOutput + "s"
         }
     }
 }

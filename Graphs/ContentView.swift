@@ -50,6 +50,7 @@ struct ContentView: View {
                 visibility_inspector.toggle()
             } label: {
                 Image(systemName: "sidebar.right")
+                    .help(visibility_inspector ? "Hide Inspectors" : "Show Inspectors")
             }
         }
     }

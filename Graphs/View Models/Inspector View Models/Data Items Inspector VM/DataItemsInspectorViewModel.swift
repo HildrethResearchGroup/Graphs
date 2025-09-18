@@ -246,7 +246,57 @@ extension UserDefaults {
 }
 
 
-
+// MARK: - Tool Tips
+extension DataItemsInspectorViewModel {
+    var toolTip_ParserSettings: String {
+        let defaultOutput = "Set Parser for Data"
+        let numberOfSelectedDataItems = selectionManager.selectedDataItemIDs.count
+        
+        switch numberOfSelectedDataItems {
+        case 0: return defaultOutput
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else {
+                return defaultOutput
+            }
+            
+            return "Set Parser for \(dataItem.name) Data"
+        default: return defaultOutput
+        }
+    }
+    
+    
+    var toolTip_GraphTemplate: String {
+        let defaultOutput = "Set Graph for Data"
+        let numberOfSelectedDataItems = selectionManager.selectedDataItemIDs.count
+        
+        switch numberOfSelectedDataItems {
+        case 0: return defaultOutput
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else {
+                return defaultOutput
+            }
+            
+            return "Set Graph for \(dataItem.name) Data"
+        default: return defaultOutput
+        }
+    }
+    
+    var toolTip_openFiles: String {
+        let defaultOutput = "Show files in Finder"
+        let numberOfSelectedDataItems = selectionManager.selectedDataItemIDs.count
+        
+        switch numberOfSelectedDataItems {
+        case 0: return defaultOutput
+        case 1:
+            guard let dataItem = dataController.selectedDataItems.first else {
+                return defaultOutput
+            }
+            
+            return "Show \(dataItem.name) in Finder"
+        default: return defaultOutput
+        }
+    }
+}
 
 
 // MARK: - Unused.  Cleanup

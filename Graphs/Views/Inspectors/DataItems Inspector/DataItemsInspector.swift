@@ -61,7 +61,9 @@ struct DataItemsInspector: View {
                         viewModel.updateParserSetting(with: .directlySet, and: nextParserSetting)
                     }
                 }
-            }.disabled(viewModel.disableSettingsUpdate)
+            }
+            .disabled(viewModel.disableSettingsUpdate)
+            .help(viewModel.toolTip_ParserSettings)
         }
     }
     
@@ -85,7 +87,9 @@ struct DataItemsInspector: View {
                         viewModel.updateGraphtemplate(with: .directlySet, and: nextGraphTemplate)
                     }
                 }
-            }.disabled(viewModel.disableSettingsUpdate)
+            }
+            .disabled(viewModel.disableSettingsUpdate)
+            .help(viewModel.toolTip_GraphTemplate)
         }
     }
     
@@ -102,12 +106,14 @@ struct DataItemsInspector: View {
             Spacer()
             Button("􀉣") { openDataItemsInFinder()}
             .disabled(viewModel.disableNameFilepath)
+            .help(viewModel.toolTip_openFiles)
             .alert("This will open \(viewModel.dataItemsCount) Finder Windows.  Are you sure you want to do this?", isPresented: $shouldDisplayFinderWarning) {
                 Button("Yes", role: .cancel) {viewModel.openInFinder()}
                 Button("No", role: .destructive) {}
             }
         }
     }
+    
     
     private func openDataItemsInFinder() {
         let count = viewModel.dataItemsCount

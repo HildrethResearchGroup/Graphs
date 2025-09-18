@@ -172,7 +172,7 @@ class MenuViewModel {
     }
     
     var isDisabled_deleteSelectedNodes: Bool {
-        return selectionManager.selectedDataItemIDs.isEmpty
+        return selectionManager.selectedNodeIDs.isEmpty
     }
     
     var toolTip_deleteSelectedNodes: String {
