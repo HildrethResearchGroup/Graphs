@@ -28,6 +28,7 @@ class AppController {
     var inspectorVM: InspectorViewModel
     var dataListVM: DataListViewModel
     var graphListVM: GraphControllerListViewModel
+    var preferencesVM: PreferencesViewModel
     
     init() {
         var url = try? FileManager.default.url(for: .libraryDirectory,
@@ -55,6 +56,7 @@ class AppController {
         let commonManagers = CommonManagers(localDataController, localSelectionManager, localProcessedDataManager, localExportManager, localImportManager)
         
         let localMenuManager = MenuViewModel(commonManagers)
+
         
         
         
@@ -74,6 +76,7 @@ class AppController {
         graphListVM = GraphControllerListViewModel(commonManagers)
         inspectorVM = InspectorViewModel(commonManagers)
         sourceListVM = SourceListViewModel(commonManagers)
+        preferencesVM = PreferencesViewModel(localDataController)
         
         
         // Delegates and DataSources

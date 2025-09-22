@@ -11,7 +11,7 @@ import SwiftData
 import SwiftUI
 
 @Model
-class FileExtension {
+class FileExtension: Identifiable {
     var localID: LocalID
     
     var fileExtension: String = "Ext"
@@ -28,8 +28,19 @@ class FileExtension {
         self.userNotes = userNotes
     }
     
+    
+    func contains(_ content: String) -> Bool {
+        
+        
+        if fileExtension.lowercased().contains(content.lowercased()) { return true }
+        else if userNotes.lowercased().contains(content.lowercased()) { return true }
+        else { return false }
+    }
+    
+
+    
+    // MARK: - Default Extensions
     static var defaultExtensions: [FileExtension] {
-        let output: [FileExtension] = []
         
         let txtOutput = FileExtension("txt", "Generic Text file")
         let csvOutput = FileExtension("cvs", "Comma Separated Values file")

@@ -29,7 +29,11 @@ class DataController {
     
     var graphTemplates: [GraphTemplate] = []
     
-    
+    var fileExtensions: [FileExtension] = [] {
+        didSet {
+            print("file Extensions changed")
+        }
+    }
     
     
     // MARK: - Data Items
@@ -118,7 +122,7 @@ class DataController {
     init(withDelegate delegate: DataControllerDelegate?) {
         let sharedModelContainer: ModelContainer = {
             let schema = Schema([
-                Node.self, DataItem.self, GraphTemplate.self, ParserSettings.self
+                Node.self, DataItem.self, GraphTemplate.self, ParserSettings.self, FileExtension.self
             ])
             
             
@@ -146,28 +150,9 @@ class DataController {
         fetchAllObjects()
         
         updateFilteredDataItems()
-        
-        
+
     }
     
-    
-    private func checkInitialFileExtensions() {
-        guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
-            let defaultExtension = AllowedFileExtension.defaultFileExtensions
-            
-            UserDefaults.setValue(defaultExtension, forKey: UserDefaults.allowedDataFileExtensions)
-            
-            return
-        }
-        
-        
-        if allowedExtensions.isEmpty {
-            let defaultExtension = AllowedFileExtension.defaultFileExtensions
-            
-            UserDefaults.setValue(defaultExtension, forKey: UserDefaults.allowedDataFileExtensions)
-        }
-        
-    }
     
     
     // MARK: Nodes
@@ -214,8 +199,10 @@ class DataController {
         fetchParserSettings()
         fetchGraphTemplates()
         fetchDataItems()
+        fetchFileExtensions()
         updateFilteredDataItems()
     }
+    
     
     private func fetchDataItems() {
         do {
@@ -265,6 +252,27 @@ class DataController {
             graphTemplates = try modelContext.fetch(descriptor)
         } catch {
             Logger.dataController.info("DataController: Failed to Fetch GraphTemplate")
+        }
+    }
+    
+    
+    func fetchFileExtensions() {
+        do {
+            let sortOrder = [SortDescriptor<FileExtension>(\.fileExtension)]
+            let descriptor = FetchDescriptor<FileExtension>(sortBy: sortOrder)
+            fileExtensions = try modelContext.fetch(descriptor)
+            
+            if fileExtensions.isEmpty {
+                let defaultExtensions = FileExtension.defaultExtensions
+                
+                for nextExtension in defaultExtensions {
+                    modelContext.insert(nextExtension)
+                }
+            }
+            
+        } catch {
+            Logger.dataController.info("DataController: Failed to Fetch File Extensions")
+            fileExtensions = []
         }
     }
     

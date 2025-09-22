@@ -10,6 +10,8 @@ import Foundation
 // MARK: - Delete
 extension DataController {
     
+    
+    // MARK: - DataItems and Nodes
     func delete(_ nodeIDs: [Node.ID]) {
         var nodesToDelete: [Node] = []
         
@@ -66,6 +68,8 @@ extension DataController {
         fetchAllObjects()
     }
     
+    
+    // MARK: - Parser Settings
     func delete(_ parserSettings: ParserSettings) {
         
         delegate?.preparingToDelete(parserSettings: parserSettings)
@@ -75,6 +79,8 @@ extension DataController {
         //fetchAllObjects()
     }
     
+    
+    // MARK: - Graph Template
     func delete(_ graphTemplate: GraphTemplate) {
         
         delegate?.preparingToDelete(graphTemplate: graphTemplate)
@@ -83,4 +89,16 @@ extension DataController {
         try? modelContext.save()
         fetchAllObjects()
     }
+    
+    
+    // MARK: - File Extensions
+    func delete(_ fileExtension: FileExtension) {
+        modelContext.delete(fileExtension)
+        
+        try? modelContext.save()
+        
+        fetchFileExtensions()
+    }
+    
+
 }

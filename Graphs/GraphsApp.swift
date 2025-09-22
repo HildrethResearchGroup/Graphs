@@ -30,7 +30,7 @@ struct GraphsApp: App {
         }
         
         Settings {
-            Preferences()
+            Preferences(appController.preferencesVM)
         }
     }
     

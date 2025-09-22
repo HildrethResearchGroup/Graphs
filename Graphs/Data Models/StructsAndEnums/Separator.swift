@@ -70,9 +70,9 @@ extension Separator: PresentableName {
         case .colon: return "Colon"
         case .comma: return "Comma"
         case .semicolon: return "Semicolon"
-        case .space: return "Single Space"
+        case .space: return "Space - Single"
+        case .whitespace: return "Space - Multiple"
         case .tab: return "Tab"
-        case .whitespace: return "Multiple Spaces"
         }
     }
 }

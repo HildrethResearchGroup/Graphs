@@ -182,14 +182,8 @@ extension DataController {
         }
         
         
-        
-        guard let allowedExtensions = UserDefaults.standard.object(forKey: UserDefaults.allowedDataFileExtensions) as? [String] else {
-            Logger.dataController.info("\(url.pathExtension) is not an allowed extensions")
-            return nil
-        }
-        
         // Make the comparison case insensitive to make it easier on the user when adding file extensions in the Preferences
-        if (allowedExtensions.contains(where: {$0.caseInsensitiveCompare(url.pathExtension) == .orderedSame }) == false) {
+        if (fileExtensions.contains(where: {$0.fileExtension.caseInsensitiveCompare(url.pathExtension) == .orderedSame }) == false) {
             // Filetype is not allowed to be imported
             
             // UPDATE
@@ -317,6 +311,22 @@ extension DataController {
     }
 
 }
+
+
+// MARK: - File Extensions
+
+extension DataController {
+    func createNewFileExtension() {
+        let newFileExtension = FileExtension()
+        
+        modelContext.insert(newFileExtension)
+        
+        try? modelContext.save()
+        
+        fetchFileExtensions()
+    }
+}
+
 
 
 // MARK: - Duplicating Objects
