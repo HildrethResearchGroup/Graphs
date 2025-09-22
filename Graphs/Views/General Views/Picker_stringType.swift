@@ -17,7 +17,7 @@ struct Picker_stringType: View {
 
     
     var body: some View {
-        Picker("Encoding:", selection: $stringEncondingType) {
+        Picker("String Encoding", selection: $stringEncondingType) {
             ForEach(StringEncodingType.primaryEncodings) { nextEncoding in
                 Text(nextEncoding.rawValue)
             }

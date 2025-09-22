@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var visibility_inspector = true
     
     
+    
+    
     init(_ appController: AppController) {
         self.appController = appController
     }
@@ -59,3 +61,5 @@ struct ContentView: View {
 #Preview {
     ContentView(AppController())
 }
+
+

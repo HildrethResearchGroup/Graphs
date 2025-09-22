@@ -27,7 +27,7 @@ class TextInspectorViewModel {
      
     
     // MARK: View State
-    var textInspectorViewIsVisable: Bool = false {
+    var textInspectorViewIsVisable: Bool = true {
         didSet {
             if textInspectorViewIsVisable {
                 Task { await updateProcessedData() }
@@ -35,7 +35,7 @@ class TextInspectorViewModel {
         }
     }
     
-    var parseInpsectorViewIsVisible: Bool = false {
+    var parseInpsectorViewIsVisible: Bool = true {
         didSet {
             if parseInpsectorViewIsVisible {
                 Task { await updateProcessedData() }
@@ -58,21 +58,30 @@ class TextInspectorViewModel {
     
     
     var content: String {
-        if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
-            return processedData?.parsedFile?.content ?? ""
-        } else {
-            return "View is not visible"
-        }
+        return processedData?.parsedFile?.content ?? ""
+        
+        /*
+         if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
+             return processedData?.parsedFile?.content ?? ""
+         } else {
+             return "View is not visible"
+         }
+         */
+        
     }
     
     
     //var combinedLineNumbersAndContent: AttributedString {
     var combinedLineNumbersAndContent: String {
-        if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
-            return processedData?.parsedFile?.combinedLineNumbersAndContent ?? ""
-        } else {
-            return "View is not visible"
-        }
+        return processedData?.parsedFile?.combinedLineNumbersAndContent ?? ""
+        
+        /*
+         if textInspectorViewIsVisable || parseInpsectorViewIsVisible {
+             return processedData?.parsedFile?.combinedLineNumbersAndContent ?? ""
+         } else {
+             return "View is not visible"
+         }
+         */
     }
     
     
@@ -94,7 +103,7 @@ class TextInspectorViewModel {
     // MARK: - Updating State
     private func updateProcessedData() async {
         
-        if !textInspectorViewIsVisable && !parseInpsectorViewIsVisible { return }
+        //if !textInspectorViewIsVisable && !parseInpsectorViewIsVisible { return }
         
         guard let dataItem else {
             processedData = nil

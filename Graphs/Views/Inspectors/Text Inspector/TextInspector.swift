@@ -24,15 +24,15 @@ struct TextInspector: View {
         VStack {
             if useNumberedText {
                 Text_Numbered
+                    .onAppear { viewModel.textInspectorViewIsVisable = true }
+                    .onDisappear { viewModel.textInspectorViewIsVisable = false }
             } else {
                 Text_Simple
+                    .onAppear { viewModel.textInspectorViewIsVisable = true }
+                    .onDisappear { viewModel.textInspectorViewIsVisable = false }
             }
         }
         .frame(maxWidth: .infinity)
-        .onAppear {
-            viewModel.textInspectorViewIsVisable = true
-        }
-        .onDisappear { viewModel.textInspectorViewIsVisable = false }
         .backgroundStyle(.white)
         .background(.white)
         
@@ -51,8 +51,6 @@ struct TextInspector: View {
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
             .selectionDisabled(false)
-            .onAppear { viewModel.textInspectorViewIsVisable = true }
-            .onDisappear { viewModel.textInspectorViewIsVisable = false }
     }
     
     private var Text_Numbered: some View {
@@ -64,9 +62,6 @@ struct TextInspector: View {
             .multilineTextAlignment(.leading)
             .fixedSize(horizontal: false, vertical: false)
             .selectionDisabled(false)
-            .onAppear { viewModel.textInspectorViewIsVisable = true }
-            .onDisappear { viewModel.textInspectorViewIsVisable = false }
-            
     }
     
     var lineLimit: Int {

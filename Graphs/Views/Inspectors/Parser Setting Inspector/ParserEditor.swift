@@ -26,15 +26,29 @@ struct ParserEditor: View {
     
     var body: some View {
         
-        Form() {
-            TextField("Name:", text: $parseSettings.name)
-                //.frame(minWidth: 100, maxWidth: .infinity)
+        Form {
+            /*
+             HNFormField("Name:") {
+                 TextField("Name:", text: $parseSettings.name)
+             }
+             HNFormField("New Line:") {
+                 Picker_newLineType($parseSettings.newLineType)}
+             HNFormField("Encoding:") {
+                 Picker_stringType($parseSettings.stringEncodingType) }
+             */
             
-            VStack {
-                Picker_newLineType($parseSettings.newLineType)
-                Picker_stringType($parseSettings.stringEncodingType)
-            }
             
+            
+             TextField("Name:", text: $parseSettings.name)
+                 //.frame(minWidth: 100, maxWidth: .infinity)
+             
+             VStack {
+                 Picker_newLineType($parseSettings.newLineType)
+                 Picker_stringType($parseSettings.stringEncodingType)
+             }
+             
+            
+
             EditExperimentalDetails
             
             EditHeader
@@ -49,12 +63,20 @@ struct ParserEditor: View {
     @ViewBuilder
     var EditExperimentalDetails: some View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
-            TextField("Starting Line:", value: $parseSettings.experimentalDetailsStart, format: .number)
-                .disabled(!parseSettings.hasExperimentalDetails)
-                .padding(.leading, 10)
-            TextField("Ending Line:", value: $parseSettings.experimentalDetailsEnd, format: .number)
-                .disabled(!parseSettings.hasExperimentalDetails)
-                .padding(.leading, 10)
+            
+            /*
+             HNFormField("Starting Line:") {
+                 TextField("Starting Line:", value: $parseSettings.experimentalDetailsStart, format: .number)
+                     .disabled(!parseSettings.hasExperimentalDetails)
+             }
+             .padding(.leading, 10)
+             */
+
+             TextField("Ending Line:", value: $parseSettings.experimentalDetailsEnd, format: .number)
+                 .disabled(!parseSettings.hasExperimentalDetails)
+                 .padding(.leading, 10)
+             
+            
         } label: {
             Toggle("Experimental Details:", isOn: $parseSettings.hasExperimentalDetails)
                 .font(.headline)
@@ -65,27 +87,57 @@ struct ParserEditor: View {
     var EditHeader: some View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_header) {
             /*
-             Toggle("Header:", isOn: $parseSettings.hasHeader)
-                 .font(fontType)
+             HNFormField("Starting Line:") {
+                 TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
+                     //.frame(width: width)
+                     .disabled(!parseSettings.hasHeader)
+             }
+             .padding(.leading, 10)
              */
-            TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
-                //.frame(width: width)
-                .disabled(!parseSettings.hasHeader)
-                .padding(.leading, 10)
-
-            TextField("Ending Line:", value: $parseSettings.headerEnd, format: .number)
-                //.frame(width: width)
-                .disabled(!parseSettings.hasHeader)
-                .padding(.leading, 10)
             
-            Picker("Separator:", selection: $parseSettings.headerSeparator) {
-                ForEach(Separator.allCases) { nextSeparator in
-                    Text(nextSeparator.name)
-                }
-            }
-            .help(Separator.toolTip)
-            .disabled(!parseSettings.hasHeader)
-            .padding(.leading, 10)
+            
+             TextField("Starting Line:", value: $parseSettings.headerStart, format: .number)
+                 //.frame(width: width)
+                 .disabled(!parseSettings.hasHeader)
+                 .padding(.leading, 10)
+             
+            /*
+             HNFormField("Ending Line:") {
+                 TextField("Ending Line:", value: $parseSettings.headerEnd, format: .number)
+                     //.frame(width: width)
+                     .disabled(!parseSettings.hasHeader)
+             }
+             .padding(.leading, 10)
+             */
+            
+             TextField("Ending Line:", value: $parseSettings.headerEnd, format: .number)
+                 //.frame(width: width)
+                 .disabled(!parseSettings.hasHeader)
+                 .padding(.leading, 10)
+            
+            /*
+             HNFormField("Separator:") {
+                 Picker("", selection: $parseSettings.headerSeparator) {
+                     ForEach(Separator.allCases) { nextSeparator in
+                         Text(nextSeparator.name)
+                     }
+                 }
+                 .help(Separator.toolTip)
+                 .disabled(!parseSettings.hasHeader)
+             }
+             .padding(.leading, 10)
+             */
+            
+            
+             Picker("Separator:", selection: $parseSettings.headerSeparator) {
+                 ForEach(Separator.allCases) { nextSeparator in
+                     Text(nextSeparator.name)
+                 }
+             }
+             .help(Separator.toolTip)
+             .disabled(!parseSettings.hasHeader)
+             .padding(.leading, 10)
+            
         } label: {
             Toggle("Header:", isOn: $parseSettings.hasHeader)
                 .font(fontType)
@@ -98,28 +150,59 @@ struct ParserEditor: View {
         
         DisclosureGroup(isExpanded: $expanded_parserSettings_editData) {
             /*
-             Toggle("Data:", isOn: $parseSettings.hasData)
-                 .font(fontType)
+             HNFormField("Starting Line:") {
+                 TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
+                     .disabled(!parseSettings.hasData)
+                     .frame(alignment: .trailing)
+             }
+             .padding(.leading, 10)
              */
-            TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
-                .disabled(!parseSettings.hasData)
-                .padding(.leading, 10)
+            
+
+             TextField("Starting Line:", value: $parseSettings.dataStart, format: .number)
+                 .disabled(!parseSettings.hasData)
+                 .padding(.leading, 10)
+            
             
             // Data Separator
-            Picker("Separator:", selection: $parseSettings.dataSeparator) {
-                ForEach(Separator.allCases) { nextSeparator in
-                    Text(nextSeparator.name)
-                }
-            }
-            //.frame(minWidth: 2*width + 25, alignment: .leading)
-            .help(Separator.toolTip)
-            .disabled(!parseSettings.hasData)
-            .padding(.leading, 10)
+            /*
+             HNFormField("Separator:") {
+                 Picker("", selection: $parseSettings.dataSeparator) {
+                     ForEach(Separator.allCases) { nextSeparator in
+                         Text(nextSeparator.name)
+                     }
+                 }
+                 //.frame(minWidth: 2*width + 25, alignment: .leading)
+                 .help(Separator.toolTip)
+                 .disabled(!parseSettings.hasData)
+             }
+             .padding(.leading, 10)
+             */
             
-            Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
-                //.padding(.leading, 10)
-                .padding(.leading, 10)
-                .disabled(!parseSettings.hasData)
+             Picker("Separator:", selection: $parseSettings.dataSeparator) {
+                 ForEach(Separator.allCases) { nextSeparator in
+                     Text(nextSeparator.name)
+                 }
+             }
+             .help(Separator.toolTip)
+             .disabled(!parseSettings.hasData)
+             .padding(.leading, 10)
+            
+            
+            /*
+             HNFormField("") {
+                 Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
+                     //.padding(.leading, 10)
+                     .disabled(!parseSettings.hasData)
+             }
+             .padding(.leading, 10)
+             */
+            
+
+             Toggle("Stop at Empty Line", isOn: $parseSettings.stopDataAtFirstEmptyLine)
+                 //.padding(.leading, 10)
+                 .padding(.leading, 10)
+                 .disabled(!parseSettings.hasData)
         } label: {
             Toggle("Data:", isOn: $parseSettings.hasData)
                 .font(fontType)
