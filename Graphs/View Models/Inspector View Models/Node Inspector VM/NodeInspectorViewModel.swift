@@ -113,26 +113,6 @@ extension NodeInspectorViewModel {
         }
     }
     
-    /*
-     var parserSettingsName: String {
-         switch nodesCount {
-         case 0: return ""
-         case 1:
-             guard let node = nodes.first else { return "No Selection" }
-             
-             switch node.parserSettingsInputType {
-             case .none:
-                 return "No Parser Set"
-             case .defaultFromParent:
-                 return "From Parent: \(node.getAssociatedParserSettings()?.name ?? "None")"
-             case .directlySet:
-                 return node.getAssociatedParserSettings()?.name ?? "Unnamed Parser"
-             }
-         
-         default: return "Multiple Selection"
-         }
-     }
-     */
     
     
     

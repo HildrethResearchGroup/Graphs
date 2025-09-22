@@ -89,7 +89,7 @@ struct StoredContent {
     //private func processedLines(lines: [String], using parserSettings: ParserSettingsStatic) -> (lineNumbers: String, combinedLinesAndContent: AttributedString) {
     private func processedLines(lines: [String], using parserSettings: ParserSettingsStatic) -> (lineNumbers: String, combinedLinesAndContent: String) {
         
-        /*
+        /* Preparing for NSAttributed string in macOS 26
          let useStringColors: Bool
          
          do {
@@ -115,7 +115,7 @@ struct StoredContent {
         
         for (index, nextLine) in lines.enumerated() {
             
-            /*
+            /* Preparing for NSAttributed string in macOS 26
              if useStringColors {
                  let lineType = parserSettings.parseLineType(for: index)
                  color = lineType.color

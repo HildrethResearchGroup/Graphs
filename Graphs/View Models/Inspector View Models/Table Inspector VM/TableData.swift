@@ -8,31 +8,6 @@
 
 import Foundation
 
-
-
-
-/*
- struct TableDataColumn: Identifiable {
-     var id = ID()
-     var data: [String]
-     
-     func data(for rowNumber: Int) -> String {
-         if rowNumber < data.count {
-             return ""
-         } else {
-             return data[rowNumber - 1]
-         }
-     }
-
-     
-     struct ID: Identifiable, Hashable {
-         var id = UUID()
-     }
- }
- */
-
-
-
 struct TableData: Identifiable {
     var id = ID()
     

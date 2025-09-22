@@ -73,10 +73,6 @@ struct ParseEditor_EmptySelection: View {
     var EditHeader: some View {
         
         DisclosureGroup(isExpanded: $expanded_parserSettings_header) {
-            /*
-             Toggle("Header:", isOn: $toggleState)
-                 .font(fontType)
-             */
             TextField("Starting Line:", value: $number, format: .number)
                 .padding(.leading, 10)
 
@@ -102,13 +98,6 @@ struct ParseEditor_EmptySelection: View {
     var EditData: some View {
         
         DisclosureGroup(isExpanded: $expanded_parserSettings_editData) {
-            /*
-             Toggle("Data:", isOn: $toggleState)
-                 .font(fontType)
-                 .disabled(true)
-             */
-            
-            
             TextField("Starting Line:", value: $number, format: .number)
                 .disabled(true)
                 .padding(.leading, 10)

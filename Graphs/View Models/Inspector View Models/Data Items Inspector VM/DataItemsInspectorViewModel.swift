@@ -298,25 +298,3 @@ extension DataItemsInspectorViewModel {
     }
 }
 
-
-// MARK: - Unused.  Cleanup
-/*
- var graphTemplateName: String {
-     switch dataItemsCount {
-     case 0: return ""
-     case 1:
-         guard let dataItem = dataController.selectedDataItems.first else { return "No Selection" }
-         
-         switch dataItem.graphTemplateInputType {
-         case .none:
-             return "No Graph Selected"
-         case .defaultFromParent:
-             return "From Parent: \(dataItem.getAssociatedGraphTemplate()?.name ?? "None")"
-         case .directlySet:
-             return dataItem.getAssociatedGraphTemplate()?.name ?? "Unnamed Graph Template"
-         }
-     
-     default: return "Multiple Selection"
-     }
- }
- */

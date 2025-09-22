@@ -24,13 +24,6 @@ struct NodesInspectorView: View {
                 .onSubmit { viewModel.updateNames() }
                 .disabled(viewModel.disableNameTextfield)
                 .help("Change folder name")
-            /**
-             HStack {
-                Text("Path:")
-                Spacer()
-                Text(viewModel.folderPath)
-            }
-             */
              
             //OpenInFinderView
             ParserSettingsView()

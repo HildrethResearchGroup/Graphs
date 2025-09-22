@@ -146,11 +146,7 @@ extension AppController: @preconcurrency DataControllerDelegate {
 
 extension AppController: @preconcurrency SelectionManagerDelegate {
     func selectedNodeIDsDidChange(_ nodeIDs: Set<Node.ID>) {
-        /*
-         let sort = SortDescriptor<Node>(\.name)
-         dataController.selectedNodes = Array(nodes).sorted(using: sort)
-         */
-        
+
         dataController.selectedNodeIDs = Array(nodeIDs)
         
         inspectorVM.nodeInspectorVM.selectedNodeDidChange()

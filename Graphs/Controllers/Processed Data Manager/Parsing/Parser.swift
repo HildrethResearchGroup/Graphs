@@ -198,42 +198,6 @@ struct Parser {
     
     
     
-    // Unused
-    /*
-     private static func generateSimpleLineNumbers(withLines lines: [String]) -> String {
-         if lines.isEmpty {
-             return "0:"
-         }
-         
-         let numberOfLines = lines.count
-         
-         let size = numberOfLines.size
-         
-         let formatter = NumberFormatter()
-         formatter.minimumIntegerDigits = size
-         
-         var output = ""
-         var index = 1
-         
-         for nextLine in lines {
-             let numberString = formatter.string(from: index as NSNumber) ?? ""
-             
-             let nextString = numberString + "\t" + nextLine
-             
-             if index == numberOfLines {
-                 output.append(nextString)
-                 
-             } else {
-                 output.append(nextString + "\n")
-             }
-             
-             index += 1
-         }
-         
-         return output
-     }
-     */
-    
     
     // Unused
     /**

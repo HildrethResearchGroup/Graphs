@@ -27,7 +27,7 @@ struct ParserEditor: View {
     var body: some View {
         
         Form {
-            /*
+            /*  Try to remove Form
              HNFormField("Name:") {
                  TextField("Name:", text: $parseSettings.name)
              }

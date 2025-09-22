@@ -175,21 +175,6 @@ class DataController {
     }
     
     
-    /*
-     func allDataItems() -> [DataItem] {
-         do {
-             let sortOrder = [SortDescriptor<DataItem>(\.name)]
-             let descriptor = FetchDescriptor<DataItem>(sortBy: sortOrder)
-             let output = try modelContext.fetch(descriptor)
-             
-             return output
-             
-         } catch  {
-             Logger.dataController.info("DataController: Failed to Fetch All DataItems")
-             return []
-         }
-     }
-     */
     
     
     
