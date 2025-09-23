@@ -31,7 +31,8 @@ struct Preferences: View {
                 TableColumn("User Notes", value: \.userNotes)
                     .customizationID("preferencesTable_userNotes")
             } rows : {
-                ForEach(viewModel.filteredFileExtensions, id: \.localID) {
+                ForEach(viewModel.filteredFileExtensions, id: \.localID) { //nextExtension in
+                    
                     TableRow($0)
                         .contextMenu {
                         Button("Add New Extension", action: addNewFileExtension)

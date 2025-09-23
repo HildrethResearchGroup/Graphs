@@ -249,7 +249,57 @@ extension DataItemsInspectorViewModel {
             return "Inherit: Folder needs Template"
         }
     }
+    
+    
+    
+    // MARK: - Rating
+    var rating: Int {
+        get { getRating }
+        set { setRating(newValue) }
+    }
+    
+    private var getRating: Int {
+        let localRatingState = ratingState
+        
+        switch localRatingState {
+        case .none: return 0
+        case .ambiguousMultiple: return 0
+        case .single(let localRating): return localRating
+        case .unambiguousMultiple(let localRating): return localRating
+        }
+    }
+    
+    private func setRating(_ rating: Int) {
+        for nextDataItem in dataController.selectedDataItems {
+            nextDataItem.rating = rating
+        }
+    }
+    
+    var ratingState: RatingState {
+        let dataItems = dataController.selectedDataItems
+        
+        switch dataItems.count {
+        case 0: return .none
+        case 1:
+            guard let dataItem = dataItems.first else { return .none }
+            return .single(dataItem.rating)
+        default:
+            let mappedItems = dataItems.map{ ($0.rating, 1) }
+            
+            let counts = Dictionary(mappedItems, uniquingKeysWith: +)
+            
+            if counts.count == 1 {
+                guard let key = counts.keys.first else { return .ambiguousMultiple }
+                
+                return .unambiguousMultiple(key)
+            } else {
+                return .ambiguousMultiple
+            }
+        }
+    }
+    
 }
+
 
 
 // MARK: - Open in Finder
@@ -316,12 +366,22 @@ extension DataItemsInspectorViewModel {
         }
     }
     
+    
     // MARK: - Disabled UI
     var disabled_userNotes: Bool {
         if dataItems.count == 1 {
             return false
         } else {
             return true
+        }
+    }
+    
+    var disabled_rating: Bool {
+        switch ratingState {
+        case .none: return true
+        case .single(_): return false
+        case .unambiguousMultiple(_): return false
+        case .ambiguousMultiple: return true
         }
     }
 }

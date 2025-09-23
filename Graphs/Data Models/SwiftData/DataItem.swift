@@ -49,6 +49,7 @@ final class DataItem: Identifiable, Hashable {
     
     var bookmarkData: Data?
     
+    var rating: Int = 0
     
     var userNotes: String = ""
     

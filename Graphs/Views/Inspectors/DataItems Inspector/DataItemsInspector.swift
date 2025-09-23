@@ -35,7 +35,12 @@ struct DataItemsInspector: View {
             OpenFilesView()
             ParserSettingsView()
             GraphTemplateView()
-            //Divider()
+            HStack {
+                Text("Rating:")
+                Spacer()
+                Rating(ratingState: viewModel.ratingState, rating: $viewModel.rating)
+            }
+            
             UserNotes
             
         }

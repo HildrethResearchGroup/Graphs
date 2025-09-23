@@ -18,7 +18,11 @@ class PreferencesViewModel {
     
     var selection: FileExtension.ID? = nil
     
-    var search: String = ""
+    var search: String = "" {
+        didSet {
+            searchDidChange()
+        }
+    }
     
     var sort: [KeyPathComparator<FileExtension>] = [.init(\.fileExtension)]
     
@@ -67,7 +71,19 @@ class PreferencesViewModel {
         
         dataController.delete(selectedFileExtension)
     }
+    
+    
+    // MARK: - Search and Selection
+    private func searchDidChange() {
+        if search.isEmpty { return }
+        guard let selectedFileExtension else { return }
+        
+        if !filteredFileExtensions.contains([selectedFileExtension]) {
+            selection = nil
+        }
+    }
 }
+
 
 
 // MARK: - UI

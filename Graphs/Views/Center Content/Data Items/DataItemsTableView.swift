@@ -29,6 +29,7 @@ struct DataItemsTableView: View {
              TableColumn("Folder", value: \.nodeName)
                 .customizationID("nodeName")
             
+            
              TableColumn("Folder Path", value: \.nodePath) {
                  Text($0.nodePath)
                      .help($0.nodePath)
@@ -59,11 +60,20 @@ struct DataItemsTableView: View {
              .alignment(.center)
              .customizationID("creationDate")
             
-            TableColumn("Creation Date", value: \.contentCreationDate) {
-                 Text($0.creationDate.formatted(date: .numeric, time: .omitted))
+            /*
+             TableColumn("Creation Date", value: \.contentCreationDate) {
+                  Text($0.creationDate.formatted(date: .numeric, time: .omitted))
+              }
+              .alignment(.center)
+              .customizationID("contentCreationDate")
+             */
+            
+            TableColumn("Rating", value: \.rating) {
+                Rating(ratingState: .single($0.rating), rating: .constant($0.rating), showEmptyStars: false)
+                    .font(.caption)
              }
              .alignment(.center)
-             .customizationID("contentCreationDate")
+             .customizationID("rating")
             
             
              TableColumn("Modified Date", value: \.contentModificationDate) {
@@ -72,6 +82,9 @@ struct DataItemsTableView: View {
              }
              .alignment(.center)
              .customizationID("contentModificationDate")
+            
+
+            
             
              TableColumn("Finder", value: \.url.relativePath) { nextDataItem in
                  Button(action: {
@@ -88,6 +101,8 @@ struct DataItemsTableView: View {
         }
         rows: {
             ForEach(viewModel.dataItems, id: \.id) { dataItem in
+                
+                //@Binding var bindableDataItem: DataItem = dataItem
                 TableRow(dataItem)
                     .contextMenu {
                         Button_ClearSelection

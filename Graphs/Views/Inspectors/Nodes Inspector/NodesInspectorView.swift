@@ -28,9 +28,7 @@ struct NodesInspectorView: View {
             //OpenInFinderView
             ParserSettingsView()
             GraphTemplateView()
-            Divider()
             UserNotes
-            
         }
         .formStyle(.grouped)
         .padding(.horizontal, -20)
