@@ -43,7 +43,7 @@ struct Preferences: View {
             .alternatingRowBackgrounds(.disabled)
             .background { Color.white.ignoresSafeArea() }
             .frame(maxWidth: .infinity)
-            .searchable(text: $viewModel.search, placement: .toolbar)
+            .searchable(text: $viewModel.search, placement: .toolbarPrincipal)
             .navigationTitle("Import Extensions")
             .toolbar() {
                 Button("", systemImage: "plus", action: addNewFileExtension)

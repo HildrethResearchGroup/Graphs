@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.5</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>LSMinimumSystemVersion</key>
@@ -32,10 +32,6 @@
 	<false/>
 	<key>NSSupportsSuddenTermination</key>
 	<false/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>SF-Symbols-6.ttf</string>
-	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
