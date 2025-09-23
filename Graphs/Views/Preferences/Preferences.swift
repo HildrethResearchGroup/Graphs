@@ -54,11 +54,13 @@ struct Preferences: View {
                     .disabled(viewModel.disabled_DeleteSelectionButton)
             }
             
+            
             if let fileExtension = viewModel.selectedFileExtension {
                 FileExtensionEdit(fileExtension)
                     .padding()
             } else {
-                EmptyView()
+                NilFileExtensionEdit
+                    .padding()
             }
         }
     }
@@ -72,6 +74,21 @@ struct Preferences: View {
         viewModel.addExtension()
     }
     
+    
+    
+    // MARK: - Nil Selection View
+    @State private var nilExtension: String = ""
+    @State private var nilUserNotes: String = ""
+    
+    @ViewBuilder
+    private var NilFileExtensionEdit: some View {
+        Form {
+            TextField("Ext.", text: $nilExtension)
+                .disabled(true)
+            TextField("Notes", text: $nilUserNotes)
+                .disabled(true)
+        }
+    }
     
 }
 

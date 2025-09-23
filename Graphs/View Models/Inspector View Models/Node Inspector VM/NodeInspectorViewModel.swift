@@ -53,6 +53,25 @@ class NodeInspectorViewModel {
     }
     
     
+    var userNotes: String {
+        get {
+            switch nodes.count {
+            case 0: return ""
+            case 1:
+                guard let node = nodes.first else { return "" }
+                return node.userNotes
+            default: return "Notes can only be edited for one data file at a time"
+            }
+        }
+        set {
+            if nodes.count == 1 {
+                guard let node = nodes.first else { return }
+                node.userNotes = newValue
+            }
+        }
+    }
+    
+    
     init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
@@ -237,6 +256,15 @@ extension NodeInspectorViewModel {
             
             return "Set Graph for \(node.name) Folder"
         default: return defaultOutput + "s"
+        }
+    }
+    
+    
+    var disabled_userNotes: Bool {
+        if nodes.count == 1 {
+            return false
+        } else {
+            return true
         }
     }
 }

@@ -14,7 +14,7 @@ import SwiftUI
 class FileExtension: Identifiable {
     var localID: LocalID
     
-    var fileExtension: String = "Ext"
+    var fileExtension: String = "ext"
     var userNotes: String = ""
     
     init() {

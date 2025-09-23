@@ -29,6 +29,8 @@ class DataListViewModel {
     private init(_ dataController: DataController, _ selectionManager: SelectionManager) {
         self.dataController = dataController
         self.selectionManager = selectionManager
+        
+        
     }
     
     convenience init(_ commonManagers: AppController.CommonManagers) {
@@ -51,6 +53,13 @@ class DataListViewModel {
         set { dataController.filter = newValue }
     }
     
+    
+    
+    private func setAllSelectedDataItemsUserInfo(to newInfo: String) {
+        for nextDataItem in dataItems {
+            nextDataItem.userNotes = newInfo
+        }
+    }
 }
 
 
@@ -100,6 +109,7 @@ extension DataListViewModel {
     var numberOfVisibleDataItems: Int {
         dataItems.count
     }
+
 }
 
 

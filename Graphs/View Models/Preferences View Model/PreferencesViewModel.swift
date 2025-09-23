@@ -55,11 +55,16 @@ class PreferencesViewModel {
     
     // MARK: - Creating and Deleting
     func addExtension() {
-        dataController.createNewFileExtension()
+        let newExtension = dataController.createNewFileExtension()
+        
+        selection = newExtension.id
     }
     
     func deleteSelectedFileExtensions() {
         guard let selectedFileExtension else { return }
+        
+        selection = nil
+        
         dataController.delete(selectedFileExtension)
     }
 }

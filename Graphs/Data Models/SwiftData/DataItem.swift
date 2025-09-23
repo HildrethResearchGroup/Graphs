@@ -49,6 +49,9 @@ final class DataItem: Identifiable, Hashable {
     
     var bookmarkData: Data?
     
+    
+    var userNotes: String = ""
+    
     @Transient
     private var resourceValues: URLResourceValues?
     
@@ -285,6 +288,18 @@ extension DataItem {
         if nodePath.lowercased().contains(lowerCasedFilter) {
             return true
         }
+        
+        if userNotes.lowercased().contains(lowerCasedFilter) {
+            return true
+        }
+        
+        if let node {
+            if node.userNotes.lowercased().contains(lowerCasedFilter) {
+                return true
+            }
+        }
+        
+        
         
         return false
     }

@@ -80,6 +80,25 @@ class DataItemsInspectorViewModel {
     }
     
     
+    var userNotes: String {
+        get {
+            switch dataItems.count {
+            case 0: return ""
+            case 1:
+                guard let dataItem = dataItems.first else { return "" }
+                return dataItem.userNotes
+            default: return "Notes can only be edited for one data file at a time"
+            }
+        }
+        set {
+            if dataItems.count == 1 {
+                guard let dataItem = dataItems.first else { return }
+                dataItem.userNotes = newValue
+            }
+        }
+    }
+    
+    
     var dataItemsCount: Int {
         dataItems.count
     }
@@ -294,6 +313,15 @@ extension DataItemsInspectorViewModel {
             
             return "Show \(dataItem.name) in Finder"
         default: return defaultOutput
+        }
+    }
+    
+    // MARK: - Disabled UI
+    var disabled_userNotes: Bool {
+        if dataItems.count == 1 {
+            return false
+        } else {
+            return true
         }
     }
 }

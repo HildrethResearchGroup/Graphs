@@ -35,6 +35,9 @@ struct DataItemsInspector: View {
             OpenFilesView()
             ParserSettingsView()
             GraphTemplateView()
+            //Divider()
+            UserNotes
+            
         }
         .formStyle(.grouped)
         .padding(.horizontal, -20)
@@ -130,7 +133,37 @@ struct DataItemsInspector: View {
             }
         }
     }
+    
+    
+    // MARK: - User Notes
+    @ViewBuilder
+    private var UserNotes: some View {
+        /*
+         if viewModel.dataItemsCount == 1 {
+             if let dataItem = viewModel.dataItems.first {
+                 DataItemNote(dataItem)
+             }
+         } else {
+             EmptyTextEditor()
+         }
+         */
+        
+        VStack {
+            HStack {
+                Text("Notes:")
+                Spacer()
+            }
+            
+            TextEditor(text: $viewModel.userNotes)
+                .disabled(viewModel.disabled_userNotes)
+                .frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
+        }
+        
+    }
 }
+
+
+
 
 
 // MARK: - Preview

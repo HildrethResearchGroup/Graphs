@@ -316,7 +316,7 @@ extension DataController {
 // MARK: - File Extensions
 
 extension DataController {
-    func createNewFileExtension() {
+    func createNewFileExtension() -> FileExtension {
         let newFileExtension = FileExtension()
         
         modelContext.insert(newFileExtension)
@@ -324,6 +324,8 @@ extension DataController {
         try? modelContext.save()
         
         fetchFileExtensions()
+        
+        return newFileExtension
     }
 }
 

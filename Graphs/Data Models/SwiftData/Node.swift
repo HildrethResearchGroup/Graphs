@@ -85,6 +85,8 @@ final class Node: Identifiable {
     
     var parserSettingsInputType: InputType
     
+    var userNotes: String = ""
+    
     
     // MARK: - Initializers
     init(url: URL?) {
