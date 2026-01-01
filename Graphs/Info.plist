@@ -63,7 +63,7 @@
 				<key>UTTypeIconBadgeName</key>
 				<string>ParserIcon</string>
 				<key>UTTypeIconText</key>
-				<string>Parser</string>
+				<string></string>
 			</dict>
 			<key>UTTypeIdentifier</key>
 			<string>edu.HRG.GraphParser</string>
@@ -74,6 +74,20 @@
 					<string>gparser</string>
 				</array>
 			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Drop Item</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>edu.HRG.DropItem</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
 		</dict>
 	</array>
 	<key>UTImportedTypeDeclarations</key>
@@ -140,6 +154,20 @@
 			<dict/>
 			<key>UTTypeIdentifier</key>
 			<string>public.item</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Drop Item</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>edu.HRG.DropItem</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>

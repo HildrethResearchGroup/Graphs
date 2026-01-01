@@ -24,11 +24,13 @@ struct SourceList: View {
             }
             
             Spacer()
-                .dropDestination(for: URL.self) { urls, _  in
-                    let success = sourceListVM.importURLs(urls, intoNode: nil)
-                    return success
-                }
             
+             .dropDestination(for: URL.self) { urls, _  in
+                 let success = sourceListVM.importURLs(urls, intoNode: nil)
+                 return success
+             }
+             
+                
             HStack {
                 Menu_plus()
                 Menu_minus()
@@ -43,26 +45,30 @@ struct SourceList: View {
     }
     
     
-    // MARK: - Primary Content
-    @ViewBuilder
-    func NodeContent(_ node: Node) -> some View {
-        HStack {
-            Image(systemName: "folder.fill")
-                .foregroundStyle(.secondary)
-            Text(node.name)
-        }
-        .draggable(node.localID)
-        .dropDestination(for: DropItem.self, action: { items, location in
-            sourceListVM.drop(items: items, onto: node)
-            return true
-        })
-        .contextMenu {
-            Button_newFolder(withParent: node)
-            Button_DeleteSelectedNode()
-        }
-        .alert(isPresented: $sourceListVM.presentURLImportError) { importAlert }
-        
-    }
+    /*
+     // MARK: - Primary Content
+     @ViewBuilder
+     func NodeContent(_ node: Node) -> some View {
+         HStack {
+             Image(systemName: "folder.fill")
+                 .foregroundStyle(.secondary)
+             Text(node.name)
+         }
+         .draggable(node.localID)
+         .dropDestination(for: DropItem.self, action: { items, location in
+             
+             sourceListVM.drop(items: items, onto: node)
+             return true
+         })
+         .contextMenu {
+             Button_newFolder(withParent: node)
+             Button_DeleteSelectedNode()
+         }
+         .alert(isPresented: $sourceListVM.presentURLImportError) { importAlert }
+         
+     }
+     */
+    
           
     
     // MARK: - Menu Buttons

@@ -282,9 +282,12 @@ extension Node: SelectableCheck {
         }
         
         static var transferRepresentation: some TransferRepresentation {
-            CodableRepresentation(contentType: .uuid)
-                ProxyRepresentation(exporting: \.id)
-            }
+            
+            // Trying to fix drag and drop
+            
+             CodableRepresentation(contentType: .uuid)
+                 ProxyRepresentation(exporting: \.id)
+             }
     }
     
     func matches(_ uuid: UUID) -> Bool {

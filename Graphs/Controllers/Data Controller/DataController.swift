@@ -29,11 +29,7 @@ class DataController {
     
     var graphTemplates: [GraphTemplate] = []
     
-    var fileExtensions: [FileExtension] = [] {
-        didSet {
-            print("file Extensions changed")
-        }
-    }
+    var fileExtensions: [FileExtension] = []
     
     
     // MARK: - Data Items

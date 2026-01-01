@@ -19,13 +19,13 @@ struct DataItemsListView: View {
     }
     
     var body: some View {
-        List(viewModel.dataItems, id: \.id, selection: $viewModel.selection) { nextDataItem in
-            Text(nextDataItem.name)
+        List(viewModel.dataItems, id: \.id, selection: $viewModel.selection) { dataItem in
+            Text(dataItem.name)
                 .contextMenu {
                     Button_Delete
-                    Button_OpenInFinder(nextDataItem)
+                    Button_OpenInFinder(dataItem)
                 }
-                .draggable(nextDataItem.localID)
+                .draggable(DropItem(dataItem))
             
         }
     }

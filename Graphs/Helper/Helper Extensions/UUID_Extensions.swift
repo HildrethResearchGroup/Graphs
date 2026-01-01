@@ -19,6 +19,7 @@ extension UUID: @retroactive Transferable {
 
 extension UTType {
     static var uuid = UTType(exportedAs: "edu.HRG.UUID")
+    static var dropItem = UTType(exportedAs: "edu.HRG.dropItem")
     static var dgraph: UTType? = UTType(filenameExtension: "dgraph", conformingTo: .content)
     static var gparser: UTType? = UTType(filenameExtension: "gparser", conformingTo: .content)
 }

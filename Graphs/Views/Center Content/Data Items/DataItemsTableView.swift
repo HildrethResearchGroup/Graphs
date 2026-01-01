@@ -109,6 +109,7 @@ struct DataItemsTableView: View {
                         Button_Export
                         Button_Delete
                     }
+                    .draggable(DropItem(dataItem))
                 }
             } // END: Table
     }

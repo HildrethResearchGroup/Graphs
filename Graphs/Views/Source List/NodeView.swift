@@ -23,9 +23,9 @@ struct NodeView: View {
                 .foregroundStyle(.secondary)
             TextField("", text: $node.name)
         }
-        .draggable(node.localID)
+        .draggable(DropItem(node))
+        
         .dropDestination(for: DropItem.self, action: { items, location in
-            
             sourceListVM.drop(items: items, onto: node)
             return true
         })
