@@ -1,9 +1,5 @@
 Source Code: https://github.com/HildrethResearchGroup/Graphs
 
-Compiled App: https://github.com/HildrethResearchGroup/Graphs/blob/master/Graphs.app.zip
-
-
-
 Hi Everyone,
 
   Above are some links to the source code and compiled app for Graphs.  Graphs is a Database program for data written using the DataGraph framework.   The objective of this program is to make it easy to organize and visualize data.  In grad. school, I noticed that I collected a lot of data that I never looked at (or just look at is quickly on the machine that collected it), so I wrote a program to collect, parse, and graph my data using the DataGraph framework as a basis for graphing.  As a professor, I noticed that my students weren't looking at their data in detail either - so I had an undergraduate student rewrite Graphs in Swift so that it would run on the latest macOS.
