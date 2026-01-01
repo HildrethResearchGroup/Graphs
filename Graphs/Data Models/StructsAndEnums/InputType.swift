@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum InputType: String, Codable, Identifiable, Hashable {
+enum InputType: String, Codable, Identifiable, Hashable, Sendable {
     var id: Self { self }
     
     case none

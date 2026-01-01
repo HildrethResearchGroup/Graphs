@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-protocol SelectableID: Identifiable, Hashable, Codable, Equatable {
+protocol SelectableID: Identifiable, Hashable, Codable, Equatable, Sendable {
 }
 
 

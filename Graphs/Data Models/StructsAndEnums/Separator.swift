@@ -9,7 +9,7 @@
 import Foundation
 
 
-enum Separator: String, CaseIterable, Codable, Identifiable {
+enum Separator: String, CaseIterable, Codable, Identifiable, Sendable {
     
     var id: Self { self }
     

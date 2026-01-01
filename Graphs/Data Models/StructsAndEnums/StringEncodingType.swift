@@ -9,7 +9,7 @@
 import Foundation
 import OrderedCollections
 
-enum StringEncodingType: String, Codable, CaseIterable, Identifiable {
+enum StringEncodingType: String, Codable, CaseIterable, Identifiable, Sendable {
     var id: Self {self}
     
     case automatic

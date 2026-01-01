@@ -12,7 +12,7 @@ import Foundation
 /// Type of New Line character representation.
 ///
 /// https://en.wikipedia.org/wiki/Newline
-enum NewLineType: String, Codable, CaseIterable, Identifiable {
+enum NewLineType: String, Codable, CaseIterable, Identifiable, Sendable {
     var id: Self {self}
     
     /// Automatic replacement of \r\n with \n

@@ -25,7 +25,7 @@ struct ParseViewer: View {
             Tabs
             TabContent
         }
-        //.background(.white)
+        .background(.white)
         .onAppear {
             textViewModel.parseInpsectorViewIsVisible = true
             tableViewModel.viewIsVisable = true

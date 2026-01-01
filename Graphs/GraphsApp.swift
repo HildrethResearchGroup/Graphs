@@ -21,13 +21,7 @@ struct GraphsApp: App {
             ContentView(appController)
         }
         .environment(appController)
-        .commands{
-            ExportMenuCommands
-            DeleteMenuCommands
-            ImportMenuCommands
-            PasteBoardCommands
-            UndoRedoCommands
-        }
+        .commands{ AllMenuCommands }
         
         Settings {
             Preferences(appController.preferencesVM)
@@ -43,6 +37,16 @@ extension GraphsApp {
     
     fileprivate var menuVM: MenuViewModel {
         appController.menuViewModel
+    }
+    
+    
+    @CommandsBuilder
+    fileprivate var AllMenuCommands: some Commands {
+        ExportMenuCommands
+        DeleteMenuCommands
+        ImportMenuCommands
+        PasteBoardCommands
+        UndoRedoCommands
     }
     
     

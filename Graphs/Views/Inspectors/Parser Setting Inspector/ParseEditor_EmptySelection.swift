@@ -22,7 +22,7 @@ struct ParseEditor_EmptySelection: View {
     
     @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_header = true
     
-    @AppStorage("expanded_parserSettings_header") private var expanded_parserSettings_editData = true
+    @AppStorage("expanded_parserSettings_editData") private var expanded_parserSettings_editData = true
     
     //private let width = 100.0
     private let fontType: Font = .headline
@@ -47,7 +47,7 @@ struct ParseEditor_EmptySelection: View {
         }
         .formStyle(.grouped)
         //.disabled(true)
-        .padding(.horizontal, -20)
+        .padding(.horizontal, -15)
         //.padding(.vertical, -20)
         .scrollContentBackground(.hidden)
         .background(.clear)

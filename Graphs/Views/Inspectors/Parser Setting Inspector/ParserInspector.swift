@@ -28,16 +28,17 @@ struct ParserInspector: View {
             
             if let selectedParser = viewModel.parserSettingsVM.selection {
                 ParserEditor(parseSettings: selectedParser)
-                    .frame(maxHeight: 425)
+                    .frame(maxHeight: 475)
                     //.padding(.horizontal, -20)
-                    //.padding(.top, -20)
+                    //.padding(.vertical, -20)
             } else {
                 ParseEditor_EmptySelection()
-                    .frame(maxHeight: 425)
+                    .frame(maxHeight: 475)
                     //.padding(.horizontal, -20)
-                    //.padding(.top, -20)
+                    //.padding(.vertical, -20)
             }
             FileContentView
+                //.frame(minHeight: 400, maxHeight: .infinity)
 
             Spacer()
             
@@ -88,8 +89,9 @@ struct ParserInspector: View {
             if dataItem.getAssociatedParserSettings()?.id == viewModel.parserSettingsVM.selection?.id {
                  VStack {
                      Divider()
+                     ParseViewer(viewModel.tableInspectorVM, viewModel.textInspectorVM)
                  }
-                ParseViewer(viewModel.tableInspectorVM, viewModel.textInspectorVM)
+                 .background(.white)
             } else {
                 EmptyView()
             }

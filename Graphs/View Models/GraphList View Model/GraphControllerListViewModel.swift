@@ -32,6 +32,8 @@ class GraphControllerListViewModel {
         self.init(dataController: cm.dataController, selectionManager: cm.selectionManager, processedDataManager: cm.processedDataManager)
     }
     
+    
+    
     func updateProcessedData() {
         //let selectedDataItemIDs = selectionManager.selectedDataItemIDs
         

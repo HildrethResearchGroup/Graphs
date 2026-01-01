@@ -19,6 +19,7 @@ struct ParserEditor: View {
     
     @AppStorage("expanded_parserSettings_editData") private var expanded_parserSettings_editData = true
     
+    @AppStorage("expanded_parserSettings_content") private var expanded_parserSettings_content = true
     
     private let width = 100.0
     private let fontType: Font = .headline
@@ -57,11 +58,11 @@ struct ParserEditor: View {
 
         }
         .formStyle(.grouped)
-        .padding(.horizontal, -20)
+        .padding(.horizontal, -15)
     }
     
     @ViewBuilder
-    var EditExperimentalDetails: some View {
+    private var EditExperimentalDetails: some View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_experimentalDetails) {
             
             /*
@@ -83,8 +84,9 @@ struct ParserEditor: View {
         }
     }
     
+    
     @ViewBuilder
-    var EditHeader: some View {
+    private var EditHeader: some View {
         DisclosureGroup(isExpanded: $expanded_parserSettings_header) {
             /*
              HNFormField("Starting Line:") {
@@ -146,7 +148,7 @@ struct ParserEditor: View {
     }
     
     @ViewBuilder
-    var EditData: some View {
+    private var EditData: some View {
         
         DisclosureGroup(isExpanded: $expanded_parserSettings_editData) {
             /*
@@ -209,6 +211,7 @@ struct ParserEditor: View {
         }
         
     }
+    
 
 }
 
