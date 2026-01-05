@@ -18,7 +18,7 @@ The third step is to add some data.  The data must be a text file (such as .csv 
 
 At anytime, you can change the default Graph Template and Parser for a Folder, selection of multiple folders, file, or selection of files using the Folder and File Inspectors.
 
-Now that you've got Graph Templates, Parsers, and Data, you are ready to go.  Simply navigate to your data using the Source List, select the data you are intersted in viewing from the Tableview in the middle and look at your data using the Graph View in the middle.  The selected data is parsed using the Parse Template and then graphed using the Graph Template and the DataGraph Framework.  Any changes you make to the Graph Template using DataGraph will be reflected next time select a data item that uses that graph template.  The same is true for the Parser.  As a result, you can evolve your graphs as needed without having to get it perfect the first time.
+Now that you've got Graph Templates, Parsers, and Data, you are ready to go.  Simply navigate to your data using the Source List, select the data you are intersted in viewing from the Table View in the middle and look at your data using the Graph Views below.  The selected data is parsed using the Parse Template and then graphed using the Graph Template and the DataGraph Framework.  Any changes you make to the Graph Template using DataGraph will be reflected next time you selected data that uses that graph template.  The same is true for the Parser.  As a result, you can evolve your graphs as needed without having to get it perfect the first time.
 
 ![Overview of Graphs](Images/Overview.png)
 
