@@ -86,3 +86,6 @@ Examples of unacceptable behavior by participants include:
  
 ### Reporting Issues or Problems
 * Please submit an Issue if you have any problems with using or installing Graphs
+
+## Licensing
+This project is licensed under the terms of the GNU General Public License v3.0.  See License.txt for details.
