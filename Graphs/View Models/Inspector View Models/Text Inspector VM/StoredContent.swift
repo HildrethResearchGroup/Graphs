@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct StoredContent {
-    let dataItemID: DataItem.LocalID?
+    let dataItemID: DataItem.LocalID
     
     private let reducedNumberOfLines: Bool
     private(set) var content: String = ""
@@ -21,7 +21,7 @@ struct StoredContent {
     
     let date: Date = .now
     
-    init(_ dataItemID: DataItem.LocalID?, url: URL?, parserSettings: ParserSettingsStatic?, _  reducedNumberOfLines: Bool) {
+    init(_ dataItemID: DataItem.LocalID, url: URL?, parserSettings: ParserSettingsStatic?, _  reducedNumberOfLines: Bool) {
         self.dataItemID = dataItemID
         self.reducedNumberOfLines = reducedNumberOfLines
         
@@ -48,9 +48,9 @@ struct StoredContent {
         }
         
         
+        let parser = Parser(url: url, settings: parserSettings, dataItemID: dataItemID)
         
-        
-        guard let localContent = try? Parser.content(for: url, using: parserSettings) else {
+        guard let localContent = try? parser.generateContent() else {
             content = "Could not decode file"
             linesNumbers = "0"
             //combinedLineNumbersAndContent = AttributedString(linesNumbers + "\t" + content)

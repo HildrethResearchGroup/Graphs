@@ -10,22 +10,34 @@ import Foundation
 
 struct Parser {
     
+    var url: URL
+    var settings: ParserSettingsStatic
+    var dataItemID: DataItem.LocalID
     
-    static func parse(_ url: URL, using staticSettings: ParserSettingsStatic, into localID: DataItem.LocalID) async throws -> ParsedFile {
+    
+    init(url: URL, settings: ParserSettingsStatic, dataItemID: DataItem.LocalID) {
+        self.url = url
+        self.settings = settings
+        self.dataItemID = dataItemID
+    }
+    
+    
+    
+    func parse() async throws -> ParsedFile {
         
-        _ = staticSettings.validateLineStartEndSettings
+        _ = settings.validateLineStartEndSettings
         
-        var localContent = try content(for: url, using: staticSettings)
+        var localContent = try generateContent()
         
-        if staticSettings.newLineType == .auto {
+        if settings.newLineType == .auto {
             localContent = localContent.replacingOccurrences(of: "\r", with: "")
         }
         
-        let lineSeparator = staticSettings.newLineType.stringLiteral
+        let lineSeparator = settings.newLineType.stringLiteral
         
         let lines: [String] = localContent.components(separatedBy: lineSeparator)
         
-        var parsedFile = ParsedFile(dataItemID: localID)
+        var parsedFile = ParsedFile(dataItemID: dataItemID)
         
         parsedFile.content = localContent
         
@@ -35,21 +47,21 @@ struct Parser {
         let numberOfLines = lines.count
         
         for  nextLine in lines {
-            let type = staticSettings.parseLineType(for: index)
+            let type = settings.parseLineType(for: index)
             
             switch type {
             case .skip: break
             case .error: break
                 //print("Error during parsing at index: \(index).  For line:\n\(nextLine)")
             case .experimentalDetails:
-                if index == staticSettings.experimentalDetailsStart {
+                if index == settings.experimentalDetailsStart {
                     parsedFile.experimentDetails.append(nextLine)
                 } else {
                     parsedFile.experimentDetails.append("\n")
                     parsedFile.experimentDetails.append(nextLine)
                 }
             case .header:
-                let separator = staticSettings.headerSeparator
+                let separator = settings.headerSeparator
                 
                 if separator == .none { throw ParserError.noHeaderSeparator }
                 
@@ -59,15 +71,15 @@ struct Parser {
                 
             case .data:
                 
-                if staticSettings.stopDataAtFirstEmptyLine && nextLine.isEmpty {
+                if settings.stopDataAtFirstEmptyLine && nextLine.isEmpty {
                     break
                 }
                 
-                let separator = staticSettings.dataSeparator
+                let separator = settings.dataSeparator
                 if separator == .none { throw ParserError.noDataSeparator }
                 let nextDataLine = parse(line: nextLine, withSeparator: separator)
                 
-                if staticSettings.stopDataAtFirstEmptyLine {
+                if settings.stopDataAtFirstEmptyLine {
                     if nextDataLine.allAreEmpty() {
                         break
                     }
@@ -98,12 +110,12 @@ struct Parser {
 
     
     
-    static func content(for url: URL, using staticSettings: ParserSettingsStatic) throws -> String {
-        let encoding = staticSettings.stringEncodingType.encoding
+    func generateContent() throws -> String {
+        let encoding = settings.stringEncodingType.encoding
         
         
         // Automatically determine string encoding type
-        if staticSettings.stringEncodingType == .automatic {
+        if settings.stringEncodingType == .automatic {
             
             var encodingDetermined = false
             
@@ -149,7 +161,7 @@ struct Parser {
     
     
     
-    private static func parse(line: String, withSeparator separator: Separator) -> [String] {
+    private func parse(line: String, withSeparator separator: Separator) -> [String] {
         var output: [String] = []
         
         if separator == .none {
@@ -171,7 +183,7 @@ struct Parser {
     
     
     
-    private static func indexInRange(_ index: Int, startRange: Int, endRange: Int) throws -> Bool{
+    private func indexInRange(_ index: Int, startRange: Int, endRange: Int) throws -> Bool{
         if startRange > endRange {throw ParserError.startingIndexHigherThanEndingIndex}
         
         if index >= startRange - 1 && index <= endRange - 1 {
@@ -182,7 +194,7 @@ struct Parser {
     }
     
     
-    private static func simpleLineNumber(for line: String, at index: Int, totalNumberOfLines: Int) -> String {
+    private func simpleLineNumber(for line: String, at index: Int, totalNumberOfLines: Int) -> String {
 
         let size = totalNumberOfLines.size
         let formatter = NumberFormatter()

@@ -34,7 +34,9 @@ extension ProcessedData {
             let dataItemID = dataItem.localID
             //let dataItemName = dataItem.name
             
-            parsedfile = try await Parser.parse(dataItemURL, using: staticParserSettings, into: dataItemID)
+            let parser = Parser(url: dataItemURL, settings: staticParserSettings, dataItemID: dataItemID)
+            
+            parsedfile = try await parser.parse()
             
             self.parsedFileState = .upToDate
         }

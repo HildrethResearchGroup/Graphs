@@ -26,7 +26,7 @@ struct CenterContent: View {
                 DataItemsTableView(dataListVM)
                     .frame(minHeight: 300, maxHeight: .infinity)
                 GraphListView(viewModel: graphListVM)
-                    .frame(minWidth: 300, maxWidth: .infinity, minHeight: 300, maxHeight: 1000)
+                    .frame(minHeight: 300, maxHeight: 1000)
             }
             HStack {
                 Spacer()
@@ -34,6 +34,7 @@ struct CenterContent: View {
                 Spacer()
             }
         }
+        .frame(minWidth: 300, maxWidth: .infinity)
         
         .searchable(text: $dataListVM.filter, placement: .toolbar)
     }
