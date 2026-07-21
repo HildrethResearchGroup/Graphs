@@ -46,12 +46,19 @@ class ImportManager {
 
     // MARK: - Importing Files
     /// Imports Data Files into the selected Node
-    func importDataFiles() -> Bool {
+    func importDataFiles(into node: Node? = nil) -> Bool {
+        
         if !shouldAllowDataFileImport() {
             return false
         }
         
-        guard let parentNode = dataController.selectedNodes.first else {return false}
+        var destinationNode: Node
+        let selectedNode = dataController.selectedNodes.first
+        
+        if let node { destinationNode = node }
+        else if let selectedNode { destinationNode = selectedNode }
+        else { return false }
+        
         
         let panel = NSOpenPanel()
         panel.canChooseFiles = true
@@ -62,7 +69,7 @@ class ImportManager {
         
         if panel.runModal() == .OK {
             let urls = panel.urls
-            let success = dataController.importURLs(urls, intoNode: parentNode)
+            let success = dataController.importURLs(urls, intoNode: destinationNode)
             
             return success
         } else {
@@ -102,7 +109,14 @@ class ImportManager {
     /// Import Directories into the selected nodes
     ///
     /// Uses NSOpen Panel to select urls for importing
-    func importAll() -> Bool {
+    func importAll(into node: Node? = nil) -> Bool {
+        var destinationNode: Node
+        let selectedNode = dataController.selectedNodes.first
+        
+        if let node { destinationNode = node }
+        else if let selectedNode { destinationNode = selectedNode }
+        else { return false }
+        
         let panel = NSOpenPanel()
         panel.canChooseFiles = true
         panel.canChooseDirectories = true
@@ -110,11 +124,10 @@ class ImportManager {
         panel.allowsMultipleSelection = true
         panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText, .text]
         
-        let parentNode = dataController.selectedNodes.first
         
         if panel.runModal() == .OK {
             let urls = panel.urls
-            let success = dataController.importURLs(urls, intoNode: parentNode)
+            let success = dataController.importURLs(urls, intoNode: destinationNode)
             
             return success
         } else {
@@ -143,13 +156,19 @@ class ImportManager {
     
     // MARK: - Import Parser Settings
     /// Import Parser Settings into Selected Node
-    func importParserSettings() -> Bool {
+    func importParserSettings(into node: Node? = nil) -> Bool {
         
         if !shouldAllowParserSettingsImport() {
             return false
         }
         
-        let targetNode = dataController.selectedNodes.first
+        var destinationNode: Node?
+        let selectedNode = dataController.selectedNodes.first
+        
+        if let node { destinationNode = node }
+        else if let selectedNode { destinationNode = selectedNode }
+        else { destinationNode = nil }
+        
         
         let panel = NSOpenPanel()
         panel.canChooseFiles = true
@@ -160,7 +179,7 @@ class ImportManager {
         
         if panel.runModal() == .OK {
             let urls = panel.urls
-            let success = dataController.importURLs(urls, intoNode: targetNode)
+            let success = dataController.importURLs(urls, intoNode: destinationNode)
             return success
         } else {
             return false
@@ -197,13 +216,19 @@ class ImportManager {
     
     
     // MARK: - Import Graph Templates
-    func importGraphTemplate() -> Bool {
+    func importGraphTemplate(into node: Node? = nil) -> Bool {
         
         if !shouldAllGraphTemplatesImport() {
             return false
         }
         
-        let parentNode = dataController.selectedNodes.first
+        var destinationNode: Node?
+        let selectedNode = dataController.selectedNodes.first
+        
+        if let node { destinationNode = node }
+        else if let selectedNode { destinationNode = selectedNode }
+        else { destinationNode = nil }
+        
         
         let panel = NSOpenPanel()
         panel.canChooseFiles = true
@@ -214,7 +239,7 @@ class ImportManager {
         
         if panel.runModal() == .OK {
             let urls = panel.urls
-            let success = dataController.importURLs(urls, intoNode: parentNode)
+            let success = dataController.importURLs(urls, intoNode: destinationNode)
             return success
         } else {
             return false

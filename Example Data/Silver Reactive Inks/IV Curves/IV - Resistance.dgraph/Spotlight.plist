@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Labels</key>
+	<string>IV
+Voltage [V]
+Current [A]
+CH1 Current
+CH1 Current = 0.000428049 + 0.213164CH1 Voltage
+R = 0.213 Ω 
+</string>
+	<key>Text</key>
+	<string></string>
+</dict>
+</plist>

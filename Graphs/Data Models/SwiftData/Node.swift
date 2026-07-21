@@ -26,8 +26,9 @@ final class Node: Identifiable {
     private var subNodes: [Node]? = []
     
     @Transient
-    var sortedSubNodes: [Node]? {
-        subNodes?.sorted(using: sort)
+    var children: [Node]? {
+        if subNodes?.count == 0 { return nil }
+        else { return subNodes?.sorted(using: sort) }
     }
     
     @Transient
@@ -172,11 +173,11 @@ final class Node: Identifiable {
         let dataItemIDs = flattenedDataItems().map( { $0.id } )
         
         let info: [String: Any] = [
-            "dataItem.ids" : [dataItemIDs],
+            Notification.UserInfoKey.dataItemIDs : [dataItemIDs],
             
-            "oldGraphTemplate.id" : oldGraphTemplateID as Any,
+            Notification.UserInfoKey.oldGraphTemplateID : oldGraphTemplateID as Any,
             
-            "newGraphTemplate.id" : newGraphTemplateID as Any
+            Notification.UserInfoKey.newGraphTemplateID : newGraphTemplateID as Any
         ]
         
         nc.post(name: .graphTemplateDidChange, object: nil, userInfo: info)

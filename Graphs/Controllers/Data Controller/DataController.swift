@@ -138,14 +138,18 @@ class DataController {
         
         container = sharedModelContainer
         
-        
         modelContext = ModelContext(sharedModelContainer)
 
         self.delegate = delegate
         
         fetchAllObjects()
+        for nextDataItem in allDataItems {
+            nextDataItem.updateTransientPropertiesAfterFetch()
+        }
         
         updateFilteredDataItems()
+        
+        
 
     }
     
@@ -190,6 +194,7 @@ class DataController {
             let sortOrder = [SortDescriptor<DataItem>(\.name)]
             let descriptor = FetchDescriptor<DataItem>(sortBy: sortOrder)
             allDataItems = try modelContext.fetch(descriptor)
+            
         } catch  {
             Logger.dataController.info("DataController: Failed to Fetch All DataItems")
             allDataItems = []

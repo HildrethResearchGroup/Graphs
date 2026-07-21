@@ -12,6 +12,12 @@ struct NodeView: View {
     @Bindable var sourceListVM: SourceListViewModel
     @Bindable var node: Node
     
+    private var isSelected: Bool {
+        sourceListVM.selection.contains(node.id)
+    }
+    
+    @FocusState private var isFocused: Bool
+    
     init(_ sourceListVM: SourceListViewModel, _ node: Node) {
         self.sourceListVM = sourceListVM
         self.node = node
@@ -19,11 +25,14 @@ struct NodeView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: "folder.fill")
-                .foregroundStyle(.secondary)
+            FolderLabel(isSelected)
             TextField("", text: $node.name)
         }
+        .focused($isFocused)
         .draggable(DropItem(node))
+        .onChange(of: isFocused, {
+            print("focused changed to: \(isFocused)")
+        })
         
         .dropDestination(for: DropItem.self, action: { items, location in
             sourceListVM.drop(items: items, onto: node)
@@ -32,14 +41,17 @@ struct NodeView: View {
         .contextMenu {
             Button_newFolder(withParent: node)
             Button_DeleteSelectedNode()
+            Button_ImportDirectory()
         }
         .alert(isPresented: $sourceListVM.presentURLImportError) { importAlert }
     }
     
+    
     // MARK: - Buttons
+    
     @ViewBuilder
     private func Button_newFolder(withParent parentNode: Node?) -> some View {
-        Button("Create New Folder") {
+        Button(UIStrings.createNewFolder) {
             sourceListVM.createEmptyNode(withParent: parentNode)
         }
     }
@@ -51,6 +63,14 @@ struct NodeView: View {
             sourceListVM.deleteSelectedNodes()
         }
     }
+    
+    @ViewBuilder
+    private func Button_ImportDirectory() -> some View {
+        Button(UIStrings.importFolders) {
+            sourceListVM.importDirectories(into: self.node)
+        }
+    }
+    
     
     
     // MARK: - Alerts

@@ -18,7 +18,7 @@ struct SourceList: View {
     var body: some View {
         VStack(alignment: .leading) {
             List(selection: $sourceListVM.selection) {
-                OutlineGroup(sourceListVM.rootNodes, id: \.id, children: \.sortedSubNodes) { nextNode in
+                OutlineGroup(sourceListVM.rootNodes, id: \.id, children: \.children) { nextNode in
                     NodeView(sourceListVM, nextNode)
                 }
             }
@@ -104,34 +104,28 @@ struct SourceList: View {
     
     
     // MARK: - Content Buttons
+    // New Folder
     @ViewBuilder
     private func Button_newFolder(withParent parentNode: Node?) -> some View {
-        Button("Create New Folder") {
+        Button(UIStrings.createNewFolder) {
             sourceListVM.createEmptyNode(withParent: parentNode)
         }
     }
     
     
+    // Import Folders
     @ViewBuilder
     private func Button_importDirectories() -> some View {
-        Button("Import Folders") {
-            let panel = NSOpenPanel()
-            panel.canChooseFiles = true
-            panel.canChooseDirectories = true
-            panel.canCreateDirectories = false
-            panel.allowsMultipleSelection = true
-            panel.allowedContentTypes = [.dgraph ?? .data, .directory, .gparser ?? .json, .data, .delimitedText, .text]
-            
-            if panel.runModal() == .OK {
-                let urls = panel.urls
-                _ = sourceListVM.importURLs(urls)
-            }
+        Button(UIStrings.importFolders) {
+            sourceListVM.importDirectories()
         }
     }
     
+    
+    // Import Files
     @ViewBuilder
     private func Button_importFile() -> some View {
-        Button("Import Data") {
+        Button(UIStrings.importFiles) {
             sourceListVM.importDataFiles()
         }
         .help(sourceListVM.toolTip_importFile)
@@ -140,22 +134,26 @@ struct SourceList: View {
         
     }
     
+    
+    // Import Parsers
     @ViewBuilder
     private func Button_importParserSettings() -> some View {
-        Button("Import Parser") {
+        Button(UIStrings.importParser) {
             sourceListVM.importParserSettings()
         }
     }
     
+    
+    // Import Graph Template
     @ViewBuilder
     private func Button_importGraphTemplate() -> some View {
-        Button("Import Graph Template") {
+        Button(UIStrings.importGraphTemplate) {
             sourceListVM.importGraphTemplate()
         }
     }
     
     
-    
+    // Delete Selected Nodes
     @ViewBuilder
     private func Button_DeleteSelectedNode() -> some View {
         Button("Delete \(sourceListVM.selection.count) Folders") {
@@ -163,17 +161,10 @@ struct SourceList: View {
         }
     }
     
-    @ViewBuilder
-    private func Button_DeleteSelectedDataItems() -> some View {
-        Button("Delete DataItems") {
-            
-        }
-    }
-    
     
     @ViewBuilder
     private func Button_deselectNodes() -> some View {
-        Button("Clear Selection") {
+        Button(UIStrings.clearSelection) {
             sourceListVM.deselectNodes()
         }
     }

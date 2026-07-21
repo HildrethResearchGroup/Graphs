@@ -26,7 +26,7 @@ struct GraphTemplateEditor_EmptySelection: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .formStyle(.grouped)
-        .padding(.horizontal, -20)
+        //.padding(.horizontal, -20)
     }
 }
 

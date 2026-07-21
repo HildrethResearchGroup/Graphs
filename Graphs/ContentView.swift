@@ -26,7 +26,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             SourceList(appController.sourceListVM)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+                .frame(minWidth: 200, maxWidth: 450, minHeight: 200, maxHeight: .infinity)
         } detail: {
             CenterContent(appController.dataListVM, appController.graphListVM)
             //.frame(minHeight: 100, maxHeight: .infinity)
@@ -34,7 +34,7 @@ struct ContentView: View {
         .inspector(isPresented: $visibility_inspector) {
             Inspector(appController.inspectorVM)
                 //.frame(maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
-                .inspectorColumnWidth(min: 300, ideal: 350, max: 800)
+                .inspectorColumnWidth(min: 300, ideal: 350, max: 400)
                 .toolbar() {
                     InspectorVisibilityButton
                 }

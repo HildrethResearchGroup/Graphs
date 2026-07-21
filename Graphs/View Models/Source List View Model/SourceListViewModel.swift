@@ -50,25 +50,24 @@ extension SourceListViewModel {
     /// Imports Data Files
     ///
     /// Uses ImportManager to present and open panel and process the results.
-    func importDataFiles() {
-        _ = importManager.importDataFiles()
+    func importDataFiles(into node: Node? = nil) {
+        _ = importManager.importDataFiles(into: node)
     }
     
     /// Imports Parser Settings Files
     ///
     /// Uses ImportManager to present and open panel and process the results.
-    func importParserSettings() {
-        _ = importManager.importParserSettings()
+    func importParserSettings(into node: Node? = nil) {
+        _ = importManager.importParserSettings(into: node)
     }
     
     
     /// Imports Graph Template Files
     ///
     /// Uses ImportManager to present and open panel and process the results.
-    func importGraphTemplate() {
-        _ = importManager.importGraphTemplate()
+    func importGraphTemplate(into node: Node? = nil) {
+        _ = importManager.importGraphTemplate(into: node)
     }
-    
     
     
     func shouldAllowDrop(ofURLs urls: [URL]) -> Bool {
@@ -83,6 +82,7 @@ extension SourceListViewModel {
         }
     }
     
+    
     func importURLs(_ urls: [URL], intoNode parentNode: Node?) -> Bool {
         let success = dataController.importURLs(urls, intoNode: parentNode)
         
@@ -90,24 +90,8 @@ extension SourceListViewModel {
     }
     
     
-    func importDirectories() {
-
-        
-    }
-    
-    func importURLs(_ urls: [URL]) -> Bool {
-        if shouldAllowDrop(ofURLs: urls) == false {
-            self.presentURLImportError = true
-            return false
-        }
-        
-        let success = importManager.importDataFiles()
-        
-        if success == false {
-            self.presentURLImportError = true
-        }
-        
-        return success
+    func importDirectories(into node: Node? = nil) {
+        _ = importManager.importAll(into: node)
     }
 }
 
@@ -118,7 +102,7 @@ extension SourceListViewModel {
         let nodeIDs = Array(selection)
         dataController.delete(nodeIDs)
     }
-    
+
     func createEmptyNode(withParent parent: Node?) {
         dataController.createEmptyNode(withParent: parent)
     }
@@ -173,6 +157,7 @@ extension SourceListViewModel {
         selectionManager.deselectNodes()
     }
     
+    
     func deselectedDataItems() {
         selectionManager.deselectDataItems()
     }
@@ -189,7 +174,6 @@ extension SourceListViewModel {
         case 1: return false
         default: return true
         }
-        
     }
 }
 

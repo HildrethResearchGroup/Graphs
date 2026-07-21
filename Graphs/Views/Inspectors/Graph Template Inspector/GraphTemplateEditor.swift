@@ -33,7 +33,7 @@ struct GraphTemplateEditor: View {
                 OpenFilesView
             }
             .formStyle(.grouped)
-            .padding(.horizontal, -20)
+            //.padding(.horizontal, -20)
             GraphViewRepresentable(graphController: graphController)
         }
     }

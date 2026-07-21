@@ -1,0 +1,33 @@
+[Probe Positioning Parameters]
+Distance Coordinate=TRUE
+Points Number=5
+
+[Position 0]
+X=0.000000 µm
+Y=0.000000 µm
+MoveTime=3000 msec
+WaitTime=2000 msec
+
+[Position 1]
+X=3.000000 µm
+Y=3.000000 µm
+MoveTime=3000 msec
+WaitTime=2000 msec
+
+[Position 2]
+X=-3.000000 µm
+Y=3.000000 µm
+MoveTime=3000 msec
+WaitTime=2000 msec
+
+[Position 3]
+X=-3.000000 µm
+Y=-3.000000 µm
+MoveTime=3000 msec
+WaitTime=2000 msec
+
+[Position 4]
+X=3.000000 µm
+Y=-3.000000 µm
+MoveTime=3000 msec
+WaitTime=2000 msec

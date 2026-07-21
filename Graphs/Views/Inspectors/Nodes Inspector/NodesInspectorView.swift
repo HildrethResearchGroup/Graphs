@@ -31,7 +31,7 @@ struct NodesInspectorView: View {
             UserNotes
         }
         .formStyle(.grouped)
-        .padding(.horizontal, -20)
+        //.padding(.horizontal, -20)
     }
     
     

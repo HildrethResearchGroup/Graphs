@@ -1,0 +1,40 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "srgb:0.83742,0.83744,0.83743,1.00000",
+      "srgb:0.66422,0.66424,0.66423,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "blend-mode" : "normal",
+          "fill" : {
+            "linear-gradient" : [
+              "extended-srgb:0.34510,0.33725,0.83922,1.00000",
+              "srgb:0.00486,0.09609,0.57499,1.00000"
+            ]
+          },
+          "glass" : true,
+          "image-name" : "Icon - Parser.svg",
+          "name" : "Icon - Parser",
+          "opacity" : 1
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : [
+      "macOS"
+    ]
+  }
+}

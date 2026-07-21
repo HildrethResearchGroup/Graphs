@@ -27,6 +27,8 @@ class GraphView: NSView {
         self.addSubview(graph)
         graphController?.dgController?.setDrawingView(graph)
         
+        
+        
     }
     
     override init(frame frameRect: NSRect) {

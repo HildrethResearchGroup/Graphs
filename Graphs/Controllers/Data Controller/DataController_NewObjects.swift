@@ -256,7 +256,7 @@ extension DataController {
             }
         }
         
-        print("\(urls.map({$0.pathExtension})) only contain dgraph extensions")
+        //print("\(urls.map({$0.pathExtension})) only contain dgraph extensions")
         return true
     }
     

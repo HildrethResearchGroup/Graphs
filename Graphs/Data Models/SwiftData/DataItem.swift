@@ -53,9 +53,6 @@ final class DataItem: Identifiable, Hashable {
     
     var userNotes: String = ""
     
-    @Transient
-    private var resourceValues: URLResourceValues?
-    
     
     
     // MARK: - Initialization
@@ -71,6 +68,7 @@ final class DataItem: Identifiable, Hashable {
         self.parserSettingsInputType = .none
         
         bookmarkData = self.setBookmarkData()
+        updateTransientPropertiesAfterFetch()
     }
     
     
@@ -106,6 +104,39 @@ final class DataItem: Identifiable, Hashable {
         getAssociatedParserSettings()?.name ?? "No Parser"
     }
     
+    // MARK: - Transient File Properties
+    @Transient
+    private var resourceValues: URLResourceValues?
+    
+    
+    @Transient
+    var fileSize: Int = 0
+    
+    @Transient
+    var contentCreationDate: Date = .distantPast
+    
+    @Transient
+    var contentCreationDateFormatted: String = ""
+    
+    @Transient
+    var contentModificationDate: Date = .distantPast
+    
+    @Transient
+    var contentModificationDateFormatted: String = ""
+    
+    func updateTransientPropertiesAfterFetch() {
+        if resourceValues == nil {
+            resourceValues = try? url.resourceValues(forKeys: [.totalFileSizeKey, .creationDateKey, .contentModificationDateKey])
+        }
+        
+        self.fileSize = urlResources()?.totalFileSize ?? 0
+        self.contentCreationDate = resourceValues?.creationDate ?? .distantPast
+        self.contentModificationDate = resourceValues?.contentModificationDate ?? .distantPast
+        
+        self.contentCreationDateFormatted = contentCreationDate.formatted(date: .numeric, time: .omitted)
+        self.contentModificationDateFormatted = contentModificationDate.formatted(date: .numeric, time: .omitted)
+    }
+    
     
     // MARK: - URL Resources
     func urlResources() -> URLResourceValues? {
@@ -117,6 +148,7 @@ final class DataItem: Identifiable, Hashable {
     }
     
     
+    // MARK: - Custom Setters
     func setGraphTemplate(withInputType inputType: InputType, and newGraphTemplate: GraphTemplate?) {
         
         // Prepare for posting notification
@@ -144,6 +176,7 @@ final class DataItem: Identifiable, Hashable {
         
         // Post Notification
         let nc = NotificationCenter.default
+        
         
         let info: [String: Any] = [
             "dataItem.ids" : [id],

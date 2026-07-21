@@ -27,30 +27,34 @@ struct Inspector: View {
              Tabs
              TabContent(for: selectedTab)
          }
-        .frame(minWidth: 330, maxWidth: .infinity, maxHeight: .infinity)
+        .frame(minWidth: 330, maxWidth: 500, maxHeight: .infinity)
         
     }
     
-    private var OriginalTab: some View {
-        TabView {
-             DataItemsInspector(viewModel.dataItemsVM)
-                 .tabItem { Image(systemName: "document") }
-             GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
-                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                 //.tabItem { Text("􁂥") }
-                 .tabItem { Image(systemName: "chart.xyaxis.line") }
+    
+    /*
+     private var OriginalTab: some View {
+         TabView {
+              DataItemsInspector(viewModel.dataItemsVM)
+                  .tabItem { Image(systemName: "document") }
+              GraphTemplateInspector(viewModel.graphTemplateInspectorVM)
+                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                  //.tabItem { Text("􁂥") }
+                  .tabItem { Image(systemName: "chart.xyaxis.line") }
 
-             ParserInspector(viewModel)
-                 //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
-                 //.tabItem { Text("􀋱") }
-                .tabItem { Image(systemName: "list.bullet") }
-             TextInspector(viewModel.textInspectorVM)
-                 .tabItem { Text("T") }
-             TableInspector(viewModel.tableInspectorVM)
-                 //.tabItem { Text("􀏣") }
-                 .tabItem { Image(systemName: "tablecells") }
-        }
-    }
+              ParserInspector(viewModel)
+                  //.frame(minWidth: 300, maxWidth: .infinity, maxHeight: .infinity)
+                  //.tabItem { Text("􀋱") }
+                 .tabItem { Image(systemName: "list.bullet") }
+              TextInspector(viewModel.textInspectorVM)
+                  .tabItem { Text("T") }
+              TableInspector(viewModel.tableInspectorVM)
+                  //.tabItem { Text("􀏣") }
+                  .tabItem { Image(systemName: "tablecells") }
+         }
+     }
+     */
+    
     
     
     private var Tabs: some View {

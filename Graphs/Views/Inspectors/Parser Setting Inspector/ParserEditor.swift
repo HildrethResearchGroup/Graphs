@@ -58,7 +58,7 @@ struct ParserEditor: View {
 
         }
         .formStyle(.grouped)
-        .padding(.horizontal, -15)
+        //.padding(.horizontal, -15)
     }
     
     @ViewBuilder

@@ -13,11 +13,7 @@ import SwiftData
 // MARK: - File Properties
 extension DataItem {
 
-    @Transient
-    var fileSize: Int {
-        urlResources()?.totalFileSize ?? 0
-    }
-    
+     
     
     @Transient
     var scaledFileSize: String {
@@ -29,16 +25,21 @@ extension DataItem {
         return bcf.string(fromByteCount: Int64(fileSize))
     }
     
-    @Transient
-    var contentCreationDate: Date {
-        return urlResources()?.creationDate ?? .distantPast
-    }
+    /*
+     @Transient
+     var contentCreationDate: Date {
+         return urlResources()?.creationDate ?? .distantPast
+     }
+     */
     
     
-    @Transient
-    var contentModificationDate: Date {
-        return urlResources()?.contentModificationDate ?? .distantPast
-    }
+    /*
+     @Transient
+     var contentModificationDate: Date {
+         return urlResources()?.contentModificationDate ?? .distantPast
+     }
+     */
+    
     
     @Transient
     var fileExists: Bool {

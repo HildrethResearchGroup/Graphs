@@ -29,12 +29,12 @@ struct ParserInspector: View {
             if let selectedParser = viewModel.parserSettingsVM.selection {
                 ParserEditor(parseSettings: selectedParser)
                     .frame(maxHeight: 475)
-                    //.padding(.horizontal, -20)
+                    //.padding(.horizontal)
                     //.padding(.vertical, -20)
             } else {
                 ParseEditor_EmptySelection()
                     .frame(maxHeight: 475)
-                    //.padding(.horizontal, -20)
+                    //.padding(.horizontal)
                     //.padding(.vertical, -20)
             }
             FileContentView

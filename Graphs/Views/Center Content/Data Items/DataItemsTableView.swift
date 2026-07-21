@@ -12,7 +12,8 @@ struct DataItemsTableView: View {
     
     @Bindable var viewModel: DataListViewModel
     
-    @AppStorage("dataItemTableCustomization") var customization: TableColumnCustomization<DataItem>
+    @SceneStorage("dataItemTableCustomization")
+    private var customization: TableColumnCustomization<DataItem>
     
     init(_ viewModel: DataListViewModel) {
         self.viewModel = viewModel
@@ -25,16 +26,18 @@ struct DataItemsTableView: View {
                     .help($0.url.path(percentEncoded: false))
             }
             .customizationID("name")
-
-             TableColumn("Folder", value: \.nodeName)
+            
+            
+            TableColumn("Folder", value: \.nodeName)
                 .customizationID("nodeName")
             
             
-             TableColumn("Folder Path", value: \.nodePath) {
-                 Text($0.nodePath)
-                     .help($0.nodePath)
-             }
-             .customizationID("nodePath")
+            TableColumn("Folder Path", value: \.nodePath) {
+                Text($0.nodePath)
+                    .help($0.nodePath)
+            }
+            .customizationID("nodePath")
+            
             
             TableColumn("Graph", value: \.graphTemplateName) {
                 Text($0.graphTemplateName)
@@ -42,50 +45,56 @@ struct DataItemsTableView: View {
             }
             .customizationID("graphTemplate")
             
+            
             TableColumn("Parser", value: \.parserSettingsName) {
                 Text($0.parserSettingsName)
                     .help($0.parserSettingsName)
             }
             .customizationID("parserSettings")
             
-             TableColumn("File Size", value: \.fileSize) {
-                 Text($0.scaledFileSize)
-             }
-             .alignment(.center)
-             .customizationID("fileSize")
             
-             TableColumn("Import Date", value: \.creationDate) {
-                 Text($0.creationDate.formatted(date: .numeric, time: .omitted))
-             }
-             .alignment(.center)
-             .customizationID("creationDate")
+            TableColumn("File Size", value: \.fileSize) {
+                Text($0.scaledFileSize)
+            }
+            .alignment(.center)
+            .customizationID("fileSize")
             
-            /*
+            
+            TableColumn("Import Date", value: \.creationDate) {
+                Text($0.creationDate.formatted(date: .numeric, time: .omitted))
+            }
+            .alignment(.center)
+            .customizationID("importDate")
+            
+            
              TableColumn("Creation Date", value: \.contentCreationDate) {
-                  Text($0.creationDate.formatted(date: .numeric, time: .omitted))
-              }
-              .alignment(.center)
-              .customizationID("contentCreationDate")
-             */
+             Text($0.contentCreationDateFormatted)
+             }
+             .alignment(.center)
+             .customizationID("contentCreationDate")
+             
+            
+            TableColumn("Modified Date", value: \.contentModificationDate) {
+                Text($0.contentModificationDateFormatted)
+                
+            }
+            .alignment(.center)
+            .customizationID("contentModificationDate")
+            
             
             TableColumn("Rating", value: \.rating) {
                 Rating(ratingState: .single($0.rating), rating: .constant($0.rating), showEmptyStars: false)
                     .font(.caption)
-             }
-             .alignment(.center)
-             .customizationID("rating")
+            }
+            .alignment(.center)
+            .customizationID("rating")
             
             
-             TableColumn("Modified Date", value: \.contentModificationDate) {
-                 Text($0.contentModificationDate.formatted(date: .numeric, time: .omitted))
-                 
-             }
-             .alignment(.center)
-             .customizationID("contentModificationDate")
             
-
+             
+             
             
-            
+            /*
              TableColumn("Finder", value: \.url.relativePath) { nextDataItem in
                  Button(action: {
                      nextDataItem.url.showInFinder()
@@ -98,6 +107,7 @@ struct DataItemsTableView: View {
              }
              .alignment(.center)
              .customizationID("openInFinder")
+             */
         }
         rows: {
             ForEach(viewModel.dataItems, id: \.id) { dataItem in
@@ -108,14 +118,15 @@ struct DataItemsTableView: View {
                         Button_ClearSelection
                         Button_Export
                         Button_Delete
+                        Button("Open in Finder") { openInFinder(dataItem) }
                     }
                     .draggable(DropItem(dataItem))
-                }
-            } // END: Table
+            }
+        } // END: Table
     }
     
     
-// MARK: - Buttons
+    // MARK: - Buttons
     private var Button_Delete: some View {
         Button("Delete") { viewModel.deleteSelectedDataItems() }
             .disabled(viewModel.selection.count == 0)
@@ -130,7 +141,13 @@ struct DataItemsTableView: View {
         Button("Clear Selection") { viewModel.selection = [] }
             .disabled(viewModel.selection.count == 0)
     }
-
+    
+    
+    
+    private func openInFinder(_ dataItem: DataItem) {
+        dataItem.url.showInFinder()
+    }
+    
 }
 
 #Preview {
